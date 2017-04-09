@@ -1,0 +1,36 @@
+//
+//  ChooseMovieHeaderView.h
+//  YuWa
+//
+//  Created by double on 2017/2/17.
+//  Copyright © 2017年 Shanghai DuRui Information Technology Company. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+@protocol ChooseMovieHeaderViewDelegate <NSObject>
+-(void)play;
+-(void)commend;
+@end
+@interface ChooseMovieHeaderView : UIView
+
+@property (nonatomic,strong) UIImageView * posterImageView;//电影图片
+@property (nonatomic,strong) UILabel * title;//电影名称
+@property (nonatomic,strong) UILabel * subTitle;//英文名称
+@property (nonatomic,strong) UILabel * number ;//想看人数
+@property (nonatomic,strong) UILabel * category;//该电影的类别
+@property (nonatomic,strong) UILabel * countryAndTime;//国家和时长
+@property (nonatomic,strong) UILabel * beginTime;//上映时间
+
+@property (nonatomic,strong) UIButton * wantSeeBtn;//想看按钮
+@property (nonatomic,strong) UIButton * gradeBtn;//评分按钮
+@property (nonatomic,strong) UIButton * playBtn;//播放按钮
+@property (nonatomic,assign) BOOL isselected;
+@property (nonatomic,strong) UITapGestureRecognizer * PrivateLetterTap;
+@property (nonatomic,strong)id<ChooseMovieHeaderViewDelegate>delegate;
+
+- (instancetype)initWithFrame:(CGRect)frame andDataAry:(NSMutableArray*)ary;
+
+@end
+
+
+

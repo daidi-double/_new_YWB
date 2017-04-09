@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IndroduceViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="规则" translatesAutoresizingMaskIntoConstraints="NO" id="zm0-yy-IQv">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnY-Cu-pSt">
+                    <rect key="frame" x="35" y="577" width="140" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="FnY-Cu-pSt" secondAttribute="height" multiplier="35:10" id="wsi-ya-vOJ"/>
+                    </constraints>
+                    <state key="normal" image="2-输入兑奖码"/>
+                    <connections>
+                        <action selector="toExchangeCodeAction:" destination="-1" eventType="touchUpInside" id="lE1-WW-fks"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEI-sV-ss8">
+                    <rect key="frame" x="200" y="577" width="140" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="oIg-NS-57v"/>
+                    </constraints>
+                    <state key="normal" image="2-领奖区"/>
+                    <connections>
+                        <action selector="getMyAwardAction:" destination="-1" eventType="touchUpInside" id="Yfm-7k-PAv"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="BEI-sV-ss8" firstAttribute="leading" secondItem="FnY-Cu-pSt" secondAttribute="trailing" constant="25" id="2V6-Hw-X0l"/>
+                <constraint firstItem="zm0-yy-IQv" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="5va-2M-MPR"/>
+                <constraint firstAttribute="trailing" secondItem="BEI-sV-ss8" secondAttribute="trailing" constant="35" id="60n-UE-U0X"/>
+                <constraint firstAttribute="bottom" secondItem="FnY-Cu-pSt" secondAttribute="bottom" constant="50" id="EgV-nW-ICh"/>
+                <constraint firstItem="zm0-yy-IQv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FXP-04-3DU"/>
+                <constraint firstAttribute="bottom" secondItem="zm0-yy-IQv" secondAttribute="bottom" id="Hus-iu-7ND"/>
+                <constraint firstItem="BEI-sV-ss8" firstAttribute="centerY" secondItem="FnY-Cu-pSt" secondAttribute="centerY" id="I7O-3m-5qL"/>
+                <constraint firstItem="BEI-sV-ss8" firstAttribute="width" secondItem="FnY-Cu-pSt" secondAttribute="width" id="JjO-em-5Gj"/>
+                <constraint firstItem="BEI-sV-ss8" firstAttribute="height" secondItem="FnY-Cu-pSt" secondAttribute="height" id="Or9-sg-bGB"/>
+                <constraint firstAttribute="trailing" secondItem="zm0-yy-IQv" secondAttribute="trailing" id="RLI-nW-Bcq"/>
+                <constraint firstItem="BEI-sV-ss8" firstAttribute="height" secondItem="FnY-Cu-pSt" secondAttribute="height" id="V0O-nW-pDZ"/>
+                <constraint firstItem="zm0-yy-IQv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jcF-rI-kah"/>
+                <constraint firstItem="zm0-yy-IQv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mrN-ae-tk9"/>
+                <constraint firstItem="FnY-Cu-pSt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="pas-iT-bQR"/>
+            </constraints>
+            <point key="canvasLocation" x="-37.5" y="-97.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="2-输入兑奖码" width="205" height="60"/>
+        <image name="2-领奖区" width="203" height="62"/>
+        <image name="规则" width="621" height="1104"/>
+    </resources>
+</document>
