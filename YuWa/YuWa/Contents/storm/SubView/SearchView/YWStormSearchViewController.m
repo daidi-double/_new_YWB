@@ -147,8 +147,9 @@
 
 #pragma mark - TableView Refresh
 - (void)setupRefresh{
+    WEAKSELF;
     self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-        [self footerRereshing];
+        [weakSelf footerRereshing];
     }];
 }
 - (void)footerRereshing{

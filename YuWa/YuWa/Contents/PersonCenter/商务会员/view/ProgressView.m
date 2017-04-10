@@ -20,8 +20,9 @@
         _dataLabel                              = [[UILabel alloc]init];
         _dataLabel.bounds                       = CGRectMake(0, 0, radius - 10 ,self.bounds.size.width /4);
         _dataLabel.center                       = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 - 10);
-        _dataLabel.textColor                    = self.progressColor;
+        _dataLabel.textColor                    = [UIColor whiteColor];
         _dataLabel.text                         = self.data;
+        _dataLabel.font                         = [UIFont systemFontOfSize:35];
         _dataLabel.adjustsFontSizeToFitWidth    = YES;
         _dataLabel.textAlignment                = NSTextAlignmentCenter;
     }
@@ -34,8 +35,9 @@
         _dataNameLabel                              = [[UILabel alloc]init];
         _dataNameLabel.bounds                       = CGRectMake(0, 0, radius - 10 ,self.bounds.size.width /4);
         _dataNameLabel.center                       = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + self.bounds.size.height/8);
-        _dataNameLabel.textColor                    = self.progressColor;
+        _dataNameLabel.textColor                    = [UIColor whiteColor];
         _dataNameLabel.text                         = self.dataName;
+        _dataNameLabel.font                         = [UIFont systemFontOfSize:25];
         _dataNameLabel.adjustsFontSizeToFitWidth    = YES;
         _dataNameLabel.textAlignment                = NSTextAlignmentCenter;
     }
@@ -43,9 +45,9 @@
 }
 -(instancetype)initWithFrame:(CGRect)frame andWithBusinessGrade:(NSString *)busnessGrade andWithProportion:(CGFloat)proportion{
     if (self = [super initWithFrame:frame]) {
-//        self.backgroundColor = [UIColor cyanColor];
+        //        self.backgroundColor = [UIColor cyanColor];
         if ([busnessGrade isEqualToString:@"普通会员"]) {
-//            self.proportion = proportion/1000;
+            //            self.proportion = proportion/1000;
             
         }else if ([busnessGrade isEqualToString:@"白银会员"]){
             
@@ -66,24 +68,24 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-    if (!color) {
-        self.progressColor  = [UIColor whiteColor];
-    }else{
-        self.progressColor  = color;
-    }
-    self.progressBackColor  = backColor;
-    
-    if (proportion <= 0) {
-        proportion = 0;
-    }
-    else if (proportion > 0 && proportion < 1) {
-        proportion = proportion;
-    }
-    else{
-        proportion = 1;
-    }
-    self.proportion = proportion;
-    [self showProgress];
+        if (!color) {
+            self.progressColor  = RGBCOLOR(0, 195, 12, 1);
+        }else{
+            self.progressColor  = RGBCOLOR(0, 195, 12, 1);
+        }
+        self.progressBackColor  = backColor;
+        
+        if (proportion <= 0) {
+            proportion = 0;
+        }
+        else if (proportion > 0 && proportion < 1) {
+            proportion = proportion;
+        }
+        else{
+            proportion = 1;
+        }
+        self.proportion = proportion;
+        [self showProgress];
     }
     return self;
 }
@@ -93,7 +95,7 @@
     
     CGFloat radius = MIN(self.bounds.size.width, self.bounds.size.height)/2 - MIN(self.bounds.size.width, self.bounds.size.height)/10;
     UIBezierPath * path     = [UIBezierPath bezierPath];
-    [path addArcWithCenter:CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2) radius:radius startAngle: - M_PI endAngle:M_PI clockwise:YES];
+    [path addArcWithCenter:CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2) radius:radius+10 startAngle: - M_PI/2 endAngle:M_PI*3/2 clockwise:YES];
     
     CAShapeLayer * backLayer    = [CAShapeLayer layer];
     backLayer.fillColor         = [[UIColor clearColor] CGColor];
@@ -125,11 +127,11 @@
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end

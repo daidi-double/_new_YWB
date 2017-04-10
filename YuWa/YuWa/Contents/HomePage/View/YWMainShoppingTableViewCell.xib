@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="376" height="148"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="376" height="148"/>
+                <rect key="frame" x="0.0" y="0.0" width="376" height="147"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placehoder_loading.png" translatesAutoresizingMaskIntoConstraints="NO" id="8tA-sV-brn">
@@ -110,20 +110,20 @@
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zekou" translatesAutoresizingMaskIntoConstraints="NO" id="PTz-Lh-vKo">
-                        <rect key="frame" x="82" y="91.5" width="15" height="15"/>
+                        <rect key="frame" x="82" y="93.5" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="f1Q-QD-eZ0"/>
                             <constraint firstAttribute="width" constant="15" id="lgK-JS-JiU"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="7" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.9折，闪付立享" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsQ-vf-LiJ">
-                        <rect key="frame" x="102" y="90" width="107" height="18"/>
+                        <rect key="frame" x="102" y="92" width="107" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView hidden="YES" userInteractionEnabled="NO" tag="8" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_te.png" translatesAutoresizingMaskIntoConstraints="NO" id="DZO-Xt-DRg">
-                        <rect key="frame" x="82" y="109.5" width="15" height="15"/>
+                        <rect key="frame" x="82" y="116.5" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="X8R-VN-T7z"/>
                             <constraint firstAttribute="width" constant="15" id="dnu-Ml-txP"/>
@@ -137,7 +137,7 @@
                         </constraints>
                     </view>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="9" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中秋特别活动，全场7折" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="te6-Qj-mcP">
-                        <rect key="frame" x="102" y="108" width="151" height="18"/>
+                        <rect key="frame" x="102" y="115" width="151" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="tLA-fa-36p"/>
                         </constraints>
@@ -147,6 +147,7 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="te6-Qj-mcP" firstAttribute="top" secondItem="GsQ-vf-LiJ" secondAttribute="bottom" constant="5" id="0j0-1c-LD2"/>
                     <constraint firstItem="te6-Qj-mcP" firstAttribute="leading" secondItem="DZO-Xt-DRg" secondAttribute="trailing" constant="5" id="2WU-9x-JfN"/>
                     <constraint firstAttribute="bottom" secondItem="nNp-QA-xDa" secondAttribute="bottom" id="2qZ-u6-qi4"/>
                     <constraint firstItem="NfY-lp-61m" firstAttribute="baseline" secondItem="Nwb-bI-0nU" secondAttribute="baseline" id="2uU-40-Y10"/>
@@ -183,9 +184,8 @@
                     <constraint firstAttribute="bottom" secondItem="nNp-QA-xDa" secondAttribute="bottom" id="tCu-Hy-JhA"/>
                     <constraint firstItem="GsQ-vf-LiJ" firstAttribute="centerY" secondItem="PTz-Lh-vKo" secondAttribute="centerY" id="tuA-wB-pRQ"/>
                     <constraint firstAttribute="trailing" secondItem="nNp-QA-xDa" secondAttribute="trailing" id="uTC-zl-DOB"/>
-                    <constraint firstItem="te6-Qj-mcP" firstAttribute="top" secondItem="GsQ-vf-LiJ" secondAttribute="bottom" id="vyP-YA-tMP"/>
                     <constraint firstItem="8tA-sV-brn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="wdt-DL-Ew1"/>
-                    <constraint firstItem="GsQ-vf-LiJ" firstAttribute="top" secondItem="OKw-c4-raV" secondAttribute="bottom" constant="5" id="xTF-Km-nVa"/>
+                    <constraint firstItem="GsQ-vf-LiJ" firstAttribute="top" secondItem="OKw-c4-raV" secondAttribute="bottom" constant="7" id="xTF-Km-nVa"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="-256" y="-177"/>

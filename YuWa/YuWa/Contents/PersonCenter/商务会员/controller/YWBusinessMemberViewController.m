@@ -178,7 +178,7 @@
         // 积分分红
          imageView.image=[UIImage imageNamed:@"积分分红"];
         titleLabel.text=@"积分分红";
-        topLabel.text=[NSString stringWithFormat:@"%@",self.scoreModel.my_score];
+        topLabel.text=[NSString stringWithFormat:@"%@",self.scoreModel.my_score];//可提现积分
         subLabel.text=@"当前积分";
         timeLabel.text=[JWTools currentTime];
         UILabel * totalLabel = [cell viewWithTag:11];

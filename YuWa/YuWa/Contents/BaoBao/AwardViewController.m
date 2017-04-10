@@ -84,6 +84,9 @@
         cell.phoneNumberLabel.text = model.username;
         cell.codeLabel.text = model.code;
         cell.nameLabel.text = model.nickname;
+        if (model.nickname.length >= 11) {
+            cell.nameLabel.text = [NSString stringWithFormat:@"%@****%@",[model.nickname substringToIndex:3],[model.nickname substringFromIndex:model.nickname.length-4]];
+        }
         
     }
     

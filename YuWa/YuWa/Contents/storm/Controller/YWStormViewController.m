@@ -174,10 +174,11 @@
 }
 
 - (void)getMyLocationPlacemark:(CLLocation *)location{
+    WEAKSELF;
     [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         [placemarks enumerateObjectsUsingBlock:^(CLPlacemark * _Nonnull placemark, NSUInteger idx, BOOL * _Nonnull stop) {//地址反编译
-            MyLog(@"current location is %@",placemark.name);
-            [self cityNameSetWithStr:placemark.locality];
+//            MyLog(@"current location is %@",placemark.name);
+            [weakSelf cityNameSetWithStr:placemark.locality];
         }];
     }];
 }
@@ -190,7 +191,7 @@
     
     __weak typeof(annotationView)weakAnnotationView = annotationView;
     annotationView.callViewBlock = ^(){
-        MyLog(@"Select %@ AnnotationView",weakAnnotationView.model.type);
+        
         YWShoppingDetailViewController * vc = [[YWShoppingDetailViewController alloc]init];
         vc.shop_id = weakAnnotationView.model.annotationID;
         [self.navigationController pushViewController:vc animated:YES];
