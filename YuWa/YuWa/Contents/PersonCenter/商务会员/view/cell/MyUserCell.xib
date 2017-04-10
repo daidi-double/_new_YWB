@@ -127,6 +127,11 @@
                             <constraint firstAttribute="trailing" secondItem="MmB-oV-XMk" secondAttribute="trailing" constant="-3" id="yAz-Ln-GVK"/>
                         </constraints>
                     </view>
+                    <view tag="666" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ver-iI-ZGs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="7TM-Nx-v4W" firstAttribute="leading" secondItem="ODd-iq-q41" secondAttribute="leading" id="42a-Mv-3jm"/>

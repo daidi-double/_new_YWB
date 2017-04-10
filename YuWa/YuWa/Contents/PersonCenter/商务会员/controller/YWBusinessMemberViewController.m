@@ -30,7 +30,7 @@
 #define CELL1  @"MyUserCell"
 
 
-@interface YWBusinessMemberViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface YWBusinessMemberViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 @property(nonatomic,strong)UITableView*tableView;
 
 
@@ -181,7 +181,12 @@
         topLabel.text=[NSString stringWithFormat:@"%@",self.scoreModel.my_score];
         subLabel.text=@"当前积分";
         timeLabel.text=[JWTools currentTime];
-        
+        UILabel * totalLabel = [cell viewWithTag:11];
+        totalLabel.text = @"总积分(sp)";
+        UILabel * todaysLabel = [cell viewWithTag:13];
+        todaysLabel.text = @"今日积分(sp)";
+
+
         totailLabel.text=self.scoreModel.total_score;
         todayLabel.text=self.scoreModel.today_score;
         waitLabel.text=self.scoreModel.settlement_score;
@@ -214,11 +219,21 @@
         todayLabel.text = @"0.00";
     }
     
-    
+    UIView * tapView = [cell viewWithTag:666];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(indirctActionTap)];
+    tap.numberOfTapsRequired = 1;
+    tap.numberOfTouchesRequired = 1;
+    tap.delegate = self;
+    [tapView addGestureRecognizer:tap];
+
     
     return cell;
 }
-
+- (void)indirctActionTap{
+    SignUserViewController*vc=[[SignUserViewController alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
         IntroduceMoneyViewController*vc=[[IntroduceMoneyViewController alloc]init];
