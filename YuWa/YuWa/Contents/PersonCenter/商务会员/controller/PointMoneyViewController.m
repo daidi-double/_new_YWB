@@ -89,7 +89,8 @@
 
     
     [view addSubview:gressView];
- 
+ //
+    
     UIButton*button5=[view viewWithTag:5];
 //    label5.text=[NSString stringWithFormat:@"历史总积分：%@",self.model.total_score];
     [button5 setTitle:[NSString stringWithFormat:@"待结算积分：%@",self.model.settlement_score] forState:UIControlStateNormal];
