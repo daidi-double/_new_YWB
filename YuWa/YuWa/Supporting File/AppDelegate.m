@@ -27,7 +27,7 @@
 #import "WXApi.h"
 #import "WeiboSDK.h"
 
-// 支付
+//  支付
 #import "PCPayViewController.h"
 #import "WXApiManager.h"
 #import <AlipaySDK/AlipaySDK.h>
