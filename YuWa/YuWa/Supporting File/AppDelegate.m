@@ -199,7 +199,7 @@
     
     NSString * appKey = @"e5d6efcb778acab672b43b94";
     
-    BOOL isProduction = YES;
+    BOOL isProduction = NO;
 #if DEBUG
     isProduction = NO;
 #else
