@@ -23,7 +23,7 @@
                 <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="am4-Bx-Kw5">
                     <rect key="frame" x="30" y="284" width="315" height="34"/>
                     <color key="backgroundColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="立即到账，确认兑换">
+                    <state key="normal" title="确认兑换">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -33,29 +33,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blu-Ew-0FH">
                     <rect key="frame" x="0.0" y="134" width="375" height="60"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ogi-nK-cT0">
-                            <rect key="frame" x="82" y="15" width="280" height="30"/>
-                            <nil key="textColor"/>
+                        <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前兑换比例:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cp-10-K40">
+                            <rect key="frame" x="8" y="13" width="90" height="34"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SP:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cp-10-K40">
-                            <rect key="frame" x="8" y="13" width="74" height="34"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="74" id="xA4-p2-nHL"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.4823529412" green="0.47450980390000003" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Ogi-nK-cT0" secondAttribute="trailing" constant="13" id="3Wu-2k-F20"/>
-                        <constraint firstItem="4Cp-10-K40" firstAttribute="leading" secondItem="blu-Ew-0FH" secondAttribute="leading" constant="8" id="Ft8-8S-lX9"/>
-                        <constraint firstItem="Ogi-nK-cT0" firstAttribute="leading" secondItem="4Cp-10-K40" secondAttribute="trailing" id="ILO-ny-ZIU"/>
+                        <constraint firstItem="4Cp-10-K40" firstAttribute="leading" secondItem="blu-Ew-0FH" secondAttribute="leading" constant="8" id="8Hg-ef-URS"/>
                         <constraint firstAttribute="bottom" secondItem="4Cp-10-K40" secondAttribute="bottom" constant="13" id="N69-LP-Voe"/>
-                        <constraint firstItem="Ogi-nK-cT0" firstAttribute="centerY" secondItem="4Cp-10-K40" secondAttribute="centerY" id="VxR-sM-AaJ"/>
                         <constraint firstAttribute="height" constant="60" id="X1e-gf-UHd"/>
                         <constraint firstItem="4Cp-10-K40" firstAttribute="top" secondItem="blu-Ew-0FH" secondAttribute="top" constant="13" id="qJY-ci-FAk"/>
                     </constraints>
@@ -74,7 +62,9 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="65" id="ZNP-G5-GuA"/>
                             </constraints>
-                            <state key="normal" title="全部兑换"/>
+                            <state key="normal" title="全部兑换">
+                                <color key="titleColor" red="0.23137254901960785" green="0.64313725490196083" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                             <connections>
                                 <action selector="exchangeAllGrade:" destination="-1" eventType="touchUpInside" id="lur-dj-Joe"/>
                             </connections>

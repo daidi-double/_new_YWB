@@ -30,7 +30,7 @@
 #define CELL1  @"MyUserCell"
 
 
-@interface YWBusinessMemberViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface YWBusinessMemberViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 @property(nonatomic,strong)UITableView*tableView;
 
 
@@ -178,10 +178,15 @@
         // 积分分红
          imageView.image=[UIImage imageNamed:@"积分分红"];
         titleLabel.text=@"积分分红";
-        topLabel.text=[NSString stringWithFormat:@"%@",self.scoreModel.my_score];
+        topLabel.text=[NSString stringWithFormat:@"%@",self.scoreModel.my_score];//可提现积分
         subLabel.text=@"当前积分";
         timeLabel.text=[JWTools currentTime];
-        
+        UILabel * totalLabel = [cell viewWithTag:11];
+        totalLabel.text = @"总积分(sp)";
+        UILabel * todaysLabel = [cell viewWithTag:13];
+        todaysLabel.text = @"今日积分(sp)";
+
+
         totailLabel.text=self.scoreModel.total_score;
         todayLabel.text=self.scoreModel.today_score;
         waitLabel.text=self.scoreModel.settlement_score;
@@ -200,6 +205,12 @@
         
         UILabel*indirectBinding=[cell viewWithTag:22];  //间接锁定
         indirectBinding.text=[NSString stringWithFormat:@"%@人",self.BiningModel.my_indirect_user_nums];
+        UIView * tapView = [cell viewWithTag:666];
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(indirctActionTap)];
+        tap.numberOfTapsRequired = 1;
+        tap.numberOfTouchesRequired = 1;
+        tap.delegate = self;
+        [tapView addGestureRecognizer:tap];
         
         return cell;
     }
@@ -214,11 +225,14 @@
         todayLabel.text = @"0.00";
     }
     
-    
-    
+
     return cell;
 }
-
+- (void)indirctActionTap{
+    SignUserViewController*vc=[[SignUserViewController alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
         IntroduceMoneyViewController*vc=[[IntroduceMoneyViewController alloc]init];
@@ -236,8 +250,8 @@
         
         
     }else if (indexPath.section==3){
-        SignUserViewController*vc=[[SignUserViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+//        SignUserViewController*vc=[[SignUserViewController alloc]init];
+//        [self.navigationController pushViewController:vc animated:YES];
         
     }
     

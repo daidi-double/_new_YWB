@@ -578,7 +578,9 @@
             return 145;
         }
         
-        return [YWMainShoppingTableViewCell getCellHeight:model.holiday];
+        
+        
+        return [YWMainShoppingTableViewCell getCellHeight:model.holiday]-15;
     
     }
 }

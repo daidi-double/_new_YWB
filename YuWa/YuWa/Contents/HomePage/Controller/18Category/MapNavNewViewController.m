@@ -51,7 +51,7 @@
     
 }
 - (void)initMapView{
-    _mapView = [[MAMapView alloc]initWithFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height-94)];
+    _mapView = [[MAMapView alloc]initWithFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height)];
     _mapView.delegate = self;
     _mapView.showsUserLocation = YES;
     _mapView.userTrackingMode = MAUserTrackingModeFollow;

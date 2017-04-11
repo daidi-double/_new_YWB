@@ -17,6 +17,7 @@ DerivedData/
 !default.perspectivev3
 xcuserdata/
 
+
 ## Other
 *.moved-aside
 *.xcuserstate
@@ -51,6 +52,15 @@ Carthage/Build
 
 fastlane/report.xml
 fastlane/screenshots
+
+*.xcbkptlist
+*.xcuserstate
+project.xcworkspace
+xcuserdata
+UserInterfaceState.xcuserstate
+project.xcworkspace/
+xcuserdata/
+UserInterface.xcuserstate
 
 #Code Injection
 #

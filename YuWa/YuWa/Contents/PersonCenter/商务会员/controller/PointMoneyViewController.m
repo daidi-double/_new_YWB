@@ -51,11 +51,15 @@
     [self.view addSubview:view];
 
     UILabel * gradeLabel = [view viewWithTag:1];
-    self.proportion = [self.model.my_score floatValue];
+    UILabel * pay_scaleLabel = [view viewWithTag:2];
+    pay_scaleLabel.text = [NSString stringWithFormat:@"当前兑换比例为%@",self.model.pay_scale];
+    self.proportion = [self.model.total_score floatValue];
+   
     NSString * str;
     if (self.proportion <= 1000) {
         str = [NSString stringWithFormat:@"%f",self.proportion/1000];
         gradeLabel.text = @"商务会员";
+        
     }else if (self.proportion >1000 && self.proportion <= 3000){
         str = [NSString stringWithFormat:@"%f",self.proportion/3000];
         gradeLabel.text = @"白银会员";
@@ -74,70 +78,53 @@
     }
     
     CGFloat proporton = [str floatValue];
-   
+    
     ProgressView * gressView = [[ProgressView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width/3, kScreen_Width/3) backColor:[UIColor whiteColor] color:[UIColor orangeColor] proportion:proporton];
 
     gressView.center = view.center;
     //如果需要内容数据时使用
-    gressView.data = [NSString stringWithFormat:@"%@",self.model.my_score];//当前积分
+    gressView.data = [NSString stringWithFormat:@"%@",self.model.total_score];//当前积分
     gressView.dataName  = @"sp";
     [gressView showContentData];
 
     
     [view addSubview:gressView];
-    UILabel*label3=[view viewWithTag:3];
-//    label3.text=[NSString stringWithFormat:@"%@",self.model.my_score];//当前积分
-    self.currentPointLabel=label3;
-    
+ //
     
     UIButton*button5=[view viewWithTag:5];
 //    label5.text=[NSString stringWithFormat:@"历史总积分：%@",self.model.total_score];
-    [button5 setTitle:[NSString stringWithFormat:@"历史总积分：%@",self.model.total_score] forState:UIControlStateNormal];
-    
+    [button5 setTitle:[NSString stringWithFormat:@"待结算积分：%@",self.model.settlement_score] forState:UIControlStateNormal];
+    if (self.model.settlement_score == nil || [self.model.settlement_score isKindOfClass:[NSNull class]]) {
+        [button5 setTitle:@"待结算积分:0" forState:UIControlStateNormal];
+    }
     UIButton*button6=[view viewWithTag:6];
 //    label6.text=[NSString stringWithFormat:@"待结算积分：%@",self.model.settlement_score];
-    [button6 setTitle:[NSString stringWithFormat:@"可兑换积分：%@",self.model.settlement_score] forState:UIControlStateNormal];
-    
-    
-    view.touchGetMoney=^(){
-      //提现
-        [self alertViewGetMoney];
-        
-    };
-    
-    
-    view.touchPointDetail=^(){
-      //积分详情
-        YWShowGetMoneyViewController*vc=[[YWShowGetMoneyViewController alloc]init];
-        vc.time=@"4";
-        vc.type=@"2";
-        [self.navigationController pushViewController:vc animated:YES];
-    };
-    
-    
+    [button6 setTitle:[NSString stringWithFormat:@"可兑换积分：%@",self.model.my_score] forState:UIControlStateNormal];
+    if (self.model.my_score == nil || [self.model.my_score isKindOfClass:[NSNull class]]) {
+       [button6 setTitle:@"可兑换积分:0" forState:UIControlStateNormal];
+    }
 }
 
-
--(void)alertViewGetMoney{
-  NSString*message=[NSString stringWithFormat:@"确实要全部积分(%@)提现？",self.model.my_score];
-    UIAlertController*alertVC=[UIAlertController alertControllerWithTitle:@"积分提现" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction*cancelAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    UIAlertAction*selectedAction=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        [self getMoneyDatas];
-        
-    }];
-    
-
-    [alertVC addAction:cancelAction];
-    [alertVC addAction:selectedAction];
-    [self presentViewController:alertVC animated:YES completion:nil];
-    
-    
-    
-}
+//-(void)alertViewGetMoney{
+//  NSString*message=[NSString stringWithFormat:@"确实要全部积分(%@)提现？",self.model.my_score];
+//    UIAlertController*alertVC=[UIAlertController alertControllerWithTitle:@"积分提现" message:message preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction*cancelAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//        
+//    }];
+//    UIAlertAction*selectedAction=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        
+//        [self getMoneyDatas];
+//        
+//    }];
+//    
+//
+//    [alertVC addAction:cancelAction];
+//    [alertVC addAction:selectedAction];
+//    [self presentViewController:alertVC animated:YES completion:nil];
+//    
+//    
+//    
+//}
 
 
 -(void)addBottomImageView{
@@ -159,37 +146,9 @@
 - (void)exchangeJifen{
     MyLog(@"兑换积分");
     ExchangeViewController * exchangeVC = [[ExchangeViewController alloc]initWithNibName:@"ExchangeViewController" bundle:[NSBundle mainBundle]];
-    exchangeVC.canUseGrade = self.model.settlement_score;
+    exchangeVC.canUseGrade = self.model.my_score;
+    exchangeVC.pay_scale = self.model.pay_scale;
     [self.navigationController pushViewController:exchangeVC animated:YES];
-}
-#pragma mark  --getDatas
-
-
-
-
--(void)getMoneyDatas{
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_POINTGETMONEY];
-    if (!self.model.my_score) {
-        MyLog(@"aa");
-        self.model.my_score=@"1";
-    }
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"score":self.model.my_score};
-    HttpManager*manager=[[HttpManager alloc]init];
-    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
-        NSLog(@"%@",data);
-        NSNumber*number=data[@"errorCode"];
-        NSString*errorCode=[NSString stringWithFormat:@"%@",number];
-        if ([errorCode isEqualToString:@"0"]) {
-            [JRToast showWithText:data[@"msg"]];
-            self.model.my_score=@"0.000";
-            self.currentPointLabel.text=[NSString stringWithFormat:@"当前积分：%@",self.model.my_score];
-            
-        }else{
-            [JRToast showWithText:data[@"errorMessage"]];
-        }
-        
-    }];
-    
 }
 
 - (void)didReceiveMemoryWarning {

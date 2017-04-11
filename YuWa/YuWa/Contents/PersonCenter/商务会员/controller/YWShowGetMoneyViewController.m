@@ -106,7 +106,7 @@
     categoryLabel.text=model.type;
     
     UILabel*moneyLabel=[cell viewWithTag:3];
-    moneyLabel.text= [NSString stringWithFormat:@"%.2f",[model.money floatValue]];
+    moneyLabel.text= [NSString stringWithFormat:@"%.4f",[model.money floatValue]];
     
     return cell;
 }
@@ -127,11 +127,11 @@
         UIView*view=[[NSBundle mainBundle]loadNibNamed:@"IncomeDetailView" owner:nil options:nil].firstObject;
         
         UILabel*label1=[view viewWithTag:1];
-        label1.text= [NSString  stringWithFormat:@"%.2f",[self.total_money floatValue]];
+        label1.text= [NSString  stringWithFormat:@"%.4f",[self.total_money floatValue]];
         
         UILabel*label3=[view viewWithTag:3];
         
-        label3.text= [NSString  stringWithFormat:@"%.2f",[self.total_settlement floatValue]];
+        label3.text= [NSString  stringWithFormat:@"%.4f",[self.total_settlement floatValue]];
         
         
         UILabel*label5=[view viewWithTag:5];

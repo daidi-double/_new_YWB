@@ -30,26 +30,18 @@
                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZI-en-2Dh">
                     <rect key="frame" x="15" y="261" width="112" height="29"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="历史总积分：200"/>
+                    <state key="normal" title="待结算积分：200"/>
                 </button>
                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnK-hR-xPs">
                     <rect key="frame" x="250" y="261" width="110" height="29"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="可兑换积分：100"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7V-OH-xhq">
-                    <rect key="frame" x="316" y="20" width="44" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="44" id="LzA-LA-ykg"/>
-                        <constraint firstAttribute="height" constant="44" id="NUL-xE-lvm"/>
-                    </constraints>
-                    <state key="normal" image="问号"/>
-                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="圆环" translatesAutoresizingMaskIntoConstraints="NO" id="jg5-qO-9xS">
-                    <rect key="frame" x="137" y="100" width="100" height="100"/>
+                    <rect key="frame" x="127" y="90" width="120" height="120"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="ek6-ZH-89c"/>
-                        <constraint firstAttribute="height" constant="100" id="iop-S2-PKk"/>
+                        <constraint firstAttribute="width" constant="120" id="ek6-ZH-89c"/>
+                        <constraint firstAttribute="height" constant="120" id="iop-S2-PKk"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -65,8 +57,6 @@
                 <constraint firstAttribute="bottom" secondItem="dnK-hR-xPs" secondAttribute="bottom" constant="10" id="hxg-k7-TOl"/>
                 <constraint firstAttribute="trailing" secondItem="dnK-hR-xPs" secondAttribute="trailing" constant="15" id="kPA-vc-3BO"/>
                 <constraint firstItem="21h-QG-LbK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="65" id="n4A-gZ-jpX"/>
-                <constraint firstAttribute="trailing" secondItem="Q7V-OH-xhq" secondAttribute="trailing" constant="15" id="v5p-X9-eJb"/>
-                <constraint firstItem="Q7V-OH-xhq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="yVE-5Y-gfC"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -75,6 +65,5 @@
     </objects>
     <resources>
         <image name="圆环" width="151" height="150"/>
-        <image name="问号" width="22" height="22"/>
     </resources>
 </document>

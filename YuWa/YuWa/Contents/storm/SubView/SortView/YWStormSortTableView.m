@@ -94,8 +94,8 @@
             [tagArr addObject:dataDic[@"id"]];
             [tagNameArr addObject:dataDic[@"tag_name"]];
         }
-        
-        self.choosedTypeBlock(self.selectIndex,[self.dataStateArr[self.selectIndex] integerValue],tagNameArr,tagArr);
+        WEAKSELF;
+        self.choosedTypeBlock(weakSelf.selectIndex,[weakSelf.dataStateArr[weakSelf.selectIndex] integerValue],tagNameArr,tagArr);
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code error is %@",responsObj);

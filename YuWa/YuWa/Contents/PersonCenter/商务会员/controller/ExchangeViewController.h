@@ -10,4 +10,6 @@
 
 @interface ExchangeViewController : UIViewController
 @property (nonatomic,strong)NSString * canUseGrade;
+@property (nonatomic,strong)NSString * pay_scale;
+
 @end
