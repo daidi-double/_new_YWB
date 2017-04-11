@@ -46,7 +46,6 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self headerRereshing];
 }
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
