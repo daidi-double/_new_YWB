@@ -27,7 +27,7 @@
 #import "WXApi.h"
 #import "WeiboSDK.h"
 
-//支付
+//  支付
 #import "PCPayViewController.h"
 #import "WXApiManager.h"
 #import <AlipaySDK/AlipaySDK.h>
@@ -181,6 +181,8 @@
     if (!jpushArr)jpushArr = [NSMutableArray arrayWithCapacity:0];
     [jpushArr insertObject:dic atIndex:0];
     [KUSERDEFAULT setObject:jpushArr forKey:JPush_Notification_DicArr];
+    
+    //起别名
 }
 
 - (void)registerJPushWithOptions:(NSDictionary *)launchOptions{
