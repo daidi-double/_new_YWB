@@ -43,13 +43,13 @@
 - (void)dataSet{
     RBHomeListImagesModel * imageModel = self.model.images_list[0];
     WEAKSELF;
-//    imageModel.url = [imageModel.url stringByReplacingOccurrencesOfString:@"http://114.215.252.104" withString:HTTP_ADDRESS];
-    [self.showImageView sd_setImageWithURL:[NSURL URLWithString:imageModel.url] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        weakSelf.showImageView.alpha = 0.3f;
-        [UIView animateWithDuration:0.8 animations:^{
-            weakSelf.showImageView.alpha = 1.f;
-        }];
-    }];
+    MyLog(@"%@",imageModel.url);
+     [self.showImageView sd_setImageWithURL:[NSURL URLWithString:imageModel.url] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+         weakSelf.showImageView.alpha = 0.3f;
+         [UIView animateWithDuration:0.8 animations:^{
+             weakSelf.showImageView.alpha = 1.f;
+         }];
+     }];
     
     self.nameLabel.text = self.model.title;
     self.conLabel.text = self.model.desc;

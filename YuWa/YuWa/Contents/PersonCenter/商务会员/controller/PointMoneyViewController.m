@@ -147,6 +147,7 @@
     MyLog(@"兑换积分");
     ExchangeViewController * exchangeVC = [[ExchangeViewController alloc]initWithNibName:@"ExchangeViewController" bundle:[NSBundle mainBundle]];
     exchangeVC.canUseGrade = self.model.my_score;
+   
     exchangeVC.pay_scale = self.model.pay_scale;
     [self.navigationController pushViewController:exchangeVC animated:YES];
 }
