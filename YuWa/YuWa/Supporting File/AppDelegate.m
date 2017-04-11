@@ -181,6 +181,8 @@
     if (!jpushArr)jpushArr = [NSMutableArray arrayWithCapacity:0];
     [jpushArr insertObject:dic atIndex:0];
     [KUSERDEFAULT setObject:jpushArr forKey:JPush_Notification_DicArr];
+    
+    //起别名
 }
 
 - (void)registerJPushWithOptions:(NSDictionary *)launchOptions{

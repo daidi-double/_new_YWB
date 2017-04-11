@@ -201,7 +201,7 @@
         }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [JPUSHService setAlias:[UserSession instance].account callbackSelector:nil object:nil];
+            [JPUSHService setAlias:[UserSession instance].account callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
             [self.navigationController popViewControllerAnimated:YES];
             [[self findFirstResponderBeneathView:self.view] resignFirstResponder];
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -218,7 +218,11 @@
 //        [self showHUDWithStr:responsObj[@"errorMessage"] withSuccess:NO];
     }];
 }
-
+- (void)tagsAliasCallback:(int)iResCode
+                     tags:(NSSet *)tags
+                    alias:(NSString *)alias {
+  NSLog(@"起别名 :      rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
+}
 - (void)requestLoginWithMobile:(NSString *)account withSecuirtyCode:(NSString *)secuirty{
     
     NSDictionary * pragram = @{@"phone":account,@"code":secuirty};
