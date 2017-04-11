@@ -18,11 +18,11 @@
     if (!_dataLabel) {
         CGFloat radius                          = MIN(self.bounds.size.width, self.bounds.size.height) - 20;
         _dataLabel                              = [[UILabel alloc]init];
-        _dataLabel.bounds                       = CGRectMake(0, 0, radius - 10 ,self.bounds.size.width /4);
+        _dataLabel.bounds                       = CGRectMake(0, 0, radius - 20 ,self.bounds.size.width /4);
         _dataLabel.center                       = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 - 10);
         _dataLabel.textColor                    = [UIColor whiteColor];
         _dataLabel.text                         = self.data;
-        _dataLabel.font                         = [UIFont systemFontOfSize:35];
+        _dataLabel.font                         = [UIFont systemFontOfSize:30];
         _dataLabel.adjustsFontSizeToFitWidth    = YES;
         _dataLabel.textAlignment                = NSTextAlignmentCenter;
     }
@@ -37,7 +37,7 @@
         _dataNameLabel.center                       = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + self.bounds.size.height/8);
         _dataNameLabel.textColor                    = [UIColor whiteColor];
         _dataNameLabel.text                         = self.dataName;
-        _dataNameLabel.font                         = [UIFont systemFontOfSize:25];
+        _dataNameLabel.font                         = [UIFont systemFontOfSize:23];
         _dataNameLabel.adjustsFontSizeToFitWidth    = YES;
         _dataNameLabel.textAlignment                = NSTextAlignmentCenter;
     }
@@ -73,7 +73,7 @@
         }else{
             self.progressColor  = RGBCOLOR(0, 195, 12, 1);
         }
-        self.progressBackColor  = backColor;
+        self.progressBackColor  = RGBCOLOR(0, 187, 235, 1);
         
         if (proportion <= 0) {
             proportion = 0;

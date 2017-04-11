@@ -39,7 +39,9 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (self.dataAry.count > 0) {
         cell.detailTextLabel.text = self.dataAry[indexPath.row];
-        
+        if (indexPath.row == 4) {
+            cell.detailTextLabel.text = [JWTools getTime:self.dataAry[indexPath.row]];
+        }
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.text = self.titleAry[indexPath.row];

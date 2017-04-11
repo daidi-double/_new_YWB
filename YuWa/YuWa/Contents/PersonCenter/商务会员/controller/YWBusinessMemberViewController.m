@@ -205,6 +205,12 @@
         
         UILabel*indirectBinding=[cell viewWithTag:22];  //间接锁定
         indirectBinding.text=[NSString stringWithFormat:@"%@人",self.BiningModel.my_indirect_user_nums];
+        UIView * tapView = [cell viewWithTag:666];
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(indirctActionTap)];
+        tap.numberOfTapsRequired = 1;
+        tap.numberOfTouchesRequired = 1;
+        tap.delegate = self;
+        [tapView addGestureRecognizer:tap];
         
         return cell;
     }
@@ -219,14 +225,7 @@
         todayLabel.text = @"0.00";
     }
     
-    UIView * tapView = [cell viewWithTag:666];
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(indirctActionTap)];
-    tap.numberOfTapsRequired = 1;
-    tap.numberOfTouchesRequired = 1;
-    tap.delegate = self;
-    [tapView addGestureRecognizer:tap];
 
-    
     return cell;
 }
 - (void)indirctActionTap{
@@ -251,8 +250,8 @@
         
         
     }else if (indexPath.section==3){
-        SignUserViewController*vc=[[SignUserViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+//        SignUserViewController*vc=[[SignUserViewController alloc]init];
+//        [self.navigationController pushViewController:vc animated:YES];
         
     }
     
