@@ -70,7 +70,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     _tagChoosed = NO;
     
-    self.changeTagBlock([NSString stringWithFormat:@"%zi",indexPath.row]);
+    if (self.changeTagBlock) {
+        self.changeTagBlock([NSString stringWithFormat:@"%zi",indexPath.row]);
+    }
     self.choosedTag = indexPath.row;
     
     [self scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
