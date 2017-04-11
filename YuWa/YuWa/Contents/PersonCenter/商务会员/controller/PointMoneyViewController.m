@@ -95,36 +95,17 @@
 //    label5.text=[NSString stringWithFormat:@"历史总积分：%@",self.model.total_score];
     [button5 setTitle:[NSString stringWithFormat:@"待结算积分：%@",self.model.settlement_score] forState:UIControlStateNormal];
     if (self.model.settlement_score == nil || [self.model.settlement_score isKindOfClass:[NSNull class]]) {
-        [button5 setTitle:@"待结算积分:0" forState:UIControlStateNormal];
+        [button5 setTitle:@"待结算积分:0.0000" forState:UIControlStateNormal];
     }
     UIButton*button6=[view viewWithTag:6];
 //    label6.text=[NSString stringWithFormat:@"待结算积分：%@",self.model.settlement_score];
     [button6 setTitle:[NSString stringWithFormat:@"可兑换积分：%@",self.model.my_score] forState:UIControlStateNormal];
     if (self.model.my_score == nil || [self.model.my_score isKindOfClass:[NSNull class]]) {
-       [button6 setTitle:@"可兑换积分:0" forState:UIControlStateNormal];
+       [button6 setTitle:@"可兑换积分:0.0000" forState:UIControlStateNormal];
     }
 }
 
-//-(void)alertViewGetMoney{
-//  NSString*message=[NSString stringWithFormat:@"确实要全部积分(%@)提现？",self.model.my_score];
-//    UIAlertController*alertVC=[UIAlertController alertControllerWithTitle:@"积分提现" message:message preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction*cancelAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//        
-//    }];
-//    UIAlertAction*selectedAction=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        
-//        [self getMoneyDatas];
-//        
-//    }];
-//    
-//
-//    [alertVC addAction:cancelAction];
-//    [alertVC addAction:selectedAction];
-//    [self presentViewController:alertVC animated:YES completion:nil];
-//    
-//    
-//    
-//}
+
 
 
 -(void)addBottomImageView{
