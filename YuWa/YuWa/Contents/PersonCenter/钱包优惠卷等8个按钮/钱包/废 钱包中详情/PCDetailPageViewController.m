@@ -71,7 +71,13 @@
         NSString * order_sn = model.order_sn;
         NSString * type = model.type;
         NSString * money = model.money;
-        NSString * user_name = model.user_name;
+        NSString * nickname;
+            if (model.nickname.length >=11) {
+                NSString * name = [model.nickname substringToIndex:7];
+                nickname = [NSString stringWithFormat:@"%@****",name];
+            }else{
+                nickname = model.nickname;
+            }
         NSString * ctime = model.ctime;
         NSString * account_status = model.account_status;//交易状态
         NSString * balance = model.balance;
@@ -79,7 +85,7 @@
         [self.dataAry addObject:order_sn];
         [self.dataAry addObject:type];
         [self.dataAry addObject:money];
-        [self.dataAry addObject:user_name];
+        [self.dataAry addObject:nickname];
         [self.dataAry addObject:ctime];
         [self.dataAry addObject:account_status];
         [self.dataAry addObject:balance];
