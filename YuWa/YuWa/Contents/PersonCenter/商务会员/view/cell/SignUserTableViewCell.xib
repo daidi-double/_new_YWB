@@ -26,13 +26,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016.11.28" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANw-bg-N4e">
-                        <rect key="frame" x="18" y="13" width="73" height="17"/>
+                        <rect key="frame" x="13" y="13" width="73" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赵XX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9p7-XA-vyZ">
-                        <rect key="frame" x="136" y="13" width="36" height="17"/>
+                        <rect key="frame" x="111" y="13" width="36" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -45,10 +45,10 @@
                     <constraint firstAttribute="bottomMargin" secondItem="aty-yb-ttQ" secondAttribute="bottom" constant="5" id="TGc-ty-AVS"/>
                     <constraint firstAttribute="bottomMargin" secondItem="ANw-bg-N4e" secondAttribute="bottom" constant="5" id="X5g-wg-ODx"/>
                     <constraint firstItem="9p7-XA-vyZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aVr-ji-Ca0"/>
-                    <constraint firstItem="9p7-XA-vyZ" firstAttribute="leading" secondItem="ANw-bg-N4e" secondAttribute="trailing" constant="45" id="awa-v0-MCk"/>
+                    <constraint firstItem="9p7-XA-vyZ" firstAttribute="leading" secondItem="ANw-bg-N4e" secondAttribute="trailing" constant="25" id="awa-v0-MCk"/>
                     <constraint firstAttribute="trailing" secondItem="aty-yb-ttQ" secondAttribute="trailing" constant="40" id="cRL-iy-4C3"/>
                     <constraint firstItem="9p7-XA-vyZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="h22-s8-aQN"/>
-                    <constraint firstItem="ANw-bg-N4e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="hF6-Xl-Gg9"/>
+                    <constraint firstItem="ANw-bg-N4e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="hF6-Xl-Gg9"/>
                     <constraint firstItem="aty-yb-ttQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="iO9-qe-ROT"/>
                     <constraint firstItem="aty-yb-ttQ" firstAttribute="centerY" secondItem="9p7-XA-vyZ" secondAttribute="centerY" id="jIg-is-eQm"/>
                     <constraint firstItem="ANw-bg-N4e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="oCC-Kd-Ulo"/>

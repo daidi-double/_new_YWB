@@ -25,7 +25,8 @@
 @property(nonatomic,strong)NSMutableArray*modelUsed;
 @property(nonatomic,strong)NSMutableArray*modelUnused;
 @property(nonatomic,strong)NSMutableArray*modelOvertime;
-
+@property (nonatomic,strong)NSMutableArray * imageAry;
+@property (nonatomic,strong)NSMutableArray * colorAry;
 
 
 @end
@@ -36,14 +37,15 @@
     [super viewDidLoad];
    
     self.title=@"优惠券";
-//    [self getDatas];
-//    
-//    [self makeTopView];
+    [self getDatas];
+    
+    [self makeTopView];
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:CELL0 bundle:nil] forCellReuseIdentifier:CELL0];
-    UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height)];
-    imageView.image = [UIImage imageNamed:@"优惠券展示.jpg"];
-    [self.view addSubview:imageView];
+    NSArray * youhuiquanAry = @[@"youhuiquan_03",@"youhuiquan_06",@"youhuiquan_08",@"youhuiquan_10"];
+    NSArray * colorAry = @[RGBCOLOR(255, 193, 0, 1),RGBCOLOR(54, 192, 250, 1),RGBCOLOR(7, 225, 158, 1),RGBCOLOR(255, 94, 108, 1)];
+    [self.imageAry addObjectsFromArray:youhuiquanAry];
+    [self.colorAry addObjectsFromArray:colorAry];
 }
 
 -(void)makeTopView{
@@ -103,20 +105,30 @@
     
     //3 4 5 6
     CouponModel*model=mtArray[indexPath.section];
-    
+    UIImageView * youhuiquanImageView = [cell viewWithTag:1];
+    UILabel * strLabel = [cell viewWithTag:2];
+    UILabel*timeLabel=[cell viewWithTag:6];
     UILabel*dis_freeLabel=[cell viewWithTag:3];
-    dis_freeLabel.text=[NSString stringWithFormat:@"%@元",model.discount_fee];
-    
     UILabel*min_freeLabel=[cell viewWithTag:4];
+    UILabel*title=[cell viewWithTag:5];
+    if (model.shop_id == 0) {
+        youhuiquanImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.imageAry[2]]];
+        strLabel.textColor = self.colorAry[2];
+        dis_freeLabel.textColor = self.colorAry[2];
+        min_freeLabel.textColor = self.colorAry[2];
+        
+    }else {
+        
+    }
+    dis_freeLabel.text=[NSString stringWithFormat:@"￥%@",model.discount_fee];
+    
     min_freeLabel.text=[NSString stringWithFormat:@"满%@减",model.min_fee];
     
-    UILabel*title=[cell viewWithTag:5];
     title.text=model.name;
     
     NSString*startTime=[JWTools getTime:model.begin_time];
     NSString*endTime=[JWTools getTime:model.end_time];
-    UILabel*timeLabel=[cell viewWithTag:6];
-    timeLabel.text=[NSString stringWithFormat:@"抵用券%@至%@",startTime,endTime];
+    timeLabel.text=[NSString stringWithFormat:@"%@至%@",startTime,endTime];
     
 
       return cell;
@@ -129,29 +141,23 @@
             return;
         }
         
-        
-        
-        
         NSInteger number=indexPath.section;
-        CouponModel*model=self.modelUsed[number];
+        CouponModel*model=self.modelUnused[number];
         
         CGFloat min_free=[model.min_fee floatValue];
         if (min_free>self.totailPayMoney) {
             [JRToast showWithText:@"不满足最低消费金额，不能使用该优惠券"];
             return;
         }
-        
-        if (![model.shop_id isEqualToString:@"0"]||![model.shop_id isEqualToString:self.shopID]) {
+        if ([model.shop_id isEqualToString:self.shopID]||[model.shop_id isEqualToString:@"0"])  {
+            
+        }else{
             [JRToast showWithText:@"该店铺不能使用这张优惠券"];
             return;
-            
         }
         
-        
-        
-            
             if ([self.delegate respondsToSelector:@selector(DelegateGetCouponInfo:)]) {
-                [self.delegate DelegateGetCouponInfo:self.modelUsed[number]];
+                [self.delegate DelegateGetCouponInfo:self.modelUnused[number]];
             }
             
             [self.navigationController popViewControllerAnimated:YES];
@@ -261,7 +267,19 @@
     }
     return _modelUsed;
 }
+- (NSMutableArray *)imageAry{
+    if (!_imageAry) {
+        _imageAry = [NSMutableArray array];
+    }
+    return _imageAry;
+}
 
+- (NSMutableArray*)colorAry{
+    if (!_colorAry) {
+        _colorAry = [NSMutableArray array];
+    }
+    return _colorAry;
+}
 -(NSMutableArray *)modelUnused{
     if (!_modelUnused) {
         _modelUnused=[NSMutableArray array];

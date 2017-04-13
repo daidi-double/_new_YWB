@@ -101,10 +101,7 @@
             
         }
         CGFloat zhek = [self.zhekou floatValue]*10;
-        NSInteger zhengshu = [self.zhekou floatValue]*10;
-//        if () {
-//            <#statements#>
-//        }
+
         specailLabel.text=[NSString stringWithFormat:@"%.1f折,闪付特享",zhek];
         
         MyLog(@"zhekou23 = %f",zhek);

@@ -36,10 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6人" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgr-36-10E">
-                                <rect key="frame" x="72" y="87" width="50" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="A2e-Kt-NIF"/>
-                                </constraints>
+                                <rect key="frame" x="80.5" y="87" width="33" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -47,7 +44,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Fgr-36-10E" firstAttribute="leading" secondItem="PQY-9g-DdA" secondAttribute="leading" constant="72" id="27f-w8-Kr3"/>
                             <constraint firstItem="UKQ-vl-hej" firstAttribute="centerY" secondItem="PQY-9g-DdA" secondAttribute="centerY" constant="-1" id="2Rt-aN-Hpz"/>
                             <constraint firstItem="UKQ-vl-hej" firstAttribute="centerX" secondItem="PQY-9g-DdA" secondAttribute="centerX" constant="3" id="3Qw-AW-4mW"/>
                             <constraint firstItem="Fgr-36-10E" firstAttribute="centerY" secondItem="PQY-9g-DdA" secondAttribute="centerY" constant="24" id="Nc6-4a-Bv8"/>
@@ -104,10 +100,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="22" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="26人" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4H-SZ-jyc">
-                                <rect key="frame" x="74" y="91" width="50" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="Bp1-aB-TQs"/>
-                                </constraints>
+                                <rect key="frame" x="77" y="91" width="44.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
