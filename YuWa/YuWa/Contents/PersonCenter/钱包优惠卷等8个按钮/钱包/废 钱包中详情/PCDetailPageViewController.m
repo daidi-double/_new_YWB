@@ -63,7 +63,7 @@
     
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
-        MyLog(@"data00 = %@",data);
+        MyLog(@"data00 = %@",data[@"data"]);
         NSInteger errorCode = [data[@"errorCode"] integerValue];
         if (errorCode == 0) {
         PCOrderDetailModel * model = [PCOrderDetailModel yy_modelWithDictionary:data[@"data"]];

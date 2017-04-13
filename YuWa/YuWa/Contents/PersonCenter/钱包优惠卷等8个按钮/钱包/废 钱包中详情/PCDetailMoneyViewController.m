@@ -134,25 +134,23 @@
 }
 -(void)setUpMJRefresh{
     
-    self.maAllDatasModel=[NSMutableArray array];
+//    self.maAllDatasModel=[NSMutableArray array];
     self.pagen=10;
-    self.pages=0;
-            [self getDatas];
-//    self.tableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-//        self.maAllDatasModel=[NSMutableArray array];
-//        self.pages=0;
-//        [self getDatas];
-//    }];
+    self.tableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+        self.maAllDatasModel=[NSMutableArray array];
+        self.pages=0;
+        [self getDatas];
+    }];
     
-//    //上拉刷新
+    //上拉刷新
 //    self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
 //        self.pages++;
 //        [self getDatas];
 //    }];
-//    
-//    
-//    //立即刷新
-//    [self.tableView.mj_header beginRefreshing];
+    
+    
+    //立即刷新
+    [self.tableView.mj_header beginRefreshing];
 
 }
 
@@ -163,7 +161,10 @@
 }
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     NSNumber * nub = self.sectionData[section];
-    return  [NSString stringWithFormat:@"%@",nub];
+    if (nub == [NSNumber numberWithInteger:[self getYearOrMonth:@"month"]]) {
+        return [NSString stringWithFormat:@"本月"];
+    }
+    return  [NSString stringWithFormat:@"%@月",nub];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSMutableArray * data = self.maAllDatasModel[section];
@@ -334,26 +335,54 @@
             NSMutableArray * all = [NSMutableArray array];
             for (NSDictionary*dict in data[@"data"]) {
                 NSString * time = dict[@"dateTime"];
-                time =  [time substringWithRange:NSMakeRange(5, 2)];
-                [time intValue];
-                [NSNumber numberWithInteger:[time integerValue]];
-                //先判断all数据里面是否包含这个月份的数据
-                    if ( ![all containsObject:[NSNumber numberWithInteger:[time integerValue]]]) {
+                NSString * year1 =  [time substringWithRange:NSMakeRange(0, 4)];
+                MyLog(@"!!!!~~~~year~%@",year1);
+                NSString *Month =  [time substringWithRange:NSMakeRange(5, 2)];
+                [Month intValue];
+                [NSNumber numberWithInteger:[Month integerValue]];
+             //先判断是否是这一年的
+                if ([year1 integerValue] == [self getYearOrMonth:@"year"]) {
+                    //先判断all数据里面是否包含这个月份的数据
+                    if ( ![all containsObject:[NSNumber numberWithInteger:[Month integerValue]]]) {
                         //表示数组里面没有这个数值
                         [allData addObject:[NSMutableArray array]];
-                        [all addObject:[NSNumber numberWithInteger:[time integerValue]]];
+                        [all addObject:[NSNumber numberWithInteger:[Month integerValue]]];
                         //字典转模型
                         MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
                         [allData.lastObject addObject:model];
                     }else{
                         //表示里面有这个数
-//                        判断出这个数，在数组里面属于第几位
-                      NSUInteger  count1 =  [all indexOfObject:[NSNumber numberWithInteger:[time integerValue]]];
-                    MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
-                      NSMutableArray * addModelArr =   allData[count1];
+                        //                        判断出这个数，在数组里面属于第几位
+                        NSUInteger  count1 =  [all indexOfObject:[NSNumber numberWithInteger:[Month integerValue]]];
+                        MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
+                        NSMutableArray * addModelArr =   allData[count1];
                         [addModelArr addObject:model];
                     }
-                
+                }else{
+//                    说明不是今年的数据
+                    if ([year1 integerValue] == ([self getYearOrMonth:@"year"]-1)) {
+                        //说明是上一年的数据  获取2017-04格式字符串
+                        NSString * yearAndMonth =  [time substringWithRange:NSMakeRange(0, 7)];
+//                        除去-
+                        yearAndMonth = [yearAndMonth stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                        //先判断all数据里面是否包含这个月份的数据
+                        if ( ![all containsObject:[NSNumber numberWithInteger:[yearAndMonth integerValue]]]) {
+                            //表示数组里面没有这个数值
+                            [allData addObject:[NSMutableArray array]];
+                            [all addObject:[NSNumber numberWithInteger:[yearAndMonth integerValue]]];
+                            //字典转模型
+                            MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
+                            [allData.lastObject addObject:model];
+                        }else{
+                            //表示里面有这个数
+                            //                        判断出这个数，在数组里面属于第几位
+                            NSUInteger  count1 =  [all indexOfObject:[NSNumber numberWithInteger:[yearAndMonth integerValue]]];
+                            MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
+                            NSMutableArray * addModelArr =   allData[count1];
+                            [addModelArr addObject:model];
+                        }
+                    }
+                }
                 self.maAllDatasModel   = allData;
                 self.sectionData = all;
 //                MyLog(@"!!!!!!!!!!%@，，%@",dict[@"dataTime"],time );
@@ -379,25 +408,38 @@
         }
         
         
-//        [self.tableView.mj_header endRefreshing];
-//        [self.tableView.mj_footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         
         
     }];
     
 }
-
+//获取当年的年份 或者月份
+-(NSInteger)getYearOrMonth:(NSString *)yearOrMonth{
+    NSDate *date = [NSDate date];
+    NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    if ([yearOrMonth isEqualToString:@"year"]) {
+        NSLog(@"Year: %ld", [calendar component:NSCalendarUnitYear fromDate:date]);
+        return  [calendar component:NSCalendarUnitYear fromDate:date];
+    }
+    if ([yearOrMonth isEqualToString:@"month"]) {
+        NSLog(@"Year: %ld", [calendar component:NSCalendarUnitYear fromDate:date]);
+        return  [calendar component:NSCalendarUnitMonth fromDate:date];
+    }
+    return 0;
+}
 //
 //#pragma mark  --delegate
-//-(void)segumentSelectionChange:(NSInteger)selection{
-//    NSInteger aa=selection+1;
-//    self.payType=(short)aa;
-//    
-//    //立即刷新
-//    [self.tableView.mj_header beginRefreshing];
-//
-//    
-//}
+-(void)segumentSelectionChange:(NSInteger)selection{
+    NSInteger aa=selection+1;
+    self.payType=(short)aa;
+    
+    //立即刷新
+    [self.tableView.mj_header beginRefreshing];
+
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
