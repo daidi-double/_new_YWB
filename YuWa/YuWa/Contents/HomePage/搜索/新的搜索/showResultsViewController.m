@@ -138,11 +138,11 @@
     zheLabel.text=[NSString stringWithFormat:@"%.1f折，闪付立享",zhe];
 
     CGFloat num=[model.discount floatValue];
-    if (num>=1) {
+    if (num>=1 || num<= 0.00) {
         zheLabel.text=@"不打折";
     }
 
-    
+    cell.zhekou = model.discount;
     //特图片
     UIImageView*imageTe=[cell viewWithTag:8];
     imageTe.hidden=YES;

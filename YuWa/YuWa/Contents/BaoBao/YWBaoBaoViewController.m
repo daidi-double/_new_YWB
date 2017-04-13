@@ -101,7 +101,7 @@
     NSInteger lvCount = [UserSession instance].baobaoLV - 1;
     [self.baobaoBGGifArr removeAllObjects];
     for (int i=1; i<60; i++) {
-        NSString * path= [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%zibaobaoBG%zi@2x",lvCount,i] ofType:@"png"];
+        NSString * path= [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%zibaobaoBG%zi@2x",lvCount,i] ofType:@"jpg"];
         if (path) {
             if (self.baobaoBGGifArr.count>i) {
                 [self.baobaoBGGifArr replaceObjectAtIndex:i withObject:[UIImage imageWithContentsOfFile:path]];

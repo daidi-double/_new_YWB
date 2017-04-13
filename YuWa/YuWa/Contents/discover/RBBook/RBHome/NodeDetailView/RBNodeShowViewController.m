@@ -14,6 +14,7 @@
 #import "RBNodeShowModel.h"
 #import "RBNodeAddToAldumModel.h"
 
+#import "YWShoppingDetailViewController.h"
 #import "RBNodeShowCommentDetailVC.h"
 #import "RBNodeDetailBottomView.h"
 #import "RBNodeDetailHeader.h"
@@ -46,7 +47,7 @@
 @property (nonatomic,copy)NSString * pagens;
 @property (nonatomic,assign)NSInteger pages;
 @property (nonatomic,assign)NSInteger failedCount;
-
+@property (nonatomic,copy)NSString * user_type;
 @property (nonatomic,strong)RBNodeDRecommendTableViewCell * recommendCell;
 @property (nonatomic,assign)CGFloat scrollImageHeight;
 @property (nonatomic,assign)CGFloat scrollToolsHeight;
@@ -204,14 +205,23 @@
             [weakSelf promptView];
         };
         self.authorHeader.otherBlock = ^(){
-            if ([weakSelf isLogin]&& !weakSelf.authorHeader.isUser) {
-                if ([weakSelf isLogin]) {
+            
+            if ([weakSelf isLogin]) {
+            if ([weakSelf.dataModel.user.user_type isEqualToString:@"2"]) {
+                YWShoppingDetailViewController * shopVC = [[YWShoppingDetailViewController alloc]init];
+                shopVC.shop_id = weakSelf.dataModel.user.userid;
+                [weakSelf.navigationController pushViewController:shopVC animated:YES];
+                
+            }else if (!weakSelf.authorHeader.isUser) {
+                
                     YWOtherSeePersonCenterViewController * vc = [[YWOtherSeePersonCenterViewController alloc]init];
                     vc.uid = weakSelf.dataModel.user.userid;
                     vc.nickName = weakSelf.dataModel.user.nickname;
                     vc.otherIcon = weakSelf.dataModel.user.images;
                     [weakSelf.navigationController pushViewController:vc animated:YES];
-                }
+           
+            }
+           
             }
         };
     }
@@ -438,10 +448,12 @@
     
     [[HttpObject manager]postDataWithType:YuWaType_RB_DETAIL withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
-        MyLog(@"Regieter Code is %@",responsObj);
+        MyLog(@"Regieter Code is 223%@",responsObj);
         NSMutableDictionary * dataDic = [RBNodeShowModel dataDicSetWithDic:responsObj[@"data"]];
         [dataDic setObject:self.model.homeID forKey:@"id"];
+
         self.dataModel = [RBNodeShowModel yy_modelWithDictionary:dataDic];
+
         self.scrollToolsHeight = 0.f;
         [self reSetBottomToolsView];
         [self requestDataWithPages:0];//瀑布流数据

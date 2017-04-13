@@ -21,6 +21,7 @@
 @property (nonatomic,copy)NSString * type;//类型
 @property (nonatomic,copy)NSString * pay_money;
 @property (nonatomic,copy)NSString * user_name;
+@property (nonatomic,copy)NSString * nickname;
 @property (nonatomic,copy)NSString * ctime;
 @property (nonatomic,copy)NSString * pay_to_shop_time;
 @property (nonatomic,copy)NSString * create_time;
