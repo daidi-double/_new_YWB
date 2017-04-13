@@ -81,7 +81,9 @@
         NSString * ctime = model.ctime;
         NSString * account_status = model.account_status;//交易状态
         NSString * balance = model.balance;
-        
+            if (model.order_sn == nil) {
+                order_sn = @"";
+            }
         [self.dataAry addObject:order_sn];
         [self.dataAry addObject:type];
         [self.dataAry addObject:money];
