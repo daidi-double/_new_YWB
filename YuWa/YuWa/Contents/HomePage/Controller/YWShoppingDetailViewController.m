@@ -325,7 +325,7 @@
         //加入到收藏夹
         cell.touchAddCollection=^(){
           
-         [self addToCollection];
+         [weakSelf addToCollection];
             
             
         };
@@ -339,21 +339,21 @@
         cell.touchLocateBlock=^(){
             //跳地图
             MapNavNewViewController * mapNaviVC = [[MapNavNewViewController alloc]init];
-            mapNaviVC.coordinatex = self.mainModel.coordinatex;
-            mapNaviVC.coordinatey = self.mainModel.coordinatey;
-            mapNaviVC.shopName = self.mainModel.company_name;
-            [self.navigationController pushViewController:mapNaviVC animated:YES];
+            mapNaviVC.coordinatex = weakSelf.mainModel.coordinatex;
+            mapNaviVC.coordinatey = weakSelf.mainModel.coordinatey;
+            mapNaviVC.shopName = weakSelf.mainModel.company_name;
+            [weakSelf.navigationController pushViewController:mapNaviVC animated:YES];
             
         };
         cell.touchPhoneBlock=^(){
           //跳电话
-            [self alertShowPhone];
+            [weakSelf alertShowPhone];
         };
         
         cell.touchQiangBlock=^{
           //抢优惠券
 //            MyLog(@"抢优惠券");
-            [self rushCoupon];
+            [weakSelf rushCoupon];
         };
         
         

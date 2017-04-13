@@ -111,11 +111,15 @@
     UILabel*dis_freeLabel=[cell viewWithTag:3];
     UILabel*min_freeLabel=[cell viewWithTag:4];
     UILabel*title=[cell viewWithTag:5];
+    UIImageView * rightImageView = [cell viewWithTag:8];
+    UIImageView * leftImageView = [cell viewWithTag:7];
     if (model.shop_id == 0) {
-        youhuiquanImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.imageAry[2]]];
-        strLabel.textColor = self.colorAry[2];
-        dis_freeLabel.textColor = self.colorAry[2];
-        min_freeLabel.textColor = self.colorAry[2];
+        youhuiquanImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.imageAry[0]]];
+        rightImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@1",self.imageAry[0]]];
+        leftImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@2",self.imageAry[0]]];
+        strLabel.textColor = self.colorAry[0];
+        dis_freeLabel.textColor = self.colorAry[0];
+        min_freeLabel.textColor = self.colorAry[0];
         
     }else {
         

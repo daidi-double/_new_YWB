@@ -118,16 +118,15 @@
 }
 
 - (void)openBusnessBtn{
-//    OpenBusinessViewController*vc=[[OpenBusinessViewController alloc]initWithNibName:@"OpenBusinessViewController" bundle:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
-    [JRToast showWithText:@"尽请期待" duration:1];
+    OpenBusinessViewController*vc=[[OpenBusinessViewController alloc]initWithNibName:@"OpenBusinessViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 -(void)touchTap{
-//    OpenBusinessViewController*vc=[[OpenBusinessViewController alloc]initWithNibName:@"OpenBusinessViewController" bundle:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
-    [JRToast showWithText:@"尽请期待" duration:1];
-//    
+    OpenBusinessViewController*vc=[[OpenBusinessViewController alloc]initWithNibName:@"OpenBusinessViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+   
 }
 
 
