@@ -157,6 +157,9 @@
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (self.maAllDatasModel.count==nil) {
+        return 0;
+    }
     return self.sectionData.count;
 }
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
@@ -167,8 +170,13 @@
     return  [NSString stringWithFormat:@"%@月",nub];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSMutableArray * data = self.maAllDatasModel[section];
-    return data.count;
+    MyLog(@"section = %ld",(long)section);
+    NSMutableArray * data;
+    if (self.maAllDatasModel.count!=nil) {
+       data  = self.maAllDatasModel[section];
+        return data.count;
+    }
+    return 0;
 }
 
 
@@ -329,67 +337,72 @@
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
-            [self.maAllDatasModel removeAllObjects];
-            //记录总数据
-            NSMutableArray * allData = [NSMutableArray array];
-            NSMutableArray * all = [NSMutableArray array];
-            for (NSDictionary*dict in data[@"data"]) {
-                NSString * time = dict[@"dateTime"];
-                NSString * year1 =  [time substringWithRange:NSMakeRange(0, 4)];
-                MyLog(@"!!!!~~~~year~%@",year1);
-                NSString *Month =  [time substringWithRange:NSMakeRange(5, 2)];
-                [Month intValue];
-                [NSNumber numberWithInteger:[Month integerValue]];
-             //先判断是否是这一年的
-                if ([year1 integerValue] == [self getYearOrMonth:@"year"]) {
-                    //先判断all数据里面是否包含这个月份的数据
-                    if ( ![all containsObject:[NSNumber numberWithInteger:[Month integerValue]]]) {
-                        //表示数组里面没有这个数值
-                        [allData addObject:[NSMutableArray array]];
-                        [all addObject:[NSNumber numberWithInteger:[Month integerValue]]];
-                        //字典转模型
-                        MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
-                        [allData.lastObject addObject:model];
-                    }else{
-                        //表示里面有这个数
-                        //                        判断出这个数，在数组里面属于第几位
-                        NSUInteger  count1 =  [all indexOfObject:[NSNumber numberWithInteger:[Month integerValue]]];
-                        MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
-                        NSMutableArray * addModelArr =   allData[count1];
-                        [addModelArr addObject:model];
-                    }
-                }else{
-//                    说明不是今年的数据
-                    if ([year1 integerValue] == ([self getYearOrMonth:@"year"]-1)) {
-                        //说明是上一年的数据  获取2017-04格式字符串
-                        NSString * yearAndMonth =  [time substringWithRange:NSMakeRange(0, 7)];
-//                        除去-
-                        yearAndMonth = [yearAndMonth stringByReplacingOccurrencesOfString:@"-" withString:@""];
+            NSMutableArray *arr = [NSMutableArray array];
+            arr = data[@"data"];
+            if (arr.count) {
+                MyLog(@"count = %lu",(unsigned long)arr.count);
+                [self.maAllDatasModel removeAllObjects];
+                //记录总数据
+                NSMutableArray * allData = [NSMutableArray array];
+                NSMutableArray * all = [NSMutableArray array];
+                for (NSDictionary*dict in data[@"data"]) {
+                    NSString * time = dict[@"dateTime"];
+                    NSString * year1 =  [time substringWithRange:NSMakeRange(0, 4)];
+                    MyLog(@"!!!!~~~~year~%@",year1);
+                    NSString *Month =  [time substringWithRange:NSMakeRange(5, 2)];
+                    [Month intValue];
+                    [NSNumber numberWithInteger:[Month integerValue]];
+                    //先判断是否是这一年的
+                    if ([year1 integerValue] == [self getYearOrMonth:@"year"]) {
                         //先判断all数据里面是否包含这个月份的数据
-                        if ( ![all containsObject:[NSNumber numberWithInteger:[yearAndMonth integerValue]]]) {
+                        if ( ![all containsObject:[NSNumber numberWithInteger:[Month integerValue]]]) {
                             //表示数组里面没有这个数值
                             [allData addObject:[NSMutableArray array]];
-                            [all addObject:[NSNumber numberWithInteger:[yearAndMonth integerValue]]];
+                            [all addObject:[NSNumber numberWithInteger:[Month integerValue]]];
                             //字典转模型
                             MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
                             [allData.lastObject addObject:model];
                         }else{
                             //表示里面有这个数
                             //                        判断出这个数，在数组里面属于第几位
-                            NSUInteger  count1 =  [all indexOfObject:[NSNumber numberWithInteger:[yearAndMonth integerValue]]];
+                            NSUInteger  count1 =  [all indexOfObject:[NSNumber numberWithInteger:[Month integerValue]]];
                             MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
                             NSMutableArray * addModelArr =   allData[count1];
                             [addModelArr addObject:model];
                         }
+                    }else{
+                        //                    说明不是今年的数据
+                        if ([year1 integerValue] == ([self getYearOrMonth:@"year"]-1)) {
+                            //说明是上一年的数据  获取2017-04格式字符串
+                            NSString * yearAndMonth =  [time substringWithRange:NSMakeRange(0, 7)];
+                            //                        除去-
+                            yearAndMonth = [yearAndMonth stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                            //先判断all数据里面是否包含这个月份的数据
+                            if ( ![all containsObject:[NSNumber numberWithInteger:[yearAndMonth integerValue]]]) {
+                                //表示数组里面没有这个数值
+                                [allData addObject:[NSMutableArray array]];
+                                [all addObject:[NSNumber numberWithInteger:[yearAndMonth integerValue]]];
+                                //字典转模型
+                                MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
+                                [allData.lastObject addObject:model];
+                            }else{
+                                //表示里面有这个数
+                                //                        判断出这个数，在数组里面属于第几位
+                                NSUInteger  count1 =  [all indexOfObject:[NSNumber numberWithInteger:[yearAndMonth integerValue]]];
+                                MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
+                                NSMutableArray * addModelArr =   allData[count1];
+                                [addModelArr addObject:model];
+                            }
+                        }
                     }
+                    self.maAllDatasModel   = allData;
+                    self.sectionData = all;
+                    //                MyLog(@"!!!!!!!!!!%@，，%@",dict[@"dataTime"],time );
+                    //                MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
+                    //                NSMutableArray * modelARR =
+                    //                [self.maAllDatasModel addObject:model];
+                    
                 }
-                self.maAllDatasModel   = allData;
-                self.sectionData = all;
-//                MyLog(@"!!!!!!!!!!%@，，%@",dict[@"dataTime"],time );
-//                MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
-//                NSMutableArray * modelARR =
-//                [self.maAllDatasModel addObject:model];
-                
             }
             [self.tableView reloadData];
             
