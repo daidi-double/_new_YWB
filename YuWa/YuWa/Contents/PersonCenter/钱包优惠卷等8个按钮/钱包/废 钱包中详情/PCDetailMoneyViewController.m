@@ -157,7 +157,7 @@
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (self.maAllDatasModel.count==nil) {
+    if (self.maAllDatasModel.count==0) {
         return 0;
     }
     return self.sectionData.count;
@@ -172,7 +172,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     MyLog(@"section = %ld",(long)section);
     NSMutableArray * data;
-    if (self.maAllDatasModel.count!=nil) {
+    if (self.maAllDatasModel.count!=0) {
        data  = self.maAllDatasModel[section];
         return data.count;
     }
