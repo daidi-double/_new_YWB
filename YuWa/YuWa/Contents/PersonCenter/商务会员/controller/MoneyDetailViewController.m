@@ -76,7 +76,8 @@
 
         titleLabel.text=@"收入来源";
         detailLabel.text=self.model.user_name;
-        if (self.model.user_name.length >= 11) {
+        //判断是否为手机号码，是就隐藏一部分
+        if (self.model.user_name.length >= 11 && [JWTools isNumberWithStr:self.model.user_name]) {
             detailLabel.text = [NSString stringWithFormat:@"%@****",[self.model.user_name substringToIndex:self.model.user_name.length - 4]];
         }
        

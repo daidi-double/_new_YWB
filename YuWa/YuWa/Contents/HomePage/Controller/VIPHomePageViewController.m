@@ -503,7 +503,7 @@
         UILabel*categoryLabel=[cell viewWithTag:4];
         NSArray*array=model.tag_name;
         NSString*arrayStr=[array componentsJoinedByString:@" "];
-        categoryLabel.text=[NSString stringWithFormat:@"%@ %@",model.catname,arrayStr];   //model.catname
+        categoryLabel.text=[NSString stringWithFormat:@"%@",arrayStr];   //model.catname
         
         //店铺所在的商圈
         UILabel*shopLocLabel=[cell viewWithTag:6];
@@ -518,9 +518,13 @@
         //折下面的文字
         UILabel*zheLabel=[cell viewWithTag:7];
         NSString*zheNum=[model.discount substringFromIndex:2];
-        CGFloat zhe = [zheNum floatValue]/10;
-        
-        zheLabel.text=[NSString stringWithFormat:@"%.1f折，闪付立享",zhe];
+       
+        if ([zheNum integerValue] % 10 == 0) {
+            zheNum = [NSString stringWithFormat:@"%ld",[zheNum integerValue]/10];
+        }else{
+            zheNum = [NSString stringWithFormat:@"%.1f",[zheNum floatValue]/10];
+        }
+        zheLabel.text=[NSString stringWithFormat:@"%@折，闪付立享",zheNum];
         
         CGFloat num=[model.discount floatValue];
         if (num>=1 || num == 0.00) {

@@ -31,6 +31,10 @@
     
     UILabel*nameLabel=[self viewWithTag:2];
     nameLabel.text=model.customer_name;
+    //判断是否为手机号码，是就隐藏一部分
+    if (model.customer_name.length >= 11 && [JWTools isNumberWithStr:model.customer_name]) {
+        nameLabel.text = [NSString stringWithFormat:@"%@****",[model.customer_name substringToIndex:model.customer_name.length - 4]];
+    }
     
     UILabel*timeLabel=[self viewWithTag:3];
     timeLabel.text=[JWTools getTime:model.ctime];

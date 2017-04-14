@@ -123,6 +123,11 @@
 
 - (void)dataSet{
     self.nameLabel.text = self.model.nickname;
+    //判断是否为手机号码，是就隐藏一部分
+    if (self.model.nickname.length == 11 && [JWTools isNumberWithStr:self.model.nickname]) {
+        NSString * number = [self.model.nickname substringToIndex:7];
+        self.nameLabel.text = [NSString stringWithFormat:@"%@****",number];
+    }
     if(self.model.user_type)self.levelImageView.hidden = [self.model.user_type integerValue]>=2?NO:YES;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:self.model.images] placeholderImage:[UIImage imageNamed:@"Head-portrait"] completed:nil];
     [self.levelImageView sd_setImageWithURL:[NSURL URLWithString:self.model.level.image] placeholderImage:[UIImage imageNamed:@"level22"] completed:nil];

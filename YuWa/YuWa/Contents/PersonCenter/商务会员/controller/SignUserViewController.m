@@ -84,7 +84,7 @@
     for (int i = 0; i<2; i ++ ) {
         
         UIButton * segmentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        segmentBtn.frame = CGRectMake(1+bgView.width/2*i, 1, bgView.width/2-2, 28);
+        segmentBtn.frame = CGRectMake(4+bgView.width/2*i, 2, bgView.width/2-8, 26);
         [segmentBtn setTitle:arrayTitle[i] forState:UIControlStateNormal];
         [segmentBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
         [segmentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
@@ -125,6 +125,10 @@
     UILabel*nameLabel=[cell viewWithTag:1];
     nameLabel.text=model.user_name;
    
+//判断是否为手机号码，是就隐藏一部分
+    if (model.user_name.length >= 11 && [JWTools isNumberWithStr:model.user_name]) {
+        nameLabel.text = [NSString stringWithFormat:@"%@****",[model.user_name substringToIndex:model.user_name.length - 4]];
+        }
     UILabel*moneyLabel=[cell viewWithTag:2];
     moneyLabel.text=[NSString stringWithFormat:@"%@",model.money];
     

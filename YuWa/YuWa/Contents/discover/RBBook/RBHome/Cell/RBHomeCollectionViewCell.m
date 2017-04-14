@@ -61,6 +61,11 @@
     [self.likeBtn setTitle:self.likeCount == 0?@"赞":self.model.likes forState:UIControlStateNormal];
     
     self.nickNameLabel.text = self.model.user.nickname;
+    //判断是否为手机号码，是就隐藏一部分
+    if (self.model.user.nickname.length == 11 && [JWTools isNumberWithStr:self.model.user.nickname]) {
+        NSString * number = [self.model.user.nickname substringToIndex:7];
+        self.nickNameLabel.text = [NSString stringWithFormat:@"%@****",number];
+    }
 }
 
 - (void)layoutSet{

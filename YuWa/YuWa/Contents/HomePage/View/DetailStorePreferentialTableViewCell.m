@@ -152,9 +152,13 @@
     _defultZhe=defultZhe;
     NSString*number=[defultZhe substringFromIndex:2];
     
-    CGFloat zhe = [number floatValue]/10;
-    
-    self.defaultZheLabel.text=[NSString stringWithFormat:@"闪付立享%.1f折",zhe];
+    if ([number integerValue] % 10 == 0) {
+        number = [NSString stringWithFormat:@"%ld",[number integerValue]/10];
+    }else{
+        number = [NSString stringWithFormat:@"%.1f",[number floatValue]/10];
+    }
+
+    self.defaultZheLabel.text=[NSString stringWithFormat:@"%@折,闪付立享",number];
     
     
     CGFloat num=[defultZhe floatValue];

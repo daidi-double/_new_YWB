@@ -33,6 +33,11 @@
 - (void)dataSet{
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:self.model.user.images] placeholderImage:[UIImage imageNamed:@"Head-portrait"] completed:nil];
     self.nameLabel.text = self.model.user.nickname;
+    //判断是否为手机号码，是就隐藏一部分
+    if (self.model.user.nickname.length == 11 && [JWTools isNumberWithStr:self.model.user.nickname]) {
+        NSString * number = [self.model.user.nickname substringToIndex:7];
+        self.nameLabel.text = [NSString stringWithFormat:@"%@****",number];
+    }
     if (self.model.target_comment.user.nickname) {
         NSMutableAttributedString * con = [NSString stringWithFirstStr:@"回复" withFont:self.conLabel.font withColor:self.conLabel.textColor withSecondtStr:self.model.target_comment.user.nickname withFont:self.conLabel.font withColor:[UIColor lightGrayColor]];
         [con appendAttributedString:[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@":%@",self.model.content] attributes:@{NSForegroundColorAttributeName:self.conLabel.textColor,NSFontAttributeName:self.conLabel.font}]];

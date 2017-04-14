@@ -70,9 +70,12 @@
             [self.saveAllLabel addObject:specailLabel];
             NSDictionary*dict=specail[i];
            NSString*zheNum=[dict[@"rebate"] substringFromIndex:2];
-           CGFloat zheN = [zheNum floatValue]/10;
-           
-           specailLabel.text=[NSString stringWithFormat:@"%.1f折,闪付特享",zheN];
+           if ([zheNum integerValue] % 10 == 0) {
+               zheNum = [NSString stringWithFormat:@"%ld",[zheNum integerValue]/10];
+           }else{
+               zheNum = [NSString stringWithFormat:@"%.1f",[zheNum floatValue]/10];
+           }
+           specailLabel.text=[NSString stringWithFormat:@"%@折,闪付特享",zheNum];
            
            CGFloat numF=[dict[@"rebate"] floatValue];
            if (numF>=1 || numF<=0.00) {
@@ -104,10 +107,15 @@
             
         }
         CGFloat zhek = [self.zhekou floatValue]*10;
-
-        specailLabel.text=[NSString stringWithFormat:@"%.1f折,闪付特享",zhek];
+        NSString*zheNum=[self.zhekou substringFromIndex:2];
+        if ([zheNum integerValue] % 10 == 0) {
+            zheNum = [NSString stringWithFormat:@"%ld",[zheNum integerValue]/10];
+        }else{
+            zheNum = [NSString stringWithFormat:@"%.1f",[zheNum floatValue]/10];
+        }
+        specailLabel.text=[NSString stringWithFormat:@"%@折,闪付特享",zheNum];
         
-        MyLog(@"zhekou23 = %f",zhek);
+//        MyLog(@"zhekou23 = %f",zhek);
         if (zhek>=10 || zhek<=1.00) {
             specailLabel.text=@"无特惠";
         }
