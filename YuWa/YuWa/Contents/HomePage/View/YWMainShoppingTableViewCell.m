@@ -11,6 +11,9 @@
 @interface YWMainShoppingTableViewCell()
 @property(nonatomic,strong)NSMutableArray*saveAllImage;
 @property(nonatomic,strong)NSMutableArray*saveAllLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleName;
+@property (weak, nonatomic) IBOutlet UILabel *caixi;
+
 
 @end
 @implementation YWMainShoppingTableViewCell
