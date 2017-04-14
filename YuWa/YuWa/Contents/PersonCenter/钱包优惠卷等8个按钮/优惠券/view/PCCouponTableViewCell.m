@@ -13,21 +13,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-//    UIView*viewleft=[self viewWithTag:1];
-//  UIBezierPath*bezierPath=  [UIBezierPath bezierPathWithRoundedRect:viewleft.frame byRoundingCorners:UIRectCornerTopLeft|UIRectCornerBottomLeft cornerRadii:CGSizeMake(6, 6)];
-//    CAShapeLayer*shapeLayer=[[CAShapeLayer alloc]init];
-//    shapeLayer.frame=viewleft.frame;
-//    shapeLayer.path=bezierPath.CGPath;
-//    viewleft.layer.mask=shapeLayer;
-//    
-//    
-//    UIView*rightView=[self viewWithTag:2];
-//    UIBezierPath*BPath=[UIBezierPath bezierPathWithRoundedRect:rightView.frame byRoundingCorners:UIRectCornerTopRight|UIRectCornerBottomRight cornerRadii:CGSizeMake(6, 6)];
-//    CAShapeLayer*sLayer=[[CAShapeLayer alloc]init];
-//    sLayer.frame=rightView.frame;
-//    sLayer.path=BPath.CGPath;
-//    rightView.layer.mask=sLayer;
-    
     
 }
 
