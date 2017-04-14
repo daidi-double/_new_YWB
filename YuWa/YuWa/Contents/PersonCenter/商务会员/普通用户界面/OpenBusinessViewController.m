@@ -63,19 +63,7 @@
 }
 
 - (IBAction)touchCommit:(id)sender {
-    
-//    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"是否确认开通商务会员，开通商务会员需缴纳8000元手续费" preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-//    UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确认开通" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        PayBusinessViewController * payVC = [[PayBusinessViewController alloc]init];
-//        [self.navigationController pushViewController:payVC animated:YES];
-//    }];
-//    
-//    [alertVC addAction:cancel];
-//    [alertVC addAction:sure];
-//    
-//    [self presentViewController:alertVC animated:YES completion:nil];
-    
+  
   NSString*str= [self judgeCanSave];
     if (self.canSave==NO) {
         [JRToast showWithText:str];
@@ -233,18 +221,18 @@
         NSInteger number=[data[@"errorCode"] integerValue];
         if (number==0) {
             [JRToast showWithText:data[@"data"]];
-            UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"是否确认开通商务会员，开通商务会员需缴纳8000元手续费" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-            UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确认开通" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                PayBusinessViewController * payVC = [[PayBusinessViewController alloc]init];
-                [self.navigationController pushViewController:payVC animated:YES];
-            }];
-            
-            [alertVC addAction:cancel];
-            [alertVC addAction:sure];
-            
-            [self presentViewController:alertVC animated:YES completion:nil];
-
+//            UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"是否确认开通商务会员，开通商务会员需缴纳8000元手续费" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+//            UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确认开通" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                PayBusinessViewController * payVC = [[PayBusinessViewController alloc]init];
+//                [self.navigationController pushViewController:payVC animated:YES];
+//            }];
+//            
+//            [alertVC addAction:cancel];
+//            [alertVC addAction:sure];
+//            
+//            [self presentViewController:alertVC animated:YES completion:nil];
+//
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
         }

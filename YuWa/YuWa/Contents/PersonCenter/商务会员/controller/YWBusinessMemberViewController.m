@@ -205,12 +205,19 @@
         
         UILabel*indirectBinding=[cell viewWithTag:22];  //间接锁定
         indirectBinding.text=[NSString stringWithFormat:@"%@人",self.BiningModel.my_indirect_user_nums];
-        UIView * tapView = [cell viewWithTag:666];
+        UIView * tapView = [cell viewWithTag:555];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(indirctActionTap)];
         tap.numberOfTapsRequired = 1;
         tap.numberOfTouchesRequired = 1;
         tap.delegate = self;
         [tapView addGestureRecognizer:tap];
+        
+        UIButton * directBtn = [cell viewWithTag:666];
+        [directBtn addTarget:self action:@selector(directAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton * indirectBtn = [cell viewWithTag:888];
+        [indirectBtn addTarget:self action:@selector(indirectAction) forControlEvents:UIControlEventTouchUpInside];
+        
         
         return cell;
     }
@@ -228,9 +235,20 @@
 
     return cell;
 }
+- (void)directAction{
+    SignUserViewController*vc=[[SignUserViewController alloc]init];
+    vc.status = @"0";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)indirectAction{
+    SignUserViewController*vc=[[SignUserViewController alloc]init];
+    vc.status = @"1";
+    [self.navigationController pushViewController:vc animated:YES];
+ 
+}
 - (void)indirctActionTap{
     SignUserViewController*vc=[[SignUserViewController alloc]init];
-    
+    vc.status = @"0";
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -251,6 +269,7 @@
         
     }else if (indexPath.section==3){
 //        SignUserViewController*vc=[[SignUserViewController alloc]init];
+//        vc.status = @"0";
 //        [self.navigationController pushViewController:vc animated:YES];
         
     }

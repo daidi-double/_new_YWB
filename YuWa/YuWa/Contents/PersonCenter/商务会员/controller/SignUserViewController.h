@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SignUserViewController : UIViewController
-
+@property (nonatomic,copy)NSString * status;
 @end

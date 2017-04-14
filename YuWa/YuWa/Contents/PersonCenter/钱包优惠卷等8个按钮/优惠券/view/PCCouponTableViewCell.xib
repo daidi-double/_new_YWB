@@ -20,34 +20,34 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youhuiquan_08" translatesAutoresizingMaskIntoConstraints="NO" id="wou-Rs-Z53">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="98.5"/>
                     </imageView>
                     <view tag="20" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ss-u8-RLM" userLabel="RightView">
-                        <rect key="frame" x="154" y="0.0" width="213" height="99"/>
+                        <rect key="frame" x="154.5" y="0.0" width="212.5" height="98.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" tag="8" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youhuiquan_081" translatesAutoresizingMaskIntoConstraints="NO" id="bAc-2A-Fsa">
-                                <rect key="frame" x="8" y="10" width="197" height="81"/>
+                                <rect key="frame" x="20" y="13.5" width="182.5" height="73.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bAc-2A-Fsa" secondAttribute="height" multiplier="2:1" constant="35" id="p6u-V0-J1O"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="阳光大自然水疗会所(抵用券)" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5k-gz-vIy">
-                                <rect key="frame" x="14" y="10" width="184" height="25.5"/>
+                                <rect key="frame" x="14" y="10" width="183.5" height="24.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="6" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-10-12至2016-10-19" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5XY-8Z-O4o">
-                                <rect key="frame" x="15" y="43.5" width="183" height="13.5"/>
+                                <rect key="frame" x="15" y="42.5" width="182.5" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Wm-ci-IJ8">
-                                <rect key="frame" x="116.5" y="62" width="81.5" height="22"/>
+                                <rect key="frame" x="115" y="61" width="82.5" height="22.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="满100减" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVr-S1-0VB">
-                                        <rect key="frame" x="12" y="2" width="56" height="18"/>
+                                        <rect key="frame" x="13" y="2" width="56" height="18"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.33725490196078434" green="0.82352941176470584" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
@@ -69,28 +69,28 @@
                             <constraint firstItem="5XY-8Z-O4o" firstAttribute="centerX" secondItem="4ss-u8-RLM" secondAttribute="centerX" id="BBo-xc-sdc"/>
                             <constraint firstItem="2Wm-ci-IJ8" firstAttribute="trailing" secondItem="b5k-gz-vIy" secondAttribute="trailing" id="ExP-ed-KYN"/>
                             <constraint firstItem="2Wm-ci-IJ8" firstAttribute="top" secondItem="5XY-8Z-O4o" secondAttribute="bottom" constant="5" id="IDO-ep-jgY"/>
-                            <constraint firstItem="bAc-2A-Fsa" firstAttribute="top" secondItem="4ss-u8-RLM" secondAttribute="top" constant="10" id="IF2-T2-ine"/>
-                            <constraint firstItem="bAc-2A-Fsa" firstAttribute="centerX" secondItem="4ss-u8-RLM" secondAttribute="centerX" id="Nc3-Qf-roo"/>
+                            <constraint firstItem="bAc-2A-Fsa" firstAttribute="centerX" secondItem="4ss-u8-RLM" secondAttribute="centerX" constant="5" id="Nc3-Qf-roo"/>
                             <constraint firstItem="5XY-8Z-O4o" firstAttribute="trailing" secondItem="b5k-gz-vIy" secondAttribute="trailing" id="QRb-uM-zF4"/>
                             <constraint firstItem="5XY-8Z-O4o" firstAttribute="top" secondItem="b5k-gz-vIy" secondAttribute="bottom" constant="8" id="SJR-Gs-EFS"/>
                             <constraint firstAttribute="trailing" secondItem="b5k-gz-vIy" secondAttribute="trailing" constant="15" id="YvJ-Mf-lfd"/>
-                            <constraint firstAttribute="trailing" secondItem="bAc-2A-Fsa" secondAttribute="trailing" constant="8" id="azp-42-WkG"/>
+                            <constraint firstItem="bAc-2A-Fsa" firstAttribute="top" secondItem="4ss-u8-RLM" secondAttribute="top" constant="13.5" id="bfg-n4-PKq"/>
+                            <constraint firstItem="bAc-2A-Fsa" firstAttribute="leading" secondItem="4ss-u8-RLM" secondAttribute="leading" constant="20" id="dSz-wj-f8b"/>
                             <constraint firstItem="b5k-gz-vIy" firstAttribute="top" secondItem="4ss-u8-RLM" secondAttribute="top" constant="10" id="lrC-cY-Lcs"/>
                             <constraint firstItem="b5k-gz-vIy" firstAttribute="leading" secondItem="4ss-u8-RLM" secondAttribute="leading" constant="14" id="qfu-OH-GZh"/>
                             <constraint firstItem="bAc-2A-Fsa" firstAttribute="centerY" secondItem="4ss-u8-RLM" secondAttribute="centerY" constant="1" id="tmT-kO-Ro4"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USZ-af-mJ6">
-                        <rect key="frame" x="0.0" y="0.0" width="146" height="98"/>
+                        <rect key="frame" x="0.0" y="0.0" width="146.5" height="98.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youhuiquan_082" translatesAutoresizingMaskIntoConstraints="NO" id="q4z-OL-GhP">
-                                <rect key="frame" x="25" y="10" width="82" height="77"/>
+                                <rect key="frame" x="25" y="10" width="82.5" height="77.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="q4z-OL-GhP" secondAttribute="height" multiplier="79:74" id="iKw-Vo-qLs"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠券" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svg-No-Qnd">
-                                <rect key="frame" x="40" y="54" width="52" height="20"/>
+                                <rect key="frame" x="40.5" y="54.5" width="52" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="svg-No-Qnd" secondAttribute="height" multiplier="49:19" id="ZTA-gC-YwQ"/>
                                 </constraints>
@@ -99,7 +99,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥2.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hoo-hh-w8N">
-                                <rect key="frame" x="30" y="21" width="71" height="27"/>
+                                <rect key="frame" x="30.5" y="21.5" width="71" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Hoo-hh-w8N" secondAttribute="height" multiplier="34:13" id="6FE-df-HSg"/>
                                 </constraints>

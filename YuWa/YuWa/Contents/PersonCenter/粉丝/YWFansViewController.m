@@ -111,6 +111,10 @@
     //名字
     UILabel*nameLabel=[cell viewWithTag:2];
     nameLabel.text=model.nickname;
+    if ([JWTools isNumberWithStr:model.nickname]) {
+        NSString * name = [model.nickname substringToIndex:7];
+        nameLabel.text = [NSString stringWithFormat:@"%@****",name];
+    }
     //info
     UILabel*infoLabel=[cell viewWithTag:3];
     infoLabel.text=[NSString stringWithFormat:@"%@条笔记，%@个粉丝",model.note_num,model.fans];
@@ -193,6 +197,7 @@
     NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"pagen":pagen,@"pages":pages};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"data = %@",data);
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
@@ -225,6 +230,7 @@
     NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"pagen":pagen,@"pages":pages};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+         MyLog(@"data fans = %@",data);
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {

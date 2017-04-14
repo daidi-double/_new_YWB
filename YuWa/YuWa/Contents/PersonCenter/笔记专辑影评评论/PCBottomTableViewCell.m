@@ -23,6 +23,7 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andDatas:(NSMutableArray*)allDatas andWhichCategory:(showViewCategory)number{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        WEAKSELF;
         switch (number) {
             case showViewCategoryNotes:{
                
@@ -30,15 +31,15 @@
                 [self addSubview:view];
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.mas_equalTo(self);
+                    make.edges.mas_equalTo(weakSelf);
                     
                     
                 }];
                 
                 //代理回控制器 来控制跳转
                 view.touchCellBlock=^(NSInteger number){
-                    if ([self.delegate respondsToSelector:@selector(DelegateForNote:)]) {
-                        [self.delegate DelegateForNote:number];
+                    if ([weakSelf.delegate respondsToSelector:@selector(DelegateForNote:)]) {
+                        [weakSelf.delegate DelegateForNote:number];
                     }
             
                 };
@@ -49,11 +50,11 @@
                 AlbumView*view=[[AlbumView alloc]initWithFrame:self.frame andArray:allDatas];
                 [self addSubview:view];
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.mas_equalTo(self);
+                    make.edges.mas_equalTo(weakSelf);
                 }];
                 view.touchCellBlock=^(NSInteger number,NSInteger maxNumber){
-                    if ([self.delegate respondsToSelector:@selector(DelegateForAlbum:andMax:)]) {
-                        [self.delegate DelegateForAlbum:number andMax:maxNumber];
+                    if ([weakSelf.delegate respondsToSelector:@selector(DelegateForAlbum:andMax:)]) {
+                        [weakSelf.delegate DelegateForAlbum:number andMax:maxNumber];
                     }
                     
                     
@@ -67,7 +68,7 @@
                 view.delegate=self;
                 [self addSubview:view];
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.mas_equalTo(self);
+                    make.edges.mas_equalTo(weakSelf);
                 }];
                 
                 break;
@@ -90,6 +91,7 @@
 -(instancetype)initWithOtherStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andDatas:(NSMutableArray*)allDatas andWhichCategory:(showViewCategory)number{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        WEAKSELF;
         switch (number) {
             case showViewCategoryNotes:{
                 
@@ -97,15 +99,15 @@
                 [self addSubview:view];
                 
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.mas_equalTo(self);
+                    make.edges.mas_equalTo(weakSelf);
                     
                     
                 }];
                 
                 //代理回控制器 来控制跳转
                 view.touchCellBlock=^(NSInteger number){
-                    if ([self.delegate respondsToSelector:@selector(DelegateForNote:)]) {
-                        [self.delegate DelegateForNote:number];
+                    if ([weakSelf.delegate respondsToSelector:@selector(DelegateForNote:)]) {
+                        [weakSelf.delegate DelegateForNote:number];
                     }
                     
                 };
@@ -116,11 +118,11 @@
                 AlbumView*view=[[AlbumView alloc]initWithFrame:self.frame andArray:allDatas withIsOther:YES];
                 [self addSubview:view];
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.mas_equalTo(self);
+                    make.edges.mas_equalTo(weakSelf);
                 }];
                 view.touchCellBlock=^(NSInteger number,NSInteger maxNumber){
-                    if ([self.delegate respondsToSelector:@selector(DelegateForAlbum:andMax:)]) {
-                        [self.delegate DelegateForAlbum:number andMax:maxNumber];
+                    if ([weakSelf.delegate respondsToSelector:@selector(DelegateForAlbum:andMax:)]) {
+                        [weakSelf.delegate DelegateForAlbum:number andMax:maxNumber];
                     }
                     
                     
@@ -134,7 +136,7 @@
                 view.delegate=self;
                 [self addSubview:view];
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.mas_equalTo(self);
+                    make.edges.mas_equalTo(weakSelf);
                 }];
                 
                 break;}

@@ -34,7 +34,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    self.title=@"我的用户";
-    self.type=@"0";
+    if (self.status == nil) {
+        self.status =@"0";
+    }
+    self.type=self.status;
     self.automaticallyAdjustsScrollViewInsets=NO;
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:CELL0 bundle:nil] forCellReuseIdentifier:CELL0];
@@ -84,19 +87,34 @@
     for (int i = 0; i<2; i ++ ) {
         
         UIButton * segmentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        segmentBtn.frame = CGRectMake(4+bgView.width/2*i, 2, bgView.width/2-8, 26);
+        segmentBtn.frame = CGRectMake(2+bgView.width/2*i, 2, bgView.width/2-4, 26);
+        segmentBtn.layer.borderColor = CNaviColor.CGColor;
+        segmentBtn.layer.borderWidth = 2.f;
+        segmentBtn.layer.cornerRadius = 5.f;
         [segmentBtn setTitle:arrayTitle[i] forState:UIControlStateNormal];
         [segmentBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
         [segmentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [segmentBtn setBackgroundColor:[UIColor whiteColor]];
         segmentBtn.tag = i +1;
-        if (i == 0) {
-            segmentBtn.selected = YES;
-            [segmentBtn setBackgroundColor:CNaviColor];
-            [markBtn setBackgroundColor:[UIColor whiteColor]];
-            markBtn.selected = NO;
-           markBtn = segmentBtn;
+        if ([self.status isEqualToString:@"0"]) {
+             if (i == 0) {
+                segmentBtn.selected = YES;
+                [segmentBtn setBackgroundColor:CNaviColor];
+                [markBtn setBackgroundColor:[UIColor whiteColor]];
+                markBtn.selected = NO;
+                markBtn = segmentBtn;
+            }
+        }else{
+            if (i == 1) {
+                segmentBtn.selected = YES;
+                [segmentBtn setBackgroundColor:CNaviColor];
+                [markBtn setBackgroundColor:[UIColor whiteColor]];
+                markBtn.selected = NO;
+                markBtn = segmentBtn;
+
+            }
         }
+        
         
         [segmentBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
         [segmentBtn addTarget:self action:@selector(segumentSelectionChangeAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -119,11 +137,14 @@
         return cell;
     }else{
     cell.selectionStyle=NO;
+        SignUserModel*model;
+        UILabel*nameLabel=[cell viewWithTag:1];
+        if (self.maMallDatas.count>0) {
+            
+            model=self.maMallDatas[indexPath.row-1];
+        }
+        nameLabel.text=model.user_name;
     
-    SignUserModel*model=self.maMallDatas[indexPath.row-1];
-    
-    UILabel*nameLabel=[cell viewWithTag:1];
-    nameLabel.text=model.user_name;
    
 //判断是否为手机号码，是就隐藏一部分
     if (model.user_name.length >= 11 && [JWTools isNumberWithStr:model.user_name]) {
@@ -173,6 +194,7 @@
 #pragma mark  --getDatas
 -(void)getDatas{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MY_USER];
+
     NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"type":self.type};
     
     HttpManager*manager=[[HttpManager alloc]init];

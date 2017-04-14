@@ -89,6 +89,10 @@
     
     if (yoffset>=HEADERVIEWHEIGHT-64&&yoffset<=HEADERVIEWHEIGHT) {
         self.navigationItem.title=self.nickName;
+        if ([JWTools isNumberWithStr:self.nickName]) {
+            NSString * name = [self.nickName substringToIndex:7];
+            self.navigationItem.title = [NSString stringWithFormat:@"%@****",name];
+        }
         CGFloat alpha=(yoffset-(HEADERVIEWHEIGHT-64))/64;
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:alpha];
         
@@ -99,6 +103,10 @@
         
     }else{
         self.navigationItem.title=self.nickName;
+        if ([JWTools isNumberWithStr:self.nickName]) {
+            NSString * name = [self.nickName substringToIndex:7];
+            self.navigationItem.title = [NSString stringWithFormat:@"%@****",name];
+        }
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
         
     }
@@ -275,7 +283,10 @@
     UILabel*nameLabel=[showView viewWithTag:2];
     nameLabel.text=self.HeaderModel.nickname;
     
-    
+    if ([JWTools isNumberWithStr:self.HeaderModel.nickname]) {
+        NSString * name = [self.HeaderModel.nickname substringToIndex:7];
+        nameLabel.text = [NSString stringWithFormat:@"%@****",name];
+    }
     // 地点
     UILabel*locateLabel=[showView viewWithTag:3];
     locateLabel.text=self.HeaderModel.address;
