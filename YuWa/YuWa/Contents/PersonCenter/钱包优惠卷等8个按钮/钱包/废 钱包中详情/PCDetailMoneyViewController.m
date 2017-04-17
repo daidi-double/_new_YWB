@@ -15,6 +15,7 @@
 #import "JWTools.h"
 #import "MoneyPackModel.h"
 #import "customBtn.h"
+#import "headerView.h"
 #import "YWLoginViewController.h"
 #import "PCDetailPageViewController.h"
 #define CELL0  @"PCMoneyDetailTableViewCell"
@@ -161,6 +162,16 @@
         return 0;
     }
     return self.sectionData.count;
+}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    headerView * headerView = [[[NSBundle mainBundle]loadNibNamed:@"headerView" owner:nil options:nil]lastObject ];
+    NSNumber * nub = self.sectionData[section];
+    if (nub == [NSNumber numberWithInteger:[self getYearOrMonth:@"month"]]) {
+            headerView.month.text = [NSString stringWithFormat:@"本月"];
+        return headerView;
+    }
+    headerView.month.text = [NSString stringWithFormat:@"%@月",nub];
+   return headerView;
 }
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     NSNumber * nub = self.sectionData[section];
