@@ -7,7 +7,7 @@
 //
 
 #import "YWForgetPassWordViewController.h"
-
+#import "YWLoginViewController.h"
 #import "JPUSHService.h"
 @interface YWForgetPassWordViewController ()
 
@@ -110,6 +110,8 @@
         [UserSession saveUserLoginWithAccount:account withPassword:password];
         [UserSession saveUserInfoWithDic:responsObj[@"data"]];
         [self showHUDWithStr:@"重置成功" withSuccess:YES];
+        [UserSession saveUserLoginWithAccount:account withPassword:password];
+        
         EMError *errorLog = [[EMClient sharedClient] loginWithUsername:account password:[UserSession instance].hxPassword];
         if (!errorLog){
             [[EMClient sharedClient].options setIsAutoLogin:NO];
@@ -117,8 +119,17 @@
         }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [JPUSHService setAlias:[UserSession instance].account callbackSelector:nil object:nil];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+                
         });
+        UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"您的密码已修改，请重新登入" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            YWLoginViewController * loginVC = [[YWLoginViewController alloc]init];
+            loginVC.status= 1;
+            [self.navigationController pushViewController:loginVC animated:YES];
+        }];
+        [alertVC addAction:ok];
+        [self presentViewController:alertVC animated:YES completion:nil];
+        
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Pragram is %@",pragram);
         MyLog(@"Data Error error is %@",responsObj);

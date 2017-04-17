@@ -9,5 +9,5 @@
 #import "JWBasicViewController.h"
 
 @interface YWLoginViewController : JWBasicViewController
-
+@property (nonatomic,assign)NSInteger status;//用于修改密码后判断跳转界面
 @end

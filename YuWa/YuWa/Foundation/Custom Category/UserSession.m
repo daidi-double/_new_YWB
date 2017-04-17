@@ -65,6 +65,7 @@ static UserSession * user=nil;
     NSString * accountDefault = [KUSERDEFAULT valueForKey:AUTOLOGIN];
     if (accountDefault) {
         if ([accountDefault isEqualToString:@""])return;
+        
         user.account = accountDefault;
         user.password = [KUSERDEFAULT valueForKey:AUTOLOGINCODE];
         [UserSession autoLoginRequestWithPragram:@{@"phone":user.account,@"password":user.password,@"is_md5":@1}];

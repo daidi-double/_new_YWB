@@ -202,7 +202,11 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [JPUSHService setAlias:[UserSession instance].account callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
-            [self.navigationController popViewControllerAnimated:YES];
+            if (self.status == 1) {
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:0] animated:YES];
+            }else{
+                [self.navigationController popViewControllerAnimated:YES];
+            }
             [[self findFirstResponderBeneathView:self.view] resignFirstResponder];
             [self dismissViewControllerAnimated:YES completion:nil];
         });
@@ -241,7 +245,7 @@
         }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [JPUSHService setAlias:[JWTools getUUID] callbackSelector:nil object:nil];
+            [JPUSHService setAlias:[UserSession instance].account callbackSelector:nil object:nil];
             [self.navigationController popViewControllerAnimated:YES];
              [[self findFirstResponderBeneathView:self.view] resignFirstResponder];
              [self dismissViewControllerAnimated:YES completion:nil];

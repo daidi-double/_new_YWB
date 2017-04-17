@@ -416,6 +416,19 @@
     
 
     NSMutableArray*fourArray=[NSMutableArray array];
+    if ([UserSession instance].attentionCount == nil) {
+        [UserSession instance].attentionCount = @"0";
+    }
+    if ([UserSession instance].fans == nil) {
+        [UserSession instance].fans = @"0";
+    }
+    if ([UserSession instance].praised == nil) {
+        [UserSession instance].praised = @"0";
+    }
+    if ([UserSession instance].collected == nil) {
+        [UserSession instance].collected = @"0";
+    }
+    
     [fourArray addObject:@[@"关注",[UserSession instance].attentionCount]];
     [fourArray addObject:@[@"粉丝",[UserSession instance].fans]];
     [fourArray addObject:@[@"被赞",[UserSession instance].praised]];

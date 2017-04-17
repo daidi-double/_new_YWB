@@ -10,7 +10,7 @@
 #import "VIPTabBarController.h"
 #import "AboutUsViewController.h"
 #import "JWThirdTools.h"
-
+#import "YWForgetPassWordViewController.h"
 @interface AccountSettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView*tableView;
 @end
@@ -35,7 +35,7 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -52,7 +52,9 @@
     }else if (indexPath.row==1){
         cell.textLabel.text=@"退出登录";
         
-    }else{
+    }else if(indexPath.row == 2){
+        cell.textLabel.text = @"更改密码";
+    }else {
         cell.textLabel.text = @"关于我们";
     }
     
@@ -60,6 +62,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row==0) {
         //清除缓存
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask,YES);
@@ -75,7 +78,10 @@
         [UIApplication sharedApplication].keyWindow.rootViewController=tabBar;
         
         
-    }else{
+    }else if(indexPath.row == 2){
+        YWForgetPassWordViewController * vc = [[YWForgetPassWordViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
         AboutUsViewController * aboutUsVC = [[AboutUsViewController alloc]init];
         [self.navigationController pushViewController:aboutUsVC animated:YES];
     }
