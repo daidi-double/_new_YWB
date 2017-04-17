@@ -24,7 +24,7 @@
 #import "YWFansViewController.h"   //粉丝
 #import "MyAlbumViewController.h"
 #import "RBNodeShowViewController.h"
-
+#import "YWShoppingDetailViewController.h"
 
 
 #define SECTION0CELL  @"cell"    //默认cell
@@ -84,7 +84,7 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    MyLog(@"%@",NSStringFromCGPoint(scrollView.contentOffset));
+//    MyLog(@"%@",NSStringFromCGPoint(scrollView.contentOffset));
     CGFloat yoffset=scrollView.contentOffset.y;
     
     if (yoffset>=HEADERVIEWHEIGHT-64&&yoffset<=HEADERVIEWHEIGHT) {
@@ -373,23 +373,28 @@
 }
 
 -(void)segumentSelectionChange:(NSInteger)selection{
-    MyLog(@"%ld",(long)selection);
+//    MyLog(@"%ld",(long)selection);
     self.whichShow=selection;
     
     self.showWhichView=selection;
     [self.tableView.mj_header beginRefreshing];
 }
-
+- (void)DelegateForToShopDetail:(NSString *)shopid{
+    YWShoppingDetailViewController * vc = [[YWShoppingDetailViewController alloc]init];
+    vc.shop_id = shopid;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark  --touch
 
 -(void)touchFourButton:(UIButton*)sender{
     NSInteger number =sender.tag-11;
-    MyLog(@"%lu",number);
+//    MyLog(@"%lu",number);
     switch (number) {
         case 0:{
             //关注
             YWFansViewController*vc=[[YWFansViewController alloc]init];
             vc.whichFriend=TheFirendsTaAbount;
+            vc.other_uid = [self.uid integerValue];
             [self.navigationController pushViewController:vc animated:YES];
      
             break;}
@@ -397,6 +402,7 @@
             //粉丝
             YWFansViewController*vc=[[YWFansViewController alloc]init];
             vc.whichFriend=TheFirendsTaFans;
+            vc.other_uid = [self.uid integerValue];
             [self.navigationController pushViewController:vc animated:YES];
             break;}
         case 2:{
@@ -488,7 +494,7 @@
 
 -(void)getDatas{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_SEEOTHERCENTER];
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":self.uid};
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":self.uid,@"user_type":@(1)};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"%@",data);
@@ -542,7 +548,7 @@
 
 //底部的数据   笔记
 -(void)getMyNotes{
-    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([self.uid integerValue]),@"pagen":[NSString stringWithFormat:@"%d",self.pagen],@"pages":[NSString stringWithFormat:@"%d",self.pages]};
+    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([self.uid integerValue]),@"pagen":[NSString stringWithFormat:@"%d",self.pagen],@"pages":[NSString stringWithFormat:@"%d",self.pages],@"user_type":@(1)};
     
     [[HttpObject manager]postNoHudWithType:YuWaType_Other_Node withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);

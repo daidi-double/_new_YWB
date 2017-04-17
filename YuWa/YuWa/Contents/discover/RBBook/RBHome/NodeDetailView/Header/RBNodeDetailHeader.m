@@ -53,7 +53,9 @@
         //                [self presentViewController:alertVC animated:YES completion:nil];
         
     }else{
-        self.backToLoginBlock();
+        
+            self.backToLoginBlock();
+        
     }
     
 }
@@ -166,6 +168,10 @@
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_ATTENTION_ADD withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code is %@",responsObj);
+        NSInteger number = [responsObj[@"errorCode"] integerValue];
+        if (number == 0) {
+            [UserSession instance].attentionCount = [NSString stringWithFormat:@"%zi",[[UserSession instance].attentionCount integerValue]+1];
+        }
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code error is %@",responsObj);
@@ -177,6 +183,10 @@
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_ATTENTION_CANCEL withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code is %@",responsObj);
+        NSInteger number = [responsObj[@"errorCode"] integerValue];
+        if (number == 0) {
+            [UserSession instance].attentionCount = [NSString stringWithFormat:@"%zi",[[UserSession instance].attentionCount integerValue]+1];
+        }
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code error is %@",responsObj);
