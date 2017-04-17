@@ -102,7 +102,7 @@
     
     [self.tableView registerClass:[PersonCenterOneCell class] forCellReuseIdentifier:CELL1];
 
-    [self setUpMJRefresh];
+   
     
 
 }
@@ -119,8 +119,8 @@
     self.navigationItem.rightBarButtonItem=rightIte;
     
     [self addHeaderView];
-    
-    [self.tableView.mj_header beginRefreshing];
+    [self setUpMJRefresh];
+//    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -158,18 +158,18 @@
     self.pagen=10;
     self.pages=0;
     self.maMallDatas=[NSMutableArray array];
-    
+    WEAKSELF;
     self.tableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-        self.pages=0;
-        self.maMallDatas=[NSMutableArray array];
-        [self getBottomDatas];
+        weakSelf.pages=0;
+        weakSelf.maMallDatas=[NSMutableArray array];
+        [weakSelf getBottomDatas];
         
     }];
     
     //上拉刷新
     self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-        self.pages++;
-        [self getBottomDatas];
+        weakSelf.pages++;
+        [weakSelf getBottomDatas];
         
     }];
 }
