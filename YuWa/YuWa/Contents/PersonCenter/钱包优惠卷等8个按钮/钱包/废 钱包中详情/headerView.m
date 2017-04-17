@@ -16,12 +16,12 @@
 @implementation headerView
 -(void)setAll:(float)all{
     _all = all;
-    
+          
     if (_all<0) {
-        self.imageView.image = [UIImage  imageNamed:@"remove"];
+        self.imageView.image =  [UIImage  imageNamed:@"remove"];
     }else{
         self.imageView.image = [UIImage  imageNamed:@"add"];
     }
-    self.allMoney.text = @"9999";
+    self.allMoney.text = @"9998";
 }
 @end
