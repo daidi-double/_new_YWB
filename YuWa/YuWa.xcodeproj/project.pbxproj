@@ -777,6 +777,7 @@
 		AAF628E81E5AEE03000FF976 /* FoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF628E71E5AEE03000FF976 /* FoodViewController.m */; };
 		AAF628EE1E5B120D000FF976 /* 横条.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF628ED1E5B120D000FF976 /* 横条.png */; };
 		AAF628F11E5B1683000FF976 /* MoviePScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF628F01E5B1683000FF976 /* MoviePScrollView.m */; };
+		AAF702791EA6069E007CAFB3 /* NotePraiseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF702781EA6069E007CAFB3 /* NotePraiseModel.m */; };
 		AAF80CEC1E67AD5B0000C4BC /* home_03.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF80CEB1E67AD5B0000C4BC /* home_03.png */; };
 		AAF80CF71E67E45A0000C4BC /* qrcode_scan_light_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF80CF11E67E45A0000C4BC /* qrcode_scan_light_green@2x.png */; };
 		AAF80CF81E67E45A0000C4BC /* scan_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF80CF21E67E45A0000C4BC /* scan_1@2x.png */; };
@@ -2584,6 +2585,8 @@
 		AAF628ED1E5B120D000FF976 /* 横条.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "横条.png"; sourceTree = "<group>"; };
 		AAF628EF1E5B1683000FF976 /* MoviePScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePScrollView.h; sourceTree = "<group>"; };
 		AAF628F01E5B1683000FF976 /* MoviePScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePScrollView.m; sourceTree = "<group>"; };
+		AAF702771EA6069E007CAFB3 /* NotePraiseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePraiseModel.h; sourceTree = "<group>"; };
+		AAF702781EA6069E007CAFB3 /* NotePraiseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotePraiseModel.m; sourceTree = "<group>"; };
 		AAF80CEB1E67AD5B0000C4BC /* home_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_03.png; sourceTree = "<group>"; };
 		AAF80CF11E67E45A0000C4BC /* qrcode_scan_light_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_light_green@2x.png"; sourceTree = "<group>"; };
 		AAF80CF21E67E45A0000C4BC /* scan_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan_1@2x.png"; sourceTree = "<group>"; };
@@ -9044,6 +9047,8 @@
 				C1F7BE011DB1C95400CCAF96 /* YWFansTableViewCell.xib */,
 				C135A0F41DDDB087002B78A5 /* AbountAndFansModel.h */,
 				C135A0F51DDDB087002B78A5 /* AbountAndFansModel.m */,
+				AAF702771EA6069E007CAFB3 /* NotePraiseModel.h */,
+				AAF702781EA6069E007CAFB3 /* NotePraiseModel.m */,
 			);
 			path = "粉丝";
 			sourceTree = "<group>";
@@ -10678,6 +10683,7 @@
 				B33A26811D9A68040092CB12 /* PSTGridLayoutInfo.m in Sources */,
 				AA42110E1E5ABAEF00085650 /* MovieCinemaViewController.m in Sources */,
 				C1214C171DEC6A4F00FFC63C /* ShowDetailModel.m in Sources */,
+				AAF702791EA6069E007CAFB3 /* NotePraiseModel.m in Sources */,
 				AAC86F521E76DA4400F94C84 /* CommonUserViewController.m in Sources */,
 				B38B2F311D8FC82F004D5256 /* RBCommentToolsView.m in Sources */,
 				AAF127E51E8AF2B900121621 /* GetMoneyToBankViewController.m in Sources */,

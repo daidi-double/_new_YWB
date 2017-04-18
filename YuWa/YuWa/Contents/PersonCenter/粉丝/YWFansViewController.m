@@ -10,7 +10,7 @@
 #import "YWFansTableViewCell.h"
 #import "JWTools.h"
 #import "AbountAndFansModel.h"
-
+#import "NotePraiseModel.h"
 #import "YWOtherSeePersonCenterViewController.h"
 
 #define  CELL0  @"YWFansTableViewCell"
@@ -101,66 +101,104 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    YWFansTableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
-    cell.selectionStyle=NO;
-    
-    AbountAndFansModel*model=self.maMallDatas[indexPath.row];
-    
-    //图片
-    UIImageView*imageView=[cell viewWithTag:1];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:model.header_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    if (self.whichFriend != TheFriendsBePraise && self.whichFriend != TheFriendsBeCollected) {
         
-    }];
-    
-    //名字
-    UILabel*nameLabel=[cell viewWithTag:2];
-    nameLabel.text=model.nickname;
-    if ([JWTools isNumberWithStr:model.nickname]) {
-        NSString * name = [model.nickname substringToIndex:7];
-        nameLabel.text = [NSString stringWithFormat:@"%@****",name];
-    }
-    //info
-    UILabel*infoLabel=[cell viewWithTag:3];
-    infoLabel.text=[NSString stringWithFormat:@"%@条笔记，%@个粉丝",model.note_num,model.fans];
-    
-    //button
-    if ([UserSession instance].uid == [model.uid integerValue]) {
+        YWFansTableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
+        cell.selectionStyle=NO;
+        cell.praiseLabel.hidden = YES;
+        AbountAndFansModel*model=self.maMallDatas[indexPath.row];
+        
+        //图片
+        UIImageView*imageView=[cell viewWithTag:1];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:model.header_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+        
+        //名字
+        UILabel*nameLabel=[cell viewWithTag:2];
+        nameLabel.text=model.nickname;
+        if ([JWTools isNumberWithStr:model.nickname]) {
+            NSString * name = [model.nickname substringToIndex:7];
+            nameLabel.text = [NSString stringWithFormat:@"%@****",name];
+        }
+        //info
+        UILabel*infoLabel=[cell viewWithTag:3];
+        infoLabel.text=[NSString stringWithFormat:@"%@条笔记，%@个粉丝",model.note_num,model.fans];
+        
+        //button
+        if ([UserSession instance].uid == [model.uid integerValue]) {
+            cell.touchButton.hidden = YES;
+        }else{
+            if (model.is_attention) {
+                //已经关注了  那么取消关注
+                [cell.touchButton removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
+                cell.touchButton.layer.borderColor=CpriceColor.CGColor;
+                [cell.touchButton setTitleColor:CpriceColor forState:UIControlStateNormal];
+                [cell.touchButton setTitle:@"取消关注" forState:UIControlStateNormal];
+                cell.touchButton.tag=indexPath.row;
+                [cell.touchButton addTarget:self action:@selector(ButtonCancelAbount:) forControlEvents:UIControlEventTouchUpInside];
+                
+            }else{
+                //没关注  那么
+                [cell.touchButton removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
+                cell.touchButton.layer.borderColor=CNaviColor.CGColor;
+                [cell.touchButton setTitleColor:CNaviColor forState:UIControlStateNormal];
+                cell.touchButton.tag=indexPath.row;
+                [cell.touchButton setTitle:@"+关注" forState:UIControlStateNormal];
+                [cell.touchButton addTarget:self action:@selector(ButtonAddAbount:) forControlEvents:UIControlEventTouchUpInside];
+            }
+        }
+        return cell;
+        
+    }else{
+        YWFansTableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
+        cell.selectionStyle=NO;
+        
+        NotePraiseModel*model=self.maMallDatas[indexPath.row];
+        //图片
+        UIImageView*imageView=[cell viewWithTag:1];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+        
+        //名字
+        UILabel*nameLabel=[cell viewWithTag:2];
+        nameLabel.text=model.title;
+        
+        //info
+        UILabel*infoLabel=[cell viewWithTag:3];
+        infoLabel.width = cell.width *0.5;
+        infoLabel.text=model.info;
+        
+        //button
+        cell.praiseLabel.hidden = NO;
+        cell.praiseLabel.text = [NSString stringWithFormat:@"被赞%@次",model.like_nums];
+        if (self.whichFriend == TheFriendsBeCollected) {
+          cell.praiseLabel.text = [NSString stringWithFormat:@"被收藏%@次",model.collect_nums];
+        }
         cell.touchButton.hidden = YES;
-    }else{
-    if (model.is_attention) {
-        //已经关注了  那么取消关注
-        [cell.touchButton removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
-        cell.touchButton.layer.borderColor=CpriceColor.CGColor;
-        [cell.touchButton setTitleColor:CpriceColor forState:UIControlStateNormal];
-        [cell.touchButton setTitle:@"取消关注" forState:UIControlStateNormal];
-        cell.touchButton.tag=indexPath.row;
-        [cell.touchButton addTarget:self action:@selector(ButtonCancelAbount:) forControlEvents:UIControlEventTouchUpInside];
-
-    }else{
-        //没关注  那么
-        [cell.touchButton removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
-         cell.touchButton.layer.borderColor=CNaviColor.CGColor;
-        [cell.touchButton setTitleColor:CNaviColor forState:UIControlStateNormal];
-         cell.touchButton.tag=indexPath.row;
-        [cell.touchButton setTitle:@"+关注" forState:UIControlStateNormal];
-        [cell.touchButton addTarget:self action:@selector(ButtonAddAbount:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
     }
-    }
-    return cell;
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSInteger number=indexPath.row;
-    AbountAndFansModel*model=self.maMallDatas[number];
-    if ([UserSession instance].uid == [model.uid integerValue]) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+    if (self.whichFriend !=TheFriendsBeCollected && self.whichFriend != TheFriendsBePraise) {
+        NSInteger number=indexPath.row;
+        AbountAndFansModel*model=self.maMallDatas[number];
+        if ([UserSession instance].uid == [model.uid integerValue]) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            YWOtherSeePersonCenterViewController*vc=[[YWOtherSeePersonCenterViewController alloc]init];
+            
+            vc.uid=model.uid;
+            vc.nickName = model.nickname;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
     }else{
-    YWOtherSeePersonCenterViewController*vc=[[YWOtherSeePersonCenterViewController alloc]init];
-    
-    vc.uid=model.uid;
-    vc.nickName = model.nickname;
-    [self.navigationController pushViewController:vc animated:YES];
+        
     }
 }
 
@@ -194,7 +232,7 @@
             [self getDatasBePraise];
             break;
         case TheFriendsBeCollected:
-//            self.title=@"被收藏";
+            [self getDatasBeCollect];
             break;
    
         default:
@@ -343,22 +381,54 @@
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"data被赞 = %@",data);
-//        NSNumber*number=data[@"errorCode"];
-//        NSString*errorCode=[NSString stringWithFormat:@"%@",number];
-//        if ([errorCode isEqualToString:@"0"]) {
-//            
-//            for (NSDictionary*dict in data[@"data"]) {
-//                AbountAndFansModel*model=[AbountAndFansModel yy_modelWithDictionary:dict];
-//                [self.maMallDatas addObject:model];
-//            }
-//            
-//            
-//            [self.tableView reloadData];
-//        }else{
-//            [JRToast showWithText:data[@"errorMessage"]];
-//            
-//        }
-//        
+        NSNumber*number=data[@"errorCode"];
+        NSString*errorCode=[NSString stringWithFormat:@"%@",number];
+        if ([errorCode isEqualToString:@"0"]) {
+
+            for (NSDictionary*dict in data[@"data"]) {
+                NotePraiseModel*model=[NotePraiseModel yy_modelWithDictionary:dict];
+                [self.maMallDatas addObject:model];
+            }
+            
+            
+            [self.tableView reloadData];
+        }else{
+            [JRToast showWithText:data[@"errorMessage"]];
+
+        }
+
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
+}
+//被收藏
+-(void)getDatasBeCollect{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MYNOTEBECOLLECT];
+    NSString*pagen=[NSString stringWithFormat:@"%d",self.pagen];
+    NSString*pages=[NSString stringWithFormat:@"%d",self.pages];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"pagen":pagen,@"pages":pages,@"user_type":@(1)};
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"data被收藏 = %@",data);
+        NSNumber*number=data[@"errorCode"];
+        NSString*errorCode=[NSString stringWithFormat:@"%@",number];
+        if ([errorCode isEqualToString:@"0"]) {
+            
+            for (NSDictionary*dict in data[@"data"]) {
+                NotePraiseModel*model=[NotePraiseModel yy_modelWithDictionary:dict];
+                [self.maMallDatas addObject:model];
+            }
+            
+            
+            [self.tableView reloadData];
+        }else{
+            [JRToast showWithText:data[@"errorMessage"]];
+            
+        }
+        
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         
