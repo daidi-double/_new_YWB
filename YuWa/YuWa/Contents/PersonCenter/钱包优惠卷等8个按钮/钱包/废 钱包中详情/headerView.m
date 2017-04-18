@@ -22,6 +22,6 @@
     }else{
         self.imageView.image = [UIImage  imageNamed:@"add"];
     }
-    self.allMoney.text = @"9998";
+    self.allMoney.text = @"0.0000";
 }
 @end

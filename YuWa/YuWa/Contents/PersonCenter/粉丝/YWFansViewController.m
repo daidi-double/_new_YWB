@@ -49,13 +49,13 @@
 
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:CELL0 bundle:nil] forCellReuseIdentifier:CELL0];
-    [self setUpMJRefresh];
+    
     
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self setUpMJRefresh];
     [[[self.navigationController.navigationBar subviews]objectAtIndex:0] setAlpha:1];
     
 }
@@ -65,18 +65,18 @@
     self.pagen=10;
     self.pages=0;
     self.maMallDatas=[NSMutableArray array];
-    
+    WEAKSELF;
     self.tableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-        self.pages=0;
-        self.maMallDatas=[NSMutableArray array];
-        [self getDatas];
+        weakSelf.pages=0;
+        weakSelf.maMallDatas=[NSMutableArray array];
+        [weakSelf getDatas];
         
     }];
     
     //上拉刷新
     self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-        self.pages++;
-        [self getDatas];
+        weakSelf.pages++;
+        [weakSelf getDatas];
         
     }];
     
@@ -119,7 +119,9 @@
     infoLabel.text=[NSString stringWithFormat:@"%@条笔记，%@个粉丝",model.note_num,model.fans];
     
     //button
- 
+    if ([UserSession instance].uid == [model.uid integerValue]) {
+        cell.touchButton.hidden = YES;
+    }else{
     if (model.is_attention) {
         //已经关注了  那么取消关注
         [cell.touchButton removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -138,7 +140,7 @@
         [cell.touchButton setTitle:@"+关注" forState:UIControlStateNormal];
         [cell.touchButton addTarget:self action:@selector(ButtonAddAbount:) forControlEvents:UIControlEventTouchUpInside];
     }
-    
+    }
     return cell;
     
 }
@@ -146,13 +148,15 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger number=indexPath.row;
     AbountAndFansModel*model=self.maMallDatas[number];
-    
+    if ([UserSession instance].uid == [model.uid integerValue]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else{
     YWOtherSeePersonCenterViewController*vc=[[YWOtherSeePersonCenterViewController alloc]init];
     
     vc.uid=model.uid;
     vc.nickName = model.nickname;
     [self.navigationController pushViewController:vc animated:YES];
-    
+    }
 }
 
 
@@ -290,7 +294,7 @@
 
 
 -(void)getDatasTaFans{
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_TAABOUNT];
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_TAFANS];
     NSString*pagen=[NSString stringWithFormat:@"%d",self.pagen];
     NSString*pages=[NSString stringWithFormat:@"%d",self.pages];
     NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":@(self.other_uid),@"pagen":pagen,@"pages":pages,@"user_type":@(1)};

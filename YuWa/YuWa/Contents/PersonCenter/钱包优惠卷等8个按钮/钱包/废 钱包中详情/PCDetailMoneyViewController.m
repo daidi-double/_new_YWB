@@ -165,6 +165,7 @@
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     headerView * headerView = [[[NSBundle mainBundle]loadNibNamed:@"headerView" owner:nil options:nil]lastObject ];
+    headerView.backgroundColor = RGBCOLOR(246, 246, 245, 1);
     NSNumber * nub = self.sectionData[section];
     if (nub == [NSNumber numberWithInteger:[self getYearOrMonth:@"month"]]) {
             headerView.month.text = [NSString stringWithFormat:@"本月"];
@@ -181,7 +182,7 @@
     return  [NSString stringWithFormat:@"%@月",nub];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    MyLog(@"section = %ld",(long)section);
+//    MyLog(@"section = %ld",(long)section);
     NSMutableArray * data;
     if (self.maAllDatasModel.count!=0) {
        data  = self.maAllDatasModel[section];
@@ -243,6 +244,9 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 67;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 44.f;
 }
 - (NSString *)distanceTimeWithBeforeTime:(double)beTime
 {
@@ -351,7 +355,7 @@
             NSMutableArray *arr = [NSMutableArray array];
             arr = data[@"data"];
             if (arr.count) {
-                MyLog(@"count = %lu",(unsigned long)arr.count);
+//                MyLog(@"count = %lu",(unsigned long)arr.count);
                 [self.maAllDatasModel removeAllObjects];
                 //记录总数据
                 NSMutableArray * allData = [NSMutableArray array];
@@ -359,7 +363,7 @@
                 for (NSDictionary*dict in data[@"data"]) {
                     NSString * time = dict[@"dateTime"];
                     NSString * year1 =  [time substringWithRange:NSMakeRange(0, 4)];
-                    MyLog(@"!!!!~~~~year~%@",year1);
+//                    MyLog(@"!!!!~~~~year~%@",year1);
                     NSString *Month =  [time substringWithRange:NSMakeRange(5, 2)];
                     [Month intValue];
                     [NSNumber numberWithInteger:[Month integerValue]];
@@ -378,7 +382,7 @@
                             //                        判断出这个数，在数组里面属于第几位
                             NSUInteger  count1 =  [all indexOfObject:[NSNumber numberWithInteger:[Month integerValue]]];
                             MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
-                            NSMutableArray * addModelArr =   allData[count1];
+                            NSMutableArray * addModelArr = allData[count1];
                             [addModelArr addObject:model];
                         }
                     }else{

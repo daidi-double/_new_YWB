@@ -1101,7 +1101,7 @@
         UIButton*button=[_topView viewWithTag:2];
         
         CGFloat moneyF=[self.mainModel.discount floatValue];
-        if (moneyF>=1) {
+        if (moneyF>=1 || moneyF <= 0.00) {
             button.enabled=NO;
             titLabel.text=@"不打折";
             [button setTitle:@"不能购买" forState:UIControlStateDisabled];
