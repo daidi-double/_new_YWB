@@ -445,7 +445,7 @@
         
 #pragma 为你推荐
         
-       YWMainShoppingTableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:CELL5];
+        YWMainShoppingTableViewCell* cell= [[[NSBundle mainBundle]loadNibNamed:@"YWMainShoppingTableViewCell" owner:self options:nil]lastObject];
         cell.selectionStyle=NO;
         
         

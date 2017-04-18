@@ -437,9 +437,8 @@
         
     }else if (indexPath.section==2){
       
-       YWMainShoppingTableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:CELL2];
+       YWMainShoppingTableViewCell* cell=  [[[NSBundle mainBundle]loadNibNamed:@"YWMainShoppingTableViewCell" owner:nil options:nil]lastObject];
         cell.selectionStyle=NO;
- 
         NSInteger number=indexPath.row;
         HPRecommendShopModel*model;
         if (self.mtModelArrRecommend.count > 0) {
