@@ -56,7 +56,7 @@
 @property(nonatomic,strong)NSMutableArray*maMDatasGoods;  //所有商品的model
 @property(nonatomic,strong)NSMutableArray*maMCommit;  //所有评论的model
 @property(nonatomic,strong)NSMutableArray*maMRecommend; //推荐的model
-
+@property(nonatomic,assign)int conmentHight;
 
 
 @end
@@ -397,10 +397,15 @@
         titleLabel.text=model.goods_name;
         
         
-        
         UILabel*detailLabel=[cell viewWithTag:3];
         detailLabel.text=model.goods_info;
-        
+        //获取内容高度
+        CGRect rect = [detailLabel.text boundingRectWithSize:CGSizeMake(detailLabel.frame.size.width, 999)
+                                                    options:NSStringDrawingUsesLineFragmentOrigin
+                                                 attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
+                                                    context:nil];
+      
+        self.conmentHight =rect.size.height;
         UILabel*moneyLabel=[cell viewWithTag:4];
         moneyLabel.text=[NSString stringWithFormat:@"￥%@",model.goods_price];
         
@@ -818,7 +823,8 @@
         if (self.maMDatasGoods.count <1) {
             return 0.01;
         }else{
-            return 95;
+           
+            return 95+self.conmentHight-13;
         }
     }else if (indexPath.section==3){
 

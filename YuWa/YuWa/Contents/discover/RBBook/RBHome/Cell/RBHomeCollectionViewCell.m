@@ -142,7 +142,10 @@
     }
     NSDictionary * pragram = @{@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_LIKE withPragram:pragram success:^(id responsObj) {
-        MyLog(@"Regieter Code pragram is %@",pragram);
+        NSData*jsondata = [responsObj responseData];
+        
+        NSString*jsonString = [[NSString alloc]initWithBytes:[jsondata bytes]length:[jsondata length]encoding:NSUTF8StringEncoding];
+        MyLog(@"Regieter Code pragram is %@",jsonString);
         MyLog(@"Regieter Code is %@",responsObj);
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
@@ -154,8 +157,11 @@
     NSDictionary * pragram = @{@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
     
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_LIKE_CANCEL withPragram:pragram success:^(id responsObj) {
+        NSData*jsondata = [responsObj responseData];
+        
+        NSString*jsonString = [[NSString alloc]initWithBytes:[jsondata bytes]length:[jsondata length]encoding:NSUTF8StringEncoding];
         MyLog(@"Regieter Code pragram is %@",pragram);
-        MyLog(@"Regieter Code is %@",responsObj);
+        MyLog(@"Regieter Code is %@",jsonString);
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code error is %@",responsObj);

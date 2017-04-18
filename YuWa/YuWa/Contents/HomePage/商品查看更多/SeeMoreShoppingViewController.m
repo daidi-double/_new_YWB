@@ -24,6 +24,7 @@
 @property(nonatomic,assign)int pages;
 
 @property(nonatomic,strong)NSMutableArray*maMallDatas;
+@property(nonatomic,assign)int conmentHight;
 @end
 
 @implementation SeeMoreShoppingViewController
@@ -88,6 +89,11 @@
     titleLabel.text=model.goods_name;
     
     UILabel*detailLabel=[cell viewWithTag:3];
+    CGRect rect = [detailLabel.text boundingRectWithSize:CGSizeMake(detailLabel.frame.size.width, 999)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
+                                                 context:nil];
+    self.conmentHight = rect.size.height;
     detailLabel.text=model.goods_info;
     
     UILabel*moneyLabel=[cell viewWithTag:4];
@@ -100,7 +106,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 95;
+    return 95+self.conmentHight-13;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
