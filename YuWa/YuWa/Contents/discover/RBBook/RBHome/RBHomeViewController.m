@@ -61,6 +61,8 @@
     self.navigationItem.titleView = self.searchView;
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem barItemWithImageName:@"white_camera" withSelectImage:@"white_camera" withHorizontalAlignment:UIControlContentHorizontalAlignmentCenter withTarget:self action:@selector(publishNodeAction) forControlEvents:UIControlEventTouchUpInside withSize:CGSizeMake(30.f, 30.f)];
+    
+    
 }
 
 - (void)makeTagCollectionViewWithArr:(NSArray *)tagArr{
