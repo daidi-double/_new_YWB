@@ -23,6 +23,7 @@
     followButton.layer.borderWidth=1;
     followButton.layer.borderColor=CNaviColor.CGColor;
 
+   
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

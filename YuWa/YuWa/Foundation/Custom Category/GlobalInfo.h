@@ -141,6 +141,7 @@
 
 #define HTTP_PRESON_CHANGEINFO     @"/api.php/User/setMyBaseInfo/"  //1 修改个人中心资料
 #define HTTP_PERSON_COUPON         @"/api.php/User/getMyCoupon/"   //1 显示优惠券列表
+#define HTTP_PRESON_UPDATAINFO     @"/api.php/User/getNewBaseInfo/" //更新个人关注被赞信息
 #define HTTP_NOTCCAFICATIONJ_ORDER @"/api.php/User/reservePushNotice/" //1预约通知
 #define HTTP_NOTCCAFICATIONJ_PAY @"/api.php/User/payPushNotice/" //1付款通知
 #define HTTP_GETMONEY              @"/api.php/User/getMyMoney/"   //1得到钱 账户余额
@@ -164,7 +165,7 @@
 #define HTTP_DELABOUT              @"/api.php/User/delAttention/"    //1删除关注
 #define HTTP_MYABOUNT              @"/api.php/User/myAttention/"   //1我的关注
 #define HTTP_MYFANS                @"/api.php/User/myFans/"        //1我的粉丝
-#define HTTP_MYNOTEBEPRAISE        @"api.php/User/myPraised/"      //被赞
+#define HTTP_MYNOTEBEPRAISE        @"/api.php/User/myPraised/"      //被赞
 #define HTTP_MYNOTEBECOLLECT       @"/api.php/User/myCollected/"   //被收藏
 #define HTTP_SEEOTHERCENTER       @"/api.php/User/getUserInfo/"  //1查看他人个人中心
 #define HTTP_TAABOUNT              @"/api.php/User/otherAttention/"  //1他人的关注

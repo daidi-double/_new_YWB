@@ -120,6 +120,7 @@
     
     [self addHeaderView];
     [self setUpMJRefresh];
+//    [self changeMyInfoData];
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -834,8 +835,16 @@
 
     
 }
-
-
+//获取被赞与关注人数
+//-(void)changeMyInfoData{
+//    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_PRESON_UPDATAINFO];
+//    NSDictionary * prams = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
+//    HttpManager * manager = [[HttpManager alloc]init];
+//    [manager postDatasNoHudWithUrl:urlStr withParams:prams compliation:^(id data, NSError *error) {
+//        MyLog(@"guanzhu %@",data);
+//        
+//    }];
+//}
 
 
 #pragma mark  --set get

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface YWFansTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *praiseLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *touchButton;
 @end
