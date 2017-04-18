@@ -124,6 +124,7 @@
    
 
 }
+
 - (void)makeAnimation{
 
     annimationImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,kScreen_Width * 0.9 , kScreen_Height*0.5)];
@@ -328,7 +329,11 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     HPRecommendShopModel*model=self.tableViewDatasModel[indexPath.section];
-    return [YWMainShoppingTableViewCell getCellHeight:model.holiday];
+    if (self.tableViewDatasModel.count <2) {
+        
+        return [YWMainShoppingTableViewCell getCellHeight:model.holiday] +15;
+    }
+    return [YWMainShoppingTableViewCell getCellHeight:model.holiday]+5;
 
 }
 
@@ -658,6 +663,12 @@
                 
                 [self setAnnimationImage];
 
+            }else{
+                if (annimationImage.animating) {
+                    [annimationImage stopAnimating];
+                    [annimationImage removeFromSuperview];
+                    _annimationAry = nil;
+                }
             }
             [self.tableView reloadData];
         }else{
