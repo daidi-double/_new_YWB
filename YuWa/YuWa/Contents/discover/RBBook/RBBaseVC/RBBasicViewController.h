@@ -16,7 +16,7 @@
 @property (nonatomic,strong)NSMutableDictionary * commentSendDic;
 @property (nonatomic,assign)BOOL isShowEmojis;//是否展示表情
 @property (nonatomic,strong)JWEmojisKeyBoards * emojisKeyBoards;
-
+@property (nonatomic,assign)NSInteger status;
 - (BOOL)isLogin;
 
 - (void)publishNodeAction;
