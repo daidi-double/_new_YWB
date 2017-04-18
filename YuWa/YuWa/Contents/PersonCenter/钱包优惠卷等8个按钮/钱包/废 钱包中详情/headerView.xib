@@ -27,33 +27,53 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add.png" translatesAutoresizingMaskIntoConstraints="NO" id="msa-7b-hX0">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="remove.png" translatesAutoresizingMaskIntoConstraints="NO" id="msa-7b-hX0">
                     <rect key="frame" x="595" y="47" width="12" height="12"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="12" id="AQm-B9-lyy"/>
-                        <constraint firstAttribute="width" constant="12" id="Pgu-z1-hAN"/>
+                        <constraint firstAttribute="height" constant="12" id="CdB-jq-ikz"/>
+                        <constraint firstAttribute="width" constant="12" id="cWC-kv-lVB"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHj-mH-LXd">
+                    <rect key="frame" x="521" y="42" width="55" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add.png" translatesAutoresizingMaskIntoConstraints="NO" id="1KC-IO-kZi">
+                    <rect key="frame" x="501" y="47" width="12" height="12"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="12" id="H39-bK-nt8"/>
+                        <constraint firstAttribute="height" constant="12" id="S8C-cI-tj6"/>
+                        <constraint firstAttribute="width" constant="12" id="iW2-9V-rEv"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="12" id="vJD-TJ-g9y"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="msa-7b-hX0" firstAttribute="centerY" secondItem="c4K-CX-Wwk" secondAttribute="centerY" id="FZx-ed-OZI"/>
-                <constraint firstItem="hqf-7S-jlz" firstAttribute="centerY" secondItem="c4K-CX-Wwk" secondAttribute="centerY" id="g8N-Z9-vNf"/>
+                <constraint firstItem="msa-7b-hX0" firstAttribute="centerY" secondItem="c4K-CX-Wwk" secondAttribute="centerY" id="9vt-GQ-mxf"/>
+                <constraint firstItem="hqf-7S-jlz" firstAttribute="centerY" secondItem="c4K-CX-Wwk" secondAttribute="centerY" id="C8c-Ia-9MA"/>
+                <constraint firstItem="msa-7b-hX0" firstAttribute="leading" secondItem="AHj-mH-LXd" secondAttribute="trailing" constant="19" id="L6N-sc-cFM"/>
+                <constraint firstItem="AHj-mH-LXd" firstAttribute="centerY" secondItem="c4K-CX-Wwk" secondAttribute="centerY" id="LHF-no-dbU"/>
+                <constraint firstAttribute="trailing" secondItem="hqf-7S-jlz" secondAttribute="trailing" constant="10" id="MKp-GR-hCH"/>
                 <constraint firstItem="6wd-2H-fSm" firstAttribute="centerY" secondItem="c4K-CX-Wwk" secondAttribute="centerY" id="hur-Le-tqa"/>
                 <constraint firstItem="6wd-2H-fSm" firstAttribute="leading" secondItem="c4K-CX-Wwk" secondAttribute="leading" constant="10" id="ikG-0D-Sxk"/>
-                <constraint firstAttribute="trailing" secondItem="hqf-7S-jlz" secondAttribute="trailing" constant="10" id="mEe-RX-pbm"/>
-                <constraint firstItem="hqf-7S-jlz" firstAttribute="leading" secondItem="msa-7b-hX0" secondAttribute="trailing" constant="8" id="seD-dD-eyt"/>
+                <constraint firstItem="1KC-IO-kZi" firstAttribute="centerY" secondItem="c4K-CX-Wwk" secondAttribute="centerY" id="mL7-bZ-Bmu"/>
+                <constraint firstItem="hqf-7S-jlz" firstAttribute="leading" secondItem="msa-7b-hX0" secondAttribute="trailing" constant="8" id="pH3-VU-Iob"/>
+                <constraint firstItem="AHj-mH-LXd" firstAttribute="leading" secondItem="1KC-IO-kZi" secondAttribute="trailing" constant="8" id="zly-ci-Rma"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="allMoney" destination="hqf-7S-jlz" id="z15-VC-Cm8"/>
-                <outlet property="imageView" destination="msa-7b-hX0" id="v4H-LP-g7Z"/>
                 <outlet property="month" destination="6wd-2H-fSm" id="vsh-FN-XNG"/>
+                <outlet property="shouru" destination="AHj-mH-LXd" id="AZV-bn-jKf"/>
+                <outlet property="zhichu" destination="hqf-7S-jlz" id="McT-Og-pCC"/>
             </connections>
             <point key="canvasLocation" x="86" y="170.5"/>
         </view>
     </objects>
     <resources>
         <image name="add.png" width="12" height="12"/>
+        <image name="remove.png" width="12" height="12"/>
     </resources>
 </document>

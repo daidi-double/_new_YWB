@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface headerView : UIView
-//总支出
-@property (assign, nonatomic)  float all;
+//支出
+@property (strong, nonatomic)  NSString * pay;
+//收入
+@property (strong, nonatomic)  NSString * income;
 @property (weak, nonatomic) IBOutlet UILabel *month;
 @end

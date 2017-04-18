@@ -25,9 +25,11 @@
     
 }
 @property(nonatomic,strong)UITableView*tableView;
-
-@property(nonatomic,strong)NSMutableArray*maAllDatasModel;   //保存所有的model
+//已经排列好各月份数据
+@property(nonatomic,strong)NSMutableArray*maAllDatasModel;   //保存所有的model 月份
 @property(nonatomic,strong)NSMutableArray*sectionData;
+//半个月总支出数据；   第一个数组是收入，最后一个是支出
+@property(nonatomic,strong)NSMutableArray*zhichuData;
 @property(nonatomic,assign)NSInteger payType;  //类别1为收支明细(全部)2为直接介绍分红，3为支出，4为简介介绍分红，5商务分红，6积分分红，7店铺收款，8退款，9提现，
 //3 = 商务分红,
 //99 = 退款,
@@ -167,8 +169,13 @@
     headerView * headerView = [[[NSBundle mainBundle]loadNibNamed:@"headerView" owner:nil options:nil]lastObject ];
     headerView.backgroundColor = RGBCOLOR(246, 246, 245, 1);
     NSNumber * nub = self.sectionData[section];
+    NSArray *income =  self.zhichuData.firstObject;
+    NSArray * pay = self.zhichuData.lastObject;
+    headerView.income = income[section];
+    headerView.pay = pay[section];
     if (nub == [NSNumber numberWithInteger:[self getYearOrMonth:@"month"]]) {
             headerView.month.text = [NSString stringWithFormat:@"本月"];
+        
         return headerView;
     }
     headerView.month.text = [NSString stringWithFormat:@"%@月",nub];
@@ -410,14 +417,19 @@
                             }
                         }
                     }
-                    self.maAllDatasModel   = allData;
-                    self.sectionData = all;
                     //                MyLog(@"!!!!!!!!!!%@，，%@",dict[@"dataTime"],time );
                     //                MoneyPackModel*model=[MoneyPackModel yy_modelWithDictionary:dict];
                     //                NSMutableArray * modelARR =
                     //                [self.maAllDatasModel addObject:model];
                     
                 }
+                NSDictionary * dic = data[@"total_money"];
+                //收入
+                [self.zhichuData addObject:dic[@"income"]];
+                //支出
+                 [self.zhichuData addObject:dic[@"pay"]];
+                self.maAllDatasModel   = allData;
+                self.sectionData = all;
             }
             [self.tableView reloadData];
             
@@ -497,5 +509,11 @@
         _sectionData   =  [NSMutableArray array];
     }
     return _sectionData;
+}
+-(NSMutableArray *)zhichuData{
+    if (_zhichuData == nil) {
+        _zhichuData = [NSMutableArray arrayWithCapacity:6];
+    }
+    return _zhichuData;
 }
 @end

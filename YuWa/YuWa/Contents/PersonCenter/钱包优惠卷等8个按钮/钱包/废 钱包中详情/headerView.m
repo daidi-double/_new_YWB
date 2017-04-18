@@ -9,19 +9,20 @@
 #import "headerView.h"
 
 @interface headerView ()
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *allMoney;
+//支出
+@property (weak, nonatomic) IBOutlet UILabel *zhichu;
+//收入
+@property (weak, nonatomic) IBOutlet UILabel *shouru;
+
 
 @end
 @implementation headerView
--(void)setAll:(float)all{
-    _all = all;
-          
-    if (_all<0) {
-        self.imageView.image =  [UIImage  imageNamed:@"remove"];
-    }else{
-        self.imageView.image = [UIImage  imageNamed:@"add"];
-    }
-    self.allMoney.text = @"0.0000";
+-(void)setPay:(NSString *)pay{
+    _pay = pay;
+    self.zhichu.text =  pay;
+}
+-(void)setIncome:(NSString *)income{
+    _income = income;
+    self.shouru.text = income;
 }
 @end
