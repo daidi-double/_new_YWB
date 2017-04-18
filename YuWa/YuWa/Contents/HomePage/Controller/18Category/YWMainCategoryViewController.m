@@ -154,7 +154,7 @@
 
 #pragma mark  -- touch
 -(void)touchFourButton:(UIButton*)sender{
-    MyLog(@"%lu",sender.tag);
+//    MyLog(@"%lu",sender.tag);
     for (int i=0; i<4; i++) {
         UIButton*button=[self.view viewWithTag:100+i];
         if (button.tag==sender.tag) {
