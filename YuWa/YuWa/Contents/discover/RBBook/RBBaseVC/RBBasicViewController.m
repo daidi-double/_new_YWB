@@ -147,6 +147,10 @@
     if (self.commentToolsView.y > kScreen_Height - 44.f)self.commentToolsView.y = kScreen_Height - 44.f;
     self.commentToolsView.sendTextField.text = @"";
     self.commentToolsView.sendTextField.placeholder = [NSString stringWithFormat:@"回复 %@ :",user[@"userName"]];
+    if ([JWTools isPhoneIDWithStr:user[@"userName"]]) {
+        NSString * str = [user[@"userName"] substringToIndex:7];
+     self.commentToolsView.sendTextField.placeholder = [NSString stringWithFormat:@"回复 %@**** :",str];
+    }
     self.isRePlayComment = YES;
     self.commentSendDic = [NSMutableDictionary dictionaryWithDictionary:user];
     [self.commentToolsView.sendTextField becomeFirstResponder];
