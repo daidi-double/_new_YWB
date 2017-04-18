@@ -486,11 +486,19 @@
         [self.navigationController pushViewController:vc animated:YES];
 
         
-    }else{
-        //被赞和被收藏  没有
+    }else if (number==2){
+        
+        //被赞
+        YWFansViewController*vc=[[YWFansViewController alloc]init];
+        vc.whichFriend=TheFriendsBePraise;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if (number==3){
+        //被收藏
+        YWFansViewController*vc=[[YWFansViewController alloc]init];
+        vc.whichFriend=TheFriendsBeCollected;
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    
-    
 }
 
 
