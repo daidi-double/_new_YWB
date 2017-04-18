@@ -444,13 +444,17 @@
 
 #pragma mark - Http
 - (void)requestData{
-    NSDictionary * pragram = @{@"token":[UserSession instance].token,@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"user_id":@([UserSession instance].uid)};
+    if (self.note_id == nil) {
+        self.note_id = self.model.homeID;
+        
+    }
+    NSDictionary * pragram = @{@"token":[UserSession instance].token,@"note_id":self.note_id,@"device_id":[JWTools getUUID],@"user_id":@([UserSession instance].uid)};
     
     [[HttpObject manager]postDataWithType:YuWaType_RB_DETAIL withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code is 223%@",responsObj);
         NSMutableDictionary * dataDic = [RBNodeShowModel dataDicSetWithDic:responsObj[@"data"]];
-        [dataDic setObject:self.model.homeID forKey:@"id"];
+        [dataDic setObject:self.note_id forKey:@"id"];
 
         self.dataModel = [RBNodeShowModel yy_modelWithDictionary:dataDic];
 
@@ -467,8 +471,42 @@
 //        MyLog(@"Regieter Code error is %@",responsObj);
     }];
 }
+- (void)requestData2{
+    
+    if (self.note_id == nil) {
+        self.note_id = self.model.homeID;
+        
+    }
+    NSDictionary * pragram = @{@"token":[UserSession instance].token,@"note_id":self.note_id,@"device_id":[JWTools getUUID],@"user_id":@([UserSession instance].uid)};
+    
+    [[HttpObject manager]postDataWithType:YuWaType_RB_DETAIL withPragram:pragram success:^(id responsObj) {
+        MyLog(@"Regieter Code pragram is %@",pragram);
+        MyLog(@"Regieter Code is 223%@",responsObj);
+        NSMutableDictionary * dataDic = [RBNodeShowModel dataDicSetWithDic:responsObj[@"data"]];
+        [dataDic setObject:self.model.homeID forKey:@"id"];
+        
+        self.dataModel = [RBNodeShowModel yy_modelWithDictionary:dataDic];
+        
+        self.scrollToolsHeight = 0.f;
+        [self reSetBottomToolsView];
+        [self requestDataWithPages:0];//瀑布流数据
+    } failur:^(id responsObj, NSError *error) {
+        NSString * number = responsObj[@"errorCode"];
+        if([number integerValue] == 9){
+            [self promptView];
+            
+        }
+        //        MyLog(@"Regieter Code pragram is %@",pragram);
+        //        MyLog(@"Regieter Code error is %@",responsObj);
+    }];
+}
+
 - (void)requestDataWithPages:(NSInteger)page{
-    NSDictionary * pragram = @{@"note_id":self.model.homeID,@"pagen":self.pagens,@"pages":[NSString stringWithFormat:@"%zi",page],@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
+    if (self.note_id == nil) {
+        self.note_id = self.model.homeID;
+        
+    }
+    NSDictionary * pragram = @{@"note_id":self.note_id,@"pagen":self.pagens,@"pages":[NSString stringWithFormat:@"%zi",page],@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
