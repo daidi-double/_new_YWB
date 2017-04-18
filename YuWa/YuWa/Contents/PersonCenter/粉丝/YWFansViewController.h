@@ -12,7 +12,9 @@ typedef NS_ENUM(NSInteger,TheFriends){
     TheFirendsAbount=0,
     TheFirendsFans,
     TheFirendsTaAbount,
-    TheFirendsTaFans
+    TheFirendsTaFans,
+    TheFriendsBePraise,//被赞
+    TheFriendsBeCollected//被收藏
     
 };
 

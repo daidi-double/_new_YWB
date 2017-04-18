@@ -42,7 +42,12 @@
         case TheFirendsTaFans:
             self.title=@"Ta的粉丝";
             break;
-  
+        case TheFriendsBePraise:
+            self.title=@"被赞";
+            break;
+        case TheFriendsBeCollected:
+            self.title=@"被收藏";
+            break;
         default:
             break;
     }
@@ -185,7 +190,13 @@
             
             [self getDatasTaFans];
             break;
-            
+        case TheFriendsBePraise:
+            [self getDatasBePraise];
+            break;
+        case TheFriendsBeCollected:
+//            self.title=@"被收藏";
+            break;
+   
         default:
             break;
     }
@@ -323,7 +334,38 @@
 
     
 }
-
+//被赞
+-(void)getDatasBePraise{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MYNOTEBEPRAISE];
+    NSString*pagen=[NSString stringWithFormat:@"%d",self.pagen];
+    NSString*pages=[NSString stringWithFormat:@"%d",self.pages];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"pagen":pagen,@"pages":pages,@"user_type":@(1)};
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"data被赞 = %@",data);
+//        NSNumber*number=data[@"errorCode"];
+//        NSString*errorCode=[NSString stringWithFormat:@"%@",number];
+//        if ([errorCode isEqualToString:@"0"]) {
+//            
+//            for (NSDictionary*dict in data[@"data"]) {
+//                AbountAndFansModel*model=[AbountAndFansModel yy_modelWithDictionary:dict];
+//                [self.maMallDatas addObject:model];
+//            }
+//            
+//            
+//            [self.tableView reloadData];
+//        }else{
+//            [JRToast showWithText:data[@"errorMessage"]];
+//            
+//        }
+//        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
+}
 
 #pragma mark  -- 加关注和  取消关注
 -(void)ButtonCancelAbount:(UIButton*)sender{
