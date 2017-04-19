@@ -14,6 +14,8 @@
 		2531B4851EA4BF33001B240F /* add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2531B4811EA4BF33001B240F /* add@3x.png */; };
 		2535423A1EA4ABE3006F2C7A /* headerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253542391EA4ABE3006F2C7A /* headerView.xib */; };
 		2535423D1EA4ADF8006F2C7A /* headerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2535423C1EA4ADF8006F2C7A /* headerView.m */; };
+		25CD5E491EA7629C0069D416 /* detailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25CD5E481EA7629C0069D416 /* detailHeaderView.xib */; };
+		25CD5E4C1EA762C10069D416 /* YWdetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */; };
 		AA048FD31E8909F700AF5423 /* MyIncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA048FD21E8909F700AF5423 /* MyIncomeModel.m */; };
 		AA048FD81E89142900AF5423 /* WillAccountIncomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA048FD61E89142900AF5423 /* WillAccountIncomeTableViewCell.m */; };
 		AA048FD91E89142900AF5423 /* WillAccountIncomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA048FD71E89142900AF5423 /* WillAccountIncomeTableViewCell.xib */; };
@@ -1697,6 +1699,9 @@
 		253542391EA4ABE3006F2C7A /* headerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerView.xib; sourceTree = "<group>"; };
 		2535423B1EA4ADF8006F2C7A /* headerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = headerView.h; sourceTree = "<group>"; };
 		2535423C1EA4ADF8006F2C7A /* headerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = headerView.m; sourceTree = "<group>"; };
+		25CD5E481EA7629C0069D416 /* detailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detailHeaderView.xib; sourceTree = "<group>"; };
+		25CD5E4A1EA762C10069D416 /* YWdetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailHeaderView.h; sourceTree = "<group>"; };
+		25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailHeaderView.m; sourceTree = "<group>"; };
 		6D91CFB893AA70B1C9A0D506 /* Pods-YuWa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YuWa.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YuWa/Pods-YuWa.debug.xcconfig"; sourceTree = "<group>"; };
 		AA048FD11E8909F700AF5423 /* MyIncomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIncomeModel.h; sourceTree = "<group>"; };
 		AA048FD21E8909F700AF5423 /* MyIncomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIncomeModel.m; sourceTree = "<group>"; };
@@ -4180,6 +4185,16 @@
 				2531B4811EA4BF33001B240F /* add@3x.png */,
 			);
 			path = "加减图标";
+			sourceTree = "<group>";
+		};
+		25CD5E471EA75FE90069D416 /* 详情页面Headview */ = {
+			isa = PBXGroup;
+			children = (
+				25CD5E481EA7629C0069D416 /* detailHeaderView.xib */,
+				25CD5E4A1EA762C10069D416 /* YWdetailHeaderView.h */,
+				25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */,
+			);
+			name = "详情页面Headview";
 			sourceTree = "<group>";
 		};
 		9163D0EA57279212CCE251B6 /* Pods */ = {
@@ -8766,6 +8781,7 @@
 		C1F7BD501DB1C94500CCAF96 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				25CD5E471EA75FE90069D416 /* 详情页面Headview */,
 				C1F7BD511DB1C94500CCAF96 /* CommentTableViewCell.h */,
 				C1F7BD521DB1C94500CCAF96 /* CommentTableViewCell.m */,
 				C1F7BD531DB1C94500CCAF96 /* CommentTableViewCell.xib */,
@@ -9901,6 +9917,7 @@
 				AA3544331E9DF23800A2EC73 /* 3baobaoLVUP12@2x.jpg in Resources */,
 				B38B2F5D1D8FC83A004D5256 /* EmotionTextKeys.plist in Resources */,
 				B38B2F4E1D8FC83A004D5256 /* 关注的人首页数据.json in Resources */,
+				25CD5E491EA7629C0069D416 /* detailHeaderView.xib in Resources */,
 				C135A1471DDE020F002B78A5 /* 波浪个人_00026.png in Resources */,
 				AA3544DC1E9DF23900A2EC73 /* 0baobaoBG5@2x.jpg in Resources */,
 				AA3545551E9DF23A00A2EC73 /* 2baobaoBG6@2x.jpg in Resources */,
@@ -10952,6 +10969,7 @@
 				B38B2E061D8FACD8004D5256 /* MASLayoutConstraint.m in Sources */,
 				AACC80BF1E901E070023CA6D /* CustomTableViewCell.m in Sources */,
 				B38B2E391D8FACD8004D5256 /* UIImageView+WebCache.m in Sources */,
+				25CD5E4C1EA762C10069D416 /* YWdetailHeaderView.m in Sources */,
 				B38B2E4D1D8FACD8004D5256 /* TAAnimatedDotView.m in Sources */,
 				B38B2F051D8FC82F004D5256 /* RBNodeDetailCommendFooter.m in Sources */,
 				B3B851081DD9879A00E171C8 /* JHColumnChart.m in Sources */,
