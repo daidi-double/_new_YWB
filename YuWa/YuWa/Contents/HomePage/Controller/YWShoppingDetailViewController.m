@@ -42,6 +42,7 @@
 
 #define HeaderHeight 175.f
 #import "PaytheBillView.h"
+#import "YWdetailHeaderView.h"
 
 @interface YWShoppingDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -130,8 +131,12 @@
     
     UIView *headerView=[[UIView alloc]initWithFrame:self.bottomView.frame];
     [headerView addSubview:self.bottomView];
-    
-    self.tableView.tableHeaderView=headerView;
+    YWdetailHeaderView * headerView1 = [[YWdetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 175.f)];
+   [headerView1.imageView1 sd_setImageWithURL:[NSURL URLWithString:_mainModel.company_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
+
+    self.tableView.tableHeaderView=headerView1;
     
     
     //图片上的按钮

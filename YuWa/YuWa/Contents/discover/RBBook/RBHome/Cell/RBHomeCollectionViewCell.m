@@ -163,7 +163,7 @@
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responsObj options:NSJSONWritingPrettyPrinted error:nil];
         // NSData转为NSString
         NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        if ([responsObj[@"msg"] isEqualToString:@"取消点赞成功"]) {
+        if ([responsObj[@"msg"] isEqualToString:@"取消点赞"]) {
             MyLog(@"点赞成功");
             
             self.isLike = NO;
