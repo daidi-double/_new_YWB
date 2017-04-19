@@ -155,7 +155,7 @@
         
     }else if (indexPath.section==1&&indexPath.row==3){
        //我的用户
-#warning 这里可能接口 不对
+
         SignUserViewController*vc=[[SignUserViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
     }

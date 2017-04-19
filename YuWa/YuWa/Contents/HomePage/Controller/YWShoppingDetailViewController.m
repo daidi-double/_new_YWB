@@ -841,7 +841,7 @@
     }else if (indexPath.section==5){
         
         HPRecommendShopModel*model=self.maMRecommend[indexPath.row];
-        return [YWMainShoppingTableViewCell getCellHeight:model.holiday];
+        return [YWMainShoppingTableViewCell getCellHeight:model.holiday]-10;
 
     }
     

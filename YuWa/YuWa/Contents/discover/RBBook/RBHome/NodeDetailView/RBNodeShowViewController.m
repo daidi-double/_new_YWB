@@ -65,6 +65,10 @@
     [self dataSet];
     [self makeUI];
     [self requestData];
+    //获取通知中心单例对象
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+    [center addObserver:self selector:@selector(notice:) name:@"123" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -84,6 +88,7 @@
         self.addToAldumView = nil;
     }
     if ([[[UIApplication sharedApplication].delegate.window.subviews lastObject] isKindOfClass:[MBProgressHUD class]])[[[UIApplication sharedApplication].delegate.window.subviews lastObject] removeFromSuperview];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"123" object:nil];
 }
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
@@ -234,7 +239,7 @@
     return self.authorHeader;
 }
 - (void)promptView{
-    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"您的身份已过期，请重新登入" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"您的身份已过期，请重新登入" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         YWLoginViewController * vc = [[YWLoginViewController alloc]init];
@@ -396,9 +401,11 @@
 
 #pragma mark - UITableViewDataSource
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  
     if (indexPath.section == 2) {//回复用户评论
         RBNodeShowCommentModel * model = self.dataModel.comments_list[indexPath.row];
         [self commentActionWithUserDic:@{@"nodeID":self.model.homeID,@"userID":model.user.userid,@"userName":model.user.nickname}];
+
         return;
     }
 }
@@ -424,14 +431,23 @@
     }
     return self.recommendCell;
 }
-
+-(void)notice:(id)sender{
+    [self requestData];
+}
 #pragma mark - TableView Refresh
 - (void)setupRefresh{
     self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self footerRereshing];
     }];
+    self.tableView.mj_header = [UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+        [self headerRefreshing];
+    }];
+    [self.tableView.mj_header beginRefreshing];
 }
-
+- (void)headerRefreshing{
+    self.pages = 0;
+    [self requestDataWithPages:self.pages];
+}
 - (void)footerRereshing{
     self.pages++;
     self.failedCount = 0;
@@ -444,13 +460,17 @@
 
 #pragma mark - Http
 - (void)requestData{
-    NSDictionary * pragram = @{@"token":[UserSession instance].token,@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"user_id":@([UserSession instance].uid)};
+    if (self.note_id == nil) {
+        self.note_id = self.model.homeID;
+        
+    }
+    NSDictionary * pragram = @{@"token":[UserSession instance].token,@"note_id":self.note_id,@"device_id":[JWTools getUUID],@"user_id":@([UserSession instance].uid)};
     
     [[HttpObject manager]postDataWithType:YuWaType_RB_DETAIL withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code is 223%@",responsObj);
         NSMutableDictionary * dataDic = [RBNodeShowModel dataDicSetWithDic:responsObj[@"data"]];
-        [dataDic setObject:self.model.homeID forKey:@"id"];
+        [dataDic setObject:self.note_id forKey:@"id"];
 
         self.dataModel = [RBNodeShowModel yy_modelWithDictionary:dataDic];
 
@@ -467,8 +487,14 @@
 //        MyLog(@"Regieter Code error is %@",responsObj);
     }];
 }
+
 - (void)requestDataWithPages:(NSInteger)page{
-    NSDictionary * pragram = @{@"note_id":self.model.homeID,@"pagen":self.pagens,@"pages":[NSString stringWithFormat:@"%zi",page],@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
+    if (self.note_id == nil) {
+        self.note_id = self.model.homeID;
+        
+    }
+
+    NSDictionary * pragram = @{@"note_id":self.note_id,@"pagen":self.pagens,@"pages":[NSString stringWithFormat:@"%zi",page],@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
@@ -493,8 +519,8 @@
             self.bottomToolsHeight = self.bottomToolsHeight == 0.f? self.scrollToolsHeight/2 : self.bottomToolsHeight;
         }
     } failur:^(id responsObj, NSError *error) {
-//        MyLog(@"Regieter Code pragram is %@",pragram);
-//        MyLog(@"Regieter Code error is %@",responsObj);
+        MyLog(@"Regieter Code pragram is %@",pragram);
+        MyLog(@"Regieter Code error is %@",responsObj);
         if (self.failedCount > 3) {
             [self.tableView reloadData];
         }else{
@@ -502,9 +528,10 @@
             [self requestDataWithPages:page];
         }
     }];
+    [self.tableView.mj_header endRefreshing];
 }
 - (void)requestAddToAldumWithIdx:(NSString *)aldumIdx{
-    MyLog(@"添加到专辑%@",aldumIdx);
+//    MyLog(@"添加到专辑%@",aldumIdx);
     if (self.addToAldumView.dataArr.count<=0) {
         YWNodeAddAldumViewController * vc = [[YWNodeAddAldumViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];

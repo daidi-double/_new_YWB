@@ -12,6 +12,7 @@
 #import "AbountAndFansModel.h"
 #import "NotePraiseModel.h"
 #import "YWOtherSeePersonCenterViewController.h"
+#import "RBNodeShowViewController.h"
 
 #define  CELL0  @"YWFansTableViewCell"
 
@@ -168,7 +169,7 @@
         //info
         UILabel*infoLabel=[cell viewWithTag:3];
         infoLabel.width = cell.width *0.5;
-        infoLabel.text=model.info;
+        infoLabel.text= [model.info stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         //button
         cell.praiseLabel.hidden = NO;
@@ -198,7 +199,11 @@
         }
         
     }else{
-        
+        NotePraiseModel * model = self.maMallDatas[indexPath.row];
+        RBNodeShowViewController * vc = [[RBNodeShowViewController alloc]init];
+        vc.isUser = YES;
+        vc.note_id = model.note_id;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

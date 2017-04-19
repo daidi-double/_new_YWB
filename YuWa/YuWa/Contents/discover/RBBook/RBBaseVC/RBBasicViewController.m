@@ -9,7 +9,7 @@
 #import "RBBasicViewController.h"
 #import "YWLoginViewController.h"
 #import "TZImagePickerController.h"
-
+#import "RBNodeShowViewController.h"
 @interface RBBasicViewController ()<UITextFieldDelegate,TZImagePickerControllerDelegate>
 @property (nonatomic,assign)BOOL isRePlayComment;//是否是回复用户评论
 
@@ -21,6 +21,7 @@
     [super viewDidLoad];
     [self makeEmojisKeyBoards];
     [self makeCommentToolsView];
+    self.status = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -197,9 +198,15 @@
     [[HttpObject manager]postDataWithType:YuWaType_RB_COMMENT withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code is %@",responsObj);
+        [JRToast showWithText:responsObj[@"msg"] duration:1];
+        //创建一个消息对象
+        NSNotification * notice = [NSNotification notificationWithName:@"123" object:nil userInfo:@{@"1":@"123"}];
+        //发送消息
+        [[NSNotificationCenter defaultCenter]postNotification:notice];
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code error is %@",responsObj);
+        [JRToast showWithText:responsObj[@"errorMessage"] duration:1];
     }];
 }
 

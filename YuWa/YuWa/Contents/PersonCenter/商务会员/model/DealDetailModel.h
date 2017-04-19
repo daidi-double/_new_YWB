@@ -31,6 +31,6 @@
 @property(nonatomic,strong)NSString*money;
 @property(nonatomic,strong)NSString * order_type;
 @property(nonatomic,strong)NSString*pay_to_shop_time;   //一个礼拜后打款的时间
-
+@property(nonatomic,strong)NSString * my_name;
 @property(nonatomic,strong)NSString*order_id;
 @end
