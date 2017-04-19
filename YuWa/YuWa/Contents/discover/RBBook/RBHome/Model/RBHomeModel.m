@@ -20,6 +20,7 @@
 }
 
 + (NSMutableDictionary *)dataDicSetWithDic:(NSDictionary *)dic{
+    MyLog(@"%@",dic);
     NSMutableDictionary * dataDic = [NSMutableDictionary dictionaryWithCapacity:0];
     NSMutableDictionary * userDic = [NSMutableDictionary dictionaryWithCapacity:0];
     NSMutableArray * imgArr = [NSMutableArray arrayWithCapacity:0];
