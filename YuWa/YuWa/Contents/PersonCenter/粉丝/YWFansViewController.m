@@ -169,7 +169,7 @@
         //info
         UILabel*infoLabel=[cell viewWithTag:3];
         infoLabel.width = cell.width *0.5;
-        infoLabel.text=model.info;
+        infoLabel.text= [model.info stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         //button
         cell.praiseLabel.hidden = NO;

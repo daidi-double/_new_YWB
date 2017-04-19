@@ -138,7 +138,7 @@
     UILabel*categoryLabel=[cell viewWithTag:4];
     NSArray*array=model.tag_name;
     NSString*arrayStr=[array componentsJoinedByString:@" "];
-    categoryLabel.text=[NSString stringWithFormat:@"%@ %@",model.catname,arrayStr];   //model.catname
+    categoryLabel.text=[NSString stringWithFormat:@"%@",arrayStr];   //model.catname
     
     //店铺所在的商圈
     UILabel*shopLocLabel=[cell viewWithTag:6];
@@ -150,7 +150,7 @@
     zheLabel.text=[NSString stringWithFormat:@"%@折，闪付立享",zheNum];
     
     CGFloat num=[model.discount floatValue];
-    if (num>=1) {
+    if (num>=1 || num<=0.00) {
         zheLabel.text=@"不打折";
     }
 
@@ -202,7 +202,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     HPRecommendShopModel*model=self.maMallDatas[indexPath.row];
-    return [YWMainShoppingTableViewCell getCellHeight:model.holiday];
+    return [YWMainShoppingTableViewCell getCellHeight:model.holiday]-10;
 
 }
 

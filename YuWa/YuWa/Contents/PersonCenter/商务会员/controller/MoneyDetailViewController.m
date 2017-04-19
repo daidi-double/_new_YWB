@@ -77,7 +77,7 @@
         titleLabel.text=@"收入来源";
         detailLabel.text=self.model.user_name;
         //判断是否为手机号码，是就隐藏一部分
-        if (self.model.user_name.length >= 11 && [JWTools isNumberWithStr:self.model.user_name]) {
+        if ([JWTools isNumberWithStr:self.model.user_name]) {
             detailLabel.text = [NSString stringWithFormat:@"%@****",[self.model.user_name substringToIndex:self.model.user_name.length - 4]];
         }
        
@@ -125,10 +125,10 @@
         label3.text=@"用户";
 
         UILabel*label4=[view viewWithTag:4];
-        label4.text=self.model.user_name;
+        label4.text=self.model.my_name;
 
-        if (self.model.user_name.length >= 11) {
-            label4.text = [NSString stringWithFormat:@"%@****",[self.model.user_name substringToIndex:self.model.user_name.length - 4]];
+        if ([JWTools isNumberWithStr:self.model.my_name]) {
+            label4.text = [NSString stringWithFormat:@"%@****",[self.model.my_name substringToIndex:self.model.my_name.length - 4]];
         }
         
         return view;
