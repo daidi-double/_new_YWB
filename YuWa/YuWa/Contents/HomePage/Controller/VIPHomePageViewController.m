@@ -608,7 +608,7 @@
             [mtArray addObject:model.img];
         }
       
-        SDCycleScrollView*sdView=[SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreen_Width, ACTUAL_HEIGHT(125)) imagesGroup:mtArray andPlaceholder:@"placehoder_loading"];
+        SDCycleScrollView*sdView=[SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreen_Width, SCREEN_WIDTH/3) imagesGroup:mtArray andPlaceholder:@"placehoder_loading"];
         sdView.autoScrollTimeInterval=5.0;
         sdView.delegate=self;
         return sdView;
