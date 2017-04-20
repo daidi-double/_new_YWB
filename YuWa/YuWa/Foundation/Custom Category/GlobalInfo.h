@@ -90,6 +90,7 @@
 #define HTTP_GETPAYDETAIL          @"/api.php/Sale/myMoneyHistory/"   // 钱包中得到收入支出明细
 #define HTTP_GETMYMONEYTOBANK      @"/api.php/Withdraw/check/" //钱包零钱提现
 
+#define HTTP_MONEY_GETMONEY       @"/api.php/user/add_cash/"//提现
 #define HTTP_GETPAYDETAILPAGE     @"/api.php/User/detailShow/"//收支明细详情
 
 #define HTTP_SUREGETMYMONEY         @"/api.php/Withdraw/application/"//确认提交申请提现

@@ -357,7 +357,7 @@
                     <rect key="frame" x="0.0" y="607" width="262" height="60"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5r-2x-wtV">
-                    <rect key="frame" x="78" y="592" width="17.5" height="14"/>
+                    <rect key="frame" x="72" y="592" width="17.5" height="14"/>
                     <color key="backgroundColor" red="0.30980392156862746" green="0.70196078431372544" blue="0.89411764705882357" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="dlF-OO-DUn"/>
@@ -377,7 +377,7 @@
                 <constraint firstItem="fER-LP-Wuq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="B2s-d3-qZo"/>
                 <constraint firstItem="FfE-p5-Kiq" firstAttribute="centerY" secondItem="d7O-s6-2MJ" secondAttribute="centerY" id="Gju-yf-8uk"/>
                 <constraint firstAttribute="trailing" secondItem="ShQ-N3-DUa" secondAttribute="trailing" id="ISZ-Eu-mjD"/>
-                <constraint firstItem="i5r-2x-wtV" firstAttribute="leading" secondItem="KPj-mJ-NFu" secondAttribute="trailing" constant="-2" id="Inx-RD-BIX"/>
+                <constraint firstItem="i5r-2x-wtV" firstAttribute="leading" secondItem="KPj-mJ-NFu" secondAttribute="trailing" constant="-8" id="Inx-RD-BIX"/>
                 <constraint firstAttribute="trailing" secondItem="hI8-qb-Anj" secondAttribute="trailing" id="Jgg-ix-gFm"/>
                 <constraint firstItem="FfE-p5-Kiq" firstAttribute="leading" secondItem="dEw-zu-tua" secondAttribute="trailing" id="KJe-vR-0AE"/>
                 <constraint firstAttribute="bottom" secondItem="KPj-mJ-NFu" secondAttribute="bottom" id="LiF-bX-3l3"/>

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface GetMoneyToBankViewController : UIViewController
-@property (nonatomic,copy)NSString * user_card_id;
+@property (nonatomic,copy)NSString * useName;
 @property (nonatomic,copy)NSString * money;
+@property (nonatomic,copy)NSString * bankName;
+@property (nonatomic,copy)NSString * bankCard;
 @end
