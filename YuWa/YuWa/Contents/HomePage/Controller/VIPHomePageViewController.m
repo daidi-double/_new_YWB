@@ -28,7 +28,7 @@
 
 #import "MovieViewController.h" //电影界面
 #import "CategoryDetaliViewController.h"//新分类详细界面
-#import "YWShoppingDetailViewController.h"
+#import "ShopDetailViewController.h"
 //
 
 #define CELL0   @"HomeMenuCell"
@@ -551,14 +551,15 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==2) {
-        NSInteger number=indexPath.row;
-        HPRecommendShopModel*model=self.mtModelArrRecommend[number];
-
-        
-        YWShoppingDetailViewController*vc=[[YWShoppingDetailViewController alloc]init];
-        vc.shop_id=model.id;
-        [self.navigationController pushViewController:vc animated:YES];
-        
+//        NSInteger number=indexPath.row;
+//        HPRecommendShopModel*model=self.mtModelArrRecommend[number];
+//
+//        
+//        YWShoppingDetailViewController*vc=[[YWShoppingDetailViewController alloc]init];
+//        vc.shop_id=model.id;
+//        [self.navigationController pushViewController:vc animated:YES];
+        ShopDetailViewController * shopVC = [[ShopDetailViewController alloc]init];
+        [self.navigationController pushViewController:shopVC animated:YES];
     }
     
 }

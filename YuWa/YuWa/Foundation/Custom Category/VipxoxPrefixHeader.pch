@@ -94,6 +94,8 @@
 //刷新时间
 #define RefreshTime 2.f
 
+//字体大小
+#define fontSize(px)   [UIFont systemFontOfSize:(px/96)*72]
 
 #define  XZseastsColMargin 60 //座位图离上部分距离
 #define  XZseastsRowMargin 40 //座位图离左边距离
