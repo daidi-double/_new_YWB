@@ -8,7 +8,7 @@
 
 #import "ShopDetailViewController.h"
 
-@interface ShopDetailViewController ()
+@interface ShopDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -26,6 +26,27 @@
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden  = NO;
 }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 4;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"table"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"table"];
+    }
+    return cell;
+}
+//返回
+- (IBAction)backAction:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+//结算
+- (IBAction)accountAction:(UIButton *)sender {
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
