@@ -49,6 +49,7 @@
 @property(nonatomic,strong)UITableView*tableView;
 @property(nonatomic,strong)PaytheBillView*topView;
 @property(nonatomic,strong)UIView*bottomView;
+@property(nonatomic,strong)YWdetailHeaderView*headerView;
 //tableHeaderView上的两个控件 需要赋值
 @property(nonatomic,strong)UIImageView*backgroundImageView;
 @property(nonatomic,strong)UILabel*tableHeaderShowNumberLabel;
@@ -75,7 +76,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:CELL2 bundle:nil] forCellReuseIdentifier:CELL2];
     [self.tableView registerNib:[UINib nibWithNibName:@"CommentTableViewCell" bundle:nil] forCellReuseIdentifier:CELL3];
         [self.tableView registerNib:[UINib nibWithNibName:CELL5 bundle:nil] forCellReuseIdentifier:CELL5];
- 
+    self.tableView.bounces = NO;
     // 得到浏览量
     [self getPageView];
 }
@@ -132,10 +133,13 @@
     UIView *headerView=[[UIView alloc]initWithFrame:self.bottomView.frame];
     [headerView addSubview:self.bottomView];
     YWdetailHeaderView * headerView1 = [[YWdetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 175.f)];
-   [headerView1.imageView1 sd_setImageWithURL:[NSURL URLWithString:_mainModel.company_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+   [headerView1.imageVIew sd_setImageWithURL:[NSURL URLWithString:_mainModel.company_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
-
+    self.headerView = headerView1;
+    [headerView1.bgImageView sd_setImageWithURL:[NSURL URLWithString:_mainModel.company_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
     self.tableView.tableHeaderView=headerView1;
    
     
@@ -163,11 +167,12 @@
 //headerTableView 赋值
 -(void)giveValueForTableHeaderView{
     self.tableHeaderShowNumberLabel.text=[NSString stringWithFormat:@"%@张",self.mainModel.total_photo];
-    [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:_mainModel.company_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.headerView.imageVIew sd_setImageWithURL:[NSURL URLWithString:_mainModel.company_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
 
-    
+    [self.headerView.bgImageView sd_setImageWithURL:[NSURL URLWithString:_mainModel.company_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    }];
     
 }
 
@@ -191,6 +196,8 @@
                                             HeaderHeight+add_topHeight);
         self.backgroundImageView.frame = imageView_frame;
 //        self.visualEffectView.frame=imageView_frame;
+
+
         
 }
     

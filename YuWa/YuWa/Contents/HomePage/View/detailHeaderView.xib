@@ -36,12 +36,12 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="fGf-bk-7wx" firstAttribute="top" secondItem="M7q-uX-D0O" secondAttribute="top" id="6eO-aQ-F5n"/>
-                <constraint firstItem="fGf-bk-7wx" firstAttribute="leading" secondItem="M7q-uX-D0O" secondAttribute="leading" id="L5m-D2-4ik"/>
-                <constraint firstAttribute="bottom" secondItem="fGf-bk-7wx" secondAttribute="bottom" id="TbV-sb-Nf9"/>
+                <constraint firstAttribute="trailing" secondItem="fGf-bk-7wx" secondAttribute="trailing" id="RQW-NK-20v"/>
                 <constraint firstItem="FRl-pt-NsZ" firstAttribute="top" secondItem="M7q-uX-D0O" secondAttribute="top" constant="64" id="V4q-nC-Yax"/>
+                <constraint firstItem="fGf-bk-7wx" firstAttribute="leading" secondItem="M7q-uX-D0O" secondAttribute="leading" id="acW-K5-O6m"/>
                 <constraint firstAttribute="trailing" secondItem="FRl-pt-NsZ" secondAttribute="trailing" constant="7" id="c2V-Jr-Eg8"/>
-                <constraint firstAttribute="trailing" secondItem="fGf-bk-7wx" secondAttribute="trailing" id="dcN-UD-3x6"/>
+                <constraint firstItem="fGf-bk-7wx" firstAttribute="top" secondItem="M7q-uX-D0O" secondAttribute="top" id="ceH-sa-6JC"/>
+                <constraint firstAttribute="bottom" secondItem="fGf-bk-7wx" secondAttribute="bottom" id="gSz-UF-dBZ"/>
                 <constraint firstItem="GuR-SO-CNO" firstAttribute="top" secondItem="M7q-uX-D0O" secondAttribute="top" constant="64" id="i61-ug-rux"/>
                 <constraint firstItem="GuR-SO-CNO" firstAttribute="leading" secondItem="M7q-uX-D0O" secondAttribute="leading" constant="20" id="qUu-oB-OcB"/>
             </constraints>

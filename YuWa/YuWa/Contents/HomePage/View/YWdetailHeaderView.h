@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface YWdetailHeaderView : UIView
-@property (nonatomic, strong) UIImageView *imageView1;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageVIew;
 -(id)initWithFrame:(CGRect)frame;
 
 @end
