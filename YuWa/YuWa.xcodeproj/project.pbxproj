@@ -774,6 +774,8 @@
 		AAF30AEE1E5EAC6500793382 /* seats 4.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAF30AE91E5EAC6500793382 /* seats 4.plist */; };
 		AAF394FE1E836C6100A93FD1 /* sorry@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF394FD1E836C6100A93FD1 /* sorry@2x.png */; };
 		AAF395001E837AD300A93FD1 /* beginCatch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF394FF1E837AD300A93FD1 /* beginCatch@2x.png */; };
+		AAF54A111EA8474D00D02D6B /* ShopDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF54A0F1EA8474D00D02D6B /* ShopDetailViewController.m */; };
+		AAF54A121EA8474D00D02D6B /* ShopDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF54A101EA8474D00D02D6B /* ShopDetailViewController.xib */; };
 		AAF628E21E5AE608000FF976 /* 爆米花.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF628E11E5AE608000FF976 /* 爆米花.png */; };
 		AAF628E51E5AED33000FF976 /* CinemaDetaliController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF628E41E5AED33000FF976 /* CinemaDetaliController.m */; };
 		AAF628E81E5AEE03000FF976 /* FoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF628E71E5AEE03000FF976 /* FoodViewController.m */; };
@@ -2582,6 +2584,9 @@
 		AAF30AE91E5EAC6500793382 /* seats 4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "seats 4.plist"; sourceTree = "<group>"; };
 		AAF394FD1E836C6100A93FD1 /* sorry@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sorry@2x.png"; sourceTree = "<group>"; };
 		AAF394FF1E837AD300A93FD1 /* beginCatch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beginCatch@2x.png"; sourceTree = "<group>"; };
+		AAF54A0E1EA8474D00D02D6B /* ShopDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopDetailViewController.h; sourceTree = "<group>"; };
+		AAF54A0F1EA8474D00D02D6B /* ShopDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopDetailViewController.m; sourceTree = "<group>"; };
+		AAF54A101EA8474D00D02D6B /* ShopDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopDetailViewController.xib; sourceTree = "<group>"; };
 		AAF628E11E5AE608000FF976 /* 爆米花.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "爆米花.png"; path = "图片/爆米花.png"; sourceTree = "<group>"; };
 		AAF628E31E5AED33000FF976 /* CinemaDetaliController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaDetaliController.h; sourceTree = "<group>"; };
 		AAF628E41E5AED33000FF976 /* CinemaDetaliController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaDetaliController.m; sourceTree = "<group>"; };
@@ -8738,6 +8743,9 @@
 				C1F7BD4A1DB1C94500CCAF96 /* VIPHomePageViewController.m */,
 				C1F7BD4B1DB1C94500CCAF96 /* YWShoppingDetailViewController.h */,
 				C1F7BD4C1DB1C94500CCAF96 /* YWShoppingDetailViewController.m */,
+				AAF54A0E1EA8474D00D02D6B /* ShopDetailViewController.h */,
+				AAF54A0F1EA8474D00D02D6B /* ShopDetailViewController.m */,
+				AAF54A101EA8474D00D02D6B /* ShopDetailViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -10170,6 +10178,7 @@
 				AA3545381E9DF23900A2EC73 /* 2baobaoBG34@2x.jpg in Resources */,
 				B3FEBA391D9C10DE003CDEF2 /* YWMessageChatViewController.xib in Resources */,
 				C13019D61DB20B2400E24C88 /* 医疗.png in Resources */,
+				AAF54A121EA8474D00D02D6B /* ShopDetailViewController.xib in Resources */,
 				AA3545AB1E9DF23A00A2EC73 /* 4baobaoBG2@2x.jpg in Resources */,
 				B38B2F511D8FC83A004D5256 /* 发送笔记.json in Resources */,
 				AA35441D1E9DF23800A2EC73 /* 2baobaoLVUP47@2x.jpg in Resources */,
@@ -10624,6 +10633,7 @@
 				C199A6AA1E1D11AA003FBCDE /* PCMoneyDetailTableViewCell.m in Sources */,
 				C1FB7F6E1DC733AE0048EBC8 /* ResultsTableViewCell.m in Sources */,
 				AAC86F6D1E76E68700F94C84 /* AccountSettingViewController.m in Sources */,
+				AAF54A111EA8474D00D02D6B /* ShopDetailViewController.m in Sources */,
 				B38B2E4C1D8FACD8004D5256 /* TAAbstractDotView.m in Sources */,
 				C135A0B91DDB1CD5002B78A5 /* OrderModel.m in Sources */,
 				B38B2E191D8FACD8004D5256 /* MJRefreshBackGifFooter.m in Sources */,

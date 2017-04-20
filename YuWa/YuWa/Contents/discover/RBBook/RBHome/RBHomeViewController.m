@@ -158,7 +158,7 @@
 
 #pragma mark - Http
 - (void)requestDataWithPages:(NSInteger)page{
-    NSDictionary * pragram = @{@"type":self.states,@"pagen":self.pagens,@"pages":[NSString stringWithFormat:@"%zi",page]};
+    NSDictionary * pragram = @{@"type":self.states,@"pagen":self.pagens,@"pages":[NSString stringWithFormat:@"%zi",page],@"user_id":@([UserSession instance].uid),@"user_type":@(1),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID]};
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
     });

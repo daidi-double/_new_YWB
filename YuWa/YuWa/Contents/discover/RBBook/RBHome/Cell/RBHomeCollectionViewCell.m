@@ -19,6 +19,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
     self.iconImageView.layer.cornerRadius = 13.f;
     self.iconImageView.layer.masksToBounds = YES;
 }
@@ -43,23 +44,29 @@
 - (void)dataSet{
     RBHomeListImagesModel * imageModel = self.model.images_list[0];
     WEAKSELF;
-    MyLog(@"%@",imageModel.url);
-     [self.showImageView sd_setImageWithURL:[NSURL URLWithString:imageModel.url] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-         weakSelf.showImageView.alpha = 0.3f;
-         [UIView animateWithDuration:0.8 animations:^{
-             weakSelf.showImageView.alpha = 1.f;
-         }];
-     }];
+    [self.showImageView sd_setImageWithURL:[NSURL URLWithString:imageModel.url] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        weakSelf.showImageView.alpha = 0.3f;
+        [UIView animateWithDuration:0.8 animations:^{
+            weakSelf.showImageView.alpha = 1.f;
+        }];
+    }];
+    
     self.nameLabel.text = self.model.title;
     self.conLabel.text = self.model.desc;
     
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:self.model.user.images] placeholderImage:[UIImage imageNamed:@"Head-portrait"] completed:nil];
     
-    self.isLike = self.model.inlikes?0:[self.model.inlikes integerValue];
-    self.showLikeImageView.image = [UIImage imageNamed:_isLike?@"icon-like":@"icon-dislike"];
+    self.isLike = [self.model.inlikes integerValue];
     self.likeCount = [self.model.likes integerValue];
     [self.likeBtn setTitle:self.likeCount == 0?@"赞":self.model.likes forState:UIControlStateNormal];
     
+    [self.likeBtn setImage:[UIImage imageNamed:self.isLike == 0?@"icon-dislike":@"icon-like"] forState:UIControlStateNormal];
+    //    MyLog(@"self.isLike%d --self.model.inlikes %@",self.isLike,self.model.inlikes);
+    //    self.likeBtn.selected = self.isLike;
+    //
+    //        [self.likeBtn setImage:[UIImage imageNamed:@"icon-dislike"] forState:UIControlStateNormal];
+    //
+    //        [self.likeBtn setImage:[UIImage imageNamed:@"icon-like"] forState:UIControlStateSelected];
     self.nickNameLabel.text = self.model.user.nickname;
     //判断是否为手机号码，是就隐藏一部分
     if (self.model.user.nickname.length == 11 && [JWTools isNumberWithStr:self.model.user.nickname]) {
@@ -82,11 +89,12 @@
 
 - (void)setIsLike:(BOOL)isLike{
     _isLike = isLike;
+    
     [self.likeBtn setImage:[UIImage imageNamed:isLike?@"icon-like":@"icon-dislike"] forState:UIControlStateNormal];
 }
 
 - (BOOL)isLogin{
-    if (![UserSession instance].isLogin) {
+    if (![UserSession instance].isLogin){
         VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         __block RBHomeViewController * rbRootVC;
         [rootTabBarVC.viewControllers enumerateObjectsUsingBlock:^(__kindof VIPNavigationController * _Nonnull navi, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -104,8 +112,30 @@
 }
 
 #pragma mark - Button Action
-- (IBAction)likeBtnAction:(id)sender {
+- (IBAction)likeBtnAction:(UIButton*)sender{
     if (![self isLogin])return;
+    self.isLike = !self.isLike;
+    self.likeCount = self.likeCount + (_isLike? 1:-1);
+    [self.likeBtn setTitle:self.likeCount == 0 ?@"赞":[NSString stringWithFormat:@"%zi",self.likeCount] forState:UIControlStateNormal];
+    
+    CGPoint center = CGPointMake(self.likeBtn.x + self.likeBtn.imageView.width/2 + self.likeBtn.imageView.x, self.likeBtn.center.y);
+    self.showLikeImageView.image = [UIImage imageNamed:_isLike?@"icon-like":@"icon-dislike"];
+    self.showLikeImageView.alpha = 0.f;
+    self.showLikeImageView.frame = CGRectMake(center.x - 1.f, center.y - 1.f, 2.f, 2.f);
+    self.showLikeImageView.hidden = NO;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.showLikeImageView.frame = CGRectMake(center.x - 16.f, center.y - 16.f, 32.f, 32.f);
+        self.showLikeImageView.alpha = 1.f;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.showLikeImageView.frame = CGRectMake(center.x - 6.f, center.y - 6.f, 12.f, 12.f);
+            self.showLikeImageView.alpha = 0.f;
+        } completion:^(BOOL finished) {
+            self.showLikeImageView.hidden = YES;
+        }];
+    }];
+    
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         [self requestLike];
     });
@@ -113,43 +143,15 @@
 
 #pragma mark - Http
 - (void)requestLike{
-    if (self.isLike) {
+    if (!self.isLike){
         [self requestCancelLike];
         return;
     }
-    NSDictionary * pragram = @{@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
+    NSDictionary * pragram = @{@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"user_type":@(1)};
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_LIKE withPragram:pragram success:^(id responsObj) {
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responsObj options:NSJSONWritingPrettyPrinted error:nil];
-        // NSData转为NSString
-        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([responsObj[@"msg"] isEqualToString:@"点赞成功"]) {
-                MyLog(@"点赞成功");
-                self.isLike = YES;
-                self.likeCount = self.likeCount +1;
-                [self.likeBtn setTitle:self.likeCount == 0 ?@"赞":[NSString stringWithFormat:@"%zi",self.likeCount] forState:UIControlStateNormal];
-                
-                CGPoint center = CGPointMake(self.likeBtn.x + self.likeBtn.imageView.width/2 + self.likeBtn.imageView.x, self.likeBtn.center.y);
-                self.showLikeImageView.image = [UIImage imageNamed:_isLike?@"icon-like":@"icon-dislike"];
-                self.showLikeImageView.alpha = 0.f;
-                self.showLikeImageView.frame = CGRectMake(center.x - 1.f, center.y - 1.f, 2.f, 2.f);
-                self.showLikeImageView.hidden = NO;
-                
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.showLikeImageView.frame = CGRectMake(center.x - 16.f, center.y - 16.f, 32.f, 32.f);
-                    self.showLikeImageView.alpha = 1.f;
-                } completion:^(BOOL finished) {
-                    [UIView animateWithDuration:0.2 animations:^{
-                        self.showLikeImageView.frame = CGRectMake(center.x - 6.f, center.y - 6.f, 12.f, 12.f);
-                        self.showLikeImageView.alpha = 0.f;
-                    } completion:^(BOOL finished) {
-                        self.showLikeImageView.hidden = YES;
-                    }];
-                }];
-            }
-        });
-        MyLog(@"Regieter Code pragram is %@",jsonStr);
+        MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code is %@",responsObj);
+        self.isLike = 1;
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code error is %@",responsObj);
@@ -157,39 +159,12 @@
 }
 
 - (void)requestCancelLike{
-    NSDictionary * pragram = @{@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
+    NSDictionary * pragram = @{@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"user_type":@(1)};
     
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_LIKE_CANCEL withPragram:pragram success:^(id responsObj) {
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responsObj options:NSJSONWritingPrettyPrinted error:nil];
-        // NSData转为NSString
-        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        if ([responsObj[@"msg"] isEqualToString:@"取消点赞"]) {
-            MyLog(@"点赞成功");
-            
-            self.isLike = NO;
-            self.likeCount = self.likeCount -1;
-            [self.likeBtn setTitle:self.likeCount == 0 ?@"赞":[NSString stringWithFormat:@"%zi",self.likeCount] forState:UIControlStateNormal];
-            
-            CGPoint center = CGPointMake(self.likeBtn.x + self.likeBtn.imageView.width/2 + self.likeBtn.imageView.x, self.likeBtn.center.y);
-            self.showLikeImageView.image = [UIImage imageNamed:_isLike?@"icon-like":@"icon-dislike"];
-            self.showLikeImageView.alpha = 0.f;
-            self.showLikeImageView.frame = CGRectMake(center.x - 1.f, center.y - 1.f, 2.f, 2.f);
-            self.showLikeImageView.hidden = NO;
-            
-            [UIView animateWithDuration:0.2 animations:^{
-                self.showLikeImageView.frame = CGRectMake(center.x - 16.f, center.y - 16.f, 32.f, 32.f);
-                self.showLikeImageView.alpha = 1.f;
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.showLikeImageView.frame = CGRectMake(center.x - 6.f, center.y - 6.f, 12.f, 12.f);
-                    self.showLikeImageView.alpha = 0.f;
-                } completion:^(BOOL finished) {
-                    self.showLikeImageView.hidden = YES;
-                }];
-            }];
-        }
         MyLog(@"Regieter Code pragram is %@",pragram);
-        MyLog(@"Regieter Code is %@",jsonStr);
+        MyLog(@"Regieter Code is %@",responsObj);
+        self.isLike = 0;
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code error is %@",responsObj);
