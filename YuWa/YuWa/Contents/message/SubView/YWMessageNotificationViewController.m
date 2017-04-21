@@ -11,11 +11,13 @@
 #import "NSDictionary+Attributes.h"
 
 #import "YWMessageNotificationCell.h"
+#import "YWdetailViewController.h"
 
 #define MESSAGENOTICELL @"YWMessageNotificationCell"
 @interface YWMessageNotificationViewController ()<UITableViewDelegate,UITableViewDataSource>
-
+//表示预约通知
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+//付款通知
 @property (nonatomic,strong)YWPayNotificationTableView * payTableView;
 @property (nonatomic,strong)NSMutableArray * dataArr;
 @property (nonatomic,copy)NSString * pagens;
@@ -35,6 +37,7 @@
     [self dataSet];
     [self setupRefresh];
     [self headerRereshing];
+    
 }
 
 - (void)dataSet{
@@ -96,7 +99,11 @@
     messageCell.model = self.dataArr[indexPath.row];
     return messageCell;
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIStoryboard * SB = [UIStoryboard storyboardWithName:@"detail" bundle:nil];
+    YWdetailViewController * vc = [SB instantiateInitialViewController];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - TableView Refresh
 - (void)setupRefresh{
     self.tableView.mj_header = [UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
@@ -131,8 +138,11 @@
     });
     
     [[HttpObject manager]postNoHudWithType:YuWaType_NOTCCAFICATIONJ_ORDER withPragram:pragram success:^(id responsObj) {
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responsObj options:NSJSONWritingPrettyPrinted error:nil];
+            // NSData转为NSString
+            NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         MyLog(@"Regieter Code pragram is %@",pragram);
-        MyLog(@"Regieter Code is %@",responsObj);
+        MyLog(@"Regieter Code is %@",jsonStr);
         if (page==0){
             [self.dataArr removeAllObjects];
         }
@@ -140,7 +150,14 @@
         if (dataArr.count>0) {
             for (int i = 0; i<dataArr.count; i++) {
                 YWMessageNotificationModel * model = [YWMessageNotificationModel yy_modelWithDictionary:dataArr[i]];
-                model.status = @"0";
+                NSDictionary * dic = dataArr[i];
+                if ([dic[@"title"]isEqualToString:@"您的预约被拒绝"]) {
+                    //表示用的预约拒绝
+                    model.status = @"0";
+                }else{
+                    model.status = @"1";
+                }
+
                 [self.dataArr addObject:model];
             }
             [self.tableView reloadData];

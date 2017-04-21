@@ -10,6 +10,7 @@
 #import "UIScrollView+JWGifRefresh.h"
 #import "HttpObject.h"
 #import "JWTools.h"
+#import "YWdetailViewController.h"
 
 #import "YWMessageNotificationCell.h"
 
@@ -41,7 +42,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArr.count;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     YWMessageNotificationCell * messageCell = [tableView dequeueReusableCellWithIdentifier:MESSAGENOTICELL];
     messageCell.model = self.dataArr[indexPath.row];
