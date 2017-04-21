@@ -13,8 +13,9 @@
 #import "YWdetailViewController.h"
 
 #import "YWMessageNotificationCell.h"
+#import "YWpayNotificationCell.h"
 
-#define MESSAGENOTICELL @"YWMessageNotificationCell"
+#define payNotificationCell @"YWpayNotificationCell"
 @implementation YWPayNotificationTableView
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style{
     self = [super initWithFrame:frame style:style];
@@ -27,7 +28,7 @@
 
 - (void)dataSet{
     self.dataArr = [NSMutableArray arrayWithCapacity:0];
-    [self registerNib:[UINib nibWithNibName:MESSAGENOTICELL bundle:nil] forCellReuseIdentifier:MESSAGENOTICELL];
+    [self registerNib:[UINib nibWithNibName:payNotificationCell bundle:nil] forCellReuseIdentifier:payNotificationCell];
     self.dataSource = self;
     self.delegate = self;
     [self setupRefresh];
@@ -43,8 +44,8 @@
     return self.dataArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    YWMessageNotificationCell * messageCell = [tableView dequeueReusableCellWithIdentifier:MESSAGENOTICELL];
-    messageCell.model = self.dataArr[indexPath.row];
+    YWpayNotificationCell   * messageCell = [tableView dequeueReusableCellWithIdentifier:payNotificationCell];
+//    messageCell.model = self.dataArr[indexPath.row];
     return messageCell;
 }
 #pragma mark - TableView Refresh

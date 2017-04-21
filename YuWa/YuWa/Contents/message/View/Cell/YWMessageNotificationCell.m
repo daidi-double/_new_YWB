@@ -14,8 +14,6 @@
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.iconImageView.layer.cornerRadius = 25.f;
-    self.iconImageView.layer.masksToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
