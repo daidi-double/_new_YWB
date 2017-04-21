@@ -16,6 +16,7 @@
 @property (nonatomic,copy)NSString * bankName;
 @property (nonatomic,copy)NSString * bankCard;
 @property (nonatomic,copy)NSString * bankCardID;
+@property (nonatomic,copy)NSString * userName;
 @end
 
 @implementation GetMyMoneyViewController
@@ -50,10 +51,11 @@
     YWBankViewController * bankVC = [[YWBankViewController alloc]init];
     WEAKSELF;
     bankVC.status = 1;
-    bankVC.getBankCardBlock = ^(NSString * bankName,NSString * bankCard,NSString * bankCardID){
+    bankVC.getBankCardBlock = ^(NSString * bankName,NSString * bankCard,NSString * bankCardID,NSString * userName){
         weakSelf.bankName = bankName;
         weakSelf.bankCard = bankCard;
         weakSelf.bankCardID = bankCardID;
+        weakSelf.userName = userName;
         NSString * card;
         if (bankCard.length < 15) {
            card = @"";
@@ -71,13 +73,43 @@
 }
 - (IBAction)nextAction:(UIButton *)sender {
     if (self.bankCardID == nil ||self.bankName == nil) {
-        [JRToast showWithText:@"请选择银行卡"];
+        [JRToast showWithText:@"请选择银行卡" duration:1];
         return;
     }
-    GetMoneyToBankViewController * getVC = [[GetMoneyToBankViewController alloc]init];
-    getVC.user_card_id = self.bankCardID;
-    getVC.money = self.inputMoneyTF.text;
-    [self.navigationController pushViewController:getVC animated:YES];
+    if (self.inputMoneyTF.text == nil || [self.inputMoneyTF.text floatValue] <=0) {
+        [JRToast showWithText:@"请输入提现金额" duration:1];
+        return;
+    }
+    if ([self.inputMoneyTF.text floatValue]>[self.money floatValue]) {
+        [JRToast showWithText:@"提现金额大于账户可提现金额" duration:1];
+        return;
+    }
+    [self requestData];
+    
+}
+- (void)requestData{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MONEY_GETMONEY];
+    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"user_type":@(1),@"token":[UserSession instance].token, @"name":self.userName,@"money":self.inputMoneyTF.text,@"bank":self.bankName,@"card":self.bankCard};
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        
+        NSInteger number = [data[@"errorCode"] integerValue];
+        if (number == 0) {
+            MyLog(@"data = %@",data);
+            
+            [JRToast showWithText:data[@"data"] duration:1];
+            GetMoneyToBankViewController * getVC = [[GetMoneyToBankViewController alloc]init];
+            getVC.money = self.inputMoneyTF.text;
+            getVC.bankName = self.bankName;
+            getVC.bankCard = self.bankCard;
+            
+            [self.navigationController pushViewController:getVC animated:YES];
+            
+        }else{
+            [JRToast showWithText:data[@"errorMessage"]duration:1];
+        }
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

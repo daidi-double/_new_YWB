@@ -120,7 +120,7 @@
     
     if (self.status == 1 && indexPath.section != self.bankArr.count) {
         YWBankModel * model = self.bankArr[indexPath.section];
-        self.getBankCardBlock(model.bankName,model.bankCard,model.bankID);
+        self.getBankCardBlock(model.bankName,model.bankCard,model.bankID,model.userName);
         [self.navigationController popViewControllerAnimated:YES];
     }else{
     if (indexPath.section == self.bankArr.count ) {

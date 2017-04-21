@@ -10,5 +10,5 @@
 #import "AddBankSuccessViewController.h"
 @interface YWBankViewController : JWBasicViewController
 @property (nonatomic,assign)NSInteger status;
-@property (nonatomic,copy)void (^getBankCardBlock)(NSString * bankName,NSString * bankCard,NSString * bankCardID);
+@property (nonatomic,copy)void (^getBankCardBlock)(NSString * bankName,NSString * bankCard,NSString * bankCardID,NSString * userName);
 @end

@@ -112,7 +112,7 @@
 -(void)getNumMoney{
     UILabel*label3=[self.view viewWithTag:3];
     CGFloat money = [[UserSession instance].money floatValue];
-    label3.text = [NSString stringWithFormat:@"%.2f",money];
+    label3.text = [NSString stringWithFormat:@"%.4f",money];
 }
 //付款
 - (IBAction)payMoney:(UIButton *)sender {
@@ -235,7 +235,7 @@
 //    [self.navigationController pushViewController:vc animated:YES];
     GetMyMoneyViewController * vc = [[GetMyMoneyViewController alloc]init];
     CGFloat money = [[UserSession instance].money floatValue];
-    vc.money = [NSString stringWithFormat:@"%.2f",money];
+    vc.money = [NSString stringWithFormat:@"%.4f",money];
     
     [self.navigationController pushViewController:vc animated:YES];
     

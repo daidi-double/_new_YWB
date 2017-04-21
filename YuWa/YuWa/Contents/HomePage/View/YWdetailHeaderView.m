@@ -36,8 +36,7 @@
 //    toolbar.barStyle = UIBarStyleBlackTranslucent;
 //    [self addSubview:toolbar];
 //    [self insertSubview:self.bgImageView belowSubview:toolbar];
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular
-                            ];
+    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
 //    effectView.backgroundColor = [UIColor orangeColor];
     effectView.frame = self.frame;
