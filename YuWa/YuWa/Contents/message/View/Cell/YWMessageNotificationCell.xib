@@ -27,16 +27,16 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="悠悠" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iz1-2L-VRf">
-                        <rect key="frame" x="62" y="28" width="31" height="18"/>
+                        <rect key="frame" x="52" y="28" width="31" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jieshou.png" translatesAutoresizingMaskIntoConstraints="NO" id="MkN-kh-G8C">
-                        <rect key="frame" x="14" y="20" width="35" height="35"/>
+                        <rect key="frame" x="14" y="25" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="35" id="3Jo-Rt-Ebs"/>
-                            <constraint firstAttribute="height" constant="35" id="8oE-kh-9zj"/>
+                            <constraint firstAttribute="height" constant="25" id="6kI-uq-dGr"/>
+                            <constraint firstAttribute="width" constant="25" id="yvI-11-Wo2"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9z-EJ-QID">

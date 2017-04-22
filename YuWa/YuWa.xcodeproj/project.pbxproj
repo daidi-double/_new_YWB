@@ -7982,12 +7982,12 @@
 		B3FEBA081D9B717C003CDEF2 /* PayNotificationTableView */ = {
 			isa = PBXGroup;
 			children = (
-				25D587C71EAA619C00C0178C /* YWpayNotificationCell.xib */,
-				25D587C91EAA627300C0178C /* YWpayNotificationCell.h */,
-				25D587CA1EAA627300C0178C /* YWpayNotificationCell.m */,
 				251522CD1EAA05F700BA4FF9 /* 详情页面 */,
 				B3FEBA091D9B71D4003CDEF2 /* YWPayNotificationTableView.h */,
 				B3FEBA0A1D9B71D4003CDEF2 /* YWPayNotificationTableView.m */,
+				25D587C71EAA619C00C0178C /* YWpayNotificationCell.xib */,
+				25D587C91EAA627300C0178C /* YWpayNotificationCell.h */,
+				25D587CA1EAA627300C0178C /* YWpayNotificationCell.m */,
 			);
 			path = PayNotificationTableView;
 			sourceTree = "<group>";

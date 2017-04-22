@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G45-hi-R8R">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G45-hi-R8R">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KN0-D4-GeV">
@@ -165,14 +165,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94109410047531128" green="0.94122928380966187" blue="0.94106453657150269" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="KN0-D4-GeV" firstAttribute="height" secondItem="jaD-5k-BNc" secondAttribute="height" id="DGm-Ay-0Aa"/>
+                            <constraint firstItem="KN0-D4-GeV" firstAttribute="height" secondItem="jaD-5k-BNc" secondAttribute="height" multiplier="1.0001" id="DGm-Ay-0Aa"/>
                             <constraint firstItem="G45-hi-R8R" firstAttribute="leading" secondItem="jaD-5k-BNc" secondAttribute="leading" id="G3f-mD-MN0"/>
                             <constraint firstAttribute="trailing" secondItem="G45-hi-R8R" secondAttribute="trailing" id="MSx-B9-ZrE"/>
                             <constraint firstItem="G45-hi-R8R" firstAttribute="leading" secondItem="jaD-5k-BNc" secondAttribute="leading" id="PEf-Yz-he1"/>
                             <constraint firstAttribute="trailing" secondItem="G45-hi-R8R" secondAttribute="trailing" id="Q6b-LB-o3Y"/>
                             <constraint firstItem="G45-hi-R8R" firstAttribute="top" secondItem="aHu-7h-3Da" secondAttribute="bottom" id="ioQ-8C-3n0"/>
                             <constraint firstItem="NUa-XC-iKt" firstAttribute="top" secondItem="G45-hi-R8R" secondAttribute="bottom" id="nZ1-YV-gGi"/>
-                            <constraint firstItem="KN0-D4-GeV" firstAttribute="width" secondItem="jaD-5k-BNc" secondAttribute="width" multiplier="1.001" id="rJk-w4-YxA"/>
+                            <constraint firstItem="KN0-D4-GeV" firstAttribute="width" secondItem="jaD-5k-BNc" secondAttribute="width" id="rJk-w4-YxA"/>
                             <constraint firstItem="NUa-XC-iKt" firstAttribute="top" secondItem="G45-hi-R8R" secondAttribute="bottom" id="szC-ly-Wb2"/>
                             <constraint firstItem="G45-hi-R8R" firstAttribute="top" secondItem="aHu-7h-3Da" secondAttribute="bottom" id="yzn-dc-7q2"/>
                         </constraints>

@@ -14,6 +14,7 @@
 
 #import "YWMessageNotificationCell.h"
 #import "YWpayNotificationCell.h"
+#import "OrderDetailViewController.h"
 
 #define payNotificationCell @"YWpayNotificationCell"
 @implementation YWPayNotificationTableView
@@ -48,6 +49,16 @@
 //    messageCell.model = self.dataArr[indexPath.row];
     return messageCell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    OrderModel * model = self.maAllDatasModel[indexPath.row];
+//    OrderDetailViewController * orderVC =[[OrderDetailViewController alloc]init];
+//    orderVC.order_id = model.order_id;
+//    [self.navigationController pushViewController:orderVC animated:YES];
+      YWMessageNotificationModel* model  = self.dataArr[indexPath.row];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"push" object:nil userInfo:@{@"order_id":model.order_id}];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma mark - TableView Refresh
 - (void)setupRefresh{
     self.mj_header = [UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
@@ -80,8 +91,11 @@
     });
     
     [[HttpObject manager]postNoHudWithType:YuWaType_NOTCCAFICATIONJ_PAY withPragram:pragram success:^(id responsObj) {
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responsObj options:NSJSONWritingPrettyPrinted error:nil];
+        // NSData转为NSString
+        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         MyLog(@"Regieter Code pragram is %@",pragram);
-        MyLog(@"Regieter Code is %@",responsObj);
+        MyLog(@"Regieter Code is %@",jsonStr);
         if (page==0){
             [self.dataArr removeAllObjects];
         }

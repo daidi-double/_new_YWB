@@ -12,6 +12,7 @@
 
 #import "YWMessageNotificationCell.h"
 #import "YWdetailViewController.h"
+#import "OrderDetailViewController.h"
 
 #define MESSAGENOTICELL @"YWMessageNotificationCell"
 @interface YWMessageNotificationViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -37,9 +38,14 @@
     [self dataSet];
     [self setupRefresh];
     [self headerRereshing];
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didselectCell:) name:@"push" object:nil];
 }
-
+-(void)didselectCell:(NSNotification*)user{
+    NSDictionary * dic =  user.userInfo;
+        OrderDetailViewController * orderVC =[[OrderDetailViewController alloc]init];
+        orderVC.order_id = dic[@"order_id"];
+        [self.navigationController pushViewController:orderVC animated:YES];
+}
 - (void)dataSet{
     self.dataArr = [NSMutableArray arrayWithCapacity:0];
     [self.tableView registerNib:[UINib nibWithNibName:MESSAGENOTICELL bundle:nil] forCellReuseIdentifier:MESSAGENOTICELL];
