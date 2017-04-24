@@ -20,16 +20,19 @@
     if (self) {
         
         _saveAllLabel=[NSMutableArray array];
-        
-        UILabel*shopLabel=[[UILabel alloc]initWithFrame:CGRectMake(15, 0, kScreen_Width-15, 30)];
+        UIView * BGView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 32)];
+        BGView.backgroundColor = RGBCOLOR(220, 220, 220, 1);
+        [self.contentView addSubview:BGView];
+//
+        UILabel*shopLabel=[[UILabel alloc]initWithFrame:CGRectMake(8, 0, kScreen_Width-30, 30)];
         shopLabel.text=@"商家详情";
-        shopLabel.font=FONT_CN_30;
-        [self.contentView addSubview:shopLabel];
+        shopLabel.font=[UIFont systemFontOfSize:14];
+        [BGView addSubview:shopLabel];
         
-        
-        
-        
-        
+        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(8, shopLabel.bottom+2, kScreen_Width-30, 0.5)];
+        line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
+        [self.contentView addSubview:line];
+     
     }
     
     return self;
@@ -47,16 +50,21 @@
     
     
     
-    CGFloat topPoint =30;
+    CGFloat topPoint =32.5;
     for (int i=0; i<allDatas.count; i++) {
         UILabel*label=[[UILabel alloc]initWithFrame:CGRectMake(15, topPoint, kScreen_Width-15, 30)];
         label.text=allDatas[i];
-        label.font=FONT_CN_24;
+        label.font=FONT_CN_30;
         [self.contentView addSubview:label];
         [self.saveAllLabel addObject:label];
-        
-        topPoint=topPoint+30;
-        
+        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15, topPoint+32, kScreen_Width-30, 1)];
+        line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
+        [self.contentView addSubview:line];
+        [self.saveAllLabel addObject:line];
+        topPoint = topPoint+33;
+        if (i == allDatas.count-1) {
+            line.hidden = YES;
+        }
     }
 
     
@@ -66,7 +74,7 @@
 +(CGFloat)getHeight:(NSArray*)array{
     
     NSInteger aa=array.count;
-    return 30+30*aa;
+    return 32.5+33*aa;
   
 }
 

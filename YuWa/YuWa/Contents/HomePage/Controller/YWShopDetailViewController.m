@@ -32,14 +32,8 @@
     return 3;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
-        return 1;
-    }else if (section == 1){
-        return 1;
-    }else{
-        
-        return 5;
-    }
+    
+   return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
@@ -48,7 +42,8 @@
         NSMutableArray*mtArray=[self.mainModel.holiday mutableCopy];
         return [YWActivityTableViewCell getCellHeight:mtArray];
     }else{
-        
+        NSMutableArray*mtArray=[self.mainModel.infrastructure mutableCopy];
+        return [StoreDescriptionTableViewCell getHeight:mtArray];
         return 44.f;
     }
 }
@@ -83,12 +78,8 @@
             cell=[[StoreDescriptionTableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CELL4 ];
         }
         cell.selectionStyle=NO;
-//        cell.allDatas=self.mainModel.infrastructure;
+        cell.allDatas=self.mainModel.infrastructure;
         
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(10, cell.height-1, cell.width-20, 1)];
-        line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
-        [cell.contentView addSubview:line];
         return cell;
     }
 }

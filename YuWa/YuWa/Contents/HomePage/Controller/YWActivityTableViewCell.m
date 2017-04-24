@@ -23,7 +23,7 @@
     
     //显示的特别活动
     NSArray*specail=holidayArray;
-    CGFloat top = 30.0;
+    CGFloat top = 61.0;
     CGFloat left = 5;
     //首先移除所有的东西
     for (UIView*view in self.saveAllImage) {
@@ -116,7 +116,7 @@
 
 
 +(CGFloat)getCellHeight:(NSArray*)array{
-    CGFloat top=30.0;
+    CGFloat top=61.0;
     for (int i=0; i<array.count; i++) {
         top=top+18+10;
     }
