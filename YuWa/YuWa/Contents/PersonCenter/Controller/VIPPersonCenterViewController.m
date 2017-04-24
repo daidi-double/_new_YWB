@@ -63,7 +63,7 @@
 #define HEADERVIEWHEIGHT   195     //头视图的高度
 
 
-@interface VIPPersonCenterViewController()<UITableViewDelegate,UITableViewDataSource,YJSegmentedControlDelegate,PCBottomTableViewCellDelegate,TZImagePickerControllerDelegate>
+@interface VIPPersonCenterViewController()<UITableViewDelegate,UITableViewDataSource,YJSegmentedControlDelegate,PCBottomTableViewCellDelegate,TZImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property(nonatomic,strong)UIView*belowImageViewView;   //图片下面的视图
 @property(nonatomic,strong)UIView*headerView;   //头视图
@@ -106,12 +106,22 @@
     
 
 }
-
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    
+}
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    if (viewController == self) {
+         self.navigationController.navigationBarHidden = YES;
+    }else{
+        self.navigationController.navigationBarHidden = NO;
+    }
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+//    self.navigationController.navigationBarHidden = YES;
     self.navigationItem.title=@"";
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+//    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+    self.navigationController.delegate = self;
     
 
     
@@ -125,7 +135,7 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-      [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+//      [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     
 }
 
@@ -141,8 +151,9 @@
         
         
     }else if (yoffset<HEADERVIEWHEIGHT-64){
+      
         self.navigationItem.title=@"";
-        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+//        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
 
     }else{
         self.navigationItem.title=[UserSession instance].nickName;
@@ -514,6 +525,7 @@
 
 //点击个人信息
 -(void)touchPersonInfo{
+     self.navigationController.navigationBarHidden = NO;
     YWPersonInfoViewController*vc=[[YWPersonInfoViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -522,6 +534,7 @@
 //八个按钮
 -(void)touchEightButton:(imageDefineButton*)sender{
     NSInteger number=sender.tag-200;
+     self.navigationController.navigationBarHidden = NO;
 //    MyLog(@"%lu",number);
     switch (number) {
         case 0:{
