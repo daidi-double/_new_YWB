@@ -8,10 +8,12 @@
 
 #import "YWShopDetailViewController.h"
 #import "YWShopDetailTableViewCell.h"
-#import "YWActivityTableViewCell.h"
-#import "StoreDescriptionTableViewCell.h"
+#import "YWActivityTableViewCell.h"//优惠活动
+#import "StoreDescriptionTableViewCell.h"//商家详情
 #import "ShopdetailModel.h"
+#import "YWShopTimeTableViewCell.h"//营业时间
 
+#define TIMECELL    @"YWShopTimeTableViewCell"
 #define DetailCell  @"YWShopDetailTableViewCell"
 #define ActivityCell     @"YWActivityTableViewCell"
 #define CELL4   @"StoreDescriptionTableViewCell"
@@ -26,10 +28,14 @@
     [super viewDidLoad];
     [self.shopDetailTableView registerNib:[UINib nibWithNibName:DetailCell bundle:nil] forCellReuseIdentifier:DetailCell];
     [self.shopDetailTableView registerNib:[UINib nibWithNibName:ActivityCell bundle:nil] forCellReuseIdentifier:ActivityCell];
+    
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self getDatas];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -41,10 +47,13 @@
     }else if (indexPath.section == 1){
         NSMutableArray*mtArray=[self.mainModel.holiday mutableCopy];
         return [YWActivityTableViewCell getCellHeight:mtArray];
-    }else{
+    }else if (indexPath.section == 2){
         NSMutableArray*mtArray=[self.mainModel.infrastructure mutableCopy];
         return [StoreDescriptionTableViewCell getHeight:mtArray];
-        return 44.f;
+        
+    }else{
+        NSMutableArray * mtArray = [self.mainModel.business_hours mutableCopy];
+        return [YWShopTimeTableViewCell getHeight:mtArray];
     }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -72,14 +81,22 @@
 
         cell.holidayArray = self.mainModel.holiday;
         return cell;
-    }else{
+    }else if (indexPath.section == 2){
         StoreDescriptionTableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:CELL4];
         if (!cell) {
-            cell=[[StoreDescriptionTableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CELL4 ];
+            cell=[[StoreDescriptionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL4 ];
         }
         cell.selectionStyle=NO;
         cell.allDatas=self.mainModel.infrastructure;
         
+        return cell;
+    }else{
+        YWShopTimeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TIMECELL];
+        if (!cell) {
+            cell = [[YWShopTimeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TIMECELL];
+        }
+        cell.selectionStyle = NO;
+        cell.times = self.mainModel.business_hours;
         return cell;
     }
 }

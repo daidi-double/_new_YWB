@@ -55,6 +55,7 @@
         UILabel*label=[[UILabel alloc]initWithFrame:CGRectMake(15, topPoint, kScreen_Width-15, 30)];
         label.text=allDatas[i];
         label.font=FONT_CN_30;
+        label.textColor = RGBCOLOR(135, 136, 137, 1);
         [self.contentView addSubview:label];
         [self.saveAllLabel addObject:label];
         UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15, topPoint+32, kScreen_Width-30, 1)];

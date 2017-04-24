@@ -23,6 +23,7 @@
 #import "YWShopCarView.h"
 #import "YWShopCommitView.h"//评价
 #import "YWShopDetailViewController.h"
+#import "YWShopCarViewController.h"//购物车
 
 #define CATEGORYCELL @"CategoryLeftTableViewCell"
 @interface ShopDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,YWShopCarViewDelegate>
@@ -141,7 +142,6 @@
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 - (void)shopAndCommitAction:(UIButton *)sender{
-    MyLog(@"%ld",sender.tag);
     if (sender.selected == YES) {
         return;
     }
@@ -578,6 +578,9 @@
 }
 //购物车
 - (IBAction)shopCarAction:(UIButton *)sender {
+    YWShopCarViewController * carVC = [[YWShopCarViewController alloc]init];
+    carVC.shops = self.shops;
+    [self.navigationController pushViewController:carVC animated:YES];
 }
 
 //更多-相册
@@ -611,18 +614,6 @@
     NSDictionary * dic;
     
     if ([self isAddShop:cell.shop_nameLabel.text]) {
-//        int a = 0;
-//        for (NSDictionary * dict in self.shops) {
-//            NSString * name = dict[@"goods_name"];
-//            if ([name isEqualToString:cell.shop_nameLabel.text]) {
-//                
-//                dic = @{@"goods_name":cell.shop_nameLabel.text,@"goods_price":cell.priceLabel.text,@"number":cell.numberLabel.text};
-//                [self.shops replaceObjectAtIndex:a withObject:dic];
-//            }
-//            a ++;
-//
-        //        }
-        
         __block typeof(cell)weakCell = cell;
         __block typeof(dic) weakDic = dic;
         WEAKSELF;
@@ -639,6 +630,7 @@
         [self.markCells addObject:cell];
         [self.shops addObject:dic];
     }
+    [self addShopToCar:cell.goods_id];
 }
 //YES就已经存在，no不存在
 - (BOOL)isAddShop:(NSString *)shopName{
@@ -687,11 +679,39 @@
             
         }
         
-    }else{
-       
     }
+    [self reduceShopToCar:cell.goods_id];
 
-
+}
+//点击加号，把商品传到服务器
+- (void)addShopToCar:(NSString *)goodsID{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_SHOPCAR];
+    NSDictionary*dict=@{@"shop_id":self.shop_id,@"device_id":[JWTools getUUID],@"goods_id":goodsID};
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
+    if ([UserSession instance].isLogin) {
+        [params setObject:@([UserSession instance].uid) forKey:@"user_id"];
+        [params setObject:[UserSession instance].token forKey:@"token"];
+    }
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"购物车 %@",data);
+    }];
+}
+//点减加号，把商品传到服务器
+- (void)reduceShopToCar:(NSString *)goodsID{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_REDUCESHOPCAR];
+    NSDictionary*dict=@{@"shop_id":self.shop_id,@"device_id":[JWTools getUUID],@"goods_id":goodsID};
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
+    if ([UserSession instance].isLogin) {
+        [params setObject:@([UserSession instance].uid) forKey:@"user_id"];
+        [params setObject:[UserSession instance].token forKey:@"token"];
+    }
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"购物车 %@",data);
+    }];
 }
 //所选的商品
 - (IBAction)myShopAction:(UIButton *)sender {

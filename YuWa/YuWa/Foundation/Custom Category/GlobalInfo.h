@@ -45,8 +45,8 @@
 #define HTTP_HOME_SHOPPHOTO         @"/api.php/Shop/getShopPhoto/"  //1店铺相册
 #define HTTP_HOME_MOREGOODS       @"/api.php/Shop/moreGoods/"  //1更多商品
 #define HTTP_HOME_MORECOMMIT      @"/api.php/Shop/moreComment/"  //1更多评论
-
-
+#define HTTP_HOME_SHOPCAR           @"/api.php/Shop/addShopCart/"//添加到购物车
+#define HTTP_HOME_REDUCESHOPCAR     @"/api.php/Shop/redgShopCart"//减少购物车商品
 
 #define HTTP_QRCODE_ID              @"/api.php/User/getQrcode/"  //1通过二维码的id 得到买单的详情
 #define HTTP_MAKEORDER             @"/api.php/Index/addNoPayOrder/"  //1生成未付款的订单 选好优惠券点确认付款

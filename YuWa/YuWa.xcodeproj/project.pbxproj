@@ -52,6 +52,12 @@
 		AA29C24D1EAD985B0092EF6F /* YWShopDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA29C24B1EAD985B0092EF6F /* YWShopDetailTableViewCell.xib */; };
 		AA29C2511EAD9C4E0092EF6F /* YWActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29C24F1EAD9C4E0092EF6F /* YWActivityTableViewCell.m */; };
 		AA29C2521EAD9C4E0092EF6F /* YWActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA29C2501EAD9C4E0092EF6F /* YWActivityTableViewCell.xib */; };
+		AA29C25A1EADDB0A0092EF6F /* YWShopTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29C2591EADDB0A0092EF6F /* YWShopTimeTableViewCell.m */; };
+		AA29C25D1EADE7500092EF6F /* YWTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29C25C1EADE7500092EF6F /* YWTimeModel.m */; };
+		AA29C2621EADEAB30092EF6F /* YWShopCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29C2601EADEAB30092EF6F /* YWShopCarViewController.m */; };
+		AA29C2631EADEAB30092EF6F /* YWShopCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA29C2611EADEAB30092EF6F /* YWShopCarViewController.xib */; };
+		AA29C2681EADF24C0092EF6F /* ShopCarDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29C2661EADF24C0092EF6F /* ShopCarDetailTableViewCell.m */; };
+		AA29C2691EADF24C0092EF6F /* ShopCarDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA29C2671EADF24C0092EF6F /* ShopCarDetailTableViewCell.xib */; };
 		AA29FFFC1E78EFC100113FFF /* NSObject+MapService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29FFFB1E78EFC100113FFF /* NSObject+MapService.m */; };
 		AA2B2BF51E8CB46D008CB3C6 /* AwardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2B2BF31E8CB46D008CB3C6 /* AwardViewController.m */; };
 		AA2B2BF61E8CB46D008CB3C6 /* AwardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2B2BF41E8CB46D008CB3C6 /* AwardViewController.xib */; };
@@ -731,8 +737,6 @@
 		AAF0EB3A1EAC58EB0003A930 /* YWShopCommitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB391EAC58EB0003A930 /* YWShopCommitView.m */; };
 		AAF0EB431EAC5C940003A930 /* YWShopScoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB411EAC5C940003A930 /* YWShopScoreTableViewCell.m */; };
 		AAF0EB441EAC5C940003A930 /* YWShopScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF0EB421EAC5C940003A930 /* YWShopScoreTableViewCell.xib */; };
-		AAF0EB481EAC63D20003A930 /* YWShopCommitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB461EAC63D20003A930 /* YWShopCommitTableViewCell.m */; };
-		AAF0EB491EAC63D20003A930 /* YWShopCommitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF0EB471EAC63D20003A930 /* YWShopCommitTableViewCell.xib */; };
 		AAF0EB4D1EAC721C0003A930 /* ShopScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB4C1EAC721C0003A930 /* ShopScoreModel.m */; };
 		AAF127CE1E8AD3C200121621 /* wechatPay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF127C01E8AD3C200121621 /* wechatPay@2x.png */; };
 		AAF127CF1E8AD3C200121621 /* wechatPay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF127C11E8AD3C200121621 /* wechatPay@3x.png */; };
@@ -1787,6 +1791,16 @@
 		AA29C24E1EAD9C4E0092EF6F /* YWActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWActivityTableViewCell.h; sourceTree = "<group>"; };
 		AA29C24F1EAD9C4E0092EF6F /* YWActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWActivityTableViewCell.m; sourceTree = "<group>"; };
 		AA29C2501EAD9C4E0092EF6F /* YWActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWActivityTableViewCell.xib; sourceTree = "<group>"; };
+		AA29C2581EADDB0A0092EF6F /* YWShopTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopTimeTableViewCell.h; sourceTree = "<group>"; };
+		AA29C2591EADDB0A0092EF6F /* YWShopTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopTimeTableViewCell.m; sourceTree = "<group>"; };
+		AA29C25B1EADE7500092EF6F /* YWTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWTimeModel.h; sourceTree = "<group>"; };
+		AA29C25C1EADE7500092EF6F /* YWTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWTimeModel.m; sourceTree = "<group>"; };
+		AA29C25F1EADEAB30092EF6F /* YWShopCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCarViewController.h; sourceTree = "<group>"; };
+		AA29C2601EADEAB30092EF6F /* YWShopCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopCarViewController.m; sourceTree = "<group>"; };
+		AA29C2611EADEAB30092EF6F /* YWShopCarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopCarViewController.xib; sourceTree = "<group>"; };
+		AA29C2651EADF24C0092EF6F /* ShopCarDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCarDetailTableViewCell.h; sourceTree = "<group>"; };
+		AA29C2661EADF24C0092EF6F /* ShopCarDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCarDetailTableViewCell.m; sourceTree = "<group>"; };
+		AA29C2671EADF24C0092EF6F /* ShopCarDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopCarDetailTableViewCell.xib; sourceTree = "<group>"; };
 		AA29FFEE1E78DB5F00113FFF /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = ../../../../Downloads/AMap_iOS_Navi_ALL/AMapFoundationKit.framework; sourceTree = "<group>"; };
 		AA29FFEF1E78DB5F00113FFF /* AMapNaviKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapNaviKit.framework; path = ../../../../Downloads/AMap_iOS_Navi_ALL/AMapNaviKit.framework; sourceTree = "<group>"; };
 		AA29FFF21E78DC0000113FFF /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = ../../../../Downloads/MAMapKit.framework; sourceTree = "<group>"; };
@@ -2543,9 +2557,6 @@
 		AAF0EB401EAC5C940003A930 /* YWShopScoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopScoreTableViewCell.h; sourceTree = "<group>"; };
 		AAF0EB411EAC5C940003A930 /* YWShopScoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopScoreTableViewCell.m; sourceTree = "<group>"; };
 		AAF0EB421EAC5C940003A930 /* YWShopScoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopScoreTableViewCell.xib; sourceTree = "<group>"; };
-		AAF0EB451EAC63D20003A930 /* YWShopCommitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCommitTableViewCell.h; sourceTree = "<group>"; };
-		AAF0EB461EAC63D20003A930 /* YWShopCommitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopCommitTableViewCell.m; sourceTree = "<group>"; };
-		AAF0EB471EAC63D20003A930 /* YWShopCommitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopCommitTableViewCell.xib; sourceTree = "<group>"; };
 		AAF0EB4B1EAC721C0003A930 /* ShopScoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopScoreModel.h; sourceTree = "<group>"; };
 		AAF0EB4C1EAC721C0003A930 /* ShopScoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopScoreModel.m; sourceTree = "<group>"; };
 		AAF127C01E8AD3C200121621 /* wechatPay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechatPay@2x.png"; sourceTree = "<group>"; };
@@ -4417,6 +4428,27 @@
 			name = menuView;
 			sourceTree = "<group>";
 		};
+		AA29C25E1EADEA920092EF6F /* 购物车 */ = {
+			isa = PBXGroup;
+			children = (
+				AA29C2641EADF2240092EF6F /* cell */,
+				AA29C25F1EADEAB30092EF6F /* YWShopCarViewController.h */,
+				AA29C2601EADEAB30092EF6F /* YWShopCarViewController.m */,
+				AA29C2611EADEAB30092EF6F /* YWShopCarViewController.xib */,
+			);
+			name = "购物车";
+			sourceTree = "<group>";
+		};
+		AA29C2641EADF2240092EF6F /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA29C2651EADF24C0092EF6F /* ShopCarDetailTableViewCell.h */,
+				AA29C2661EADF24C0092EF6F /* ShopCarDetailTableViewCell.m */,
+				AA29C2671EADF24C0092EF6F /* ShopCarDetailTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		AA29FFE91E78DA8E00113FFF /* amapSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -5143,6 +5175,7 @@
 		AA399CD61EAB370200CA22CB /* 新店铺详情 */ = {
 			isa = PBXGroup;
 			children = (
+				AA29C25E1EADEA920092EF6F /* 购物车 */,
 				AAF0EB4A1EAC72000003A930 /* mdel */,
 				AA399CDD1EAB3B5000CA22CB /* cell */,
 				AA399CD71EAB371C00CA22CB /* view */,
@@ -5185,9 +5218,8 @@
 				AA29C24E1EAD9C4E0092EF6F /* YWActivityTableViewCell.h */,
 				AA29C24F1EAD9C4E0092EF6F /* YWActivityTableViewCell.m */,
 				AA29C2501EAD9C4E0092EF6F /* YWActivityTableViewCell.xib */,
-				AAF0EB451EAC63D20003A930 /* YWShopCommitTableViewCell.h */,
-				AAF0EB461EAC63D20003A930 /* YWShopCommitTableViewCell.m */,
-				AAF0EB471EAC63D20003A930 /* YWShopCommitTableViewCell.xib */,
+				AA29C2581EADDB0A0092EF6F /* YWShopTimeTableViewCell.h */,
+				AA29C2591EADDB0A0092EF6F /* YWShopTimeTableViewCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -5608,6 +5640,8 @@
 			children = (
 				AAF0EB4B1EAC721C0003A930 /* ShopScoreModel.h */,
 				AAF0EB4C1EAC721C0003A930 /* ShopScoreModel.m */,
+				AA29C25B1EADE7500092EF6F /* YWTimeModel.h */,
+				AA29C25C1EADE7500092EF6F /* YWTimeModel.m */,
 			);
 			name = mdel;
 			sourceTree = "<group>";
@@ -9699,7 +9733,6 @@
 				AA3544F51E9DF23900A2EC73 /* 1baobaoBG28@2x.jpg in Resources */,
 				AA35458E1E9DF23A00A2EC73 /* 3baobaoBG58@2x.jpg in Resources */,
 				AA35455D1E9DF23A00A2EC73 /* 3baobaoBG13@2x.jpg in Resources */,
-				AAF0EB491EAC63D20003A930 /* YWShopCommitTableViewCell.xib in Resources */,
 				C13019E01DB20B2400E24C88 /* 汽车服务.png in Resources */,
 				AA35458A1E9DF23A00A2EC73 /* 3baobaoBG54@2x.jpg in Resources */,
 				25FE75601EA9EA76003EA989 /* jujue.png in Resources */,
@@ -10396,6 +10429,7 @@
 				AA3544321E9DF23800A2EC73 /* 3baobaoLVUP11@2x.jpg in Resources */,
 				AA3544451E9DF23800A2EC73 /* 3baobaoLVUP29@2x.jpg in Resources */,
 				AA3544981E9DF23900A2EC73 /* 4baobaoLVUP4@2x.jpg in Resources */,
+				AA29C2691EADF24C0092EF6F /* ShopCarDetailTableViewCell.xib in Resources */,
 				AA3544A21E9DF23900A2EC73 /* 4baobaoLVUP59@2x.jpg in Resources */,
 				AA3544FF1E9DF23900A2EC73 /* 1baobaoBG37@2x.jpg in Resources */,
 				AAF127DA1E8AD3C200121621 /* 框框@2x.png in Resources */,
@@ -10586,6 +10620,7 @@
 				AA3838BE1E82194500A1B5C9 /* ExchangeViewController.xib in Resources */,
 				C135A13D1DDE020F002B78A5 /* 波浪个人_00017.png in Resources */,
 				AA3543F31E9DF23800A2EC73 /* 1baobaoLVUP9@2x.jpg in Resources */,
+				AA29C2631EADEAB30092EF6F /* YWShopCarViewController.xib in Resources */,
 				C1C1480B1DE817F1001FCBC3 /* 椭圆虚.png in Resources */,
 				C11F14F11DC83B92005C58CF /* banner_selected@2x.png in Resources */,
 				AAF127CE1E8AD3C200121621 /* wechatPay@2x.png in Resources */,
@@ -10807,6 +10842,7 @@
 				B33A26521D9A68040092CB12 /* EMAudioPlayerUtil.m in Sources */,
 				B3B8510A1DD9879A00E171C8 /* JHPieChart.m in Sources */,
 				B33A26AE1D9A68040092CB12 /* EaseFaceView.m in Sources */,
+				AA29C2621EADEAB30092EF6F /* YWShopCarViewController.m in Sources */,
 				C1F7BDAF1DB1C94500CCAF96 /* StorePhotoViewController.m in Sources */,
 				B3B8510E1DD9879A00E171C8 /* JHRingChart.m in Sources */,
 				B38B2E291D8FACD8004D5256 /* UIScrollView+MJRefresh.m in Sources */,
@@ -10980,6 +11016,7 @@
 				B3CD68B41D94FC5C00C26B1C /* RBPublicEditorCollectionViewCell.m in Sources */,
 				AA8846301E667742005F657D /* AdressViewController.m in Sources */,
 				B38B2E411D8FACD8004D5256 /* NSDictionary+Log.m in Sources */,
+				AA29C2681EADF24C0092EF6F /* ShopCarDetailTableViewCell.m in Sources */,
 				B33A269A1D9A68040092CB12 /* EaseRefreshTableViewController.m in Sources */,
 				B33A268C1D9A68040092CB12 /* NSString+Valid.m in Sources */,
 				B3AE4D761D91302B000A389F /* TZPhotoPreviewCell.m in Sources */,
@@ -11128,11 +11165,13 @@
 				B33A26701D9A68040092CB12 /* NSData+EMImageContentType.m in Sources */,
 				C1F7BE371DB1C95400CCAF96 /* PersonCenterZeroCell.m in Sources */,
 				B33A26841D9A68040092CB12 /* PSTGridLayoutSection.m in Sources */,
+				AA29C25D1EADE7500092EF6F /* YWTimeModel.m in Sources */,
 				B38B2E051D8FACD8004D5256 /* MASConstraintMaker.m in Sources */,
 				B38B2E231D8FACD8004D5256 /* MJDIYBackFooter.m in Sources */,
 				AA2E6AD91E8169CF00A03DAA /* ProgressView.m in Sources */,
 				B3CD68A41D94CE4600C26B1C /* YWLocation.m in Sources */,
 				B33A267E1D9A68040092CB12 /* PSTCollectionViewItemKey.m in Sources */,
+				AA29C25A1EADDB0A0092EF6F /* YWShopTimeTableViewCell.m in Sources */,
 				B3AE4D751D91302B000A389F /* TZPhotoPickerController.m in Sources */,
 				B38B2E631D8FACD8004D5256 /* main.m in Sources */,
 				AA048FD31E8909F700AF5423 /* MyIncomeModel.m in Sources */,
@@ -11302,7 +11341,6 @@
 				B38B2E331D8FACD8004D5256 /* SDWebImagePrefetcher.m in Sources */,
 				B33A26881D9A68040092CB12 /* EaseMessageModel.m in Sources */,
 				B3AE4DC21D91812D000A389F /* JWImgPickerAlbumChooseView.m in Sources */,
-				AAF0EB481EAC63D20003A930 /* YWShopCommitTableViewCell.m in Sources */,
 				B38B2E301D8FACD8004D5256 /* SDWebImageDownloader.m in Sources */,
 				C19EB0411DD9F6A200C28F15 /* YWChooseSexView.m in Sources */,
 				B33A267D1D9A68040092CB12 /* PSTCollectionViewFlowLayout.m in Sources */,

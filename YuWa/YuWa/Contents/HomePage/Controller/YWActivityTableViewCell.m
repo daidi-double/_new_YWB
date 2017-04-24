@@ -24,7 +24,7 @@
     //显示的特别活动
     NSArray*specail=holidayArray;
     CGFloat top = 61.0;
-    CGFloat left = 5;
+    CGFloat left = 13.0;
     //首先移除所有的东西
     for (UIView*view in self.saveAllImage) {
         [view removeFromSuperview];
@@ -47,10 +47,10 @@
             
             UILabel*specailLabel=[self viewWithTag:300+i];
             if (!specailLabel) {
-                specailLabel=[[UILabel alloc]initWithFrame:CGRectMake(102, top, kScreen_Width-110, 18)];
+                specailLabel=[[UILabel alloc]initWithFrame:CGRectMake(left+25, top, kScreen_Width-110, 18)];
                 specailLabel.centerY=speImage.centerY;
                 specailLabel.font=[UIFont systemFontOfSize:14];
-                specailLabel.textColor = [UIColor darkGrayColor];
+                specailLabel.textColor = RGBCOLOR(141, 142, 143, 1);
                 specailLabel.tag=300+i;
                 
             }
@@ -85,10 +85,10 @@
         speImage.image=[UIImage imageNamed:@"home_te"];
         UILabel*specailLabel=[self viewWithTag:300];
         if (!specailLabel) {
-            specailLabel=[[UILabel alloc]initWithFrame:CGRectMake(102, top, kScreen_Width-110, 18)];
+            specailLabel=[[UILabel alloc]initWithFrame:CGRectMake(left+25, top, kScreen_Width-110, 18)];
             specailLabel.centerY=speImage.centerY;
             specailLabel.font=[UIFont systemFontOfSize:14];
-            specailLabel.textColor = [UIColor darkGrayColor];
+            specailLabel.textColor = RGBCOLOR(141, 142, 143, 1);
             specailLabel.tag=300;
             [self.contentView addSubview:specailLabel];
             [self.saveAllLabel addObject:specailLabel];

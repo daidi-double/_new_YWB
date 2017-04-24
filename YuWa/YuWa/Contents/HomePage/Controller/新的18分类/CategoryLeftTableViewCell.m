@@ -20,6 +20,7 @@
 }
 - (void)setData{
     [_shop_imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",_model.goods_img]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    self.goods_id = self.model.goods_id;
     _shop_nameLabel.text = self.model.goods_name;
     self.shop_nameLabel.textColor = [UIColor colorWithHexString:@"#000000"];
     self.monthPayLabel.text = [NSString stringWithFormat:@"月销售%@份",self.model.month_sales];

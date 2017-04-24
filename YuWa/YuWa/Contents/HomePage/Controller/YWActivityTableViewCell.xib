@@ -66,6 +66,7 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="aq9-bb-KE4" secondAttribute="trailing" id="21i-kq-qZf"/>
                     <constraint firstItem="mqB-sQ-ZUB" firstAttribute="leading" secondItem="ny0-wa-MMm" secondAttribute="leading" id="2PK-gB-UgJ"/>
+                    <constraint firstItem="mqB-sQ-ZUB" firstAttribute="leading" secondItem="Kgx-6t-XQG" secondAttribute="trailing" constant="5" id="FUW-G9-UkX"/>
                     <constraint firstItem="Kpk-re-PSx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="MBy-mW-suw"/>
                     <constraint firstItem="mqB-sQ-ZUB" firstAttribute="centerY" secondItem="Kgx-6t-XQG" secondAttribute="centerY" id="Wc2-rL-F1X"/>
                     <constraint firstItem="Kpk-re-PSx" firstAttribute="top" secondItem="aq9-bb-KE4" secondAttribute="bottom" constant="8" id="XAQ-J9-RWt"/>
