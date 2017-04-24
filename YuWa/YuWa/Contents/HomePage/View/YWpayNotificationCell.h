@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YWMessageNotificationModel.h"
 
 @interface YWpayNotificationCell : UITableViewCell
-
+@property (nonatomic, strong) YWMessageNotificationModel *model;
 @end

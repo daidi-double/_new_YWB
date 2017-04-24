@@ -15,5 +15,6 @@
 @property (nonatomic,copy)NSString * content;
 @property (nonatomic,copy)NSString * ctime;
 @property (nonatomic,copy)NSString * order_id;
+@property (nonatomic, copy) NSString *pay_money;
 
 @end

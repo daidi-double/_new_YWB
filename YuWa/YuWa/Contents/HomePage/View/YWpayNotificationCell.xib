@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="YWpayNotificationCell" rowHeight="63" id="xqE-lb-t8H">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="YWpayNotificationCell" rowHeight="63" id="xqE-lb-t8H" customClass="YWpayNotificationCell">
             <rect key="frame" x="0.0" y="0.0" width="376" height="63"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xqE-lb-t8H" id="APT-R0-b96">
@@ -46,6 +46,11 @@
                     <constraint firstItem="IDe-7h-I5A" firstAttribute="centerX" secondItem="APT-R0-b96" secondAttribute="centerX" id="nGY-NA-R7n"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="isPay" destination="IDe-7h-I5A" id="1Ds-qc-5Pm"/>
+                <outlet property="payCount" destination="sUD-dy-SH9" id="rlX-f1-1Cj"/>
+                <outlet property="time" destination="lVr-YB-9db" id="hbS-vd-hdA"/>
+            </connections>
             <point key="canvasLocation" x="96" y="14.5"/>
         </tableViewCell>
     </objects>
