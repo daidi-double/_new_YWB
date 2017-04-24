@@ -46,7 +46,8 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     YWpayNotificationCell   * messageCell = [tableView dequeueReusableCellWithIdentifier:payNotificationCell];
-//    messageCell.model = self.dataArr[indexPath.row];
+    messageCell.model = self.dataArr[indexPath.row];
+    
     return messageCell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -103,6 +104,9 @@
         if (dataArr.count>0) {
             for (int i = 0; i<dataArr.count; i++) {
                 YWMessageNotificationModel * model = [YWMessageNotificationModel yy_modelWithDictionary:dataArr[i]];
+                NSDictionary * dic = dataArr[i];
+                NSDictionary * dic1 = dic[@"order"];
+                model.pay_money = dic1[@"pay_money"];
                 model.status = @"1";
                 [self.dataArr addObject:model];
             }

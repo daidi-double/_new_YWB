@@ -7,7 +7,15 @@
 //
 
 #import "YWpayNotificationCell.h"
+#import "JWTools.h"
 
+@interface YWpayNotificationCell ()
+@property (weak, nonatomic) IBOutlet UILabel *isPay;
+@property (weak, nonatomic) IBOutlet UILabel *payCount;
+@property (weak, nonatomic) IBOutlet UILabel *time;
+
+
+@end
 @implementation YWpayNotificationCell
 
 - (void)awakeFromNib {
@@ -20,5 +28,9 @@
 
     // Configure the view for the selected state
 }
-
+-(void)setModel:(YWMessageNotificationModel *)model{
+    _model = model;
+    self.time.text = [JWTools dateWithOutYearStr:self.model.ctime];
+    self.payCount.text = [NSString stringWithFormat:@"¥%@",model.pay_money];
+}
 @end
