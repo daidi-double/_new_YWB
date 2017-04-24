@@ -9,5 +9,19 @@
 #import "ShowShoppingModel.h"
 
 @implementation ShowShoppingModel
-
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key   {
+    if ([key isEqualToString: @"id"]) {
+        self.userID = value;
+    }
+}
++(ShowShoppingModel *)modelWithDic:(NSDictionary *)dic{
+    ShowShoppingModel * model = [[ShowShoppingModel alloc]init];
+    [model setValuesForKeysWithDictionary:dic];
+    ShopDetailGoodsModel * goodsModel = [[ShopDetailGoodsModel alloc]init];
+    for (NSDictionary * dict in model.cat_goods) {
+        
+        [goodsModel setValuesForKeysWithDictionary:dict];
+    }
+    return model;
+}
 @end

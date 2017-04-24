@@ -40,6 +40,12 @@
 		AA1FEB5A1E55DE9E00239FEC /* ChooseMovieController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA1FEB581E55DE9E00239FEC /* ChooseMovieController.xib */; };
 		AA225B781E63F69E00F4D74F /* TableBGView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA225B771E63F69E00F4D74F /* TableBGView.m */; };
 		AA27F5411E86778B00B29B17 /* ShopNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27F5401E86778B00B29B17 /* ShopNameView.m */; };
+		AA29C2421EAD8EB60092EF6F /* YWShopDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29C2401EAD8EB60092EF6F /* YWShopDetailViewController.m */; };
+		AA29C2431EAD8EB60092EF6F /* YWShopDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA29C2411EAD8EB60092EF6F /* YWShopDetailViewController.xib */; };
+		AA29C24C1EAD985B0092EF6F /* YWShopDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29C24A1EAD985B0092EF6F /* YWShopDetailTableViewCell.m */; };
+		AA29C24D1EAD985B0092EF6F /* YWShopDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA29C24B1EAD985B0092EF6F /* YWShopDetailTableViewCell.xib */; };
+		AA29C2511EAD9C4E0092EF6F /* YWActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29C24F1EAD9C4E0092EF6F /* YWActivityTableViewCell.m */; };
+		AA29C2521EAD9C4E0092EF6F /* YWActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA29C2501EAD9C4E0092EF6F /* YWActivityTableViewCell.xib */; };
 		AA29FFFC1E78EFC100113FFF /* NSObject+MapService.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29FFFB1E78EFC100113FFF /* NSObject+MapService.m */; };
 		AA2B2BF51E8CB46D008CB3C6 /* AwardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2B2BF31E8CB46D008CB3C6 /* AwardViewController.m */; };
 		AA2B2BF61E8CB46D008CB3C6 /* AwardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2B2BF41E8CB46D008CB3C6 /* AwardViewController.xib */; };
@@ -597,6 +603,9 @@
 		AA3805FD1E65086900DB8C4C /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3805FC1E65086900DB8C4C /* PayViewController.m */; };
 		AA3838BD1E82194500A1B5C9 /* ExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3838BB1E82194500A1B5C9 /* ExchangeViewController.m */; };
 		AA3838BE1E82194500A1B5C9 /* ExchangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3838BC1E82194500A1B5C9 /* ExchangeViewController.xib */; };
+		AA399CDA1EAB374900CA22CB /* YWShopCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA399CD91EAB374900CA22CB /* YWShopCarView.m */; };
+		AA399CE11EAB3B6E00CA22CB /* YWShopCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA399CDF1EAB3B6E00CA22CB /* YWShopCarTableViewCell.m */; };
+		AA399CE21EAB3B6E00CA22CB /* YWShopCarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA399CE01EAB3B6E00CA22CB /* YWShopCarTableViewCell.xib */; };
 		AA3A1E5B1E8F72E300C12497 /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3A1E5A1E8F72E300C12497 /* AMapFoundationKit.framework */; };
 		AA3A1E5D1E8F731D00C12497 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3A1E5C1E8F731D00C12497 /* AMapSearchKit.framework */; };
 		AA3A1E611E8F773F00C12497 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3A1E601E8F773F00C12497 /* MAMapKit.framework */; };
@@ -662,6 +671,9 @@
 		AA47068A1E655F5B00D09619 /* MovieCinemaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4706891E655F5B00D09619 /* MovieCinemaModel.m */; };
 		AA47068E1E65689300D09619 /* TimeDownLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA47068D1E65689300D09619 /* TimeDownLabel.m */; };
 		AA6208121E8E8CCB0001960C /* YWScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6208101E8E8CCB0001960C /* YWScanViewController.m */; };
+		AA6B5EC31EA9FCF900E6A83D /* ShopDetailGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B5EC21EA9FCF900E6A83D /* ShopDetailGoodsModel.m */; };
+		AA6B5EC71EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B5EC51EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m */; };
+		AA6B5EC81EAA0E6F00E6A83D /* CategoryLeftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA6B5EC61EAA0E6F00E6A83D /* CategoryLeftTableViewCell.xib */; };
 		AA7B64731E797ED400406CB8 /* MapNavNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7B64711E797ED400406CB8 /* MapNavNewViewController.m */; };
 		AA88462B1E666FD7005F657D /* CatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8846291E666FD7005F657D /* CatchViewController.m */; };
 		AA88462C1E666FD7005F657D /* CatchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA88462A1E666FD7005F657D /* CatchViewController.xib */; };
@@ -710,6 +722,12 @@
 		AAC86F711E76E93300F94C84 /* app_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC86F701E76E93300F94C84 /* app_logo@2x.png */; };
 		AACC80BF1E901E070023CA6D /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AACC80BD1E901E070023CA6D /* CustomTableViewCell.m */; };
 		AACC80C01E901E070023CA6D /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AACC80BE1E901E070023CA6D /* CustomTableViewCell.xib */; };
+		AAF0EB3A1EAC58EB0003A930 /* YWShopCommitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB391EAC58EB0003A930 /* YWShopCommitView.m */; };
+		AAF0EB431EAC5C940003A930 /* YWShopScoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB411EAC5C940003A930 /* YWShopScoreTableViewCell.m */; };
+		AAF0EB441EAC5C940003A930 /* YWShopScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF0EB421EAC5C940003A930 /* YWShopScoreTableViewCell.xib */; };
+		AAF0EB481EAC63D20003A930 /* YWShopCommitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB461EAC63D20003A930 /* YWShopCommitTableViewCell.m */; };
+		AAF0EB491EAC63D20003A930 /* YWShopCommitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF0EB471EAC63D20003A930 /* YWShopCommitTableViewCell.xib */; };
+		AAF0EB4D1EAC721C0003A930 /* ShopScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB4C1EAC721C0003A930 /* ShopScoreModel.m */; };
 		AAF127CE1E8AD3C200121621 /* wechatPay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF127C01E8AD3C200121621 /* wechatPay@2x.png */; };
 		AAF127CF1E8AD3C200121621 /* wechatPay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF127C11E8AD3C200121621 /* wechatPay@3x.png */; };
 		AAF127D01E8AD3C200121621 /* yinlianpay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF127C21E8AD3C200121621 /* yinlianpay@2x.png */; };
@@ -1746,6 +1764,15 @@
 		AA225B771E63F69E00F4D74F /* TableBGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableBGView.m; sourceTree = "<group>"; };
 		AA27F53F1E86778B00B29B17 /* ShopNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopNameView.h; sourceTree = "<group>"; };
 		AA27F5401E86778B00B29B17 /* ShopNameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopNameView.m; sourceTree = "<group>"; };
+		AA29C23F1EAD8EB60092EF6F /* YWShopDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopDetailViewController.h; sourceTree = "<group>"; };
+		AA29C2401EAD8EB60092EF6F /* YWShopDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopDetailViewController.m; sourceTree = "<group>"; };
+		AA29C2411EAD8EB60092EF6F /* YWShopDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopDetailViewController.xib; sourceTree = "<group>"; };
+		AA29C2491EAD985B0092EF6F /* YWShopDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopDetailTableViewCell.h; sourceTree = "<group>"; };
+		AA29C24A1EAD985B0092EF6F /* YWShopDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopDetailTableViewCell.m; sourceTree = "<group>"; };
+		AA29C24B1EAD985B0092EF6F /* YWShopDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopDetailTableViewCell.xib; sourceTree = "<group>"; };
+		AA29C24E1EAD9C4E0092EF6F /* YWActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWActivityTableViewCell.h; sourceTree = "<group>"; };
+		AA29C24F1EAD9C4E0092EF6F /* YWActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWActivityTableViewCell.m; sourceTree = "<group>"; };
+		AA29C2501EAD9C4E0092EF6F /* YWActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWActivityTableViewCell.xib; sourceTree = "<group>"; };
 		AA29FFEE1E78DB5F00113FFF /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = ../../../../Downloads/AMap_iOS_Navi_ALL/AMapFoundationKit.framework; sourceTree = "<group>"; };
 		AA29FFEF1E78DB5F00113FFF /* AMapNaviKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapNaviKit.framework; path = ../../../../Downloads/AMap_iOS_Navi_ALL/AMapNaviKit.framework; sourceTree = "<group>"; };
 		AA29FFF21E78DC0000113FFF /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = ../../../../Downloads/MAMapKit.framework; sourceTree = "<group>"; };
@@ -2318,6 +2345,11 @@
 		AA3838BA1E82194500A1B5C9 /* ExchangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeViewController.h; sourceTree = "<group>"; };
 		AA3838BB1E82194500A1B5C9 /* ExchangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExchangeViewController.m; sourceTree = "<group>"; };
 		AA3838BC1E82194500A1B5C9 /* ExchangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExchangeViewController.xib; sourceTree = "<group>"; };
+		AA399CD81EAB374900CA22CB /* YWShopCarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCarView.h; sourceTree = "<group>"; };
+		AA399CD91EAB374900CA22CB /* YWShopCarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopCarView.m; sourceTree = "<group>"; };
+		AA399CDE1EAB3B6E00CA22CB /* YWShopCarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCarTableViewCell.h; sourceTree = "<group>"; };
+		AA399CDF1EAB3B6E00CA22CB /* YWShopCarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopCarTableViewCell.m; sourceTree = "<group>"; };
+		AA399CE01EAB3B6E00CA22CB /* YWShopCarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopCarTableViewCell.xib; sourceTree = "<group>"; };
 		AA3A1E5A1E8F72E300C12497 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapFoundationKit.framework; sourceTree = "<group>"; };
 		AA3A1E5C1E8F731D00C12497 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
 		AA3A1E601E8F773F00C12497 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
@@ -2415,6 +2447,11 @@
 		AA47068D1E65689300D09619 /* TimeDownLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeDownLabel.m; sourceTree = "<group>"; };
 		AA62080F1E8E8CCB0001960C /* YWScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWScanViewController.h; sourceTree = "<group>"; };
 		AA6208101E8E8CCB0001960C /* YWScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWScanViewController.m; sourceTree = "<group>"; };
+		AA6B5EC11EA9FCF900E6A83D /* ShopDetailGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopDetailGoodsModel.h; sourceTree = "<group>"; };
+		AA6B5EC21EA9FCF900E6A83D /* ShopDetailGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopDetailGoodsModel.m; sourceTree = "<group>"; };
+		AA6B5EC41EAA0E6F00E6A83D /* CategoryLeftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryLeftTableViewCell.h; path = "新的18分类/CategoryLeftTableViewCell.h"; sourceTree = "<group>"; };
+		AA6B5EC51EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryLeftTableViewCell.m; path = "新的18分类/CategoryLeftTableViewCell.m"; sourceTree = "<group>"; };
+		AA6B5EC61EAA0E6F00E6A83D /* CategoryLeftTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoryLeftTableViewCell.xib; path = "新的18分类/CategoryLeftTableViewCell.xib"; sourceTree = "<group>"; };
 		AA7B64701E797ED400406CB8 /* MapNavNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNavNewViewController.h; sourceTree = "<group>"; };
 		AA7B64711E797ED400406CB8 /* MapNavNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNavNewViewController.m; sourceTree = "<group>"; };
 		AA8846281E666FD7005F657D /* CatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchViewController.h; sourceTree = "<group>"; };
@@ -2487,6 +2524,16 @@
 		AACC80BC1E901E070023CA6D /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		AACC80BD1E901E070023CA6D /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		AACC80BE1E901E070023CA6D /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		AAF0EB381EAC58EB0003A930 /* YWShopCommitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCommitView.h; sourceTree = "<group>"; };
+		AAF0EB391EAC58EB0003A930 /* YWShopCommitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopCommitView.m; sourceTree = "<group>"; };
+		AAF0EB401EAC5C940003A930 /* YWShopScoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopScoreTableViewCell.h; sourceTree = "<group>"; };
+		AAF0EB411EAC5C940003A930 /* YWShopScoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopScoreTableViewCell.m; sourceTree = "<group>"; };
+		AAF0EB421EAC5C940003A930 /* YWShopScoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopScoreTableViewCell.xib; sourceTree = "<group>"; };
+		AAF0EB451EAC63D20003A930 /* YWShopCommitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCommitTableViewCell.h; sourceTree = "<group>"; };
+		AAF0EB461EAC63D20003A930 /* YWShopCommitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopCommitTableViewCell.m; sourceTree = "<group>"; };
+		AAF0EB471EAC63D20003A930 /* YWShopCommitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopCommitTableViewCell.xib; sourceTree = "<group>"; };
+		AAF0EB4B1EAC721C0003A930 /* ShopScoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopScoreModel.h; sourceTree = "<group>"; };
+		AAF0EB4C1EAC721C0003A930 /* ShopScoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopScoreModel.m; sourceTree = "<group>"; };
 		AAF127C01E8AD3C200121621 /* wechatPay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechatPay@2x.png"; sourceTree = "<group>"; };
 		AAF127C11E8AD3C200121621 /* wechatPay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechatPay@3x.png"; sourceTree = "<group>"; };
 		AAF127C21E8AD3C200121621 /* yinlianpay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yinlianpay@2x.png"; sourceTree = "<group>"; };
@@ -5060,6 +5107,58 @@
 			name = "支付";
 			sourceTree = "<group>";
 		};
+		AA399CD61EAB370200CA22CB /* 新店铺详情 */ = {
+			isa = PBXGroup;
+			children = (
+				AAF0EB4A1EAC72000003A930 /* mdel */,
+				AA399CDD1EAB3B5000CA22CB /* cell */,
+				AA399CD71EAB371C00CA22CB /* view */,
+				AAF54A0E1EA8474D00D02D6B /* ShopDetailViewController.h */,
+				AAF54A0F1EA8474D00D02D6B /* ShopDetailViewController.m */,
+				AAF54A101EA8474D00D02D6B /* ShopDetailViewController.xib */,
+				AA29C23F1EAD8EB60092EF6F /* YWShopDetailViewController.h */,
+				AA29C2401EAD8EB60092EF6F /* YWShopDetailViewController.m */,
+				AA29C2411EAD8EB60092EF6F /* YWShopDetailViewController.xib */,
+			);
+			name = "新店铺详情";
+			sourceTree = "<group>";
+		};
+		AA399CD71EAB371C00CA22CB /* view */ = {
+			isa = PBXGroup;
+			children = (
+				AA399CD81EAB374900CA22CB /* YWShopCarView.h */,
+				AA399CD91EAB374900CA22CB /* YWShopCarView.m */,
+				AAF0EB381EAC58EB0003A930 /* YWShopCommitView.h */,
+				AAF0EB391EAC58EB0003A930 /* YWShopCommitView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		AA399CDD1EAB3B5000CA22CB /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA6B5EC41EAA0E6F00E6A83D /* CategoryLeftTableViewCell.h */,
+				AA6B5EC51EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m */,
+				AA6B5EC61EAA0E6F00E6A83D /* CategoryLeftTableViewCell.xib */,
+				AA399CDE1EAB3B6E00CA22CB /* YWShopCarTableViewCell.h */,
+				AA399CDF1EAB3B6E00CA22CB /* YWShopCarTableViewCell.m */,
+				AA399CE01EAB3B6E00CA22CB /* YWShopCarTableViewCell.xib */,
+				AAF0EB401EAC5C940003A930 /* YWShopScoreTableViewCell.h */,
+				AAF0EB411EAC5C940003A930 /* YWShopScoreTableViewCell.m */,
+				AAF0EB421EAC5C940003A930 /* YWShopScoreTableViewCell.xib */,
+				AA29C2491EAD985B0092EF6F /* YWShopDetailTableViewCell.h */,
+				AA29C24A1EAD985B0092EF6F /* YWShopDetailTableViewCell.m */,
+				AA29C24B1EAD985B0092EF6F /* YWShopDetailTableViewCell.xib */,
+				AA29C24E1EAD9C4E0092EF6F /* YWActivityTableViewCell.h */,
+				AA29C24F1EAD9C4E0092EF6F /* YWActivityTableViewCell.m */,
+				AA29C2501EAD9C4E0092EF6F /* YWActivityTableViewCell.xib */,
+				AAF0EB451EAC63D20003A930 /* YWShopCommitTableViewCell.h */,
+				AAF0EB461EAC63D20003A930 /* YWShopCommitTableViewCell.m */,
+				AAF0EB471EAC63D20003A930 /* YWShopCommitTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		AA3A1E6A1E8F908100C12497 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -5151,6 +5250,7 @@
 		AA3BFE421E855F1000D669C2 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				C1F7BDC21DB1C95400CCAF96 /* Model */,
 				AA3BFE201E8559B500D669C2 /* BankCategoryPickerView.h */,
 				AA3BFE211E8559B500D669C2 /* BankCategoryPickerView.m */,
 				AA3BFE2C1E8559B500D669C2 /* PassWordTextView.h */,
@@ -5345,6 +5445,13 @@
 			name = "扫描跳转";
 			sourceTree = "<group>";
 		};
+		AA6B5EBD1EA9D77800E6A83D /* 自定义 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "自定义";
+			sourceTree = "<group>";
+		};
 		AA8846271E666F30005F657D /* 抓娃娃 */ = {
 			isa = PBXGroup;
 			children = (
@@ -5461,6 +5568,15 @@
 			);
 			name = "账户设置";
 			path = "笔记专辑影评评论/账户设置";
+			sourceTree = "<group>";
+		};
+		AAF0EB4A1EAC72000003A930 /* mdel */ = {
+			isa = PBXGroup;
+			children = (
+				AAF0EB4B1EAC721C0003A930 /* ShopScoreModel.h */,
+				AAF0EB4C1EAC721C0003A930 /* ShopScoreModel.m */,
+			);
+			name = mdel;
 			sourceTree = "<group>";
 		};
 		AAF127BF1E8AD3C200121621 /* 开通商务会员 */ = {
@@ -8533,6 +8649,7 @@
 		C1392DB11DBDB644002418EF /* 新的18分类 */ = {
 			isa = PBXGroup;
 			children = (
+				AA6B5EBD1EA9D77800E6A83D /* 自定义 */,
 				C1392DB21DBDB65F002418EF /* NewMainCategoryViewController.h */,
 				C1392DB31DBDB660002418EF /* NewMainCategoryViewController.m */,
 				C10E93A21DD1815300728B3D /* PHCategoryModel.h */,
@@ -8652,6 +8769,8 @@
 			children = (
 				C1B5E12F1DCACFA8003769EF /* ShopdetailModel.h */,
 				C1B5E1301DCACFA8003769EF /* ShopdetailModel.m */,
+				AA6B5EC11EA9FCF900E6A83D /* ShopDetailGoodsModel.h */,
+				AA6B5EC21EA9FCF900E6A83D /* ShopDetailGoodsModel.m */,
 			);
 			path = "店铺详情Model";
 			sourceTree = "<group>";
@@ -8733,6 +8852,7 @@
 		C1F7BD3C1DB1C94500CCAF96 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AA399CD61EAB370200CA22CB /* 新店铺详情 */,
 				AA62080E1E8E8CA20001960C /* 扫描跳转 */,
 				AA29FFFF1E79092900113FFF /* mapNavi */,
 				AAF80CFF1E6801030000C4BC /* 新分类 */,
@@ -8743,9 +8863,6 @@
 				C1F7BD4A1DB1C94500CCAF96 /* VIPHomePageViewController.m */,
 				C1F7BD4B1DB1C94500CCAF96 /* YWShoppingDetailViewController.h */,
 				C1F7BD4C1DB1C94500CCAF96 /* YWShoppingDetailViewController.m */,
-				AAF54A0E1EA8474D00D02D6B /* ShopDetailViewController.h */,
-				AAF54A0F1EA8474D00D02D6B /* ShopDetailViewController.m */,
-				AAF54A101EA8474D00D02D6B /* ShopDetailViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -8922,7 +9039,6 @@
 				C1E5B7821DE5C96B00EB1F85 /* 商务会员 */,
 				C18E7D5B1DB878BA003D0012 /* 我的专辑列表 */,
 				C1F7BDBF1DB1C95400CCAF96 /* Controller */,
-				C1F7BDC21DB1C95400CCAF96 /* Model */,
 				C1F7BDC31DB1C95400CCAF96 /* View */,
 				C1F7BDD01DB1C95400CCAF96 /* 个人资料 */,
 				C1F7BDE81DB1C95400CCAF96 /* 笔记专辑影评评论 */,
@@ -8946,7 +9062,8 @@
 			isa = PBXGroup;
 			children = (
 			);
-			path = Model;
+			name = Model;
+			path = ../Model;
 			sourceTree = "<group>";
 		};
 		C1F7BDC31DB1C95400CCAF96 /* View */ = {
@@ -9458,7 +9575,7 @@
 					B38B2C6B1D8FAC5A004D5256 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = JQ283T24DV;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 0;
@@ -9544,6 +9661,7 @@
 				AA3544F51E9DF23900A2EC73 /* 1baobaoBG28@2x.jpg in Resources */,
 				AA35458E1E9DF23A00A2EC73 /* 3baobaoBG58@2x.jpg in Resources */,
 				AA35455D1E9DF23A00A2EC73 /* 3baobaoBG13@2x.jpg in Resources */,
+				AAF0EB491EAC63D20003A930 /* YWShopCommitTableViewCell.xib in Resources */,
 				C13019E01DB20B2400E24C88 /* 汽车服务.png in Resources */,
 				AA35458A1E9DF23A00A2EC73 /* 3baobaoBG54@2x.jpg in Resources */,
 				AA35450A1E9DF23900A2EC73 /* 1baobaoBG47@2x.jpg in Resources */,
@@ -9646,6 +9764,7 @@
 				AA3544411E9DF23800A2EC73 /* 3baobaoLVUP25@2x.jpg in Resources */,
 				AAC86F541E76DA4400F94C84 /* OpenBusinessViewController.xib in Resources */,
 				AA3544201E9DF23800A2EC73 /* 2baobaoLVUP4@2x.jpg in Resources */,
+				AA29C2521EAD9C4E0092EF6F /* YWActivityTableViewCell.xib in Resources */,
 				AA3543C11E9DF23800A2EC73 /* 1baobaoLVUP18@2x.jpg in Resources */,
 				AA3AB5391E5D2693009BD8D9 /* share.png in Resources */,
 				AA3545CC1E9DF23A00A2EC73 /* 4baobaoBG5@2x.jpg in Resources */,
@@ -9705,6 +9824,7 @@
 				AA3544541E9DF23800A2EC73 /* 3baobaoLVUP42@2x.jpg in Resources */,
 				B38B2F551D8FC83A004D5256 /* 总的专辑 个人中心展示小图.json in Resources */,
 				C13019DA1DB20B2400E24C88 /* 宴会.png in Resources */,
+				AA29C2431EAD8EB60092EF6F /* YWShopDetailViewController.xib in Resources */,
 				AA35451D1E9DF23900A2EC73 /* 2baobaoBG0@2x.jpg in Resources */,
 				AA35446C1E9DF23800A2EC73 /* 4baobaoLVUP0@2x.jpg in Resources */,
 				AA3545681E9DF23A00A2EC73 /* 3baobaoBG23@2x.jpg in Resources */,
@@ -9865,6 +9985,7 @@
 				C123154C1DE6C03C00B9D0FE /* BusinessMoneyTableViewCell.xib in Resources */,
 				B34BCE0D1DAA7C07001AB98D /* YWNodeAddAldumViewController.xib in Resources */,
 				C13019D81DB20B2400E24C88 /* 学习培训.png in Resources */,
+				AA6B5EC81EAA0E6F00E6A83D /* CategoryLeftTableViewCell.xib in Resources */,
 				AA3544A11E9DF23900A2EC73 /* 4baobaoLVUP58@2x.jpg in Resources */,
 				AA3544271E9DF23800A2EC73 /* 2baobaoLVUP56@2x.jpg in Resources */,
 				AA3C40C41E8D59EF0052C732 /* AlipaySDK.bundle in Resources */,
@@ -9940,6 +10061,7 @@
 				C1F7BF411DB1CA0700CCAF96 /* home_xiaofeijilu.png in Resources */,
 				C135A13A1DDE020F002B78A5 /* 波浪个人_00014.png in Resources */,
 				C13019E71DB20B2400E24C88 /* 酒店.png in Resources */,
+				AA399CE21EAB3B6E00CA22CB /* YWShopCarTableViewCell.xib in Resources */,
 				AA35459F1E9DF23A00A2EC73 /* 4baobaoBG19@2x.jpg in Resources */,
 				B38B2E6C1D8FC3B6004D5256 /* JWBasicViewController.xib in Resources */,
 				C13019E41DB20B2400E24C88 /* 美食.png in Resources */,
@@ -10037,6 +10159,7 @@
 				C1214C291DEE70AF00FFC63C /* 商务会员_show.jpg in Resources */,
 				C1E5B7701DE45DA400EB1F85 /* ScheduleTextFieldTableViewCell.xib in Resources */,
 				B38B2E441D8FACD8004D5256 /* banner_normal6.png in Resources */,
+				AA29C24D1EAD985B0092EF6F /* YWShopDetailTableViewCell.xib in Resources */,
 				C1F7BDB21DB1C94500CCAF96 /* StorePhotoCollectionViewCell.xib in Resources */,
 				B33A26851D9A68040092CB12 /* MWPhotoBrowser.bundle in Resources */,
 				AA3545751E9DF23A00A2EC73 /* 3baobaoBG35@2x.jpg in Resources */,
@@ -10333,6 +10456,7 @@
 				AA3544F61E9DF23900A2EC73 /* 1baobaoBG29@2x.jpg in Resources */,
 				AA3544611E9DF23800A2EC73 /* 3baobaoLVUP54@2x.jpg in Resources */,
 				AA35444C1E9DF23800A2EC73 /* 3baobaoLVUP35@2x.jpg in Resources */,
+				AAF0EB441EAC5C940003A930 /* YWShopScoreTableViewCell.xib in Resources */,
 				C135A0CF1DDC5F69002B78A5 /* page_collection.png in Resources */,
 				AA35456D1E9DF23A00A2EC73 /* 3baobaoBG28@2x.jpg in Resources */,
 				AA3545331E9DF23900A2EC73 /* 2baobaoBG2@2x.jpg in Resources */,
@@ -10672,6 +10796,7 @@
 				AA2B2BFF1E8CC7D3008CB3C6 /* IndroduceViewController.m in Sources */,
 				C1F7BD9F1DB1C94500CCAF96 /* DetailStorePreferentialTableViewCell.m in Sources */,
 				AAAE11831E5C72CF00D637D7 /* SeeMovieCell.m in Sources */,
+				AA29C24C1EAD985B0092EF6F /* YWShopDetailTableViewCell.m in Sources */,
 				AA3838BD1E82194500A1B5C9 /* ExchangeViewController.m in Sources */,
 				B3192ADE1D927C3600FD6578 /* UIImage+Utility.m in Sources */,
 				B33A26871D9A68040092CB12 /* EaseConversationModel.m in Sources */,
@@ -10708,8 +10833,11 @@
 				C1F7BE4F1DB1C95400CCAF96 /* YWFansTableViewCell.m in Sources */,
 				B3CD68A71D94CF3200C26B1C /* RBPublicEditorScrollView.m in Sources */,
 				B33A26811D9A68040092CB12 /* PSTGridLayoutInfo.m in Sources */,
+				AA6B5EC71EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m in Sources */,
+				AA399CDA1EAB374900CA22CB /* YWShopCarView.m in Sources */,
 				AA42110E1E5ABAEF00085650 /* MovieCinemaViewController.m in Sources */,
 				C1214C171DEC6A4F00FFC63C /* ShowDetailModel.m in Sources */,
+				AAF0EB3A1EAC58EB0003A930 /* YWShopCommitView.m in Sources */,
 				AAF702791EA6069E007CAFB3 /* NotePraiseModel.m in Sources */,
 				AAC86F521E76DA4400F94C84 /* CommonUserViewController.m in Sources */,
 				B38B2F311D8FC82F004D5256 /* RBCommentToolsView.m in Sources */,
@@ -10729,6 +10857,7 @@
 				B3FEBA031D9B64C1003CDEF2 /* YWMessageNotificationViewController.m in Sources */,
 				B38B2F331D8FC82F004D5256 /* UIBarButtonItem+SettingCustom.m in Sources */,
 				C1C1481E1DE83B44001FCBC3 /* pointMoneyHeaderView.m in Sources */,
+				AA29C2421EAD8EB60092EF6F /* YWShopDetailViewController.m in Sources */,
 				B38B2F261D8FC82F004D5256 /* RBNewAlbumCollectionViewCell.m in Sources */,
 				B351E84D1DDEA70000A15954 /* YWPersonCenterDelView.m in Sources */,
 				AAF30ADF1E5EA74400793382 /* NSObject+MJClass.m in Sources */,
@@ -10839,6 +10968,7 @@
 				B38B2E3E1D8FACD8004D5256 /* JRSegmentViewController.m in Sources */,
 				C1E5B7611DE456B700EB1F85 /* scheduleTwoTableViewCell.m in Sources */,
 				B38B2DF81D8FACD8004D5256 /* AFSecurityPolicy.m in Sources */,
+				AA6B5EC31EA9FCF900E6A83D /* ShopDetailGoodsModel.m in Sources */,
 				AAF30AE31E5EA74400793382 /* NSString+MJExtension.m in Sources */,
 				B38B2E351D8FACD8004D5256 /* UIImage+GIF.m in Sources */,
 				C1F7BDAE1DB1C94500CCAF96 /* SeeMoreShoppingViewController.m in Sources */,
@@ -10872,6 +11002,7 @@
 				B3A1C32E1DB21ED00091BD9D /* JWTagScrollView.m in Sources */,
 				B38B2EFA1D8FC82F004D5256 /* RBHomeListGoodsModel.m in Sources */,
 				C1E5B75C1DE454C200EB1F85 /* ScheduleTableViewCell.m in Sources */,
+				AAF0EB431EAC5C940003A930 /* YWShopScoreTableViewCell.m in Sources */,
 				B38B2E371D8FACD8004D5256 /* UIImage+WebP.m in Sources */,
 				B38B2E111D8FACD8004D5256 /* MJRefreshAutoFooter.m in Sources */,
 				B38B2E3A1D8FACD8004D5256 /* UIView+WebCacheOperation.m in Sources */,
@@ -11049,12 +11180,14 @@
 				B38B2E2B1D8FACD8004D5256 /* MKAnnotationView+WebCache.m in Sources */,
 				B38B2E571D8FACD8004D5256 /* VPImageCropperViewController.m in Sources */,
 				B38B2E201D8FACD8004D5256 /* MJChiBaoZiFooter2.m in Sources */,
+				AAF0EB4D1EAC721C0003A930 /* ShopScoreModel.m in Sources */,
 				B38B2F221D8FC82F004D5256 /* RBHomeSearchToolsView.m in Sources */,
 				B3AE4D791D91302B000A389F /* UIView+Layout.m in Sources */,
 				AA0B93811E7A349000A80673 /* CustomAnnotationView.m in Sources */,
 				C122FBE91DB5F72D009A518A /* CommitShopView.m in Sources */,
 				AA7B64731E797ED400406CB8 /* MapNavNewViewController.m in Sources */,
 				B3192AC51D92224A00FD6578 /* JWImagePickerTableViewCell.m in Sources */,
+				AA29C2511EAD9C4E0092EF6F /* YWActivityTableViewCell.m in Sources */,
 				B3AE4D701D91302B000A389F /* TZAssetCell.m in Sources */,
 				B38B2E071D8FACD8004D5256 /* MASViewAttribute.m in Sources */,
 				AAF30AB41E5E8A5500793382 /* XZHallLogoView.m in Sources */,
@@ -11125,6 +11258,7 @@
 				B38B2E331D8FACD8004D5256 /* SDWebImagePrefetcher.m in Sources */,
 				B33A26881D9A68040092CB12 /* EaseMessageModel.m in Sources */,
 				B3AE4DC21D91812D000A389F /* JWImgPickerAlbumChooseView.m in Sources */,
+				AAF0EB481EAC63D20003A930 /* YWShopCommitTableViewCell.m in Sources */,
 				B38B2E301D8FACD8004D5256 /* SDWebImageDownloader.m in Sources */,
 				C19EB0411DD9F6A200C28F15 /* YWChooseSexView.m in Sources */,
 				B33A267D1D9A68040092CB12 /* PSTCollectionViewFlowLayout.m in Sources */,
@@ -11177,6 +11311,7 @@
 				C1A75DF91DCC3554000E76C2 /* ShowShoppingModel.m in Sources */,
 				B38B2E241D8FACD8004D5256 /* MJDIYHeader.m in Sources */,
 				B33A26A51D9A68040092CB12 /* EaseBubbleView+Location.m in Sources */,
+				AA399CE11EAB3B6E00CA22CB /* YWShopCarTableViewCell.m in Sources */,
 				B34BCE071DAA3D61001AB98D /* RBNodeAddToAldumModel.m in Sources */,
 				B38B2E4A1D8FACD8004D5256 /* SDCollectionViewCell.m in Sources */,
 				C1214C061DEC15D200FFC63C /* MybindingShopTableViewCell.m in Sources */,
@@ -11357,7 +11492,7 @@
 				CODE_SIGN_ENTITLEMENTS = YuWa/YuWa.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mingbang Network Technology Co., Ltd. (JQ283T24DV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JQ283T24DV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11394,8 +11529,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.duruikeji.YuWa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9b9f5f2-2c2c-44e0-87ad-366c261519cb";
-				PROVISIONING_PROFILE_SPECIFIER = luoyun;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -11409,7 +11544,7 @@
 				CODE_SIGN_ENTITLEMENTS = YuWa/YuWa.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mingbang Network Technology Co., Ltd. (JQ283T24DV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JQ283T24DV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11446,8 +11581,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.duruikeji.YuWa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9b9f5f2-2c2c-44e0-87ad-366c261519cb";
-				PROVISIONING_PROFILE_SPECIFIER = luoyun;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

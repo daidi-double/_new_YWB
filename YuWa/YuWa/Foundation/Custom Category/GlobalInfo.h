@@ -38,7 +38,7 @@
 #define HTTP_HOME_HOTSEARCH          @"/api.php/Index/hotSearch/"    //1热门搜索 旋风也用
 #define HTTP_HOME_SEARCH            @"/api.php/Index/searchResult/"     //1搜索
 
-#define HTTP_HOME_SHOPDETAIL        @"/api.php/Shop/index/"      //1店铺详情
+#define HTTP_HOME_SHOPDETAIL        @"/api.php/Shop/newIndex/"      //1店铺详情
 #define HTTP_GETPAGEVIEW            @"/api.php/Shop/addLog/"      //1得到浏览量
 #define HTTP_GET_CONPON             @"/api.php/User/robCoupon/"  //1抢优惠券
 #define HTTP_HOME_SCHEDULE          @"/api.php/User/addReserve/" //1店铺预定
@@ -101,6 +101,7 @@
 #pragma mark - Storm
 
 #define HTTP_STORM_NEARSHOP @"/api.php/Shop/getMyNearShop/" //1商家
+#define HTTP_SHOP_SHOPINFO  @"/api.php/Shop/shopInfo" //商家详情
 #define HTTP_STORM_TAG @"/api.php/Shop/getTagNameByCid/" //1子标签
 
 

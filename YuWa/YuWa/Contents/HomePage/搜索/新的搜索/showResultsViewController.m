@@ -11,7 +11,7 @@
 
 #import "HPRecommendShopModel.h"
 
-#import "YWShoppingDetailViewController.h"
+#import "ShopDetailViewController.h"
 
 #import "HUDLoadingShowView.h"
 
@@ -166,7 +166,7 @@
     HPRecommendShopModel*model=self.ModelArray[indexPath.section];
 
     
-    YWShoppingDetailViewController*vc=[[YWShoppingDetailViewController alloc]init];
+    ShopDetailViewController*vc=[[ShopDetailViewController alloc]init];
     vc.shop_id=model.id;
     [self.navigationController pushViewController:vc animated:YES];
 

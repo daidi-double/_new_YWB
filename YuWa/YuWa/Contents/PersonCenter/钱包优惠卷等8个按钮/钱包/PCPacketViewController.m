@@ -19,7 +19,7 @@
 #import "MyIncomeViewController.h"
 #import "GetMyMoneyViewController.h"
 #import "YWPayViewController.h"
-#import "YWShoppingDetailViewController.h"
+#import "ShopDetailViewController.h"
 #import "YWScanViewController.h"
 
 #import "WLBarcodeViewController.h"
@@ -132,7 +132,7 @@
             if([str hasPrefix:@"yuwabao"]){
                 NSArray*array=[str componentsSeparatedByString:@"/"];
                 NSString*idd=array.lastObject;
-                YWShoppingDetailViewController * vc = [[YWShoppingDetailViewController alloc]init];
+                ShopDetailViewController * vc = [[ShopDetailViewController alloc]init];
                 vc.shop_id = idd;
                 [self.navigationController pushViewController:vc animated:YES];
           

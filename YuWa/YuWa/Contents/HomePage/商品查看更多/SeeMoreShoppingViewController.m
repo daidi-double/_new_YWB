@@ -80,13 +80,13 @@
         return cell;
     }
     
-    ShowShoppingModel*model=self.maMallDatas[indexPath.row];
+//    ShowShoppingModel*model=self.maMallDatas[indexPath.row];
     
-    UIImageView*imageView=[cell viewWithTag:1];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:model.goods_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:nil];
-    
-    UILabel*titleLabel=[cell viewWithTag:2];
-    titleLabel.text=model.goods_name;
+//    UIImageView*imageView=[cell viewWithTag:1];
+//    [imageView sd_setImageWithURL:[NSURL URLWithString:model.goods_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:nil];
+//    
+//    UILabel*titleLabel=[cell viewWithTag:2];
+//    titleLabel.text=model.goods_name;
     
     UILabel*detailLabel=[cell viewWithTag:3];
     CGRect rect = [detailLabel.text boundingRectWithSize:CGSizeMake(detailLabel.frame.size.width, 999)
@@ -94,10 +94,10 @@
                                               attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
                                                  context:nil];
     self.conmentHight = rect.size.height;
-    detailLabel.text=model.goods_info;
-    
-    UILabel*moneyLabel=[cell viewWithTag:4];
-    moneyLabel.text=[NSString stringWithFormat:@"￥%@",model.goods_price];
+//    detailLabel.text=model.goods_info;
+//    
+//    UILabel*moneyLabel=[cell viewWithTag:4];
+//    moneyLabel.text=[NSString stringWithFormat:@"￥%@",model.goods_price];
     
     
     

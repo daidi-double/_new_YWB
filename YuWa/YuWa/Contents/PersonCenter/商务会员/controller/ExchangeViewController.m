@@ -30,7 +30,7 @@
   
     self.scoreLabel = [self.view viewWithTag:3];
     self.scoreLabel.text = [NSString stringWithFormat:@"当前兑换比例为%@,可兑换为人民币金额为:0元",self.pay_scale];
-    self.exchangeGradeTextField.keyboardType = UIKeyboardTypePhonePad;
+    self.exchangeGradeTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     
 
 

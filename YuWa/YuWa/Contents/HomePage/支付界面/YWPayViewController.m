@@ -49,7 +49,7 @@
     payVC.shopName=shopName;
     payVC.shopID=shopID;
     payVC.shopZhekou=shopZhekou;
-    
+
     payVC.whichPay=PayCategoryWritePay;
    
     

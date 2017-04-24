@@ -19,7 +19,7 @@
 #import "YWLoginViewController.h"
 
 #import "NewMainCategoryViewController.h"   //18个分类
-#import "YWShoppingDetailViewController.h"    //店铺详情
+#import "ShopDetailViewController.h"    //店铺详情
 #import "NewSearchViewController.h"        //搜索界面
 #import "WLBarcodeViewController.h"     //新的扫2维码
 #import "YWPayViewController.h"      //优惠买单界面
@@ -427,7 +427,7 @@
             HPTopShopModel*model=self.mtModelArrTopShop[number];
 //            MyLog(@"id=%@",model.id);
 
-            YWShoppingDetailViewController*vc=[[YWShoppingDetailViewController alloc]init];
+            ShopDetailViewController*vc=[[ShopDetailViewController alloc]init];
             vc.shop_id=model.id;
             [weakSelf.navigationController pushViewController:vc animated:YES];
             
@@ -551,14 +551,15 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==2) {
-//        NSInteger number=indexPath.row;
-//        HPRecommendShopModel*model=self.mtModelArrRecommend[number];
+        NSInteger number=indexPath.row;
+        HPRecommendShopModel*model=self.mtModelArrRecommend[number];
+
 //
-//        
 //        YWShoppingDetailViewController*vc=[[YWShoppingDetailViewController alloc]init];
 //        vc.shop_id=model.id;
 //        [self.navigationController pushViewController:vc animated:YES];
         ShopDetailViewController * shopVC = [[ShopDetailViewController alloc]init];
+        shopVC.shop_id = model.id;
         [self.navigationController pushViewController:shopVC animated:YES];
     }
     
@@ -661,7 +662,7 @@
                 ;
                 NSArray *strAry = [str componentsSeparatedByString:@"/"];
                 NSString*idd=strAry.lastObject;
-                YWShoppingDetailViewController * vc = [[YWShoppingDetailViewController alloc]init];
+                ShopDetailViewController * vc = [[ShopDetailViewController alloc]init];
                 vc.shop_id = idd;
                 [self.navigationController pushViewController:vc animated:YES];
             }else if (![str hasPrefix:@"yvwa.com/"]) {

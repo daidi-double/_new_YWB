@@ -64,15 +64,16 @@
 @property(nonatomic,strong)NSString*total_comment;   //总评论数
 @property(nonatomic,strong)NSString*top_than_other;  //高于同行
 @property(nonatomic,assign)BOOL is_collection;   //1为已经收藏  0为未收藏
-
+@property(nonatomic,strong)NSString*order_nums ;
+@property (nonatomic,strong)NSString * monthSale;//月销售量
 
 @property(nonatomic,strong)NSArray*infrastructure;           //商家详情
 @property(nonatomic,strong)NSArray*holiday;           // 活动
 @property(nonatomic,strong)NSArray*goods;           //  推荐商品
 @property(nonatomic,strong)NSArray*comment;           //  评论
 @property(nonatomic,strong)NSArray*recommend_shop;           //推荐店铺
-
-
+@property(nonatomic,strong)NSArray * business_hours;//营业时间
+@property(nonatomic,strong)NSArray*tag_name;//所属分类
 
 
 @end

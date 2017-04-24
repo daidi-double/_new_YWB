@@ -400,26 +400,26 @@
         
         
         UIImageView*leftImage=[cell viewWithTag:1];
-        [leftImage sd_setImageWithURL:[NSURL URLWithString:model.goods_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-        }];
-        
-        
-        UILabel*titleLabel=[cell viewWithTag:2];
-        titleLabel.text=model.goods_name;
-        
-        
-        UILabel*detailLabel=[cell viewWithTag:3];
-        detailLabel.text=model.goods_info;
+//        [leftImage sd_setImageWithURL:[NSURL URLWithString:model.goods_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//            
+//        }];
+//        
+//        
+//        UILabel*titleLabel=[cell viewWithTag:2];
+//        titleLabel.text=model.goods_name;
+//        
+//        
+//        UILabel*detailLabel=[cell viewWithTag:3];
+//        detailLabel.text=model.goods_info;
         //获取内容高度
-        CGRect rect = [detailLabel.text boundingRectWithSize:CGSizeMake(detailLabel.frame.size.width, 999)
-                                                    options:NSStringDrawingUsesLineFragmentOrigin
-                                                 attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
-                                                    context:nil];
-      
-        self.conmentHight =rect.size.height;
-        UILabel*moneyLabel=[cell viewWithTag:4];
-        moneyLabel.text=[NSString stringWithFormat:@"￥%@",model.goods_price];
+//        CGRect rect = [detailLabel.text boundingRectWithSize:CGSizeMake(detailLabel.frame.size.width, 999)
+//                                                    options:NSStringDrawingUsesLineFragmentOrigin
+//                                                 attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
+//                                                    context:nil];
+//      
+//        self.conmentHight =rect.size.height;
+//        UILabel*moneyLabel=[cell viewWithTag:4];
+//        moneyLabel.text=[NSString stringWithFormat:@"￥%@",model.goods_price];
         
         
         
