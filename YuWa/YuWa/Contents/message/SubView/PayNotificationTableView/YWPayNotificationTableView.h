@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface YWPayNotificationTableView : UITableView<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong)NSMutableArray * dataArr;

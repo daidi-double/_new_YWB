@@ -14,6 +14,6 @@
 @property (nonatomic,copy)NSString * title;
 @property (nonatomic,copy)NSString * content;
 @property (nonatomic,copy)NSString * ctime;
-
+@property (nonatomic,copy)NSString * order_id;
 
 @end
