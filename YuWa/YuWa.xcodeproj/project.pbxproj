@@ -629,6 +629,8 @@
 		AA3A1E6D1E8F90A000C12497 /* ScanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A1E6C1E8F90A000C12497 /* ScanModel.m */; };
 		AA3A30571EB02BB600E2FCD7 /* YWNoShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A30551EB02BB600E2FCD7 /* YWNoShopTableViewCell.m */; };
 		AA3A30581EB02BB600E2FCD7 /* YWNoShopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3A30561EB02BB600E2FCD7 /* YWNoShopTableViewCell.xib */; };
+		AA3A305C1EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A305A1EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.m */; };
+		AA3A305D1EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3A305B1EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.xib */; };
 		AA3A42C61E90DE6E0038E5CE /* PCDetailPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A42C41E90DE6E0038E5CE /* PCDetailPageViewController.m */; };
 		AA3A42C71E90DE6E0038E5CE /* PCDetailPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3A42C51E90DE6E0038E5CE /* PCDetailPageViewController.xib */; };
 		AA3A42CB1E90EA690038E5CE /* PCOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A42CA1E90EA690038E5CE /* PCOrderDetailModel.m */; };
@@ -2407,6 +2409,9 @@
 		AA3A30541EB02BB600E2FCD7 /* YWNoShopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWNoShopTableViewCell.h; sourceTree = "<group>"; };
 		AA3A30551EB02BB600E2FCD7 /* YWNoShopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWNoShopTableViewCell.m; sourceTree = "<group>"; };
 		AA3A30561EB02BB600E2FCD7 /* YWNoShopTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWNoShopTableViewCell.xib; sourceTree = "<group>"; };
+		AA3A30591EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWNewShopInfoTableViewCell.h; sourceTree = "<group>"; };
+		AA3A305A1EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWNewShopInfoTableViewCell.m; sourceTree = "<group>"; };
+		AA3A305B1EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWNewShopInfoTableViewCell.xib; sourceTree = "<group>"; };
 		AA3A42C31E90DE6E0038E5CE /* PCDetailPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDetailPageViewController.h; sourceTree = "<group>"; };
 		AA3A42C41E90DE6E0038E5CE /* PCDetailPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCDetailPageViewController.m; sourceTree = "<group>"; };
 		AA3A42C51E90DE6E0038E5CE /* PCDetailPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCDetailPageViewController.xib; sourceTree = "<group>"; };
@@ -5896,6 +5901,9 @@
 				AA3A30541EB02BB600E2FCD7 /* YWNoShopTableViewCell.h */,
 				AA3A30551EB02BB600E2FCD7 /* YWNoShopTableViewCell.m */,
 				AA3A30561EB02BB600E2FCD7 /* YWNoShopTableViewCell.xib */,
+				AA3A30591EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.h */,
+				AA3A305A1EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.m */,
+				AA3A305B1EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -9896,6 +9904,7 @@
 				C1E5B74F1DE3211B00EB1F85 /* qiang.png in Resources */,
 				AA3545C91E9DF23A00A2EC73 /* 4baobaoBG57@2x.jpg in Resources */,
 				AA35446E1E9DF23800A2EC73 /* 4baobaoLVUP11@2x.jpg in Resources */,
+				AA3A305D1EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.xib in Resources */,
 				AA35448F1E9DF23900A2EC73 /* 4baobaoLVUP41@2x.jpg in Resources */,
 				C12315471DE6BBE400B9D0FE /* BusinessMumberHeaderView.xib in Resources */,
 				AAF128031E8B72DC00121621 /* ForgetViewController.xib in Resources */,
@@ -11039,6 +11048,7 @@
 				AAF30ADF1E5EA74400793382 /* NSObject+MJClass.m in Sources */,
 				B38B2F161D8FC82F004D5256 /* RBNodeShowViewController.m in Sources */,
 				AA3BFE311E8559B500D669C2 /* AddBankCategoryViewController.m in Sources */,
+				AA3A305C1EB0619500E2FCD7 /* YWNewShopInfoTableViewCell.m in Sources */,
 				B38B2E531D8FACD8004D5256 /* STCountDownButton.m in Sources */,
 				B36AB95B1DB2345400FEAAAB /* YWStormSubSortCollectionView.m in Sources */,
 				B3192ACC1D9246FB00FD6578 /* RBPublicToolView.m in Sources */,

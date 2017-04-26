@@ -1,24 +1,18 @@
 //
-//  ShopCarDetailTableViewCell.m
+//  YWNewShopInfoTableViewCell.m
 //  YuWa
 //
-//  Created by double on 17/4/24.
+//  Created by double on 17/4/26.
 //  Copyright © 2017年 Shanghai DuRui Information Technology Company. All rights reserved.
 //
 
-#import "ShopCarDetailTableViewCell.h"
-#import "YWShopInfoListModel.h"
+#import "YWNewShopInfoTableViewCell.h"
 #import "NSString+JWAppendOtherStr.h"
-
-@interface ShopCarDetailTableViewCell()
-@property (nonatomic,strong)YWShopInfoListModel * infoModel;
-@property (nonatomic,strong)NSMutableArray * dataAry;
-@end
-@implementation ShopCarDetailTableViewCell
+@implementation YWNewShopInfoTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    // Initialization code
 }
 - (NSMutableArray *)dataAry{
     if (!_dataAry) {
@@ -26,20 +20,19 @@
     }
     return _dataAry;
 }
-- (void)setModel:(YWCarListModel *)model{
+- (void)setModel:(YWShopInfoListModel *)model{
     _model = model;
     [self setDataForCell];
 }
+-(void)setCart:(NSArray *)cart{
+    _cart = cart;
+    
+}
 - (void)setDataForCell{
-    self.shopNameLabel.text = self.model.company_name;
-    self.shop_id = self.model.id;
-    self.accountBtn.layer.cornerRadius = 2;
-    self.accountBtn.layer.masksToBounds = YES;
-    for (NSDictionary * dict in self.model.cart) {
-        self.infoModel = [YWShopInfoListModel yy_modelWithDictionary:dict];
-        [self.dataAry addObject:self.infoModel];
-    }
-    NSArray*specail=self.model.cart;
+    self.shopNameLabel.text = self.shopName;
+    self.shop_id = self.model.shop_id;
+
+    NSArray*specail=self.cart;
     CGFloat top = 30.0;
     CGFloat left = 13.0;
     //首先移除所有的东西
@@ -50,11 +43,12 @@
     for (UIView*view2 in self.saveAllLabel) {
         [view2 removeFromSuperview];
     }
-    CGFloat totalMoney = 0.0;
     if (specail.count>0) {
         for (int i=0; i<specail.count; i++) {
             YWShopInfoListModel * listModel = self.dataAry[i];
             UIImageView*speImage=[self viewWithTag:100+i];
+            speImage.width = kScreen_Width/7;
+            speImage.height = speImage.width;
             if (!speImage) {
                 speImage=[[UIImageView alloc]initWithFrame:CGRectMake(left, top, kScreen_Width/7, kScreen_Width/7)];
                 speImage.tag=10+i;
@@ -87,14 +81,14 @@
             shopNumberLabel.text = [NSString stringWithFormat:@"x%@",listModel.goods_num];
             [self.contentView addSubview:shopNumberLabel];
             [self.saveAllLabel addObject:shopNumberLabel];
-
+            
             UILabel*newPriceLaber=[self viewWithTag:500+i];
             NSString * price;
             NSString * total;
             if ([listModel.goods_disprice floatValue] == 0.00 || listModel.goods_disprice == nil || [listModel.goods_disprice isKindOfClass:[NSNull class]]) {
                 
                 price = listModel.goods_price;
-
+                
             }else{
                 price = listModel.goods_disprice;
                 
@@ -122,12 +116,12 @@
                 oldPriceLaber.tag=400+i;
                 
             }
-            NSString * str = [NSString stringWithFormat:@"￥%.2f",[listModel.goods_price floatValue] * [listModel.goods_num floatValue]];
+            NSString * str = [NSString stringWithFormat:@"￥%@",listModel.goods_price];
             NSMutableAttributedString *attributeMarket = [[NSMutableAttributedString alloc] initWithString:str];
             [attributeMarket setAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle], NSBaselineOffsetAttributeName : @(NSUnderlineStyleSingle)} range:NSMakeRange(0,str.length)];
-
+            
             oldPriceLaber.attributedText = attributeMarket;
-
+            
             CGRect shopNameOldWidth = [oldPriceLaber.text boundingRectWithSize:CGSizeMake(MAXFLOAT, newPriceLaber.height) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: oldPriceLaber.font} context:nil];
             oldPriceLaber.frame= CGRectMake(kScreen_Width - shopNameOldWidth.size.width-25 -newPriceLaber.frame.size.width, top + 30, shopNameOldWidth.size.width , newPriceLaber.height);
             
@@ -139,29 +133,29 @@
                 oldPriceLaber.hidden = YES;
                 
             }
-
+            
             top=top+kScreen_Width/7+20;
-            NSString * money = [newPriceLaber.text substringFromIndex:1];
-            totalMoney = totalMoney + [money floatValue];
+//            NSString * money = [newPriceLaber.text substringFromIndex:1];
+//            totalMoney = totalMoney + [money floatValue];
             
         }
-        NSString * totalMoneyStr = [NSString stringWithFormat:@"%.2f",totalMoney];
-        if (totalMoney == 0.00) {
-            totalMoneyStr = @"0";
-        }
-        self.totalMoneyLabel.attributedText = [NSString stringWithFirstStr:@"合计￥" withFont:self.totalMoneyLabel.font withColor:RGBCOLOR(123, 124, 125, 1) withSecondtStr:totalMoneyStr withFont:self.totalMoneyLabel.font withColor:[UIColor colorWithHexString:@"#fe8238"]];
-    }else{
-        
+//        NSString * totalMoneyStr = [NSString stringWithFormat:@"%.2f",totalMoney];
+//        if (totalMoney == 0.00) {
+//            totalMoneyStr = @"0";
+//        }
+//        self.totalMoneyLabel.attributedText = [NSString stringWithFirstStr:@"合计￥" withFont:self.totalMoneyLabel.font withColor:RGBCOLOR(123, 124, 125, 1) withSecondtStr:totalMoneyStr withFont:self.totalMoneyLabel.font withColor:[UIColor colorWithHexString:@"#fe8238"]];
+//    }else{
+//        
     }
-
+    
 }
 + (CGFloat)getHeight:(NSArray *)array{
     NSInteger aa=array.count;
     return 30+(kScreen_Width/7+20)*aa + 50 ;
 }
 - (IBAction)goToAccountAction:(UIButton *)sender {
-    NSString * money = [self.totalMoneyLabel.text substringFromIndex:3];
-    [self.delegate goToAccount:money andBtn:sender];
+//    NSString * money = [self.totalMoneyLabel.text substringFromIndex:3];
+//    [self.delegate goToAccount:money andBtn:sender];
     
 }
 -(NSMutableArray *)saveAllImage{
@@ -184,8 +178,4 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)clearShopAction:(UIButton *)sender {
-    [self.delegate cleaerShopCarList:sender];
-
-}
 @end

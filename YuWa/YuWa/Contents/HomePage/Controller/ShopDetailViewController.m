@@ -448,6 +448,8 @@
         vc.shopID = self.mainModel.id;
         vc.shopName = self.mainModel.company_name;
         vc.shopDiscount = self.mainModel.discount;
+        NSString * money = [self. totalMoneyLabel.text substringFromIndex:1];
+        vc.money = money;
         [self.navigationController pushViewController:vc animated:YES];
         
     }
