@@ -112,6 +112,10 @@
             [JRToast showWithText:data[@"msg"] duration:1];
             
             [self.shopCarTableView reloadData];
+            //创建一个消息对象
+            NSNotification * notice = [NSNotification notificationWithName:@"清除数量" object:nil userInfo:nil];
+            //发送消息
+            [[NSNotificationCenter defaultCenter]postNotification:notice];
         }else{
             [JRToast showWithText:data[@"errorMessage"] duration:1];
         }

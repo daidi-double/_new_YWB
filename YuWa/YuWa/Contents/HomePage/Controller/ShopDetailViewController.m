@@ -61,6 +61,14 @@
     [self getDatas];
      self.commentView.hidden = YES;
 
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+    [center addObserver:self selector:@selector(notice:) name:@"清除数量" object:nil];
+}
+-(void)notice:(id)sender{
+    [self clearNumberOfShop];
+    [self.rightTableView reloadData];
+    [self.leftTableView reloadData];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
@@ -70,6 +78,10 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden  = NO;
+}
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"清除数量" object:nil];
+    
 }
 - (void)makeUI{
     [self.view addSubview:self.commentView];
