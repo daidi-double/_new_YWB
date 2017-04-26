@@ -27,7 +27,10 @@
 @property(nonatomic,strong)NSString*customer_content;
 @property(nonatomic,strong)NSArray*img_url;
 @property(nonatomic,strong)NSString*customer_name;
-@property(nonatomic,strong)NSString*customer_header_img;
+//@property(nonatomic,strong)NSString*customer_header_img;
+@property(nonatomic,strong)NSString*customer_img;
+@property(nonatomic,strong)NSArray*rep_list;
+@property(nonatomic,strong)NSString*id;
 
 //一些店铺的信息  只有个人中心才有
 //@property(nonatomic,strong)NSString*company_name;

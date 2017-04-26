@@ -86,7 +86,7 @@
     
 }
 - (void)makeUI{
-    [self.view addSubview:self.commentView];
+    
     self.BGImageView.userInteractionEnabled = YES;
     self.BGImageView.contentMode = UIViewContentModeScaleToFill;
     self.numberLabel.hidden = YES;
@@ -177,6 +177,8 @@
             self.rightTableView.hidden = YES;
             self.accountBGView.hidden = YES;
             self.commentView.hidden = NO;
+           [self.view addSubview:self.commentView];
+            
             break;
     }
    

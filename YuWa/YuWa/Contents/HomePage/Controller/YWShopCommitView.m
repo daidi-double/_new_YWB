@@ -18,10 +18,11 @@
     UIButton * markBtn;
 }
 @property(nonatomic,strong)HUDFailureShowView*failView;
-
+@property (nonatomic,strong)UIView * bgview;
 @property(nonatomic,assign)int pagen;
 @property(nonatomic,assign)int pages;
 @property(nonatomic,strong)NSMutableArray*maMallDatas;
+@property (nonatomic,copy)NSString *type;
 @end
 @implementation YWShopCommitView
 
@@ -29,6 +30,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubview:self.shopCommitTableView];
+        self.shopCommitTableView.backgroundColor = RGBCOLOR(240, 240, 240, 1);
+        self.type = @"1";
         [self setUpMJRefresh];
     }
     return self;
@@ -41,14 +44,14 @@
     self.shopCommitTableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         self.pages=0;
         self.maMallDatas=[NSMutableArray array];
-        [self getDatas];
+        [self getDatas:self.type];
         
     }];
     
     //上拉刷新
     self.shopCommitTableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         self.pages++;
-        [self getDatas];
+        [self getDatas:self.type];
     }];
     
     //立即刷新
@@ -63,6 +66,7 @@
         _shopCommitTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.width, self.height) style:UITableViewStylePlain];
         _shopCommitTableView.delegate = self;
         _shopCommitTableView.dataSource = self;
+        self.shopCommitTableView.backgroundColor = RGBCOLOR(240, 240, 240, 1);
         [_shopCommitTableView registerNib:[UINib nibWithNibName:SCORECELL bundle:nil] forCellReuseIdentifier:SCORECELL];
         [_shopCommitTableView registerNib:[UINib nibWithNibName:COMMENTCELl bundle:nil] forCellReuseIdentifier:COMMENTCELl];
     }
@@ -85,27 +89,7 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1) {
-        UIView * bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 5, kScreen_Width, 25)];
-        NSArray * titleAry = @[@"全部评论",@"好评",@"中差评"];
-        CGFloat btnWidth = (kScreen_Width -2)/3;
-        for (int i = 0; i <3;  i++) {
-            UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake((btnWidth +1) * i, 0, btnWidth, 25);
-            [btn setTitle:titleAry[i] forState:UIControlStateNormal];
-            btn.titleLabel.font = [UIFont systemFontOfSize:13];
-            [btn setTitleColor:[UIColor colorWithHexString:@"#5dc0ea"] forState:UIControlStateSelected];
-            [btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
-            if (i == 0 ) {
-                btn.selected = YES;
-                markBtn.selected = NO;
-                markBtn = btn;
-            }
-            btn.tag = 1000 +i;
-            [btn addTarget:self action:@selector(seeOtherComment:) forControlEvents:UIControlEventTouchUpInside];
-            [bgview addSubview:btn];
-        }
-        
-        return bgview;
+        return self.bgview;
     }
     return nil;
 }
@@ -114,12 +98,14 @@
         
         return 88.f;
     }
-    CommentModel*model=self.maMallDatas[indexPath.section];
+    CommentModel*model=self.maMallDatas[indexPath.row];
+    MyLog(@"cell高度 %f",[CommentTableViewCell getCellHeight:model]);
     return [CommentTableViewCell getCellHeight:model];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         YWShopScoreTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:SCORECELL];
+        cell.selectionStyle = NO;
         cell.totalScore = self.totalScore;
         return cell;
     }else{
@@ -132,11 +118,10 @@
     }
 }
 
--(void)getDatas{
-    NSString*pages=[NSString stringWithFormat:@"%d",self.pages];
-    NSString*pagen=[NSString stringWithFormat:@"%d",self.pagen];
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_MORECOMMIT];
-    NSDictionary*params=@{@"shop_id":self.shop_id,@"pagen":pagen,@"pages":pages};
+-(void)getDatas:(NSString *)type{
+
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_SHOPDETAILCOMMENT];
+    NSDictionary*params=@{@"shop_id":self.shop_id,@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"type":type};
     HttpManager*manager=[[HttpManager alloc]init];
     
     
@@ -146,11 +131,12 @@
     
     
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
-        MyLog(@"%@",data[@"data"]);
+        MyLog(@"评价data = %@",data[@"comment"]);
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
-            for (NSDictionary*dict in data[@"data"]) {
+            [self.maMallDatas removeAllObjects];
+            for (NSDictionary*dict in data[@"comment"]) {
                 CommentModel*model=[CommentModel yy_modelWithDictionary:dict];
                 [self.maMallDatas addObject:model];
                 
@@ -160,15 +146,6 @@
             //如果没有数据
             if (self.maMallDatas.count<1) {
                 [JRToast showWithText:@"没有更多评论了！" duration:3.5f];
-                
-                //                [self.view addSubview:self.failView];
-                //                UIView*failView=[JWTools addFailViewWithFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height-64) withTouchBlock:^{
-                //                    [failView removeFromSuperview];
-                //                    [self.tableView.mj_header beginRefreshing];
-                //
-                //                }];
-                ////                [self.view addSubview:failView];
-                //                [self.view insertSubview:failView belowSubview:loadingView];
                 
             }
             
@@ -194,8 +171,45 @@
         return;
     }
     sender.selected = YES;
-    markBtn.selected = YES;
+    markBtn.selected = NO;
     markBtn = sender;
+    self.type = [NSString stringWithFormat:@"%ld",sender.tag];
+    [self getDatas:[NSString stringWithFormat:@"%ld",sender.tag -999]];
 }
+- (UIView*)bgview{
+    if (!_bgview) {
+        _bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 35)];
+        _bgview.backgroundColor = RGBCOLOR(240, 240, 240, 1);
+        UIView * bgViewT = [[UIView alloc]initWithFrame:CGRectMake(0, 5, kScreen_Width, 25)];
+        bgViewT.backgroundColor = [UIColor whiteColor];
+        [_bgview addSubview:bgViewT];
+        
+        NSArray * titleAry = @[@"全部评论",@"好评",@"中差评"];
+        CGFloat btnWidth = (kScreen_Width -2)/3;
+        for (int i = 0; i <3;  i++) {
+            UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            btn.frame = CGRectMake((btnWidth +1) * i, 0, btnWidth, 25);
+            [btn setTitle:titleAry[i] forState:UIControlStateNormal];
+            btn.centerY = bgViewT.frame.size.height/2;
+            btn.titleLabel.font = [UIFont systemFontOfSize:13];
+            [btn setTitleColor:[UIColor colorWithHexString:@"#5dc0ea"] forState:UIControlStateSelected];
+            [btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+            if (i == 0 ) {
+                btn.selected = YES;
+                markBtn.selected = NO;
+                markBtn = btn;
+            }
+            btn.tag = 1000 +i;
+            [btn addTarget:self action:@selector(seeOtherComment:) forControlEvents:UIControlEventTouchUpInside];
+            [bgViewT addSubview:btn];
+            
+            UIView * line = [[UIView alloc]initWithFrame:CGRectMake(btnWidth +(1+btnWidth)*i, 5, 1, 15)];
+            line.backgroundColor = [UIColor lightGrayColor];
+            
+            [bgViewT addSubview:line];
+        }
 
+    }
+    return _bgview;
+}
 @end
