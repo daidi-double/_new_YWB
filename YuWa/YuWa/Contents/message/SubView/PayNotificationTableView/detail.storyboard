@@ -45,7 +45,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.32217621803283691" green="0.61267608404159546" blue="0.38916748762130737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.95350903272628784" green="0.60627204179763794" blue="0.37489908933639526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Gif-fd-Kg5"/>
                                                     <constraint firstItem="wgD-OT-UAC" firstAttribute="leading" secondItem="Gar-Mc-ScI" secondAttribute="trailing" constant="10" id="PHG-L2-Rbw"/>
@@ -124,26 +124,43 @@
                                                 <rect key="frame" x="0.0" y="46" width="375" height="46"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贵族世家(万达店)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bY9-Oh-r4X">
-                                                        <rect key="frame" x="15" y="13" width="133" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="15" y="13" width="134" height="21"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_right_arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="aL6-YA-14z">
+                                                        <rect key="frame" x="342" y="10" width="19" height="27"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="19" id="DtG-YV-Avp"/>
+                                                            <constraint firstAttribute="height" constant="27" id="r5X-lQ-Gaf"/>
+                                                        </constraints>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="bY9-Oh-r4X" firstAttribute="centerY" secondItem="p80-dd-6Ab" secondAttribute="centerY" id="3iC-hK-etM"/>
+                                                    <constraint firstItem="aL6-YA-14z" firstAttribute="centerY" secondItem="p80-dd-6Ab" secondAttribute="centerY" id="dNc-ke-goB"/>
                                                     <constraint firstAttribute="height" constant="46" id="f44-mo-54n"/>
+                                                    <constraint firstAttribute="trailing" secondItem="aL6-YA-14z" secondAttribute="trailing" constant="14" id="gBT-TA-bxn"/>
                                                     <constraint firstItem="bY9-Oh-r4X" firstAttribute="leading" secondItem="p80-dd-6Ab" secondAttribute="leading" constant="15" id="uq9-hd-Ebu"/>
                                                 </constraints>
                                             </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商务服务有异议？联系客服" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAC-nT-15e">
+                                                <rect key="frame" x="102" y="255" width="172" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="xhb-YO-Hc4" secondAttribute="trailing" id="0tq-bi-np3"/>
+                                            <constraint firstItem="nAC-nT-15e" firstAttribute="top" secondItem="FPn-uU-2eu" secondAttribute="bottom" constant="50" id="1Nt-Xq-Kn4"/>
                                             <constraint firstAttribute="trailing" secondItem="FPn-uU-2eu" secondAttribute="trailing" id="6zp-dd-wwr"/>
                                             <constraint firstItem="FPn-uU-2eu" firstAttribute="top" secondItem="xhb-YO-Hc4" secondAttribute="bottom" id="Bn9-Ae-neW"/>
                                             <constraint firstItem="FPn-uU-2eu" firstAttribute="leading" secondItem="KN0-D4-GeV" secondAttribute="leading" id="GFF-be-AyF"/>
+                                            <constraint firstItem="nAC-nT-15e" firstAttribute="centerX" secondItem="KN0-D4-GeV" secondAttribute="centerX" id="OPQ-H8-nQ9"/>
                                             <constraint firstItem="igB-xN-nvl" firstAttribute="top" secondItem="KN0-D4-GeV" secondAttribute="top" id="ccH-av-gNh"/>
                                             <constraint firstItem="xhb-YO-Hc4" firstAttribute="top" secondItem="p80-dd-6Ab" secondAttribute="bottom" id="gjM-oI-Ihk"/>
                                             <constraint firstItem="p80-dd-6Ab" firstAttribute="top" secondItem="igB-xN-nvl" secondAttribute="bottom" id="iYS-H8-gSR"/>
@@ -183,10 +200,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zU4-wh-UGW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="236" y="-141.67916041979012"/>
+            <point key="canvasLocation" x="672.79999999999995" y="-258.62068965517244"/>
         </scene>
     </scenes>
     <resources>
+        <image name="ic_right_arrow.png" width="64" height="64"/>
         <image name="jieshou.png" width="37" height="37"/>
     </resources>
 </document>

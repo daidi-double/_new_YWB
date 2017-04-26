@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1200AE09FCCFFA5EBD10470F /* libPods-YuWa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC1CC6C89770D83C605851F /* libPods-YuWa.a */; };
+		2514AA581EB0900100E3DF30 /* rightJIan.png in Resources */ = {isa = PBXBuildFile; fileRef = 2514AA571EB0900100E3DF30 /* rightJIan.png */; };
+		2514AA5A1EB091B200E3DF30 /* ic_right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2514AA591EB091B100E3DF30 /* ic_right_arrow.png */; };
 		251522C91EA9F9A600BA4FF9 /* detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 251522C81EA9F9A600BA4FF9 /* detail.storyboard */; };
 		251522CC1EA9FA1400BA4FF9 /* YWdetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 251522CB1EA9FA1400BA4FF9 /* YWdetailViewController.m */; };
 		2531B4821EA4BF33001B240F /* remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2531B47E1EA4BF33001B240F /* remove@2x.png */; };
@@ -1738,6 +1740,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2514AA571EB0900100E3DF30 /* rightJIan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightJIan.png; sourceTree = "<group>"; };
+		2514AA591EB091B100E3DF30 /* ic_right_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_right_arrow.png; sourceTree = "<group>"; };
 		251522C81EA9F9A600BA4FF9 /* detail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = detail.storyboard; sourceTree = "<group>"; };
 		251522CA1EA9FA1400BA4FF9 /* YWdetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailViewController.h; sourceTree = "<group>"; };
 		251522CB1EA9FA1400BA4FF9 /* YWdetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailViewController.m; sourceTree = "<group>"; };
@@ -9514,12 +9518,14 @@
 				AA3BD3B81E777B5D0024BECD /* aboutuslogo.png */,
 				AAC86F701E76E93300F94C84 /* app_logo@2x.png */,
 				C135A17C1DDEF3BC002B78A5 /* addImage.png */,
+				2514AA591EB091B100E3DF30 /* ic_right_arrow.png */,
 				C1F7BEF01DB1CA0700CCAF96 /* center_set@2x.png */,
 				C1F7BEF11DB1CA0700CCAF96 /* center_whiteLocate@2x.png */,
 				C1F7BEF21DB1CA0700CCAF96 /* dagou.png */,
 				C1F7BEF31DB1CA0700CCAF96 /* home_money.png */,
 				C1F7BEF41DB1CA0700CCAF96 /* home_pic@2x.png */,
 				C1DB58FB1E51B4EA004B386F /* applePay.png */,
+				2514AA571EB0900100E3DF30 /* rightJIan.png */,
 				C1F7BEF71DB1CA0700CCAF96 /* 个人中心八张图 */,
 				C1F7BF011DB1CA0700CCAF96 /* 钻石.png */,
 			);
@@ -10014,6 +10020,7 @@
 				AA3544C31E9DF23900A2EC73 /* 0baobaoBG34@2x.jpg in Resources */,
 				AA3544911E9DF23900A2EC73 /* 4baobaoLVUP43@2x.jpg in Resources */,
 				AA35440D1E9DF23800A2EC73 /* 2baobaoLVUP32@2x.jpg in Resources */,
+				2514AA5A1EB091B200E3DF30 /* ic_right_arrow.png in Resources */,
 				C135A1551DDE020F002B78A5 /* 波浪个人_00039.png in Resources */,
 				AA35458C1E9DF23A00A2EC73 /* 3baobaoBG56@2x.jpg in Resources */,
 				AA35458D1E9DF23A00A2EC73 /* 3baobaoBG57@2x.jpg in Resources */,
@@ -10784,6 +10791,7 @@
 				AA3544681E9DF23800A2EC73 /* 3baobaoLVUP6@2x.jpg in Resources */,
 				C135A1491DDE020F002B78A5 /* 波浪个人_00028.png in Resources */,
 				C135A16F1DDE020F002B78A5 /* 波浪个人_0009.png in Resources */,
+				2514AA581EB0900100E3DF30 /* rightJIan.png in Resources */,
 				AA3544EE1E9DF23900A2EC73 /* 1baobaoBG21@2x.jpg in Resources */,
 				AA3544521E9DF23800A2EC73 /* 3baobaoLVUP40@2x.jpg in Resources */,
 				C1F7BD971DB1C94500CCAF96 /* YWMainCategoryViewController.xib in Resources */,
