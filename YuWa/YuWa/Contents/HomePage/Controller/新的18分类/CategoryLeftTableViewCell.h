@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *shop_imgView;
 @property (weak, nonatomic) IBOutlet UILabel *shop_nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *monthPayLabel;//月销售量
+@property (weak, nonatomic) IBOutlet UILabel *oldPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;
 @property (nonatomic,strong)NSArray * goodsAry;

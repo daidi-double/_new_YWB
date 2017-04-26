@@ -13,6 +13,10 @@
 #define COMMENTCELl @"CommentTableViewCell"
 #define SCORECELL  @"YWShopScoreTableViewCell"
 @interface YWShopCommitView ()<UITableViewDelegate,UITableViewDataSource>
+
+{
+    UIButton * markBtn;
+}
 @property(nonatomic,strong)HUDFailureShowView*failView;
 
 @property(nonatomic,assign)int pagen;
@@ -72,6 +76,38 @@
         return 1;
     }
     return self.maMallDatas.count;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        return 35.f;
+    }
+    return 0.01f;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        UIView * bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 5, kScreen_Width, 25)];
+        NSArray * titleAry = @[@"全部评论",@"好评",@"中差评"];
+        CGFloat btnWidth = (kScreen_Width -2)/3;
+        for (int i = 0; i <3;  i++) {
+            UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            btn.frame = CGRectMake((btnWidth +1) * i, 0, btnWidth, 25);
+            [btn setTitle:titleAry[i] forState:UIControlStateNormal];
+            btn.titleLabel.font = [UIFont systemFontOfSize:13];
+            [btn setTitleColor:[UIColor colorWithHexString:@"#5dc0ea"] forState:UIControlStateSelected];
+            [btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+            if (i == 0 ) {
+                btn.selected = YES;
+                markBtn.selected = NO;
+                markBtn = btn;
+            }
+            btn.tag = 1000 +i;
+            [btn addTarget:self action:@selector(seeOtherComment:) forControlEvents:UIControlEventTouchUpInside];
+            [bgview addSubview:btn];
+        }
+        
+        return bgview;
+    }
+    return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
@@ -153,6 +189,13 @@
     
 }
 
-
+- (void)seeOtherComment:(UIButton*)sender{
+    if (sender.selected == YES) {
+        return;
+    }
+    sender.selected = YES;
+    markBtn.selected = YES;
+    markBtn = sender;
+}
 
 @end

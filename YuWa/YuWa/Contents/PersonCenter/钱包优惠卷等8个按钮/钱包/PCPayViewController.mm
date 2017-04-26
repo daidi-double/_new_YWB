@@ -539,7 +539,11 @@
         NSInteger number=[data[@"errorCode"] floatValue];
         if (number==0) {
             [JRToast showWithText:data[@"data"]];
-            UIViewController*vc=[self.navigationController.viewControllers objectAtIndex:1];
+            UIViewController*vc=[self.navigationController.viewControllers objectAtIndex:3];
+            //创建一个消息对象
+            NSNotification * notice = [NSNotification notificationWithName:@"清除数量" object:nil userInfo:nil];
+            //发送消息
+            [[NSNotificationCenter defaultCenter]postNotification:notice];
             [self.navigationController popToViewController:vc animated:YES];
             
         }else{
@@ -604,9 +608,13 @@
             if (reslut == 1) {
             [UserSession instance].money=data[@"data"][@"money"];
 
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付结果" message:@"成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付结果" message:@"成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alert show];
 
+                //创建一个消息对象
+                NSNotification * notice = [NSNotification notificationWithName:@"清空数量" object:nil userInfo:nil];
+                //发送消息
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
 
             }else{
                 [JRToast showWithText:@"支付失败"];
@@ -663,7 +671,12 @@
             case WXSuccess:
             {
                 strMsg = @"支付结果：成功！";
-
+                //创建一个消息对象
+                NSNotification * notice = [NSNotification notificationWithName:@"清空数量" object:nil userInfo:nil];
+                //发送消息
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                //清空购物车商品，有shopid的时候在解注释调用
+//              [self clearShopCar:self.shop_ID];
         }
                 break;
                 
@@ -689,6 +702,20 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)clearShopCar:(NSString *)shop_id{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_CLEARSHOPCARLIST];
+    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"shop_id":shop_id};
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"清空购物车%@",data);
+        NSInteger number = [data[@"errorCode"] integerValue];
+        if (number == 0) {
+           
+                }else{
+           
+                }
+    }];
+}
 
 -(UITableView *)tableView{
     if (!_tableView) {

@@ -44,12 +44,6 @@
                         <color key="textColor" red="0.32549019607843138" green="0.32941176470588235" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1i8-xc-Yf5">
-                        <rect key="frame" x="74.5" y="53.5" width="25" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.90588235294117647" green="0.2627450980392157" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vq-N1-hcA">
                         <rect key="frame" x="265.5" y="47.5" width="10.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -70,6 +64,18 @@
                         </constraints>
                         <state key="normal" backgroundImage="加号"/>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTT-1z-nkS">
+                        <rect key="frame" x="105.5" y="53" width="13.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1i8-xc-Yf5">
+                        <rect key="frame" x="74" y="53" width="21.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.90588235294117647" green="0.2627450980392157" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="1Vq-N1-hcA" firstAttribute="centerY" secondItem="Eeg-Ng-hNU" secondAttribute="centerY" id="532-ty-uzV"/>
@@ -78,8 +84,10 @@
                     <constraint firstAttribute="trailing" secondItem="zuo-Wc-2HW" secondAttribute="trailing" constant="10" id="E4r-0P-PnG"/>
                     <constraint firstItem="gPA-dB-YS3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="Fd8-IZ-yAW"/>
                     <constraint firstAttribute="trailing" secondItem="zuo-Wc-2HW" secondAttribute="trailing" constant="10" id="JYT-li-6fe"/>
+                    <constraint firstItem="1i8-xc-Yf5" firstAttribute="leading" secondItem="v8W-mD-z1p" secondAttribute="leading" id="N7f-yP-h3J"/>
                     <constraint firstItem="1i8-xc-Yf5" firstAttribute="top" secondItem="v8W-mD-z1p" secondAttribute="bottom" constant="8" id="ScD-W0-gg7"/>
                     <constraint firstItem="zuo-Wc-2HW" firstAttribute="leading" secondItem="1Vq-N1-hcA" secondAttribute="trailing" constant="10" id="SkX-82-iMk"/>
+                    <constraint firstItem="YTT-1z-nkS" firstAttribute="leading" secondItem="1i8-xc-Yf5" secondAttribute="trailing" constant="10" id="TUl-7A-vZt"/>
                     <constraint firstItem="zuo-Wc-2HW" firstAttribute="leading" secondItem="1Vq-N1-hcA" secondAttribute="trailing" constant="10" id="V1U-lK-g0v"/>
                     <constraint firstItem="zuo-Wc-2HW" firstAttribute="height" secondItem="Eeg-Ng-hNU" secondAttribute="height" id="ZBV-6Z-TxS"/>
                     <constraint firstItem="VHc-qy-va0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="ZtX-mb-hqs"/>
@@ -89,7 +97,7 @@
                     <constraint firstItem="v8W-mD-z1p" firstAttribute="leading" secondItem="gPA-dB-YS3" secondAttribute="leading" id="dKF-xc-rtc"/>
                     <constraint firstItem="v8W-mD-z1p" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gHx-N6-uEg"/>
                     <constraint firstAttribute="bottom" secondItem="zuo-Wc-2HW" secondAttribute="bottom" constant="6" id="rxW-ob-JRr"/>
-                    <constraint firstItem="1i8-xc-Yf5" firstAttribute="leading" secondItem="gPA-dB-YS3" secondAttribute="leading" id="tHh-eH-gMM"/>
+                    <constraint firstItem="1i8-xc-Yf5" firstAttribute="centerY" secondItem="YTT-1z-nkS" secondAttribute="centerY" id="s1v-h5-Y87"/>
                     <constraint firstItem="zuo-Wc-2HW" firstAttribute="centerY" secondItem="Eeg-Ng-hNU" secondAttribute="centerY" id="tm2-2o-lTz"/>
                     <constraint firstItem="gPA-dB-YS3" firstAttribute="leading" secondItem="VHc-qy-va0" secondAttribute="trailing" constant="10" id="zXb-kB-amg"/>
                 </constraints>
@@ -97,6 +105,7 @@
             <connections>
                 <outlet property="monthPayLabel" destination="v8W-mD-z1p" id="aOy-3N-Ryr"/>
                 <outlet property="numberLabel" destination="1Vq-N1-hcA" id="S6s-Z5-hGu"/>
+                <outlet property="oldPriceLabel" destination="YTT-1z-nkS" id="vc1-nz-8C7"/>
                 <outlet property="priceLabel" destination="1i8-xc-Yf5" id="vrq-s7-0Zu"/>
                 <outlet property="shop_imgView" destination="VHc-qy-va0" id="8cT-MG-Hi2"/>
                 <outlet property="shop_nameLabel" destination="gPA-dB-YS3" id="ZS1-4O-ugS"/>

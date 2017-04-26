@@ -67,6 +67,8 @@
 }
 -(void)notice:(id)sender{
     [self clearNumberOfShop];
+    [self clearShopCar:self.shop_id];
+    [self.shops removeAllObjects];
     [self.rightTableView reloadData];
     [self.leftTableView reloadData];
 }
@@ -401,17 +403,6 @@
             }
            
 
-//            for (NSDictionary*dict in self.mainModel.comment) {
-//                CommentModel*model=[CommentModel yy_modelWithDictionary:dict];
-//                [self.maMCommit addObject:model];
-//            }
-//
-//            for (NSDictionary*dict in self.mainModel.recommend_shop) {
-//                HPRecommendShopModel*model=[HPRecommendShopModel yy_modelWithDictionary:dict];
-//                [self.maMRecommend addObject:model];
-//            }
-            
-//            [self giveValueForTableHeaderView];
             [self.leftTableView reloadData];
             [self.rightTableView reloadData];
             NSIndexPath*indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
@@ -618,6 +609,21 @@
     carVC.shop_id = self.shop_id;
     [self.navigationController pushViewController:carVC animated:YES];
 }
+- (void)clearShopCar:(NSString *)shop_id{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_CLEARSHOPCARLIST];
+    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"shop_id":shop_id};
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"清空购物车%@",data);
+        NSInteger number = [data[@"errorCode"] integerValue];
+        if (number == 0) {
+
+        }else{
+  
+        }
+    }];
+}
+
 
 //更多-相册
 - (IBAction)seeMoreAction:(UIButton *)sender {
