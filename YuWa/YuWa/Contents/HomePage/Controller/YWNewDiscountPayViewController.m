@@ -27,7 +27,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *settomMoneyLabel;
 @property (weak, nonatomic) IBOutlet UIView *accountBGView;
 @property (weak, nonatomic) IBOutlet UITableView *payTableView;
-@property (nonatomic,copy)NSString * shopID;
 @property (nonatomic,strong)UIButton * couponBtn;//使用优惠券
 @property (nonatomic,copy)NSString * noDiscountMoney;//不打折金额
 @property (nonatomic,copy)NSString * otherTotalMoney;//其他消费总额
@@ -59,7 +58,13 @@
         self.settomMoneyLabel.text = @"待支付￥0.00";
     }
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.status == 2) {
+        
+        [self requestShopListData];
+    }
+}
 //去结算
 - (IBAction)toAccountAction:(UIButton *)sender {
     [self touchPay];
@@ -88,8 +93,13 @@
         return 44.f;
     }else{
     if (indexPath.section == 0) {
-        YWCarListModel * model = self.dataAry[indexPath.section];
-        return [ShopCarDetailTableViewCell getHeight:model.cart]-40;
+        if (self.status != 2) {
+            
+            YWCarListModel * model = self.dataAry[indexPath.section];
+            return [ShopCarDetailTableViewCell getHeight:model.cart]-40;
+        }else{
+            return [ShopCarDetailTableViewCell getHeight:self.model.cart];
+        }
     }
         return 44.f;
     }
@@ -109,9 +119,13 @@
             return cell;
         }else{
         ShopCarDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:carCell];
-        cell.selectionStyle = NO;
-        cell.model = self.model;
-        self.shopID = self.model.id;
+            cell.selectionStyle = NO;
+            cell.status = 2;
+            cell.infoModel = self.infoModel;
+            
+            cell.model = self.model;
+            
+            self.shopID = self.model.id;
         [self.goods_prices removeAllObjects];
         [self.goods_nums removeAllObjects];
         [self.goods_ids removeAllObjects];
@@ -394,7 +408,6 @@
    
 
      NSString * goods_price = [self.goods_prices componentsJoinedByString:@","];
-        MyLog(@"价格%@",goods_price);
 
     NSString * goods_nums = [self.goods_nums componentsJoinedByString:@","];
     NSString * goods_ids = [self.goods_ids componentsJoinedByString:@","];
@@ -405,9 +418,21 @@
         isCoupon = @"0";
     }
 
+    if (self.goods_ids.count == 0) {
+        goods_ids = @"";
+        goods_nums = @"";
+        goods_price = @"";
+    }
     
+    NSString * discount;
+    if (self.status == 1) {
+        discount = @"1";
+    }else{
+        discount = @"1";
+    }
+    NSString * newShouldPayMoney = [NSString stringWithFormat:@"%.2f",self.shouldPayMoney];
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MAKEORDER];
-    NSDictionary*dict=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"seller_uid":self.shopID,@"total_money":@(self.shouldPayMoney),@"non_discount_money":self.noDiscountMoney,@"discount":self.model.discount,@"is_coupon":isCoupon,@"goods_id":goods_ids,@"goods_num":goods_nums,@"goods_price":goods_price,@"path":@(1)};
+    NSDictionary*dict=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"seller_uid":self.shopID,@"total_money":newShouldPayMoney,@"non_discount_money":self.noDiscountMoney,@"discount":discount,@"is_coupon":isCoupon,@"goods_id":goods_ids,@"goods_num":goods_nums,@"goods_price":goods_price,@"path":@(1)};
     NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
     if (self.is_coupon==YES) {
         [params setObject:@(self.coupon_id) forKey:@"coupon_id"];
@@ -490,7 +515,34 @@
     }
     return nil;
 }
+//请求购物车列表
+- (void)requestShopListData{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_SHOPCARLISTTWO];
+    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"shop_id":self.shopID};
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"指定购物车列表 data = %@",data);
+        NSInteger number = [data[@"errorCode"] integerValue];
+        if (number == 0) {
+            if ([data[@"data"][@"cart"] isKindOfClass:[NSNull class]]) {
+                self.status = 1;
+                [self.payTableView reloadData];
+                return ;
+            }
 
+            NSArray * datas = data[@"data"][@"cart"];
+            for (NSDictionary * dict in datas) {
+                
+                self.infoModel = [YWShopInfoListModel yy_modelWithDictionary:dict];
+                [self.dataAry addObject:self.infoModel];
+                
+            }
+            [self.payTableView reloadData];
+        }else{
+            [JRToast showWithText:data[@"errorMessage"] duration:1];
+        }
+    }];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
