@@ -17,24 +17,22 @@
 }
 
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
-        [super pushViewController:viewController animated:animated];
-//    if (self.viewControllers.count>0) {
-//        viewController.hidesBottomBarWhenPushed=YES;
-//        
-//        UIButton*button=[[UIButton alloc]init];
-//        [button setBackgroundImage:[UIImage imageNamed:@"NaviBack"] forState:UIControlStateNormal];
-//        [button setBackgroundImage:[UIImage imageNamed:@"NaviBack"] forState:UIControlStateHighlighted];
-//        CGSize buttonSize =button.currentBackgroundImage.size;
-//        button.frame=CGRectMake(button.frame.origin.x, button.frame.origin.y, buttonSize.width, buttonSize.height);
-//        [button addTarget:self action:@selector(buttonBack) forControlEvents:UIControlEventTouchUpInside];
-//        UIBarButtonItem*leftItem=[[UIBarButtonItem alloc]initWithCustomView:button];
-//        viewController.navigationItem.leftBarButtonItem=leftItem;
-////        viewController.navigationItem.backBarButtonItem=leftItem;
-//        
-//}
-    
-  
-    
+
+    if (self.viewControllers.count>0) {
+        viewController.hidesBottomBarWhenPushed=YES;
+        
+        UIButton*button=[[UIButton alloc]init];
+        [button setBackgroundImage:[UIImage imageNamed:@"NaviBack"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"NaviBack"] forState:UIControlStateHighlighted];
+        CGSize buttonSize =button.currentBackgroundImage.size;
+        button.frame=CGRectMake(button.frame.origin.x, button.frame.origin.y, buttonSize.width, buttonSize.height);
+        [button addTarget:self action:@selector(buttonBack) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem*leftItem=[[UIBarButtonItem alloc]initWithCustomView:button];
+        viewController.navigationItem.leftBarButtonItem=leftItem;
+//        viewController.navigationItem.backBarButtonItem=leftItem;
+        
+}
+[super pushViewController:viewController animated:animated];
     
 
 }
