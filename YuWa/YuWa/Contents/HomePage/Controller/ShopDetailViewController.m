@@ -90,11 +90,7 @@
     mapTap.numberOfTouchesRequired = 1;
     mapTap.delegate = self;
     [self.touchMapView addGestureRecognizer:mapTap];
-//    UITapGestureRecognizer * shopInfoTap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toShopDetail)];
-//    shopInfoTap1.numberOfTapsRequired = 1;
-//    shopInfoTap1.numberOfTouchesRequired = 1;
-//    shopInfoTap1.delegate = self;
-//    [effectView addGestureRecognizer:shopInfoTap1];
+
     UITapGestureRecognizer * shopInfoTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toShopDetail)];
     shopInfoTap.numberOfTapsRequired = 1;
     shopInfoTap.numberOfTouchesRequired = 1;
@@ -443,7 +439,13 @@
 //
 //        YWPayViewController * vc = [YWPayViewController payViewControllerCreatWithQRCodePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou andpayAllMoney:[money floatValue] andNOZheMoney:0];
         YWNewDiscountPayViewController * vc =[[YWNewDiscountPayViewController alloc]init];
-        vc.status = 1;
+        if (self.shops.count==0) {
+            
+            vc.status = 1;
+        }else{
+            vc.status = 2;
+        }
+        vc.shopID = self.mainModel.id;
         vc.shopName = self.mainModel.company_name;
         vc.shopDiscount = self.mainModel.discount;
         [self.navigationController pushViewController:vc animated:YES];
@@ -460,7 +462,13 @@
         
 //        YWPayViewController*vc=[YWPayViewController payViewControllerCreatWithWritePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou];
         YWNewDiscountPayViewController * vc = [[YWNewDiscountPayViewController alloc]init];
-        vc.status = 1;
+        if (self.shops.count==0) {
+            
+            vc.status = 1;
+        }else{
+            vc.status = 2;
+        }
+        vc.shopID = self.mainModel.id;
         vc.shopName = self.mainModel.company_name;
         vc.shopDiscount = self.mainModel.discount;
         [self.navigationController pushViewController:vc animated:YES];

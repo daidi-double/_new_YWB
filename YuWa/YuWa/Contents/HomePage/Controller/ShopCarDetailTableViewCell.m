@@ -7,11 +7,10 @@
 //
 
 #import "ShopCarDetailTableViewCell.h"
-#import "YWShopInfoListModel.h"
 #import "NSString+JWAppendOtherStr.h"
 
 @interface ShopCarDetailTableViewCell()
-@property (nonatomic,strong)YWShopInfoListModel * infoModel;
+
 @property (nonatomic,strong)NSMutableArray * dataAry;
 @end
 @implementation ShopCarDetailTableViewCell
@@ -30,16 +29,26 @@
     _model = model;
     [self setDataForCell];
 }
+- (void)setInfoModel:(YWShopInfoListModel *)infoModel{
+    _infoModel = infoModel;
+    [self setDataForCell];
+}
 - (void)setDataForCell{
     self.shopNameLabel.text = self.model.company_name;
     self.shop_id = self.model.id;
     self.accountBtn.layer.cornerRadius = 2;
     self.accountBtn.layer.masksToBounds = YES;
-    for (NSDictionary * dict in self.model.cart) {
-        self.infoModel = [YWShopInfoListModel yy_modelWithDictionary:dict];
-        [self.dataAry addObject:self.infoModel];
+    NSArray*specail;
+    if (self.status != 2) {
+        
+        for (NSDictionary * dict in self.model.cart) {
+            self.infoModel = [YWShopInfoListModel yy_modelWithDictionary:dict];
+            [self.dataAry addObject:self.infoModel];
+        }
+       specail =self.model.cart;
+    }else{
+        
     }
-    NSArray*specail=self.model.cart;
     CGFloat top = 30.0;
     CGFloat left = 13.0;
     //首先移除所有的东西

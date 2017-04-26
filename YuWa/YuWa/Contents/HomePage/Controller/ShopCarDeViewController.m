@@ -89,6 +89,7 @@
     YWCarListModel * model = self.dataAry[path.section];
     newVC.model = model;
     newVC.money = money;
+    newVC.shopID = model.id;
     newVC.dataAry = self.dataAry;
     [self.navigationController pushViewController:newVC animated:YES];
 }
