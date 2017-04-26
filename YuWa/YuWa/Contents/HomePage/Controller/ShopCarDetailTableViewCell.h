@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "YWCarListModel.h"
-#import "YWShopInfoListModel.h"
 @protocol ShopCarDetailTableViewCellDeleate <NSObject>
 
 -(void)cleaerShopCarList:(UIButton*)sender;
@@ -20,9 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *clearBtn;
 @property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
 @property (nonatomic,strong)YWCarListModel * model;
-@property (nonatomic,strong)YWShopInfoListModel * infoModel;
 @property (nonatomic,strong)NSArray * shops;
-@property (nonatomic,assign)NSInteger status;
 @property(nonatomic,strong)NSMutableArray*saveAllImage;
 @property(nonatomic,strong)NSMutableArray*saveAllLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalMoneyLabel;

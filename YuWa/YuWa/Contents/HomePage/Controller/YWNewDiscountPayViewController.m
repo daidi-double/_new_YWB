@@ -16,8 +16,10 @@
 #import "PCPayViewController.h"
 #import "YWLoginViewController.h"
 #import "YWShopInfoListModel.h"
-#import "YWNoShopTableViewCell.h"
+#import "YWNoShopTableViewCell.h"//无商品的时候买单
+#import "YWNewShopInfoTableViewCell.h"//直接买单cell
 
+#define newShopInfoCell @"YWNewShopInfoTableViewCell"
 #define noShopCell     @"YWNoShopTableViewCell"
 #define otherPayCell   @"YWOtherPayMoneyTableViewCell"
 #define payMoneyCell  @"YWPayMoneyTableViewCell"
@@ -51,6 +53,7 @@
     [self.payTableView registerNib:[UINib nibWithNibName:payMoneyCell bundle:nil] forCellReuseIdentifier:payMoneyCell];
     [self.payTableView registerNib:[UINib nibWithNibName:otherPayCell bundle:nil] forCellReuseIdentifier:otherPayCell];
     [self.payTableView registerNib:[UINib nibWithNibName:noShopCell bundle:nil] forCellReuseIdentifier:noShopCell];
+    [self.payTableView registerNib:[UINib nibWithNibName:newShopInfoCell bundle:nil] forCellReuseIdentifier:newShopInfoCell];
     self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
     self.shouldPayMoney = [self.money floatValue];
     self.is_coupon = NO;
@@ -98,7 +101,8 @@
             YWCarListModel * model = self.dataAry[indexPath.section];
             return [ShopCarDetailTableViewCell getHeight:model.cart]-40;
         }else{
-            return [ShopCarDetailTableViewCell getHeight:self.model.cart];
+            
+            return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count;
         }
     }
         return 44.f;
@@ -118,33 +122,39 @@
             cell.delegate = self;
             return cell;
         }else{
-        ShopCarDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:carCell];
-            cell.selectionStyle = NO;
-            cell.status = 2;
-            cell.infoModel = self.infoModel;
-            
-            cell.model = self.model;
-            
-            self.shopID = self.model.id;
-        [self.goods_prices removeAllObjects];
-        [self.goods_nums removeAllObjects];
-        [self.goods_ids removeAllObjects];
-        for (NSDictionary * dict in self.model.cart) {
-            YWShopInfoListModel * model = [YWShopInfoListModel yy_modelWithDictionary:dict];
-            if (model.goods_price == nil ||[model.goods_price isKindOfClass:[NSNull class]]) {
-                [self.goods_prices addObject:model.goods_price];
+            if (self.status == 2) {
+                YWNewShopInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:newShopInfoCell];
+                cell.selectionStyle = NO;
+                cell.model = self.infoModel;
+                cell.shopName = self.shopName;
+                cell.cart = self.dataAry;
+                cell.dataAry = self.dataAry;
+                return cell;
             }else{
-                
-                [self.goods_prices addObject:model.goods_disprice];
+                ShopCarDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:carCell];
+                cell.selectionStyle = NO;
+                cell.model = self.model;
+                self.shopID = self.model.id;
+                [self.goods_prices removeAllObjects];
+                [self.goods_nums removeAllObjects];
+                [self.goods_ids removeAllObjects];
+                for (NSDictionary * dict in self.model.cart) {
+                    YWShopInfoListModel * model = [YWShopInfoListModel yy_modelWithDictionary:dict];
+                    if (model.goods_price == nil ||[model.goods_price isKindOfClass:[NSNull class]]) {
+                        [self.goods_prices addObject:model.goods_price];
+                    }else{
+                        
+                        [self.goods_prices addObject:model.goods_disprice];
+                    }
+                    [self.goods_nums addObject:model.goods_num];
+                    [self.goods_ids addObject:model.goods_id];
+                }
+                cell.totalMoneyLabel.hidden = YES;
+                cell.line.hidden = YES;
+                cell.accountBtn.hidden = YES;
+                cell.clearBtn.hidden = YES;
+                return cell;
             }
-            [self.goods_nums addObject:model.goods_num];
-            [self.goods_ids addObject:model.goods_id];
-        }
-        cell.totalMoneyLabel.hidden = YES;
-        cell.line.hidden = YES;
-        cell.accountBtn.hidden = YES;
-        cell.clearBtn.hidden = YES;
-        return cell;
         }
     }else if (indexPath.section ==1){
         WEAKSELF;
@@ -185,7 +195,7 @@
             line.backgroundColor = [UIColor lightGrayColor];
             [cell.contentView addSubview:line];
             
-            if (self.status == 1) {
+            if (self.status == 1 ||self.status == 2) {
                 NSString*zheNum=[self.shopDiscount substringFromIndex:2];
                 
                 if ([zheNum integerValue] % 10 == 0) {
@@ -239,7 +249,7 @@
         }else if (indexPath.row == 1){
             cell.titleNameLabel.text = @"其他消费折后总额";
             CGFloat otherMoney;
-            if (self.status == 1) {
+            if (self.status == 1 || self.status == 2) {
                otherMoney = ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue];
             }else{
             otherMoney = ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.model.discount floatValue];
@@ -530,6 +540,7 @@
                 return ;
             }
 
+            [self.dataAry removeAllObjects];
             NSArray * datas = data[@"data"][@"cart"];
             for (NSDictionary * dict in datas) {
                 

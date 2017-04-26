@@ -15,4 +15,5 @@
 @property (nonatomic,strong)NSString * goods_num;
 @property (nonatomic,strong)NSString * goods_name;
 @property (nonatomic,strong)NSString * goods_img;
+@property (nonatomic,strong)NSString * shop_id;
 @end
