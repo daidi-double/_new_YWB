@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VIPNavigationController : UINavigationController
+@interface VIPNavigationController : UINavigationController<UIGestureRecognizerDelegate>
 
 @end

@@ -63,7 +63,7 @@
 #define HEADERVIEWHEIGHT   195     //头视图的高度
 
 
-@interface VIPPersonCenterViewController()<UITableViewDelegate,UITableViewDataSource,YJSegmentedControlDelegate,PCBottomTableViewCellDelegate,TZImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface VIPPersonCenterViewController()<UITableViewDelegate,UITableViewDataSource,YJSegmentedControlDelegate,PCBottomTableViewCellDelegate,TZImagePickerControllerDelegate>
 
 @property(nonatomic,strong)UIView*belowImageViewView;   //图片下面的视图
 @property(nonatomic,strong)UIView*headerView;   //头视图
@@ -106,23 +106,11 @@
     
 
 }
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    
-}
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    if (viewController == self) {
-         self.navigationController.navigationBarHidden = YES;
-    }else{
-        self.navigationController.navigationBarHidden = NO;
-    }
-}
+
 -(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden = YES;
-    self.navigationItem.title=@"";
-//    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    self.navigationController.delegate = self;
-    
+    [super viewWillAppear:animated];    self.navigationItem.title=@"";
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES]
 
     
     UIBarButtonItem*rightIte=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"center_set"] style:UIBarButtonItemStylePlain target:self action:@selector(touchRightItem)];
@@ -135,7 +123,7 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-//      [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+      [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     
 }
 
