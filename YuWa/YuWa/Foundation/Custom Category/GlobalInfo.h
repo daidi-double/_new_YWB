@@ -45,6 +45,8 @@
 #define HTTP_HOME_SHOPPHOTO         @"/api.php/Shop/getShopPhoto/"  //1店铺相册
 #define HTTP_HOME_MOREGOODS       @"/api.php/Shop/moreGoods/"  //1更多商品
 #define HTTP_HOME_MORECOMMIT      @"/api.php/Shop/moreComment/"  //1更多评论
+#define HTTP_HOME_SHOPCARLIST      @"/api.php/Shop/viewShopCart/"//购物车列表
+#define HTTP_HOME_CLEARSHOPCARLIST @"/api.php/Shop/clearShopCart"//清空购物车
 #define HTTP_HOME_SHOPCAR           @"/api.php/Shop/addShopCart/"//添加到购物车
 #define HTTP_HOME_REDUCESHOPCAR     @"/api.php/Shop/redgShopCart"//减少购物车商品
 

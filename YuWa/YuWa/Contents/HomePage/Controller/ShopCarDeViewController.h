@@ -1,5 +1,5 @@
 //
-//  YWShopCarViewController.h
+//  ShopCarDeViewController.h
 //  YuWa
 //
 //  Created by double on 17/4/24.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YWShopCarViewController : UIViewController
-@property (nonatomic,strong)NSMutableArray * shops;
+@interface ShopCarDeViewController : UIViewController
+@property (nonatomic,copy)NSString * shop_id;
 @end

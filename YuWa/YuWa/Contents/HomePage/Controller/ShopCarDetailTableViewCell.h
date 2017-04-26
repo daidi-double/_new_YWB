@@ -7,8 +7,29 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YWCarListModel.h"
+@protocol ShopCarDetailTableViewCellDeleate <NSObject>
 
-@interface ShopCarDetailTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
+-(void)cleaerShopCarList:(UIButton*)sender;
+-(void)goToAccount:(NSString *)money andBtn:(UIButton*)sender;
 
 @end
+@interface ShopCarDetailTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIView *line;
+@property (weak, nonatomic) IBOutlet UIButton *clearBtn;
+@property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
+@property (nonatomic,strong)YWCarListModel * model;
+@property (nonatomic,strong)NSArray * shops;
+@property(nonatomic,strong)NSMutableArray*saveAllImage;
+@property(nonatomic,strong)NSMutableArray*saveAllLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalMoneyLabel;
+@property (weak, nonatomic) IBOutlet UIButton *accountBtn;
+@property (nonatomic,copy)NSString * shop_id;
+
+@property (nonatomic,assign)id<ShopCarDetailTableViewCellDeleate>delegate;
+
+
++(CGFloat)getHeight:(NSArray*)array;
+@end
+
+
