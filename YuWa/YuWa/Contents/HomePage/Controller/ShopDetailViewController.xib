@@ -31,6 +31,7 @@
                 <outlet property="shopIconImageView" destination="USe-o1-cvZ" id="QlT-lZ-76u"/>
                 <outlet property="shopNameLabel" destination="DXg-TL-tde" id="Twk-42-jri"/>
                 <outlet property="totalMoneyLabel" destination="d7O-s6-2MJ" id="Ueh-6o-3a1"/>
+                <outlet property="touchInfoView" destination="nfP-jM-g9d" id="Hc5-3g-EkA"/>
                 <outlet property="touchMapView" destination="fO9-Gr-clb" id="znS-Vz-OnZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -145,6 +146,10 @@
                                         <constraint firstAttribute="width" constant="15" id="brW-hK-40e"/>
                                     </constraints>
                                 </imageView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfP-jM-g9d">
+                                    <rect key="frame" x="0.0" y="62" width="375" height="135"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -153,6 +158,7 @@
                                 <constraint firstItem="pH4-eb-UVa" firstAttribute="centerY" secondItem="Jea-Fn-2uy" secondAttribute="centerY" id="4zW-az-OL9"/>
                                 <constraint firstAttribute="trailing" secondItem="q2o-rm-hr3" secondAttribute="trailing" id="6qL-PZ-r2y"/>
                                 <constraint firstItem="q2o-rm-hr3" firstAttribute="top" secondItem="7bE-9g-SGA" secondAttribute="top" id="7TG-fs-YYY"/>
+                                <constraint firstAttribute="trailing" secondItem="nfP-jM-g9d" secondAttribute="trailing" id="8Wg-p2-HEd"/>
                                 <constraint firstItem="NmI-ai-qE6" firstAttribute="leading" secondItem="DXg-TL-tde" secondAttribute="leading" id="91p-hM-A3b"/>
                                 <constraint firstItem="LsD-jH-8Fb" firstAttribute="leading" secondItem="QSk-0b-bwl" secondAttribute="trailing" constant="5" id="9KE-b3-0MX"/>
                                 <constraint firstAttribute="trailing" secondItem="czI-AT-OS6" secondAttribute="trailing" constant="15" id="AKS-Uu-BTG"/>
@@ -175,9 +181,11 @@
                                 <constraint firstItem="SOL-Y9-tFQ" firstAttribute="height" secondItem="Jea-Fn-2uy" secondAttribute="height" id="Rjd-EH-UHt"/>
                                 <constraint firstItem="0ra-ky-Au6" firstAttribute="leading" secondItem="7bE-9g-SGA" secondAttribute="leading" constant="13" id="S4Z-Wy-vG5"/>
                                 <constraint firstItem="LsD-jH-8Fb" firstAttribute="width" secondItem="Jea-Fn-2uy" secondAttribute="width" id="V8c-rj-13J"/>
+                                <constraint firstAttribute="bottom" secondItem="nfP-jM-g9d" secondAttribute="bottom" id="VC4-wj-ojN"/>
                                 <constraint firstAttribute="trailing" secondItem="eTu-Ye-Sd2" secondAttribute="trailing" id="Xnw-VH-Ki3"/>
                                 <constraint firstItem="SOL-Y9-tFQ" firstAttribute="width" secondItem="Jea-Fn-2uy" secondAttribute="width" id="Z6a-Hp-L25"/>
                                 <constraint firstAttribute="bottom" secondItem="qmS-kD-MAJ" secondAttribute="bottom" constant="15" id="Znf-ei-40j"/>
+                                <constraint firstItem="nfP-jM-g9d" firstAttribute="top" secondItem="1cr-eC-g5C" secondAttribute="bottom" constant="12" id="a1B-dR-rwb"/>
                                 <constraint firstItem="QSk-0b-bwl" firstAttribute="leading" secondItem="SOL-Y9-tFQ" secondAttribute="trailing" constant="5" id="alw-si-4aZ"/>
                                 <constraint firstItem="LsD-jH-8Fb" firstAttribute="height" secondItem="Jea-Fn-2uy" secondAttribute="height" id="c6A-hW-cJt"/>
                                 <constraint firstItem="USe-o1-cvZ" firstAttribute="top" secondItem="eTu-Ye-Sd2" secondAttribute="bottom" id="cQX-Ku-MA6"/>
@@ -185,6 +193,7 @@
                                 <constraint firstItem="0ra-ky-Au6" firstAttribute="top" secondItem="7bE-9g-SGA" secondAttribute="top" constant="30" id="hIH-ef-pfW"/>
                                 <constraint firstAttribute="bottom" secondItem="bcb-XY-gX3" secondAttribute="bottom" constant="15" id="hxR-Pp-GcA"/>
                                 <constraint firstItem="QSk-0b-bwl" firstAttribute="centerY" secondItem="Jea-Fn-2uy" secondAttribute="centerY" id="mtF-d5-Him"/>
+                                <constraint firstItem="nfP-jM-g9d" firstAttribute="leading" secondItem="7bE-9g-SGA" secondAttribute="leading" id="n9h-EA-0af"/>
                                 <constraint firstAttribute="trailing" secondItem="1cr-eC-g5C" secondAttribute="trailing" constant="15" id="nK3-La-ifr"/>
                                 <constraint firstItem="pH4-eb-UVa" firstAttribute="height" secondItem="Jea-Fn-2uy" secondAttribute="height" id="ozd-LG-cZN"/>
                                 <constraint firstItem="S0G-8D-66M" firstAttribute="leading" secondItem="LsD-jH-8Fb" secondAttribute="trailing" constant="10" id="poM-B8-kek"/>
@@ -367,10 +376,11 @@
                             </constraints>
                             <state key="normal">
                                 <attributedString key="attributedTitle">
-                                    <fragment content="去结算">
+                                    <fragment content="优惠买单">
                                         <attributes>
                                             <color key="NSColor" red="0.97254901959999995" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="20" name="STKaiti-SC-Bold"/>
+                                            <font key="NSFont" size="18" name="STKaiti-SC-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>

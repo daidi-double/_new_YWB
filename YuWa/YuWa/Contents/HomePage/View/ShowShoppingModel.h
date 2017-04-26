@@ -14,11 +14,11 @@
 //@property(nonatomic,strong)NSString*goods_name;
 //@property(nonatomic,strong)NSString*goods_price;
 //新的
-@property(nonatomic,strong)NSString*userID;
+@property(nonatomic,strong)NSString*id;
 @property(nonatomic,strong)NSString*shop_id;
 @property(nonatomic,strong)NSString*cat_name;
 @property(nonatomic,strong)NSArray*cat_goods;
 @property(nonatomic,strong)NSString*ctime;
 
-+(ShowShoppingModel*)modelWithDic:(NSDictionary*)dic;
+//+(ShowShoppingModel*)modelWithDic:(NSDictionary*)dic;
 @end

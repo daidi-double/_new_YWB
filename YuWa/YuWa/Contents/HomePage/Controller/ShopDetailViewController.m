@@ -17,12 +17,14 @@
 #import "YWLoginViewController.h"
 #import "MapNavNewViewController.h"//地图导航
 #import "YWPayViewController.h"    //优惠买单
+#import "YWNewDiscountPayViewController.h"//新的优惠买单
 #import "ShowMoreCommitViewController.h"
 #import "ShopDetailGoodsModel.h"//商品model
 #import "CategoryLeftTableViewCell.h"//类别的cell
 #import "YWShopCarView.h"
 #import "YWShopCommitView.h"//评价
 #import "YWShopDetailViewController.h"
+#import "ShopCarDeViewController.h"//购物车
 
 #define CATEGORYCELL @"CategoryLeftTableViewCell"
 @interface ShopDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,YWShopCarViewDelegate>
@@ -39,6 +41,8 @@
 @property(nonatomic,strong)ShowShoppingModel * shopModel;//右边商品model
 @property(nonatomic,strong)NSMutableArray*maMCommit;  //所有评论的model
 @property(nonatomic,strong)NSMutableArray*maMRecommend; //推荐的model
+@property (weak, nonatomic) IBOutlet UIView *touchInfoView;
+
 @property (weak, nonatomic) IBOutlet UIView *touchMapView;//用来跳转地图
 @property (nonatomic,strong)UIButton * btn;
 @property (nonatomic,assign)BOOL isRoll;//判断左侧点击的时候，右侧滚动方法不影响左侧
@@ -55,11 +59,12 @@
     [super viewDidLoad];
     [self makeUI];
     [self getDatas];
+     self.commentView.hidden = YES;
 
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
-    self.commentView.hidden = YES;
+   
     self.navigationController.navigationBarHidden = YES;
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -67,6 +72,7 @@
     self.navigationController.navigationBarHidden  = NO;
 }
 - (void)makeUI{
+    [self.view addSubview:self.commentView];
     self.BGImageView.userInteractionEnabled = YES;
     self.BGImageView.contentMode = UIViewContentModeScaleToFill;
     self.numberLabel.hidden = YES;
@@ -84,16 +90,16 @@
     mapTap.numberOfTouchesRequired = 1;
     mapTap.delegate = self;
     [self.touchMapView addGestureRecognizer:mapTap];
-    UITapGestureRecognizer * shopInfoTap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toShopDetail)];
-    shopInfoTap1.numberOfTapsRequired = 1;
-    shopInfoTap1.numberOfTouchesRequired = 1;
-    shopInfoTap1.delegate = self;
-    [effectView addGestureRecognizer:shopInfoTap1];
+//    UITapGestureRecognizer * shopInfoTap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toShopDetail)];
+//    shopInfoTap1.numberOfTapsRequired = 1;
+//    shopInfoTap1.numberOfTouchesRequired = 1;
+//    shopInfoTap1.delegate = self;
+//    [effectView addGestureRecognizer:shopInfoTap1];
     UITapGestureRecognizer * shopInfoTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toShopDetail)];
     shopInfoTap.numberOfTapsRequired = 1;
     shopInfoTap.numberOfTouchesRequired = 1;
     shopInfoTap.delegate = self;
-    [self.BGImageView addGestureRecognizer:shopInfoTap];
+    [self.touchInfoView addGestureRecognizer:shopInfoTap];
     NSArray * btnTitle = @[@"商品",@"评价（4.3）"];
     for (int i = 0; i<2; i++) {
         if (i == 0) {
@@ -131,7 +137,7 @@
     
     [self.shopAndCommontView addSubview:line];
    
-    [self.view addSubview:self.commentView];
+    
 
 }
 //跳店铺详情，有无wifi等
@@ -141,7 +147,6 @@
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 - (void)shopAndCommitAction:(UIButton *)sender{
-    MyLog(@"%ld",sender.tag);
     if (sender.selected == YES) {
         return;
     }
@@ -381,7 +386,8 @@
 
             [self.shops removeAllObjects];
             for (NSDictionary*dict in self.mainModel.goods) {
-                self.shopModel= [ShowShoppingModel modelWithDic:dict];
+//                self.shopModel= [ShowShoppingModel modelWithDic:dict];
+                self.shopModel = [ShowShoppingModel yy_modelWithDictionary:dict];
                 [self.maMDatasGoods addObject:self.shopModel];
                 
             }
@@ -428,14 +434,18 @@
 //结算
 - (IBAction)accountAction:(UIButton *)sender {
     if ([self judgeLogin]) {
-        NSString * money = [self.totalMoneyLabel.text substringFromIndex:1];
-        if (money == nil ||[money floatValue] == 0.00) {
-            [JRToast showWithText:@"请选择商品" duration:1];
-            return;
-        }
-        CGFloat zhekou=[self.mainModel.discount floatValue];
-        
-        YWPayViewController * vc = [YWPayViewController payViewControllerCreatWithQRCodePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou andpayAllMoney:[money floatValue] andNOZheMoney:0];
+//        NSString * money = [self.totalMoneyLabel.text substringFromIndex:1];
+//        if (money == nil ||[money floatValue] == 0.00) {
+//            [JRToast showWithText:@"请选择商品" duration:1];
+//            return;
+//        }
+//        CGFloat zhekou=[self.mainModel.discount floatValue];
+//
+//        YWPayViewController * vc = [YWPayViewController payViewControllerCreatWithQRCodePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou andpayAllMoney:[money floatValue] andNOZheMoney:0];
+        YWNewDiscountPayViewController * vc =[[YWNewDiscountPayViewController alloc]init];
+        vc.status = 1;
+        vc.shopName = self.mainModel.company_name;
+        vc.shopDiscount = self.mainModel.discount;
         [self.navigationController pushViewController:vc animated:YES];
         
     }
@@ -446,9 +456,13 @@
 //优惠买单,付款
 - (IBAction)payAction:(UIButton *)sender {
     if ([self judgeLogin]) {
-        CGFloat zhekou=[self.mainModel.discount floatValue];
+//        CGFloat zhekou=[self.mainModel.discount floatValue];
         
-        YWPayViewController*vc=[YWPayViewController payViewControllerCreatWithWritePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou];
+//        YWPayViewController*vc=[YWPayViewController payViewControllerCreatWithWritePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou];
+        YWNewDiscountPayViewController * vc = [[YWNewDiscountPayViewController alloc]init];
+        vc.status = 1;
+        vc.shopName = self.mainModel.company_name;
+        vc.shopDiscount = self.mainModel.discount;
         [self.navigationController pushViewController:vc animated:YES];
         
     }
@@ -578,6 +592,9 @@
 }
 //购物车
 - (IBAction)shopCarAction:(UIButton *)sender {
+    ShopCarDeViewController * carVC = [[ShopCarDeViewController alloc]init];
+    carVC.shop_id = self.shop_id;
+    [self.navigationController pushViewController:carVC animated:YES];
 }
 
 //更多-相册
@@ -591,8 +608,8 @@
 - (void)addShopAction:(UIButton *)sender {
 //    MyLog(@"tag = %ld",sender.tag);
     CategoryLeftTableViewCell * cell = (CategoryLeftTableViewCell *)[[sender superview] superview];
-    NSIndexPath * path = [self.rightTableView indexPathForCell:cell];
-    markPath = path;
+//    NSIndexPath * path = [self.rightTableView indexPathForCell:cell];
+//    markPath = path;
 //    NSLog(@"index row%@", cell.priceLabel.text);
     NSString * price = [cell.priceLabel.text substringFromIndex:1];
     NSString * totalMoney = [self.totalMoneyLabel.text substringFromIndex:1];
@@ -611,18 +628,6 @@
     NSDictionary * dic;
     
     if ([self isAddShop:cell.shop_nameLabel.text]) {
-//        int a = 0;
-//        for (NSDictionary * dict in self.shops) {
-//            NSString * name = dict[@"goods_name"];
-//            if ([name isEqualToString:cell.shop_nameLabel.text]) {
-//                
-//                dic = @{@"goods_name":cell.shop_nameLabel.text,@"goods_price":cell.priceLabel.text,@"number":cell.numberLabel.text};
-//                [self.shops replaceObjectAtIndex:a withObject:dic];
-//            }
-//            a ++;
-//
-        //        }
-        
         __block typeof(cell)weakCell = cell;
         __block typeof(dic) weakDic = dic;
         WEAKSELF;
@@ -639,6 +644,7 @@
         [self.markCells addObject:cell];
         [self.shops addObject:dic];
     }
+    [self addShopToCar:cell.goods_id];
 }
 //YES就已经存在，no不存在
 - (BOOL)isAddShop:(NSString *)shopName{
@@ -687,11 +693,39 @@
             
         }
         
-    }else{
-       
     }
+    [self reduceShopToCar:cell.goods_id];
 
-
+}
+//点击加号，把商品传到服务器
+- (void)addShopToCar:(NSString *)goodsID{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_SHOPCAR];
+    NSDictionary*dict=@{@"shop_id":self.shop_id,@"device_id":[JWTools getUUID],@"goods_id":goodsID};
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
+    if ([UserSession instance].isLogin) {
+        [params setObject:@([UserSession instance].uid) forKey:@"user_id"];
+        [params setObject:[UserSession instance].token forKey:@"token"];
+    }
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"购物车 %@",data);
+    }];
+}
+//点减加号，把商品传到服务器
+- (void)reduceShopToCar:(NSString *)goodsID{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_REDUCESHOPCAR];
+    NSDictionary*dict=@{@"shop_id":self.shop_id,@"device_id":[JWTools getUUID],@"goods_id":goodsID};
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
+    if ([UserSession instance].isLogin) {
+        [params setObject:@([UserSession instance].uid) forKey:@"user_id"];
+        [params setObject:[UserSession instance].token forKey:@"token"];
+    }
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"购物车 %@",data);
+    }];
 }
 //所选的商品
 - (IBAction)myShopAction:(UIButton *)sender {
@@ -767,6 +801,7 @@
     if (!_commentView) {
         _commentView = [[YWShopCommitView alloc]initWithFrame:CGRectMake(0, self.bottomBGView.height-32, kScreen_Width,kScreen_Height - self.bottomBGView.height+32)];
         _commentView.hidden = YES;
+        _commentView.shop_id = self.shop_id;
     }
     return _commentView;
 }

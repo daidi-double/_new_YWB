@@ -23,8 +23,8 @@
     
     //显示的特别活动
     NSArray*specail=holidayArray;
-    CGFloat top = 30.0;
-    CGFloat left = 5;
+    CGFloat top = 61.0;
+    CGFloat left = 13.0;
     //首先移除所有的东西
     for (UIView*view in self.saveAllImage) {
         [view removeFromSuperview];
@@ -38,7 +38,7 @@
             
             UIImageView*speImage=[self viewWithTag:200+i];
             if (!speImage) {
-                speImage=[[UIImageView alloc]initWithFrame:CGRectMake(left, top, 17, 17)];
+                speImage=[[UIImageView alloc]initWithFrame:CGRectMake(left, top, 20, 20)];
                 speImage.tag=200+i;
             }
             [self.contentView addSubview:speImage];
@@ -47,10 +47,9 @@
             
             UILabel*specailLabel=[self viewWithTag:300+i];
             if (!specailLabel) {
-                specailLabel=[[UILabel alloc]initWithFrame:CGRectMake(102, top, kScreen_Width-110, 18)];
-                specailLabel.centerY=speImage.centerY;
+                specailLabel=[[UILabel alloc]initWithFrame:CGRectMake(left+25, top, kScreen_Width-110, 20)];
                 specailLabel.font=[UIFont systemFontOfSize:14];
-                specailLabel.textColor = [UIColor darkGrayColor];
+                specailLabel.textColor = RGBCOLOR(141, 142, 143, 1);
                 specailLabel.tag=300+i;
                 
             }
@@ -70,30 +69,21 @@
                 specailLabel.text=@"无特惠";
             }
             
-            top=top+18+10;
+            top=top+20+6;
         }
         
     }else{
         UIImageView*speImage=[self viewWithTag:200];
-        if (!speImage) {
-            speImage=[[UIImageView alloc]initWithFrame:CGRectMake(left, top, 17, 17)];
-            speImage.tag=200;
-        }
+
         [self.contentView addSubview:speImage];
         [self.saveAllImage addObject:speImage];
         
         speImage.image=[UIImage imageNamed:@"home_te"];
         UILabel*specailLabel=[self viewWithTag:300];
-        if (!specailLabel) {
-            specailLabel=[[UILabel alloc]initWithFrame:CGRectMake(102, top, kScreen_Width-110, 18)];
-            specailLabel.centerY=speImage.centerY;
-            specailLabel.font=[UIFont systemFontOfSize:14];
-            specailLabel.textColor = [UIColor darkGrayColor];
-            specailLabel.tag=300;
-            [self.contentView addSubview:specailLabel];
-            [self.saveAllLabel addObject:specailLabel];
-            
-        }
+
+        [self.contentView addSubview:specailLabel];
+        [self.saveAllLabel addObject:specailLabel];
+
         CGFloat zhek = [self.zhekou floatValue]*10;
         NSString*zheNum=[self.zhekou substringFromIndex:2];
         if ([zheNum integerValue] % 10 == 0) {
@@ -116,15 +106,28 @@
 
 
 +(CGFloat)getCellHeight:(NSArray*)array{
-    CGFloat top=30.0;
+    CGFloat top=61.0;
     for (int i=0; i<array.count; i++) {
-        top=top+18+10;
+        top=top+20+6;
     }
     
     return top;
     
 }
+-(NSMutableArray *)saveAllImage{
+    if (!_saveAllImage) {
+        _saveAllImage=[NSMutableArray array];
+    }
+    return _saveAllImage;
+    
+}
 
+-(NSMutableArray *)saveAllLabel{
+    if (!_saveAllLabel) {
+        _saveAllLabel=[NSMutableArray array];
+    }
+    return _saveAllLabel;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

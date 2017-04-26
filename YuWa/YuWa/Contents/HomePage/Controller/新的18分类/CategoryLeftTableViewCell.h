@@ -18,4 +18,5 @@
 @property (nonatomic,strong) ShopDetailGoodsModel * model;
 @property (nonatomic,assign)void(^addShopBlock)(NSString * price);
 @property (nonatomic,assign)void(^reduceShopBlock)(NSString * price);
+@property (nonatomic,copy)NSString * goods_id;
 @end
