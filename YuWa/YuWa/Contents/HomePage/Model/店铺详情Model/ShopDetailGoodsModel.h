@@ -14,6 +14,7 @@
 @property(nonatomic,strong)NSString*goods_cat_id;//商品分类id
 @property(nonatomic,strong)NSString*uid;
 @property(nonatomic,strong)NSString*num;
+@property(nonatomic,strong)NSString*goods_num;
 @property(nonatomic,strong)NSString*shop_id;
 @property(nonatomic,strong)NSString*goods_info;
 @property(nonatomic,strong)NSString*goods_price;

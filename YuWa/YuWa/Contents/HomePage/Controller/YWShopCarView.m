@@ -40,8 +40,7 @@
         _strLabel.font = [UIFont systemFontOfSize:15];
         [_clearView addSubview:_strLabel];
         UIButton * clearBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        clearBtn.frame = CGRectMake(_clearView.width - 85, 0,70, 35);
-        [clearBtn setTitle:@"清空" forState:UIControlStateNormal];
+        clearBtn.frame = CGRectMake(_clearView.width - 40, 5,25, 25);
         [clearBtn setImage:[UIImage imageNamed:@"垃圾桶"] forState:UIControlStateNormal];
         [clearBtn setTitleColor:RGBCOLOR(112, 122, 112, 1) forState:UIControlStateNormal];
         [clearBtn addTarget:self action:@selector(clearAllShopAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -75,5 +74,10 @@
     cell.model = goodModel;
     
     return cell;
+}
++(CGFloat)getCellHeight:(NSArray *)array{
+    CGFloat top = 35.f;
+    CGFloat cellHeight = 44 * array.count;
+    return top + cellHeight;
 }
 @end

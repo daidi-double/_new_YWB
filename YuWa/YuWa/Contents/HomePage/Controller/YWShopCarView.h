@@ -23,6 +23,9 @@
 @property (nonatomic,assign)id<YWShopCarViewDelegate>delegate;
 
 @property (nonatomic,strong)NSMutableArray * shopInfoAry;
+
++(CGFloat)getCellHeight:(NSArray *)array;
+
 @end
 
 

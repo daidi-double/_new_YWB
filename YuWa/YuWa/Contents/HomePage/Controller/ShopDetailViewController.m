@@ -62,24 +62,26 @@
     [self makeUI];
     [self getDatas];
      self.commentView.hidden = YES;
-
+    
     self.totalMoneyLabel.text = @"￥0.00";
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     [center addObserver:self selector:@selector(notice:) name:@"清除数量" object:nil];
+   
 }
 -(void)notice:(id)sender{
     [self clearNumberOfShop];
     [self clearShopCar:self.shop_id];
+    [self getDatas];
     [self.shops removeAllObjects];
     [self.rightTableView reloadData];
     [self.leftTableView reloadData];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
-   
     self.navigationController.navigationBarHidden = YES;
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden  = NO;
@@ -432,6 +434,9 @@
                     }else{
                         price = model.goods_disprice;
                     }
+                    if ([model.goods_num integerValue]!= 1) {
+                        price = [NSString stringWithFormat:@"%.2f",[price floatValue]* [model.goods_num integerValue]];
+                    }
                     totalMoney2 = [NSString stringWithFormat:@"%.2f",[price floatValue] + [totalMoney2 floatValue]];
                 }
             self.totalMoneyLabel.text = [NSString stringWithFormat:@"￥%@",totalMoney2];
@@ -445,7 +450,7 @@
                 
                 [_leftTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
             }
-            
+
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
         }
@@ -505,7 +510,7 @@
         
 //        YWPayViewController*vc=[YWPayViewController payViewControllerCreatWithWritePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou];
         YWNewDiscountPayViewController * vc = [[YWNewDiscountPayViewController alloc]init];
-        if (self.shops.count==0) {
+        if (self.mainModel.cart.count==0 && self.shops.count == 0) {
             
             vc.status = 1;
         }else{
@@ -811,8 +816,13 @@
 }
 //所选的商品
 - (IBAction)myShopAction:(UIButton *)sender {
-    if (self.shops.count<=0) {
+    if (self.mainModel.cart.count<=0) {
         return;
+    }
+    static int a = 0;
+    if (a == 0) {
+         [self.shops addObjectsFromArray:self.mainModel.cart];
+        a++;
     }
     BOOL viewRemove = self.isRemove = !self.isRemove;
     if (viewRemove == NO) {
@@ -820,6 +830,7 @@
         [self.touchView removeFromSuperview];
     }else{
         [self creatShopView];
+        
         self.shopCarView.shopInfoAry = self.shops;
     }
     
@@ -857,8 +868,9 @@
          cell.numberLabel.text = @"0";
          cell.numberLabel.hidden = YES;
     }
+
     self.totalMoneyLabel.text = @"0.00";
-   self.numberLabel.text = @"0";
+    self.numberLabel.text = @"0";
 }
 //所有的评论
 - (void)allCommitAction{

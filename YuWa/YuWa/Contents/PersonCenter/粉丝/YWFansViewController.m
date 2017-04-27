@@ -259,7 +259,11 @@
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
-            
+            if ([data[@"data"] isKindOfClass:[NSNull class]]) {
+                [self.tableView.mj_header endRefreshing];
+                [self.tableView.mj_footer endRefreshing];
+                return ;
+            }
             for (NSDictionary*dict in data[@"data"]) {
                 AbountAndFansModel*model=[AbountAndFansModel yy_modelWithDictionary:dict];
                 [self.maMallDatas addObject:model];

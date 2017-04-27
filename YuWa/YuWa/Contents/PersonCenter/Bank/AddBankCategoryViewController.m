@@ -196,6 +196,8 @@
                 
             });
             
+        }else if (errorCode == 9){
+            [JRToast showWithText:@"你的身份已失效" duration:1];
         }
         
         
