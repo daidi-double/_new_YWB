@@ -132,6 +132,7 @@
     self.toolsBottomView = [[[NSBundle mainBundle]loadNibNamed:@"RBNodeDetailBottomView" owner:nil options:nil] firstObject];
     WEAKSELF;
     self.toolsBottomView.nodeID = self.model.homeID;
+    self.toolsBottomView.auser_type = self.model.user.user_type;
     self.toolsBottomView.likeBlock = ^(BOOL isLike){
         if ([weakSelf isLogin]) {
             weakSelf.dataModel.inlikes = [NSString stringWithFormat:@"%zi",isLike];
@@ -176,6 +177,7 @@
     WEAKSELF;
     if (!self.addToAldumView) {
         self.addToAldumView = [[[NSBundle mainBundle]loadNibNamed:@"RBNodeCollectionToAldumView" owner:nil options:nil]firstObject];
+        self.addToAldumView.auser_type = self.model.user.user_type;
         self.addToAldumView.cancelBlock = ^(){
             [weakSelf.addToAldumView removeFromSuperview];
         };
@@ -542,7 +544,7 @@
     RBNodeAddToAldumModel * aldumModel = self.addToAldumView.dataArr[[aldumIdx integerValue]];
     NSString * album_id = aldumModel.aldumID;
     
-    NSDictionary * pragram = @{@"note_id":self.model.homeID,@"album_id":album_id,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};//album_id没有将创建默认
+    NSDictionary * pragram = @{@"note_id":self.model.homeID,@"album_id":album_id,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"auser_type":self.model.user.user_type};//album_id没有将创建默认
     
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_COLLECTION_TO_ALDUM withPragram:pragram success:^(id responsObj) {
 //        MyLog(@"Regieter Code pragram is %@",pragram);
@@ -567,7 +569,7 @@
 }
 
 - (void)requestCancelToAldum{
-    NSDictionary * pragram = @{@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
+    NSDictionary * pragram = @{@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"auser_type":self.model.user.user_type};
     
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_COLLECTION_CANCEL withPragram:pragram success:^(id responsObj) {
 //        MyLog(@"Regieter Code pragram is %@",pragram);

@@ -15,6 +15,7 @@
 @property (nonatomic,copy)void (^addToAlbumBlock)(NSInteger);
 @property (nonatomic,strong)NSMutableArray * dataArr;
 @property (nonatomic,strong)UILabel * headView;
+@property (nonatomic,strong)NSString * auser_type;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *tableBGView;
 @property (weak, nonatomic) IBOutlet UIView *alphaBGView;

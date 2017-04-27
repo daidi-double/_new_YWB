@@ -165,7 +165,7 @@
     
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_HOME withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
-        MyLog(@"Regieter Code is %@",responsObj);
+        MyLog(@"Regieter Code is 笔记首页%@",responsObj);
         if (page == 0) {
             [self.dataArr removeAllObjects];
         }
@@ -175,6 +175,7 @@
                 NSDictionary * dic = dataArr[i];
                 NSMutableDictionary * dataDic = [RBHomeModel dataDicSetWithDic:dic];
                 [self.dataArr addObject:[RBHomeModel yy_modelWithDictionary:dataDic]];
+                
             }
         }
         [self.collectionView reloadData];
