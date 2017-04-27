@@ -670,11 +670,13 @@
         switch (resopnse.errCode) {
             case WXSuccess:
             {
+                [self.navigationController popViewControllerAnimated:YES];
                 strMsg = @"支付结果：成功！";
                 //创建一个消息对象
                 NSNotification * notice = [NSNotification notificationWithName:@"清空数量" object:nil userInfo:nil];
                 //发送消息
                 [[NSNotificationCenter defaultCenter]postNotification:notice];
+                
                 //清空购物车商品，有shopid的时候在解注释调用
 //              [self clearShopCar:self.shop_ID];
         }
@@ -683,11 +685,12 @@
             default:
                 strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
                 NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                [self.navigationController popViewControllerAnimated:YES];
                 break;
         }
 
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alert show];
         
     }
     
