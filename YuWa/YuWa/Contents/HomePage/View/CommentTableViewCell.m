@@ -24,7 +24,7 @@
 -(void)giveValueWithModel:(CommentModel *)model{
     //默认的数据
     UIImageView*imageView=[self viewWithTag:1];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:model.customer_header_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [imageView sd_setImageWithURL:[NSURL URLWithString:model.customer_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     
@@ -114,7 +114,7 @@
         
         UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(Left+(With+HJianju)*HNmuber, Top+(Height+VJianJu)*VNumber, With, Height)];
         imageView.contentMode=UIViewContentModeScaleAspectFit;
-        [imageView sd_setImageWithURL:[NSURL URLWithString:imageArray[i][@"url"]] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imageView sd_setImageWithURL:[NSURL URLWithString:imageArray[i]] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
         [self.contentView addSubview:imageView];
