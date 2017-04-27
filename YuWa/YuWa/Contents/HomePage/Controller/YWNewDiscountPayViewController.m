@@ -57,9 +57,9 @@
     self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
     self.shouldPayMoney = [self.money floatValue];
     self.is_coupon = NO;
-    if (self.status == 1) {
-        self.settomMoneyLabel.text = @"待支付￥0.00";
-    }
+//    if (self.status == 1) {
+//        self.settomMoneyLabel.text = @"待支付￥0.00";
+//    }
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -463,9 +463,7 @@
             vc.shop_ID = self.shopID;
             MyLog(@"%f",order_id);
             [self.navigationController pushViewController:vc animated:YES];
-            
-            
-            
+     
         }else if ([errorCode isEqualToString:@"9"]){
             
             [JRToast showWithText:@"身份已过期,请重新登入" duration:1];

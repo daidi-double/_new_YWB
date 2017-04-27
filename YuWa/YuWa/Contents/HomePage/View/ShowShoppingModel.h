@@ -19,6 +19,6 @@
 @property(nonatomic,strong)NSString*cat_name;
 @property(nonatomic,strong)NSArray*cat_goods;
 @property(nonatomic,strong)NSString*ctime;
-
+@property(nonatomic,strong)NSString * cat_goods_num;
 //+(ShowShoppingModel*)modelWithDic:(NSDictionary*)dic;
 @end

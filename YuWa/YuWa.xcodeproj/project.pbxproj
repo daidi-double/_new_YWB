@@ -619,6 +619,8 @@
 		AA3805FD1E65086900DB8C4C /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3805FC1E65086900DB8C4C /* PayViewController.m */; };
 		AA3838BD1E82194500A1B5C9 /* ExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3838BB1E82194500A1B5C9 /* ExchangeViewController.m */; };
 		AA3838BE1E82194500A1B5C9 /* ExchangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3838BC1E82194500A1B5C9 /* ExchangeViewController.xib */; };
+		AA3860BD1EB1B261002E0805 /* YWLeftCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3860BB1EB1B261002E0805 /* YWLeftCategoryTableViewCell.m */; };
+		AA3860BE1EB1B261002E0805 /* YWLeftCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3860BC1EB1B261002E0805 /* YWLeftCategoryTableViewCell.xib */; };
 		AA399CDA1EAB374900CA22CB /* YWShopCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA399CD91EAB374900CA22CB /* YWShopCarView.m */; };
 		AA399CE11EAB3B6E00CA22CB /* YWShopCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA399CDF1EAB3B6E00CA22CB /* YWShopCarTableViewCell.m */; };
 		AA399CE21EAB3B6E00CA22CB /* YWShopCarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA399CE01EAB3B6E00CA22CB /* YWShopCarTableViewCell.xib */; };
@@ -2397,6 +2399,9 @@
 		AA3838BA1E82194500A1B5C9 /* ExchangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeViewController.h; sourceTree = "<group>"; };
 		AA3838BB1E82194500A1B5C9 /* ExchangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExchangeViewController.m; sourceTree = "<group>"; };
 		AA3838BC1E82194500A1B5C9 /* ExchangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExchangeViewController.xib; sourceTree = "<group>"; };
+		AA3860BA1EB1B261002E0805 /* YWLeftCategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWLeftCategoryTableViewCell.h; sourceTree = "<group>"; };
+		AA3860BB1EB1B261002E0805 /* YWLeftCategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWLeftCategoryTableViewCell.m; sourceTree = "<group>"; };
+		AA3860BC1EB1B261002E0805 /* YWLeftCategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWLeftCategoryTableViewCell.xib; sourceTree = "<group>"; };
 		AA399CD81EAB374900CA22CB /* YWShopCarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCarView.h; sourceTree = "<group>"; };
 		AA399CD91EAB374900CA22CB /* YWShopCarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopCarView.m; sourceTree = "<group>"; };
 		AA399CDE1EAB3B6E00CA22CB /* YWShopCarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCarTableViewCell.h; sourceTree = "<group>"; };
@@ -5278,6 +5283,9 @@
 				AA29C2501EAD9C4E0092EF6F /* YWActivityTableViewCell.xib */,
 				AA29C2581EADDB0A0092EF6F /* YWShopTimeTableViewCell.h */,
 				AA29C2591EADDB0A0092EF6F /* YWShopTimeTableViewCell.m */,
+				AA3860BA1EB1B261002E0805 /* YWLeftCategoryTableViewCell.h */,
+				AA3860BB1EB1B261002E0805 /* YWLeftCategoryTableViewCell.m */,
+				AA3860BC1EB1B261002E0805 /* YWLeftCategoryTableViewCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -10605,6 +10613,7 @@
 				AA3544711E9DF23800A2EC73 /* 4baobaoLVUP14@2x.jpg in Resources */,
 				AA3543E01E9DF23800A2EC73 /* 1baobaoLVUP46@2x.jpg in Resources */,
 				C13019AF1DB1FD2F00E24C88 /* qrcode_scan_btn_photo_down@2x.png in Resources */,
+				AA3860BE1EB1B261002E0805 /* YWLeftCategoryTableViewCell.xib in Resources */,
 				C135A1401DDE020F002B78A5 /* 波浪个人_0002.png in Resources */,
 				AA3544251E9DF23800A2EC73 /* 2baobaoLVUP54@2x.jpg in Resources */,
 				AA3545881E9DF23A00A2EC73 /* 3baobaoBG52@2x.jpg in Resources */,
@@ -11464,6 +11473,7 @@
 				B33A26881D9A68040092CB12 /* EaseMessageModel.m in Sources */,
 				B3AE4DC21D91812D000A389F /* JWImgPickerAlbumChooseView.m in Sources */,
 				B38B2E301D8FACD8004D5256 /* SDWebImageDownloader.m in Sources */,
+				AA3860BD1EB1B261002E0805 /* YWLeftCategoryTableViewCell.m in Sources */,
 				C19EB0411DD9F6A200C28F15 /* YWChooseSexView.m in Sources */,
 				B33A267D1D9A68040092CB12 /* PSTCollectionViewFlowLayout.m in Sources */,
 				B38B2E561D8FACD8004D5256 /* ImageCache.m in Sources */,

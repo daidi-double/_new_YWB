@@ -25,7 +25,9 @@
 #import "YWShopCommitView.h"//评价
 #import "YWShopDetailViewController.h"
 #import "ShopCarDeViewController.h"//购物车
+#import "YWLeftCategoryTableViewCell.h"//左边的cell
 
+#define leftCell      @"YWLeftCategoryTableViewCell"
 #define CATEGORYCELL @"CategoryLeftTableViewCell"
 @interface ShopDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,YWShopCarViewDelegate>
 {
@@ -39,7 +41,7 @@
 @property(nonatomic,strong)NSMutableArray*maMDatasGoods;  //左边的大分类
 @property(nonatomic,strong)NSMutableArray * shops;//购物车里的物品
 @property(nonatomic,strong)ShowShoppingModel * shopModel;//右边商品model
-@property(nonatomic,strong)NSMutableArray*maMCommit;  //所有评论的model
+@property(nonatomic,strong)NSMutableArray*maShopCarAry;  //购物车商品
 @property(nonatomic,strong)NSMutableArray*maMRecommend; //推荐的model
 @property (weak, nonatomic) IBOutlet UIView *touchInfoView;
 
@@ -61,6 +63,7 @@
     [self getDatas];
      self.commentView.hidden = YES;
 
+    self.totalMoneyLabel.text = @"￥0.00";
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     [center addObserver:self selector:@selector(notice:) name:@"清除数量" object:nil];
@@ -90,6 +93,7 @@
     self.BGImageView.userInteractionEnabled = YES;
     self.BGImageView.contentMode = UIViewContentModeScaleToFill;
     self.numberLabel.hidden = YES;
+    self.numberLabel.textColor = [UIColor colorWithHexString:@"#999999"];
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
     //    effectView.backgroundColor = [UIColor orangeColor];
@@ -98,6 +102,7 @@
     [self.BGView insertSubview:effectView aboveSubview:self.BGImageView];
 //    
     [self.rightTableView registerNib:[UINib nibWithNibName:CATEGORYCELL bundle:nil] forCellReuseIdentifier:CATEGORYCELL];
+    [self.leftTableView registerNib:[UINib nibWithNibName:leftCell bundle:nil] forCellReuseIdentifier:leftCell];
     
     UITapGestureRecognizer * mapTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toMapView)];
     mapTap.numberOfTapsRequired = 1;
@@ -116,7 +121,7 @@
             
         }
         _btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btn.frame = CGRectMake(kScreen_Width/2*i, 0, kScreen_Width/2, 28);
+        _btn.frame = CGRectMake(kScreen_Width/2*i, 5, kScreen_Width/2, 28);
 //        btn.centerY = self.shopAndCommontView.height/2;
         _btn.tag = 100 + i;
         [_btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
@@ -204,25 +209,37 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _leftTableView) {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"table"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"table"];
-    }
+    YWLeftCategoryTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:leftCell];
+
         _leftTableView.showsVerticalScrollIndicator = NO;
 
         cell.contentView.backgroundColor = RGBCOLOR(246, 247, 248, 1);
-        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cell.width-6, cell.frame.size.height)];
+        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 75, cell.frame.size.height)];
         cell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
         ShowShoppingModel * showModel = self.maMDatasGoods[indexPath.row];
-        cell.textLabel.text = showModel.cat_name;
-        cell.textLabel.textColor = RGBCOLOR(103, 104, 105, 1);
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
-        
+        cell.categoryNameLabel.text = showModel.cat_name;
+
         lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 52)];
         lineView.backgroundColor = CNaviColor;
         
         [cell.selectedBackgroundView addSubview:lineView];
+
         
+        cell.numberLabel.text = showModel.cat_goods_num;
+        
+        cell.numberLabel.layer.masksToBounds = YES;
+        cell.numberLabel.layer.cornerRadius = 3;
+        
+        self.numberLabel.text = [NSString stringWithFormat:@"%ld",[self.numberLabel.text integerValue] + [showModel.cat_goods_num integerValue]];
+        if ([self.numberLabel.text integerValue] != 0) {
+            self.numberLabel.hidden = NO;
+        }else{
+            self.numberLabel.hidden = YES;
+        }
+        
+        if ([showModel.cat_goods_num integerValue]==0) {
+            cell.numberLabel.hidden = YES;
+        }
 
         return cell;
     }else{
@@ -231,6 +248,8 @@
         CategoryLeftTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CATEGORYCELL];
         NSDictionary * dit = model.cat_goods[indexPath.row];
         ShopDetailGoodsModel * shopModel = [ShopDetailGoodsModel yy_modelWithDictionary:dit];
+        [cell.shopCarAry removeAllObjects];
+        cell.shopCarAry  = self.maShopCarAry;
         cell.model = shopModel;
         UIButton * addBtn = [cell viewWithTag:11];
         [addBtn addTarget:self action:@selector(addShopAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -268,7 +287,9 @@
     }
     return 0.01;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
+}
 //MARK: - 点击 cell 的代理方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -283,9 +304,7 @@
         self.isRoll = YES;
         // 取消选中效果
         [self.rightTableView deselectRowAtIndexPath:moveToIndexPath animated:YES];
-//        lineView.hidden = NO;
-//        markView.hidden = YES;
-//        markView = lineView;
+
     }
     if (tableView == self.rightTableView) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -392,7 +411,7 @@
             self.mainModel=[ShopdetailModel yy_modelWithDictionary:data[@"data"]];
             [self setHeaderInfo];
             self.maMDatasGoods=[NSMutableArray array];
-            self.maMCommit=[NSMutableArray array];
+            self.maShopCarAry=[NSMutableArray array];
             self.maMRecommend=[NSMutableArray array];
             //所有商品的model
 
@@ -403,12 +422,29 @@
                 [self.maMDatasGoods addObject:self.shopModel];
                 
             }
-           
-
+            NSString * price;
+            NSString * totalMoney2 ;
+                for (NSDictionary * shopCarDic in self.mainModel.cart) {
+                    YWShopInfoListModel * model = [YWShopInfoListModel yy_modelWithDictionary:shopCarDic];
+                    [self.maShopCarAry addObject:model];
+                    if (model.goods_disprice ==nil ||[model.goods_disprice isKindOfClass:[NSNull class]]) {
+                        price = model.goods_price;
+                    }else{
+                        price = model.goods_disprice;
+                    }
+                    totalMoney2 = [NSString stringWithFormat:@"%.2f",[price floatValue] + [totalMoney2 floatValue]];
+                }
+            self.totalMoneyLabel.text = [NSString stringWithFormat:@"￥%@",totalMoney2];
+            if ([totalMoney2 floatValue] == 0.00) {
+                self.totalMoneyLabel.text = @"￥0.00";
+            }
             [self.leftTableView reloadData];
             [self.rightTableView reloadData];
             NSIndexPath*indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-            [_leftTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+            if (self.maMDatasGoods.count>0) {
+                
+                [_leftTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+            }
             
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
@@ -444,7 +480,7 @@
 //
 //        YWPayViewController * vc = [YWPayViewController payViewControllerCreatWithQRCodePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou andpayAllMoney:[money floatValue] andNOZheMoney:0];
         YWNewDiscountPayViewController * vc =[[YWNewDiscountPayViewController alloc]init];
-        if (self.shops.count==0) {
+        if (self.mainModel.cart.count==0) {
             
             vc.status = 1;
         }else{
@@ -638,7 +674,7 @@
 - (void)addShopAction:(UIButton *)sender {
 //    MyLog(@"tag = %ld",sender.tag);
     CategoryLeftTableViewCell * cell = (CategoryLeftTableViewCell *)[[sender superview] superview];
-//    NSIndexPath * path = [self.rightTableView indexPathForCell:cell];
+    NSIndexPath * path = [self.rightTableView indexPathForCell:cell];
 //    markPath = path;
 //    NSLog(@"index row%@", cell.priceLabel.text);
     NSString * price = [cell.priceLabel.text substringFromIndex:1];
@@ -655,6 +691,11 @@
         }
     }
 
+    YWLeftCategoryTableViewCell * leftTableViewCell = [self.leftTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:path.section inSection:0]];
+//    UILabel * number = [leftTableViewCell viewWithTag:123];
+    leftTableViewCell.numberLabel.text = [NSString stringWithFormat:@"%ld",[leftTableViewCell.numberLabel.text integerValue] + 1];
+    leftTableViewCell.numberLabel.hidden = NO;
+   
     NSDictionary * dic;
     
     if ([self isAddShop:cell.shop_nameLabel.text]) {
@@ -673,8 +714,11 @@
        dic = @{@"goods_name":cell.shop_nameLabel.text,@"goods_price":cell.priceLabel.text,@"number":cell.numberLabel.text};
         [self.markCells addObject:cell];
         [self.shops addObject:dic];
+        [self.markCells addObject:leftTableViewCell];
     }
-    [self addShopToCar:cell.goods_id];
+    [self addShopToCar:cell.goods_id andRow:path.section];
+//    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:path.section inSection:0];
+//    [self.leftTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
 }
 //YES就已经存在，no不存在
 - (BOOL)isAddShop:(NSString *)shopName{
@@ -690,7 +734,7 @@
 - (void)reduceShopAction:(UIButton *)sender {
 //     MyLog(@"tag = %ld",sender.tag);
     CategoryLeftTableViewCell * cell = (CategoryLeftTableViewCell *)[[sender superview] superview];
-    //    NSIndexPath * path = [self.rightTableView indexPathForCell:cell];
+        NSIndexPath * path = [self.rightTableView indexPathForCell:cell];
     //    NSLog(@"index row%@", cell.priceLabel.text);
     NSString * price = [cell.priceLabel.text substringFromIndex:1];
     NSString * totalMoney = [self.totalMoneyLabel.text substringFromIndex:1];
@@ -704,6 +748,13 @@
     if ([self.numberLabel.text integerValue] == 0 ) {
         self.numberLabel.hidden = YES;
     }
+    YWLeftCategoryTableViewCell * leftTableViewCell = [self.leftTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:path.section inSection:0]];
+    //    UILabel * number = [leftTableViewCell viewWithTag:123];
+    leftTableViewCell.numberLabel.text = [NSString stringWithFormat:@"%ld",[leftTableViewCell.numberLabel.text integerValue] - 1];
+    if ([leftTableViewCell.numberLabel.text integerValue] == 0 ) {
+        leftTableViewCell.numberLabel.hidden = YES;
+    }
+
     NSDictionary * dic;
     
     if ([self isAddShop:cell.shop_nameLabel.text]) {
@@ -728,7 +779,7 @@
 
 }
 //点击加号，把商品传到服务器
-- (void)addShopToCar:(NSString *)goodsID{
+- (void)addShopToCar:(NSString *)goodsID andRow:(NSInteger)row{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_SHOPCAR];
     NSDictionary*dict=@{@"shop_id":self.shop_id,@"device_id":[JWTools getUUID],@"goods_id":goodsID};
     NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
@@ -740,6 +791,7 @@
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"购物车 %@",data);
+       
     }];
 }
 //点减加号，把商品传到服务器
@@ -801,6 +853,10 @@
             btn.hidden = YES;
 
     }
+    for (YWLeftCategoryTableViewCell * cell in self.markCells) {
+         cell.numberLabel.text = @"0";
+         cell.numberLabel.hidden = YES;
+    }
     self.totalMoneyLabel.text = @"0.00";
    self.numberLabel.text = @"0";
 }
@@ -829,7 +885,7 @@
 }
 - (YWShopCommitView*)commentView{
     if (!_commentView) {
-        _commentView = [[YWShopCommitView alloc]initWithFrame:CGRectMake(0, self.bottomBGView.height-32, kScreen_Width,kScreen_Height - self.bottomBGView.height+32)];
+        _commentView = [[YWShopCommitView alloc]initWithFrame:CGRectMake(0, self.bottomBGView.height, kScreen_Width,kScreen_Height - self.bottomBGView.height)];
         _commentView.hidden = YES;
         _commentView.shop_id = self.shop_id;
     }

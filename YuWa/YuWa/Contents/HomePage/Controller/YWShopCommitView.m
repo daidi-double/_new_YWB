@@ -99,7 +99,7 @@
         return 88.f;
     }
     CommentModel*model=self.maMallDatas[indexPath.row];
-    MyLog(@"cell高度 %f",[CommentTableViewCell getCellHeight:model]);
+
     return [CommentTableViewCell getCellHeight:model];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
