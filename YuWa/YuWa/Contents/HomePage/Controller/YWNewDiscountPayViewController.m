@@ -457,7 +457,7 @@
             
             CGFloat shouldPay=[data[@"data"][@"data"][@"pay_money"] floatValue];
             CGFloat  order_id=[data[@"data"][@"data"][@"order_id"] floatValue];
-            PCPayViewController*vc=[[PCPayViewController alloc]init];
+            PCPayViewController*vc=[PCPayViewController sharedManager];
             vc.blanceMoney=shouldPay;
             vc.order_id=order_id;
             vc.shop_ID = self.shopID;

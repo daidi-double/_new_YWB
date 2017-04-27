@@ -653,7 +653,6 @@
     req.package             = dict[@"package"];
     req.sign                = dict[@"sign"];
    
-    
     [WXApi sendReq:req];
     
 };
@@ -662,7 +661,7 @@
 
 #pragma mark - WXApiDelegate
 - (void)onResp:(BaseResp *)resp {
-    [self.navigationController popViewControllerAnimated:YES];
+    
     if([resp isKindOfClass:[PayResp class]]){
         //支付返回结果，实际支付结果需要去微信服务器端查询
         NSString *strMsg,*strTitle = [NSString stringWithFormat:@"支付结果"];
@@ -683,15 +682,14 @@
                 break;
                 
             default:
-//                <VIPNavigationController: 0x103058800>
                 strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
                 NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
 
                 break;
         }
 
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
         
     }
     
@@ -762,5 +760,7 @@
     });
     return payMVC;
 }
-
+-(void)dealloc{
+    
+}
 @end
