@@ -74,6 +74,6 @@
 @property(nonatomic,strong)NSArray*recommend_shop;           //推荐店铺
 @property(nonatomic,strong)NSArray * business_hours;//营业时间
 @property(nonatomic,strong)NSArray*tag_name;//所属分类
-
+@property (nonatomic,strong)NSArray * cart;//购物车内容
 
 @end

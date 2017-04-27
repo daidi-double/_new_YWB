@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *oldPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;
+@property (nonatomic,strong) NSMutableArray * shopCarAry;
+@property (nonatomic,copy)NSString * number;
 @property (nonatomic,strong)NSArray * goodsAry;
 @property (nonatomic,strong) ShopDetailGoodsModel * model;
 @property (nonatomic,assign)void(^addShopBlock)(NSString * price);
