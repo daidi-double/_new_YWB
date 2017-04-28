@@ -39,8 +39,13 @@
     self.shopIconImageView.layer.masksToBounds = YES;
     [self.shopIconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.company_img]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     for (NSDictionary * dict in self.model.cart) {
+        if ([dict isKindOfClass:[NSNull class]]) {
+            
+        }else{
         self.infoModel = [YWShopInfoListModel yy_modelWithDictionary:dict];
         [self.dataAry addObject:self.infoModel];
+       
+        }
     }
     NSArray*specail=self.model.cart;
     CGFloat top = 30.0;
@@ -56,7 +61,14 @@
     CGFloat totalMoney = 0.0;
     if (specail.count>0) {
         for (int i=0; i<specail.count; i++) {
-            YWShopInfoListModel * listModel = self.dataAry[i];
+            YWShopInfoListModel * listModel;
+            if ([self.dataAry[i] isKindOfClass:[NSNull class]]) {
+                
+            }else{
+               
+                listModel = self.dataAry[i];
+                
+            }
             UIImageView*speImage=[self viewWithTag:100+i];
             if (!speImage) {
                 speImage=[[UIImageView alloc]initWithFrame:CGRectMake(left, top, kScreen_Width/7, kScreen_Width/7)];
