@@ -162,7 +162,7 @@
 }
 
 - (void)segmentControlAction:(UISegmentedControl *)sender{
-    self.status = sender.selectedSegmentIndex;
+    self.status = sender.selectedSegmentIndex+2;
     
     if (!self.addressBooktableView)return;
     self.addressBooktableView.hidden = sender.selectedSegmentIndex == 0?YES:NO;
