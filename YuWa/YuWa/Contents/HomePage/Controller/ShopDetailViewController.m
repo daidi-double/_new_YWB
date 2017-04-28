@@ -303,7 +303,7 @@
             
             ShowShoppingModel * model = self.maMDatasGoods[indexPath.row];
             if (model.cat_goods.count>=3) {
-                [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+                [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
             }else if (model.cat_goods.count==1) {
                 [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
             }else if (model.cat_goods.count==0){
@@ -311,7 +311,7 @@
             }
             
         }else{
-            [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+            [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
         }
         
         
@@ -323,11 +323,14 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    self.isRoll  = NO;
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
 
     if (self.isRoll == NO) {
-        
+    
     // 如果是 左侧的 tableView 直接return
     if (scrollView == self.leftTableView) return;
     
@@ -341,6 +344,7 @@
     [self.leftTableView selectRowAtIndexPath:moveToIndexpath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
     
     }
+//    self.isRoll = NO;
 }
 - (void)setHeaderInfo{
     
@@ -467,7 +471,7 @@
             NSIndexPath*indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
             if (self.maMDatasGoods.count>0) {
                 
-                [_leftTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+                [_leftTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
             }
 
         }else{
