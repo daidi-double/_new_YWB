@@ -52,6 +52,7 @@
         reduceBtn.hidden = YES;
     }else{
         reduceBtn.hidden= NO;
+        
     }
 }
 
