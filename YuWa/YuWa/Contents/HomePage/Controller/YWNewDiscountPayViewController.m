@@ -14,6 +14,7 @@
 #import "CouponViewController.h"
 #import "TwoLabelShowTableViewCell.h"
 #import "PCPayViewController.h"
+#import "ShopdetailModel.h"
 #import "YWLoginViewController.h"
 #import "YWShopInfoListModel.h"
 #import "YWNoShopTableViewCell.h"//无商品的时候买单
@@ -29,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *settomMoneyLabel;
 @property (weak, nonatomic) IBOutlet UIView *accountBGView;
 @property (weak, nonatomic) IBOutlet UITableView *payTableView;
+@property (nonatomic,strong)ShopdetailModel * mainModel;
 @property (nonatomic,strong)UIButton * couponBtn;//使用优惠券
 @property (nonatomic,copy)NSString * noDiscountMoney;//不打折金额
 @property (nonatomic,copy)NSString * otherTotalMoney;//其他消费总额
@@ -57,12 +59,14 @@
     self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
     self.shouldPayMoney = [self.money floatValue];
     self.is_coupon = NO;
+    MyLog(@"status = %ld",self.status);
 //    if (self.status == 1) {
 //        self.settomMoneyLabel.text = @"待支付￥0.00";
 //    }
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self getDatas];
     if (self.status == 2) {
         
         [self requestShopListData];
@@ -91,7 +95,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.status == 1) {
         if (indexPath.section == 0) {
-            return 150.f;
+            return 250.f;
         }
         return 44.f;
     }else{
@@ -118,6 +122,9 @@
             if (!cell) {
                 cell = [[YWNoShopTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:noShopCell];
             }
+            cell.shopIconImageView.layer.masksToBounds = YES;
+            cell.shopIconImageView.layer.cornerRadius = 5;
+            [cell.shopIconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.mainModel.company_img]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
             cell.shopNameLabel.text = self.shopName;
             cell.delegate = self;
             return cell;
@@ -129,6 +136,9 @@
                 cell.shopName = self.shopName;
                 cell.cart = self.dataAry;
                 cell.dataAry = self.dataAry;
+                cell.shopIconImageView.layer.masksToBounds = YES;
+                cell.shopIconImageView.layer.cornerRadius = 5;
+                [cell.shopIconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.mainModel.company_img]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
                 return cell;
             }else{
                 ShopCarDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:carCell];
@@ -552,6 +562,35 @@
         }
     }];
 }
+-(void)getDatas{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_SHOPDETAIL];
+    NSDictionary*dict=@{@"shop_id":self.shopID,@"device_id":[JWTools getUUID]};
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
+    if ([UserSession instance].isLogin) {
+        [params setObject:@([UserSession instance].uid) forKey:@"user_id"];
+        [params setObject:[UserSession instance].token forKey:@"token"];
+    }
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        NSNumber*number=data[@"errorCode"];
+        NSString*errorCode =[NSString stringWithFormat:@"%@",number];
+        if ([errorCode isEqualToString:@"0"]) {
+            self.mainModel=[ShopdetailModel yy_modelWithDictionary:data[@"data"]];
+            [self.payTableView reloadData];
+            
+        }else{
+            [JRToast showWithText:data[@"errorMessage"]];
+        }
+        
+        
+        
+    }];
+    
+    
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

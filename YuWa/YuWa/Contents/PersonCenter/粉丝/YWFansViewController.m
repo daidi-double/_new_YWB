@@ -13,6 +13,7 @@
 #import "NotePraiseModel.h"
 #import "YWOtherSeePersonCenterViewController.h"
 #import "RBNodeShowViewController.h"
+#import "ShopDetailViewController.h"
 
 #define  CELL0  @"YWFansTableViewCell"
 
@@ -191,18 +192,24 @@
         if ([UserSession instance].uid == [model.uid integerValue]) {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else{
+            if ([model.user_type integerValue] == 2) {
+                ShopDetailViewController * shopVC = [[ShopDetailViewController alloc]init];
+                shopVC.shop_id = model.uid;
+                [self.navigationController pushViewController:shopVC animated:YES];
+            }else{
             YWOtherSeePersonCenterViewController*vc=[[YWOtherSeePersonCenterViewController alloc]init];
             
             vc.uid=model.uid;
             vc.nickName = model.nickname;
             [self.navigationController pushViewController:vc animated:YES];
         }
-        
+        }
     }else{
         NotePraiseModel * model = self.maMallDatas[indexPath.row];
         RBNodeShowViewController * vc = [[RBNodeShowViewController alloc]init];
         vc.isUser = YES;
         vc.note_id = model.note_id;
+        
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

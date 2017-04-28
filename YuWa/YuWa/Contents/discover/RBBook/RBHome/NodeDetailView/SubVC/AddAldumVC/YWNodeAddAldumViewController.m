@@ -102,11 +102,12 @@
     }
     if (!self.aldumIntro)self.aldumIntro = @"";
     NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"title":self.aldumTitle,@"info":self.aldumIntro,@"is_hidden":@(self.isPublic)};
-    
+   
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_CREATE_ALDUM withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code is %@",responsObj);
         [UserSession instance].aldumCount = [NSString stringWithFormat:@"%zi",[UserSession instance].aldumCount?([[UserSession instance].aldumCount integerValue]+1):1];
+         [JRToast showWithText:@"创建成功" duration:1];
         [self.navigationController popViewControllerAnimated:YES];
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);

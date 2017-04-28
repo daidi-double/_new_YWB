@@ -35,6 +35,9 @@
     self.shop_id = self.model.id;
     self.accountBtn.layer.cornerRadius = 2;
     self.accountBtn.layer.masksToBounds = YES;
+    self.shopIconImageView.layer.cornerRadius =5;
+    self.shopIconImageView.layer.masksToBounds = YES;
+    [self.shopIconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.company_img]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     for (NSDictionary * dict in self.model.cart) {
         self.infoModel = [YWShopInfoListModel yy_modelWithDictionary:dict];
         [self.dataAry addObject:self.infoModel];

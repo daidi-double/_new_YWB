@@ -11,6 +11,7 @@
 @interface YWCarListModel : NSObject
 
 @property (nonatomic,strong)NSString * company_name;
+@property (nonatomic,strong)NSString * company_img;
 @property (nonatomic,strong)NSString * id;
 @property (nonatomic,strong)NSString * discount;
 @property (nonatomic,strong)NSString * pay_discount;

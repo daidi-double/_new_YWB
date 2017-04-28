@@ -14,5 +14,6 @@
 @end
 @interface YWNoShopTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *shopIconImageView;
 @property (nonatomic,weak) id<YWNoShopTableViewCellDelegate>delegate;
 @end

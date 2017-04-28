@@ -23,6 +23,7 @@
 @property(nonatomic,strong)NSString*nickname;   //名字
 @property(nonatomic,strong)NSString*note_num;   //多少条笔记
 @property(nonatomic,strong)NSString*fans;    //多少粉丝
+@property(nonatomic,strong)NSString * user_type;
 @property(nonatomic,assign)BOOL is_attention;           //是否关注了  1为关注了   0为未关注
 
 

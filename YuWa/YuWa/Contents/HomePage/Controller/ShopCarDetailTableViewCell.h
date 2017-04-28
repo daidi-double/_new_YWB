@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIView *line;
 @property (weak, nonatomic) IBOutlet UIButton *clearBtn;
 @property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *shopIconImageView;
 @property (nonatomic,strong)YWCarListModel * model;
 @property (nonatomic,strong)NSArray * shops;
 @property(nonatomic,strong)NSMutableArray*saveAllImage;

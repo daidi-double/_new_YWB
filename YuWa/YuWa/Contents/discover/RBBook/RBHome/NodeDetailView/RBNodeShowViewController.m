@@ -74,9 +74,11 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.f];
+    WEAKSELF;
     if (self.addToAldumView && [[UserSession instance].aldumCount integerValue]!=self.addToAldumView.dataArr.count) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            [self.addToAldumView aldumReload];
+            weakSelf.addToAldumView.auser_type = self.model.user.user_type;
+            [weakSelf.addToAldumView aldumReload];
         });
     }
     
@@ -132,7 +134,7 @@
     self.toolsBottomView = [[[NSBundle mainBundle]loadNibNamed:@"RBNodeDetailBottomView" owner:nil options:nil] firstObject];
     WEAKSELF;
     self.toolsBottomView.nodeID = self.model.homeID;
-    self.toolsBottomView.auser_type = self.model.user.user_type;
+
     self.toolsBottomView.likeBlock = ^(BOOL isLike){
         if ([weakSelf isLogin]) {
             weakSelf.dataModel.inlikes = [NSString stringWithFormat:@"%zi",isLike];
@@ -155,6 +157,7 @@
     };
     [self addToAldumViewmake];
     [self.view addSubview:self.toolsBottomView];
+    self.toolsBottomView.auser_type = self.model.user.user_type;
 }
 - (void)reSetBottomToolsView{
     RBNodeDetailTableViewCell * detailCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];

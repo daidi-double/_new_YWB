@@ -23,7 +23,6 @@
 }
 - (void)setData{
 //    _shop_imgView.size = CGSizeMake(kScreen_Width/7, kScreen_Width/7);
-
     [_shop_imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",_model.goods_img]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.goods_id = self.model.goods_id;
     _shop_nameLabel.text = self.model.goods_name;
@@ -35,6 +34,7 @@
         price = self.model.goods_price;
         self.oldPriceLabel.hidden = YES;
     }else{
+        self.oldPriceLabel.hidden= NO;
         price = self.model.goods_disprice;
         NSString * str = [NSString stringWithFormat:@"￥%@",self.model.goods_price];
         NSMutableAttributedString *attributeMarket = [[NSMutableAttributedString alloc] initWithString:str];
@@ -43,6 +43,7 @@
         self.oldPriceLabel.attributedText = attributeMarket;
 
     }
+    
     self.numberLabel.text = self.model.num;
     self.priceLabel.attributedText = [NSString stringWithFirstStr:@"￥" withFont:[UIFont systemFontOfSize:10.f] withColor:RGBCOLOR(255, 152, 125, 1) withSecondtStr:[NSString stringWithFormat:@"%@",price]  withFont:[UIFont systemFontOfSize:13.f] withColor:RGBCOLOR(255, 152, 125, 1)];
  

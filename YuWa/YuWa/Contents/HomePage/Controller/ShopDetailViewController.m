@@ -231,14 +231,7 @@
         
         cell.numberLabel.layer.masksToBounds = YES;
         cell.numberLabel.layer.cornerRadius = 3;
-        
-        self.numberLabel.text = [NSString stringWithFormat:@"%ld",[self.numberLabel.text integerValue] + [showModel.cat_goods_num integerValue]];
-        if ([self.numberLabel.text integerValue] != 0) {
-            self.numberLabel.hidden = NO;
-        }else{
-            self.numberLabel.hidden = YES;
-        }
-        
+    
         if ([showModel.cat_goods_num integerValue]==0) {
             cell.numberLabel.hidden = YES;
         }
@@ -250,7 +243,7 @@
         CategoryLeftTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CATEGORYCELL];
         NSDictionary * dit = model.cat_goods[indexPath.row];
         ShopDetailGoodsModel * shopModel = [ShopDetailGoodsModel yy_modelWithDictionary:dit];
-        [cell.shopCarAry removeAllObjects];
+//        [cell.shopCarAry removeAllObjects];
         cell.shopCarAry  = self.maShopCarAry;
         cell.model = shopModel;
         UIButton * addBtn = [cell viewWithTag:11];
@@ -294,25 +287,45 @@
 }
 //MARK: - 点击 cell 的代理方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    self.isRoll = YES;
     // 判断是否为 左侧 的 tableView
     if (tableView == self.leftTableView) {
         
         // 计算出 右侧 tableView 将要 滚动的 位置
         NSIndexPath *moveToIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.row];
         
+        if (indexPath.row > 3 || indexPath.row < self.maMDatasGoods.count-3) {
+            
+            [self.leftTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+        }
         // 将右侧 tableView 移动到指定位置(点击左边最后一个cell无法选中)
-        [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
-        self.isRoll = YES;
+        if (indexPath.row > self.maMDatasGoods.count-1) {
+            
+            ShowShoppingModel * model = self.maMDatasGoods[indexPath.row];
+            if (model.cat_goods.count>=3) {
+                [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+            }else if (model.cat_goods.count==1) {
+                [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+            }else if (model.cat_goods.count==0){
+                
+            }
+            
+        }else{
+            [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+        }
+        
+        
         // 取消选中效果
         [self.rightTableView deselectRowAtIndexPath:moveToIndexPath animated:YES];
-
+        
     }
     if (tableView == self.rightTableView) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+
     if (self.isRoll == NO) {
         
     // 如果是 左侧的 tableView 直接return
@@ -416,13 +429,19 @@
             self.maShopCarAry=[NSMutableArray array];
             self.maMRecommend=[NSMutableArray array];
             //所有商品的model
-
+            self.numberLabel.text = @"0";
             [self.shops removeAllObjects];
             for (NSDictionary*dict in self.mainModel.goods) {
 //                self.shopModel= [ShowShoppingModel modelWithDic:dict];
                 self.shopModel = [ShowShoppingModel yy_modelWithDictionary:dict];
                 [self.maMDatasGoods addObject:self.shopModel];
                 
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld",[self.numberLabel.text integerValue] + [self.shopModel.cat_goods_num integerValue]];
+                if ([self.numberLabel.text integerValue] != 0) {
+                    self.numberLabel.hidden = NO;
+                }else{
+                    self.numberLabel.hidden = YES;
+                }
             }
             NSString * price;
             NSString * totalMoney2 ;
@@ -476,19 +495,12 @@
 //结算
 - (IBAction)accountAction:(UIButton *)sender {
     if ([self judgeLogin]) {
-//        NSString * money = [self.totalMoneyLabel.text substringFromIndex:1];
-//        if (money == nil ||[money floatValue] == 0.00) {
-//            [JRToast showWithText:@"请选择商品" duration:1];
-//            return;
-//        }
-//        CGFloat zhekou=[self.mainModel.discount floatValue];
-//
-//        YWPayViewController * vc = [YWPayViewController payViewControllerCreatWithQRCodePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou andpayAllMoney:[money floatValue] andNOZheMoney:0];
+
         YWNewDiscountPayViewController * vc =[[YWNewDiscountPayViewController alloc]init];
-        if (self.mainModel.cart.count==0) {
+        if (self.mainModel.cart.count==0 && self.shops.count == 0) {
             
             vc.status = 1;
-        }else{
+        }else if (self.mainModel.cart.count != 0 || self.shops.count !=0){
             vc.status = 2;
         }
         vc.shopID = self.mainModel.id;
@@ -506,19 +518,20 @@
 //优惠买单,付款
 - (IBAction)payAction:(UIButton *)sender {
     if ([self judgeLogin]) {
-//        CGFloat zhekou=[self.mainModel.discount floatValue];
-        
-//        YWPayViewController*vc=[YWPayViewController payViewControllerCreatWithWritePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou];
+
+        MyLog(@"self.shops.count = %ld",self.shops.count);
         YWNewDiscountPayViewController * vc = [[YWNewDiscountPayViewController alloc]init];
         if (self.mainModel.cart.count==0 && self.shops.count == 0) {
             
             vc.status = 1;
-        }else{
+        }else if (self.mainModel.cart.count != 0 || self.shops.count !=0){
             vc.status = 2;
         }
         vc.shopID = self.mainModel.id;
         vc.shopName = self.mainModel.company_name;
         vc.shopDiscount = self.mainModel.discount;
+        NSString * money = [self. totalMoneyLabel.text substringFromIndex:1];
+        vc.money = money;
         [self.navigationController pushViewController:vc animated:YES];
         
     }
@@ -764,6 +777,9 @@
     
     if ([self isAddShop:cell.shop_nameLabel.text]) {
         int a = 0;
+        if (self.shops.count == 0) {
+            [self.shops addObjectsFromArray:self.mainModel.cart];
+        }
         for (NSDictionary * dict in self.shops) {
             NSString * name = dict[@"goods_name"];
             NSString * number = dict[@"number"];
@@ -780,8 +796,12 @@
         }
         
     }
-    [self reduceShopToCar:cell.goods_id];
-
+    if ([cell.numberLabel.text integerValue] == 0) {
+        
+        [self clearShopNumber:cell.goods_id];
+    }else{
+        [self reduceShopToCar:cell.goods_id];
+    }
 }
 //点击加号，把商品传到服务器
 - (void)addShopToCar:(NSString *)goodsID andRow:(NSInteger)row{
@@ -910,6 +930,25 @@
     [self.shopCarView removeFromSuperview];
     [self.touchView removeFromSuperview];
     [self clearNumberOfShop];
+}
+
+//清空某件商品
+- (void)clearShopNumber:(NSString *)goodsID{
+    
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_CLEARSHOPNUMBER];
+    NSDictionary*dict=@{@"shop_id":self.shop_id,@"device_id":[JWTools getUUID],@"goods_id":goodsID};
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
+    if ([UserSession instance].isLogin) {
+        [params setObject:@([UserSession instance].uid) forKey:@"user_id"];
+        [params setObject:[UserSession instance].token forKey:@"token"];
+    }
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"减去商品 %@",data);
+    }];
+
+    
 }
 /*
 #pragma mark - Navigation

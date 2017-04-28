@@ -12,6 +12,7 @@
 @property (nonatomic,strong)NSMutableArray * dataAry;
 @property (nonatomic,strong)YWShopInfoListModel * model;
 @property (nonatomic,copy)NSString * shopName;
+@property (weak, nonatomic) IBOutlet UIImageView *shopIconImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
 @property (nonatomic,strong)NSArray * cart;

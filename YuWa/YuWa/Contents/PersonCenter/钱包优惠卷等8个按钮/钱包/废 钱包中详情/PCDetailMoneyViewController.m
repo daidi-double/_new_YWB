@@ -131,13 +131,13 @@
             self.payType = 99;
         }
         }
-        MyLog(@"self.payType = %ld",self.payType);
+//        MyLog(@"self.payType = %ld",self.payType);
         [self getDatas];
     });
 }
 -(void)setUpMJRefresh{
     
-//    self.maAllDatasModel=[NSMutableArray array];
+    self.maAllDatasModel=[NSMutableArray array];
     self.pagen=10;
     self.tableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         self.maAllDatasModel=[NSMutableArray array];
@@ -146,10 +146,10 @@
     }];
     
     //上拉刷新
-//    self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-//        self.pages++;
-//        [self getDatas];
-//    }];
+    self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+        self.pages++;
+        [self getDatas];
+    }];
     
     
     //立即刷新
