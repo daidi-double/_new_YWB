@@ -29,6 +29,12 @@
 
 #define leftCell      @"YWLeftCategoryTableViewCell"
 #define CATEGORYCELL @"CategoryLeftTableViewCell"
+
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
 @interface ShopDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,YWShopCarViewDelegate>
 {
     UIButton * markBtn;
@@ -59,9 +65,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets  = NO;
+    self.commentView.hidden = YES;
     [self makeUI];
     [self getDatas];
-     self.commentView.hidden = YES;
     
     self.totalMoneyLabel.text = @"￥0.00";
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
@@ -926,8 +933,14 @@
 }
 - (YWShopCommitView*)commentView{
     if (!_commentView) {
-        _commentView = [[YWShopCommitView alloc]initWithFrame:CGRectMake(0, self.bottomBGView.height, kScreen_Width,kScreen_Height - self.bottomBGView.height)];
-        _commentView.hidden = YES;
+        CGRect rect;
+        if (IS_IPHONE_5) {
+            rect= CGRectMake(0, self.bottomBGView.height-64, kScreen_Width,kScreen_Height - self.bottomBGView.height+64);
+        }else{
+            rect= CGRectMake(0, self.bottomBGView.height, kScreen_Width,kScreen_Height - self.bottomBGView.height);
+        }
+        _commentView = [[YWShopCommitView alloc]initWithFrame:rect];
+//        _commentView.hidden = YES;
         _commentView.shop_id = self.shop_id;
     }
     return _commentView;
