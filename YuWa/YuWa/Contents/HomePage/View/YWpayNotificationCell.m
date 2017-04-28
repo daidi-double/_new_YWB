@@ -31,6 +31,6 @@
 -(void)setModel:(YWMessageNotificationModel *)model{
     _model = model;
     self.time.text = [JWTools dateWithOutYearStr:self.model.ctime];
-//    self.payCount.text = [NSString stringWithFormat:@"¥%@",model.pay_money];
+    self.payCount.text = [NSString stringWithFormat:@"¥%@",model.pay_money];
 }
 @end

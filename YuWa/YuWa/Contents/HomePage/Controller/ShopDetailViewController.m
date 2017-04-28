@@ -59,6 +59,8 @@
 @property (nonatomic,assign)BOOL isRemove;
 @property(nonatomic,strong)NSMutableArray* markCells;//清空购物车时用
 @property (nonatomic,strong)YWShopCommitView * commentView;//评价
+@property (nonatomic,assign)BOOL is_ADD;//判断是否添加到数组
+
 @end
 
 @implementation ShopDetailViewController
@@ -69,7 +71,7 @@
     self.commentView.hidden = YES;
     [self makeUI];
     [self getDatas];
-    
+    self.is_ADD = YES;
     self.totalMoneyLabel.text = @"￥0.00";
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
@@ -254,6 +256,10 @@
 //        [cell.shopCarAry removeAllObjects];
         cell.shopCarAry  = self.maShopCarAry;
         cell.model = shopModel;
+        
+
+
+        
         UIButton * addBtn = [cell viewWithTag:11];
         [addBtn addTarget:self action:@selector(addShopAction:) forControlEvents:UIControlEventTouchUpInside];
         UIButton * reduceBtn = [cell viewWithTag:10];
@@ -262,6 +268,18 @@
 //            reduceBtn.enabled = NO;
 //            reduceBtn.hidden = YES;
 //        }
+        __block typeof(cell)weakCell = cell;
+                __block typeof(reduceBtn) weakbtn = reduceBtn;
+        
+        [self.shops enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString * name = obj[@"goods_name"];
+            if ([name isEqualToString:cell.shop_nameLabel.text]) {
+                weakCell.numberLabel.text = obj[@"number"];
+                if ([obj[@"number"] integerValue] != 0) {
+                    weakbtn.hidden = NO;
+                }
+            }
+        }];
 
         return cell;
     }
@@ -310,10 +328,10 @@
             
             [self.leftTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
         }
+        ShowShoppingModel * model = self.maMDatasGoods[indexPath.row];
         // 将右侧 tableView 移动到指定位置(点击左边最后一个cell无法选中)
         if (indexPath.row > self.maMDatasGoods.count-1) {
             
-            ShowShoppingModel * model = self.maMDatasGoods[indexPath.row];
             if (model.cat_goods.count>=3) {
                 [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
             }else if (model.cat_goods.count==1) {
@@ -323,7 +341,11 @@
             }
             
         }else{
+            if (model.cat_goods.count<1) {
+                
+            }else{
             [self.rightTableView selectRowAtIndexPath:moveToIndexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+            }
         }
         
         
@@ -740,19 +762,18 @@
             NSString * name = obj[@"goods_name"];
             if ([name isEqualToString:cell.shop_nameLabel.text]) {
                 *stop = YES;
-                weakDic = @{@"goods_name":weakCell.shop_nameLabel.text,@"goods_price":weakCell.priceLabel.text,@"number":weakCell.numberLabel.text};
+                weakDic = @{@"goods_name":weakCell.shop_nameLabel.text,@"goods_price":price,@"number":weakCell.numberLabel.text};
                 [weakSelf.shops replaceObjectAtIndex:idx withObject:weakDic];
             }
         }];
     }else{
-       dic = @{@"goods_name":cell.shop_nameLabel.text,@"goods_price":cell.priceLabel.text,@"number":cell.numberLabel.text};
+       dic = @{@"goods_name":cell.shop_nameLabel.text,@"goods_price":price,@"number":cell.numberLabel.text};
         [self.markCells addObject:cell];
         [self.shops addObject:dic];
         [self.markCells addObject:leftTableViewCell];
     }
     [self addShopToCar:cell.goods_id andRow:path.section];
-//    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:path.section inSection:0];
-//    [self.leftTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+    
 }
 //YES就已经存在，no不存在
 - (BOOL)isAddShop:(NSString *)shopName{
@@ -789,34 +810,34 @@
         leftTableViewCell.numberLabel.hidden = YES;
     }
 
+    
+    
+    
     NSDictionary * dic;
     
     if ([self isAddShop:cell.shop_nameLabel.text]) {
-        int a = 0;
-        if (self.shops.count == 0) {
-            [self.shops addObjectsFromArray:self.mainModel.cart];
-        }
-        for (NSDictionary * dict in self.shops) {
-            NSString * name = dict[@"goods_name"];
-            NSString * number = dict[@"number"];
+        __block typeof(cell)weakCell = cell;
+        __block typeof(dic) weakDic = dic;
+        WEAKSELF;
+        [self.shops enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString * name = obj[@"goods_name"];
             if ([name isEqualToString:cell.shop_nameLabel.text]) {
-                if ([number integerValue] == 1) {
-                    [self.shops removeObjectAtIndex:a];
-                }else{
-                    dic = @{@"goods_name":cell.shop_nameLabel.text,@"goods_price":cell.priceLabel.text,@"number":cell.numberLabel.text};
-                    [self.shops replaceObjectAtIndex:a withObject:dic];
-                }
+                *stop = YES;
+                weakDic = @{@"goods_name":weakCell.shop_nameLabel.text,@"goods_price":price,@"number":weakCell.numberLabel.text};
+                [weakSelf.shops replaceObjectAtIndex:idx withObject:weakDic];
             }
-            a ++;
-            
-        }
+        }];
         
     }
     if ([cell.numberLabel.text integerValue] == 0) {
         
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
         [self clearShopNumber:cell.goods_id];
+//      
+//        });
     }else{
-        [self reduceShopToCar:cell.goods_id];
+            [self reduceShopToCar:cell.goods_id];
     }
 }
 //点击加号，把商品传到服务器
@@ -835,7 +856,7 @@
        
     }];
 }
-//点减加号，把商品传到服务器
+//点减号，把商品传到服务器
 - (void)reduceShopToCar:(NSString *)goodsID{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_REDUCESHOPCAR];
     NSDictionary*dict=@{@"shop_id":self.shop_id,@"device_id":[JWTools getUUID],@"goods_id":goodsID};
@@ -847,18 +868,25 @@
     
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
-        MyLog(@"购物车 %@",data);
+    MyLog(@"减去商品 %@",data);
+        
     }];
 }
 //所选的商品
 - (IBAction)myShopAction:(UIButton *)sender {
-    if (self.mainModel.cart.count<=0) {
-        return;
-    }
     static int a = 0;
+    if (self.is_ADD == YES) {
+        
+        if (self.shops.count == 0) {
+            a = 0;
+        }
+    }
     if (a == 0) {
          [self.shops addObjectsFromArray:self.mainModel.cart];
         a++;
+    }
+    if (self.shops.count<=0 ) {
+        return;
     }
     BOOL viewRemove = self.isRemove = !self.isRemove;
     if (viewRemove == NO) {
@@ -967,7 +995,16 @@
     
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
-        MyLog(@"减去商品 %@",data);
+        MyLog(@"删除商品 %@",data);
+        self.is_ADD = NO;
+        [self.shops enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString * name = obj[@"number"];
+            if ([name isEqualToString:@"0"]) {
+                *stop = YES;
+                [self.shops removeObjectAtIndex:idx];
+                //                [self.shops removeObject:obj];
+            }
+        }];
     }];
 
     
