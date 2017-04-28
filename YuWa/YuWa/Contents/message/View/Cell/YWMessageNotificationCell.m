@@ -29,7 +29,7 @@
 
 - (void)dataSet{
     self.timeLbael.text = [JWTools dateWithOutYearStr:self.model.ctime];
-    self.nameLabel.text = self.model.title;
+    self.nameLabel.text = self.model.shop_name;
     self.iconImageView.image = [UIImage imageNamed:[self.model.status isEqualToString:@"0"]?@"jujue":@"jieshou"];
 }
 

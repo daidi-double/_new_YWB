@@ -19,7 +19,7 @@
 #import "PHOrderModel.h"
 
 #import "HPRecommendShopModel.h"   //tableViewCell  Model
-#import "YWShoppingDetailViewController.h"  //push 到一个界面
+#import "ShopDetailViewController.h"  //push 到一个界面
 
 
 #define CELL0    @"YWMainShoppingTableViewCell"
@@ -308,8 +308,7 @@
            NSInteger number=indexPath.section;
         HPRecommendShopModel*model=self.tableViewDatasModel[number];
         
-        
-        YWShoppingDetailViewController*vc=[[YWShoppingDetailViewController alloc]init];
+        ShopDetailViewController*vc=[[ShopDetailViewController alloc]init];
         vc.shop_id=model.id;
         [self.navigationController pushViewController:vc animated:YES];
         

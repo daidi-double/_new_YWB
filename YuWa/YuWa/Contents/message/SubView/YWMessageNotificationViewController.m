@@ -158,10 +158,11 @@
                 YWMessageNotificationModel * model = [YWMessageNotificationModel yy_modelWithDictionary:dataArr[i]];
                 NSDictionary * dic = dataArr[i];
                 if ([dic[@"title"]isEqualToString:@"您的预约被拒绝"]) {
-                    //表示用的预约拒绝
-                    model.status = @"0";
+                    //表示预约拒绝
+                    model.status = @"3";
                 }else{
-                    model.status = @"1";
+                    //表示接受
+                    model.status = @"2";
                 }
 
                 [self.dataArr addObject:model];

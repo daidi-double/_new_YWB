@@ -119,7 +119,7 @@
     [self addHeaderView];
     [self setUpMJRefresh];
 //    [self changeMyInfoData];
-    [self.tableView.mj_header beginRefreshing];
+//    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

@@ -10,11 +10,12 @@
 
 @interface YWMessageNotificationModel : NSObject
 
-@property (nonatomic,copy)NSString * status;//0预定通知1付款通知    这个跟返回的数据不搭嘎的
-@property (nonatomic,copy)NSString * title;
+@property (nonatomic,copy)NSString * status;//1待处理 2已接受 3拒绝
+@property (nonatomic,copy)NSString * shop_name;
 @property (nonatomic,copy)NSString * content;
 @property (nonatomic,copy)NSString * ctime;
-@property (nonatomic,copy)NSString * order_id;
-@property (nonatomic, copy) NSString *pay_money;
+@property (nonatomic,strong)NSArray * details;
+@property (nonatomic,strong)NSString * pay_money;
+@property (nonatomic,strong)NSString * order_id;
 
 @end
