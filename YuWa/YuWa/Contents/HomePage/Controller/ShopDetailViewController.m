@@ -104,6 +104,7 @@
     [self.BGView insertSubview:effectView aboveSubview:self.BGImageView];
 //    
     [self.rightTableView registerNib:[UINib nibWithNibName:CATEGORYCELL bundle:nil] forCellReuseIdentifier:CATEGORYCELL];
+   
     [self.leftTableView registerNib:[UINib nibWithNibName:leftCell bundle:nil] forCellReuseIdentifier:leftCell];
     
     UITapGestureRecognizer * mapTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toMapView)];
@@ -260,6 +261,10 @@
     
     
 }
+//- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    ShowShoppingModel * showModel = self.maMDatasGoods[section];
+//    return showModel.cat_name;
+//}
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (tableView == _rightTableView) {
