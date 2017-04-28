@@ -47,6 +47,12 @@
     self.numberLabel.text = self.model.num;
     self.priceLabel.attributedText = [NSString stringWithFirstStr:@"￥" withFont:[UIFont systemFontOfSize:10.f] withColor:RGBCOLOR(255, 152, 125, 1) withSecondtStr:[NSString stringWithFormat:@"%@",price]  withFont:[UIFont systemFontOfSize:13.f] withColor:RGBCOLOR(255, 152, 125, 1)];
  
+    UIButton * reduceBtn = [self viewWithTag:10];
+    if ([self.model.num integerValue] == 0) {
+        reduceBtn.hidden = YES;
+    }else{
+        reduceBtn.hidden= NO;
+    }
 }
 
 

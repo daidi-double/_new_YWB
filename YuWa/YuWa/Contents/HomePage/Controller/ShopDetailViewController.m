@@ -250,10 +250,10 @@
         [addBtn addTarget:self action:@selector(addShopAction:) forControlEvents:UIControlEventTouchUpInside];
         UIButton * reduceBtn = [cell viewWithTag:10];
         [reduceBtn addTarget:self action:@selector(reduceShopAction:) forControlEvents:UIControlEventTouchUpInside];
-        if ([cell.numberLabel.text integerValue] == 0) {
-            reduceBtn.enabled = NO;
-            reduceBtn.hidden = YES;
-        }
+//        if ([shopModel.num integerValue] == 0) {
+//            reduceBtn.enabled = NO;
+//            reduceBtn.hidden = YES;
+//        }
 
         return cell;
     }
