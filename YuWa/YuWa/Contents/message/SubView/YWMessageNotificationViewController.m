@@ -13,6 +13,7 @@
 #import "YWMessageNotificationCell.h"
 #import "YWdetailViewController.h"
 #import "OrderDetailViewController.h"
+#import "YWdetailModel.h"
 
 #define MESSAGENOTICELL @"YWMessageNotificationCell"
 @interface YWMessageNotificationViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -26,6 +27,7 @@
 
 @property (nonatomic,assign)NSInteger status;
 @property (nonatomic,strong)UISegmentedControl * segmentedControl;
+@property (nonatomic, strong) NSMutableArray *detailArray;
 
 @end
 
@@ -108,6 +110,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIStoryboard * SB = [UIStoryboard storyboardWithName:@"detail" bundle:nil];
     YWdetailViewController * vc = [SB instantiateInitialViewController];
+    vc.model = self.detailArray[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - TableView Refresh
@@ -120,10 +123,14 @@
     }];
 }
 - (void)footerRereshing{
+
     self.pages++;
     [self requestShopArrDataWithPages:self.pages];
 }
 - (void)headerRereshing{
+    if (_detailArray == nil) {
+        [self getDatasWithIDD:nil];
+    }
     self.pages = 0;
     [self requestShopArrDataWithPages:0];
 }
@@ -134,6 +141,31 @@
     }else{
         [self.tableView.mj_footer endRefreshing];
     }
+}
+
+-(void)getDatasWithIDD:(NSString*)idd{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_NOTCCAFICATIONJ_ORDER];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+        // NSData转为NSString
+        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        //        MyLog(@"Regieter Code pragram is %@",data);
+        MyLog(@"Regieter Code is %@",jsonStr);
+        NSArray * dataArr = data[@"data"];
+        if (self.detailArray.count == 0) {
+            for (int i = 0; i<dataArr.count; i++) {
+                NSDictionary * dic = dataArr[i];
+                NSDictionary * dic1 = dic[@"details"];
+                NSString * str = dic1[@"seller_message"];
+                 YWdetailModel * model = [YWdetailModel yy_modelWithDictionary:dic[@"details"]];
+                
+                [self.detailArray addObject:model];
+            }
+        }
+    }];
 }
 
 #pragma mark - Http
@@ -174,6 +206,11 @@
         MyLog(@"Regieter Code error is %@",responsObj);
     }];
 }
-
+-(NSMutableArray *)detailArray{
+    if (_detailArray  == nil) {
+        _detailArray = [NSMutableArray array];
+    }
+    return _detailArray;
+}
 
 @end

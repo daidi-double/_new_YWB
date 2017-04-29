@@ -106,8 +106,8 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="rN0-k6-YY9" firstAttribute="leading" secondItem="bcc-nO-Q2J" secondAttribute="trailing" constant="5" id="081-LT-dy5"/>
+                                                    <constraint firstItem="gju-aY-R9b" firstAttribute="top" secondItem="gmz-OY-2t3" secondAttribute="bottom" constant="8" id="9q0-B8-8MB"/>
                                                     <constraint firstItem="gju-aY-R9b" firstAttribute="leading" secondItem="FPn-uU-2eu" secondAttribute="leading" constant="15" id="Ctb-bC-Vsb"/>
-                                                    <constraint firstItem="gju-aY-R9b" firstAttribute="top" secondItem="rN0-k6-YY9" secondAttribute="bottom" constant="8" id="FLE-WQ-Mdw"/>
                                                     <constraint firstItem="z7H-sB-Od5" firstAttribute="leading" secondItem="FPn-uU-2eu" secondAttribute="leading" constant="15" id="RaR-4v-vfr"/>
                                                     <constraint firstItem="gmz-OY-2t3" firstAttribute="top" secondItem="z7H-sB-Od5" secondAttribute="bottom" constant="8" id="Wp2-bK-pbq"/>
                                                     <constraint firstItem="bcc-nO-Q2J" firstAttribute="leading" secondItem="gmz-OY-2t3" secondAttribute="trailing" constant="5" id="aIB-lz-Cc9"/>
@@ -147,7 +147,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商务服务有异议？联系客服" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAC-nT-15e">
-                                                <rect key="frame" x="102" y="255" width="172" height="17"/>
+                                                <rect key="frame" x="101.5" y="255" width="172" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -195,7 +195,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="Name" destination="gju-aY-R9b" id="HPM-0o-jax"/>
+                        <outlet property="customer_phone" destination="fFB-xl-nBB" id="oa1-Pv-Ed4"/>
+                        <outlet property="message" destination="rN0-k6-YY9" id="RoN-WM-LrJ"/>
+                        <outlet property="num" destination="gmz-OY-2t3" id="OfW-nK-EAk"/>
                         <outlet property="scrollw" destination="G45-hi-R8R" id="rTa-c2-6ek"/>
+                        <outlet property="shopName1" destination="bY9-Oh-r4X" id="cNd-Kg-Qz2"/>
+                        <outlet property="time" destination="z7H-sB-Od5" id="EVb-a0-hVX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zU4-wh-UGW" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "YWdetailModel.h"
 @interface YWdetailViewController : UIViewController
-//@property (nonatomic, strong) <##> *<#name#>;
+@property (nonatomic, strong) YWdetailModel *model;
 @end

@@ -18,6 +18,7 @@
 		2531B4851EA4BF33001B240F /* add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2531B4811EA4BF33001B240F /* add@3x.png */; };
 		2535423A1EA4ABE3006F2C7A /* headerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253542391EA4ABE3006F2C7A /* headerView.xib */; };
 		2535423D1EA4ADF8006F2C7A /* headerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2535423C1EA4ADF8006F2C7A /* headerView.m */; };
+		255222581EB504FF00F22793 /* YWdetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 255222571EB504FF00F22793 /* YWdetailModel.m */; };
 		25CD5E491EA7629C0069D416 /* detailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25CD5E481EA7629C0069D416 /* detailHeaderView.xib */; };
 		25CD5E4C1EA762C10069D416 /* YWdetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */; };
 		25D587C81EAA619C00C0178C /* YWpayNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D587C71EAA619C00C0178C /* YWpayNotificationCell.xib */; };
@@ -1754,6 +1755,8 @@
 		253542391EA4ABE3006F2C7A /* headerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerView.xib; sourceTree = "<group>"; };
 		2535423B1EA4ADF8006F2C7A /* headerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = headerView.h; sourceTree = "<group>"; };
 		2535423C1EA4ADF8006F2C7A /* headerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = headerView.m; sourceTree = "<group>"; };
+		255222561EB504FF00F22793 /* YWdetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailModel.h; sourceTree = "<group>"; };
+		255222571EB504FF00F22793 /* YWdetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailModel.m; sourceTree = "<group>"; };
 		25CD5E481EA7629C0069D416 /* detailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detailHeaderView.xib; sourceTree = "<group>"; };
 		25CD5E4A1EA762C10069D416 /* YWdetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailHeaderView.h; sourceTree = "<group>"; };
 		25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailHeaderView.m; sourceTree = "<group>"; };
@@ -4306,6 +4309,7 @@
 		251522CD1EAA05F700BA4FF9 /* 详情页面 */ = {
 			isa = PBXGroup;
 			children = (
+				255222551EB504CE00F22793 /* Model */,
 				251522C81EA9F9A600BA4FF9 /* detail.storyboard */,
 				251522CA1EA9FA1400BA4FF9 /* YWdetailViewController.h */,
 				251522CB1EA9FA1400BA4FF9 /* YWdetailViewController.m */,
@@ -4322,6 +4326,15 @@
 				2531B4811EA4BF33001B240F /* add@3x.png */,
 			);
 			path = "加减图标";
+			sourceTree = "<group>";
+		};
+		255222551EB504CE00F22793 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				255222561EB504FF00F22793 /* YWdetailModel.h */,
+				255222571EB504FF00F22793 /* YWdetailModel.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		25CD5E471EA75FE90069D416 /* 详情页面Headview */ = {
@@ -10953,6 +10966,7 @@
 				B3AE4D711D91302B000A389F /* TZAssetModel.m in Sources */,
 				AA048FD81E89142900AF5423 /* WillAccountIncomeTableViewCell.m in Sources */,
 				25D587CB1EAA627300C0178C /* YWpayNotificationCell.m in Sources */,
+				255222581EB504FF00F22793 /* YWdetailModel.m in Sources */,
 				AA3CA5671E606F0B000D05FA /* MapAnnotation.m in Sources */,
 				C199A6AA1E1D11AA003FBCDE /* PCMoneyDetailTableViewCell.m in Sources */,
 				C1FB7F6E1DC733AE0048EBC8 /* ResultsTableViewCell.m in Sources */,

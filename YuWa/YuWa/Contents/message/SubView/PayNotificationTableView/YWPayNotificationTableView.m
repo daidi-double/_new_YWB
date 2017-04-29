@@ -84,6 +84,7 @@
         [self.mj_footer endRefreshing];
     }
 }
+
 #pragma mark - Http
 - (void)requestShopArrDataWithPages:(NSInteger)page{
     NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"pagen":self.pagens,@"pages":[NSString stringWithFormat:@"%zi",page]};
