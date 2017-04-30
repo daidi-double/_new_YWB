@@ -268,8 +268,13 @@
     } 
     
 }
-
-
+#pragma mark ---alertViewDelegat
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0){
+//    PostCommitViewController * commitVC = [[PostCommitViewController alloc]init];
+//    commitVC.order_id = [NSString stringWithFormat:@"%.0f",self.order_id];
+//    commitVC.shop_id = self.shop_ID;
+//    [self.navigationController pushViewController:commitVC animated:YES];
+}
 -(void)pushAlertView{
     UIAlertController*alertVC=[UIAlertController alertControllerWithTitle:@"余额支付" message:@"确实要用余额支付？" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
