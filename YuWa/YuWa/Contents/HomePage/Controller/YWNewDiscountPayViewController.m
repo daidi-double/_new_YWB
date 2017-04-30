@@ -472,6 +472,9 @@
             vc.order_id=order_id;
             vc.shop_ID = self.shopID;
             MyLog(@"%f",order_id);
+            //发送消息  //清空详情页面勾选物品，数据
+            //                ShopDetailViewController
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"deleteNun" object:nil];
             [self.navigationController pushViewController:vc animated:YES];
      
         }else if ([errorCode isEqualToString:@"9"]){

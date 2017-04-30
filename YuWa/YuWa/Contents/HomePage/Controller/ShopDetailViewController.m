@@ -73,12 +73,12 @@
     [self getDatas];
     self.is_ADD = YES;
     self.totalMoneyLabel.text = @"￥0.00";
-    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
-    [center addObserver:self selector:@selector(notice:) name:@"清除数量" object:nil];
+    //清空勾选的物品数量
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notice) name:@"deleteNun" object:nil];
    
 }
--(void)notice:(id)sender{
+-(void)notice{
     [self clearNumberOfShop];
     [self clearShopCar:self.shop_id];
     [self getDatas];
@@ -554,6 +554,8 @@
         vc.shopDiscount = self.mainModel.discount;
         NSString * money = [self. totalMoneyLabel.text substringFromIndex:1];
         vc.money = money;
+        //先清理详情页面数据，在push
+      
         [self.navigationController pushViewController:vc animated:YES];
         
     }
