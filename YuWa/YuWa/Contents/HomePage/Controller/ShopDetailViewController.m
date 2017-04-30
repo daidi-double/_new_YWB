@@ -105,13 +105,21 @@
     self.BGImageView.contentMode = UIViewContentModeScaleToFill;
     self.numberLabel.hidden = YES;
     self.numberLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-    //    effectView.backgroundColor = [UIColor orangeColor];
-    effectView.frame = self.BGImageView.frame;
-    effectView.alpha  = 0.97;
-    [self.BGView insertSubview:effectView aboveSubview:self.BGImageView];
-//    
+//    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+//    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+//    //    effectView.backgroundColor = [UIColor orangeColor];
+//    effectView.frame = self.BGImageView.frame;
+//    effectView.alpha  = 0.97;
+//    [self.BGView insertSubview:effectView aboveSubview:self.BGImageView];
+//
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:self.BGImageView.frame];
+    toolbar.barStyle = UIBarStyleBlackTranslucent;
+    toolbar.alpha = 0.9;
+    [self.BGImageView addSubview:toolbar];
+    
+    
+    
+    
     [self.rightTableView registerNib:[UINib nibWithNibName:CATEGORYCELL bundle:nil] forCellReuseIdentifier:CATEGORYCELL];
    
     [self.leftTableView registerNib:[UINib nibWithNibName:leftCell bundle:nil] forCellReuseIdentifier:leftCell];
