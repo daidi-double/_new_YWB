@@ -45,7 +45,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86a-0W-lVq">
                             <rect key="frame" x="250" y="0.0" width="125" height="44"/>
-                            <state key="normal" title="优惠买单">
+                            <state key="normal" title="去结算">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
