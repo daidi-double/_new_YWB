@@ -59,18 +59,20 @@
 //3
 -(void)postDatasWithUrl:(NSString *)urlStr withParams:(NSDictionary *)params compliation:(resultBlock)newBlock{
     [self.HUD show:YES];
-    AFHTTPRequestOperationManager*manager=[AFHTTPRequestOperationManager manager];
-    [manager POST:urlStr parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-          newBlock(responseObject,nil);
-        [self.HUD hide:YES];
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        newBlock(nil,error);
-        [JRToast showWithText:@"连接超时,请检查网络" bottomOffset:70*kScreen_Width/320 duration:3.0f];
-        [self.HUD hide:YES];
-        
-    }];
-    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        AFHTTPRequestOperationManager*manager=[AFHTTPRequestOperationManager manager];
+        [manager POST:urlStr parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            newBlock(responseObject,nil);
+            [self.HUD hide:YES];
+            
+        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+            newBlock(nil,error);
+            [JRToast showWithText:@"连接超时,请检查网络" bottomOffset:70*kScreen_Width/320 duration:3.0f];
+            [self.HUD hide:YES];
+            
+        }];
+
+    });
 }
 
 //4

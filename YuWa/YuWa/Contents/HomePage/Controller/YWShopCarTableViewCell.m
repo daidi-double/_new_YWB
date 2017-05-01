@@ -18,6 +18,7 @@
     [self setshopInfo];
 }
 -(void)setshopInfo{
+    self.goods_id = self.model.goods_id;
     self.shopNameLabel.text = self.model.goods_name;
     NSString * price;
     
@@ -45,8 +46,10 @@
     // Configure the view for the selected state
 }
 - (IBAction)addAction:(UIButton *)sender {
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"addShop1" object:nil userInfo:@{@"button": sender}];
 }
 - (IBAction)reduceAction:(UIButton *)sender {
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"reduceShop1" object:nil userInfo:@{@"button": sender}];
 }
 
 @end

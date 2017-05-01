@@ -13,5 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numbelLabel;
-
+@property(nonatomic,strong)NSString*goods_id;
 @end
