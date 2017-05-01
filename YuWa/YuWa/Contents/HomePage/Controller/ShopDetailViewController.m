@@ -26,6 +26,7 @@
 #import "YWShopDetailViewController.h"
 #import "ShopCarDeViewController.h"//购物车
 #import "YWLeftCategoryTableViewCell.h"//左边的cell
+#import "YWShopCarTableViewCell.h"
 
 #define leftCell      @"YWLeftCategoryTableViewCell"
 #define CATEGORYCELL @"CategoryLeftTableViewCell"
@@ -76,12 +77,18 @@
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     //清空勾选的物品数量
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notice) name:@"deleteNun" object:nil];
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableViewData) name:@"relodDate" object:nil];
+}
+//刷新两个联动tabelView的数据
+-(void)reloadTableViewData{
+    self.shops =nil;
+     self.maMDatasGoods = nil;
+        [self getDatas];
 }
 -(void)notice{
     [self clearNumberOfShop];
     [self clearShopCar:self.shop_id];
-    [self getDatas];
+//    [self getDatas];
     [self.shops removeAllObjects];
     [self.rightTableView reloadData];
     [self.leftTableView reloadData];
@@ -96,8 +103,8 @@
     self.navigationController.navigationBarHidden  = NO;
 }
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"清除数量" object:nil];
-    
+    //清除数量
+    [self notice];
 }
 - (void)makeUI{
     
@@ -145,6 +152,7 @@
 //        btn.centerY = self.shopAndCommontView.height/2;
         _btn.tag = 100 + i;
         [_btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+        
         [_btn setTitle:btnTitle[i] forState:UIControlStateNormal];
         _btn.titleLabel.font = [UIFont systemFontOfSize:13];
         if (i == 1) {
@@ -795,7 +803,7 @@
     }
     return NO;
 }
-//减
+ //减
 - (void)reduceShopAction:(UIButton *)sender {
 //     MyLog(@"tag = %ld",sender.tag);
     CategoryLeftTableViewCell * cell = (CategoryLeftTableViewCell *)[[sender superview] superview];
@@ -912,6 +920,7 @@
 - (void)creatShopView{
     _shopCarView = [[YWShopCarView alloc]initWithFrame:CGRectMake(0, kScreen_Height * 0.3, kScreen_Width, kScreen_Height * 0.7f - 60)];
     _shopCarView.delegate = self;
+    _shopCarView.shop_id = self.shop_id;
     [self.view addSubview:_shopCarView];
     self.touchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.3f)];
     self.touchView.backgroundColor = [UIColor grayColor];
@@ -973,7 +982,7 @@
     if (!_commentView) {
         CGRect rect;
         if (IS_IPHONE_5) {
-            rect= CGRectMake(0, self.bottomBGView.height-64, kScreen_Width,kScreen_Height - self.bottomBGView.height+64);
+            rect= CGRectMake(0, self.bottomBGView.height-42, kScreen_Width,kScreen_Height - self.bottomBGView.height);
         }else{
             rect= CGRectMake(0, self.bottomBGView.height, kScreen_Width,kScreen_Height - self.bottomBGView.height);
         }
