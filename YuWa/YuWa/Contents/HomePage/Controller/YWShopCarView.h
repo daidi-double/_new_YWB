@@ -19,7 +19,7 @@
 @property (strong, nonatomic)  UIButton *clearBtn;
 @property (nonatomic,strong) UIView * clearView;
 @property (nonatomic,strong) UILabel * strLabel;
-
+@property (nonatomic,copy) NSString * shop_id;
 @property (nonatomic,assign)id<YWShopCarViewDelegate>delegate;
 
 @property (nonatomic,strong)NSMutableArray * shopInfoAry;

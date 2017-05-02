@@ -44,7 +44,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self falseDatas];
 
    self.navigationItem.hidesBackButton =YES;
    self.navigationItem.leftBarButtonItem=nil;

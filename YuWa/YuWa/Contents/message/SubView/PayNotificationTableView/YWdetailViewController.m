@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *customer_phone;
 @property (weak, nonatomic) IBOutlet UILabel *num;
 
+
 @end
 
 @implementation YWdetailViewController

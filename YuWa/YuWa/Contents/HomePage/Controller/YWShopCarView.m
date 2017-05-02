@@ -25,7 +25,9 @@
         [self addSubview:self.clearView];
         [self addSubview:self.shopTableView];
         [self.shopTableView registerNib:[UINib nibWithNibName:SHOPCARCELL bundle:nil] forCellReuseIdentifier:SHOPCARCELL];
-        
+        //监听总额点击出来之后调用的方法
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reduceShopAction1:) name:@"reduceShop1" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addShopAction1:) name:@"addShop1" object:nil];
     }
     return self;
 }
@@ -48,6 +50,67 @@
     }
     return _clearView;
 }
+-(void)reduceShopAction1:(NSNotification * )user{
+    NSDictionary * dic1 = user.userInfo;
+    UIButton * bnt = dic1[@"button"];
+    YWShopCarTableViewCell * cell = (YWShopCarTableViewCell *)[[bnt superview] superview];
+    NSString * str = cell.numbelLabel.text ;
+    if ([str integerValue] == 0)return;
+    [self reduceShopToCar:cell.goods_id addcell:cell];
+}
+-(void)addShopAction1:(NSNotification * )user{
+    NSDictionary * dic1 = user.userInfo;
+    UIButton * bnt = dic1[@"button"];
+    YWShopCarTableViewCell * cell = (YWShopCarTableViewCell *)[[bnt superview] superview];
+    [self addShopToCar:cell.goods_id addcell:cell];
+}
+//点减号，把商品传到服务器
+- (void)reduceShopToCar:(NSString *)goodsID addcell:(YWShopCarTableViewCell *)cell{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_REDUCESHOPCAR];
+    NSDictionary*dict=@{@"shop_id":self.shop_id,@"device_id":[JWTools getUUID],@"goods_id":goodsID};
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
+    if ([UserSession instance].isLogin) {
+        [params setObject:@([UserSession instance].uid) forKey:@"user_id"];
+        [params setObject:[UserSession instance].token forKey:@"token"];
+    }
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        NSString * str = cell.numbelLabel.text ;
+            cell.numbelLabel.text = [NSString stringWithFormat:@"%ld",[str integerValue] -1];
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+            // NSData转为NSString
+            NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        MyLog(@"减去商品 %@",jsonStr);
+        //发送通知刷新联动界面数据
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"relodDate" object:nil];
+    }];
+}
+//点击加号，把商品传到服务器
+- (void)addShopToCar:(NSString *)goodsID addcell:(YWShopCarTableViewCell *)cell{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_SHOPCAR];
+    NSDictionary*dict=@{@"shop_id":self.shop_id,@"device_id":[JWTools getUUID],@"goods_id":goodsID};
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
+    if ([UserSession instance].isLogin) {
+        [params setObject:@([UserSession instance].uid) forKey:@"user_id"];
+        [params setObject:[UserSession instance].token forKey:@"token"];
+    }
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        NSString * str = cell.numbelLabel.text ;
+        cell.numbelLabel.text = [NSString stringWithFormat:@"%ld",[str integerValue] -1];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+        // NSData转为NSString
+        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        MyLog(@"减去商品 %@",jsonStr);
+        //发送通知刷新联动界面数据
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"relodDate" object:nil];
+    }];
+}
+
 - (UITableView*)shopTableView{
     if (!_shopTableView) {
         _shopTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 35, self.width, self.height-35) style:UITableViewStylePlain];
