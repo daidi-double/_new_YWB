@@ -23,7 +23,7 @@
 #define HEADERVIEW   @"HeaderCollectionReusableView"
 #define RESULTSCCELL  @"ResultsCollectionViewCell"
 #define FOOTREUSEVIEW  @"FOOTREUSEVIEW"   //就是 那一条线
-
+#define hisTarrCount  10      //历史记录保存的数量；
 
 @interface NewSearchViewController ()<SearchResultsViewControllerDelegate,UISearchResultsUpdating,UISearchControllerDelegate,UISearchBarDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -479,6 +479,11 @@
     if (a != 1) {
         //吧这个存进去
         [self.hisTArr addObject:searchBar.text];
+        for (NSString * str in self.hisTArr) {
+            if (self.hisTArr.count>hisTarrCount) {
+                [self.hisTArr removeLastObject];
+            }
+        }
         [self.hisTArr writeToFile:self.path atomically:YES];
     }
 //   [self saveHistoryDatas:searchBar.text];
