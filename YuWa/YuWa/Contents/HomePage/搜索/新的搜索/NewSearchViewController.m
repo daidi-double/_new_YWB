@@ -309,10 +309,8 @@
                 __weak typeof (self)weakSelf=self;
                 header.cleanBlock=^{
                     //清楚历史记录
-                    YYCoreData*coreData=[YYCoreData shareCoreData];
-                   NSString*path=[coreData userResPath:SEARCHFILE];
                     NSFileManager*manager=[NSFileManager defaultManager];
-                    [manager removeItemAtPath:path error:nil];
+                    [manager removeItemAtPath:self.path error:nil];
                    _historyArr=[NSMutableArray array];
                     _hisTArr=[NSMutableArray array];
                     
