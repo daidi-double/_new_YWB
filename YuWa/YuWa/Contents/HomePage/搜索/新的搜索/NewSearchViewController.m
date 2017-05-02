@@ -36,6 +36,7 @@
 @property(nonatomic,strong)NSMutableArray*historyArr;   //历史  model
 @property(nonatomic,strong)NSMutableArray*hotArr;   //热门   model
 @property(nonatomic,strong)NSMutableArray*hotmutableArray;   //数组  不是model
+@property (nonatomic, copy) NSString * path;
 @end
 
 @implementation NewSearchViewController
@@ -50,21 +51,40 @@
     [self makeSearchBar];
     [self setupCollection];
     [self setDatas];
-
+    NSString * documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+    NSString * filePath1 = [NSString stringWithFormat:@"%@/searchTitle.plist",documentPath];
+    self.path = filePath1;
+    //拼接要下载在那个地方的路径
+//    if (![[NSFileManager defaultManager]fileExistsAtPath:filePath1]) {
+//        
+//        [[NSFileManager defaultManager] createDirectoryAtPath:filePath1 withIntermediateDirectories:YES attributes:nil error:nil];
+//        
+//    }else{
+        NSLog(@"有这个文件了");
+        self.hisTArr = [NSMutableArray arrayWithContentsOfFile:filePath1];
+        for (NSString*  str   in self.hisTArr) {
+            
+            ResultsModel*model=[[ResultsModel alloc]init];
+            model.title = str ;
+            [self.historyArr addObject:model];
+        }
+//    }
+    
 }
 
 -(void)setDatas{
    YYCoreData*coreData= [YYCoreData shareCoreData];
-    self.hisTArr=[NSMutableArray arrayWithContentsOfFile:[coreData userResPath:SEARCHFILE]];
-    if (!self.hisTArr) {
-         self.hisTArr = [NSMutableArray array];
-        }
-    
-    for (NSDictionary*dict in self.hisTArr) {
-        
-        ResultsModel*model=[ResultsModel cellModel:dict];
-        [self.historyArr addObject:model];
-    }
+//    self.hisTArr=[NSMutableArray arrayWithContentsOfFile:[coreData userResPath:SEARCHFILE]];
+//    if (!self.hisTArr) {
+//         self.hisTArr = [NSMutableArray array];
+//        }
+//    NSDictionary*dict=@{@"title":@"饭店"};
+//    self.hisTArr = [@[@{@"title":@"饭店1"},@{@"title":@"饭店2"},@{@"title":@"饭店3"},@{@"title":@"4饭店"},@{@"title":@"5饭店"},@{@"title":@"6饭店"}]mutableCopy];
+//    for (NSDictionary*dict in self.hisTArr) {
+//        
+//        ResultsModel*model=[ResultsModel cellModel:dict];
+//        [self.historyArr addObject:model];
+//    }
     
     
 //热门
@@ -451,7 +471,19 @@
 //键盘的搜索按钮
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     NSLog(@"%@",searchBar.text);
-   [self saveHistoryDatas:searchBar.text];
+    int a = 0 ;
+    for (NSString * str  in self.hisTArr) {
+        if ([str isEqualToString:searchBar.text]) {
+             a = 1;
+            //说明历史搜索已经有这个关键字了
+        }
+    }
+    if (a != 1) {
+        //吧这个存进去
+        [self.hisTArr addObject:searchBar.text];
+        [self.hisTArr writeToFile:self.path atomically:YES];
+    }
+//   [self saveHistoryDatas:searchBar.text];
     //搜索结果 准备跳页
     [self getDatasFromSearch:searchBar.text];
     
@@ -565,6 +597,12 @@
         _hotArr=[NSMutableArray array];
     }
     return _hotArr;
+}
+-(NSMutableArray *)hisTArr{
+    if (!_hisTArr) {
+        _hisTArr = [NSMutableArray array ];
+    }
+    return _hisTArr;
 }
 
 @end
