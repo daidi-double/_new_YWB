@@ -780,12 +780,12 @@
             NSString * name = obj[@"goods_name"];
             if ([name isEqualToString:cell.shop_nameLabel.text]) {
                 *stop = YES;
-                weakDic = @{@"goods_name":weakCell.shop_nameLabel.text,@"goods_price":price,@"number":weakCell.numberLabel.text};
+                weakDic = @{@"goods_name":weakCell.shop_nameLabel.text,@"goods_price":price,@"number":weakCell.numberLabel.text,@"goods_id":weakCell.goods_id};
                 [weakSelf.shops replaceObjectAtIndex:idx withObject:weakDic];
             }
         }];
     }else{
-       dic = @{@"goods_name":cell.shop_nameLabel.text,@"goods_price":price,@"number":cell.numberLabel.text};
+       dic = @{@"goods_name":cell.shop_nameLabel.text,@"goods_price":price,@"number":cell.numberLabel.text,@"goods_id":cell.goods_id};
         [self.markCells addObject:cell];
         [self.shops addObject:dic];
         [self.markCells addObject:leftTableViewCell];

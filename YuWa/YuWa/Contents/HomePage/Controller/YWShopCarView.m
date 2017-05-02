@@ -100,7 +100,7 @@
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         NSString * str = cell.numbelLabel.text ;
-        cell.numbelLabel.text = [NSString stringWithFormat:@"%ld",[str integerValue] -1];
+        cell.numbelLabel.text = [NSString stringWithFormat:@"%ld",[str integerValue] +1];
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
         // NSData转为NSString
         NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
