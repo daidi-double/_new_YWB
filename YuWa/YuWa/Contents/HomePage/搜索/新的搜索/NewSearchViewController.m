@@ -479,11 +479,11 @@
     if (a != 1) {
         //吧这个存进去
         [self.hisTArr addObject:searchBar.text];
-        for (NSString * str in self.hisTArr) {
             if (self.hisTArr.count>hisTarrCount) {
-                [self.hisTArr removeLastObject];
+//                [self.hisTArr removeObject:@0];
+                [self.hisTArr removeObject:self.hisTArr[0]];
             }
-        }
+
         [self.hisTArr writeToFile:self.path atomically:YES];
     }
 //   [self saveHistoryDatas:searchBar.text];

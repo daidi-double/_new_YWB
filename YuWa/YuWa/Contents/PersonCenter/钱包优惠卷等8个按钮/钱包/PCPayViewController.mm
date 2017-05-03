@@ -634,16 +634,16 @@
     
     
 }
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
-        
-    PostCommitViewController * vc = [[PostCommitViewController alloc]init];
-    vc.stauts = 1;
-    MyLog(@"%@%f",self.orderID,self.order_id);
-    vc.order_id = [NSString stringWithFormat:@"%zi",self.order_id];
-    vc.shop_id = self.shop_ID;
-    [self.navigationController pushViewController:vc animated:YES];
-
-}
+//- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+//        
+//    PostCommitViewController * vc = [[PostCommitViewController alloc]init];
+//    vc.stauts = 1;
+//    MyLog(@"%@%f",self.orderID,self.order_id);
+//    vc.order_id = [NSString stringWithFormat:@"%zi",self.order_id];
+//    vc.shop_id = self.shop_ID;
+//    [self.navigationController pushViewController:vc animated:YES];
+//
+//}
 #pragma mark  -- 微信支付
 -(void)TowechatPay:(NSDictionary*)dict{
     

@@ -102,10 +102,10 @@
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden  = NO;
 }
-- (void)dealloc{
-    //清除数量
-    [self notice];
-}
+//- (void)dealloc{
+//    //清除数量
+//    [self notice];
+//}
 - (void)makeUI{
     
     self.BGImageView.userInteractionEnabled = YES;
