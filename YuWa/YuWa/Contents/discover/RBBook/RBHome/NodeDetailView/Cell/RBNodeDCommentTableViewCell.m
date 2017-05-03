@@ -38,9 +38,9 @@
         NSString * number = [self.model.user.nickname substringToIndex:7];
         self.nameLabel.text = [NSString stringWithFormat:@"%@****",number];
     }
-    if (self.model.user.rep_nickname) {
-        NSMutableAttributedString * con = [NSString stringWithFirstStr:@"回复" withFont:self.conLabel.font withColor:self.conLabel.textColor withSecondtStr:self.model.target_comment.user.rep_nickname withFont:self.conLabel.font withColor:[UIColor lightGrayColor]];
-        [con appendAttributedString:[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@":%@",self.model.customer_content] attributes:@{NSForegroundColorAttributeName:self.conLabel.textColor,NSFontAttributeName:self.conLabel.font}]];
+    if (self.model.user.rep_uid) {
+        NSMutableAttributedString * con = [NSString stringWithFirstStr:@"回复" withFont:self.conLabel.font withColor:self.conLabel.textColor withSecondtStr:self.model.user.rep_nickname withFont:self.conLabel.font withColor:[UIColor lightGrayColor]];
+        [con appendAttributedString:[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@":%@",self.model.content] attributes:@{NSForegroundColorAttributeName:self.conLabel.textColor,NSFontAttributeName:self.conLabel.font}]];
         self.conLabel.attributedText = con;
     }else{
         self.conLabel.text = self.model.content;

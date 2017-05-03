@@ -17,6 +17,9 @@
 
 @property (nonatomic,copy)NSString * pagens;
 @property (nonatomic,assign)NSInteger pages;
+@property (nonatomic,assign)BOOL isRePlayComment;//是否是回复用户评论
+@property (nonatomic,strong)NSString * rep_uid;//回复的那个人id
+@property (nonatomic,strong)NSString * rep_user_type;
 
 @end
 
@@ -50,7 +53,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RBNodeShowCommentModel * model = self.dataArr[indexPath.row];
-    [self commentActionWithUserDic:@{@"nodeID":self.idd,@"userID":model.user.userid,@"userName":model.user.nickname}];
+    NSString * rep_user_type = model.user.user_type;
+    if (rep_user_type == nil) {
+        rep_user_type = @"0";
+    }
+    self.isRePlayComment = YES;
+    [self commentActionWithUserDic:@{@"nodeID":self.idd,@"userID":model.user.userid,@"userName":model.user.nickname,@"rep_user_type":rep_user_type}];
+    self.rep_user_type = rep_user_type;
+    self.rep_uid = model.user.userid;
     return;
 }
 
@@ -120,9 +130,17 @@
 - (void)requestSendComment{
     NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"note_id":@([self.commentSendDic[@"nodeID"] integerValue]),@"customer_content":[JWTools UTF8WithStringJW:self.commentToolsView.sendTextField.text]};
     
-    [[HttpObject manager]postDataWithType:YuWaType_RB_COMMENT withPragram:pragram success:^(id responsObj) {
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:pragram];
+    if (self.isRePlayComment == YES) {
+        [params setObject:self.rep_uid forKey:@"rep_uid"];
+        [params setObject:self.rep_user_type forKey:@"rep_user_type"];
+    }
+
+    
+    [[HttpObject manager]postDataWithType:YuWaType_RB_COMMENT withPragram:params success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code is %@",responsObj);
+        self.commentToolsView.sendTextField.text = nil;
         [self.tableView.mj_header beginRefreshing];
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);

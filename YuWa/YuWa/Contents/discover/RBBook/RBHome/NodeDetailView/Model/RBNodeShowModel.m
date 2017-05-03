@@ -45,7 +45,10 @@
     [userDic setObject:dic[@"header_img"]?dic[@"header_img"]:@"" forKey:@"images"];
     [userDic setObject:dic[@"user_id"]?dic[@"user_id"]:@"0" forKey:@"userid"];
     [userDic setObject:dic[@"nickname"]?dic[@"nickname"]:@"" forKey:@"nickname"];
+    [userDic setObject:dic[@"rep_uid"]?dic[@"rep_uid"]:@"0" forKey:@"rep_uid"];
+    [userDic setObject:dic[@"rep_nickname"]?dic[@"rep_nickname"]:@"" forKey:@"rep_nickname"];
     [userDic setObject:dic[@"user_type"]?dic[@"user_type"]:@"" forKey:@"user_type"];
+    [userDic setObject:dic[@"rep_user_type"]?dic[@"rep_user_type"]:@"" forKey:@"rep_user_type"];
     
     NSArray * imgArrTemp = dic[@"images_list"];
     for (int i = 0; i<imgArrTemp.count; i++) {
@@ -72,6 +75,11 @@
         [userDicTemp setObject:commentDicTemp[@"customer_header_img"]?commentDicTemp[@"customer_header_img"]:@"" forKey:@"images"];
         [userDicTemp setObject:commentDicTemp[@"customer_uid"]?commentDicTemp[@"customer_uid"]:@"0" forKey:@"userid"];
         [userDicTemp setObject:commentDicTemp[@"customer_nickname"]?commentDicTemp[@"customer_nickname"]:@"" forKey:@"nickname"];
+        
+        [userDicTemp setObject:commentDicTemp[@"rep_uid"]?commentDicTemp[@"rep_uid"]:@"0" forKey:@"rep_uid"];
+        [userDicTemp setObject:commentDicTemp[@"rep_nickname"]?commentDicTemp[@"rep_nickname"]:@"" forKey:@"rep_nickname"];
+        [userDicTemp setObject:commentDicTemp[@"rep_user_type"]?commentDicTemp[@"rep_user_type"]:@"" forKey:@"rep_user_type"];
+        
         [commentDic setObject:userDicTemp forKey:@"user"];
         
         [commentArr addObject:commentDic];
