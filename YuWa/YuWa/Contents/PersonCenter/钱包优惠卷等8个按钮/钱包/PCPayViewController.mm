@@ -617,7 +617,7 @@
                     [alert show];
 
                 //创建一个消息对象
-                NSNotification * notice = [NSNotification notificationWithName:@"清空数量" object:nil userInfo:nil];
+                NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:nil];
                 //发送消息
                 [[NSNotificationCenter defaultCenter]postNotification:notice];
 
@@ -684,7 +684,7 @@
                 commitVC.shop_id = self.shop_ID;
                 [self.navigationController pushViewController:commitVC animated:YES];
                 //清空购物车商品，有shopid的时候在解注释调用
-//              [self clearShopCar:self.shop_ID];
+                [self clearShopCar:self.shop_ID];
         }
                 break;
                 

@@ -83,13 +83,13 @@
 }
 //去结算
 -(void)goToAccount:(NSString *)money andBtn:(UIButton *)sender{
-    YWNewDiscountPayViewController * newVC = [[YWNewDiscountPayViewController alloc]init];
     ShopCarDetailTableViewCell * cell = (ShopCarDetailTableViewCell*)[[[sender superview]superview]superview];
     NSIndexPath * path = [self.shopCarTableView indexPathForCell:cell];
     YWCarListModel * model = self.dataAry[path.section];
+    YWNewDiscountPayViewController * newVC = [YWNewDiscountPayViewController payViewControllerCreatWithWritePayAndShopName:model.company_name andShopID:model.id andZhekou:[model.discount floatValue]];
     newVC.model = model;
     newVC.money = money;
-    newVC.shopID = model.id;
+//    newVC.shopID = model.id;
     newVC.dataAry = self.dataAry;
     [self.navigationController pushViewController:newVC animated:YES];
 }
