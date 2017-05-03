@@ -475,8 +475,12 @@
             //发送消息  //清空详情页面勾选物品，数据
             //                ShopDetailViewController
             [[NSNotificationCenter defaultCenter]postNotificationName:@"deleteNun" object:nil];
+            //清空总价
+//
+            self.money = @"0.00";
+            self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
             [self.navigationController pushViewController:vc animated:YES];
-     
+            
         }else if ([errorCode isEqualToString:@"9"]){
             
             [JRToast showWithText:@"身份已过期,请重新登入" duration:1];
