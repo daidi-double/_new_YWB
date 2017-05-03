@@ -16,6 +16,7 @@
 @property (nonatomic,copy)NSString * time;
 @property (nonatomic,copy)NSString * commentID;
 @property (nonatomic,copy)NSString * liked;
+@property (nonatomic,copy)NSString * customer_content;//回复某人的内容
 
 @property (nonatomic,strong)RBNodeShowCommentTargetModel * target_comment;
 @property (nonatomic,strong)RBHomeUserModel * user;

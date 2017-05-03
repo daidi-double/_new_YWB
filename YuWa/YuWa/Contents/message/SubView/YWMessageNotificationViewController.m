@@ -149,17 +149,17 @@
     
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
-        // NSData转为NSString
-        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+//        // NSData转为NSString
+//        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         //        MyLog(@"Regieter Code pragram is %@",data);
-        MyLog(@"Regieter Code is %@",jsonStr);
+        MyLog(@"通知 Regieter Code is %@",data);
         NSArray * dataArr = data[@"data"];
         if (self.detailArray.count == 0) {
             for (int i = 0; i<dataArr.count; i++) {
                 NSDictionary * dic = dataArr[i];
-                NSDictionary * dic1 = dic[@"details"];
-                NSString * str = dic1[@"seller_message"];
+//                NSDictionary * dic1 = dic[@"details"];
+//                NSString * str = dic1[@"seller_message"];
                  YWdetailModel * model = [YWdetailModel yy_modelWithDictionary:dic[@"details"]];
                 
                 [self.detailArray addObject:model];

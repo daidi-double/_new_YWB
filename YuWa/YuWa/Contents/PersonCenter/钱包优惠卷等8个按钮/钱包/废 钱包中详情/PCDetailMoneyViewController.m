@@ -171,8 +171,14 @@
     NSNumber * nub = self.sectionData[section];
     NSArray *income =  self.zhichuData.firstObject;
     NSArray * pay = self.zhichuData.lastObject;
-    headerView.income = income[section];
-    headerView.pay = pay[section];
+    NSNumber * incomeStr = income[section];
+    NSString * str = incomeStr.description;
+    headerView.income = str;
+    
+    NSNumber * payStr = pay[section];
+    NSString * payStr2 = payStr.description;
+    
+    headerView.pay = payStr2;
     if (nub == [NSNumber numberWithInteger:[self getYearOrMonth:@"month"]]) {
             headerView.month.text = [NSString stringWithFormat:@"本月"];
         
