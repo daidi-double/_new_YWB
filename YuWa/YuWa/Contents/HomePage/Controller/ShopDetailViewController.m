@@ -102,10 +102,10 @@
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden  = NO;
 }
-//- (void)dealloc{
-//    //清除数量
-//    [self notice];
-//}
+- (void)dealloc{
+    //清除数量
+    [self notice];
+}
 - (void)makeUI{
     
     self.BGImageView.userInteractionEnabled = YES;
@@ -922,6 +922,7 @@
     _shopCarView.delegate = self;
     _shopCarView.shop_id = self.shop_id;
     [self.view addSubview:_shopCarView];
+    [self.view bringSubviewToFront:self.accountBGView];
     self.touchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.3f)];
     self.touchView.backgroundColor = [UIColor grayColor];
     self.touchView.alpha = 0.7;
