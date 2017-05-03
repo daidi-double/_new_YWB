@@ -14,6 +14,7 @@
 @property (nonatomic,copy)NSString * images;
 @property (nonatomic,copy)NSString * userid;
 @property (nonatomic,copy)NSString * nickname;
+@property (nonatomic,copy)NSString * rep_nickname;//回复的昵称
 
 //RBHomeModel
 @property (nonatomic,copy)NSString * isbirthday;

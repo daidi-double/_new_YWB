@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="FXE-mT-Fik">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="FXE-mT-Fik">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,7 +38,7 @@
                                                             <constraint firstAttribute="height" constant="25" id="spI-6H-lUA"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定做成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgD-OT-UAC">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定座成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgD-OT-UAC">
                                                         <rect key="frame" x="50" y="13" width="70" height="21"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <color key="textColor" red="0.96414691850000001" green="0.95823747299999995" blue="0.98889593909999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -201,6 +201,7 @@
                         <outlet property="num" destination="gmz-OY-2t3" id="OfW-nK-EAk"/>
                         <outlet property="scrollw" destination="G45-hi-R8R" id="rTa-c2-6ek"/>
                         <outlet property="shopName1" destination="bY9-Oh-r4X" id="cNd-Kg-Qz2"/>
+                        <outlet property="suggestions" destination="nAC-nT-15e" id="aUc-E0-7Vx"/>
                         <outlet property="time" destination="z7H-sB-Od5" id="EVb-a0-hVX"/>
                     </connections>
                 </viewController>

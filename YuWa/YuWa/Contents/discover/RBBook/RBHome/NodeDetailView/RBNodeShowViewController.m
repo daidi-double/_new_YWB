@@ -409,7 +409,7 @@
   
     if (indexPath.section == 2) {//回复用户评论
         RBNodeShowCommentModel * model = self.dataModel.comments_list[indexPath.row];
-        [self commentActionWithUserDic:@{@"nodeID":self.model.homeID,@"userID":model.user.userid,@"userName":model.user.nickname}];
+        [self commentActionWithUserDic:@{@"nodeID":self.model.homeID,@"userID":model.user.userid,@"userName":model.user.nickname,@"rep_user_type":self.model.user.user_type}];
 
         return;
     }

@@ -82,7 +82,7 @@
 //刷新两个联动tabelView的数据
 -(void)reloadTableViewData{
     self.shops =nil;
-     self.maMDatasGoods = nil;
+    self.maMDatasGoods = nil;
         [self getDatas];
 }
 -(void)notice{

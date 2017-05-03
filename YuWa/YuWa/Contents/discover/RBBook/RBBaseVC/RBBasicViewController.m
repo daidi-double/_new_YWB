@@ -12,7 +12,8 @@
 #import "RBNodeShowViewController.h"
 @interface RBBasicViewController ()<UITextFieldDelegate,TZImagePickerControllerDelegate>
 @property (nonatomic,assign)BOOL isRePlayComment;//是否是回复用户评论
-
+@property (nonatomic,strong)NSString * rep_uid;//回复的那个人id
+@property (nonatomic,strong)NSString * rep_user_type;
 @end
 
 @implementation RBBasicViewController
@@ -144,6 +145,10 @@
 
 - (void)commentActionWithUserDic:(NSDictionary *)user{//回复用户评论
     if (![self isLogin])return;
+    if ( [UserSession instance].uid == [user[@"userID"] integerValue]) {
+        [self.view endEditing:YES];
+        return;
+    }
     self.commentToolsView.hidden = NO;
     if (self.commentToolsView.y > kScreen_Height - 44.f)self.commentToolsView.y = kScreen_Height - 44.f;
     self.commentToolsView.sendTextField.text = @"";
@@ -153,6 +158,8 @@
      self.commentToolsView.sendTextField.placeholder = [NSString stringWithFormat:@"回复 %@**** :",str];
     }
     self.isRePlayComment = YES;
+    self.rep_uid = user[@"userID"];
+    self.rep_user_type = user[@"rep_user_type"];
     self.commentSendDic = [NSMutableDictionary dictionaryWithDictionary:user];
     [self.commentToolsView.sendTextField becomeFirstResponder];
 }
@@ -190,12 +197,18 @@
 #pragma mark - Http
 - (void)requestSendComment{
 //    if (self.commentDic[@"userID"]) {
-//        [self requestSendRePlayComment];
+//        [self requestxSendRePlayComment];
 //        return;
 //    }
     NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"note_id":@([self.commentSendDic[@"nodeID"] integerValue]),@"customer_content":[JWTools UTF8WithStringJW:self.commentToolsView.sendTextField.text]};
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:pragram];
+    if (self.isRePlayComment == YES) {
+        [params setObject:self.rep_uid forKey:@"rep_uid"];
+        [params setObject:self.rep_user_type forKey:@"rep_user_type"];
+    }
+
     
-    [[HttpObject manager]postDataWithType:YuWaType_RB_COMMENT withPragram:pragram success:^(id responsObj) {
+    [[HttpObject manager]postDataWithType:YuWaType_RB_COMMENT withPragram:params success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code is %@",responsObj);
         [JRToast showWithText:responsObj[@"msg"] duration:1];
@@ -211,7 +224,23 @@
 }
 
 - (void)requestSendRePlayComment{
-    //回复用户评论
+//    //回复用户评论
+//    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"note_id":@([self.commentSendDic[@"nodeID"] integerValue]),@"customer_content":[JWTools UTF8WithStringJW:self.commentToolsView.sendTextField.text]};
+//    
+//    [[HttpObject manager]postDataWithType:YuWaType_RB_COMMENT withPragram:pragram success:^(id responsObj) {
+//        MyLog(@"Regieter Code pragram is %@",pragram);
+//        MyLog(@"Regieter Code is %@",responsObj);
+//        [JRToast showWithText:responsObj[@"msg"] duration:1];
+//        //创建一个消息对象
+//        NSNotification * notice = [NSNotification notificationWithName:@"123" object:nil userInfo:@{@"1":@"123"}];
+//        //发送消息
+//        [[NSNotificationCenter defaultCenter]postNotification:notice];
+//    } failur:^(id responsObj, NSError *error) {
+//        MyLog(@"Regieter Code pragram is %@",pragram);
+//        MyLog(@"Regieter Code error is %@",responsObj);
+//        [JRToast showWithText:responsObj[@"errorMessage"] duration:1];
+//    }];
+//
 }
 
 @end
