@@ -1090,10 +1090,10 @@
 -(void)gotoPay{
     MyLog(@"pay");
     if ([self judgeLogin]) {
-        CGFloat zhekou=[self.mainModel.discount floatValue];
+//        CGFloat zhekou=[self.mainModel.discount floatValue];
         
-        YWPayViewController*vc=[YWPayViewController payViewControllerCreatWithWritePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou];
-        [self.navigationController pushViewController:vc animated:YES];
+//        YWPayViewController*vc=[YWPayViewController payViewControllerCreatWithWritePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:zhekou];
+//        [self.navigationController pushViewController:vc animated:YES];
 
     }
     

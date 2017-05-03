@@ -32,9 +32,9 @@ typedef NS_ENUM(NSInteger,PayCategory){
 //----------------------------------------------
 
 //折扣多少
-+(instancetype)payViewControllerCreatWithWritePayAndShopName:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou;
++(instancetype)payViewControllerCreatWithWritePayAndShopNameStr:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou;
 
-+(instancetype)payViewControllerCreatWithQRCodePayAndShopName:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou andpayAllMoney:(CGFloat)payAllMoney andNOZheMoney:(CGFloat)NOZheMoney;
++(instancetype)payViewControllerCreatWithQRCodePayAndShopNameStr:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou andpayAllMoney:(CGFloat)payAllMoney andNOZheMoney:(CGFloat)NOZheMoney;
 
 
 @end

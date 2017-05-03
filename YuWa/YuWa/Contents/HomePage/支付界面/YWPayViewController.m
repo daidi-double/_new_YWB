@@ -43,7 +43,7 @@
 @implementation YWPayViewController
 
 //手动支付
-+(instancetype)payViewControllerCreatWithWritePayAndShopName:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou{
++(instancetype)payViewControllerCreatWithWritePayAndShopNameStr:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou{
     
    YWPayViewController *payVC = [[self alloc] init];
     payVC.shopName=shopName;
@@ -58,7 +58,7 @@
 }
 
 //扫码支付
-+(instancetype)payViewControllerCreatWithQRCodePayAndShopName:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou andpayAllMoney:(CGFloat)payAllMoney andNOZheMoney:(CGFloat)NOZheMoney{
++(instancetype)payViewControllerCreatWithQRCodePayAndShopNameStr:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou andpayAllMoney:(CGFloat)payAllMoney andNOZheMoney:(CGFloat)NOZheMoney{
     
     YWPayViewController *payVC = [[self alloc] init];
     payVC.shopName=shopName;

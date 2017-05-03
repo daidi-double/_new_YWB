@@ -48,6 +48,37 @@
 
 @implementation YWNewDiscountPayViewController
 
+//手动支付
++(instancetype)payViewControllerCreatWithWritePayAndShopName:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou{
+    
+    YWNewDiscountPayViewController *payVC = [[self alloc] init];
+    payVC.shopName=shopName;
+    payVC.shopID=shopID;
+    payVC.shopZhekou=shopZhekou;
+    
+    payVC.whichPay=PayCategoryWritePayMethod;
+    
+    
+    
+    return payVC;
+}
+
+//扫码支付
++(instancetype)payViewControllerCreatWithQRCodePayAndShopName:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou andpayAllMoney:(CGFloat)payAllMoney andNOZheMoney:(CGFloat)NOZheMoney{
+    
+    YWNewDiscountPayViewController *payVC = [[self alloc] init];
+    payVC.shopName=shopName;
+    payVC.shopID=shopID;
+    payVC.shopZhekou=shopZhekou;
+    payVC.payAllMoney=payAllMoney;//总金额，未打折前
+    payVC.NOZheMoney=NOZheMoney;
+    payVC.status = 1;
+    payVC.otherTotalMoney = [NSString stringWithFormat:@"%.2f",payAllMoney];
+    payVC.whichPay=PayCategoryQRCodePayMethod;
+    
+    
+    return payVC;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"优惠买单";
@@ -59,10 +90,11 @@
     self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
     self.shouldPayMoney = [self.money floatValue];
     self.is_coupon = NO;
-    MyLog(@"status = %ld",self.status);
-//    if (self.status == 1) {
-//        self.settomMoneyLabel.text = @"待支付￥0.00";
-//    }
+//    MyLog(@"status = %ld",self.status);
+    if (self.whichPay == PayCategoryQRCodePayMethod) {
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",_otherTotalMoney];
+       
+    }
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -193,6 +225,15 @@
                 weakSelf.otherTotalMoney = money;
                 weakSelf.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付%.2f",([weakSelf.otherTotalMoney floatValue] - [weakSelf.noDiscountMoney floatValue])*[weakSelf.model.discount floatValue] + [weakSelf.money floatValue]];
             };
+            //扫码
+            if (self.whichPay==PayCategoryQRCodePayMethod) {
+                if (self.otherTotalMoney != nil) {
+                  cell.moneyTF.text=[NSString stringWithFormat:@"%@",self.otherTotalMoney];
+                }
+                cell.moneyTF.userInteractionEnabled=NO;
+               
+            }
+            
         }else if (indexPath.row == 1){
             cell.titleNameLabel.text = @"其中非打折金额:";
             cell.moneyTF.placeholder = @"(选填)";
@@ -200,6 +241,11 @@
                 weakSelf.noDiscountMoney = money;
                 weakSelf.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付%.2f",([weakSelf.otherTotalMoney floatValue] - [weakSelf.noDiscountMoney floatValue])*[weakSelf.model.discount floatValue] + [weakSelf.money floatValue]];
             };
+            //扫码
+            if (self.whichPay==PayCategoryQRCodePayMethod) {
+                cell.moneyTF.userInteractionEnabled=NO;
+                cell.moneyTF.text=[NSString stringWithFormat:@"%.2f",self.NOZheMoney];
+            }
         }else{
             UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15, 0, kScreen_Width-30, 1)];
             line.backgroundColor = [UIColor lightGrayColor];

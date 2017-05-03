@@ -9,7 +9,7 @@
 #import "PCPacketViewController.h"
 
 #import "PCDetailMoneyViewController.h"    //收入明细
-#import "PCPayViewController.h"    //支付界面
+#import "YWNewDiscountPayViewController.h"    //支付界面
 #import "PCGetMoneyViewController.h"   //提现界面 （废）
 #import "YWMessageNotificationViewController.h"//收入明细 -- 消费记录
 #import "YWBankViewController.h"
@@ -192,7 +192,7 @@
         CGFloat total_money=[data[@"data"][@"total_money"] floatValue];
         CGFloat non_discount_money=[data[@"data"][@"non_discount_money"] floatValue];
         
-        YWPayViewController*vc=[YWPayViewController payViewControllerCreatWithQRCodePayAndShopName:company_name andShopID:shopID andZhekou:discount andpayAllMoney:total_money andNOZheMoney:non_discount_money];
+        YWNewDiscountPayViewController*vc=[YWNewDiscountPayViewController payViewControllerCreatWithQRCodePayAndShopName:company_name andShopID:shopID andZhekou:discount andpayAllMoney:total_money andNOZheMoney:non_discount_money];
         [self.navigationController pushViewController:vc animated:YES];
         
     }];

@@ -9,13 +9,33 @@
 #import <UIKit/UIKit.h>
 #import "YWCarListModel.h"
 #import "YWShopInfoListModel.h"
+typedef NS_ENUM(NSInteger,PayCategoryMethod){
+    PayCategoryQRCodePayMethod=0,   //二维码支付
+    PayCategoryWritePayMethod //手写支付
+    
+    
+};
+
+
 @interface YWNewDiscountPayViewController : UIViewController
 @property (nonatomic,strong)NSMutableArray * dataAry;
 @property (nonatomic,strong)YWCarListModel * model;
 @property (nonatomic,strong)YWShopInfoListModel * infoModel;
 @property (nonatomic,copy)NSString * money;
 @property (nonatomic,assign)NSInteger status;//直接从店铺跳转
-@property (nonatomic,strong)NSString * shopName;
 @property (nonatomic,strong)NSString * shopDiscount;
-@property (nonatomic,copy)NSString * shopID;
+@property(nonatomic,assign)PayCategoryMethod whichPay;  //哪种支付
+@property(nonatomic,strong)NSString*shopID;  //店铺的id
+@property(nonatomic,strong)NSString*shopName;  //店铺的名字
+@property(nonatomic,assign)CGFloat shopZhekou;  //店铺的折扣
+
+//如果是  扫码支付 就得有下面的参数 否则就不需要
+@property(nonatomic,assign)CGFloat payAllMoney;    //需要支付的总额
+@property(nonatomic,assign)CGFloat NOZheMoney;     //不打折的金额
+
+
+//折扣多少
++(instancetype)payViewControllerCreatWithWritePayAndShopName:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou;
+
++(instancetype)payViewControllerCreatWithQRCodePayAndShopName:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou andpayAllMoney:(CGFloat)payAllMoney andNOZheMoney:(CGFloat)NOZheMoney;
 @end

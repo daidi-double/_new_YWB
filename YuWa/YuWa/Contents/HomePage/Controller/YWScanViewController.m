@@ -10,8 +10,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import "UIView+Frame.h"
 #import "ScanModel.h"
-#import "YWPayViewController.h"
-#import "YWShoppingDetailViewController.h"
+//#import "YWPayViewController.h"
+#import "ShopDetailViewController.h"
+#import "YWNewDiscountPayViewController.h"
 
 static const CGFloat kBorderW = 100;//边框宽度
 static const CGFloat kMargin = 30;//扫描窗口的外边距
@@ -111,7 +112,7 @@ static const CGFloat kMargin = 30;//扫描窗口的外边距
             if ([metadataObject.stringValue hasPrefix:@"yuwabao"]){
                 NSArray*array=[metadataObject.stringValue componentsSeparatedByString:@"/"];
                 NSString*idd=array.lastObject;
-                YWShoppingDetailViewController * vc = [[YWShoppingDetailViewController alloc]init];
+                ShopDetailViewController * vc = [[ShopDetailViewController alloc]init];
                 vc.shop_id = idd;
                 [self.navigationController pushViewController:vc animated:YES];
             }else if  (![metadataObject.stringValue hasPrefix:@"yvwa.com/"]) {
@@ -151,7 +152,7 @@ static const CGFloat kMargin = 30;//扫描窗口的外边距
         CGFloat total_money=[data[@"data"][@"total_money"] floatValue];
         CGFloat non_discount_money=[data[@"data"][@"non_discount_money"] floatValue];
         
-        YWPayViewController*vc=[YWPayViewController payViewControllerCreatWithQRCodePayAndShopName:company_name andShopID:shopID andZhekou:discount andpayAllMoney:total_money andNOZheMoney:non_discount_money];
+        YWNewDiscountPayViewController*vc=[YWNewDiscountPayViewController payViewControllerCreatWithQRCodePayAndShopName:company_name andShopID:shopID andZhekou:discount andpayAllMoney:total_money andNOZheMoney:non_discount_money];
         [self.navigationController pushViewController:vc animated:YES];
         
     }];

@@ -22,13 +22,13 @@
 #import "ShopDetailViewController.h"    //店铺详情
 #import "NewSearchViewController.h"        //搜索界面
 #import "WLBarcodeViewController.h"     //新的扫2维码
-#import "YWPayViewController.h"      //优惠买单界面
+#import "YWNewDiscountPayViewController.h"      //优惠买单界面
 #import "H5LinkViewController.h"    //webView
 #import "YWMessageNotificationViewController.h"  //通知
 
 #import "MovieViewController.h" //电影界面
 #import "CategoryDetaliViewController.h"//新分类详细界面
-#import "ShopDetailViewController.h"
+#import "ShopDetailViewController.h"//新店铺详情界面
 //
 
 #define CELL0   @"HomeMenuCell"
@@ -392,7 +392,7 @@
         CGFloat total_money=[data[@"data"][@"total_money"] floatValue];
         CGFloat non_discount_money=[data[@"data"][@"non_discount_money"] floatValue];
         
-        YWPayViewController*vc=[YWPayViewController payViewControllerCreatWithQRCodePayAndShopName:company_name andShopID:shopID andZhekou:discount andpayAllMoney:total_money andNOZheMoney:non_discount_money];
+       YWNewDiscountPayViewController *vc=[YWNewDiscountPayViewController payViewControllerCreatWithQRCodePayAndShopName:company_name andShopID:shopID andZhekou:discount andpayAllMoney:total_money andNOZheMoney:non_discount_money];
         [self.navigationController pushViewController:vc animated:YES];
         
     }];
