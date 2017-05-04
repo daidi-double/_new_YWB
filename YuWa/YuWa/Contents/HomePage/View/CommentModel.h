@@ -31,6 +31,8 @@
 @property(nonatomic,strong)NSString*customer_img;
 @property(nonatomic,strong)NSArray*rep_list;
 @property(nonatomic,strong)NSString*id;
+//商家回复
+@property(nonatomic,strong)NSMutableArray* shangJiaRep;
 
 //一些店铺的信息  只有个人中心才有
 //@property(nonatomic,strong)NSString*company_name;

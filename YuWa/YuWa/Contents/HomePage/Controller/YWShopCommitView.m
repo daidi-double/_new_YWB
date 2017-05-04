@@ -142,8 +142,14 @@
             [self.maMallDatas removeAllObjects];
             for (NSDictionary*dict in data[@"comment"]) {
                 CommentModel*model=[CommentModel yy_modelWithDictionary:dict];
+                //商家评论数据
+                NSMutableArray * arr = dict[@"rep_list"];
+                if (arr.count) {
+                    for (NSDictionary * dic in arr) {
+                        [model.shangJiaRep addObject:dic[@"content"]];
+                    }
+                }
                 [self.maMallDatas addObject:model];
-                
             }
             [self.shopCommitTableView reloadData];
             
