@@ -25,6 +25,8 @@
 		25D587CB1EAA627300C0178C /* YWpayNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D587CA1EAA627300C0178C /* YWpayNotificationCell.m */; };
 		25FE755E1EA9EA70003EA989 /* jieshou.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FE755D1EA9EA70003EA989 /* jieshou.png */; };
 		25FE75601EA9EA76003EA989 /* jujue.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FE755F1EA9EA76003EA989 /* jujue.png */; };
+		AA024DDF1EBB52D00049D4F1 /* UseCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA024DDD1EBB52D00049D4F1 /* UseCouponViewController.m */; };
+		AA024DE01EBB52D00049D4F1 /* UseCouponViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA024DDE1EBB52D00049D4F1 /* UseCouponViewController.xib */; };
 		AA048FD31E8909F700AF5423 /* MyIncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA048FD21E8909F700AF5423 /* MyIncomeModel.m */; };
 		AA048FD81E89142900AF5423 /* WillAccountIncomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA048FD61E89142900AF5423 /* WillAccountIncomeTableViewCell.m */; };
 		AA048FD91E89142900AF5423 /* WillAccountIncomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA048FD71E89142900AF5423 /* WillAccountIncomeTableViewCell.xib */; };
@@ -1766,6 +1768,9 @@
 		25FE755D1EA9EA70003EA989 /* jieshou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jieshou.png; sourceTree = "<group>"; };
 		25FE755F1EA9EA76003EA989 /* jujue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jujue.png; sourceTree = "<group>"; };
 		6D91CFB893AA70B1C9A0D506 /* Pods-YuWa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YuWa.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YuWa/Pods-YuWa.debug.xcconfig"; sourceTree = "<group>"; };
+		AA024DDC1EBB52D00049D4F1 /* UseCouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseCouponViewController.h; sourceTree = "<group>"; };
+		AA024DDD1EBB52D00049D4F1 /* UseCouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseCouponViewController.m; sourceTree = "<group>"; };
+		AA024DDE1EBB52D00049D4F1 /* UseCouponViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UseCouponViewController.xib; sourceTree = "<group>"; };
 		AA048FD11E8909F700AF5423 /* MyIncomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIncomeModel.h; sourceTree = "<group>"; };
 		AA048FD21E8909F700AF5423 /* MyIncomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIncomeModel.m; sourceTree = "<group>"; };
 		AA048FD51E89142900AF5423 /* WillAccountIncomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WillAccountIncomeTableViewCell.h; sourceTree = "<group>"; };
@@ -4365,6 +4370,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AA024DDB1EBB52A80049D4F1 /* 使用优惠券 */ = {
+			isa = PBXGroup;
+			children = (
+				AA024DDC1EBB52D00049D4F1 /* UseCouponViewController.h */,
+				AA024DDD1EBB52D00049D4F1 /* UseCouponViewController.m */,
+				AA024DDE1EBB52D00049D4F1 /* UseCouponViewController.xib */,
+			);
+			name = "使用优惠券";
+			sourceTree = "<group>";
+		};
 		AA048FD01E8909DB00AF5423 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -5903,6 +5918,7 @@
 		AAF508761EAF1B2E0007BC78 /* 新优惠买单 */ = {
 			isa = PBXGroup;
 			children = (
+				AA024DDB1EBB52A80049D4F1 /* 使用优惠券 */,
 				AAF5087C1EAF1D5C0007BC78 /* cell */,
 				AAF508771EAF1B620007BC78 /* YWNewDiscountPayViewController.h */,
 				AAF508781EAF1B620007BC78 /* YWNewDiscountPayViewController.m */,
@@ -10225,6 +10241,7 @@
 				AA3545B91E9DF23A00A2EC73 /* 4baobaoBG42@2x.jpg in Resources */,
 				C1F7BF361DB1CA0700CCAF96 /* center_whiteLocate@2x.png in Resources */,
 				AA3545451E9DF23A00A2EC73 /* 2baobaoBG46@2x.jpg in Resources */,
+				AA024DE01EBB52D00049D4F1 /* UseCouponViewController.xib in Resources */,
 				AA3544621E9DF23800A2EC73 /* 3baobaoLVUP55@2x.jpg in Resources */,
 				AA3545061E9DF23900A2EC73 /* 1baobaoBG43@2x.jpg in Resources */,
 				B3D219111DB0985100D661F5 /* read_me.txt in Resources */,
@@ -11544,6 +11561,7 @@
 				B38B2E4A1D8FACD8004D5256 /* SDCollectionViewCell.m in Sources */,
 				C1214C061DEC15D200FFC63C /* MybindingShopTableViewCell.m in Sources */,
 				AA084B7E1E56DDF9002D14F5 /* CustomBtn.m in Sources */,
+				AA024DDF1EBB52D00049D4F1 /* UseCouponViewController.m in Sources */,
 				AAF30A941E5E7D3700793382 /* XZSeatButton.m in Sources */,
 				C123156A1DE70FEB00B9D0FE /* MoneyDetailTableViewCell.m in Sources */,
 				B38B2DF61D8FACD8004D5256 /* AFHTTPSessionManager.m in Sources */,

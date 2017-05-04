@@ -10,7 +10,7 @@
 #import "CouponModel.h"
 @protocol CouponViewControllerDelegate <NSObject>
 
--(void)DelegateGetCouponInfo:(CouponModel*)model;
+-(void)DelegateGetCouponInfoOld:(CouponModel*)model;
 
 @end
 

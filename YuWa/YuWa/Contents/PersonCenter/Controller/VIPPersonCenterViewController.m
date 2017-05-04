@@ -406,6 +406,9 @@
     UIButton*PersonInfo=[showView viewWithTag:4];
     PersonInfo.hidden=NO;
     NSString* str=[NSString stringWithFormat:@"今日收益:￥%@",self.newsToday_money];
+    if (self.newsToday_money == nil) {
+        str = @"今日收益:￥0.00";
+    }
 
     [PersonInfo setTitle:str forState:UIControlStateNormal];
     

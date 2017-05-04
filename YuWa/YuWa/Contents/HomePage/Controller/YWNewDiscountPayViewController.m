@@ -19,6 +19,8 @@
 #import "YWShopInfoListModel.h"
 #import "YWNoShopTableViewCell.h"//无商品的时候买单
 #import "YWNewShopInfoTableViewCell.h"//直接买单cell
+#import "UseCouponViewController.h"//选择优惠券
+
 
 #define newShopInfoCell @"YWNewShopInfoTableViewCell"
 #define noShopCell     @"YWNoShopTableViewCell"
@@ -26,7 +28,7 @@
 #define payMoneyCell  @"YWPayMoneyTableViewCell"
 #define carCell @"ShopCarDetailTableViewCell"
 #define CELL2  @"TwoLabelShowTableViewCell"
-@interface YWNewDiscountPayViewController ()<UITableViewDelegate,UITableViewDataSource,YWOtherPayMoneyTableViewCellDelegate,CouponViewControllerDelegate,YWPayMoneyTableViewCellDelegate,UITextFieldDelegate,YWNoShopTableViewCellDelegate>
+@interface YWNewDiscountPayViewController ()<UITableViewDelegate,UITableViewDataSource,YWOtherPayMoneyTableViewCellDelegate,UseCouponViewControllerDelegate,YWPayMoneyTableViewCellDelegate,UITextFieldDelegate,YWNoShopTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *settomMoneyLabel;
 @property (weak, nonatomic) IBOutlet UIView *accountBGView;
 @property (weak, nonatomic) IBOutlet UITableView *payTableView;
@@ -393,13 +395,22 @@
 }
 //使用优惠券
 - (void)useYouhuiquanAction{
-    CouponViewController*vc=[[CouponViewController alloc]init];
-    vc.delegate=self;
-    vc.shopID=self.shopID;
-    NSString * settmontMoney = [self.settomMoneyLabel.text substringFromIndex:4];
-    vc.totailPayMoney=[settmontMoney floatValue];
-    [self.navigationController pushViewController:vc animated:YES];
-    
+//    CouponViewController*vc=[[CouponViewController alloc]init];
+//    vc.delegate=self;
+//    vc.shopID=self.shopID;
+//    NSString * settmontMoney = [self.settomMoneyLabel.text substringFromIndex:4];
+//    vc.totailPayMoney=[settmontMoney floatValue];
+//    [self.navigationController pushViewController:vc animated:YES];
+    UseCouponViewController * useVC = [[UseCouponViewController alloc]init];
+    useVC.shop_id = self.shopID;
+    useVC.delegate = self;
+    if (self.status == 3) {
+        
+        useVC.total_money = [NSString stringWithFormat:@"%.2f",self.payAllMoney];
+    }else{
+        useVC.total_money = [NSString stringWithFormat:@"%.2f",[self.money floatValue] + ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue]) * [self.shopDiscount floatValue]];
+    }
+    [self.navigationController pushViewController:useVC animated:YES];
 }
 //代理
 - (void)changMoney:(NSString *)money{
@@ -626,10 +637,18 @@
     [self.couponBtn setTitle:[NSString stringWithFormat:@"满%@抵%@",model.min_fee,model.discount_fee] forState:UIControlStateNormal];
     self.useDiscountCoupon = [NSString stringWithFormat:@"满%@抵%@",model.min_fee,model.discount_fee];
     NSString*aa=model.discount_fee;
+    CGFloat payMoney = self.payAllMoney;
     self.CouponMoney=[aa floatValue];
-    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",[self.noUserCouponMoney floatValue] - self.CouponMoney];
+
      YWOtherPayMoneyTableViewCell*cell2=[self.payTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:2]];
-    cell2.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",[self.noUserCouponMoney floatValue] - self.CouponMoney];
+    if (self.status == 3) {
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",payMoney  - self.CouponMoney];
+        cell2.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",payMoney  - self.CouponMoney];
+        
+    }else{
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",[self.money floatValue] + ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue]) * [self.shopDiscount floatValue] - self.CouponMoney + [self.noDiscountMoney floatValue]];
+        cell2.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",[self.money floatValue] + ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue]) * [self.shopDiscount floatValue] - self.CouponMoney + [self.noDiscountMoney floatValue]];
+    }
     if (self.whichPay == PayCategoryQRCodePayMethod) {
         self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*self.shopZhekou  - self.CouponMoney];
     }

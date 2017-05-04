@@ -147,6 +147,7 @@
 
 #define HTTP_PRESON_CHANGEINFO     @"/api.php/User/setMyBaseInfo/"  //1 修改个人中心资料
 #define HTTP_PERSON_COUPON         @"/api.php/User/getMyCoupon/"   //1 显示优惠券列表
+#define HTTP_PERSON_CANUSECOUPON   @"/api.php/User/checkCoupon/"   //1 筛选能使用的优惠券列表，优惠买单选择
 #define HTTP_PRESON_UPDATAINFO     @"/api.php/User/getNewBaseInfo/" //更新个人关注被赞信息
 #define HTTP_PRESON_GETNEWBASINFO  @"/api.php/User/getNewBaseInfo/"//个人中心的收益数据
 #define HTTP_NOTCCAFICATIONJ_ORDER @"/api.php/User/reservePushNotice/" //1预约通知

@@ -367,7 +367,7 @@
 
 #pragma mark  --delegate
 //使用了优惠券
--(void)DelegateGetCouponInfo:(CouponModel *)model{
+-(void)DelegateGetCouponInfoOld:(CouponModel *)model{
     self.is_coupon=YES;
     self.coupon_id=[model.coupon_id intValue];
     
