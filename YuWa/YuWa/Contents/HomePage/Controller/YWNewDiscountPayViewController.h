@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger,PayCategoryMethod){
 @property (nonatomic,strong)YWCarListModel * model;
 @property (nonatomic,strong)YWShopInfoListModel * infoModel;
 @property (nonatomic,copy)NSString * money;
-@property (nonatomic,assign)NSInteger status;//直接从店铺跳转
+@property (nonatomic,assign)NSInteger status;//1.无单品的情况，2.有单品，3.扫码支付
 @property (nonatomic,strong)NSString * shopDiscount;
 @property(nonatomic,assign)PayCategoryMethod whichPay;  //哪种支付
 @property(nonatomic,strong)NSString*shopID;  //店铺的id

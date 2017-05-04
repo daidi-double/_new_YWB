@@ -72,7 +72,7 @@
 @property(nonatomic,strong)UITableView*tableView;
 @property (nonatomic,strong)RBHomeCollectionViewCell * heighCell;   //collectionView 的cell
 
-
+@property (nonatomic,copy)NSString * newsToday_money;
 @property(nonatomic,assign)NSInteger whichShow;   // 0笔记 1专辑 2评论
 @property(nonatomic,assign)int pagen;
 @property(nonatomic,assign)int pages;
@@ -118,7 +118,7 @@
     
     [self addHeaderView];
     [self setUpMJRefresh];
-//    [self changeMyInfoData];
+    [self getNewBaseInfo];
 //    [self.tableView.mj_header beginRefreshing];
 }
 
@@ -405,7 +405,7 @@
     
     UIButton*PersonInfo=[showView viewWithTag:4];
     PersonInfo.hidden=NO;
-    NSString* str=[NSString stringWithFormat:@"今日收益:￥%@",[UserSession instance].today_money];
+    NSString* str=[NSString stringWithFormat:@"今日收益:￥%@",self.newsToday_money];
 
     [PersonInfo setTitle:str forState:UIControlStateNormal];
     
@@ -836,16 +836,18 @@
 
     
 }
-//获取被赞与关注人数
-//-(void)changeMyInfoData{
-//    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_PRESON_UPDATAINFO];
-//    NSDictionary * prams = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
-//    HttpManager * manager = [[HttpManager alloc]init];
-//    [manager postDatasNoHudWithUrl:urlStr withParams:prams compliation:^(id data, NSError *error) {
-//        MyLog(@"guanzhu %@",data);
-//        
-//    }];
-//}
+//获取今日收益数据
+-(void)getNewBaseInfo{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_PRESON_GETNEWBASINFO];
+    NSDictionary * prams = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:prams compliation:^(id data, NSError *error) {
+        MyLog(@"信息 %@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            self.newsToday_money = data[@"data"][@"money"];
+        }
+    }];
+}
 
 
 #pragma mark  --set get

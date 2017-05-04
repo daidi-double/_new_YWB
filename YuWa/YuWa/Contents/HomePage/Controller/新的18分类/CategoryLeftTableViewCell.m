@@ -39,13 +39,13 @@
         NSString * str = [NSString stringWithFormat:@"￥%@",self.model.goods_price];
         NSMutableAttributedString *attributeMarket = [[NSMutableAttributedString alloc] initWithString:str];
         [attributeMarket setAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle], NSBaselineOffsetAttributeName : @(NSUnderlineStyleSingle)} range:NSMakeRange(0,str.length)];
-        self.oldPriceLabel.font = [UIFont systemFontOfSize:12];
+        self.oldPriceLabel.font = [UIFont systemFontOfSize:10];
         self.oldPriceLabel.attributedText = attributeMarket;
 
     }
     
     self.numberLabel.text = self.model.num;
-    self.priceLabel.attributedText = [NSString stringWithFirstStr:@"￥" withFont:[UIFont systemFontOfSize:10.f] withColor:RGBCOLOR(255, 152, 125, 1) withSecondtStr:[NSString stringWithFormat:@"%@",price]  withFont:[UIFont systemFontOfSize:13.f] withColor:RGBCOLOR(255, 152, 125, 1)];
+    self.priceLabel.attributedText = [NSString stringWithFirstStr:@"￥" withFont:[UIFont systemFontOfSize:10.f] withColor:RGBCOLOR(255, 152, 125, 1) withSecondtStr:[NSString stringWithFormat:@"%@",price]  withFont:[UIFont systemFontOfSize:12.f] withColor:RGBCOLOR(255, 152, 125, 1)];
  
     UIButton * reduceBtn = [self viewWithTag:10];
     if ([self.model.num integerValue] == 0) {

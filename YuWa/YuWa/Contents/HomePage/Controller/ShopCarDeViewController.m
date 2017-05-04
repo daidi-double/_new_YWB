@@ -42,6 +42,7 @@
         cell = [[ShopCarDetailTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CARDETAILCELL];
     }
     YWCarListModel * model = self.dataAry[indexPath.section];
+    cell.selectionStyle = NO;
     cell.delegate =self;
     cell.model = model;
     return cell;

@@ -55,44 +55,47 @@
     [self makeTableViewHeader];
     [self getAccountMoney];   //接口得到账户金额
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
 -(void)makeTableViewHeader{
-    UIView*topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 160)];
-    topView.backgroundColor=CNaviColor;
-    
-    UILabel*titleLabel=[[UILabel alloc]initWithFrame:CGRectZero];
-    titleLabel.text=@"实际支付：￥";
-    titleLabel.font=[UIFont systemFontOfSize:17];
-    titleLabel.centerY = topView.centerY + 5;
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.textAlignment=NSTextAlignmentRight;
-    titleLabel.attributedText = [NSString stringWithFirstStr:@"实际支付:" withFont:[UIFont systemFontOfSize:17.f] withColor:[UIColor whiteColor] withSecondtStr:@" ￥" withFont:[UIFont systemFontOfSize:43] withColor:[UIColor whiteColor]];
-    [topView addSubview:titleLabel];
-    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(topView.mas_left).offset(15);
-        make.top.mas_equalTo(@(50));
-        make.right.mas_equalTo(topView.mas_centerX);
-    }];
+//    UIView*topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 160)];
+//    topView.backgroundColor=CNaviColor;
+//    
+//    UILabel*titleLabel=[[UILabel alloc]initWithFrame:CGRectZero];
+//    titleLabel.text=@"实际支付：￥";
+//    titleLabel.font=[UIFont systemFontOfSize:17];
 //    titleLabel.centerY = topView.centerY + 5;
-    UITextField*textField=[[UITextField alloc]initWithFrame:CGRectZero];
-    textField.font=[UIFont systemFontOfSize:43];
-    textField.userInteractionEnabled=NO;
-//    textField.placeholder=@"请输入金额";
-//    if (self.blanceMoney!=0) {
-    
-        textField.text=[NSString stringWithFormat:@"%.2f",self.blanceMoney];
-//    }
-    textField.textColor=[UIColor whiteColor];
-    [topView addSubview:textField];
-////    textField.centerY = topView.centerY;
-    [textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(titleLabel.mas_centerY);
-        make.left.mas_equalTo(titleLabel.mas_right);
-        make.right.mas_equalTo(self.view.right);
-        
-    }];
+//    titleLabel.textColor = [UIColor whiteColor];
+//    titleLabel.textAlignment=NSTextAlignmentRight;
+//    titleLabel.attributedText = [NSString stringWithFirstStr:@"实际支付:" withFont:[UIFont systemFontOfSize:17.f] withColor:[UIColor whiteColor] withSecondtStr:@" ￥" withFont:[UIFont systemFontOfSize:43] withColor:[UIColor whiteColor]];
+//    [topView addSubview:titleLabel];
+//    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(topView.mas_left).offset(15);
+//        make.top.mas_equalTo(@(50));
+//        make.right.mas_equalTo(topView.mas_centerX);
+//    }];
+////    titleLabel.centerY = topView.centerY + 5;
+//    UITextField*textField=[[UITextField alloc]initWithFrame:CGRectZero];
+//    textField.font=[UIFont systemFontOfSize:43];
+//    textField.userInteractionEnabled=NO;
+////    textField.placeholder=@"请输入金额";
+////    if (self.blanceMoney!=0) {
+//    
+//        textField.text=[NSString stringWithFormat:@"%.2f",self.blanceMoney];
+////    }
+//    textField.textColor=[UIColor whiteColor];
+//    [topView addSubview:textField];
+//////    textField.centerY = topView.centerY;
+//    [textField mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(titleLabel.mas_centerY);
+//        make.left.mas_equalTo(titleLabel.mas_right);
+//        make.right.mas_equalTo(self.view.right);
+//        
+//    }];
 
-    self.tableView.tableHeaderView=topView;
+//    self.tableView.tableHeaderView=topView;
     
 }
 
@@ -212,7 +215,43 @@
 
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section==1) {
+    if (section == 0) {
+        UIView*topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 160)];
+        topView.backgroundColor=CNaviColor;
+        
+        UILabel*titleLabel=[[UILabel alloc]initWithFrame:CGRectZero];
+        titleLabel.text=@"实际支付：￥";
+        titleLabel.font=[UIFont systemFontOfSize:17];
+        titleLabel.centerY = topView.centerY + 5;
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.textAlignment=NSTextAlignmentRight;
+        titleLabel.attributedText = [NSString stringWithFirstStr:@"实际支付:" withFont:[UIFont systemFontOfSize:17.f] withColor:[UIColor whiteColor] withSecondtStr:@" ￥" withFont:[UIFont systemFontOfSize:43] withColor:[UIColor whiteColor]];
+        [topView addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(topView.mas_left).offset(15);
+            make.top.mas_equalTo(@(50));
+            make.right.mas_equalTo(topView.mas_centerX);
+        }];
+        //    titleLabel.centerY = topView.centerY + 5;
+        UITextField*textField=[[UITextField alloc]initWithFrame:CGRectZero];
+        textField.font=[UIFont systemFontOfSize:43];
+        textField.userInteractionEnabled=NO;
+        //    textField.placeholder=@"请输入金额";
+        //    if (self.blanceMoney!=0) {
+        
+        textField.text=[NSString stringWithFormat:@"%.2f",self.blanceMoney];
+        //    }
+        textField.textColor=[UIColor whiteColor];
+        [topView addSubview:textField];
+        ////    textField.centerY = topView.centerY;
+        [textField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(titleLabel.mas_centerY);
+            make.left.mas_equalTo(titleLabel.mas_right);
+            make.right.mas_equalTo(self.view.right);
+            
+        }];
+        return topView;
+    }else if (section==1) {
         UIView*backView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
         backView.backgroundColor=[UIColor whiteColor];
         
@@ -225,6 +264,9 @@
         moneyLabel.font=[UIFont systemFontOfSize:14];
         moneyLabel.textAlignment=NSTextAlignmentRight;
         CGFloat payMoney = self.accountMoney-self.blanceMoney;
+        if (payMoney < 0) {
+            payMoney = self.blanceMoney - self.accountMoney;
+        }
         moneyLabel.text=[NSString stringWithFormat:@"￥%.2f",payMoney];
         self.needPayLabel=moneyLabel;
         [backView addSubview:moneyLabel];
@@ -242,7 +284,7 @@
         return 40;
     }
     
-    return 10;
+    return 170;
 }
 
 
@@ -533,7 +575,7 @@
             self.isSelectedOn=YES;
             [self switchAction:self.Myswitch];
 
-//            [self.tableView reloadData];
+            [self.tableView reloadData];
             
         }else{
             [JRToast showWithText:data[@"errorMessage"]];

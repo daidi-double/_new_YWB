@@ -344,9 +344,9 @@
             cell.titleNameLabel.text = @"其他消费折后总额";
             CGFloat otherMoney;
             if (self.status == 1 || self.status == 2 || self.status == 3) {
-               otherMoney = ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue];
+               otherMoney = ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]+[self.noDiscountMoney floatValue];
             }else{
-            otherMoney = ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.model.discount floatValue];
+            otherMoney = ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.model.discount floatValue] + [self.noDiscountMoney floatValue];
             }
             cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",otherMoney];
             if (self.whichPay == PayCategoryQRCodePayMethod) {
@@ -520,7 +520,7 @@
     }
    
 
-     NSString * goods_price = [self.goods_prices componentsJoinedByString:@","];
+    NSString * goods_price = [self.goods_prices componentsJoinedByString:@","];
 
     NSString * goods_nums = [self.goods_nums componentsJoinedByString:@","];
     NSString * goods_ids = [self.goods_ids componentsJoinedByString:@","];
@@ -538,14 +538,35 @@
     }
     
     NSString * discount;
-    if (self.status == 1 || self.status == 3) {
+    CGFloat payTotalMoney;//需要支付的总金额，未打折的
+    NSString * noDisMoney;//不参与打折金额和单品总额
+    if (self.status == 3) {//扫码支付的情况下的折扣和需要支付的金额
+        discount = [NSString stringWithFormat:@"%.2f",self.shopZhekou];
+        noDisMoney = [NSString stringWithFormat:@"%.2f",self.NOZheMoney ];
+        payTotalMoney = self.payAllMoney;
+    }else if (self.status != 3 && ([self.otherTotalMoney isEqualToString:@"0"]||self.otherTotalMoney == nil)) {//只有单品的情况
         discount = @"1";
-    }else{
-        discount = @"1";
+        payTotalMoney = [self.money floatValue];
+        noDisMoney = @"0";
+        
+    }else{//其他状态下，有单品也有其他消费总额，把单品价格添加到不打折金额中
+        discount = self.shopDiscount;
+        payTotalMoney  = [self.money floatValue] + [self.otherTotalMoney floatValue];
+        noDisMoney = [NSString stringWithFormat:@"%f",[self.money floatValue] + [self.noDiscountMoney floatValue]];
     }
-    NSString * newShouldPayMoney = [NSString stringWithFormat:@"%.2f",self.shouldPayMoney];
+    //有单品的情况下传path = 1，没有单品则传2；
+    NSString * path;
+    if (self.money == nil) {
+        path = @"2";
+    }else{
+        path = @"1";
+    }
+    if (self.status == 3) {
+        path = @"2";
+    }
+    NSString * newShouldPayMoney = [NSString stringWithFormat:@"%.2f",payTotalMoney];
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MAKEORDER];
-    NSDictionary*dict=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"seller_uid":self.shopID,@"total_money":newShouldPayMoney,@"non_discount_money":self.noDiscountMoney,@"discount":discount,@"is_coupon":isCoupon,@"goods_id":goods_ids,@"goods_num":goods_nums,@"goods_price":goods_price,@"path":@(1)};
+    NSDictionary*dict=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"seller_uid":self.shopID,@"total_money":newShouldPayMoney,@"non_discount_money":noDisMoney,@"discount":discount,@"is_coupon":isCoupon,@"goods_id":goods_ids,@"goods_num":goods_nums,@"goods_price":goods_price,@"path":path};
     NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
     if (self.is_coupon==YES) {
         [params setObject:@(self.coupon_id) forKey:@"coupon_id"];
@@ -652,6 +673,9 @@
             }
 
             [self.dataAry removeAllObjects];
+            [self.goods_ids removeAllObjects];
+            [self.goods_nums removeAllObjects];
+            [self.goods_prices removeAllObjects];
             NSArray * datas = data[@"data"][@"cart"];
             for (NSDictionary * dict in datas) {
                 
