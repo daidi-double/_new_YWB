@@ -110,10 +110,11 @@
         
         self.money = @"0.00";
         self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
-        
-        
     }
 
+}
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"deleteTotalMoney" object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
