@@ -78,7 +78,7 @@
     self.totalMoneyLabel.text = @"￥0.00";
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     //清空勾选的物品数量
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notice) name:@"deleteNun" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notice:) name:@"deleteNun" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableViewData) name:@"relodDate" object:nil];
 }
 //刷新两个联动tabelView的数据
@@ -87,10 +87,11 @@
     self.maMDatasGoods = nil;
         [self getDatas];
 }
--(void)notice{
+-(void)notice:(NSNotification*)sender{
 //    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:nil preferredStyle:UIAlertControllerStyleAlert];
 //    UIAlertAction * sure = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    if (self.isClearShop == YES) {
+   
+    if ((self.isClearShop =1?sender.userInfo[@"isClear"]:NO)) {
         
         [self clearNumberOfShop];
         [self clearShopCar:self.shop_id];
@@ -117,7 +118,7 @@
 }
 - (void)dealloc{
     //清除数量
-    [self notice];
+    [self notice:nil];
 }
 - (void)makeUI{
     
@@ -962,10 +963,10 @@
     }
     for (YWLeftCategoryTableViewCell * cell in self.markCells) {
          cell.numberLabel.text = @"0";
-         cell.numberLabel.hidden = YES;
+//         cell.numberLabel.hidden = YES;
     }
 
-    self.totalMoneyLabel.text = @"0.00";
+    self.totalMoneyLabel.text = @"￥0.00";
     self.numberLabel.text = @"0";
 }
 //所有的评论

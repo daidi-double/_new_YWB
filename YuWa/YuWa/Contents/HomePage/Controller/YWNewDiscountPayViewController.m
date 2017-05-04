@@ -44,6 +44,7 @@
 @property (nonatomic,strong)NSMutableArray * goods_nums;//同上
 @property (nonatomic,copy)NSString * noUserCouponMoney;//未使用优惠券的时候需要支付的金额；
 @property (nonatomic,copy)NSString * useDiscountCoupon;
+@property (nonatomic,assign)BOOL isClearMoney;//清空金额
 @end
 
 @implementation YWNewDiscountPayViewController
@@ -97,10 +98,22 @@
         self.shouldPayMoney = [[NSString stringWithFormat:@"%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])* self.shopZhekou  - self.CouponMoney] floatValue];
        
     }
-    MyLog(@"self.status = %ld",self.status);
-    if ([self.settomMoneyLabel.text isKindOfClass:[NSNull class]]) {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleMoney:) name:@"deleteTotalMoney" object:nil];
+
+       if ([self.money isKindOfClass:[NSNull class]]||self.money ==nil) {
         self.settomMoneyLabel.text = @"待支付￥0.00";
     }
+}
+- (void)deleMoney:(NSNotification*)sender{
+    if ((self.isClearMoney =1?sender.userInfo[@"isClearMoney"]:NO)) {
+        //清空总价
+        
+        self.money = @"0.00";
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
+        
+        
+    }
+
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

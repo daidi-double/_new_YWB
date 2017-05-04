@@ -25,7 +25,7 @@
 #import "YWNewDiscountPayViewController.h"      //优惠买单界面
 #import "H5LinkViewController.h"    //webView
 #import "YWMessageNotificationViewController.h"  //通知
-
+#import "JPUSHService.h"
 #import "MovieViewController.h" //电影界面
 #import "CategoryDetaliViewController.h"//新分类详细界面
 #import "ShopDetailViewController.h"//新店铺详情界面
@@ -66,7 +66,6 @@
     [super viewDidLoad];
     //得到坐标
     [self getLocalSubName];
-
     
     [self makeNaviBar];
     
@@ -77,10 +76,15 @@
     [self.tableView registerNib:[UINib nibWithNibName:CELL2 bundle:nil] forCellReuseIdentifier:CELL2];
     [self setUpMJRefresh];
 
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [JPUSHService setAlias:[UserSession instance].account callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+    });
     
     
 }
-
+- (void)tagsAliasCallback:(int)iResCode  tags:(NSSet *)tags alias:(NSString *)alias {
+    NSLog(@"起别名 :      rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0 ]setAlpha:1];

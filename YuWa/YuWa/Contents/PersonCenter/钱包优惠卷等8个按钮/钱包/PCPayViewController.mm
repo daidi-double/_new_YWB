@@ -467,15 +467,26 @@
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
             if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-            UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"支付结果" message:@"支付成功" preferredStyle:UIAlertControllerStyleActionSheet];
-            UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                PostCommitViewController * commitVC = [[PostCommitViewController alloc]init];
-                commitVC.order_id = [NSString stringWithFormat:@"%.0f",self.order_id];
-                commitVC.shop_id = self.shop_ID;
-                [self.navigationController pushViewController:commitVC animated:YES];
-            }];
-                [alertVC addAction:sure];
-                [self presentViewController:alertVC animated:YES completion:nil];
+//            UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"支付结果" message:@"支付成功" preferredStyle:UIAlertControllerStyleActionSheet];
+//            UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //创建一个消息对象
+                NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
+                //发送消息
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                //创建一个消息对象
+                NSNotification * deleMoney = [NSNotification notificationWithName:@"deleteTotalMoney" object:nil userInfo:@{@"isClearMoney":@(1)}];
+                //发送消息
+                [[NSNotificationCenter defaultCenter]postNotification:deleMoney];
+
+                [self pushToPostComment:self.shop_ID];
+//                [self clearShopCar:self.shop_ID];
+//                PostCommitViewController * commitVC = [[PostCommitViewController alloc]init];
+//                commitVC.order_id = [NSString stringWithFormat:@"%.0f",self.order_id];
+//                commitVC.shop_id = self.shop_ID;
+//                [self.navigationController pushViewController:commitVC animated:YES];
+//            }];
+//                [alertVC addAction:sure];
+//                [self presentViewController:alertVC animated:YES completion:nil];
             }
         }];
    
@@ -546,7 +557,7 @@
             [JRToast showWithText:data[@"data"]];
             UIViewController*vc=[self.navigationController.viewControllers objectAtIndex:3];
             //创建一个消息对象
-            NSNotification * notice = [NSNotification notificationWithName:@"清除数量" object:nil userInfo:nil];
+            NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
             //发送消息
             [[NSNotificationCenter defaultCenter]postNotification:notice];
             [self.navigationController popToViewController:vc animated:YES];
@@ -564,7 +575,8 @@
 
 -(void)payWith:(NSString*)aa{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_THIRD_PAY];
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":@(self.order_id),@"is_balance":@(self.isSelectedOn),@"pay_method":aa};
+    NSString * orderIDStr = [NSString stringWithFormat:@"%f",self.order_id];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":orderIDStr,@"is_balance":@(self.isSelectedOn),@"pay_method":aa};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"%@",data);
@@ -613,13 +625,17 @@
             if (reslut == 1) {
             [UserSession instance].money=data[@"data"][@"money"];
 
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付结果" message:@"成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    [alert show];
-
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付结果" message:@"成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                    [alert show];
+                [self pushToPostComment:self.shop_ID];
                 //创建一个消息对象
-                NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:nil];
-                //发送消息
+                NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
+                //发送消息isClearMoney
                 [[NSNotificationCenter defaultCenter]postNotification:notice];
+                //创建一个消息对象
+                NSNotification * deleMoney = [NSNotification notificationWithName:@"deleteTotalMoney" object:nil userInfo:@{@"isClearMoney":@(1)}];
+                //发送消息
+                [[NSNotificationCenter defaultCenter]postNotification:deleMoney];
 
             }else{
                 [JRToast showWithText:@"支付失败"];
@@ -674,34 +690,54 @@
         switch (resopnse.errCode) {
             case WXSuccess:
             {
-                [self.navigationController popViewControllerAnimated:YES];
+//                [self.navigationController popViewControllerAnimated:YES];
                 strMsg = @"支付结果：成功！";
                 //发送消息  //清空详情页面勾选物品，数据
 //                ShopDetailViewController
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"deleteNun" object:nil];
-                PostCommitViewController * commitVC = [[PostCommitViewController alloc]init];
-                commitVC.order_id = [NSString stringWithFormat:@"%.0f",self.order_id];
-                commitVC.shop_id = self.shop_ID;
-                [self.navigationController pushViewController:commitVC animated:YES];
+                NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
+                //发送消息
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
+                
+                //创建一个消息对象
+                NSNotification * deleMoney = [NSNotification notificationWithName:@"deleteTotalMoney" object:nil userInfo:@{@"isClearMoney":@(1)}];
+                //发送消息
+                [[NSNotificationCenter defaultCenter]postNotification:deleMoney];
+
+//                PostCommitViewController * commitVC = [[PostCommitViewController alloc]init];
+//                commitVC.order_id = [NSString stringWithFormat:@"%.0f",self.order_id];
+//                commitVC.shop_id = self.shop_ID;
+//                [self.navigationController pushViewController:commitVC animated:YES];
+                [self pushToPostComment:self.shop_ID];
                 //清空购物车商品，有shopid的时候在解注释调用
                 [self clearShopCar:self.shop_ID];
         }
                 break;
                 
             default:
-                strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
+                strMsg = [NSString stringWithFormat:@"支付结果：失败！"];
                 NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
 
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
                 break;
         }
 
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
         
     }
     
 }
-
+- (void)pushToPostComment:(NSString * )shop_id{
+    WEAKSELF;
+    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"支付结果" message:@"支付成功" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * ok = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        PostCommitViewController * vc = [[PostCommitViewController alloc]init];
+        vc.shop_id = shop_id ;
+        vc.order_id = [NSString stringWithFormat:@"%f",weakSelf.order_id] ;
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    [alertVC addAction:ok];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
 /*
 #pragma mark - Navigation
 
