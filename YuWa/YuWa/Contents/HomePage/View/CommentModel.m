@@ -14,5 +14,10 @@
 //    return @{@"shop":ShopdetailModel.class};
 //    
 //}
-
+-(NSMutableArray *)shangJiaRep{
+    if (_shangJiaRep == nil) {
+        _shangJiaRep = [NSMutableArray array];
+    }
+    return _shangJiaRep;
+}
 @end

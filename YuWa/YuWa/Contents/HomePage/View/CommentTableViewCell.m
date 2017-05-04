@@ -16,12 +16,14 @@
 @property(nonatomic,strong)UIView*lineView;
 @property(nonatomic,strong)UIImageView*messageImageView;
 @property(nonatomic,strong)UILabel*sellerShowLabel;
+@property (weak, nonatomic) IBOutlet UILabel *shangjiaRep;
 
 @end
 @implementation CommentTableViewCell
 
 
 -(void)giveValueWithModel:(CommentModel *)model{
+
     //默认的数据
     UIImageView*imageView=[self viewWithTag:1];
     [imageView sd_setImageWithURL:[NSURL URLWithString:model.customer_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -123,13 +125,22 @@
     }
     
     //图片的底部
-    CGFloat imageVHeight;
+    CGFloat imageVHeight = 0.0;
     if (imageArray.count>0) {
         NSUInteger VNumber=(imageArray.count-1)/3;
       imageVHeight =Height+(Height+VJianJu)*VNumber+10;
 
     }
-    
+    if (model.shangJiaRep.count) {
+        for (int i = 0; i<model.shangJiaRep.count; i++) {
+            NSString * str = model.shangJiaRep[i];
+            UILabel  * label = [[UILabel alloc]init];
+            CGFloat strHeight=[str boundingRectWithSize:CGSizeMake(kScreen_Width-65-50, 999) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height;
+            label.frame = CGRectMake(65, imageVHeight+10, kScreen_Width-65-50-5, strHeight+i*strHeight);
+            label.text = model.shangJiaRep[i];
+            [self.contentView addSubview:label   ];
+        }
+    }
     CGFloat realImageViewBottom=Top+imageVHeight;
 
     
@@ -161,7 +172,7 @@
     self.sellerShowLabel.height =labelHeight;
     [self.contentView addSubview:self.sellerShowLabel];
     
-    
+
     
     
     

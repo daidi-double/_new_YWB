@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -25,54 +26,54 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小雨娃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5k-Ke-2ig">
-                        <rect key="frame" x="65" y="15" width="37" height="14.5"/>
+                        <rect key="frame" x="65" y="15" width="37" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="打分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbS-ZW-mfe">
-                        <rect key="frame" x="65" y="32.5" width="25" height="14.5"/>
+                        <rect key="frame" x="65" y="33" width="25" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_lightStar.png" translatesAutoresizingMaskIntoConstraints="NO" id="t25-RJ-wsG">
-                        <rect key="frame" x="95" y="34" width="12" height="12"/>
+                        <rect key="frame" x="95" y="35" width="12" height="12"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="12" id="VbN-hK-kkQ"/>
                             <constraint firstAttribute="height" constant="12" id="hM9-dZ-FGE"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="31" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_lightStar.png" translatesAutoresizingMaskIntoConstraints="NO" id="pRT-tF-kTu">
-                        <rect key="frame" x="110" y="34" width="12" height="12"/>
+                        <rect key="frame" x="110" y="35" width="12" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="9DY-zW-uQq"/>
                             <constraint firstAttribute="width" constant="12" id="Bee-ye-SqE"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="32" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_lightStar.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Q7-s2-YsX">
-                        <rect key="frame" x="125" y="34" width="12" height="12"/>
+                        <rect key="frame" x="125" y="35" width="12" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="B2A-xV-ivC"/>
                             <constraint firstAttribute="width" constant="12" id="gcO-Fm-pWZ"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="33" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_lightStar.png" translatesAutoresizingMaskIntoConstraints="NO" id="eIm-ov-O8P">
-                        <rect key="frame" x="140" y="34" width="12" height="12"/>
+                        <rect key="frame" x="140" y="35" width="12" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="2op-el-4BN"/>
                             <constraint firstAttribute="width" constant="12" id="yAj-BG-CQl"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="34" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_lightStar.png" translatesAutoresizingMaskIntoConstraints="NO" id="f41-jJ-KaO">
-                        <rect key="frame" x="155" y="34" width="12" height="12"/>
+                        <rect key="frame" x="155" y="35" width="12" height="12"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="12" id="cVP-1f-wGV"/>
                             <constraint firstAttribute="height" constant="12" id="l5Y-Jg-ViW"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9月22日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkZ-BW-oED">
-                        <rect key="frame" x="313" y="23" width="47" height="14.5"/>
+                        <rect key="frame" x="313" y="23" width="47" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -99,7 +100,7 @@
                     <constraint firstItem="t25-RJ-wsG" firstAttribute="leading" secondItem="hbS-ZW-mfe" secondAttribute="trailing" constant="5" id="wOY-g1-7Yz"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="27" y="91"/>
+            <point key="canvasLocation" x="26.5" y="91"/>
         </tableViewCell>
     </objects>
     <resources>
