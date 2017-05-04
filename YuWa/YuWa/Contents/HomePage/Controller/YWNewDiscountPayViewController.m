@@ -42,8 +42,9 @@
 @property (nonatomic,strong)NSMutableArray * goods_ids;//商品id，上传用
 @property (nonatomic,strong)NSMutableArray * goods_prices;//同上
 @property (nonatomic,strong)NSMutableArray * goods_nums;//同上
-
+@property (nonatomic,copy)NSString * noUserCouponMoney;//未使用优惠券的时候需要支付的金额；
 @property (nonatomic,copy)NSString * useDiscountCoupon;
+@property (nonatomic,assign)BOOL isClearMoney;//清空金额
 @end
 
 @implementation YWNewDiscountPayViewController
@@ -54,7 +55,7 @@
     YWNewDiscountPayViewController *payVC = [[self alloc] init];
     payVC.shopName=shopName;
     payVC.shopID=shopID;
-    payVC.shopZhekou=shopZhekou;
+    payVC.shopDiscount= [NSString stringWithFormat:@"%.2f",shopZhekou];
     
     payVC.whichPay=PayCategoryWritePayMethod;
     
@@ -72,7 +73,7 @@
     payVC.shopZhekou=shopZhekou;
     payVC.payAllMoney=payAllMoney;//总金额，未打折前
     payVC.NOZheMoney=NOZheMoney;
-    payVC.status = 1;
+    payVC.status = 3;
     payVC.otherTotalMoney = [NSString stringWithFormat:@"%.2f",payAllMoney];
     payVC.whichPay=PayCategoryQRCodePayMethod;
     
@@ -92,9 +93,28 @@
     self.is_coupon = NO;
 //    MyLog(@"status = %ld",self.status);
     if (self.whichPay == PayCategoryQRCodePayMethod) {
-        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",_otherTotalMoney];
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*self.shopZhekou  - self.CouponMoney];
+        MyLog(@"金额 %@",[NSString stringWithFormat:@"%f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])* self.shopZhekou  - self.CouponMoney]);
+        self.shouldPayMoney = [[NSString stringWithFormat:@"%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])* self.shopZhekou  - self.CouponMoney] floatValue];
        
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleMoney:) name:@"deleteTotalMoney" object:nil];
+
+       if ([self.money isKindOfClass:[NSNull class]]||self.money ==nil) {
+        self.settomMoneyLabel.text = @"待支付￥0.00";
+    }
+}
+- (void)deleMoney:(NSNotification*)sender{
+    if ((self.isClearMoney =1?sender.userInfo[@"isClearMoney"]:NO)) {
+        //清空总价
+        
+        self.money = @"0.00";
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
+    }
+
+}
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"deleteTotalMoney" object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -125,7 +145,7 @@
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.status == 1) {
+    if (self.status == 1 || self.status == 3) {
         if (indexPath.section == 0) {
             return 250.f;
         }
@@ -149,7 +169,7 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        if (self.status == 1) {
+        if (self.status == 1 || self.status == 3) {
             YWNoShopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:noShopCell];
             if (!cell) {
                 cell = [[YWNoShopTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:noShopCell];
@@ -182,7 +202,7 @@
                 [self.goods_ids removeAllObjects];
                 for (NSDictionary * dict in self.model.cart) {
                     YWShopInfoListModel * model = [YWShopInfoListModel yy_modelWithDictionary:dict];
-                    if (model.goods_price == nil ||[model.goods_price isKindOfClass:[NSNull class]]) {
+                    if (model.goods_disprice == nil ||[model.goods_disprice isKindOfClass:[NSNull class]]) {
                         [self.goods_prices addObject:model.goods_price];
                     }else{
                         
@@ -221,38 +241,52 @@
         if (indexPath.row == 0) {
             cell.titleNameLabel.text = @"其他消费总额:";
             cell.moneyTF.placeholder = @"请输入金额";
+            cell.moneyTF.userInteractionEnabled=YES;
             cell.moneyChangeBlock = ^(NSString * money){
                 weakSelf.otherTotalMoney = money;
-                weakSelf.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付%.2f",([weakSelf.otherTotalMoney floatValue] - [weakSelf.noDiscountMoney floatValue])*[weakSelf.model.discount floatValue] + [weakSelf.money floatValue]];
+                weakSelf.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([weakSelf.otherTotalMoney floatValue] - [weakSelf.noDiscountMoney floatValue])*[weakSelf.model.discount floatValue] + [weakSelf.money floatValue]];
             };
+            if (self.status == 3) {
             //扫码
             if (self.whichPay==PayCategoryQRCodePayMethod) {
                 if (self.otherTotalMoney != nil) {
                   cell.moneyTF.text=[NSString stringWithFormat:@"%@",self.otherTotalMoney];
+                    cell.moneyTF.userInteractionEnabled=NO;
+                    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([weakSelf.otherTotalMoney floatValue] - [weakSelf.noDiscountMoney floatValue])*self.shopZhekou];
                 }
-                cell.moneyTF.userInteractionEnabled=NO;
                
             }
-            
+            }
         }else if (indexPath.row == 1){
+            cell.moneyTF.userInteractionEnabled=YES;
             cell.titleNameLabel.text = @"其中非打折金额:";
             cell.moneyTF.placeholder = @"(选填)";
             cell.moneyChangeBlock = ^(NSString * money){
                 weakSelf.noDiscountMoney = money;
-                weakSelf.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付%.2f",([weakSelf.otherTotalMoney floatValue] - [weakSelf.noDiscountMoney floatValue])*[weakSelf.model.discount floatValue] + [weakSelf.money floatValue]];
+                weakSelf.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([weakSelf.otherTotalMoney floatValue] - [weakSelf.noDiscountMoney floatValue])*[weakSelf.model.discount floatValue] + [weakSelf.money floatValue]];
             };
             //扫码
-            if (self.whichPay==PayCategoryQRCodePayMethod) {
-                cell.moneyTF.userInteractionEnabled=NO;
-                cell.moneyTF.text=[NSString stringWithFormat:@"%.2f",self.NOZheMoney];
+            if (self.status == 3) {
+                
+                if (self.whichPay==PayCategoryQRCodePayMethod) {
+                    cell.moneyTF.userInteractionEnabled=NO;
+                    cell.moneyTF.text=[NSString stringWithFormat:@"%.2f",self.NOZheMoney];
+                }
             }
         }else{
             UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15, 0, kScreen_Width-30, 1)];
             line.backgroundColor = [UIColor lightGrayColor];
             [cell.contentView addSubview:line];
             
-            if (self.status == 1 ||self.status == 2) {
-                NSString*zheNum=[self.shopDiscount substringFromIndex:2];
+            if (self.status == 1 ||self.status == 2 ||self.status == 3) {
+                NSString*zheNum;
+                if (self.whichPay == PayCategoryQRCodePayMethod) {
+                    
+                    zheNum = [NSString stringWithFormat:@"%f",_shopZhekou*100];
+                }else{
+                
+                 zheNum=[self.shopDiscount substringFromIndex:2];
+                }
                 
                 if ([zheNum integerValue] % 10 == 0) {
                     zheNum = [NSString stringWithFormat:@"%ld折",[zheNum integerValue]/10];
@@ -263,6 +297,10 @@
                 
                 cell.discountLabel.attributedText = [NSString stringWithFirstStr:@"雨娃支付立享" withFont:cell.discountLabel.font withColor:RGBCOLOR(94, 94, 94, 1) withSecondtStr:[NSString stringWithFormat:@"%@",zheNum] withFont:[UIFont systemFontOfSize:15] withColor:RGBCOLOR(252, 227, 135, 1)];
                 CGFloat num=[self.shopDiscount floatValue];
+                if (self.status == 3) {
+                    num = self.shopZhekou;
+                }
+
                 if (num>=1 || num == 0.00) {
                     cell.discountLabel.text = @"不打折";
                 }
@@ -305,19 +343,27 @@
         }else if (indexPath.row == 1){
             cell.titleNameLabel.text = @"其他消费折后总额";
             CGFloat otherMoney;
-            if (self.status == 1 || self.status == 2) {
+            if (self.status == 1 || self.status == 2 || self.status == 3) {
                otherMoney = ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue];
             }else{
             otherMoney = ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.model.discount floatValue];
             }
             cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",otherMoney];
+            if (self.whichPay == PayCategoryQRCodePayMethod) {
+                cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",[_otherTotalMoney floatValue]* self.shopZhekou];
+            }
         }else if (indexPath.row == 2){
             cell.titleNameLabel.text = @"实付金额";
 //            cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.model.discount floatValue] + [self.money floatValue]];
             cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",self.shouldPayMoney];
             cell.titleNameLabel.textColor = RGBCOLOR(123, 123, 123, 1);
             cell.moneyLabel.textColor = RGBCOLOR(123, 123, 123, 1);
-            
+            if (self.whichPay == PayCategoryQRCodePayMethod) {
+                if (self.is_coupon == YES) {
+                    cell.moneyLabel.text = [NSString stringWithFormat:@"%.2f",[_otherTotalMoney floatValue]* self.shopZhekou];//xiu
+                }
+                   
+                }
              [self calshouldPayMoney];
             
         }else if (indexPath.section == 2 && indexPath.row == 3){
@@ -360,13 +406,14 @@
 
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:2];
     NSIndexPath *indexPathT=[NSIndexPath indexPathForRow:2 inSection:2];
-    if (self.status == 1) {
-        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue] - self.CouponMoney];
+    if (self.status == 1 ||self.status == 3) {
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]];//修;
     }else{
-    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.model.discount floatValue] + [self.money floatValue] - self.CouponMoney];
+    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue] + [self.noDiscountMoney floatValue] + [self.money floatValue] ];//修
     }
      NSString * payAllmoney = [self.settomMoneyLabel.text substringFromIndex:4];
     self.shouldPayMoney = [payAllmoney floatValue];
+    self.noUserCouponMoney = payAllmoney;
     [self calshouldPayMoney];
     //刷新对应行的数据
     [self.payTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,indexPathT,nil] withRowAnimation:UITableViewRowAnimationFade];
@@ -491,7 +538,7 @@
     }
     
     NSString * discount;
-    if (self.status == 1) {
+    if (self.status == 1 || self.status == 3) {
         discount = @"1";
     }else{
         discount = @"1";
@@ -518,13 +565,13 @@
             vc.order_id=order_id;
             vc.shop_ID = self.shopID;
             MyLog(@"%f",order_id);
-            //发送消息  //清空详情页面勾选物品，数据
-            //                ShopDetailViewController
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"deleteNun" object:nil];
-            //清空总价
-//
-            self.money = @"0.00";
-            self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
+//            //发送消息  //清空详情页面勾选物品，数据
+//            //                ShopDetailViewController
+//            [[NSNotificationCenter defaultCenter]postNotificationName:@"deleteNun" object:nil];
+//            //清空总价
+////
+//            self.money = @"0.00";
+//            self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
             [self.navigationController pushViewController:vc animated:YES];
             
         }else if ([errorCode isEqualToString:@"9"]){
@@ -559,10 +606,13 @@
     self.useDiscountCoupon = [NSString stringWithFormat:@"满%@抵%@",model.min_fee,model.discount_fee];
     NSString*aa=model.discount_fee;
     self.CouponMoney=[aa floatValue];
-    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",self.shouldPayMoney - self.CouponMoney];
+    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",[self.noUserCouponMoney floatValue] - self.CouponMoney];
      YWOtherPayMoneyTableViewCell*cell2=[self.payTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:2]];
-    cell2.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",self.shouldPayMoney - self.CouponMoney];
-    
+    cell2.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",[self.noUserCouponMoney floatValue] - self.CouponMoney];
+    if (self.whichPay == PayCategoryQRCodePayMethod) {
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*self.shopZhekou  - self.CouponMoney];
+    }
+
 
     [self.payTableView reloadData];
     
@@ -606,6 +656,20 @@
             for (NSDictionary * dict in datas) {
                 
                 self.infoModel = [YWShopInfoListModel yy_modelWithDictionary:dict];
+                
+                if (self.infoModel.goods_disprice == nil ||[self.infoModel.goods_disprice isKindOfClass:[NSNull class]]) {
+         
+                    [self.goods_prices addObject:self.infoModel.goods_price];
+                    
+                }else{
+                    
+                    [self.goods_prices addObject:self.infoModel.goods_disprice];
+                }
+                [self.goods_nums addObject:self.infoModel.goods_num];
+                [self.goods_ids addObject:self.infoModel.goods_id];
+                
+
+                
                 [self.dataAry addObject:self.infoModel];
                 
             }

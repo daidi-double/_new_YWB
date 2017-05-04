@@ -61,6 +61,7 @@
 @property(nonatomic,strong)NSMutableArray* markCells;//清空购物车时用
 @property (nonatomic,strong)YWShopCommitView * commentView;//评价
 @property (nonatomic,assign)BOOL is_ADD;//判断是否添加到数组
+@property (nonatomic,assign)BOOL isClearShop;//是否清空购物车商品
 
 @end
 
@@ -73,10 +74,11 @@
     [self makeUI];
     [self getDatas];
     self.is_ADD = YES;
+    self.isClearShop = YES;
     self.totalMoneyLabel.text = @"￥0.00";
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     //清空勾选的物品数量
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notice) name:@"deleteNun" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notice:) name:@"deleteNun" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableViewData) name:@"relodDate" object:nil];
 }
 //刷新两个联动tabelView的数据
@@ -85,13 +87,25 @@
     self.maMDatasGoods = nil;
         [self getDatas];
 }
--(void)notice{
-    [self clearNumberOfShop];
-    [self clearShopCar:self.shop_id];
-//    [self getDatas];
-    [self.shops removeAllObjects];
-    [self.rightTableView reloadData];
-    [self.leftTableView reloadData];
+-(void)notice:(NSNotification*)sender{
+//    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction * sure = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+   
+    if ((self.isClearShop =1?sender.userInfo[@"isClear"]:NO)) {
+        
+        [self clearNumberOfShop];
+        [self clearShopCar:self.shop_id];
+        //    [self getDatas];
+        [self.shops removeAllObjects];
+        [self.rightTableView reloadData];
+        [self.leftTableView reloadData];
+    }
+//    }];
+//    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil];
+//    [alertVC addAction:sure];
+//    [alertVC addAction:cancel];
+//    [self presentViewController:alertVC animated:YES completion:nil];
+//    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
@@ -104,7 +118,7 @@
 }
 - (void)dealloc{
     //清除数量
-    [self notice];
+    [self notice:nil];
 }
 - (void)makeUI{
     
@@ -545,21 +559,22 @@
 //返回
 - (IBAction)backAction:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    self.isClearShop = NO;
 }
 //结算
 - (IBAction)accountAction:(UIButton *)sender {
     if ([self judgeLogin]) {
 
-        YWNewDiscountPayViewController * vc =[[YWNewDiscountPayViewController alloc]init];
+        YWNewDiscountPayViewController * vc =[YWNewDiscountPayViewController payViewControllerCreatWithWritePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou: [self.mainModel.discount floatValue]];
         if (self.mainModel.cart.count==0 && self.shops.count == 0) {
             
             vc.status = 1;
         }else if (self.mainModel.cart.count != 0 || self.shops.count !=0){
             vc.status = 2;
         }
-        vc.shopID = self.mainModel.id;
-        vc.shopName = self.mainModel.company_name;
-        vc.shopDiscount = self.mainModel.discount;
+//        vc.shopID = self.mainModel.id;
+//        vc.shopName = self.mainModel.company_name;
+//        vc.shopDiscount = self.mainModel.discount;
         NSString * money = [self. totalMoneyLabel.text substringFromIndex:1];
         vc.money = money;
         //先清理详情页面数据，在push
@@ -576,16 +591,14 @@
     if ([self judgeLogin]) {
 
         MyLog(@"self.shops.count = %ld",self.shops.count);
-        YWNewDiscountPayViewController * vc = [[YWNewDiscountPayViewController alloc]init];
+        YWNewDiscountPayViewController * vc = [YWNewDiscountPayViewController payViewControllerCreatWithWritePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou:[self.mainModel.discount floatValue]];
         if (self.mainModel.cart.count==0 && self.shops.count == 0) {
             
             vc.status = 1;
         }else if (self.mainModel.cart.count != 0 || self.shops.count !=0){
             vc.status = 2;
         }
-        vc.shopID = self.mainModel.id;
-        vc.shopName = self.mainModel.company_name;
-        vc.shopDiscount = self.mainModel.discount;
+
         NSString * money = [self. totalMoneyLabel.text substringFromIndex:1];
         vc.money = money;
         [self.navigationController pushViewController:vc animated:YES];
@@ -950,10 +963,10 @@
     }
     for (YWLeftCategoryTableViewCell * cell in self.markCells) {
          cell.numberLabel.text = @"0";
-         cell.numberLabel.hidden = YES;
+//         cell.numberLabel.hidden = YES;
     }
 
-    self.totalMoneyLabel.text = @"0.00";
+    self.totalMoneyLabel.text = @"￥0.00";
     self.numberLabel.text = @"0";
 }
 //所有的评论
