@@ -389,16 +389,20 @@
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
 //        MyLog(@"%@",data);
-        
-        NSString*company_name=data[@"data"][@"company_name"];   //这个 名字 需要改。
-        NSString*shopID=data[@"data"][@"seller_uid"];
-        CGFloat discount=[data[@"data"][@"discount"] floatValue];
-        CGFloat total_money=[data[@"data"][@"total_money"] floatValue];
-        CGFloat non_discount_money=[data[@"data"][@"non_discount_money"] floatValue];
-        
-       YWNewDiscountPayViewController *vc=[YWNewDiscountPayViewController payViewControllerCreatWithQRCodePayAndShopName:company_name andShopID:shopID andZhekou:discount andpayAllMoney:total_money andNOZheMoney:non_discount_money];
-        [self.navigationController pushViewController:vc animated:YES];
-        
+        if ([data[@"errorCode"] integerValue] == 0) {
+            
+            NSString*company_name=data[@"data"][@"company_name"];   //这个 名字 需要改。
+            NSString*shopID=data[@"data"][@"seller_uid"];
+            CGFloat discount=[data[@"data"][@"discount"] floatValue];
+            CGFloat total_money=[data[@"data"][@"total_money"] floatValue];
+            CGFloat non_discount_money=[data[@"data"][@"non_discount_money"] floatValue];
+            
+            YWNewDiscountPayViewController *vc=[YWNewDiscountPayViewController payViewControllerCreatWithQRCodePayAndShopName:company_name andShopID:shopID andZhekou:discount andpayAllMoney:total_money andNOZheMoney:non_discount_money];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else{
+            [JRToast showWithText:@"请先登入"];
+        }
     }];
     
 }

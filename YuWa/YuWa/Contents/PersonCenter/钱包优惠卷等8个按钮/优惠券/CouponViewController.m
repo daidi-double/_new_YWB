@@ -113,16 +113,35 @@
     UILabel*title=[cell viewWithTag:5];
     UIImageView * rightImageView = [cell viewWithTag:8];
     UIImageView * leftImageView = [cell viewWithTag:7];
-    if (model.shop_id == 0) {
+    if (model.type == 1) {
+        youhuiquanImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.imageAry[1]]];
+        rightImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@1",self.imageAry[1]]];
+        leftImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@2",self.imageAry[1]]];
+        strLabel.textColor = self.colorAry[1];
+        dis_freeLabel.textColor = self.colorAry[1];
+        min_freeLabel.textColor = self.colorAry[1];
+        
+    }else if(model.type == 2) {
         youhuiquanImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.imageAry[0]]];
         rightImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@1",self.imageAry[0]]];
         leftImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@2",self.imageAry[0]]];
         strLabel.textColor = self.colorAry[0];
         dis_freeLabel.textColor = self.colorAry[0];
         min_freeLabel.textColor = self.colorAry[0];
-        
-    }else {
-        
+    }else if(model.type == 3) {
+        youhuiquanImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.imageAry[2]]];
+        rightImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@1",self.imageAry[2]]];
+        leftImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@2",self.imageAry[2]]];
+        strLabel.textColor = self.colorAry[2];
+        dis_freeLabel.textColor = self.colorAry[2];
+        min_freeLabel.textColor = self.colorAry[2];
+    }else{
+        youhuiquanImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.imageAry[3]]];
+        rightImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@1",self.imageAry[3]]];
+        leftImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@2",self.imageAry[3]]];
+        strLabel.textColor = self.colorAry[3];
+        dis_freeLabel.textColor = self.colorAry[3];
+        min_freeLabel.textColor = self.colorAry[3];
     }
     dis_freeLabel.text=[NSString stringWithFormat:@"￥%@",model.discount_fee];
     
@@ -160,8 +179,8 @@
             return;
         }
         
-            if ([self.delegate respondsToSelector:@selector(DelegateGetCouponInfo:)]) {
-                [self.delegate DelegateGetCouponInfo:self.modelUnused[number]];
+            if ([self.delegate respondsToSelector:@selector(DelegateGetCouponInfoOld:)]) {
+                [self.delegate DelegateGetCouponInfoOld:self.modelUnused[number]];
             }
             
             [self.navigationController popViewControllerAnimated:YES];

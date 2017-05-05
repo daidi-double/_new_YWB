@@ -42,6 +42,7 @@
         cell = [[ShopCarDetailTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CARDETAILCELL];
     }
     YWCarListModel * model = self.dataAry[indexPath.section];
+    cell.selectionStyle = NO;
     cell.delegate =self;
     cell.model = model;
     return cell;
@@ -83,7 +84,7 @@
 }
 //去结算
 -(void)goToAccount:(NSString *)money andBtn:(UIButton *)sender{
-    ShopCarDetailTableViewCell * cell = (ShopCarDetailTableViewCell*)[[[sender superview]superview]superview];
+    ShopCarDetailTableViewCell * cell = (ShopCarDetailTableViewCell*)[[sender superview]superview];
     NSIndexPath * path = [self.shopCarTableView indexPathForCell:cell];
     YWCarListModel * model = self.dataAry[path.section];
     YWNewDiscountPayViewController * newVC = [YWNewDiscountPayViewController payViewControllerCreatWithWritePayAndShopName:model.company_name andShopID:model.id andZhekou:[model.discount floatValue]];

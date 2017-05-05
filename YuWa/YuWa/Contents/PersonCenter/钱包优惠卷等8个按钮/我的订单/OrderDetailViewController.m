@@ -12,7 +12,7 @@
 #import "NSString+JWAppendOtherStr.h"
 #import "ShopNameView.h"
 #import "OrderRefundViewController.h"
-#import "YWShoppingDetailViewController.h"
+#import "ShopDetailViewController.h"
 @interface OrderDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView * orderTableView;
 @property (nonatomic,strong)NSMutableArray * orderAry;
@@ -86,7 +86,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        YWShoppingDetailViewController * vc = [[YWShoppingDetailViewController alloc]init];
+        ShopDetailViewController * vc = [[ShopDetailViewController alloc]init];
         vc.shop_id = self.shop_id;
         [self.navigationController pushViewController:vc animated:YES];
     }

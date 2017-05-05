@@ -95,7 +95,7 @@
         
         [self clearNumberOfShop];
         [self clearShopCar:self.shop_id];
-        //    [self getDatas];
+        [self getDatas];
         [self.shops removeAllObjects];
         [self.rightTableView reloadData];
         [self.leftTableView reloadData];
@@ -955,15 +955,18 @@
     
 }
 -(void)clearNumberOfShop{
+    
     for (CategoryLeftTableViewCell * cell in self.markCells) {
             cell.numberLabel.text = @"0";
             UIButton * btn = [cell viewWithTag:10];
             btn.hidden = YES;
+        MyLog(@"清空归零");
 
     }
     for (YWLeftCategoryTableViewCell * cell in self.markCells) {
          cell.numberLabel.text = @"0";
 //         cell.numberLabel.hidden = YES;
+        MyLog(@"清空归零2");
     }
 
     self.totalMoneyLabel.text = @"￥0.00";
