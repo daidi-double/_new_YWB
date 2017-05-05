@@ -111,7 +111,7 @@
     }else{
         CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:COMMENTCELl];
         for (UIView * view in cell.contentView.subviews) {
-            MyLog(@"%ld",(long)view.tag);
+//            MyLog(@"%ld",(long)view.tag);
             if ((2100>=view.tag&&view.tag >= 2000)||(1100>=view.tag&&view.tag >= 1000)) {
                 [view removeFromSuperview];
             }

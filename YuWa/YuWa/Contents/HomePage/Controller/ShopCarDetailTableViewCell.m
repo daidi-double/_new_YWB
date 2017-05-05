@@ -48,7 +48,7 @@
         }
     }
     NSArray*specail=self.model.cart;
-    CGFloat top = 30.0;
+    CGFloat top = 35.0;
     CGFloat left = 13.0;
     //首先移除所有的东西
     for (UIView*view in self.saveAllImage) {
@@ -160,8 +160,6 @@
             totalMoneyStr = @"0";
         }
         self.totalMoneyLabel.attributedText = [NSString stringWithFirstStr:@"合计￥" withFont:self.totalMoneyLabel.font withColor:RGBCOLOR(123, 124, 125, 1) withSecondtStr:totalMoneyStr withFont:self.totalMoneyLabel.font withColor:[UIColor colorWithHexString:@"#fe8238"]];
-    }else{
-        
     }
 
 }

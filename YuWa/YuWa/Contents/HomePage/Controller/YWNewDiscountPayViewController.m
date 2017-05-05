@@ -91,6 +91,12 @@
     [self.payTableView registerNib:[UINib nibWithNibName:noShopCell bundle:nil] forCellReuseIdentifier:noShopCell];
     [self.payTableView registerNib:[UINib nibWithNibName:newShopInfoCell bundle:nil] forCellReuseIdentifier:newShopInfoCell];
     self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
+    if (self.shopZhekou <= 0.00 || self.shopZhekou >=1) {
+        self.shopZhekou = 1;
+    }
+    if ([self.shopDiscount floatValue]<=0.00 || [self.shopDiscount floatValue] >=1) {
+        self.shopDiscount = @"1";
+    }
     self.shouldPayMoney = [self.money floatValue];
     self.is_coupon = NO;
 //    MyLog(@"status = %ld",self.status);
@@ -155,11 +161,11 @@
     }else{
     if (indexPath.section == 0) {
         if (self.status != 2) {
-            
-            YWCarListModel * model = self.dataAry[indexPath.section];
-            return [ShopCarDetailTableViewCell getHeight:model.cart]-40;
+                //从购物车点击过来的
+           
+            return [ShopCarDetailTableViewCell getHeight:self.model.cart]-40;
         }else{
-            
+
             return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count+20;
         }
     }
@@ -246,7 +252,7 @@
             cell.moneyTF.userInteractionEnabled=YES;
             cell.moneyChangeBlock = ^(NSString * money){
                 weakSelf.otherTotalMoney = money;
-                weakSelf.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([weakSelf.otherTotalMoney floatValue] - [weakSelf.noDiscountMoney floatValue])*[weakSelf.model.discount floatValue] + [weakSelf.money floatValue]];
+                weakSelf.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([weakSelf.otherTotalMoney floatValue] - [weakSelf.noDiscountMoney floatValue])*[weakSelf.model.discount floatValue] + [weakSelf.money floatValue]- _CouponMoney];
             };
             if (self.status == 3) {
             //扫码
@@ -254,7 +260,7 @@
                 if (self.otherTotalMoney != nil) {
                   cell.moneyTF.text=[NSString stringWithFormat:@"%@",self.otherTotalMoney];
                     cell.moneyTF.userInteractionEnabled=NO;
-                    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",(weakSelf.payAllMoney - weakSelf.NOZheMoney)*self.shopZhekou +weakSelf.NOZheMoney];
+                    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",(weakSelf.payAllMoney - weakSelf.NOZheMoney)*self.shopZhekou +weakSelf.NOZheMoney - _CouponMoney];
                     if (self.is_coupon == YES) {
                         self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",(_payAllMoney - _NOZheMoney)*self.shopZhekou +_NOZheMoney - _CouponMoney];
                     }
@@ -289,8 +295,11 @@
                     
                     zheNum = [NSString stringWithFormat:@"%f",_shopZhekou*100];
                 }else{
-                
+                    if ([self.shopDiscount isEqualToString:@"1"]) {
+                        zheNum = @"10";
+                    }else{
                  zheNum=[self.shopDiscount substringFromIndex:2];
+                    }
                 }
                 
                 if ([zheNum integerValue] % 10 == 0) {
@@ -367,7 +376,7 @@
                 if (self.is_coupon == YES) {
                     cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",(self.payAllMoney -self.NOZheMoney) * self.shopZhekou +self.NOZheMoney - self.CouponMoney];//xiu
                 }else{
-                    cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",(self.payAllMoney -self.NOZheMoney) * self.shopZhekou +self.NOZheMoney];
+                    cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",(self.payAllMoney -self.NOZheMoney) * self.shopZhekou +self.NOZheMoney- _CouponMoney];
                 }
                    
                 }
@@ -423,9 +432,9 @@
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:2];
     NSIndexPath *indexPathT=[NSIndexPath indexPathForRow:2 inSection:2];
     if (self.status == 1 ||self.status == 3) {
-        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]];//修;
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]- _CouponMoney];//修;
     }else{
-    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue] + [self.noDiscountMoney floatValue] + [self.money floatValue] ];//修
+    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue] + [self.noDiscountMoney floatValue] + [self.money floatValue]- _CouponMoney ];//修
     }
      NSString * payAllmoney = [self.settomMoneyLabel.text substringFromIndex:4];
     self.shouldPayMoney = [payAllmoney floatValue];
