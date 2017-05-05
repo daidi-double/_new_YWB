@@ -19,6 +19,7 @@
 		2535423A1EA4ABE3006F2C7A /* headerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253542391EA4ABE3006F2C7A /* headerView.xib */; };
 		2535423D1EA4ADF8006F2C7A /* headerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2535423C1EA4ADF8006F2C7A /* headerView.m */; };
 		255222581EB504FF00F22793 /* YWdetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 255222571EB504FF00F22793 /* YWdetailModel.m */; };
+		25CCE0141EBC6F8B009A58DB /* OrderDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25CCE0131EBC6F8B009A58DB /* OrderDetailViewController.storyboard */; };
 		25CD5E4C1EA762C10069D416 /* YWdetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */; };
 		25D587C81EAA619C00C0178C /* YWpayNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D587C71EAA619C00C0178C /* YWpayNotificationCell.xib */; };
 		25D587CB1EAA627300C0178C /* YWpayNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D587CA1EAA627300C0178C /* YWpayNotificationCell.m */; };
@@ -674,7 +675,6 @@
 		AA3BFE401E8559B500D669C2 /* YWBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3BFE2F1E8559B500D669C2 /* YWBankViewController.m */; };
 		AA3BFE411E8559B500D669C2 /* YWBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3BFE301E8559B500D669C2 /* YWBankViewController.xib */; };
 		AA3BFE471E85735700D669C2 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3BFE451E85735700D669C2 /* OrderDetailViewController.m */; };
-		AA3BFE481E85735700D669C2 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3BFE461E85735700D669C2 /* OrderDetailViewController.xib */; };
 		AA3BFE4E1E857CA600D669C2 /* OrdelShopCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3BFE4D1E857CA600D669C2 /* OrdelShopCellView.m */; };
 		AA3C40C41E8D59EF0052C732 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA3C40C21E8D59EF0052C732 /* AlipaySDK.bundle */; };
 		AA3C40C51E8D59EF0052C732 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3C40C31E8D59EF0052C732 /* AlipaySDK.framework */; };
@@ -1759,6 +1759,7 @@
 		2535423C1EA4ADF8006F2C7A /* headerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = headerView.m; sourceTree = "<group>"; };
 		255222561EB504FF00F22793 /* YWdetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailModel.h; sourceTree = "<group>"; };
 		255222571EB504FF00F22793 /* YWdetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailModel.m; sourceTree = "<group>"; };
+		25CCE0131EBC6F8B009A58DB /* OrderDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderDetailViewController.storyboard; sourceTree = "<group>"; };
 		25CD5E4A1EA762C10069D416 /* YWdetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailHeaderView.h; sourceTree = "<group>"; };
 		25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailHeaderView.m; sourceTree = "<group>"; };
 		25D587C71EAA619C00C0178C /* YWpayNotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YWpayNotificationCell.xib; path = ../../../HomePage/View/YWpayNotificationCell.xib; sourceTree = "<group>"; };
@@ -2486,7 +2487,6 @@
 		AA3BFE301E8559B500D669C2 /* YWBankViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWBankViewController.xib; sourceTree = "<group>"; };
 		AA3BFE441E85735700D669C2 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		AA3BFE451E85735700D669C2 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
-		AA3BFE461E85735700D669C2 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
 		AA3BFE4C1E857CA600D669C2 /* OrdelShopCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdelShopCellView.h; sourceTree = "<group>"; };
 		AA3BFE4D1E857CA600D669C2 /* OrdelShopCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdelShopCellView.m; sourceTree = "<group>"; };
 		AA3C40C21E8D59EF0052C732 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
@@ -5457,7 +5457,7 @@
 				AAF127DC1E8AE0D500121621 /* 退款 */,
 				AA3BFE441E85735700D669C2 /* OrderDetailViewController.h */,
 				AA3BFE451E85735700D669C2 /* OrderDetailViewController.m */,
-				AA3BFE461E85735700D669C2 /* OrderDetailViewController.xib */,
+				25CCE0131EBC6F8B009A58DB /* OrderDetailViewController.storyboard */,
 				C1F7BE131DB1C95400CCAF96 /* PCMyOrderViewController.h */,
 				C1F7BE141DB1C95400CCAF96 /* PCMyOrderViewController.m */,
 			);
@@ -10109,7 +10109,6 @@
 				B38B2F5A1D8FC83A004D5256 /* country.plist in Resources */,
 				AA3544701E9DF23800A2EC73 /* 4baobaoLVUP13@2x.jpg in Resources */,
 				AA3545921E9DF23A00A2EC73 /* 3baobaoBG7@2x.jpg in Resources */,
-				AA3BFE481E85735700D669C2 /* OrderDetailViewController.xib in Resources */,
 				B3FFF4941D94037D00EDD2AB /* RBPublicEditorViewController.xib in Resources */,
 				AA3544191E9DF23800A2EC73 /* 2baobaoLVUP43@2x.jpg in Resources */,
 				AAF80CF81E67E45A0000C4BC /* scan_1@2x.png in Resources */,
@@ -10665,6 +10664,7 @@
 				C135A17D1DDEF3BC002B78A5 /* addImage.png in Resources */,
 				AA2B2C131E8D010A008CB3C6 /* YWWinnersCollectionViewCell.xib in Resources */,
 				AA2B2BFB1E8CB57B008CB3C6 /* BaobaoSkillViewController.xib in Resources */,
+				25CCE0141EBC6F8B009A58DB /* OrderDetailViewController.storyboard in Resources */,
 				AA3544E21E9DF23900A2EC73 /* 1baobaoBG10@2x.jpg in Resources */,
 				B3CD68AF1D94F9F300C26B1C /* RBPublicLocationViewController.xib in Resources */,
 				AA3544581E9DF23800A2EC73 /* 3baobaoLVUP46@2x.jpg in Resources */,

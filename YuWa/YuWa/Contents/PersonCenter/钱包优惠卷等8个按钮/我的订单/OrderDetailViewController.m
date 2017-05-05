@@ -41,7 +41,7 @@
     [self getDatas];
 }
 - (void)makeUI{
-    self.orderTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, kScreen_Width, kScreen_Height * 0.8f) style:UITableViewStylePlain];
+    self.orderTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, kScreen_Width, kScreen_Height ) style:UITableViewStylePlain];
     _orderTableView.delegate = self;
     _orderTableView.dataSource = self;
     _orderTableView.backgroundColor = [UIColor whiteColor];
@@ -196,6 +196,7 @@
         [questionBtn setTitle:@"对订单有疑问?" forState:UIControlStateNormal];
         questionBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [questionBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
+        [questionBtn addTarget:self action:@selector(callKeFu) forControlEvents:UIControlEventTouchDown];
         [cell.contentView addSubview:questionBtn];
     
     }
@@ -203,7 +204,19 @@
     }
     return cell;
 }
-
+-(void)callKeFu{
+    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction * call = [UIAlertAction actionWithTitle:@"客服电话:4001505599" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIWebView* callWebview =[[UIWebView alloc] init];
+        NSURL * telURL =[NSURL URLWithString:@"tel:4001505599"];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
+        [self.view addSubview:callWebview];
+    }];
+    [alertVC addAction:call];
+    [alertVC addAction:cancel];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
 #pragma mark  --allDatas
 -(void)getDatas{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MYORDERDETAIL];
