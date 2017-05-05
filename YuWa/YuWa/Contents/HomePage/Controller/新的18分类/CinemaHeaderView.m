@@ -123,7 +123,7 @@
         //            _BGScrollView.backgroundColor = [UIColor orangeColor];
         [self addSubview:_BGScrollView];
         
-        _BGroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height*0.7)];
+        _BGroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height*1.1f)];
         ;
         
         _BGroundView.image = [UIImage imageNamed:@"横条.png"];

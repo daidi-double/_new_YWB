@@ -34,7 +34,12 @@
         pictureImage.tag = 100+i;
         /////////////////////////////
 //        删
-        UIImage * image = [UIImage imageNamed:[NSString stringWithFormat:@"a%d",i+1000]];
+        NSString*imageName=[NSString stringWithFormat:@"1baobaoLVUP%d@2x.jpg",i+1];
+//        NSBundle*bundle=[NSBundle mainBundle];
+//        NSString*path=[bundle pathForResource:imageName ofType:@"jpg"];
+//        
+//        UIImage*image=[UIImage imageWithContentsOfFile:path];
+        UIImage*image=[UIImage imageNamed:imageName];
         [self.dataArr addObject:image];
         ////////////////////////////
         UITapGestureRecognizer * tapGes = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchToDetail:)];

@@ -567,10 +567,6 @@
         NSInteger number=indexPath.row;
         HPRecommendShopModel*model=self.mtModelArrRecommend[number];
 
-//
-//        YWShoppingDetailViewController*vc=[[YWShoppingDetailViewController alloc]init];
-//        vc.shop_id=model.id;
-//        [self.navigationController pushViewController:vc animated:YES];
         ShopDetailViewController * shopVC = [[ShopDetailViewController alloc]init];
         shopVC.shop_id = model.id;
         [self.navigationController pushViewController:shopVC animated:YES];
