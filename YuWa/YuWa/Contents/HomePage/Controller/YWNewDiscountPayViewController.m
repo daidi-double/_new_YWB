@@ -155,11 +155,11 @@
     }else{
     if (indexPath.section == 0) {
         if (self.status != 2) {
-            
-            YWCarListModel * model = self.dataAry[indexPath.section];
-            return [ShopCarDetailTableViewCell getHeight:model.cart]-40;
+                //从购物车点击过来的
+           
+            return [ShopCarDetailTableViewCell getHeight:self.model.cart]-40;
         }else{
-            
+
             return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count+20;
         }
     }

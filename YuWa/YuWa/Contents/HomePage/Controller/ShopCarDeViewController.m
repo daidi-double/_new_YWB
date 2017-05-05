@@ -90,8 +90,9 @@
     YWNewDiscountPayViewController * newVC = [YWNewDiscountPayViewController payViewControllerCreatWithWritePayAndShopName:model.company_name andShopID:model.id andZhekou:[model.discount floatValue]];
     newVC.model = model;
     newVC.money = money;
+//    newVC.status = 2;
 //    newVC.shopID = model.id;
-    newVC.dataAry = self.dataAry;
+
     [self.navigationController pushViewController:newVC animated:YES];
 }
 
@@ -120,6 +121,7 @@
         }else{
             [JRToast showWithText:data[@"errorMessage"] duration:1];
         }
+        [self.shopCarTableView reloadData];
     }];
 }
 
