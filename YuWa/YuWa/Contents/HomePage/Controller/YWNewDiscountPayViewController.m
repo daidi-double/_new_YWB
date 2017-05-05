@@ -91,6 +91,12 @@
     [self.payTableView registerNib:[UINib nibWithNibName:noShopCell bundle:nil] forCellReuseIdentifier:noShopCell];
     [self.payTableView registerNib:[UINib nibWithNibName:newShopInfoCell bundle:nil] forCellReuseIdentifier:newShopInfoCell];
     self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
+    if (self.shopZhekou <= 0.00 || self.shopZhekou >=1) {
+        self.shopZhekou = 1;
+    }
+    if ([self.shopDiscount floatValue]<=0.00 || [self.shopDiscount floatValue] >=1) {
+        self.shopDiscount = @"1";
+    }
     self.shouldPayMoney = [self.money floatValue];
     self.is_coupon = NO;
 //    MyLog(@"status = %ld",self.status);
@@ -289,8 +295,11 @@
                     
                     zheNum = [NSString stringWithFormat:@"%f",_shopZhekou*100];
                 }else{
-                
+                    if ([self.shopDiscount isEqualToString:@"1"]) {
+                        zheNum = @"10";
+                    }else{
                  zheNum=[self.shopDiscount substringFromIndex:2];
+                    }
                 }
                 
                 if ([zheNum integerValue] % 10 == 0) {

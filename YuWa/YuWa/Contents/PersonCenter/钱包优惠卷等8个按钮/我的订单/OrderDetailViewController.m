@@ -153,7 +153,7 @@
             itemW = cell.imageView.image.size.height / cell.imageView.image.size.width * itemH;
             
             if (itemH >= itemW) {
-                itemH = cell.height * 0.5f;
+                itemH = cell.height * 0.35f;
                 itemW = cell.imageView.image.size.width * itemH/cell.imageView.image.size.height;
             }
         }
@@ -165,11 +165,15 @@
         cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         CGFloat zhekou = [orderModel.discount floatValue]*10;
+        if (zhekou >=10 || zhekou<=0.00) {
+           cell.textLabel.text = @"不打折";
+        }else{
         cell.textLabel.text = [NSString stringWithFormat:@"闪付享受%.1f折 折扣",zhekou];
-        CGFloat discountMoney = [orderModel.total_money floatValue] - [orderModel.pay_money floatValue];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"-%.2f",discountMoney];
-        cell.detailTextLabel.textColor = [UIColor orangeColor];
-        
+            CGFloat discountMoney = [orderModel.total_money floatValue] - [orderModel.pay_money floatValue];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"-%.2f",discountMoney];
+            cell.detailTextLabel.textColor = [UIColor orangeColor];
+            
+        }
     }else if (indexPath.row == 3){
 
         if (orderModel.pay_money == NULL) {

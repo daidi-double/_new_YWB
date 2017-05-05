@@ -463,7 +463,9 @@
         dis = [NSString stringWithFormat:@"%.1f",[dis floatValue]/10];
     }
     self.discountLabel.text = [NSString stringWithFormat:@"优惠买单     闪付立享%@折",dis];
-    
+    if ([self.mainModel.discount floatValue] >= 1 || [self.mainModel.discount floatValue] <=0.00) {
+       self.discountLabel.text = @"不打折";
+    }
     self.addressLabel.text = self.mainModel.company_address;
     [self.shopCarView.shopInfoAry removeAllObjects];
     if (!self.shopCarView) {
