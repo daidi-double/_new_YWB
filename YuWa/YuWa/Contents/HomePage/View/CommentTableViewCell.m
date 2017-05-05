@@ -184,9 +184,9 @@
     [self.messageImageView removeFromSuperview];
     [seller_contentLabel removeFromSuperview];
     for (int i = 0; i < model.rep_list.count; i ++) {
-        self.messageImageView = [[UIImageView alloc]initWithFrame:CGRectMake(65, 60  + strHeight+ [_allRep_contents[1][i] floatValue]*i +5, 20, 20)];
+        self.messageImageView = [[UIImageView alloc]initWithFrame:CGRectMake(65, self.lineView.bottom + strHeight+ ([_allRep_contents[1][i] floatValue] +5)*i - 10, 20, 20)];
         self.messageImageView.tag = 1001+i;
-        seller_contentLabel = [[MyLable alloc]initWithFrame:CGRectMake(95, 60  + strHeight+ [_allRep_contents[1][i] floatValue]*i +5 , kScreen_Width - 65 -30 -20, [_allRep_contents[1][i] floatValue] +5)];
+        seller_contentLabel = [[MyLable alloc]initWithFrame:CGRectMake(95, self.lineView.bottom+ strHeight+ ([_allRep_contents[1][i] floatValue] +5)*i -10 , kScreen_Width - 65 -30 -20, [_allRep_contents[1][i] floatValue] +5)];
         seller_contentLabel.tag = 2000 +i;
         self.messageImageView.image=[UIImage imageNamed:@"messageImage"];
         [self.contentView addSubview:self.messageImageView];
@@ -246,7 +246,7 @@
         
         rep = contentDic[@"content"];
         [rep_contentArr addObject:rep];
-        repLabelHeight=[rep boundingRectWithSize:CGSizeMake(kScreen_Width-65-30-20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height;
+        repLabelHeight=[rep boundingRectWithSize:CGSizeMake(kScreen_Width-65-30-20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height + 5;
         labelHeight = labelHeight + repLabelHeight;
     }
     
