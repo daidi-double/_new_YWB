@@ -95,9 +95,9 @@
     self.is_coupon = NO;
 //    MyLog(@"status = %ld",self.status);
     if (self.whichPay == PayCategoryQRCodePayMethod) {
-        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*self.shopZhekou  - self.CouponMoney];
-        MyLog(@"金额 %@",[NSString stringWithFormat:@"%f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])* self.shopZhekou  - self.CouponMoney]);
-        self.shouldPayMoney = [[NSString stringWithFormat:@"%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])* self.shopZhekou  - self.CouponMoney] floatValue];
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",(self.payAllMoney - self.NOZheMoney )*self.shopZhekou  + self.NOZheMoney ];
+        MyLog(@"金额 %@",[NSString stringWithFormat:@"%f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])* self.shopZhekou  - self.CouponMoney+[self.noDiscountMoney floatValue]]);
+        self.shouldPayMoney = [[NSString stringWithFormat:@"待支付￥%.2f",(self.payAllMoney - self.NOZheMoney )*self.shopZhekou  + self.NOZheMoney ] floatValue];
        
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleMoney:) name:@"deleteTotalMoney" object:nil];
@@ -254,7 +254,10 @@
                 if (self.otherTotalMoney != nil) {
                   cell.moneyTF.text=[NSString stringWithFormat:@"%@",self.otherTotalMoney];
                     cell.moneyTF.userInteractionEnabled=NO;
-                    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([weakSelf.otherTotalMoney floatValue] - [weakSelf.noDiscountMoney floatValue])*self.shopZhekou];
+                    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",(weakSelf.payAllMoney - weakSelf.NOZheMoney)*self.shopZhekou +weakSelf.NOZheMoney];
+                    if (self.is_coupon == YES) {
+                        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",(_payAllMoney - _NOZheMoney)*self.shopZhekou +_NOZheMoney - _CouponMoney];
+                    }
                 }
                
             }
@@ -352,7 +355,7 @@
             }
             cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",otherMoney];
             if (self.whichPay == PayCategoryQRCodePayMethod) {
-                cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",[_otherTotalMoney floatValue]* self.shopZhekou];
+                cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",(self.payAllMoney-self.NOZheMoney) * self.shopZhekou +self.NOZheMoney];
             }
         }else if (indexPath.row == 2){
             cell.titleNameLabel.text = @"实付金额";
@@ -362,7 +365,9 @@
             cell.moneyLabel.textColor = RGBCOLOR(123, 123, 123, 1);
             if (self.whichPay == PayCategoryQRCodePayMethod) {
                 if (self.is_coupon == YES) {
-                    cell.moneyLabel.text = [NSString stringWithFormat:@"%.2f",[_otherTotalMoney floatValue]* self.shopZhekou];//xiu
+                    cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",(self.payAllMoney -self.NOZheMoney) * self.shopZhekou +self.NOZheMoney - self.CouponMoney];//xiu
+                }else{
+                    cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",(self.payAllMoney -self.NOZheMoney) * self.shopZhekou +self.NOZheMoney];
                 }
                    
                 }
@@ -637,20 +642,20 @@
     [self.couponBtn setTitle:[NSString stringWithFormat:@"满%@抵%@",model.min_fee,model.discount_fee] forState:UIControlStateNormal];
     self.useDiscountCoupon = [NSString stringWithFormat:@"满%@抵%@",model.min_fee,model.discount_fee];
     NSString*aa=model.discount_fee;
-    CGFloat payMoney = self.payAllMoney;
+    CGFloat payMoneys = (self.payAllMoney - self.NOZheMoney )*self.shopZhekou + self.NOZheMoney;
     self.CouponMoney=[aa floatValue];
 
      YWOtherPayMoneyTableViewCell*cell2=[self.payTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:2]];
     if (self.status == 3) {
-        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",payMoney  - self.CouponMoney];
-        cell2.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",payMoney  - self.CouponMoney];
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",payMoneys  - self.CouponMoney];
+        cell2.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",payMoneys  - self.CouponMoney];
         
     }else{
         self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",[self.money floatValue] + ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue]) * [self.shopDiscount floatValue] - self.CouponMoney + [self.noDiscountMoney floatValue]];
         cell2.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",[self.money floatValue] + ([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue]) * [self.shopDiscount floatValue] - self.CouponMoney + [self.noDiscountMoney floatValue]];
     }
     if (self.whichPay == PayCategoryQRCodePayMethod) {
-        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*self.shopZhekou  - self.CouponMoney];
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"%.2f",(self.payAllMoney -self.NOZheMoney) * self.shopZhekou +self.NOZheMoney - self.CouponMoney];
     }
 
 

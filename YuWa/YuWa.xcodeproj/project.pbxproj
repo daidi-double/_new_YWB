@@ -82,6 +82,7 @@
 		AA2E6AD91E8169CF00A03DAA /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2E6AD81E8169CF00A03DAA /* ProgressView.m */; };
 		AA3009231E56E5BB0025B2A5 /* play1.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3009221E56E5BB0025B2A5 /* play1.png */; };
 		AA3009261E5725CE0025B2A5 /* CinemaTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3009251E5725CE0025B2A5 /* CinemaTimeCell.m */; };
+		AA3522B91EBC20ED00CA0E2B /* MyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3522B81EBC20ED00CA0E2B /* MyLabel.m */; };
 		AA3543B81E9DF23800A2EC73 /* 1baobaoLVUP0@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3541971E9DF23700A2EC73 /* 1baobaoLVUP0@2x.jpg */; };
 		AA3543B91E9DF23800A2EC73 /* 1baobaoLVUP10@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3541981E9DF23700A2EC73 /* 1baobaoLVUP10@2x.jpg */; };
 		AA3543BA1E9DF23800A2EC73 /* 1baobaoLVUP11@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3541991E9DF23700A2EC73 /* 1baobaoLVUP11@2x.jpg */; };
@@ -1865,6 +1866,8 @@
 		AA3009221E56E5BB0025B2A5 /* play1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play1.png; sourceTree = "<group>"; };
 		AA3009241E5725CE0025B2A5 /* CinemaTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaTimeCell.h; sourceTree = "<group>"; };
 		AA3009251E5725CE0025B2A5 /* CinemaTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaTimeCell.m; sourceTree = "<group>"; };
+		AA3522B71EBC20ED00CA0E2B /* MyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLabel.h; sourceTree = "<group>"; };
+		AA3522B81EBC20ED00CA0E2B /* MyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLabel.m; sourceTree = "<group>"; };
 		AA3541971E9DF23700A2EC73 /* 1baobaoLVUP0@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1baobaoLVUP0@2x.jpg"; sourceTree = "<group>"; };
 		AA3541981E9DF23700A2EC73 /* 1baobaoLVUP10@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1baobaoLVUP10@2x.jpg"; sourceTree = "<group>"; };
 		AA3541991E9DF23700A2EC73 /* 1baobaoLVUP11@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1baobaoLVUP11@2x.jpg"; sourceTree = "<group>"; };
@@ -5283,6 +5286,8 @@
 		AA399CD71EAB371C00CA22CB /* view */ = {
 			isa = PBXGroup;
 			children = (
+				AA3522B71EBC20ED00CA0E2B /* MyLabel.h */,
+				AA3522B81EBC20ED00CA0E2B /* MyLabel.m */,
 				AA399CD81EAB374900CA22CB /* YWShopCarView.h */,
 				AA399CD91EAB374900CA22CB /* YWShopCarView.m */,
 				AAF0EB381EAC58EB0003A930 /* YWShopCommitView.h */,
@@ -11047,6 +11052,7 @@
 				B30347EF1DDE96B700C18074 /* YWAldumDetailIndoModel.m in Sources */,
 				AAC86F501E76DA4400F94C84 /* BusinessAgreementDetaliViewController.m in Sources */,
 				C12315571DE6DFD700B9D0FE /* YWShowGetMoneyViewController.m in Sources */,
+				AA3522B91EBC20ED00CA0E2B /* MyLabel.m in Sources */,
 				B38B2DF91D8FACD8004D5256 /* AFURLConnectionOperation.m in Sources */,
 				AAF30A831E5E73F900793382 /* XZSeatModel.m in Sources */,
 				AA3BFE3C1E8559B500D669C2 /* CheckUpBankInfomationViewController.m in Sources */,

@@ -9,7 +9,7 @@
 #import "CommentTableViewCell.h"
 #import "CommentModel.h"
 #import "JWTools.h"
-
+#import "MyLabel.h"
 @interface CommentTableViewCell()
 @property(nonatomic,strong)NSMutableArray*maSaveImageView;
 
