@@ -41,7 +41,7 @@
     [self getDatas];
 }
 - (void)makeUI{
-    self.orderTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, kScreen_Width, kScreen_Height * 0.8f) style:UITableViewStylePlain];
+    self.orderTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, kScreen_Width, kScreen_Height ) style:UITableViewStylePlain];
     _orderTableView.delegate = self;
     _orderTableView.dataSource = self;
     _orderTableView.backgroundColor = [UIColor whiteColor];

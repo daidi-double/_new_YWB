@@ -44,7 +44,7 @@
 }
 -(void)didselectCell:(NSNotification*)user{
     NSDictionary * dic =  user.userInfo;
-        OrderDetailViewController * orderVC =[[OrderDetailViewController alloc]init];
+    OrderDetailViewController * orderVC =[[UIStoryboard storyboardWithName:@"OrderDetailViewController" bundle:nil] instantiateInitialViewController];
         orderVC.order_id = dic[@"order_id"];
         [self.navigationController pushViewController:orderVC animated:YES];
 }
