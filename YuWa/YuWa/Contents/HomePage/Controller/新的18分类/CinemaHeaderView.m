@@ -13,7 +13,9 @@
 
 #define MOVIECELL1 @"MoviePicCollectionViewCell"
 @interface CinemaHeaderView()<UIGestureRecognizerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-
+@property (nonatomic,strong)NSMutableArray * imageAry;//存放背景图
+@property (nonatomic,assign)NSInteger index;
+@property (nonatomic,strong)UIImageView * bgImageView;;
 @end
 @implementation CinemaHeaderView
 
@@ -42,6 +44,7 @@
         _address.text = @"晋江市";
         [self addSubview:_address];
         _isDiscount = 0;
+        self.index = 0;
         UIView * foodView;
         UIView * discountView;
         if (_isDiscount) {
@@ -123,6 +126,7 @@
         _score.font = [UIFont systemFontOfSize:15];
         [self addSubview:_score];
         
+    _bgImageView.image = [Acceleecet boxblurImage:[UIImage imageNamed:@"baobaoBG0"] withBlurNumber:0.9];
         
         _BGScrollView = [[UIView alloc]initWithFrame:CGRectMake(0, self.height*0.4f, kScreen_Width, self.height *0.45f)];
 //        _BGScrollView.backgroundColor = [UIColor clearColor];
@@ -179,7 +183,7 @@
 }
 #pragma mark - collectViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 7;//修改
+    return 5;//修改
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -189,25 +193,64 @@
     MoviePicCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:MOVIECELL1 forIndexPath:indexPath];
 
     cell.movieImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"baobaoBG%ld",indexPath.item]];
-    UIImageView * bgImageView;
-    if (!bgImageView) {
-        bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height -10)];
+    [self.imageAry addObject:cell.movieImageView.image];
+    
+    if (!_bgImageView) {
+        _bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height -10)];
         
         
-        [_BGScrollView addSubview:bgImageView];
+        [_BGScrollView addSubview:_bgImageView];
         _BGroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height -10)];
         ;
-
-        _BGroundView.image = [UIImage imageNamed:@"横条.png"];
-        [bgImageView addSubview:_BGroundView];
-
         
+        _BGroundView.image = [UIImage imageNamed:@"横条.png"];
+        [_bgImageView addSubview:_BGroundView];
+        
+        
+        _bgImageView.image = [Acceleecet boxblurImage:self.imageAry[0] withBlurNumber:0.9];
     }
-    bgImageView.image = [Acceleecet boxblurImage:cell.movieImageView.image withBlurNumber:0.9];
+    
     
     return cell;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.mj_offsetX == 0 ){
+        self.index = 0;
+        _movieTitle.text = @"乘风破浪";
+    }else if (scrollView.mj_offsetX == kScreen_Width/4){
+        self.index = 1;
+        _movieTitle.text = @"乘风破浪2";
+
+    }else if (scrollView.mj_offsetX == kScreen_Width/2){
+        self.index = 2;
+        _movieTitle.text = @"乘风破浪3";
+    }else if (scrollView.mj_offsetX == kScreen_Width*0.75){
+        self.index = 3;
+        _movieTitle.text = @"乘风破浪4";
+    }else if (scrollView.mj_offsetX == kScreen_Width){
+        self.index = 4;
+        _movieTitle.text = @"乘风破浪5";
+    }
+    
+    if (!_bgImageView) {
+        _bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height -10)];
+        
+        
+        [_BGScrollView addSubview:_bgImageView];
+        _BGroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height -10)];
+        ;
+        
+        _BGroundView.image = [UIImage imageNamed:@"横条.png"];
+        [_bgImageView addSubview:_BGroundView];
+        
+        
+    }
+    CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
+    _movieTitle.width = movieTitleSize.width;
+    _bgImageView.image = [Acceleecet boxblurImage:self.imageAry[self.index] withBlurNumber:0.9];
+}
 - (CGSize)sizeWithSt:(NSString *)string font:(UIFont *)font
 {
     CGRect rect = [string boundingRectWithSize:CGSizeMake(kScreen_Width * 0.6f, kScreen_Height * 0.05f)options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: font}context:nil];
@@ -226,6 +269,13 @@
 }
 - (void)touchToDiscount{
     [self.delegate ToVipDetaliPage];
+}
+
+- (NSMutableArray *)imageAry{
+    if (!_imageAry) {
+        _imageAry = [NSMutableArray array];
+    }
+    return _imageAry;
 }
 /*
 // Only override drawRect: if you perform custom drawing.

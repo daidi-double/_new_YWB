@@ -21,5 +21,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *chooseBtn;
 @property (nonatomic,copy) void(^moneyChangeBlock)(NSString * money);
 @property (nonatomic,assign)id<YWPayMoneyTableViewCellDelegate>delegate;
-
+-(void)hideBoradKey;
 @end

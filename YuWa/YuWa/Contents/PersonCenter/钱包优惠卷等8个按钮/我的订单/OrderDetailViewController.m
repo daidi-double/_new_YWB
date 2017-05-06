@@ -147,18 +147,18 @@
     }else if (indexPath.row == 2){
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.imageView.image = [UIImage imageNamed:@"减"];
-        CGFloat itemH =  cell.height * 0.3f;
+        CGFloat itemH =  cell.height * 0.4f;
         CGFloat itemW = 0;
         if (cell.imageView.image.size.width) {
             itemW = cell.imageView.image.size.height / cell.imageView.image.size.width * itemH;
             
             if (itemH >= itemW) {
-                itemH = cell.height * 0.35f;
+                itemH = cell.height * 0.4f;
                 itemW = cell.imageView.image.size.width * itemH/cell.imageView.image.size.height;
             }
         }
         
-        CGSize itemSize = CGSizeMake(itemW,cell.height*0.5f);
+        CGSize itemSize = CGSizeMake(itemW,cell.height*0.4f);
         UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
         CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
         [cell.imageView.image drawInRect:imageRect];
@@ -166,7 +166,7 @@
         UIGraphicsEndImageContext();
         CGFloat zhekou = [orderModel.discount floatValue]*10;
         if (zhekou >=10 || zhekou<=0.00) {
-           cell.textLabel.text = @"不打折";
+           cell.textLabel.text = @"未打折";
         }else{
         cell.textLabel.text = [NSString stringWithFormat:@"闪付享受%.1f折 折扣",zhekou];
             CGFloat discountMoney = [orderModel.total_money floatValue] - [orderModel.pay_money floatValue];
@@ -182,6 +182,13 @@
         }else{
             cell.detailTextLabel.attributedText = [NSString stringWithFirstStr:@"实付款" withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor blackColor] withSecondtStr:[NSString stringWithFormat:@"￥%@",orderModel.pay_money] withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor orangeColor]];
         }
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
+        if (orderModel.is_coupon == 0) {
+            cell.textLabel.text = @"优惠券金额:￥0.00";
+        }else{
+            cell.textLabel.text = [NSString stringWithFormat:@"优惠券金额￥:%@",orderModel.coupon_money];
+        }
+        
 
     }else if (indexPath.row == 4){
         cell.textLabel.text = [NSString stringWithFormat:@"订单编号:%@",orderModel.order_id];
