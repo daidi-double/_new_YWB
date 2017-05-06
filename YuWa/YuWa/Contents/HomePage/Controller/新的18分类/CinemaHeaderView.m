@@ -7,6 +7,11 @@
 //
 
 #import "CinemaHeaderView.h"
+#import "Acceleecet.h"
+#import "ViscosityLayout.h"
+#import "MoviePicCollectionViewCell.h"
+
+#define MOVIECELL1 @"MoviePicCollectionViewCell"
 @interface CinemaHeaderView()<UIGestureRecognizerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @end
@@ -119,25 +124,21 @@
         [self addSubview:_score];
         
         
-        _BGScrollView = [[UIView alloc]initWithFrame:CGRectMake(0, self.height*0.45f, kScreen_Width, self.height *0.4f)];
-        //            _BGScrollView.backgroundColor = [UIColor orangeColor];
+        _BGScrollView = [[UIView alloc]initWithFrame:CGRectMake(0, self.height*0.4f, kScreen_Width, self.height *0.45f)];
+//        _BGScrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:_BGScrollView];
-        
-        _BGroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height*1.1f)];
-        ;
-        
-        _BGroundView.image = [UIImage imageNamed:@"横条.png"];
-        
-        [_BGScrollView addSubview:_BGroundView];
-
-        
-        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
+      
+        ViscosityLayout * layout = [[ViscosityLayout alloc]init];
         [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-        _movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, self.height * 0.4f, kScreen_Width, self.height * 0.4f) collectionViewLayout:layout];
+        _movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, self.height * 0.4f+10, kScreen_Width, self.height * 0.3f) collectionViewLayout:layout];
+
+            [_movieCollectView registerClass:[MoviePicCollectionViewCell class] forCellWithReuseIdentifier:MOVIECELL1];
+        [_movieCollectView registerNib:[UINib nibWithNibName:MOVIECELL1 bundle:nil] forCellWithReuseIdentifier:MOVIECELL1];
+
         _movieCollectView.dataSource = self;
         _movieCollectView.delegate = self;
+        _movieCollectView.backgroundColor = [UIColor clearColor];
 
-        [_movieCollectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"movieCollectViewCell"];
         
         _movieCollectView.showsVerticalScrollIndicator = NO;
         _movieCollectView.showsHorizontalScrollIndicator = NO;
@@ -149,8 +150,9 @@
         _movieTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 0, _BGScrollView.height * 0.3f)];
         _movieTitle.text = @"乘风破浪";
         CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
-        _movieTitle.frame = CGRectMake(0, 0, movieTitleSize.width, _BGScrollView.height*0.3f);
-        _movieTitle.center = CGPointMake(self.width/2 -15, _BGScrollView.height*0.9f+movieTitleSize.height*0.7);
+        _movieTitle.frame = CGRectMake(0, _BGScrollView.height * 0.9f, movieTitleSize.width, _BGScrollView.height*0.3f);
+
+        _movieTitle.centerX = self.width/2 - 15;
         _movieTitle.textColor = [UIColor blackColor];
         _movieTitle.font = [UIFont systemFontOfSize:15];
         [_BGScrollView addSubview:_movieTitle];
@@ -167,8 +169,8 @@
         _introduce.text = @"乘风破浪|剧情|邓超MMMMMMMMMMM";
         _introduce.font = [UIFont systemFontOfSize:13];
         CGSize introduceSize = [self sizeWithSt:_introduce.text font:_introduce.font];
-        _introduce.frame = CGRectMake(0, 0, introduceSize.width, _BGScrollView.height*0.2f);
-        _introduce.center = CGPointMake(self.width/2 , self.height*0.5f);
+        _introduce.frame = CGRectMake(0, _movieTitle.bottom-10, introduceSize.width, _BGScrollView.height*0.2f);
+        _introduce.centerX = self.width/2;
         _introduce.textAlignment = 1;
         [_BGScrollView addSubview:_introduce];
 
@@ -182,29 +184,26 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(kScreen_Width/4, collectionView.height * 0.8f);
-}
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, 20, 0, 20);
-}
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 10;
-}
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 0;
-}
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"movieCollectViewCell" forIndexPath:indexPath];
-    _movieImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.width, cell.height)];
-    _movieImageView.image = [UIImage imageNamed:@"a1003"];
-    cell.backgroundColor = [UIColor greenColor];
-    [cell.contentView addSubview:_movieImageView];
-    if (indexPath.item == 0) {
-        cell.selected = YES;
-        cell.center = collectionView.center;
+    MoviePicCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:MOVIECELL1 forIndexPath:indexPath];
+
+    cell.movieImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"baobaoBG%ld",indexPath.item]];
+    UIImageView * bgImageView;
+    if (!bgImageView) {
+        bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height -10)];
+        
+        
+        [_BGScrollView addSubview:bgImageView];
+        _BGroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height -10)];
+        ;
+
+        _BGroundView.image = [UIImage imageNamed:@"横条.png"];
+        [bgImageView addSubview:_BGroundView];
+
+        
     }
+    bgImageView.image = [Acceleecet boxblurImage:cell.movieImageView.image withBlurNumber:0.9];
     
     return cell;
 }
