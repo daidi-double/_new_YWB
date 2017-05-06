@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MoviePScrollView.h"
+
 @protocol CinemaHeaderViewDelegate <NSObject>
 
 - (void)ToFoodPage;

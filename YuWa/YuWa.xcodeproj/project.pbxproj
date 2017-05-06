@@ -83,6 +83,8 @@
 		AA3009231E56E5BB0025B2A5 /* play1.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3009221E56E5BB0025B2A5 /* play1.png */; };
 		AA3009261E5725CE0025B2A5 /* CinemaTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3009251E5725CE0025B2A5 /* CinemaTimeCell.m */; };
 		AA3522B91EBC20ED00CA0E2B /* MyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3522B81EBC20ED00CA0E2B /* MyLabel.m */; };
+		AA3522BE1EBCB3E400CA0E2B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3522BD1EBCB3E400CA0E2B /* Accelerate.framework */; };
+		AA3522C11EBCB55300CA0E2B /* Acceleecet.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3522C01EBCB55300CA0E2B /* Acceleecet.m */; };
 		AA3543B81E9DF23800A2EC73 /* 1baobaoLVUP0@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3541971E9DF23700A2EC73 /* 1baobaoLVUP0@2x.jpg */; };
 		AA3543B91E9DF23800A2EC73 /* 1baobaoLVUP10@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3541981E9DF23700A2EC73 /* 1baobaoLVUP10@2x.jpg */; };
 		AA3543BA1E9DF23800A2EC73 /* 1baobaoLVUP11@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3541991E9DF23700A2EC73 /* 1baobaoLVUP11@2x.jpg */; };
@@ -842,6 +844,9 @@
 		AAF80CFC1E67E45A0000C4BC /* scan_net@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF80CF61E67E45A0000C4BC /* scan_net@2x.png */; };
 		AAF80CFE1E67F7C40000C4BC /* gain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAF80CFD1E67F7C40000C4BC /* gain.jpg */; };
 		AAF80D021E68013E0000C4BC /* CategoryDetaliViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF80D011E68013E0000C4BC /* CategoryDetaliViewController.m */; };
+		AAFAC9961EBD7160000AAB78 /* ViscosityLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAC9951EBD7160000AAB78 /* ViscosityLayout.m */; };
+		AAFAC99B1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAC9991EBD7A4E000AAB78 /* MoviePicCollectionViewCell.m */; };
+		AAFAC99C1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAFAC99A1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.xib */; };
 		B30136BE1DB86C1C00691F60 /* RBNodeTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B30136BD1DB86C1C00691F60 /* RBNodeTagModel.m */; };
 		B301E7CA1DAC86BD0001336E /* YWMessageSearchFriendAddCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B301E7C81DAC86BD0001336E /* YWMessageSearchFriendAddCell.m */; };
 		B301E7CB1DAC86BD0001336E /* YWMessageSearchFriendAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B301E7C91DAC86BD0001336E /* YWMessageSearchFriendAddCell.xib */; };
@@ -1867,6 +1872,9 @@
 		AA3009251E5725CE0025B2A5 /* CinemaTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaTimeCell.m; sourceTree = "<group>"; };
 		AA3522B71EBC20ED00CA0E2B /* MyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLabel.h; sourceTree = "<group>"; };
 		AA3522B81EBC20ED00CA0E2B /* MyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLabel.m; sourceTree = "<group>"; };
+		AA3522BD1EBCB3E400CA0E2B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		AA3522BF1EBCB55300CA0E2B /* Acceleecet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Acceleecet.h; sourceTree = "<group>"; };
+		AA3522C01EBCB55300CA0E2B /* Acceleecet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Acceleecet.m; sourceTree = "<group>"; };
 		AA3541971E9DF23700A2EC73 /* 1baobaoLVUP0@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1baobaoLVUP0@2x.jpg"; sourceTree = "<group>"; };
 		AA3541981E9DF23700A2EC73 /* 1baobaoLVUP10@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1baobaoLVUP10@2x.jpg"; sourceTree = "<group>"; };
 		AA3541991E9DF23700A2EC73 /* 1baobaoLVUP11@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1baobaoLVUP11@2x.jpg"; sourceTree = "<group>"; };
@@ -2738,6 +2746,11 @@
 		AAF80CFD1E67F7C40000C4BC /* gain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gain.jpg; sourceTree = "<group>"; };
 		AAF80D001E68013E0000C4BC /* CategoryDetaliViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryDetaliViewController.h; sourceTree = "<group>"; };
 		AAF80D011E68013E0000C4BC /* CategoryDetaliViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryDetaliViewController.m; sourceTree = "<group>"; };
+		AAFAC9941EBD7160000AAB78 /* ViscosityLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViscosityLayout.h; sourceTree = "<group>"; };
+		AAFAC9951EBD7160000AAB78 /* ViscosityLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViscosityLayout.m; sourceTree = "<group>"; };
+		AAFAC9981EBD7A4E000AAB78 /* MoviePicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePicCollectionViewCell.h; sourceTree = "<group>"; };
+		AAFAC9991EBD7A4E000AAB78 /* MoviePicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePicCollectionViewCell.m; sourceTree = "<group>"; };
+		AAFAC99A1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoviePicCollectionViewCell.xib; sourceTree = "<group>"; };
 		B30136BC1DB86C1C00691F60 /* RBNodeTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBNodeTagModel.h; sourceTree = "<group>"; };
 		B30136BD1DB86C1C00691F60 /* RBNodeTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBNodeTagModel.m; sourceTree = "<group>"; };
 		B301E7C71DAC86BD0001336E /* YWMessageSearchFriendAddCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWMessageSearchFriendAddCell.h; sourceTree = "<group>"; };
@@ -4236,6 +4249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3522BE1EBCB3E400CA0E2B /* Accelerate.framework in Frameworks */,
 				AA3A1E651E8F7C1C00C12497 /* GLKit.framework in Frameworks */,
 				AAA459561E79179800396AE5 /* AdSupport.framework in Frameworks */,
 				AAA459541E79177400396AE5 /* CoreLocation.framework in Frameworks */,
@@ -5529,6 +5543,7 @@
 		AA466CC71E54498F009E9F98 /* 电影类 */ = {
 			isa = PBXGroup;
 			children = (
+				AAFAC9931EBD7142000AAB78 /* 自定义布局 */,
 				AAF30ABB1E5E926300793382 /* XZSeatsTool */,
 				AAF30A801E5E73A200793382 /* Model */,
 				AA084B7B1E56DDD8002D14F5 /* Custom */,
@@ -5546,6 +5561,7 @@
 		AA466CCD1E545DD3009E9F98 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				AAFAC9971EBD7A10000AAB78 /* cell */,
 				AA225B751E63F67300F4D74F /* menuView */,
 				AAF30AEF1E5EB20600793382 /* 选座View */,
 				AA3AB53C1E5D38F8009BD8D9 /* MovieAddComment.h */,
@@ -5563,6 +5579,8 @@
 				AAF237281E5C0A3B002D58B4 /* CinemaHeaderView.m */,
 				AA3CA5651E606F0B000D05FA /* MapAnnotation.h */,
 				AA3CA5661E606F0B000D05FA /* MapAnnotation.m */,
+				AA3522BF1EBCB55300CA0E2B /* Acceleecet.h */,
+				AA3522C01EBCB55300CA0E2B /* Acceleecet.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -5979,6 +5997,25 @@
 				AAF80D011E68013E0000C4BC /* CategoryDetaliViewController.m */,
 			);
 			name = "新分类";
+			sourceTree = "<group>";
+		};
+		AAFAC9931EBD7142000AAB78 /* 自定义布局 */ = {
+			isa = PBXGroup;
+			children = (
+				AAFAC9941EBD7160000AAB78 /* ViscosityLayout.h */,
+				AAFAC9951EBD7160000AAB78 /* ViscosityLayout.m */,
+			);
+			name = "自定义布局";
+			sourceTree = "<group>";
+		};
+		AAFAC9971EBD7A10000AAB78 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AAFAC9981EBD7A4E000AAB78 /* MoviePicCollectionViewCell.h */,
+				AAFAC9991EBD7A4E000AAB78 /* MoviePicCollectionViewCell.m */,
+				AAFAC99A1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.xib */,
+			);
+			name = cell;
 			sourceTree = "<group>";
 		};
 		B30347E91DDE962900C18074 /* Model */ = {
@@ -9677,6 +9714,7 @@
 		EDD1BC4F3FB283CECFE57A3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA3522BD1EBCB3E400CA0E2B /* Accelerate.framework */,
 				AA3A1E641E8F7C1C00C12497 /* GLKit.framework */,
 				AAA459551E79179800396AE5 /* AdSupport.framework */,
 				AAA459531E79177400396AE5 /* CoreLocation.framework */,
@@ -9915,6 +9953,7 @@
 				AA35450D1E9DF23900A2EC73 /* 1baobaoBG4@2x.jpg in Resources */,
 				C13019B31DB1FD2F00E24C88 /* zbar-helpicons.png in Resources */,
 				B38B2E511D8FACD8004D5256 /* tb4.png in Resources */,
+				AAFAC99C1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.xib in Resources */,
 				AA3544121E9DF23800A2EC73 /* 2baobaoLVUP37@2x.jpg in Resources */,
 				AA3544131E9DF23800A2EC73 /* 2baobaoLVUP38@2x.jpg in Resources */,
 				AA3545A21E9DF23A00A2EC73 /* 4baobaoBG21@2x.jpg in Resources */,
@@ -11293,6 +11332,7 @@
 				AAF628E81E5AEE03000FF976 /* FoodViewController.m in Sources */,
 				B38B2E5A1D8FACD8004D5256 /* AdvertiseViewController.m in Sources */,
 				B38B2E6B1D8FC3B6004D5256 /* JWBasicViewController.m in Sources */,
+				AAFAC9961EBD7160000AAB78 /* ViscosityLayout.m in Sources */,
 				B3FEB9FE1D9B6465003CDEF2 /* YWMessageTableViewCell.m in Sources */,
 				AA3BDE7A1E63C6800019F02F /* SearchViewController.m in Sources */,
 				B3D219271DB1241800D661F5 /* YWSharedEditorViewController.m in Sources */,
@@ -11325,6 +11365,7 @@
 				B33A26701D9A68040092CB12 /* NSData+EMImageContentType.m in Sources */,
 				C1F7BE371DB1C95400CCAF96 /* PersonCenterZeroCell.m in Sources */,
 				B33A26841D9A68040092CB12 /* PSTGridLayoutSection.m in Sources */,
+				AA3522C11EBCB55300CA0E2B /* Acceleecet.m in Sources */,
 				AA29C25D1EADE7500092EF6F /* YWTimeModel.m in Sources */,
 				B38B2E051D8FACD8004D5256 /* MASConstraintMaker.m in Sources */,
 				B38B2E231D8FACD8004D5256 /* MJDIYBackFooter.m in Sources */,
@@ -11402,6 +11443,7 @@
 				C1A75DF61DCB7EB2000E76C2 /* DetailStorePreferentialModel.m in Sources */,
 				B33A26A21D9A68040092CB12 /* EaseBubbleView+File.m in Sources */,
 				AAF128081E8B753F00121621 /* ForgetPayPasswordTableViewCell.m in Sources */,
+				AAFAC99B1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.m in Sources */,
 				B38B2E161D8FACD8004D5256 /* MJRefreshAutoGifFooter.m in Sources */,
 				B35778AF1D9962180058A998 /* YWStormAnnotationModel.m in Sources */,
 				C135A1771DDEC49B002B78A5 /* PostCommitTextTableViewCell.m in Sources */,
