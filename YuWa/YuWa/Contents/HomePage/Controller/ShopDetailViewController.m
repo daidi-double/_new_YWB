@@ -391,8 +391,10 @@
     self.isRoll  = NO;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-
+    //如果左边LeftTableView没数据，让他滑动无效
+    if (!self.maMDatasGoods.count) {
+        return;
+    }
     if (self.isRoll == NO) {
     
     // 如果是 左侧的 tableView 直接return
