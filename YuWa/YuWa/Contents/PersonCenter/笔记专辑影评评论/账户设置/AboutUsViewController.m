@@ -46,7 +46,7 @@
     icon.layer.cornerRadius = 5;
     [BGView addSubview:icon];
     
-
+    NSString *localVersion = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"];
     
     UILabel * appVersion = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 30)];
     appVersion.centerX = icon.centerX;
@@ -55,7 +55,8 @@
     appVersion.font = [UIFont systemFontOfSize:14];
     appVersion.textAlignment = 1;
 
-    appVersion.text = @"雨娃宝 v1.6 ";
+//    appVersion.text = @"雨娃宝 v1.6 ";
+    appVersion.text = [NSString stringWithFormat:@"雨娃宝v%@",localVersion];
     [BGView addSubview:appVersion];
     return BGView;
 }

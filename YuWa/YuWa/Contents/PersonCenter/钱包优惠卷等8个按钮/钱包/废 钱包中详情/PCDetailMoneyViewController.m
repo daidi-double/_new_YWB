@@ -241,9 +241,12 @@
     if ([model.type isEqualToString:@"直接介绍积分分红"] ||[model.type isEqualToString:@"间接介绍积分分红"]) {
         picView.image = [UIImage imageNamed:@"积分分红"];
     }
+    if ([model.type containsString:@"提现"]) {
+        picView.image = [UIImage imageNamed:@"提现"];
+    }
     UILabel * methodLabel = [cell viewWithTag:4];
     methodLabel.text = model.type;
-    MyLog(@"method = %@",methodLabel.text);
+//    MyLog(@"method = %@",methodLabel.text);
     
 //    UILabel * getMoneyLabel = [self.view viewWithTag:5];
 //    getMoneyLabel.text = model.money;
@@ -288,9 +291,9 @@
         else{
             [df setDateFormat:@"MM-dd HH:mm"];
             distanceStr = [self weekdayStringFromDate:beDate];
-            MyLog(@"distanceStr 1 = %@",distanceStr);
+//            MyLog(@"distanceStr 1 = %@",distanceStr);
             distanceStr = [df stringFromDate:beDate];
-            MyLog(@"distanceStr 2 = %@",distanceStr);
+//            MyLog(@"distanceStr 2 = %@",distanceStr);
         }
         
     }
@@ -348,7 +351,7 @@
     NSMutableArray * modelArr =  self.maAllDatasModel[indexPath.section];
     MoneyPackModel* model = modelArr[indexPath.row];
     vc.orderId = model.id;
-    MyLog(@"vc.orderId = %@",vc.orderId);
+//    MyLog(@"vc.orderId = %@",vc.orderId);
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark  --Datas
