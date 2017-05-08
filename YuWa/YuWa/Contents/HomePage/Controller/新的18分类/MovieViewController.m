@@ -52,23 +52,23 @@
     self.title = @"电影";
 
 
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    UIBarButtonItem * searchBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_homepage_search"] style:UIBarButtonItemStylePlain target:self action:@selector(searchMovie)];
-    self.navigationItem.rightBarButtonItem = searchBtn;
-    
-    //:有数据后删除
-    for (int i = 0; i<5; i++) {
-
-          NSString * image = [NSString stringWithFormat:@"1baobaoLVUP%d@2x.jpg",i+1];
-        [self.hotCollectDataAry addObject:image];
-
-    }
-    
-    [self.view addSubview:self.movieTableView];
-    [self setRJRefresh];
-    [self requestData];
+//    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.view.backgroundColor = [UIColor whiteColor];
+//    
+//    UIBarButtonItem * searchBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_homepage_search"] style:UIBarButtonItemStylePlain target:self action:@selector(searchMovie)];
+//    self.navigationItem.rightBarButtonItem = searchBtn;
+//    
+//    //:有数据后删除
+//    for (int i = 0; i<5; i++) {
+//
+//          NSString * image = [NSString stringWithFormat:@"1baobaoLVUP%d@2x.jpg",i+1];
+//        [self.hotCollectDataAry addObject:image];
+//
+//    }
+//    
+//    [self.view addSubview:self.movieTableView];
+//    [self setRJRefresh];
+//    [self requestData];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
