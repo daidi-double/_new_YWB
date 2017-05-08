@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="249"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N9Z-rE-YhY">
@@ -53,13 +53,13 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你还没有相关的订单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akl-2t-y2R">
-                        <rect key="frame" x="105" y="176.5" width="111" height="14.5"/>
+                        <rect key="frame" x="105" y="166.5" width="111" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66T-ov-mXU">
-                        <rect key="frame" x="84" y="201" width="153" height="30"/>
+                        <rect key="frame" x="84" y="191" width="153" height="30"/>
                         <state key="normal" title="去逛逛看有哪些想买的">
                             <color key="titleColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
@@ -68,7 +68,7 @@
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="购物车图片" translatesAutoresizingMaskIntoConstraints="NO" id="2Jf-Ku-7I0">
-                        <rect key="frame" x="91.5" y="65" width="107" height="106.5"/>
+                        <rect key="frame" x="91.5" y="55" width="107" height="106.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="2Jf-Ku-7I0" secondAttribute="height" multiplier="1:1" id="72U-UM-ykR"/>
                         </constraints>
@@ -80,7 +80,7 @@
                     <constraint firstItem="66T-ov-mXU" firstAttribute="top" secondItem="akl-2t-y2R" secondAttribute="bottom" constant="10" id="MKO-fO-EFG"/>
                     <constraint firstItem="N9Z-rE-YhY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="QS5-uf-jYc"/>
                     <constraint firstItem="2Jf-Ku-7I0" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1:3" id="VSw-eh-h17"/>
-                    <constraint firstItem="2Jf-Ku-7I0" firstAttribute="top" secondItem="N9Z-rE-YhY" secondAttribute="bottom" constant="30" id="Yd1-aP-AUJ"/>
+                    <constraint firstItem="2Jf-Ku-7I0" firstAttribute="top" secondItem="N9Z-rE-YhY" secondAttribute="bottom" constant="20" id="Yd1-aP-AUJ"/>
                     <constraint firstItem="66T-ov-mXU" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="cYJ-U7-wS7"/>
                     <constraint firstItem="N9Z-rE-YhY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="d9J-3V-zjE"/>
                     <constraint firstItem="2Jf-Ku-7I0" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="-15" id="fNZ-kR-qf0"/>

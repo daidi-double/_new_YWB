@@ -40,7 +40,8 @@
 @property(nonatomic,strong)NSString*total_money;   //总共需要支付的钱
 
 @property(nonatomic,strong)NSArray * buy_shopAry;//购买的商品套餐
-
+@property(nonatomic,assign)NSInteger is_coupon;//是否使用优惠券
+@property(nonatomic,strong)NSString * coupon_money;//优惠券金额
 
 +(OrderModel *)orderModelWithDic:(NSDictionary*)dic;
 

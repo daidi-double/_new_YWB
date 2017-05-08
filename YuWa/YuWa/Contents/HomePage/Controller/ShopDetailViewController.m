@@ -27,6 +27,8 @@
 #import "ShopCarDeViewController.h"//购物车
 #import "YWLeftCategoryTableViewCell.h"//左边的cell
 #import "YWShopCarTableViewCell.h"
+#import "Acceleecet.h"
+
 
 #define leftCell      @"YWLeftCategoryTableViewCell"
 #define CATEGORYCELL @"CategoryLeftTableViewCell"
@@ -133,13 +135,10 @@
 //    effectView.alpha  = 0.97;
 //    [self.BGView insertSubview:effectView aboveSubview:self.BGImageView];
 //
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:self.BGImageView.frame];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, self.BGView.height)];
     toolbar.barStyle = UIBarStyleBlackTranslucent;
-    toolbar.alpha = 0.9;
+    toolbar.alpha = 0.97;
     [self.BGImageView addSubview:toolbar];
-    
-    
-    
     
     [self.rightTableView registerNib:[UINib nibWithNibName:CATEGORYCELL bundle:nil] forCellReuseIdentifier:CATEGORYCELL];
    

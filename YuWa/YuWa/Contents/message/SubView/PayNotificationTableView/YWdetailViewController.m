@@ -8,7 +8,7 @@
 
 #import "YWdetailViewController.h"
 #import "JWTools.h"
-
+#import "ShopDetailViewController.h"
 @interface YWdetailViewController ()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *shopName1;
 @property (weak, nonatomic) IBOutlet UILabel *time;
@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *Name;
 @property (weak, nonatomic) IBOutlet UILabel *customer_phone;
 @property (weak, nonatomic) IBOutlet UILabel *num;
+@property (weak, nonatomic) IBOutlet UIView *toShopTouchView;
 
 @property (weak, nonatomic) IBOutlet UILabel *suggestions;
 
@@ -46,6 +47,19 @@
     touchTap.numberOfTapsRequired = 1;
     touchTap.numberOfTouchesRequired = 1;
     [self.suggestions addGestureRecognizer:touchTap];
+    
+    UITapGestureRecognizer * toShopTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toShop)];
+    toShopTap.delegate = self;
+    toShopTap.numberOfTapsRequired = 1;
+    toShopTap.numberOfTouchesRequired = 1;
+    [self.toShopTouchView addGestureRecognizer:toShopTap];
+
+}
+
+-(void)toShop{
+    ShopDetailViewController * vc = [[ShopDetailViewController alloc]init];
+    vc.shop_id = self.model.shop_id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)callIphone{
     UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];

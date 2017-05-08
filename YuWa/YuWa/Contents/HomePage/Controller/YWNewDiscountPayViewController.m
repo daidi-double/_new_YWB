@@ -182,6 +182,7 @@
             if (!cell) {
                 cell = [[YWNoShopTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:noShopCell];
             }
+            cell.selectionStyle = NO;
             cell.shopIconImageView.layer.masksToBounds = YES;
             cell.shopIconImageView.layer.cornerRadius = 5;
             [cell.shopIconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.mainModel.company_img]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
@@ -455,6 +456,7 @@
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
+     [self.view endEditing:YES];
     return NO;
 }
 
@@ -478,7 +480,7 @@
         self.noDiscountMoney=str;
         
     }
-    
+     [self.view endEditing:YES];
     //计算所要支付的钱
         [self calshouldPayMoney];
     
@@ -510,13 +512,16 @@
 
     
 }
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.view endEditing: YES];
+}
+
 #pragma mark  --touch
 -(void)touchPay{
     //确认付款的时候 先生成订单
     [self jiekouADDOrder];
     
 }
-
 
 
 #pragma mark  --datas
@@ -676,6 +681,7 @@
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [[self findFirstResponderBeneathView:self.view] resignFirstResponder];
+
 }
 
 - (UIView*)findFirstResponderBeneathView:(UIView*)view

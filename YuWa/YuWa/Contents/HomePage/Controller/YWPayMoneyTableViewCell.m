@@ -7,7 +7,10 @@
 //
 
 #import "YWPayMoneyTableViewCell.h"
+@interface YWPayMoneyTableViewCell()<UITextViewDelegate>
 
+
+@end
 @implementation YWPayMoneyTableViewCell
 
 - (void)awakeFromNib {
@@ -21,7 +24,7 @@
 }
 - (void)moneyChangeAction:(UITextField *)sender {
     if (self.moneyChangeBlock) {
-        MyLog(@"jine%@",sender.text);
+       
         self.moneyChangeBlock(sender.text);
     
     }
@@ -34,8 +37,12 @@
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.moneyTF endEditing:YES];
+    [self endEditing:YES];
 }
 
+-(void)hideBoradKey{
+   [self.moneyTF resignFirstResponder];
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

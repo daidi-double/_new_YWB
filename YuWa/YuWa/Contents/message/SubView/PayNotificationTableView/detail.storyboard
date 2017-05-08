@@ -203,6 +203,7 @@
                         <outlet property="shopName1" destination="bY9-Oh-r4X" id="cNd-Kg-Qz2"/>
                         <outlet property="suggestions" destination="nAC-nT-15e" id="aUc-E0-7Vx"/>
                         <outlet property="time" destination="z7H-sB-Od5" id="EVb-a0-hVX"/>
+                        <outlet property="toShopTouchView" destination="p80-dd-6Ab" id="Ztb-Ms-fRY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zU4-wh-UGW" userLabel="First Responder" sceneMemberID="firstResponder"/>

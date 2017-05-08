@@ -24,4 +24,5 @@
 
 @property (nonatomic, copy) NSString *customer_num;
 
+@property (nonatomic,copy) NSString * shop_id;
 @end
