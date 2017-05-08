@@ -295,7 +295,17 @@
         [self cancelComment];
         self.commentToolsView.hidden = YES;
     }
-    self.toolsBottomView.hidden = scrollView.contentOffset.y <= self.bottomToolsHeight ?NO:YES;
+     [UIView animateWithDuration:0.5 animations:^{
+         if (scrollView.contentOffset.y <= self.bottomToolsHeight ) {
+             //表示要隐藏
+             self.toolsBottomView.alpha = 1;
+         }else{
+             //表示要显示出来
+              self.toolsBottomView.alpha = 0;
+         }
+//             self.toolsBottomView.hidden = scrollView.contentOffset.y <= self.bottomToolsHeight ?NO:YES;
+     }];
+
 }
 
 #pragma mark - Set ScrollImageView Height
@@ -513,6 +523,7 @@
         if (page == 0) {
             [self.dataArr removeAllObjects];
         }
+        
         NSArray * dataArr = responsObj[@"data"];
         if (dataArr.count>0) {
             for (int i = 0; i < dataArr.count; i++) {
