@@ -203,7 +203,7 @@
     bgLine.backgroundColor = [UIColor clearColor];
     
     cell.selectionStyle=NO;
-    
+    cell.bgLineView.hidden = YES;
     NSInteger number=indexPath.section;
     HPRecommendShopModel*model=self.tableViewDatasModel[number];
 
@@ -299,6 +299,7 @@
     
     cell.holidayArray=model.holiday;
 
+    
 
      return cell;
     
@@ -323,7 +324,7 @@
     return 10;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.01;
+    return 0.01f;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

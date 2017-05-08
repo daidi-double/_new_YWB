@@ -30,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"影院";
+    self.title = @"影院";//修改为电影名称
 
     [self.view addSubview:self.movieTableView];
 //    UIBarButtonItem * shareBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"share.png"] style:UIBarButtonItemStyleDone target:self action:@selector(shareBtn)];

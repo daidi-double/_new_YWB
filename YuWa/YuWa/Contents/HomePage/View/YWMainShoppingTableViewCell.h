@@ -12,6 +12,8 @@
 
 @property(nonatomic,strong)NSArray*holidayArray;
 @property(nonatomic,strong)NSString * zhekou;
+@property (weak, nonatomic) IBOutlet UIView *bgLineView;
+
 
 +(CGFloat)getCellHeight:(NSArray*)array;
 @end
