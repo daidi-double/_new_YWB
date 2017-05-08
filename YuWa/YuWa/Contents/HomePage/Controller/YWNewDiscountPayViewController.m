@@ -29,6 +29,8 @@
 #define carCell @"ShopCarDetailTableViewCell"
 #define CELL2  @"TwoLabelShowTableViewCell"
 @interface YWNewDiscountPayViewController ()<UITableViewDelegate,UITableViewDataSource,YWOtherPayMoneyTableViewCellDelegate,UseCouponViewControllerDelegate,YWPayMoneyTableViewCellDelegate,UITextFieldDelegate,YWNoShopTableViewCellDelegate>
+//去结算按钮
+@property (weak, nonatomic) IBOutlet UIButton *goPay;
 @property (weak, nonatomic) IBOutlet UILabel *settomMoneyLabel;
 @property (weak, nonatomic) IBOutlet UIView *accountBGView;
 @property (weak, nonatomic) IBOutlet UITableView *payTableView;
@@ -51,6 +53,51 @@
 
 @implementation YWNewDiscountPayViewController
 
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.title = @"优惠买单";
+    [self.payTableView registerNib:[UINib nibWithNibName:carCell bundle:nil] forCellReuseIdentifier:carCell];
+    [self.payTableView registerNib:[UINib nibWithNibName:payMoneyCell bundle:nil] forCellReuseIdentifier:payMoneyCell];
+    [self.payTableView registerNib:[UINib nibWithNibName:otherPayCell bundle:nil] forCellReuseIdentifier:otherPayCell];
+    [self.payTableView registerNib:[UINib nibWithNibName:noShopCell bundle:nil] forCellReuseIdentifier:noShopCell];
+    [self.payTableView registerNib:[UINib nibWithNibName:newShopInfoCell bundle:nil] forCellReuseIdentifier:newShopInfoCell];
+    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
+    if ([self.money isEqualToString:@"0.00"]) {
+        self.goPay.selected = NO;
+        [self.goPay setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    }
+    if (self.shopZhekou <= 0.00 || self.shopZhekou >=1) {
+        self.shopZhekou = 1;
+    }
+    if ([self.shopDiscount floatValue]<=0.00 || [self.shopDiscount floatValue] >=1) {
+        self.shopDiscount = @"1";
+    }
+    self.shouldPayMoney = [self.money floatValue];
+    self.is_coupon = NO;
+//    MyLog(@"status = %ld",self.status);
+    if (self.whichPay == PayCategoryQRCodePayMethod) {
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",(self.payAllMoney - self.NOZheMoney )*self.shopZhekou  + self.NOZheMoney ];
+        MyLog(@"金额 %@",[NSString stringWithFormat:@"%f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])* self.shopZhekou  - self.CouponMoney+[self.noDiscountMoney floatValue]]);
+        self.shouldPayMoney = [[NSString stringWithFormat:@"待支付￥%.2f",(self.payAllMoney - self.NOZheMoney )*self.shopZhekou  + self.NOZheMoney ] floatValue];
+       
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleMoney:) name:@"deleteTotalMoney" object:nil];
+
+       if ([self.money isKindOfClass:[NSNull class]]||self.money ==nil) {
+        self.settomMoneyLabel.text = @"待支付￥0.00";
+    }
+}
+- (void)deleMoney:(NSNotification*)sender{
+    if ((self.isClearMoney =1?sender.userInfo[@"isClearMoney"]:NO)) {
+        //清空总价
+        
+        self.money = @"0.00";
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
+    }
+
+}
 //手动支付
 +(instancetype)payViewControllerCreatWithWritePayAndShopName:(NSString*)shopName andShopID:(NSString*)shopID andZhekou:(CGFloat)shopZhekou{
     
@@ -82,48 +129,7 @@
     
     return payVC;
 }
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.title = @"优惠买单";
-    [self.payTableView registerNib:[UINib nibWithNibName:carCell bundle:nil] forCellReuseIdentifier:carCell];
-    [self.payTableView registerNib:[UINib nibWithNibName:payMoneyCell bundle:nil] forCellReuseIdentifier:payMoneyCell];
-    [self.payTableView registerNib:[UINib nibWithNibName:otherPayCell bundle:nil] forCellReuseIdentifier:otherPayCell];
-    [self.payTableView registerNib:[UINib nibWithNibName:noShopCell bundle:nil] forCellReuseIdentifier:noShopCell];
-    [self.payTableView registerNib:[UINib nibWithNibName:newShopInfoCell bundle:nil] forCellReuseIdentifier:newShopInfoCell];
-    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
-    if (self.shopZhekou <= 0.00 || self.shopZhekou >=1) {
-        self.shopZhekou = 1;
-    }
-    if ([self.shopDiscount floatValue]<=0.00 || [self.shopDiscount floatValue] >=1) {
-        self.shopDiscount = @"1";
-    }
-    self.shouldPayMoney = [self.money floatValue];
-    self.is_coupon = NO;
-//    MyLog(@"status = %ld",self.status);
-    if (self.whichPay == PayCategoryQRCodePayMethod) {
-        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",(self.payAllMoney - self.NOZheMoney )*self.shopZhekou  + self.NOZheMoney ];
-        MyLog(@"金额 %@",[NSString stringWithFormat:@"%f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])* self.shopZhekou  - self.CouponMoney+[self.noDiscountMoney floatValue]]);
-        self.shouldPayMoney = [[NSString stringWithFormat:@"待支付￥%.2f",(self.payAllMoney - self.NOZheMoney )*self.shopZhekou  + self.NOZheMoney ] floatValue];
-       
-    }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleMoney:) name:@"deleteTotalMoney" object:nil];
 
-       if ([self.money isKindOfClass:[NSNull class]]||self.money ==nil) {
-        self.settomMoneyLabel.text = @"待支付￥0.00";
-    }
-}
-- (void)deleMoney:(NSNotification*)sender{
-    if ((self.isClearMoney =1?sender.userInfo[@"isClearMoney"]:NO)) {
-        //清空总价
-        
-        self.money = @"0.00";
-        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
-    }
-
-}
--(void)dealloc{
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"deleteTotalMoney" object:nil];
-}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self getDatas];
@@ -134,7 +140,9 @@
 }
 //去结算
 - (IBAction)toAccountAction:(UIButton *)sender {
-    [self touchPay];
+    if (self.goPay.isSelected) {
+        [self touchPay];
+    }
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -769,7 +777,9 @@
     
     
 }
-
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"deleteTotalMoney" object:nil];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
