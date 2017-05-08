@@ -242,5 +242,7 @@
 //    }];
 //
 }
-
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:UIKeyboardWillChangeFrameNotification];
+}
 @end
