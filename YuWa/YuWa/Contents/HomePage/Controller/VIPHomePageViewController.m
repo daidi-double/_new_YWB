@@ -325,8 +325,9 @@
         MyLog(@"%@",data);
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
+        NSArray*array=data[@"data"];
         if ([errorCode isEqualToString:@"0"]) {
-            NSArray*array=data[@"data"];
+
             for (NSDictionary*dict in array) {
                 HPRecommendShopModel*model=[HPRecommendShopModel yy_modelWithDictionary:dict];
                 [self.mtModelArrRecommend addObject:model];
@@ -348,13 +349,13 @@
         
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (data[@"data"] == nil) {
+            if (array.count == 0) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }else{
                 
-                [self.tableView.mj_header endRefreshing];
+                [self.tableView.mj_footer endRefreshing];
             }
-            [self.tableView.mj_footer endRefreshing];
+            [self.tableView.mj_header endRefreshing];
             
         });
     }];
