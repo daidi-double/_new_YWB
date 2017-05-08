@@ -98,14 +98,14 @@
     
     UIView * headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.5f)];
 //    headerView.backgroundColor = [UIColor greenColor];
-    hotScrollView = [[HotMovieScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, headerView.size.height * 0.25f) andDataAry:self.hotMovieSAry];
-        hotScrollView.contentSize = CGSizeMake(5*kScreen_Width, headerView.size.height * 0.25f);//容量要根据数据修改
+    hotScrollView = [[HotMovieScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, headerView.size.height * 0.4f) andDataAry:self.hotMovieSAry];
+        hotScrollView.contentSize = CGSizeMake(5*kScreen_Width, headerView.size.height * 0.4f);//容量要根据数据修改
         hotScrollView.delegate = self;
         hotScrollView.pagingEnabled = YES;
         hotScrollView.HotDelegate = self;
     [headerView addSubview:hotScrollView];
         
-        UIPageControl * moviePage = [[UIPageControl alloc]initWithFrame:CGRectMake(0, headerView.size.height * 0.15f, kScreen_Width, 30)];
+        UIPageControl * moviePage = [[UIPageControl alloc]initWithFrame:CGRectMake(0, headerView.size.height * 0.3f, kScreen_Width, 30)];
         moviePage.numberOfPages = 5;//修改
         moviePage.currentPage = 0;
         moviePage.currentPageIndicatorTintColor = [UIColor redColor];
@@ -117,7 +117,7 @@
         _page = moviePage;
         
     
-    UIView * hotMovieBGView = [[UIView alloc]initWithFrame:CGRectMake(0, headerView.size.height*0.25f, kScreen_Width, headerView.size.height*0.1f)];
+    UIView * hotMovieBGView = [[UIView alloc]initWithFrame:CGRectMake(0, headerView.size.height*0.4f, kScreen_Width, headerView.size.height*0.1f)];
         hotMovieBGView.backgroundColor = [UIColor whiteColor];
         
         
@@ -139,7 +139,7 @@
         [hotMovieBGView addSubview:lookBtn];
         
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
-        UICollectionView *movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, headerView.size.height * 0.35f, kScreen_Width, headerView.size.height*0.65f) collectionViewLayout:layout];
+        UICollectionView *movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, headerView.size.height * 0.5f, kScreen_Width, headerView.size.height*0.6f) collectionViewLayout:layout];
        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
         [movieCollectView registerClass:[HotMovieCollectCell class] forCellWithReuseIdentifier:@"HotMovieCell"];
@@ -156,7 +156,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-        return kScreen_Height * 0.5f;
+        return kScreen_Height * 0.55f;
 
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -168,7 +168,7 @@
     }else if (indexPath.row == 1){
         return 30.f;
     }else{
-        return 80.f;
+        return 70.f;
     }
    
 }
