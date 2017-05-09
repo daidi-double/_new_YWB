@@ -8,6 +8,11 @@
 
 #import "PayViewController.h"
 #import "TimeDownLabel.h"
+#import "MoviePayTableViewCell.h"
+#import "TotalMoneyTableViewCell.h"
+
+#define TOTALCELL @"TotalMoneyTableViewCell"
+#define PAYCELL  @"MoviePayTableViewCell"
 @interface PayViewController ()<UITableViewDelegate,UITableViewDataSource,TimeDownLabelDelegate>
 @property (nonatomic,strong) NSMutableArray * dataAry;
 @property (nonatomic,strong) UITableView * payInforTableView;
@@ -42,12 +47,12 @@
 }
 #pragma mark - 倒计时
 - (void)timeDown{
-    TimeDownLabel *lable = [[TimeDownLabel alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
+    TimeDownLabel *lable = [[TimeDownLabel alloc]initWithFrame:CGRectMake(100, 100, kScreen_Width/2, 100)];
     lable.minute = 14;
     lable.second = 59;
-    self.navigationItem.titleView = lable;
     lable.delegate = self;
     
+    self.navigationItem.titleView = lable;
 }
 - (void)quitPayPage{
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您选择场次信息已过期或者支付超时，请重新选座购买" preferredStyle:UIAlertControllerStyleAlert];
@@ -70,19 +75,33 @@
     _payInforTableView.delegate = self;
     _payInforTableView.dataSource = self;
     
+    [_payInforTableView registerNib:[UINib nibWithNibName:PAYCELL bundle:nil] forCellReuseIdentifier:PAYCELL];
+    [_payInforTableView registerNib:[UINib nibWithNibName:TOTALCELL bundle:nil] forCellReuseIdentifier:TOTALCELL];
     [self.view addSubview:_payInforTableView];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 5;
+    return 3;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    if (section == 0) {
-//        return 3;
-//    }else if (section == 1){
-//        return 5;
-//    }else if (<#expression#>)
-    return 5;
+    if (section == 0) {
+        return 6;
+    }else if (section == 1){
+        return 1;
+    }else{
+        return 0;//根据小吃套餐修改
+    }
     
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            return 100;
+        }else if (indexPath.row == 3){
+            return 88.f;
+        }
+        return 50.f;
+    }
+    return 50.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"payCell"];
@@ -91,14 +110,21 @@
     }
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            cell.textLabel.textColor = [UIColor blackColor];
-            cell.textLabel.frame = CGRectMake(cell.textLabel.x, 5, cell.textLabel.width, cell.textLabel.height);
+            MoviePayTableViewCell * payCell = [tableView dequeueReusableCellWithIdentifier:PAYCELL];
+            
+            return payCell;
         }else if (indexPath.row == 1){
-            cell.textLabel.textColor = [UIColor redColor];
-            cell.textLabel.font = [UIFont systemFontOfSize:12];
+            cell.textLabel.textColor = RGBCOLOR(142, 143, 144, 1);
+            cell.textLabel.font = [UIFont systemFontOfSize:15];
+            cell.textLabel.text = @"优惠券抵用";
         }else{
-            cell.textLabel.textColor = [UIColor lightGrayColor];
-            cell.textLabel.font = [UIFont systemFontOfSize:12];
+            cell.textLabel.textColor = RGBCOLOR(142, 143, 144, 1);
+            cell.textLabel.font = [UIFont systemFontOfSize:15];
+            cell.textLabel.text =@"商家优惠";
+        }
+        if (indexPath.row == 3) {
+            TotalMoneyTableViewCell * totalCell = [tableView dequeueReusableCellWithIdentifier:TOTALCELL];
+            return totalCell;
         }
     }else if (indexPath.section == 1){
         cell.textLabel.font = [UIFont systemFontOfSize:14];

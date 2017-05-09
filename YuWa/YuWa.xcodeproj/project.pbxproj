@@ -644,6 +644,10 @@
 		AA3A42C61E90DE6E0038E5CE /* PCDetailPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A42C41E90DE6E0038E5CE /* PCDetailPageViewController.m */; };
 		AA3A42C71E90DE6E0038E5CE /* PCDetailPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3A42C51E90DE6E0038E5CE /* PCDetailPageViewController.xib */; };
 		AA3A42CB1E90EA690038E5CE /* PCOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A42CA1E90EA690038E5CE /* PCOrderDetailModel.m */; };
+		AA3A86191EC1A59F003966F1 /* MoviePayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A86171EC1A59F003966F1 /* MoviePayTableViewCell.m */; };
+		AA3A861A1EC1A59F003966F1 /* MoviePayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3A86181EC1A59F003966F1 /* MoviePayTableViewCell.xib */; };
+		AA3A861E1EC1AC45003966F1 /* TotalMoneyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A861C1EC1AC45003966F1 /* TotalMoneyTableViewCell.m */; };
+		AA3A861F1EC1AC45003966F1 /* TotalMoneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3A861D1EC1AC45003966F1 /* TotalMoneyTableViewCell.xib */; };
 		AA3AB5341E5D1F92009BD8D9 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3AB5331E5D1F92009BD8D9 /* PlayViewController.m */; };
 		AA3AB5371E5D2166009BD8D9 /* CommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3AB5361E5D2166009BD8D9 /* CommendViewController.m */; };
 		AA3AB5391E5D2693009BD8D9 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3AB5381E5D2693009BD8D9 /* share.png */; };
@@ -2446,6 +2450,12 @@
 		AA3A42C51E90DE6E0038E5CE /* PCDetailPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCDetailPageViewController.xib; sourceTree = "<group>"; };
 		AA3A42C91E90EA690038E5CE /* PCOrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCOrderDetailModel.h; sourceTree = "<group>"; };
 		AA3A42CA1E90EA690038E5CE /* PCOrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCOrderDetailModel.m; sourceTree = "<group>"; };
+		AA3A86161EC1A59F003966F1 /* MoviePayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePayTableViewCell.h; sourceTree = "<group>"; };
+		AA3A86171EC1A59F003966F1 /* MoviePayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePayTableViewCell.m; sourceTree = "<group>"; };
+		AA3A86181EC1A59F003966F1 /* MoviePayTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoviePayTableViewCell.xib; sourceTree = "<group>"; };
+		AA3A861B1EC1AC45003966F1 /* TotalMoneyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalMoneyTableViewCell.h; sourceTree = "<group>"; };
+		AA3A861C1EC1AC45003966F1 /* TotalMoneyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalMoneyTableViewCell.m; sourceTree = "<group>"; };
+		AA3A861D1EC1AC45003966F1 /* TotalMoneyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalMoneyTableViewCell.xib; sourceTree = "<group>"; };
 		AA3AB5321E5D1F92009BD8D9 /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
 		AA3AB5331E5D1F92009BD8D9 /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
 		AA3AB5351E5D2166009BD8D9 /* CommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommendViewController.h; sourceTree = "<group>"; };
@@ -5274,6 +5284,7 @@
 		AA3805FA1E65082200DB8C4C /* 支付 */ = {
 			isa = PBXGroup;
 			children = (
+				AA3A86151EC1A566003966F1 /* cell */,
 				AA3805FB1E65086900DB8C4C /* PayViewController.h */,
 				AA3805FC1E65086900DB8C4C /* PayViewController.m */,
 				AA47068C1E65689300D09619 /* TimeDownLabel.h */,
@@ -5355,6 +5366,19 @@
 				AA3A42CA1E90EA690038E5CE /* PCOrderDetailModel.m */,
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		AA3A86151EC1A566003966F1 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA3A86161EC1A59F003966F1 /* MoviePayTableViewCell.h */,
+				AA3A86171EC1A59F003966F1 /* MoviePayTableViewCell.m */,
+				AA3A86181EC1A59F003966F1 /* MoviePayTableViewCell.xib */,
+				AA3A861B1EC1AC45003966F1 /* TotalMoneyTableViewCell.h */,
+				AA3A861C1EC1AC45003966F1 /* TotalMoneyTableViewCell.m */,
+				AA3A861D1EC1AC45003966F1 /* TotalMoneyTableViewCell.xib */,
+			);
+			name = cell;
 			sourceTree = "<group>";
 		};
 		AA3AB5441E5D82DB009BD8D9 /* 电影选座 */ = {
@@ -10360,6 +10384,7 @@
 				AA3544A41E9DF23900A2EC73 /* 4baobaoLVUP6@2x.jpg in Resources */,
 				AA3545901E9DF23A00A2EC73 /* 3baobaoBG5@2x.jpg in Resources */,
 				AA3544881E9DF23900A2EC73 /* 4baobaoLVUP35@2x.jpg in Resources */,
+				AA3A861A1EC1A59F003966F1 /* MoviePayTableViewCell.xib in Resources */,
 				AA3545471E9DF23A00A2EC73 /* 2baobaoBG48@2x.jpg in Resources */,
 				AA35454A1E9DF23A00A2EC73 /* 2baobaoBG50@2x.jpg in Resources */,
 				AA3544751E9DF23800A2EC73 /* 4baobaoLVUP18@2x.jpg in Resources */,
@@ -10430,6 +10455,7 @@
 				B38B2F5F1D8FC83A004D5256 /* xhsemoji1.plist in Resources */,
 				C13019D71DB20B2400E24C88 /* 周边游.png in Resources */,
 				AA3544221E9DF23800A2EC73 /* 2baobaoLVUP51@2x.jpg in Resources */,
+				AA3A861F1EC1AC45003966F1 /* TotalMoneyTableViewCell.xib in Resources */,
 				AA3544B41E9DF23900A2EC73 /* 0baobaoBG20@2x.jpg in Resources */,
 				C10E94BA1DD3609B00728B3D /* home_cricle_no.png in Resources */,
 				B36C7F061D9D0C8900B022E0 /* YWMessageFriendAddCell.xib in Resources */,
@@ -11483,6 +11509,7 @@
 				B38B2EF91D8FC82F004D5256 /* RBHomeListCommentsModel.m in Sources */,
 				B38B2F151D8FC82F004D5256 /* RBNodeUserModel.m in Sources */,
 				B38B2E2B1D8FACD8004D5256 /* MKAnnotationView+WebCache.m in Sources */,
+				AA3A86191EC1A59F003966F1 /* MoviePayTableViewCell.m in Sources */,
 				B38B2E571D8FACD8004D5256 /* VPImageCropperViewController.m in Sources */,
 				B38B2E201D8FACD8004D5256 /* MJChiBaoZiFooter2.m in Sources */,
 				AAF0EB4D1EAC721C0003A930 /* ShopScoreModel.m in Sources */,
@@ -11633,6 +11660,7 @@
 				B38B2DE61D8FACD8004D5256 /* UIImage+imageColor.m in Sources */,
 				B38B2E431D8FACD8004D5256 /* SAMTextView.m in Sources */,
 				AAF127E01E8AE11500121621 /* OrderRefundViewController.m in Sources */,
+				AA3A861E1EC1AC45003966F1 /* TotalMoneyTableViewCell.m in Sources */,
 				B33A265E1D9A68040092CB12 /* MBProgressHUD+Add.m in Sources */,
 				B3FEBA321D9BE4EE003CDEF2 /* YWMessageNotificationCell.m in Sources */,
 				AA29FFFC1E78EFC100113FFF /* NSObject+MapService.m in Sources */,

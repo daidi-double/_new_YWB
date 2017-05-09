@@ -29,7 +29,7 @@
 
     }
     
-    self.text = [NSString stringWithFormat:@"%ld:%ld",(long)self.minute,(long)self.second];
+    self.text = [NSString stringWithFormat:@"电影订单 %ld:%ld",(long)self.minute,(long)self.second];
     if (self.second==0 && self.minute==0 ) {
         [self.timer invalidate];
         self.timer = nil;
