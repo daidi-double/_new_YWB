@@ -83,8 +83,8 @@
 
 
 -(CGFloat)getCellHeightWith:(NSArray*)array{
-    CGFloat leftValue=15;
-    CGFloat jianju=10;
+//    CGFloat leftValue=15;
+//    CGFloat jianju=10;
     CGFloat withAndHeight=(kScreen_Width-30-30)/4;
     CGFloat topValue=10;
 

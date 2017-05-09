@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     _lineWidth.constant = 1;
     _lineHeight.constant = 0.5;
 }

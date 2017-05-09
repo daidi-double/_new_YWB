@@ -170,7 +170,7 @@
     _indicatorView.backgroundColor = self.indicatorViewColor;
     _indicatorView.layer.cornerRadius = self.layer.cornerRadius;
     _indicatorView.layer.masksToBounds = YES;
-#warning --   隐藏掉
+//#warning --   隐藏掉
     [self addSubview:_indicatorView];
     
     // 创建各个按钮

@@ -10,12 +10,12 @@
 
 @interface DetailStoreFirstTableViewCell : UITableViewCell
 
-@property(nonatomic,strong)void(^touchPayBlock)();
+@property(nonatomic,strong)void(^_Nonnull touchPayBlock)();
 
-@property(nonatomic,strong)void(^touchLocateBlock)();
+@property(nonatomic,strong)void(^_Nonnull touchLocateBlock)();
 
 @property(nonnull,strong)void(^touchAddCollection)();
-@property(nonatomic,copy)void(^touchPhoneBlock)();
+@property(nonatomic,copy)void(^_Nonnull touchPhoneBlock)();
 
-@property(nonatomic,copy)void(^touchQiangBlock)();
+@property(nonatomic,copy)void(^_Nonnull touchQiangBlock)();
 @end

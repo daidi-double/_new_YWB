@@ -71,7 +71,7 @@
         UILabel*labelMoney=[cell viewWithTag:2];
         labelMoney.text=[NSString stringWithFormat:@"账户余额：￥%@",[UserSession instance].money];
         
-        UIImageView*selectImage=[cell viewWithTag:3];
+//        UIImageView*selectImage=[cell viewWithTag:3];
         
         
         return cell;

@@ -28,6 +28,7 @@
 }
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
     self.frame = CGRectMake(0.f, 0.f, kScreen_Width, 216.f);
     [self makeKeyboards];
     self.pageControl.numberOfPages = [self.pageNumberArr[0] integerValue];

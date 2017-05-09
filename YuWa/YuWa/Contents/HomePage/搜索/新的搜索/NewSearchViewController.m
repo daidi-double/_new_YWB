@@ -42,7 +42,12 @@
 @implementation NewSearchViewController
 
 
-
+-(void)DelegateForReturnRow:(NSString *)idd andText:(NSString *)text{
+    
+}
+-(void)DelegateResignFirstRespon{
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -71,7 +76,9 @@
 //    }
     
 }
-
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
+    
+}
 -(void)setDatas{
    YYCoreData*coreData= [YYCoreData shareCoreData];
 //    self.hisTArr=[NSMutableArray arrayWithContentsOfFile:[coreData userResPath:SEARCHFILE]];

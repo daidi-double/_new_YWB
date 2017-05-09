@@ -27,7 +27,7 @@
     
     
     
-    UIButton*Bperson=[self viewWithTag:4];
+//    UIButton*Bperson=[self viewWithTag:4];
 //    Bperson.layer.cornerRadius=5;
 //    Bperson.layer.borderWidth=1;
 //    Bperson.layer.borderColor=[UIColor whiteColor].CGColor;
