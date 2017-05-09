@@ -688,6 +688,8 @@
 		AA3CA5611E6058D3000D05FA /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA5601E6058D3000D05FA /* LocationViewController.m */; };
 		AA3CA5671E606F0B000D05FA /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA5661E606F0B000D05FA /* MapAnnotation.m */; };
 		AA3E98221E7BA6D9007A4FB0 /* libPaymentControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3E98211E7BA6D9007A4FB0 /* libPaymentControl.a */; };
+		AA41E33F1EC0366200FCB498 /* NewHotMovieCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA41E33D1EC0366200FCB498 /* NewHotMovieCollectCell.m */; };
+		AA41E3401EC0366200FCB498 /* NewHotMovieCollectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA41E33E1EC0366200FCB498 /* NewHotMovieCollectCell.xib */; };
 		AA42110E1E5ABAEF00085650 /* MovieCinemaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42110C1E5ABAEF00085650 /* MovieCinemaViewController.m */; };
 		AA42110F1E5ABAEF00085650 /* MovieCinemaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA42110D1E5ABAEF00085650 /* MovieCinemaViewController.xib */; };
 		AA466C7E1E53EA1F009E9F98 /* gogogo1.png in Resources */ = {isa = PBXBuildFile; fileRef = AA466C7C1E53EA1F009E9F98 /* gogogo1.png */; };
@@ -2511,6 +2513,9 @@
 		AA3CA5661E606F0B000D05FA /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		AA3E981F1E7BA6D9007A4FB0 /* UPPaymentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPaymentControl.h; sourceTree = "<group>"; };
 		AA3E98211E7BA6D9007A4FB0 /* libPaymentControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentControl.a; sourceTree = "<group>"; };
+		AA41E33C1EC0366200FCB498 /* NewHotMovieCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHotMovieCollectCell.h; sourceTree = "<group>"; };
+		AA41E33D1EC0366200FCB498 /* NewHotMovieCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHotMovieCollectCell.m; sourceTree = "<group>"; };
+		AA41E33E1EC0366200FCB498 /* NewHotMovieCollectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewHotMovieCollectCell.xib; sourceTree = "<group>"; };
 		AA42110B1E5ABAEF00085650 /* MovieCinemaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCinemaViewController.h; sourceTree = "<group>"; };
 		AA42110C1E5ABAEF00085650 /* MovieCinemaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCinemaViewController.m; sourceTree = "<group>"; };
 		AA42110D1E5ABAEF00085650 /* MovieCinemaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCinemaViewController.xib; sourceTree = "<group>"; };
@@ -5367,8 +5372,10 @@
 		AA3B4DAB1E554871008466C4 /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				AA1FEB531E55DA3000239FEC /* HotMovieCollectCell.h */,
-				AA1FEB541E55DA3000239FEC /* HotMovieCollectCell.m */,
+				AA41E3411EC04D9B00FCB498 /* 废弃 */,
+				AA41E33C1EC0366200FCB498 /* NewHotMovieCollectCell.h */,
+				AA41E33D1EC0366200FCB498 /* NewHotMovieCollectCell.m */,
+				AA41E33E1EC0366200FCB498 /* NewHotMovieCollectCell.xib */,
 				AA3B4DC31E55AA22008466C4 /* CinemaCell.h */,
 				AA3B4DC41E55AA22008466C4 /* CinemaCell.m */,
 				AA3009241E5725CE0025B2A5 /* CinemaTimeCell.h */,
@@ -5521,6 +5528,15 @@
 				AA3E98211E7BA6D9007A4FB0 /* libPaymentControl.a */,
 			);
 			path = libs;
+			sourceTree = "<group>";
+		};
+		AA41E3411EC04D9B00FCB498 /* 废弃 */ = {
+			isa = PBXGroup;
+			children = (
+				AA1FEB531E55DA3000239FEC /* HotMovieCollectCell.h */,
+				AA1FEB541E55DA3000239FEC /* HotMovieCollectCell.m */,
+			);
+			name = "废弃";
 			sourceTree = "<group>";
 		};
 		AA466C7B1E53E9F5009E9F98 /* 商家入驻 */ = {
@@ -9828,10 +9844,10 @@
 					B38B2C6B1D8FAC5A004D5256 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = JQ283T24DV;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -10722,6 +10738,7 @@
 				AA3544F61E9DF23900A2EC73 /* 1baobaoBG29@2x.jpg in Resources */,
 				AA3544611E9DF23800A2EC73 /* 3baobaoLVUP54@2x.jpg in Resources */,
 				AA35444C1E9DF23800A2EC73 /* 3baobaoLVUP35@2x.jpg in Resources */,
+				AA41E3401EC0366200FCB498 /* NewHotMovieCollectCell.xib in Resources */,
 				AAF0EB441EAC5C940003A930 /* YWShopScoreTableViewCell.xib in Resources */,
 				C135A0CF1DDC5F69002B78A5 /* page_collection.png in Resources */,
 				AA35456D1E9DF23A00A2EC73 /* 3baobaoBG28@2x.jpg in Resources */,
@@ -11475,6 +11492,7 @@
 				C122FBE91DB5F72D009A518A /* CommitShopView.m in Sources */,
 				AA7B64731E797ED400406CB8 /* MapNavNewViewController.m in Sources */,
 				B3192AC51D92224A00FD6578 /* JWImagePickerTableViewCell.m in Sources */,
+				AA41E33F1EC0366200FCB498 /* NewHotMovieCollectCell.m in Sources */,
 				AA29C2511EAD9C4E0092EF6F /* YWActivityTableViewCell.m in Sources */,
 				B3AE4D701D91302B000A389F /* TZAssetCell.m in Sources */,
 				B38B2E071D8FACD8004D5256 /* MASViewAttribute.m in Sources */,
@@ -11782,7 +11800,7 @@
 				CODE_SIGN_ENTITLEMENTS = YuWa/YuWa.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mingbang Network Technology Co., Ltd. (JQ283T24DV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JQ283T24DV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11819,8 +11837,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.duruikeji.YuWa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9b9f5f2-2c2c-44e0-87ad-366c261519cb";
-				PROVISIONING_PROFILE_SPECIFIER = luoyun;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -11834,7 +11852,7 @@
 				CODE_SIGN_ENTITLEMENTS = YuWa/YuWa.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mingbang Network Technology Co., Ltd. (JQ283T24DV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JQ283T24DV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11871,8 +11889,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.duruikeji.YuWa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9b9f5f2-2c2c-44e0-87ad-366c261519cb";
-				PROVISIONING_PROFILE_SPECIFIER = luoyun;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

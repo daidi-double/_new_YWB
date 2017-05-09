@@ -66,7 +66,8 @@
     self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
     if ([self.money isEqualToString:@"0.00"]) {
         self.goPay.selected = NO;
-        [self.goPay setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.goPay setUserInteractionEnabled:NO];
+        [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
     }
     if (self.shopZhekou <= 0.00 || self.shopZhekou >=1) {
         self.shopZhekou = 1;
@@ -87,7 +88,10 @@
 
        if ([self.money isKindOfClass:[NSNull class]]||self.money ==nil) {
         self.settomMoneyLabel.text = @"待支付￥0.00";
+           self.goPay.userInteractionEnabled = NO;
+           [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
     }
+
 }
 - (void)deleMoney:(NSNotification*)sender{
     if ((self.isClearMoney =1?sender.userInfo[@"isClearMoney"]:NO)) {
@@ -95,6 +99,8 @@
         
         self.money = @"0.00";
         self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
+        self.goPay.userInteractionEnabled = NO;
+        [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
     }
 
 }
@@ -140,9 +146,9 @@
 }
 //去结算
 - (IBAction)toAccountAction:(UIButton *)sender {
-    if (self.goPay.isSelected) {
+    
         [self touchPay];
-    }
+
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -377,7 +383,6 @@
             }
         }else if (indexPath.row == 2){
             cell.titleNameLabel.text = @"实付金额";
-//            cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.model.discount floatValue] + [self.money floatValue]];
             cell.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",self.shouldPayMoney];
             cell.titleNameLabel.textColor = RGBCOLOR(123, 123, 123, 1);
             cell.moneyLabel.textColor = RGBCOLOR(123, 123, 123, 1);
@@ -389,7 +394,7 @@
                 }
                    
                 }
-             [self calshouldPayMoney];
+
             
         }else if (indexPath.section == 2 && indexPath.row == 3){
             cell=[tableView dequeueReusableCellWithIdentifier:otherPayCell];
@@ -449,6 +454,14 @@
     self.shouldPayMoney = [payAllmoney floatValue];
     self.noUserCouponMoney = payAllmoney;
     [self calshouldPayMoney];
+    if (([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]- _CouponMoney != 0.00) {
+        self.goPay.userInteractionEnabled = YES;
+        [self.goPay setBackgroundColor:RGBCOLOR(60, 194, 237, 1)];
+        
+    }else{
+        self.goPay.userInteractionEnabled = NO;
+        [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
+    }
     //刷新对应行的数据
     [self.payTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,indexPathT,nil] withRowAnimation:UITableViewRowAnimationFade];
 }
@@ -502,7 +515,7 @@
     
     
     //不能小于
-    if (self.otherTotalMoney<self.noDiscountMoney) {
+    if (self.otherTotalMoney<=self.noDiscountMoney) {
         
         [JRToast showWithText:@"不打折金额不能大于消费总额"];
 
@@ -538,7 +551,7 @@
     
     
     
-    if (self.otherTotalMoney<self.noDiscountMoney) {
+    if (self.otherTotalMoney<=self.noDiscountMoney) {
         [JRToast showWithText:@"不打折金额不能大于消费总金额"];
         return;
     }
@@ -681,9 +694,9 @@
     }
 
 
+    [self calshouldPayMoney];
     [self.payTableView reloadData];
     
-    [self calshouldPayMoney];
     
     
 }

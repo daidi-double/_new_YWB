@@ -70,26 +70,7 @@ static const CGFloat ItemHW = 60;
     return CGPointMake(proposedContentOffset.x + adjustOffsetX, proposedContentOffset.y);
 }
 
-//    //起始的x值，也即默认情况下要停下来的x值
-//    CGFloat startX = proposedContentOffset.x;
-//    
-//    //3.遍历所有的属性
-//    CGFloat adjustOffsetX = MAXFLOAT;
-//    for (UICollectionViewLayoutAttributes *attrs in array) {
-//        CGFloat attrsX = CGRectGetMinX(attrs.frame);
-//        CGFloat attrsW = CGRectGetWidth(attrs.frame) ;
-////        NSLog(@"-frame--:%@-%f-:%f",NSStringFromCGRect(attrs.frame),attrsX,proposedContentOffset.x);
-//
-//        if (startX - attrsX  < attrsW/2) {
-//            adjustOffsetX = -(startX - attrsX+ItemMaigin);
-//        }else{
-//            adjustOffsetX = attrsW - (startX - attrsX);
-//        }
-//    
-//        break ;//只循环数组中第一个元素即可，所以直接break了
-//    }
-//    return CGPointMake(proposedContentOffset.x + adjustOffsetX, proposedContentOffset.y);
-//}
+
 
 /**
  *  返回yes，只要显示的边界发生改变，就需要重新布局：(会自动调用layoutAttributesForElementsInRect方法，获得所有cell的布局属性)
