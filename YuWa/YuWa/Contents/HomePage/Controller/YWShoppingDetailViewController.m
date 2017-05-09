@@ -280,7 +280,7 @@
         }
         
 //        //月消费人次
-        UILabel*monthPay=[cell viewWithTag:5];
+//        UILabel*monthPay=[cell viewWithTag:5];
 //        monthPay.text=[NSString stringWithFormat:@""];
         
         //地址
@@ -396,10 +396,10 @@
        
         cell=[tableView dequeueReusableCellWithIdentifier:CELL2];
         cell.selectionStyle=NO;
-       ShowShoppingModel*model= self.maMDatasGoods[indexPath.row];
+//       ShowShoppingModel*model= self.maMDatasGoods[indexPath.row];
         
         
-        UIImageView*leftImage=[cell viewWithTag:1];
+//        UIImageView*leftImage=[cell viewWithTag:1];
 //        [leftImage sd_setImageWithURL:[NSURL URLWithString:model.goods_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
 //            
 //        }];

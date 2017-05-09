@@ -11820,7 +11820,7 @@
 					"$(SRCROOT)/YuWa/Foundation/SDK/aliPay",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/YuWa/Supporting File/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks -ObjC";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11872,7 +11872,7 @@
 					"$(SRCROOT)/YuWa/Foundation/SDK/aliPay",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/YuWa/Supporting File/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks -ObjC";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

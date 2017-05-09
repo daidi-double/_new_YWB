@@ -8,7 +8,7 @@
 
 #import "XHBranchLayer.h"
 
-@interface XHBranchLayer ()
+@interface XHBranchLayer ()<CAAnimationDelegate>
 
 @property (nonatomic, copy) XHBranchLayerAnimationCompletion completion;
 

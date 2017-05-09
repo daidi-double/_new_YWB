@@ -762,7 +762,7 @@
         //send the acknowledgement
         [self _sendHasReadResponseForMessages:@[model.message] isRead:YES];
         __weak EaseMessageViewController *weakSelf = self;
-        BOOL isPrepare = [[EaseMessageReadManager defaultManager] prepareMessageAudioModel:model updateViewCompletion:^(EaseMessageModel *prevAudioModel, EaseMessageModel *currentAudioModel) {
+        BOOL isPrepare = [[EaseMessageReadManager defaultManager] prepareMessageAudioModel:(EaseMessageModel*)model updateViewCompletion:^(EaseMessageModel *prevAudioModel, EaseMessageModel *currentAudioModel) {
             if (prevAudioModel || currentAudioModel) {
                 [weakSelf.tableView reloadData];
             }

@@ -175,7 +175,7 @@
     
     
     //吊接口  照片
-    NSString *str = [ImageCache headImagePath:newPhoto];
+//    NSString *str = [ImageCache headImagePath:newPhoto];
     
     if (self.saveAllImage.count>=9) {
         [JRToast showWithText:@"最多只能传9张照片"];

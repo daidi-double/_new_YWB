@@ -75,7 +75,7 @@
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
-    PayRecordModel*model=self.maMallDatas[indexPath.row];
+//    PayRecordModel*model=self.maMallDatas[indexPath.row];
     
 //    UILabel*label1=[cell viewWithTag:1];
 //    label1.text=model.type_name;
