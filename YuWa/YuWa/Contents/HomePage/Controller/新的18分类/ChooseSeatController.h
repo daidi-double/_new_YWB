@@ -14,5 +14,6 @@
 @property (nonatomic,strong)UIButton * sureBtn;
 @property (nonatomic,strong) UILabel * allPrice;//总价;
 @property (nonatomic,strong) UILabel * price_num;//价格和张数
-//@property (nonatomic,strong)
+@property (nonatomic,strong) UILabel * languageLabel;
+@property (nonatomic,strong) UIButton * changeMovieBtn;//更换场次
 @end
