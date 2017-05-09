@@ -13,7 +13,6 @@
 //#import "WXMediaMessage+messageConstruct.h"
 
 @implementation WXApiRequestHandler
-
 //#pragma mark - Public Methods
 //+ (BOOL)sendText:(NSString *)text
 //         InScene:(enum WXScene)scene {

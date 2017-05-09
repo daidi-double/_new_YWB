@@ -11,6 +11,7 @@
 @implementation JWLocalNotificationShowView
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
     self.showImageView.layer.cornerRadius = 5.f;
     self.showImageView.layer.masksToBounds = YES;
     self.width = kScreen_Width;

@@ -142,7 +142,7 @@
     if (indexPath.section==0) {
         return 200;
     }else{
-#warning 这里的告诉要根据图片的多少来的
+//#warning 这里的告诉要根据图片的多少来的
         PostCommitImageTableViewCell*cell=[[PostCommitImageTableViewCell alloc]init];
         return [cell getCellHeightWith:self.saveAllImage];
     }

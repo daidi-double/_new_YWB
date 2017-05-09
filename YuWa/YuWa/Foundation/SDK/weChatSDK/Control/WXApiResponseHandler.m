@@ -21,6 +21,7 @@
 //    return [WXApi sendResp:resp];
 //}
 //
+
 //+ (BOOL)respImageData:(NSData *)imageData
 //           MessageExt:(NSString *)messageExt
 //               Action:(NSString *)action
