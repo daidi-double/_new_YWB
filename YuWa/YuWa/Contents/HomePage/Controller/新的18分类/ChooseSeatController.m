@@ -16,6 +16,7 @@
 #import "XZSeatSelectionTool.h"
 #import "XZSeatsView.h"
 #import "PayViewController.h"
+#import "NSString+JWAppendOtherStr.h"
 @interface ChooseSeatController ()<UITableViewDelegate,UITableViewDataSource>
 {
 //    UILabel * selectedSeat;
@@ -72,6 +73,24 @@
     }
     return _sureBtn;
 }
+
+- (UIButton*)changeMovieBtn{
+    if (!_changeMovieBtn) {
+        _changeMovieBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _changeMovieBtn.frame = CGRectMake(_languageLabel.right, 10, kScreen_Width*0.25f, 25);
+        [_changeMovieBtn.layer setBorderColor:CNaviColor.CGColor];
+        [_changeMovieBtn.layer setBorderWidth:1];
+        [_changeMovieBtn.layer setMasksToBounds:YES];
+        [_changeMovieBtn setTitle:@"更换场次" forState:UIControlStateNormal];
+        [_changeMovieBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
+        _changeMovieBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        _changeMovieBtn.layer.masksToBounds = YES;
+        _changeMovieBtn.layer.cornerRadius = 5;
+        [_changeMovieBtn addTarget:self action:@selector(changeMovieAction) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _changeMovieBtn;
+}
 -(UILabel *)allPrice{
     if (!_allPrice) {
         _allPrice = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, kScreen_Width/2, 30)];
@@ -79,7 +98,15 @@
     }
     return _allPrice;
 }
-
+- (UILabel *)languageLabel{
+    if (!_languageLabel) {
+        _languageLabel = [[UILabel alloc]init];
+        _languageLabel.font = [UIFont systemFontOfSize:12];
+        _languageLabel.textColor = RGBCOLOR(167, 168, 169, 1);
+        
+    }
+    return _languageLabel;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -99,7 +126,11 @@
     _seatTableView.dataSource = self;
     _seatTableView.scrollEnabled = NO;
     [self.view addSubview:_seatTableView];
-        
+    
+}
+//更换场次
+- (void)changeMovieAction{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 5;
@@ -123,11 +154,19 @@
     }
     if (indexPath.row == 0) {
         cell.textLabel.text = @"极限特工";
+        CGRect strWidth = [cell.textLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: cell.textLabel.font} context:nil];
+        
+        self.languageLabel.frame = CGRectMake(cell.textLabel.right+25 +strWidth.size.width, cell.textLabel.top +3, kScreen_Width * 0.4, 25);
+        _languageLabel.text = @"国语/2D/7号厅";
+        [cell.contentView addSubview:self.languageLabel];
         cell.detailTextLabel.text = @"今日XXXXX";
+
+        [cell.contentView addSubview:self.changeMovieBtn];
         [self.payInformationArr addObject:cell.textLabel.text];
         [self.payInformationArr addObject:cell.detailTextLabel.text];
         [self.payInformationArr addObject:self.title];
     }else if (indexPath.row == 1){
+        cell.backgroundColor = [UIColor lightGrayColor];
         NSArray * seatAry = @[@"kexuan.imageset.png",@"yishou.imageset.png",@"xuanzhong.imageset.png"];
         NSArray * textAry = @[@"可选",@"不可选",@"已选"];
         CGFloat imageViewWidth = 15;
@@ -148,6 +187,7 @@
     }else if (indexPath.row == 2){
         [cell.contentView addSubview:selectionView];
     }else if (indexPath.row == 3){
+        
         static int i = 0;
         if (i == 0) {
             UILabel * select = [[UILabel alloc]initWithFrame:CGRectMake(10, 2, 50, 20)];
@@ -155,6 +195,7 @@
             select.font = [UIFont systemFontOfSize:12];
             select.textColor = [UIColor blackColor];
             select.text = @"已选座位";
+            select.tag = 111;
             [cell.contentView addSubview:select];
             _seatLblBGView = [[UIView alloc]initWithFrame:CGRectMake(0, 22, kScreen_Width, 20)];
             //            _seatLblBGView.backgroundColor = [UIColor greenColor];
@@ -164,7 +205,11 @@
 //            [cell.contentView addSubview:selectedSeat];
 
         }else{
-            
+            for (UILabel * label in cell.contentView.subviews) {
+                if (label.tag == 111) {
+                    [label removeFromSuperview];
+                }
+            }
             
             [cell.contentView addSubview:self.allPrice];
             
@@ -237,7 +282,7 @@
                 for (UIView * lblView in _seatLblBGView.subviews) {
                     [lblView removeFromSuperview];
                 }
-                _price_num.text = [NSString stringWithFormat:@"￥39X%lu",(unsigned long)self.selecetedSeats.count];
+                _price_num.text = [NSString stringWithFormat:@"￥39X%ld",self.selecetedSeats.count];
       
                 _allPrice.text = [NSString stringWithFormat:@"一次最多选择4个座位"];
                  _allPrice.font = [UIFont systemFontOfSize:15];
@@ -245,12 +290,15 @@
             }else{
                 _sureBtn.userInteractionEnabled = YES;
                 _sureBtn.backgroundColor = CNaviColor;
-                [_sureBtn setTitle:@"确认选座" forState:UIControlStateNormal];
+                [_sureBtn setTitle:@"去结算" forState:UIControlStateNormal];
                 _price_num.hidden = NO;
-                _price_num.text = [NSString stringWithFormat:@"￥39X%lu",(unsigned long)self.selecetedSeats.count];
+                _price_num.text = [NSString stringWithFormat:@"￥39X%ld",self.selecetedSeats.count];
                 CGFloat p = self.selecetedSeats.count * 39;
-                _allPrice.text = [NSString stringWithFormat:@"￥%.2f",p];
-                 _allPrice.font = [UIFont systemFontOfSize:17];
+                _allPrice.font = [UIFont systemFontOfSize:17];
+                
+                NSAttributedString * attributedText = [NSString stringWithFirstStr:@"待结算" withFont:[UIFont systemFontOfSize:12] withColor:CNaviColor withSecondtStr:[NSString stringWithFormat:@"￥%.2f",p] withFont:[UIFont systemFontOfSize:15] withColor:CNaviColor];
+                _allPrice.attributedText = attributedText;
+                
                 CGFloat LblWidth = (kScreen_Width -20 -6)/4;
                 
                 XZSeatsModel * smodel;
@@ -333,6 +381,12 @@
            [self.navigationController pushViewController:payVC animated:YES];
        }];
     });
+}
+
+//计算自动宽度
+- (CGRect)getStrWidth:(NSString *)str  andHeight:(CGFloat)height andStrFont:(CGFloat)font{
+     CGRect strWidth = [str boundingRectWithSize:CGSizeMake(MAXFLOAT, height) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]} context:nil];
+    return strWidth;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -15,7 +15,8 @@
 #import "ChooseSeatController.h"//选座
 #import "SeeMovieCell.h"
 #import "ShopDetaliViewController.h"
-#import "LocationViewController.h"
+//#import "LocationViewController.h"
+#import "MapNavNewViewController.h"
 #import "YWLoginViewController.h"
 @interface MovieCinemaViewController ()<UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,CinemaHeaderViewDelegate>
 {
@@ -237,7 +238,10 @@
 }
 - (void)ToLocation{
    
-    LocationViewController * locationVC = [[LocationViewController alloc]init];
+    MapNavNewViewController * locationVC = [[MapNavNewViewController alloc]init];
+//    locationVC.coordinatex = self.mainModel.coordinatex;
+//    locationVC.coordinatey = self.mainModel.coordinatey;
+//    locationVC.shopName = self.mainModel.company_name;
     [self.navigationController pushViewController:locationVC animated:YES];
   
 }

@@ -25,7 +25,7 @@
     [super viewDidLoad];
     self.title = @"收支详情";
     [self requestData];
-    self.titleAry = @[@"账号订单:",@"类型:",@"收入/支出:",@"收入方式:",@"时间:",@"交易状态:",@"余额:",@"备注:"];
+    self.titleAry = @[@"账号订单:",@"类型:",@"收入:",@"收入方式:",@"时间:",@"交易状态:",@"余额:",@"备注:"];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 8;
@@ -50,6 +50,14 @@
     }else{
         cell.textLabel.font = [UIFont systemFontOfSize:13];
         cell.textLabel.textColor = RGBCOLOR(170, 170, 170, 1);
+    }
+    if (self.dataAry.count > 0) {
+        if (indexPath.row == 2) {
+            
+        if ([self.dataAry[1] containsString:@"支出"]) {
+            cell.textLabel.text = @"支出:";
+        }
+        }
     }
     cell.detailTextLabel.textColor = RGBCOLOR(120, 120, 121, 1);
     cell.detailTextLabel.font = [UIFont systemFontOfSize:13];

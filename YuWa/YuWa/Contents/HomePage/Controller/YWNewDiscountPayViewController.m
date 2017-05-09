@@ -515,7 +515,7 @@
     
     
     //不能小于
-    if (self.otherTotalMoney<=self.noDiscountMoney) {
+    if (self.otherTotalMoney<self.noDiscountMoney) {
         
         [JRToast showWithText:@"不打折金额不能大于消费总额"];
 
@@ -551,7 +551,7 @@
     
     
     
-    if (self.otherTotalMoney<=self.noDiscountMoney) {
+    if (self.otherTotalMoney<self.noDiscountMoney) {
         [JRToast showWithText:@"不打折金额不能大于消费总金额"];
         return;
     }
