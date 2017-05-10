@@ -10,12 +10,25 @@
 #import "TimeDownLabel.h"
 #import "MoviePayTableViewCell.h"
 #import "TotalMoneyTableViewCell.h"
+#import "MarkTableViewCell.h"
+#import "UseCouponViewController.h"
 
+
+#define MARKCELL00  @"MarkTableViewCell"
 #define TOTALCELL @"TotalMoneyTableViewCell"
 #define PAYCELL  @"MoviePayTableViewCell"
-@interface PayViewController ()<UITableViewDelegate,UITableViewDataSource,TimeDownLabelDelegate>
+@interface PayViewController ()<UITableViewDelegate,UITableViewDataSource,TimeDownLabelDelegate,UseCouponViewControllerDelegate,UIGestureRecognizerDelegate>
+{
+    NSIndexPath * markPath;
+}
 @property (nonatomic,strong) NSMutableArray * dataAry;
 @property (nonatomic,strong) UITableView * payInforTableView;
+@property (nonatomic,strong) UILabel * settomLabel;
+@property (nonatomic,assign) CGFloat payMoney;//需要支付的金额
+@property (nonatomic,assign)BOOL is_useCoupon;
+@property (nonatomic,copy)NSString * coupon_id;
+@property (nonatomic,assign) CGFloat couponMoney;//优惠券金额
+@property (nonatomic,strong) UILabel * useCouponLabel;
 @end
 
 @implementation PayViewController
@@ -24,6 +37,15 @@
         _dataAry = [NSMutableArray array];
     }
     return _dataAry;
+}
+- (UILabel*)useCouponLabel{
+    if (!_useCouponLabel) {
+        _useCouponLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width * 0.6, 10, kScreen_Width * 0.45f, 30)];
+        _useCouponLabel.textColor = RGBCOLOR(143, 144, 145, 1);
+        _useCouponLabel.font = [UIFont systemFontOfSize:15];
+        _useCouponLabel.text = @"使用优惠券";
+    }
+    return _useCouponLabel;
 }
 - (instancetype)initWithDataArray:(NSMutableArray *)ary{
     self = [super init];
@@ -71,13 +93,40 @@
 
 }
 - (void)makeUI{
-    _payInforTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStylePlain];
+    _payInforTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-50) style:UITableViewStyleGrouped];
     _payInforTableView.delegate = self;
     _payInforTableView.dataSource = self;
     
     [_payInforTableView registerNib:[UINib nibWithNibName:PAYCELL bundle:nil] forCellReuseIdentifier:PAYCELL];
     [_payInforTableView registerNib:[UINib nibWithNibName:TOTALCELL bundle:nil] forCellReuseIdentifier:TOTALCELL];
+    [_payInforTableView registerNib:[UINib nibWithNibName:MARKCELL00 bundle:nil] forCellReuseIdentifier:MARKCELL00];
+    
     [self.view addSubview:_payInforTableView];
+    
+    UIView * accountBGView = [[UIView alloc]initWithFrame:CGRectMake(0, _payInforTableView.bottom, kScreen_Width, 50)];
+    accountBGView.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:accountBGView];
+    
+    _settomLabel = [[UILabel alloc]initWithFrame:CGRectMake(24,10, kScreen_Width * 0.4f, 30)];
+    _settomLabel.textColor = CNaviColor;
+    _settomLabel.text = @"待结算 ￥0.00";
+    _settomLabel.font = [UIFont systemFontOfSize:15];
+    
+    [accountBGView addSubview:_settomLabel];
+    
+    UIButton * accountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    accountBtn.frame = CGRectMake(accountBGView.width * 0.65f, 0, accountBGView.width * 0.35f, 50);
+    accountBtn.backgroundColor = CNaviColor;
+    accountBtn.titleLabel.textColor = [UIColor whiteColor];
+    [accountBtn setTitle:@"去结算" forState:UIControlStateNormal];
+    [accountBtn addTarget:self action:@selector(toAccountAction) forControlEvents:UIControlEventTouchUpInside];
+    [accountBGView addSubview:accountBtn];
+    
+    
+}
+//去结算，支付
+- (void)toAccountAction{
+
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
@@ -108,35 +157,104 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"payCell"];
     }
+
     if (indexPath.section == 0) {
+        if (indexPath.row !=0 ||indexPath.row !=3||indexPath.row !=5) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
         if (indexPath.row == 0) {
             MoviePayTableViewCell * payCell = [tableView dequeueReusableCellWithIdentifier:PAYCELL];
-            
+             payCell.selectionStyle = UITableViewCellSelectionStyleNone;
             return payCell;
         }else if (indexPath.row == 1){
             cell.textLabel.textColor = RGBCOLOR(142, 143, 144, 1);
             cell.textLabel.font = [UIFont systemFontOfSize:15];
             cell.textLabel.text = @"优惠券抵用";
-        }else{
+            
+            [cell.contentView addSubview:self.useCouponLabel];
+            markPath = indexPath;
+        }else if (indexPath.row == 2){
             cell.textLabel.textColor = RGBCOLOR(142, 143, 144, 1);
             cell.textLabel.font = [UIFont systemFontOfSize:15];
+             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text =@"商家优惠";
-        }
-        if (indexPath.row == 3) {
+        }else if (indexPath.row == 3){
             TotalMoneyTableViewCell * totalCell = [tableView dequeueReusableCellWithIdentifier:TOTALCELL];
+            NSString * totalMoney = [totalCell.totalMoneyLabel.text substringFromIndex:1];
+            totalCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            self.payMoney = [totalMoney floatValue];
             return totalCell;
+        }else if (indexPath.row == 4){
+            cell.textLabel.textColor = CNaviColor;
+            cell.textLabel.font = [UIFont systemFontOfSize:15];
+            cell.textLabel.text =@"办理会员卡本单立减16元";
+        }else {
+            MarkTableViewCell * markCell1 = [tableView dequeueReusableCellWithIdentifier:MARKCELL00];
+            markCell1.otherLabel.hidden = YES;
+            UIImageView * otherImageView = [markCell1 viewWithTag:3];
+            otherImageView.hidden = YES;
+            markCell1.selectionStyle = UITableViewCellSelectionStyleNone;
+            return markCell1;
         }
     }else if (indexPath.section == 1){
         cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.textLabel.textColor = [UIColor blackColor];
-        UILabel * textLbl = [[UILabel alloc]initWithFrame:CGRectMake(cell.width * 0.75f, 0, cell.width * 0.2f, cell.height * 0.9f)];
-        textLbl.center = CGPointMake(cell.width * 0.85f, cell.height/2);
-        textLbl.textColor = [UIColor blackColor];
-        textLbl.font = [UIFont systemFontOfSize:12];
-        [cell.contentView addSubview:textLbl];
+        cell.textLabel.textColor = RGBCOLOR(143, 144, 145, 1);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSString * threeStr = [[UserSession instance].account substringToIndex:3];
+        NSString * fourStr = [[UserSession instance].account substringFromIndex:[UserSession instance].account.length-4];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@****%@",threeStr,fourStr];
         
     }
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 1) {
+        UseCouponViewController * useVC = [[UseCouponViewController alloc]init];
+        useVC.shop_id = self.shop_id;
+        useVC.delegate = self;
+            
+            useVC.total_money = [NSString stringWithFormat:@"%.2f",self.payMoney];
+
+        [self.navigationController pushViewController:useVC animated:YES];
+
+    }else if (indexPath.row == 2) {
+        
+    }else if (indexPath.row == 4) {
+        
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        return 10  ;
+    }
+    return  0.01f;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
+}
+//计算所需要支付的金额
+-(void)accountPayMoney{
+    self.settomLabel.text = [NSString stringWithFormat:@"待结算%.2f",self.payMoney - self.couponMoney];
+}
+
+//使用了优惠券
+- (void)DelegateGetCouponInfo:(CouponModel *)model{
+    UITableViewCell * cell = [_payInforTableView cellForRowAtIndexPath:markPath];
+    self.is_useCoupon = YES;
+    self.coupon_id = model.coupon_id ;
+
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"满%@抵%@",model.min_fee,model.discount_fee];
+
+    NSString*aa=model.discount_fee;
+    self.couponMoney=[aa floatValue];
+    
+    
+    
+    [self accountPayMoney];
+    [self.payInforTableView reloadData];
+    
+
+ 
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

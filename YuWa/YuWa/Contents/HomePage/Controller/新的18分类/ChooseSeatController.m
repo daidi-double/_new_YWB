@@ -126,6 +126,7 @@
     _seatTableView.dataSource = self;
     _seatTableView.scrollEnabled = NO;
     [self.view addSubview:_seatTableView];
+    [self.sureBtn setEnabled:NO];
     
 }
 //更换场次
@@ -236,7 +237,7 @@
     [HUD show:YES];
     __weak typeof(self) weakSelf = self;
     //修改
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"seats %zd.plist",arc4random_uniform(5)] ofType:nil];
         //网络加载数据
         NSDictionary *seatsDic = [NSDictionary dictionaryWithContentsOfFile:path];
@@ -276,6 +277,7 @@
             weakSelf.allAvailableSeats = allAvailableSeats;
             weakSelf.selecetedSeats = selecetedSeats;
             if (selecetedSeats.count == 0) {
+                [self.sureBtn setEnabled:NO];
                 _sureBtn.backgroundColor = [UIColor colorWithRed:176/255.0 green:233/255.0 blue:250/255.0 alpha:1];
                 [_sureBtn setTitle:@"请先选座" forState:UIControlStateNormal];
                 _sureBtn.userInteractionEnabled = NO;
@@ -289,6 +291,7 @@
                 _price_num.hidden = YES;
             }else{
                 _sureBtn.userInteractionEnabled = YES;
+                [_sureBtn setEnabled: YES];
                 _sureBtn.backgroundColor = CNaviColor;
                 [_sureBtn setTitle:@"去结算" forState:UIControlStateNormal];
                 _price_num.hidden = NO;
@@ -354,6 +357,7 @@
     //验证是否落单
     if (![XZSeatSelectionTool verifySelectedSeatsWithSeatsDic:self.allAvailableSeats seatsArray:self.seatsModelArray]) {
         [self showMessage:@"落单"];
+        
     }else{
         XZSeatsModel * smodel;
         XZSeatModel * model;
@@ -373,9 +377,12 @@
 }
 -(void)showMessage:(NSString *)message{
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
-//    [controller addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    if ([message isEqualToString:@"落单"]) {
+        [JRToast showWithText:message duration:1];
+        return;
+    }
     [self presentViewController:controller animated:YES completion:nil];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 *NSEC_PER_SEC)),dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 *NSEC_PER_SEC)),dispatch_get_main_queue(), ^{
        [self dismissViewControllerAnimated:controller completion:^{
            PayViewController * payVC = [[PayViewController alloc]initWithDataArray:self.payInformationArr];
            [self.navigationController pushViewController:payVC animated:YES];

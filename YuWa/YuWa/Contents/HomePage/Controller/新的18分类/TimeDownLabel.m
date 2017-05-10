@@ -31,11 +31,12 @@
     
     self.text = [NSString stringWithFormat:@"电影订单 %ld:%ld",(long)self.minute,(long)self.second];
     if (self.second==0 && self.minute==0 ) {
+        [self.delegate popToPage];
         [self.timer invalidate];
         self.timer = nil;
-        [self.delegate popToPage];
     }
 }
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
