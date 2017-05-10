@@ -33,6 +33,8 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "UPPaymentControl.h"
 
+#import "YWMessageNotificationViewController.h"
+
 @interface AppDelegate ()<EMContactManagerDelegate,EMChatManagerDelegate,EMGroupManagerDelegate,EMClientDelegate,JPUSHRegisterDelegate,WXApiDelegate>
 
 @end
@@ -80,7 +82,7 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [[EMClient sharedClient] applicationDidEnterBackground:application];
 }
- 
+
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [application setApplicationIconBadgeNumber:0];   //清除角标
@@ -317,7 +319,24 @@ fetchCompletionHandler:
         [JPUSHService handleRemoteNotification:userInfo];
         NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
         [self saveJupshNotificationDicWithDic:userInfo];
+//        YWMessageNotificationViewController*vc=[[YWMessageNotificationViewController alloc]init];
+//        UINavigationController * Nav = [[UINavigationController alloc]initWithRootViewController:vc];//这里加导航栏是因为我跳转的页面带导航栏，如果跳转的页面不带导航，那这句话请省去。
+//        [self.window.rootViewController presentViewController:Nav animated:YES completion:nil];
+        NSString * documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+        NSString * filePath1 = [NSString stringWithFormat:@"%@/isPush.plist",documentPath];
+        NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithContentsOfFile:filePath1];
+        if ([dic objectForKey:@"ispush"]) {
+            //表示存在这个key，
+            [dic setValue:@"1" forKey:@"ispush"];
+        }else{
+            [dic setValue:@"1" forKey:@"ispush"];
+        }
+        [dic writeToFile:filePath1 atomically:YES];
         
+        VIPTabBarController *tabBar=[[VIPTabBarController alloc]init];
+        self.window= [AppDelegate windowInitWithRootVC:tabBar];
+        //发送通知。是远程推送的通知
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"didReceiveNotification" object:nil];
     }else {
         // 判断为本地通知
         NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);

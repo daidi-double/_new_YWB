@@ -58,6 +58,7 @@
 @property(nonatomic,strong)NSMutableArray*mtModelArrTopShop;
 @property(nonatomic,strong)NSMutableArray*mtModelArrRecommend;
 
+
 @end
 
 @implementation VIPHomePageViewController
@@ -66,9 +67,9 @@
     [super viewDidLoad];
     //得到坐标
     [self getLocalSubName];
-    
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didReceiveNotification) name:@"didReceiveNotification" object:nil];
     [self makeNaviBar];
-    
+
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -88,7 +89,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0 ]setAlpha:1];
-    
 //    [self makeNoticeWithTime:0 withAlertBody:@"您已购买了xxxx"];
     
 }
@@ -305,7 +305,27 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.tableView.mj_header endRefreshing];
             [self.tableView.mj_footer endRefreshing];
-
+            //加载完数据之后，判断是否是推送了通知，如果是，就跳转制定页面
+            NSString * documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+            NSString * filePath1 = [NSString stringWithFormat:@"%@/isPush.plist",documentPath];
+            NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithContentsOfFile:filePath1];
+            if (dic == nil) {
+                //表示没有这个文件时候。我们创建一个.plist文件
+                NSMutableDictionary* arrM = [NSMutableDictionary dictionary];
+                [arrM setObject:@"0" forKey:@"ispush"];
+                [arrM writeToFile:filePath1 atomically:YES];
+            }else{
+                //说明已经有数据，在字典里面
+                NSString * str = dic[@"ispush"];
+                if ([str isEqualToString:@"1"]) {
+                    //说明是通知发送过来的
+                    YWMessageNotificationViewController*vc=[[YWMessageNotificationViewController alloc]init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    //跳转之后，把数据还原；
+                    [dic setValue:@"0" forKey:@"ispush"];
+                    [dic writeToFile:filePath1 atomically:YES];
+                }
+            }
         });
         
         
