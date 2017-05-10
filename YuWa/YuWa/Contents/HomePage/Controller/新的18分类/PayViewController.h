@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PayViewController : UIViewController
-
-//@property (nonatomic,strong) NSMutableArray * foodArray;
-
+@property (nonatomic,strong) NSString * shop_id;
 - (instancetype)initWithDataArray:(NSMutableArray*)ary;
 @end

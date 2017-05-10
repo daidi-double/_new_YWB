@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小计" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAP-Yr-iKb">
-                        <rect key="frame" x="8" y="8" width="35" height="21"/>
+                        <rect key="frame" x="16" y="8" width="35" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -39,12 +39,12 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="bAP-Yr-iKb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Ecg-Xx-z76"/>
                     <constraint firstAttribute="trailing" secondItem="kD4-Oq-rV8" secondAttribute="trailing" constant="15" id="Gt5-Aq-I3v"/>
                     <constraint firstAttribute="bottom" secondItem="kD4-Oq-rV8" secondAttribute="bottom" constant="8" id="PqM-9q-pTm"/>
                     <constraint firstItem="kD4-Oq-rV8" firstAttribute="top" secondItem="OID-nT-iJC" secondAttribute="bottom" constant="5" id="S8B-0o-Wdo"/>
                     <constraint firstItem="kD4-Oq-rV8" firstAttribute="trailing" secondItem="OID-nT-iJC" secondAttribute="trailing" id="ZjQ-bA-v0e"/>
                     <constraint firstItem="bAP-Yr-iKb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="c2b-Jp-Kuc"/>
-                    <constraint firstItem="bAP-Yr-iKb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="hEk-TA-kCt"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

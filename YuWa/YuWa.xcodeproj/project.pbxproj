@@ -648,6 +648,8 @@
 		AA3A861A1EC1A59F003966F1 /* MoviePayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3A86181EC1A59F003966F1 /* MoviePayTableViewCell.xib */; };
 		AA3A861E1EC1AC45003966F1 /* TotalMoneyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A861C1EC1AC45003966F1 /* TotalMoneyTableViewCell.m */; };
 		AA3A861F1EC1AC45003966F1 /* TotalMoneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3A861D1EC1AC45003966F1 /* TotalMoneyTableViewCell.xib */; };
+		AA3A86231EC1B56F003966F1 /* MarkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A86211EC1B56F003966F1 /* MarkTableViewCell.m */; };
+		AA3A86241EC1B56F003966F1 /* MarkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3A86221EC1B56F003966F1 /* MarkTableViewCell.xib */; };
 		AA3AB5341E5D1F92009BD8D9 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3AB5331E5D1F92009BD8D9 /* PlayViewController.m */; };
 		AA3AB5371E5D2166009BD8D9 /* CommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3AB5361E5D2166009BD8D9 /* CommendViewController.m */; };
 		AA3AB5391E5D2693009BD8D9 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3AB5381E5D2693009BD8D9 /* share.png */; };
@@ -2456,6 +2458,9 @@
 		AA3A861B1EC1AC45003966F1 /* TotalMoneyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalMoneyTableViewCell.h; sourceTree = "<group>"; };
 		AA3A861C1EC1AC45003966F1 /* TotalMoneyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalMoneyTableViewCell.m; sourceTree = "<group>"; };
 		AA3A861D1EC1AC45003966F1 /* TotalMoneyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalMoneyTableViewCell.xib; sourceTree = "<group>"; };
+		AA3A86201EC1B56F003966F1 /* MarkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkTableViewCell.h; sourceTree = "<group>"; };
+		AA3A86211EC1B56F003966F1 /* MarkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkTableViewCell.m; sourceTree = "<group>"; };
+		AA3A86221EC1B56F003966F1 /* MarkTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkTableViewCell.xib; sourceTree = "<group>"; };
 		AA3AB5321E5D1F92009BD8D9 /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
 		AA3AB5331E5D1F92009BD8D9 /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
 		AA3AB5351E5D2166009BD8D9 /* CommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommendViewController.h; sourceTree = "<group>"; };
@@ -5377,6 +5382,9 @@
 				AA3A861B1EC1AC45003966F1 /* TotalMoneyTableViewCell.h */,
 				AA3A861C1EC1AC45003966F1 /* TotalMoneyTableViewCell.m */,
 				AA3A861D1EC1AC45003966F1 /* TotalMoneyTableViewCell.xib */,
+				AA3A86201EC1B56F003966F1 /* MarkTableViewCell.h */,
+				AA3A86211EC1B56F003966F1 /* MarkTableViewCell.m */,
+				AA3A86221EC1B56F003966F1 /* MarkTableViewCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -10099,6 +10107,7 @@
 				AA35448D1E9DF23900A2EC73 /* 4baobaoLVUP3@2x.jpg in Resources */,
 				C130199E1DB1FD2F00E24C88 /* qr_bottom_right@2x.png in Resources */,
 				AA3544D41E9DF23900A2EC73 /* 0baobaoBG4@2x.jpg in Resources */,
+				AA3A86241EC1B56F003966F1 /* MarkTableViewCell.xib in Resources */,
 				C11F14EF1DC83B92005C58CF /* banner_normal@2x.png in Resources */,
 				AA3544181E9DF23800A2EC73 /* 2baobaoLVUP42@2x.jpg in Resources */,
 				B32E4AE51DB5B3BA00358076 /* YWStormSubSortCollectionViewCell.xib in Resources */,
@@ -11574,6 +11583,7 @@
 				C1F7BE421DB1C95400CCAF96 /* DatePickerView.m in Sources */,
 				AAF30ABE1E5E929900793382 /* XZSeatSelectionTool.m in Sources */,
 				AAF30AAB1E5E87AE00793382 /* XZAppLogoView.m in Sources */,
+				AA3A86231EC1B56F003966F1 /* MarkTableViewCell.m in Sources */,
 				B38B2E4B1D8FACD8004D5256 /* SDCycleScrollView.m in Sources */,
 				B33A26631D9A68040092CB12 /* MWPhotoBrowser.m in Sources */,
 				B32E4AE41DB5B3BA00358076 /* YWStormSubSortCollectionViewCell.m in Sources */,
