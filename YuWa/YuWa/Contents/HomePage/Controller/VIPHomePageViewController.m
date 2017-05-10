@@ -58,6 +58,9 @@
 @property(nonatomic,strong)NSMutableArray*mtModelArrTopShop;
 @property(nonatomic,strong)NSMutableArray*mtModelArrRecommend;
 
+
+@property (nonatomic, assign) int ispush;
+
 @end
 
 @implementation VIPHomePageViewController
@@ -66,9 +69,9 @@
     [super viewDidLoad];
     //得到坐标
     [self getLocalSubName];
-    
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didReceiveNotification) name:@"didReceiveNotification" object:nil];
     [self makeNaviBar];
-    
+
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -82,13 +85,20 @@
     
     
 }
+#pragma mark---收到通知调用的方法
+-(void)didReceiveNotification{
+    self.ispush = 1;
+}
 - (void)tagsAliasCallback:(int)iResCode  tags:(NSSet *)tags alias:(NSString *)alias {
     NSLog(@"起别名 :      rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0 ]setAlpha:1];
-    
+
+//    if (self.ispush) {
+//
+//    }
 //    [self makeNoticeWithTime:0 withAlertBody:@"您已购买了xxxx"];
     
 }
@@ -305,7 +315,22 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.tableView.mj_header endRefreshing];
             [self.tableView.mj_footer endRefreshing];
-
+            NSString * documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+            NSString * filePath1 = [NSString stringWithFormat:@"%@/isPush.plist",documentPath];
+            NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithContentsOfFile:filePath1];
+            if (dic == nil) {
+                NSMutableDictionary* arrM = [NSMutableDictionary dictionary];
+                [arrM setObject:@"0" forKey:@"ispush"];
+                [arrM writeToFile:filePath1 atomically:YES];
+            }else{
+                NSString * str = dic[@"ispush"];
+                if ([str isEqualToString:@"1"]) {
+                    YWMessageNotificationViewController*vc=[[YWMessageNotificationViewController alloc]init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    [dic setValue:@"0" forKey:@"ispush"];
+                    [dic writeToFile:filePath1 atomically:YES];
+                }
+            }
         });
         
         
