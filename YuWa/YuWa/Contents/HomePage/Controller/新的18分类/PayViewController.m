@@ -7,17 +7,16 @@
 //
 
 #import "PayViewController.h"
-#import "TimeDownLabel.h"
 #import "MoviePayTableViewCell.h"
 #import "TotalMoneyTableViewCell.h"
 #import "MarkTableViewCell.h"
 #import "UseCouponViewController.h"
-
+#import "PCPayViewController.h"
 
 #define MARKCELL00  @"MarkTableViewCell"
 #define TOTALCELL @"TotalMoneyTableViewCell"
 #define PAYCELL  @"MoviePayTableViewCell"
-@interface PayViewController ()<UITableViewDelegate,UITableViewDataSource,TimeDownLabelDelegate,UseCouponViewControllerDelegate,UIGestureRecognizerDelegate>
+@interface PayViewController ()<UITableViewDelegate,UITableViewDataSource,UseCouponViewControllerDelegate,UIGestureRecognizerDelegate>
 {
     NSIndexPath * markPath;
 }
@@ -27,8 +26,13 @@
 @property (nonatomic,assign) CGFloat payMoney;//需要支付的金额
 @property (nonatomic,assign)BOOL is_useCoupon;
 @property (nonatomic,copy)NSString * coupon_id;
+@property (nonatomic, strong)NSTimer *timer;
+@property (nonatomic,assign)NSInteger second;
+@property (nonatomic,assign)NSInteger minute;
+@property (nonatomic,strong)UILabel * timerLabel;
 @property (nonatomic,assign) CGFloat couponMoney;//优惠券金额
 @property (nonatomic,strong) UILabel * useCouponLabel;
+@property (nonatomic,assign) BOOL is_cancel;//取消代理
 @end
 
 @implementation PayViewController
@@ -60,22 +64,25 @@
     self.view.backgroundColor = [UIColor whiteColor];
     MyLog(@"%ld----%@",self.dataAry.count,self.dataAry);
     [self makeUI];
-    [self timeDown];
     [self showMessage:@"选座票购买后无法退换，请仔细核对购票信息"];
     
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //开启定时器
+    [self.timer setFireDate:[NSDate distantPast]];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
 - (void)popToPage{
-    [self quitPayPage];
+  
+   [self quitPayPage];
+
 }
 #pragma mark - 倒计时
-- (void)timeDown{
-    TimeDownLabel *lable = [[TimeDownLabel alloc]initWithFrame:CGRectMake(100, 100, kScreen_Width/2, 100)];
-    lable.minute = 14;
-    lable.second = 59;
-    lable.delegate = self;
-    
-    self.navigationItem.titleView = lable;
-}
+
 - (void)quitPayPage{
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您选择场次信息已过期或者支付超时，请重新选座购买" preferredStyle:UIAlertControllerStyleAlert];
 
@@ -85,7 +92,23 @@
     [self presentViewController:controller animated:YES completion:nil];
 
 }
-
+- (void)timeHeadle{
+    
+    self.second--;
+    if (self.second==-1) {
+        self.second=59;
+        self.minute--;
+        
+    }
+    
+    self.timerLabel.text = [NSString stringWithFormat:@"电影订单 %ld:%ld",(long)self.minute,(long)self.second];
+    if (self.second==0 && self.minute==0 ) {
+        [self.timer invalidate];
+        self.timer = nil;
+        [self quitPayPage];
+        
+    }
+}
 -(void)showMessage:(NSString *)message{
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"温馨提示" message:message preferredStyle:UIAlertControllerStyleAlert];
         [controller addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
@@ -102,6 +125,14 @@
     [_payInforTableView registerNib:[UINib nibWithNibName:MARKCELL00 bundle:nil] forCellReuseIdentifier:MARKCELL00];
     
     [self.view addSubview:_payInforTableView];
+    self.timerLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 100, kScreen_Width/2, 100)];
+    
+    self.timerLabel.textAlignment = NSTextAlignmentCenter;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeHeadle) userInfo:nil repeats:YES];
+    self.second = 59;
+    self.minute = 14;
+    self.navigationItem.titleView = self.timerLabel;
+    
     
     UIView * accountBGView = [[UIView alloc]initWithFrame:CGRectMake(0, _payInforTableView.bottom, kScreen_Width, 50)];
     accountBGView.backgroundColor = [UIColor lightGrayColor];
@@ -126,7 +157,11 @@
 }
 //去结算，支付
 - (void)toAccountAction{
-
+    PCPayViewController * pcVC = [[PCPayViewController alloc]init];
+    pcVC.blanceMoney = self.payMoney;
+    pcVC.shop_ID = self.shop_id;
+    pcVC.order_id = self.order_id;
+    [self.navigationController pushViewController:pcVC animated:YES];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
