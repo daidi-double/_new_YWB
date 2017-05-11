@@ -67,39 +67,32 @@
     [super viewDidLoad];
     //得到坐标
     [self getLocalSubName];
-            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didReceiveNotification) name:@"didReceiveNotification" object:nil];
     [self makeNaviBar];
-
-    [self setAutomaticallyAdjustsScrollViewInsets:YES];
-    [self.view addSubview:self.tableView];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    [self.tableView registerClass:[ShoppingTableViewCell class] forCellReuseIdentifier:CELL1];
-    [self.tableView registerNib:[UINib nibWithNibName:CELL2 bundle:nil] forCellReuseIdentifier:CELL2];
+    [self addTableVIew];
     [self setUpMJRefresh];
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [JPUSHService setAlias:[UserSession instance].account callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
-    });
-    
-    
-}
-- (void)tagsAliasCallback:(int)iResCode  tags:(NSSet *)tags alias:(NSString *)alias {
-    NSLog(@"起别名 :      rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0 ]setAlpha:1];
 //    [self makeNoticeWithTime:0 withAlertBody:@"您已购买了xxxx"];
-    
+}
+- (void)tagsAliasCallback:(int)iResCode  tags:(NSSet *)tags alias:(NSString *)alias {
+    NSLog(@"起别名 :      rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 
-#pragma mark  -- 得到地理位置
-- (CLGeocoder *)geocoder{
-    if (!_geocoder) {
-        _geocoder = [[CLGeocoder alloc]init];
-    }
-    return _geocoder;
+-(void)addTableVIew{
+    [self setAutomaticallyAdjustsScrollViewInsets:YES];
+    [self.view addSubview:self.tableView];
+    //注册cell
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[ShoppingTableViewCell class] forCellReuseIdentifier:CELL1];
+    [self.tableView registerNib:[UINib nibWithNibName:CELL2 bundle:nil] forCellReuseIdentifier:CELL2];
+    //起别名
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [JPUSHService setAlias:[UserSession instance].account callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+    });
 }
+
 
 - (void)getLocalSubName{
     CLLocation * location = [[CLLocation alloc]initWithLatitude:self.location.coordinate.latitude longitude:self.location.coordinate.longitude];
@@ -199,21 +192,11 @@
     UITapGestureRecognizer*tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchinPut)];
     [self.centerView addGestureRecognizer:tap];
     
-    
-    
     self.navigationItem.titleView=centerView;
     self.leftItem=leftItem;
     self.rightItem=rightItem;
     self.rightItem2=rightItem2;
-    
-    
-    
-    
 }
-
-
-
-
 -(void)setUpMJRefresh{
     self.pagen=10;
     self.pages=-1;
@@ -230,12 +213,6 @@
     
     //立即刷新
     [self.tableView.mj_header beginRefreshing];
-    
-
-    
-    
- 
-    
 }
 
 
@@ -333,7 +310,6 @@
     }];
     
 }
-
 -(void)loadingMoreShowInfo{
     self.pages++;
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_MORELOADING];
@@ -850,5 +826,12 @@
         _zheAry = [NSMutableArray array];
     }
     return _zheAry;
+}
+#pragma mark  -- 得到地理位置
+- (CLGeocoder *)geocoder{
+    if (!_geocoder) {
+        _geocoder = [[CLGeocoder alloc]init];
+    }
+    return _geocoder;
 }
 @end

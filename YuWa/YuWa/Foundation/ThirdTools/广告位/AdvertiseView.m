@@ -144,6 +144,8 @@ static int const showtime = 3;
     }];
 
 }
-
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 @end

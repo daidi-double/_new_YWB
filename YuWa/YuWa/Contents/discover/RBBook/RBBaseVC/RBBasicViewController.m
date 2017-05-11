@@ -27,13 +27,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     [self addTextViewNotification];//键盘弹出
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
     [self cancelComment];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];//取消键盘监听
 }
@@ -243,6 +241,6 @@
 //
 }
 -(void)dealloc{
-    [[NSNotificationCenter defaultCenter]removeObserver:UIKeyboardWillChangeFrameNotification];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 @end
