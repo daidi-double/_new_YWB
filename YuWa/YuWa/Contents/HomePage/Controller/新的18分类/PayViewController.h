@@ -10,5 +10,6 @@
 
 @interface PayViewController : UIViewController
 @property (nonatomic,strong) NSString * shop_id;
+@property (nonatomic,assign) CGFloat order_id;
 - (instancetype)initWithDataArray:(NSMutableArray*)ary;
 @end

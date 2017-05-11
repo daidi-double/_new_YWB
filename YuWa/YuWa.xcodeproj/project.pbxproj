@@ -704,7 +704,6 @@
 		AA466CCC1E5449D1009E9F98 /* MovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA466CCA1E5449D1009E9F98 /* MovieViewController.xib */; };
 		AA4706861E6558AA00D09619 /* MovieHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4706851E6558AA00D09619 /* MovieHeaderModel.m */; };
 		AA47068A1E655F5B00D09619 /* MovieCinemaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4706891E655F5B00D09619 /* MovieCinemaModel.m */; };
-		AA47068E1E65689300D09619 /* TimeDownLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA47068D1E65689300D09619 /* TimeDownLabel.m */; };
 		AA6208121E8E8CCB0001960C /* YWScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6208101E8E8CCB0001960C /* YWScanViewController.m */; };
 		AA6B5EC31EA9FCF900E6A83D /* ShopDetailGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B5EC21EA9FCF900E6A83D /* ShopDetailGoodsModel.m */; };
 		AA6B5EC71EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B5EC51EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m */; };
@@ -2543,8 +2542,6 @@
 		AA4706851E6558AA00D09619 /* MovieHeaderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieHeaderModel.m; sourceTree = "<group>"; };
 		AA4706881E655F5B00D09619 /* MovieCinemaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCinemaModel.h; sourceTree = "<group>"; };
 		AA4706891E655F5B00D09619 /* MovieCinemaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCinemaModel.m; sourceTree = "<group>"; };
-		AA47068C1E65689300D09619 /* TimeDownLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeDownLabel.h; sourceTree = "<group>"; };
-		AA47068D1E65689300D09619 /* TimeDownLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeDownLabel.m; sourceTree = "<group>"; };
 		AA62080F1E8E8CCB0001960C /* YWScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWScanViewController.h; sourceTree = "<group>"; };
 		AA6208101E8E8CCB0001960C /* YWScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWScanViewController.m; sourceTree = "<group>"; };
 		AA6B5EC11EA9FCF900E6A83D /* ShopDetailGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopDetailGoodsModel.h; sourceTree = "<group>"; };
@@ -5292,8 +5289,6 @@
 				AA3A86151EC1A566003966F1 /* cell */,
 				AA3805FB1E65086900DB8C4C /* PayViewController.h */,
 				AA3805FC1E65086900DB8C4C /* PayViewController.m */,
-				AA47068C1E65689300D09619 /* TimeDownLabel.h */,
-				AA47068D1E65689300D09619 /* TimeDownLabel.m */,
 			);
 			name = "支付";
 			sourceTree = "<group>";
@@ -11407,7 +11402,6 @@
 				B33A268E1D9A68040092CB12 /* UIViewController+HUD.m in Sources */,
 				AA3BFE3E1E8559B500D669C2 /* YWBankModel.m in Sources */,
 				C1F7BE321DB1C95400CCAF96 /* defineButton.m in Sources */,
-				AA47068E1E65689300D09619 /* TimeDownLabel.m in Sources */,
 				B38B2E011D8FACD8004D5256 /* JRToast.m in Sources */,
 				B38B2F031D8FC82F004D5256 /* RBNodeDRecommendTableViewCell.m in Sources */,
 				B33A26A81D9A68040092CB12 /* EaseBubbleView+Voice.m in Sources */,
