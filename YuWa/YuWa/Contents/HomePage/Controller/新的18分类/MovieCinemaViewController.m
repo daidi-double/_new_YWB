@@ -34,11 +34,7 @@
     self.title = @"影院";//修改为电影名称
 
     [self.view addSubview:self.movieTableView];
-//    UIBarButtonItem * shareBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"share.png"] style:UIBarButtonItemStyleDone target:self action:@selector(shareBtn)];
-//    UIBarButtonItem * collectBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"home_grayStar@2x.png"] style:UIBarButtonItemStyleDone target:self action:@selector(collectBtn)];
-//    NSArray * ary = @[collectBtn,shareBtn];
-//    self.navigationItem.rightBarButtonItems = ary;
-    // Do any additional setup after loading the view from its nib.
+
 }
 
 - (UITableView*)movieTableView{
@@ -50,12 +46,7 @@
     }
     return _movieTableView;
 }
-- (void)collectBtn{
-    NSLog(@"收藏");
-}
-- (void)shareBtn{
-    NSLog(@"分享");
-}
+
 #pragma mark - tableviewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;

@@ -20,7 +20,7 @@
 
 #import "NewHotMovieCollectCell.h"
 
-
+#import "BannerModel.h"//轮播图模型
 #import "MovieHeaderModel.h"
 
 
@@ -105,17 +105,19 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView * headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.5f)];
+    UIView * headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.7f)];
     headerView.backgroundColor = [UIColor lightGrayColor];
-    hotScrollView = [[HotMovieScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, headerView.size.height * 0.4f) andDataAry:self.hotMovieSAry];
-        hotScrollView.contentSize = CGSizeMake(5*kScreen_Width, headerView.size.height * 0.4f);//容量要根据数据修改
-        hotScrollView.delegate = self;
-        hotScrollView.pagingEnabled = YES;
-        hotScrollView.HotDelegate = self;
+    hotScrollView = [[HotMovieScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, headerView.size.height * 0.4f-15) andDataAry:self.hotMovieSAry];
+    hotScrollView.contentSize = CGSizeMake(self.hotMovieSAry.count*kScreen_Width, headerView.size.height * 0.4f);//容量要根据数据修改
+    hotScrollView.delegate = self;
+    hotScrollView.pagingEnabled = YES;
+    hotScrollView.HotDelegate = self;
+    [hotScrollView setContentOffset:CGPointMake(kScreen_Width, 0) animated:NO];
+    hotScrollView.showsHorizontalScrollIndicator = NO;
     [headerView addSubview:hotScrollView];
         
         UIPageControl * moviePage = [[UIPageControl alloc]initWithFrame:CGRectMake(0, headerView.size.height * 0.3f, kScreen_Width, 30)];
-        moviePage.numberOfPages = 5;//修改
+        moviePage.numberOfPages = self.hotMovieSAry.count;//修改
         moviePage.currentPage = 0;
         moviePage.currentPageIndicatorTintColor = [UIColor redColor];
         moviePage.pageIndicatorTintColor = [UIColor whiteColor];
@@ -126,21 +128,21 @@
         _page = moviePage;
         
     
-    UIView * hotMovieBGView = [[UIView alloc]initWithFrame:CGRectMake(0, headerView.size.height*0.4f, kScreen_Width, headerView.size.height*0.1f)];
+    UIView * hotMovieBGView = [[UIView alloc]initWithFrame:CGRectMake(0, hotScrollView.bottom, kScreen_Width, headerView.size.height*0.07f)];
         hotMovieBGView.backgroundColor = [UIColor whiteColor];
         
         
     [headerView addSubview: hotMovieBGView];
-        UILabel * hotLbl = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, kScreen_Width/2, hotMovieBGView.size.height)];
+        UILabel * hotLbl = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, kScreen_Width/2, hotMovieBGView.size.height)];
         hotLbl.textAlignment = NSTextAlignmentLeft;
-        hotLbl.textColor = [UIColor blackColor];
+        hotLbl.textColor = RGBCOLOR(123, 124, 125, 1);
         hotLbl.font = [UIFont systemFontOfSize:20];
         hotLbl.text = @"热映影片";
         
         [hotMovieBGView addSubview:hotLbl];
         
         UIButton * lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        lookBtn.frame = CGRectMake(kScreen_Width*0.75, 0, kScreen_Width*0.25, hotMovieBGView.size.height);
+        lookBtn.frame = CGRectMake(kScreen_Width*0.75, 5, kScreen_Width*0.25, hotMovieBGView.size.height);
         [lookBtn setTitle:@"查看全部 >" forState:UIControlStateNormal];
         [lookBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [lookBtn addTarget:self action:@selector(lookAll:) forControlEvents:UIControlEventTouchUpInside];
@@ -148,16 +150,48 @@
         [hotMovieBGView addSubview:lookBtn];
         
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
-        UICollectionView *movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, headerView.size.height * 0.5f, kScreen_Width, headerView.size.height*0.6f-10) collectionViewLayout:layout];
+        UICollectionView *movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, hotMovieBGView.bottom, kScreen_Width, headerView.size.height*0.57f-35) collectionViewLayout:layout];
        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
-//        [movieCollectView registerClass:[HotMovieCollectCell class] forCellWithReuseIdentifier:newHotCell];
+
 
     [movieCollectView registerNib:[UINib nibWithNibName:newHotCell bundle:nil] forCellWithReuseIdentifier:newHotCell];
         movieCollectView.backgroundColor = [UIColor whiteColor];
         movieCollectView.delegate = self;
         movieCollectView.dataSource = self;
         [headerView addSubview:movieCollectView];
+    
+    
+    NSArray * titleAry = @[@"全城",@"离我最近",@"特色"];
+    CGFloat btnWidth = (kScreen_Width-6)/3;
+    for (int i = 0; i<3; i++) {
+        UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        selectBtn.frame = CGRectMake((btnWidth+3)*i, headerView.height -30,btnWidth , 30);
+        selectBtn.tag = 1111 + i;
+        selectBtn.backgroundColor = [UIColor whiteColor];
+        [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
+        [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
+        [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_selected"] forState:UIControlStateSelected];
+        [selectBtn setTitleColor:RGBCOLOR(32, 184, 230, 1) forState:UIControlStateSelected];
+        [selectBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        [selectBtn addTarget:self action:@selector(menuBtn:) forControlEvents:UIControlEventTouchUpInside];
+        if (i != 1) {
+            [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
+            [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 40, 0, -40)];
+        }else{
+            [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
+            [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
+        }
+        
+        if (_isselected == 0) {
+            selectBtn.selected = NO;
+        }
+        
+        [headerView addSubview:selectBtn];
+    }
+
     
     return headerView;
 
@@ -167,20 +201,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-        return kScreen_Height * 0.55f;
+        return kScreen_Height * 0.7f;
 
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0){
-        return 0.01f;
-    }else if (indexPath.row == 1){
-        return 30.f;
-    }else{
+
         return 70.f;
-    }
    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -190,71 +219,12 @@
 
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"movieTableCell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"movieTableCell"];
-    }
-//    if (indexPath.section == 0) {
-//        cell.textLabel.text = @"猫眼头条";
-////        cell.textLabel.textColor = [UIColor redColor];
-//        cell.textLabel.textColor = [UIColor colorWithRed:255/255.0 green:55/255.0 blue:56/255.0 alpha:1];
-//        cell.textLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:25.0f];
-//        UIImageView * lineView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"headerline.png"]];
-//        lineView.frame = CGRectMake(kScreen_Width * 0.35f, 3, 10, cell.height-15);
-//        [cell.contentView addSubview:lineView];
-//        
-//        UIButton * detailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        detailBtn.frame = CGRectMake(cell.width*0.41f, 0, kScreen_Width-cell.width*0.41f, cell.height);
-//        [detailBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-//        [detailBtn setTitle:@"查看详情" forState:UIControlStateNormal];
-//        detailBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-//        detailBtn.titleLabel.textAlignment = 0;
-//        [detailBtn addTarget:self action:@selector(lookDetail:) forControlEvents:UIControlEventTouchUpInside];
-//        [cell.contentView addSubview:detailBtn];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    
-//    }else{
-    if (indexPath.row == 0) {
-        return cell;
-    }else  if (indexPath.row == 1) {
-        markTableIndexPath = indexPath;
-        NSArray * titleAry = @[@"全城",@"离我最近",@"特色"];
-        CGFloat btnWidth = (kScreen_Width-6)/3;
-        for (int i = 0; i<3; i++) {
-            UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            selectBtn.frame = CGRectMake((btnWidth+3)*i, 0,btnWidth , 30);
-            selectBtn.tag = 1111 + i;
-            selectBtn.backgroundColor = [UIColor whiteColor];
-            [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
-            [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
-            [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_selected"] forState:UIControlStateSelected];
-            [selectBtn setTitleColor:RGBCOLOR(32, 184, 230, 1) forState:UIControlStateSelected];
-            [selectBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-            selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-            
-            [selectBtn addTarget:self action:@selector(menuBtn:) forControlEvents:UIControlEventTouchUpInside];
-            if (i != 1) {
-                [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
-                [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 40, 0, -40)];
-            }else{
-                [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
-                [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
-            }
-            
-            if (_isselected == 0) {
-                selectBtn.selected = NO;
-            }
-            
-            [cell.contentView addSubview:selectBtn];
-        }
-        return cell;
-    }else{
-        
-        CinemaCell * cell = [[CinemaCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cinemaCell"  andDataAry:self.theaterNameAry];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+        CinemaCell * cinemaCell = [[CinemaCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cinemaCell"  andDataAry:self.theaterNameAry];
+        cinemaCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-        return cell;
-    }
+        return cinemaCell;
+    
 
 }
 #pragma mark - collectViewDelegate
@@ -300,7 +270,22 @@
 
 #pragma mark - requestData
 - (void)requestData{
-    
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOMEPAGE];
+    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID]};
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"电影首页%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            for (NSDictionary * dict in data[@"data"]) {
+                
+                BannerModel* model = [BannerModel yy_modelWithDictionary:dict];
+                [self.hotMovieSAry addObject:model];
+            }
+        }else{
+            [JRToast showWithText:@"网络超时，请检查网络" duration:1];
+        }
+        [self.movieTableView reloadData];
+    }];
     [self.movieTableView.mj_header endRefreshing];
     [self.movieTableView.mj_footer endRefreshing];
     
@@ -329,13 +314,13 @@
     btn.selected = YES;
     markBtn.selected = NO;
     markBtn = btn;
-    [_movieTableView scrollToRowAtIndexPath:markTableIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [_movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
    
     if (menuBG) {
         [menuBG removeFromSuperview];
     }
 
-    menuBG = [[UIView alloc]initWithFrame:CGRectMake(0, NavigationHeight+kScreen_Height*0.05+5, kScreen_Width, kScreen_Height)];
+    menuBG = [[UIView alloc]initWithFrame:CGRectMake(0, NavigationHeight, kScreen_Width, kScreen_Height)];
     menuBG.backgroundColor = RGBCOLOR(195, 202, 203, 0.3);
     [self.view addSubview:menuBG];
     UITapGestureRecognizer*cancelFirstObject=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelFirstObject:)];
@@ -377,10 +362,10 @@
 - (void)timer:(NSTimer*)timer{
     static int a = 0;
     
-    hotScrollView.contentOffset = CGPointMake(a%5*kScreen_Width, 0);
-    _page.currentPage = a%5;//修改
+    hotScrollView.contentOffset = CGPointMake((a%self.hotMovieSAry.count)*kScreen_Width, 0);
+    _page.currentPage = a%self.hotMovieSAry.count;//修改
     a++;
-
+    MyLog(@"aaaa = %d",a);
 }
 - (void)pageController:(UIPageControl*)page{
     hotScrollView.contentOffset = CGPointMake(_page.currentPage * kScreen_Width, 0);
@@ -388,6 +373,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     _page.currentPage = scrollView.contentOffset.x/kScreen_Width;
 }
+
+
 #pragma mark - 懒加载
 - (UITableView *)movieTableView {
     

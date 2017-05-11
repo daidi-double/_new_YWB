@@ -8,6 +8,8 @@
 
 #import "HotMovieScrollView.h"
 #import "CarouselViewCell.h"
+#import "BannerModel.h"
+
 @interface HotMovieScrollView()<UIGestureRecognizerDelegate>
 @property (nonatomic,strong) NSMutableArray * dataArr;
 @end
@@ -18,30 +20,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor grayColor];
+        self.dataArr = dataAry;
         [self setScrollectViewImage];
 
-        self.dataArr = dataAry;
         
     }
     return self;
 }
 
 - (void)setScrollectViewImage{
-//    for (int i = 0; i<self.dataArr.count; i++) {
+    for (int i = 0; i<self.dataArr.count; i++) {
     
-    for (int i = 0; i<5; i++) {
         UIImageView * pictureImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width*i, 0, kScreen_Width, self.bounds.size.height)];
         pictureImage.tag = 100+i;
-        /////////////////////////////
-//        删
-        NSString*imageName=[NSString stringWithFormat:@"1baobaoLVUP%d@2x.jpg",i+1];
-//        NSBundle*bundle=[NSBundle mainBundle];
-//        NSString*path=[bundle pathForResource:imageName ofType:@"jpg"];
-//        
-//        UIImage*image=[UIImage imageWithContentsOfFile:path];
-        UIImage*image=[UIImage imageNamed:imageName];
-        [self.dataArr addObject:image];
-        ////////////////////////////
+
         UITapGestureRecognizer * tapGes = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchToDetail:)];
         tapGes.numberOfTapsRequired = 1;
         tapGes.numberOfTouchesRequired = 1;
@@ -49,7 +41,8 @@
         
         [pictureImage addGestureRecognizer:tapGes];
         pictureImage.userInteractionEnabled = YES;
-        pictureImage.image = _dataArr[i];
+        BannerModel * model = self.dataArr[i];
+        [pictureImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",model.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
         [self addSubview:pictureImage];
     }
 }

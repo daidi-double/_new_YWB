@@ -79,12 +79,12 @@
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     ChooseMovieHeaderView * movieView = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.3f) andDataAry:self.headerViewAry];
     movieView.delegate =self;
-//    UITapGestureRecognizer*PrivateTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDetali)];
-//    PrivateTap.numberOfTouchesRequired = 1; 
-//    PrivateTap.numberOfTapsRequired = 1;
-//    PrivateTap.delegate= self;
-//    movieView.contentMode = UIViewContentModeScaleToFill;
-//    [movieView addGestureRecognizer:PrivateTap];
+    UITapGestureRecognizer*PrivateTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDetali)];
+    PrivateTap.numberOfTouchesRequired = 1; 
+    PrivateTap.numberOfTapsRequired = 1;
+    PrivateTap.delegate= self;
+    movieView.contentMode = UIViewContentModeScaleToFill;
+    [movieView addGestureRecognizer:PrivateTap];
     movieView.backgroundColor = [UIColor darkGrayColor];
     return movieView;
 }
@@ -307,10 +307,10 @@
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
     [_movieTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
 }
-//- (void)tapDetali{
-//    NSLog(@"详细界面");
-//
-//}
+- (void)tapDetali{
+    NSLog(@"详细界面");
+
+}
 - (void)play{
     PlayViewController * playVC = [[PlayViewController alloc]init];
     

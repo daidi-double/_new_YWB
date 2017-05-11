@@ -7,7 +7,15 @@
 //
 
 #import "CinemaDetaliController.h"
+#import "MovieShopTableViewCell.h"
+#import "CinemaCharacteristicTableViewCell.h"
+#import "InfomationTableViewCell.h"
+#import "CommentTableViewCell.h"
 
+#define COMMENTCELL00  @"CommentTableViewCell"
+#define INFOCELL23  @"InfomationTableViewCell"
+#define CharacteristicCell  @"CinemaCharacteristicTableViewCell"
+#define MOVIECELL12 @"MovieShopTableViewCell"
 @interface CinemaDetaliController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView * cinemaTableView;
 @property (nonatomic,strong)NSMutableArray * cellDataArr;
@@ -30,10 +38,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"影院详情";
-    NSArray * title = @[@"未取票用户放映前60分钟可退",@"未取票用户放映前60分钟可改签",@"限网上选座后取票",@"免押金",@"每位观影用户可免费带领1名身高1.3米（含）一下儿童同场观影，该儿童观影与大人同坐，不予单独出票"];
-    NSArray * image = @[@"退",@"改签",@"取票机",@"3D眼镜",@"儿童优惠"];
-    [self.cellImageArr addObjectsFromArray:image];
-    [self.cellDataArr addObjectsFromArray:title];
     [self makeUI];
     // Do any additional setup after loading the view.
 }
@@ -43,30 +47,44 @@
     _cinemaTableView.delegate = self;
     _cinemaTableView.dataSource = self;
     
+    [_cinemaTableView registerNib:[UINib nibWithNibName:MOVIECELL12 bundle:nil] forCellReuseIdentifier:MOVIECELL12];
+    [_cinemaTableView registerNib:[UINib nibWithNibName:CharacteristicCell bundle:nil] forCellReuseIdentifier:CharacteristicCell];
+    [_cinemaTableView registerNib:[UINib nibWithNibName:INFOCELL23 bundle:nil] forCellReuseIdentifier:INFOCELL23];
+    [_cinemaTableView registerNib:[UINib nibWithNibName:COMMENTCELL00 bundle:nil] forCellReuseIdentifier:COMMENTCELL00];
     [self.view addSubview:_cinemaTableView];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 2;
+        return 1;
     }else{
         return 6;//修改
     }
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1 && indexPath.row == 5) {
-        return 65.f;
-    }else if (indexPath.section == 0){
+    if (indexPath.section == 0) {
+        return 165.f;
+    }else if (indexPath.section == 1){
+
         if (indexPath.row == 0) {
-            return 55.f;
-        }else{
-            return 30.f;
+            return 25.f;
+        }else if (indexPath.row == 1){
+            return 80.f;
+        }else {
+            return 50.f;
+        }
+       
+    }else if (indexPath.section == 2){
+        if (indexPath.row == 0) {
+            return 25.f;
+        }else {
+            return 50.f;
         }
     }
-    return 44.f;
+    return 50.f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 1;
@@ -81,77 +99,41 @@
     }
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, MAXFLOAT)];
-        cell.textLabel.text = @"横店电影城";
-        cell.textLabel.textColor = [UIColor blackColor];
-        cell.detailTextLabel.text = @"4.0分";
-        cell.detailTextLabel.textColor = [UIColor orangeColor];
-       
-        }else{
-            cell.imageView.image = [UIImage imageNamed:@"home_locate@2x.png"];
-            cell.textLabel.text = @"地址";
+        MovieShopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:MOVIECELL12];
         
-            UIButton * iphoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            iphoneBtn.frame = CGRectMake(cell.width*0.8f, 5, cell.width*0.2f, cell.height/2);
-            iphoneBtn.backgroundColor = [UIColor clearColor];
-            [iphoneBtn setImage:[UIImage imageNamed:@"dianhua.png"] forState:UIControlStateNormal];
-            [iphoneBtn addTarget:self action:@selector(iphoneNum) forControlEvents:UIControlEventTouchUpInside];
-            iphoneBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-            [cell.contentView addSubview:iphoneBtn];
-
-            
-            CGFloat itemH =  cell.height * 0.3f;
-            CGFloat itemW = 0;
-            if (cell.imageView.image.size.width) {
-                itemW = cell.imageView.image.size.height / cell.imageView.image.size.width * itemH;
-                
-                if (itemH >= itemW) {
-                    itemH = cell.height * 0.3f;
-                    itemW = cell.imageView.image.size.width * itemH/cell.imageView.image.size.height;
-                }
-            }
-            
-            CGSize itemSize = CGSizeMake(itemW,cell.height*0.5f);
-            UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
-            CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
-            [cell.imageView.image drawInRect:imageRect];
-            cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-        }
+        return cell;
         
-    }else {
+        
+    }else if(indexPath.section ==1){
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"特色信息";
-            cell.textLabel.textColor = [UIColor blackColor];
-        }else{
-            cell.imageView.image = [UIImage imageNamed:_cellImageArr[indexPath.row - 1]];
-  
-            cell.textLabel.text = _cellDataArr[indexPath.row-1];
-            cell.textLabel.numberOfLines = 0;
+            cell.textLabel.text = @"影院特色";
+            cell.textLabel.textColor = RGBCOLOR(123, 124, 125, 1);
             cell.textLabel.font = [UIFont systemFontOfSize:14];
-            
-            CGFloat itemH =  cell.height * 0.3f;
-            CGFloat itemW = 0;
-            if (cell.imageView.image.size.width) {
-                itemW = cell.imageView.image.size.height / cell.imageView.image.size.width * itemH;
-                
-                if (itemH >= itemW) {
-                    itemH = cell.height * 0.3f;
-                    itemW = cell.imageView.image.size.width * itemH/cell.imageView.image.size.height;
+        }else if(indexPath.row == 1) {
+            CinemaCharacteristicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CharacteristicCell];
+            //添加判断有多少图片，多余的隐藏，tag从100开始
+            return cell;
+        }else {
+            InfomationTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:INFOCELL23];
+            return cell;
+        }
+        }else{
+            if (indexPath.row == 0) {
+                cell.textLabel.text = @"网友点评";
+                cell.textLabel.textColor = RGBCOLOR(123, 124, 125, 1);
+                cell.textLabel.font = [UIFont systemFontOfSize:14];
+            }else{
+            CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:COMMENTCELL00];
+            for (UIView * view in cell.contentView.subviews) {
+                //            MyLog(@"%ld",(long)view.tag);
+                if ((2100>=view.tag&&view.tag >= 2000)||(1100>=view.tag&&view.tag >= 1000)) {
+                    [view removeFromSuperview];
                 }
             }
-            
-            CGSize itemSize = CGSizeMake(itemW,cell.height*0.5f);
-            UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
-            CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
-            [cell.imageView.image drawInRect:imageRect];
-            cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            if (indexPath.row == 1||indexPath.row == 2 || indexPath.row == 3) {
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle=NO;
+
+            return cell;
             }
-        }
     }
     return cell;
 }

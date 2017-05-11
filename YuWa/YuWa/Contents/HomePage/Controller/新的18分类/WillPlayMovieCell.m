@@ -18,8 +18,8 @@
         [self.contentView addSubview:self.movieImageView];
         [self.contentView addSubview:self.title];
         [self.contentView addSubview:self.introduce];
-        [self.contentView addSubview:self.playTime];
-        [self.contentView addSubview:self.wantLook];
+//        [self.contentView addSubview:self.playTime];
+//        [self.contentView addSubview:self.wantLook];
 //        [self.contentView addSubview:self.sellBtn];
     }
     return self;
@@ -27,10 +27,10 @@
 - (UIImageView*)movieImageView{
     if (!_movieImageView) {
         _movieImageView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, kScreen_Width/4, (selfHeigh-10)*2)];
-        _movieImageView.image = [UIImage imageNamed:@"a1003"];
-        UIImageView * playView = [[UIImageView alloc]initWithFrame:CGRectMake(self.movieImageView.width-30, self.movieImageView.height-30, 25, 25)];
-        playView.image = [UIImage imageNamed:@"play1.png"];
-        [_movieImageView addSubview:playView];
+        _movieImageView.image = [UIImage imageNamed:@"baobaoBG0"];
+//        UIImageView * playView = [[UIImageView alloc]initWithFrame:CGRectMake(self.movieImageView.width-30, self.movieImageView.height-30, 25, 25)];
+//        playView.image = [UIImage imageNamed:@"play1.png"];
+//        [_movieImageView addSubview:playView];
     }
     return _movieImageView;
 }
@@ -62,16 +62,16 @@
     }
     return _playTime;
 }
-- (UILabel*)wantLook{
-    if (!_wantLook) {
-        _wantLook = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width*0.68f, 15, kScreen_Width*0.3f, selfHeigh/3)];
-        _wantLook.textColor = [UIColor orangeColor];
-        _wantLook.font = [UIFont systemFontOfSize:14];
-        _wantLook.textAlignment = 2;
-        _wantLook.text = @"xxx人想看";
-    }
-    return _wantLook;
-}
+//- (UILabel*)wantLook{
+//    if (!_wantLook) {
+//        _wantLook = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width*0.68f, 15, kScreen_Width*0.3f, selfHeigh/3)];
+//        _wantLook.textColor = [UIColor orangeColor];
+//        _wantLook.font = [UIFont systemFontOfSize:14];
+//        _wantLook.textAlignment = 2;
+//        _wantLook.text = @"xxx人想看";
+//    }
+//    return _wantLook;
+//}
 
 //- (UIButton*)sellBtn{
 //    if (!_sellBtn) {

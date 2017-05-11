@@ -15,11 +15,11 @@
 
 @property (nonatomic,strong) UIImageView * posterImageView;//电影图片
 @property (nonatomic,strong) UILabel * title;//电影名称
-@property (nonatomic,strong) UILabel * subTitle;//英文名称
-@property (nonatomic,strong) UILabel * number ;//想看人数
-@property (nonatomic,strong) UILabel * category;//该电影的类别
+@property (nonatomic,strong) UILabel * daoyanLabel;//导演
+@property (nonatomic,strong) UILabel * scoreLabel ;//分数
+@property (nonatomic,strong) UILabel * performerLabel;//主演
 @property (nonatomic,strong) UILabel * countryAndTime;//国家和时长
-@property (nonatomic,strong) UILabel * beginTime;//上映时间
+@property (nonatomic,strong) UILabel * categoryLabel;//类型
 
 @property (nonatomic,strong) UIButton * wantSeeBtn;//想看按钮
 @property (nonatomic,strong) UIButton * gradeBtn;//评分按钮

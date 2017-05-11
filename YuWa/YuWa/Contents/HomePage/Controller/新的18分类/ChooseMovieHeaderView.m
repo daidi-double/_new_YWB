@@ -18,7 +18,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.posterImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, kScreen_Width/3, self.bounds.size.height*0.7)];
-        self.posterImageView.image = [UIImage imageNamed:@"a1004.png"];
+        self.posterImageView.image = [UIImage imageNamed:@"baobaoBG2"];
         self.posterImageView.userInteractionEnabled = YES;
         _PrivateLetterTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAvatarView)];
         _PrivateLetterTap.numberOfTouchesRequired = 1; //手指数
@@ -44,68 +44,100 @@
         _title.text = @"侏罗纪公园";
         [self addSubview:self.title];
         
-        self.subTitle = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x,12+self.bounds.size.height *0.15f, kScreen_Width/2, self.bounds.size.height*0.1f)];
-        _subTitle.textColor = [UIColor whiteColor];
-        _subTitle.font = [UIFont systemFontOfSize:14];
-        _subTitle.text = @"Jurassic Park";
-        [self addSubview:self.subTitle];
+        self.daoyanLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x,12+self.bounds.size.height *0.15f, kScreen_Width/2, self.bounds.size.height*0.1f)];
+        _daoyanLabel.textColor = [UIColor whiteColor];
+        _daoyanLabel.font = [UIFont systemFontOfSize:12];
+        _daoyanLabel.text = @"导演:张三";
+        [self addSubview:self.daoyanLabel];
         
-        self.number = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x, 13+self.bounds.size.height*0.3, kScreen_Width/2, self.bounds.size.height*0.1f)];
-        _number.textColor = [UIColor orangeColor];
-
-        _number.font = [UIFont systemFontOfSize:15];
-         _number.text = @"0人想看";
-        [self addSubview:self.number];
+        self.performerLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.daoyanLabel.origin.x, self.daoyanLabel.bottom, (kScreen_Width-30)/2, self.bounds.size.height*0.2f)];
+        _performerLabel.textColor = [UIColor whiteColor];
+        _performerLabel.numberOfLines = 2;
+        _performerLabel.font = [UIFont systemFontOfSize:12];
+        _performerLabel.text = @"主演:黄渤 测试参数参数参数参数长春市";
+        [self addSubview:self.performerLabel];
         
-        self.category = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x, 15+self.bounds.size.height*0.4f, kScreen_Width/2, self.bounds.size.height*0.1f)];
-        _category.textColor = [UIColor whiteColor];
-        _category.font = [UIFont systemFontOfSize:12];
-        _category.text = @"历史";
-        [self addSubview:self.category];
+        self.categoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x, self.performerLabel.bottom, kScreen_Width/2, self.bounds.size.height*0.1f)];
+        _categoryLabel.textColor = [UIColor whiteColor];
+        _categoryLabel.font = [UIFont systemFontOfSize:12];
+        _categoryLabel.text = @"类型:历史";
+        [self addSubview:self.categoryLabel];
         
-        self.countryAndTime = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x, 16+self.bounds.size.height*0.5f, kScreen_Width/2, self.bounds.size.height*0.1)];
+        self.countryAndTime = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x, self.categoryLabel.bottom, kScreen_Width/2, self.bounds.size.height*0.1)];
         _countryAndTime.textColor = [UIColor whiteColor];
         _countryAndTime.font = [UIFont systemFontOfSize:13];
-        _countryAndTime.text = @"美国/100分钟";
+        _countryAndTime.text = @"地区:美国/100分钟";
         [self addSubview:self.countryAndTime];
         
-        self.beginTime = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x, 17+self.bounds.size.height*0.6f, kScreen_Width/2, self.bounds.size.height*0.1f)];
-        _beginTime.textColor = [UIColor whiteColor];
-        _beginTime.font = [UIFont systemFontOfSize:12];
-        _beginTime.text = @"2017-02-24大陆上映";
-        [self addSubview:self.beginTime];
         
-        self.wantSeeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.wantSeeBtn.frame = CGRectMake(10, self.bounds.size.height*0.8, (kScreen_Width-30)/2, self.bounds.size.height*0.15f);
-        [_wantSeeBtn setTitle:@"想看" forState:UIControlStateNormal];
-        _wantSeeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        [_wantSeeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_wantSeeBtn setImage:[UIImage imageNamed:@"heartgray.png"] forState:UIControlStateNormal];
-        [_wantSeeBtn setImage:[UIImage imageNamed:@"heartselected.png"] forState:UIControlStateSelected];
-        [_wantSeeBtn addTarget:self action:@selector(wantToSee:) forControlEvents:UIControlEventTouchUpInside];
-        _wantSeeBtn.backgroundColor = RGBCOLOR(236, 183, 147, 0.8);
-        [self addSubview:self.wantSeeBtn];
+        self.scoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.posterImageView.right -28, self.posterImageView.bottom +5, 28, self.bounds.size.height*0.1f)];
+        _scoreLabel.textColor = [UIColor orangeColor];
+
+        _scoreLabel.font = [UIFont systemFontOfSize:15];
+         _scoreLabel.text = @"9.0";
+        [self addSubview:self.scoreLabel];
+        
+        UIImageView * rightImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 20, 0, 8, 15)];
+        rightImageView.centerY = self.height/2 - 15;
+        rightImageView.image = [UIImage imageNamed:@"右箭头"];
+        [self addSubview:rightImageView];
+        CGFloat realZhengshu;
+        CGFloat realXiaoshu;
+        //    NSString*starNmuber=self.model.grade;
+        NSString * starNmuber = @"4.2";
+        NSString*zhengshu=[starNmuber substringToIndex:1];
+        realZhengshu=[zhengshu floatValue];
+        NSString*xiaoshu=[starNmuber substringFromIndex:1];
+        CGFloat CGxiaoshu=[xiaoshu floatValue];
+        
+        if (CGxiaoshu>0.5) {
+            realXiaoshu=0;
+            realZhengshu= realZhengshu+1;
+        }else if (CGxiaoshu>0&&CGxiaoshu<=0.5){
+            realXiaoshu=0.5;
+        }else{
+            realXiaoshu=0;
+            
+        }
+        for (int a = 0; a<5; a++) {
+            UIImageView * startImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.posterImageView.left +(12+3)*a, self.scoreLabel.origin.y, 15, 15)];
+            startImageView.tag = 40 +a;
+            if (startImageView.tag-40<realZhengshu) {
+                //亮
+                startImageView.image=[UIImage imageNamed:@"满星"];
+            }else if (startImageView.tag-40==realZhengshu&&realXiaoshu!=0){
+                //半亮
+                startImageView.image=[UIImage imageNamed:@"半星"];
+                
+            }else{
+                //不亮
+                startImageView.image=[UIImage imageNamed:@"空星"];
+            }
+            [self addSubview:startImageView];
+        }
         
         self.gradeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.gradeBtn.frame = CGRectMake(20+(kScreen_Width-30)/2, self.bounds.size.height*0.8, (kScreen_Width-30)/2, self.bounds.size.height*0.15f);
+
+        self.gradeBtn.frame = CGRectMake(kScreen_Width * 0.65f, self.bounds.size.height*0.8, kScreen_Width*0.3f, self.bounds.size.height*0.15f);
         [_gradeBtn setTitle:@"评分" forState:UIControlStateNormal];
         _gradeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [_gradeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_gradeBtn setImage:[UIImage imageNamed:@"home_grayStar@2x.png"] forState:UIControlStateNormal];
-        [_gradeBtn setImage:[UIImage imageNamed:@"home_lightStar@2x.png"] forState:UIControlStateSelected];
-//        [_gradeBtn setTitle:@"" forState:UIControlStateSelected];
         [_gradeBtn addTarget:self action:@selector(gradeBtn:) forControlEvents:UIControlEventTouchUpInside];
-        _gradeBtn.backgroundColor = RGBCOLOR(236, 183, 147, 0.8);
+        _gradeBtn.layer.borderWidth = 0.5f;
+        
+        _gradeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+        _gradeBtn.layer.cornerRadius = 5;
+        _gradeBtn.layer.masksToBounds = YES;
         [self addSubview:self.gradeBtn];
-        self.isselected = 1;
+
     }
     return self;
 }
-- (void)wantToSee:(UIButton*)sender{
-    sender.selected = _isselected;
-    _isselected = !_isselected;
-    NSLog(@"想看，传值给服务器");
-}
+//- (void)wantToSee:(UIButton*)sender{
+//    sender.selected = _isselected;
+//    _isselected = !_isselected;
+//    NSLog(@"想看，传值给服务器");
+//}
 - (void)gradeBtn:(UIButton*)sender{
     NSLog(@"评分");
     [self.delegate commend];

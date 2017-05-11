@@ -64,7 +64,8 @@
 #define HTTP_HOME_CATEGORYSHOW    @"/api.php/Shop/checkShop/"    //1 18个分类的筛选
 
 
-
+#pragma 电影模块
+#define HTTP_MOVIE_HOMEPAGE     @"/api.php/Movie/banner/"//电影首页
 
 
 

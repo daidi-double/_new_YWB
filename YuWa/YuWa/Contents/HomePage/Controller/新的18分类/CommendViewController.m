@@ -9,7 +9,7 @@
 #import "CommendViewController.h"
 #import "ChooseMovieHeaderView.h"
 #import "MovieAddComment.h"//评分
-@interface CommendViewController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate>
+@interface CommendViewController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UIGestureRecognizerDelegate>
 {
     UITextView * textCommendView;
 }
@@ -57,8 +57,13 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
         
-        ChooseMovieHeaderView * movieView = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.2f) andDataAry:self.headerViewAry];
+        ChooseMovieHeaderView * movieView = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.25f) andDataAry:self.headerViewAry];
         movieView.backgroundColor = [UIColor darkGrayColor];
+        UITapGestureRecognizer * tapTouch = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(movieDetailAction)];
+        tapTouch.delegate = self;
+        tapTouch.numberOfTapsRequired = 1;
+        tapTouch.numberOfTouchesRequired = 1;
+        [movieView addGestureRecognizer:tapTouch];
         [movieView.playBtn removeFromSuperview];
         [movieView.PrivateLetterTap removeTarget:self action:@selector(tapAvatarView)];
         [movieView.wantSeeBtn removeFromSuperview];
@@ -71,7 +76,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return kScreen_Height * 0.2f;
+        return kScreen_Height * 0.25f;
         
     }else{
         return 0.f;
@@ -135,6 +140,10 @@
 - (void)tapAvatarView{
     
   
+}
+//进入电影详情
+-(void)movieDetailAction{
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
