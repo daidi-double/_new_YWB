@@ -143,4 +143,7 @@
     CGFloat cellHeight = 44 * array.count;
     return top + cellHeight;
 }
+-(void)dealloc  {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 @end

@@ -118,6 +118,8 @@
         MyLog(@"Regieter Code error is %@",responsObj);
     }];
 }
-
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 @end

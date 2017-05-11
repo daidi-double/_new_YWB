@@ -89,7 +89,6 @@ static void AFNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
         NSDictionary *userInfo = @{ AFNetworkingReachabilityNotificationStatusItem: @(status) };
         [notificationCenter postNotificationName:AFNetworkingReachabilityDidChangeNotification object:nil userInfo:userInfo];
     });
-
 }
 
 static const void * AFNetworkReachabilityRetainCallback(const void *info) {

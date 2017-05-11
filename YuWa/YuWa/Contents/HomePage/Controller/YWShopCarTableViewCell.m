@@ -51,5 +51,7 @@
 - (IBAction)reduceAction:(UIButton *)sender {
     [[NSNotificationCenter defaultCenter]postNotificationName:@"reduceShop1" object:nil userInfo:@{@"button": sender}];
 }
-
+-(void)dealloc  {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 @end
