@@ -67,7 +67,7 @@
     [super viewDidLoad];
     //得到坐标
     [self getLocalSubName];
-            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didReceiveNotification) name:@"didReceiveNotification" object:nil];
+    
     [self makeNaviBar];
 
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
