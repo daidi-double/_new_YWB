@@ -48,17 +48,27 @@
                             <constraint firstAttribute="height" constant="20" id="MQJ-wU-bfB"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaH-Sk-pSK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93725490199999995" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="top-bx-9YT"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="IaH-Sk-pSK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1Ys-xq-7ve"/>
                     <constraint firstItem="Sss-EI-QJK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="JRb-b4-jU1"/>
                     <constraint firstAttribute="trailingMargin" secondItem="kvG-od-S4f" secondAttribute="trailing" constant="10" id="O2g-Wl-2Es"/>
                     <constraint firstItem="d0q-XR-nrc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="S2v-U4-tQ1"/>
+                    <constraint firstItem="IaH-Sk-pSK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Tjn-yM-Bnp"/>
                     <constraint firstItem="D1e-dP-Zqe" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ckB-fp-UXS"/>
                     <constraint firstAttribute="trailingMargin" secondItem="d0q-XR-nrc" secondAttribute="trailing" constant="10" id="fCl-20-Pr5"/>
                     <constraint firstItem="D1e-dP-Zqe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="gc8-H0-8sC"/>
                     <constraint firstItem="D1e-dP-Zqe" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mnM-sX-7QK"/>
                     <constraint firstItem="kvG-od-S4f" firstAttribute="leading" secondItem="Sss-EI-QJK" secondAttribute="trailing" constant="20" id="vj7-Mh-oer"/>
                     <constraint firstItem="kvG-od-S4f" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="yOk-6e-nym"/>
+                    <constraint firstAttribute="trailing" secondItem="IaH-Sk-pSK" secondAttribute="trailing" id="zpV-We-vBc"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

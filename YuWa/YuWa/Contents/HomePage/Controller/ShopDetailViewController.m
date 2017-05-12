@@ -164,7 +164,7 @@
         _btn.frame = CGRectMake(kScreen_Width/2*i, 5, kScreen_Width/2, 28);
 //        btn.centerY = self.shopAndCommontView.height/2;
         _btn.tag = 100 + i;
-        [_btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+        [_btn setTitleColor:RGBCOLOR(255, 193, 0, 1) forState:UIControlStateNormal];
         
         [_btn setTitle:btnTitle[i] forState:UIControlStateNormal];
         _btn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -946,9 +946,7 @@
          [self.shops addObjectsFromArray:self.mainModel.cart];
         a++;
     }
-    if (self.shops.count<=0 ) {
-        return;
-    }
+
     BOOL viewRemove = self.isRemove = !self.isRemove;
     if (viewRemove == NO) {
         [self.shopCarView removeFromSuperview];
@@ -961,7 +959,7 @@
     
 }
 - (void)creatShopView{
-    _shopCarView = [[YWShopCarView alloc]initWithFrame:CGRectMake(0, kScreen_Height * 0.3, kScreen_Width, kScreen_Height * 0.7f - 60)];
+    _shopCarView = [[YWShopCarView alloc]initWithFrame:CGRectMake(0, kScreen_Height * 0.3, kScreen_Width, kScreen_Height * 0.7f - 50)];
     _shopCarView.delegate = self;
     _shopCarView.shop_id = self.shop_id;
     [self.view addSubview:_shopCarView];
@@ -1029,7 +1027,7 @@
     if (!_commentView) {
         CGRect rect;
         if (IS_IPHONE_5) {
-            rect= CGRectMake(0, self.bottomBGView.height-42, kScreen_Width,kScreen_Height - self.bottomBGView.height);
+            rect= CGRectMake(0, self.bottomBGView.height-6, kScreen_Width,kScreen_Height - self.bottomBGView.height);
         }else{
             rect= CGRectMake(0, self.bottomBGView.height, kScreen_Width,kScreen_Height - self.bottomBGView.height);
         }

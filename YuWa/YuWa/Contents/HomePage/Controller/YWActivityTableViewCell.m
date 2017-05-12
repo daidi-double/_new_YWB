@@ -20,11 +20,11 @@
 }
 -(void)setHolidayArray:(NSArray *)holidayArray{
     
-    
+    self.titleBGView.backgroundColor = [UIColor whiteColor];
     //显示的特别活动
     NSArray*specail=holidayArray;
     CGFloat top = 61.0;
-    CGFloat left = 13.0;
+    CGFloat left = 46.0;
     //首先移除所有的东西
     for (UIView*view in self.saveAllImage) {
         [view removeFromSuperview];
@@ -48,7 +48,7 @@
             UILabel*specailLabel=[self viewWithTag:300+i];
             if (!specailLabel) {
                 specailLabel=[[UILabel alloc]initWithFrame:CGRectMake(left+25, top, kScreen_Width-110, 20)];
-                specailLabel.font=[UIFont systemFontOfSize:14];
+                specailLabel.font=[UIFont systemFontOfSize:12];
                 specailLabel.textColor = RGBCOLOR(141, 142, 143, 1);
                 specailLabel.tag=300+i;
                 

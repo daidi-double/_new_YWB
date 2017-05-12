@@ -63,6 +63,7 @@
     [self.payTableView registerNib:[UINib nibWithNibName:otherPayCell bundle:nil] forCellReuseIdentifier:otherPayCell];
     [self.payTableView registerNib:[UINib nibWithNibName:noShopCell bundle:nil] forCellReuseIdentifier:noShopCell];
     [self.payTableView registerNib:[UINib nibWithNibName:newShopInfoCell bundle:nil] forCellReuseIdentifier:newShopInfoCell];
+    self.payTableView.separatorStyle = UITableViewCellAccessoryNone;
     self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
     if ([self.money isEqualToString:@"0.00"]) {
         self.goPay.selected = NO;
@@ -180,13 +181,16 @@
             return [ShopCarDetailTableViewCell getHeight:self.model.cart]-40;
         }else{
 
-            return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count+20;
+            return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count;
         }
     }
         return 44.f;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 2) {
+        return 0.01f;
+    }
         return 10;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -300,9 +304,6 @@
                 }
             }
         }else{
-            UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15, 0, kScreen_Width-30, 1)];
-            line.backgroundColor = [UIColor lightGrayColor];
-            [cell.contentView addSubview:line];
             
             if (self.status == 1 ||self.status == 2 ||self.status == 3) {
                 NSString*zheNum;
@@ -423,12 +424,7 @@
 }
 //使用优惠券
 - (void)useYouhuiquanAction{
-//    CouponViewController*vc=[[CouponViewController alloc]init];
-//    vc.delegate=self;
-//    vc.shopID=self.shopID;
-//    NSString * settmontMoney = [self.settomMoneyLabel.text substringFromIndex:4];
-//    vc.totailPayMoney=[settmontMoney floatValue];
-//    [self.navigationController pushViewController:vc animated:YES];
+
     UseCouponViewController * useVC = [[UseCouponViewController alloc]init];
     useVC.shop_id = self.shopID;
     useVC.delegate = self;

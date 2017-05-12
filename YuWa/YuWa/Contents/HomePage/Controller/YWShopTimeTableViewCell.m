@@ -16,15 +16,17 @@
         
         _saveAllLabel=[NSMutableArray array];
         UIView * BGView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 32)];
-        BGView.backgroundColor = RGBCOLOR(220, 220, 220, 1);
         [self.contentView addSubview:BGView];
-        //
-        UILabel*shopLabel=[[UILabel alloc]initWithFrame:CGRectMake(8, 0, kScreen_Width-30, 30)];
+        UIImageView * iconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(16, 5, 20, 20)];
+        iconImageView.image = [UIImage imageNamed:@"营业时间"];
+        [BGView addSubview:iconImageView];
+        UILabel*shopLabel=[[UILabel alloc]initWithFrame:CGRectMake(46, 0, kScreen_Width-30, 30)];
         shopLabel.text=@"营业时间";
+        shopLabel.textColor = RGBCOLOR(112, 112, 112, 1);
         shopLabel.font=[UIFont systemFontOfSize:14];
         [BGView addSubview:shopLabel];
         
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(8, shopLabel.bottom+2, kScreen_Width-30, 0.5)];
+        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, shopLabel.bottom+2, kScreen_Width, 0.5)];
         line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
         [self.contentView addSubview:line];
         
@@ -46,38 +48,38 @@
     
     CGFloat topPoint =32.5;
     for (int i=0; i<times.count; i++) {
-        UILabel*label=[[UILabel alloc]initWithFrame:CGRectMake(15, topPoint, kScreen_Width-15, 30)];
+        UILabel*label=[[UILabel alloc]initWithFrame:CGRectMake(46, topPoint, kScreen_Width-15, 30)];
         NSDictionary * dict = times[i];
         NSDictionary * timeDict = dict[@"time"];
         YWTimeModel * model = [YWTimeModel yy_modelWithJSON:timeDict];
     
-        label.text=[NSString stringWithFormat:@"%@：",model.name];
-        label.font=FONT_CN_30;
-        CGRect shopNameWidth = [label.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: label.font} context:nil];
-        label.frame= CGRectMake(15, topPoint, shopNameWidth.size.width , 30);
+        label.text=[NSString stringWithFormat:@"%@",model.name];
+        label.font=FONT_CN_24;
+        CGRect shopNameWidth = [label.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: label.font} context:nil];
+        label.frame= CGRectMake(46, topPoint, shopNameWidth.size.width , 30);
         label.textColor = RGBCOLOR(135, 136, 137, 1);
         [self.contentView addSubview:label];
         [self.saveAllLabel addObject:label];
         
-        UILabel * timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(label.frame.size.width + 20, label.frame.origin.y, kScreen_Width -20 - label.size.width, 30)];
-        timeLabel.font=[UIFont systemFontOfSize:14];
+        UILabel * timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(label.right, label.frame.origin.y, kScreen_Width -20 - label.size.width, 30)];
+        timeLabel.font=[UIFont systemFontOfSize:12];
         timeLabel.textColor = label.textColor;
         timeLabel.text = model.time;
         [self.contentView addSubview:timeLabel];
         [self.saveAllLabel addObject:timeLabel];
         
-        UILabel * dayLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, topPoint+32, kScreen_Width-30, 30)];
+        UILabel * dayLabel = [[UILabel alloc]initWithFrame:CGRectMake(46, topPoint+32, kScreen_Width-30, 30)];
         dayLabel.text = model.payDays;
         dayLabel.textColor = timeLabel.textColor;
         dayLabel.font = timeLabel.font;
         [self.contentView addSubview:dayLabel];
         [self.saveAllLabel addObject:dayLabel];
         
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15, topPoint+32, kScreen_Width-30, 1)];
-        line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
+        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15, topPoint+62, kScreen_Width-30, 0.5)];
+        line.backgroundColor = RGBCOLOR(243, 244, 245, 1);
         [self.contentView addSubview:line];
         [self.saveAllLabel addObject:line];
-        topPoint = topPoint+33;
+        topPoint = topPoint+63;
         if (i == times.count-1) {
             line.hidden = YES;
         }

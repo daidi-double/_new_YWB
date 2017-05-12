@@ -29,6 +29,8 @@
     self.title = @"店铺详情";
     [self.shopDetailTableView registerNib:[UINib nibWithNibName:DetailCell bundle:nil] forCellReuseIdentifier:DetailCell];
     [self.shopDetailTableView registerNib:[UINib nibWithNibName:ActivityCell bundle:nil] forCellReuseIdentifier:ActivityCell];
+    self.shopDetailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -54,8 +56,16 @@
         
     }else{
         NSMutableArray * mtArray = [self.mainModel.business_hours mutableCopy];
+        MyLog(@"高度%f,%ld",[YWShopTimeTableViewCell getHeight:mtArray],mtArray.count);
         return [YWShopTimeTableViewCell getHeight:mtArray];
+        
     }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 0) {
+        return 5.f;
+    }
+    return 0.001f;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
@@ -66,6 +76,7 @@
     }else if (indexPath.section == 1){
         YWActivityTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:ActivityCell];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         UILabel * zheLabel = [cell viewWithTag:10];
         NSString*zheNum=[self.mainModel.discount substringFromIndex:2];
         if ([zheNum integerValue] % 10 == 0) {

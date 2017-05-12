@@ -1745,7 +1745,6 @@
 		C1FB7F751DC7393D0048EBC8 /* showResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FB7F741DC7393D0048EBC8 /* showResultsViewController.m */; };
 		C1FB7F791DC73B910048EBC8 /* 火@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1FB7F761DC73B910048EBC8 /* 火@2x.png */; };
 		C1FB7F7A1DC73B910048EBC8 /* 垃圾桶@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1FB7F771DC73B910048EBC8 /* 垃圾桶@2x.png */; };
-		C1FB7F7B1DC73B910048EBC8 /* 时间@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1FB7F781DC73B910048EBC8 /* 时间@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -4281,7 +4280,6 @@
 		C1FB7F741DC7393D0048EBC8 /* showResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = showResultsViewController.m; sourceTree = "<group>"; };
 		C1FB7F761DC73B910048EBC8 /* 火@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "火@2x.png"; sourceTree = "<group>"; };
 		C1FB7F771DC73B910048EBC8 /* 垃圾桶@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "垃圾桶@2x.png"; sourceTree = "<group>"; };
-		C1FB7F781DC73B910048EBC8 /* 时间@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "时间@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -9731,7 +9729,6 @@
 				C10E94B01DD356BE00728B3D /* store.png */,
 				C1FB7F761DC73B910048EBC8 /* 火@2x.png */,
 				C1FB7F771DC73B910048EBC8 /* 垃圾桶@2x.png */,
-				C1FB7F781DC73B910048EBC8 /* 时间@2x.png */,
 				C1F7BF031DB1CA0700CCAF96 /* back@2x.png */,
 				C1F7BF071DB1CA0700CCAF96 /* home_hui@2x.png */,
 				C1F7BF081DB1CA0700CCAF96 /* home_jian@2x.png */,
@@ -10323,7 +10320,6 @@
 				AA3544871E9DF23900A2EC73 /* 4baobaoLVUP34@2x.jpg in Resources */,
 				AA88463C1E667A49005F657D /* longanBGView.jpg in Resources */,
 				C13019A21DB1FD2F00E24C88 /* qr_top_left@2x.png in Resources */,
-				C1FB7F7B1DC73B910048EBC8 /* 时间@2x.png in Resources */,
 				AA35443C1E9DF23800A2EC73 /* 3baobaoLVUP20@2x.jpg in Resources */,
 				AA35450E1E9DF23900A2EC73 /* 1baobaoBG50@2x.jpg in Resources */,
 				AAF127D01E8AD3C200121621 /* yinlianpay@2x.png in Resources */,

@@ -134,13 +134,17 @@
 }
 - (UIView *)carView{
     if (!_carView) {
-        _carView = [[UIView alloc]initWithFrame:CGRectMake(30, 30, kScreen_Width/2, kScreen_Width/2+20)];
+        _carView = [[UIView alloc]initWithFrame:CGRectMake(30, 30, kScreen_Width, kScreen_Height)];
         _carView.center = CGPointMake(kScreen_Width/2, kScreen_Height/2);
       UIImageView * carImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width/2, kScreen_Width/3)];
+        carImageView.centerY = _carView.centerY - 50;
+        carImageView.centerX = _carView.centerX - 20;
+        carImageView.layer.contentsGravity = kCAGravityResizeAspectFill;
         carImageView.image = [UIImage imageNamed:@"购物车图片"];
         [_carView addSubview:carImageView];
         
-        UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, carImageView.frame.size.height+20, kScreen_Width/2, kScreen_Width/6)];
+        UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, carImageView.bottom +20, kScreen_Width/2, kScreen_Width/6)];
+        textLabel.centerX = _carView.centerX;
         textLabel.text = @"你还没有相关的订单";
         textLabel.textAlignment = 1;
         textLabel.font = [UIFont systemFontOfSize:13];
