@@ -645,6 +645,33 @@
     [self.navigationController pushViewController:mapNaviVC animated:YES];
 
 }
+//优惠买单
+- (IBAction)touchPay:(UIButton *)sender {
+    if ([self judgeLogin]) {
+        
+        YWNewDiscountPayViewController * vc =[YWNewDiscountPayViewController payViewControllerCreatWithWritePayAndShopName:self.mainModel.company_name andShopID:self.mainModel.id andZhekou: [self.mainModel.discount floatValue]];
+        if (self.mainModel.cart.count==0 && self.shops.count == 0) {
+            
+            vc.status = 1;
+        }else if (self.mainModel.cart.count != 0 || self.shops.count !=0){
+            vc.status = 2;
+        }
+        //        vc.shopID = self.mainModel.id;
+        //        vc.shopName = self.mainModel.company_name;
+        //        vc.shopDiscount = self.mainModel.discount;
+        NSString * money = [self. totalMoneyLabel.text substringFromIndex:1];
+        vc.money = money;
+        //先清理详情页面数据，在push
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    
+
+    
+}
+
+
 //收藏
 - (IBAction)collectAcion:(UIButton *)sender {
     if ([self judgeLogin] && self.mainModel.id !=nil) {

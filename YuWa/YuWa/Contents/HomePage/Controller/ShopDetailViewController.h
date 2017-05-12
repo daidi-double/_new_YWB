@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *monthMoneyLabel;//月消费人次
 @property (weak, nonatomic) IBOutlet UILabel *discountLabel;//闪付立享几折
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;//地址
+@property (weak, nonatomic) IBOutlet UIView *manDanView;
 @property (weak, nonatomic) IBOutlet UIView *shopAndCommontView;//商品和评价背景层
 @property (weak, nonatomic) IBOutlet UILabel *totalMoneyLabel;
 @property (weak, nonatomic) IBOutlet UITableView *leftTableView;

@@ -41,6 +41,7 @@
 @property (nonatomic,strong) NSMutableArray * theaterNameAry;//影城名称数据
 @property (nonatomic,strong) NSMutableArray * hotMovieSAry;//轮播热映数组
 @property (nonatomic,strong) NSMutableArray * hotCollectDataAry;//热映影片数组
+@property (nonatomic,strong) NSTimer * timer;
 @property (nonatomic,assign)BOOL isselected;
 @end
 
@@ -107,59 +108,63 @@
     
     UIView * headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.7f)];
     headerView.backgroundColor = [UIColor lightGrayColor];
+    
+    //轮播图
     hotScrollView = [[HotMovieScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, headerView.size.height * 0.4f-15) andDataAry:self.hotMovieSAry];
     hotScrollView.contentSize = CGSizeMake(self.hotMovieSAry.count*kScreen_Width, headerView.size.height * 0.4f);//容量要根据数据修改
     hotScrollView.delegate = self;
     hotScrollView.pagingEnabled = YES;
     hotScrollView.HotDelegate = self;
-    [hotScrollView setContentOffset:CGPointMake(kScreen_Width, 0) animated:NO];
     hotScrollView.showsHorizontalScrollIndicator = NO;
     [headerView addSubview:hotScrollView];
+    
+    UIPageControl * moviePage = [[UIPageControl alloc]initWithFrame:CGRectMake(0, headerView.size.height * 0.3f, kScreen_Width, 30)];
+    moviePage.numberOfPages = self.hotMovieSAry.count;//修改
+    moviePage.currentPage = 0;
+    moviePage.currentPageIndicatorTintColor = [UIColor redColor];
+    moviePage.pageIndicatorTintColor = [UIColor whiteColor];
+    [headerView addSubview:moviePage];
+    [moviePage addTarget:self action:@selector(pageController:) forControlEvents:UIControlEventValueChanged];
+    if (self.timer == nil) {
         
-        UIPageControl * moviePage = [[UIPageControl alloc]initWithFrame:CGRectMake(0, headerView.size.height * 0.3f, kScreen_Width, 30)];
-        moviePage.numberOfPages = self.hotMovieSAry.count;//修改
-        moviePage.currentPage = 0;
-        moviePage.currentPageIndicatorTintColor = [UIColor redColor];
-        moviePage.pageIndicatorTintColor = [UIColor whiteColor];
-        [headerView addSubview:moviePage];
-        [moviePage addTarget:self action:@selector(pageController:) forControlEvents:UIControlEventValueChanged];
-        [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(timer:) userInfo:nil repeats:YES];
-        
-        _page = moviePage;
-        
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(timer:) userInfo:nil repeats:YES];
+    }
+    
+    _page = moviePage;
+    
     
     UIView * hotMovieBGView = [[UIView alloc]initWithFrame:CGRectMake(0, hotScrollView.bottom, kScreen_Width, headerView.size.height*0.07f)];
-        hotMovieBGView.backgroundColor = [UIColor whiteColor];
-        
-        
+    hotMovieBGView.backgroundColor = [UIColor whiteColor];
+    
+    
     [headerView addSubview: hotMovieBGView];
-        UILabel * hotLbl = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, kScreen_Width/2, hotMovieBGView.size.height)];
-        hotLbl.textAlignment = NSTextAlignmentLeft;
-        hotLbl.textColor = RGBCOLOR(123, 124, 125, 1);
-        hotLbl.font = [UIFont systemFontOfSize:20];
-        hotLbl.text = @"热映影片";
-        
-        [hotMovieBGView addSubview:hotLbl];
-        
-        UIButton * lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        lookBtn.frame = CGRectMake(kScreen_Width*0.75, 5, kScreen_Width*0.25, hotMovieBGView.size.height);
-        [lookBtn setTitle:@"查看全部 >" forState:UIControlStateNormal];
-        [lookBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [lookBtn addTarget:self action:@selector(lookAll:) forControlEvents:UIControlEventTouchUpInside];
-        lookBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-        [hotMovieBGView addSubview:lookBtn];
-        
-        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
-        UICollectionView *movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, hotMovieBGView.bottom, kScreen_Width, headerView.size.height*0.57f-35) collectionViewLayout:layout];
-       layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-
-
-
+    UILabel * hotLbl = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, kScreen_Width/2, hotMovieBGView.size.height)];
+    hotLbl.textAlignment = NSTextAlignmentLeft;
+    hotLbl.textColor = RGBCOLOR(123, 124, 125, 1);
+    hotLbl.font = [UIFont systemFontOfSize:20];
+    hotLbl.text = @"热映影片";
+    
+    [hotMovieBGView addSubview:hotLbl];
+    
+    UIButton * lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    lookBtn.frame = CGRectMake(kScreen_Width*0.75, 5, kScreen_Width*0.25, hotMovieBGView.size.height);
+    [lookBtn setTitle:@"查看全部 >" forState:UIControlStateNormal];
+    [lookBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [lookBtn addTarget:self action:@selector(lookAll:) forControlEvents:UIControlEventTouchUpInside];
+    lookBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [hotMovieBGView addSubview:lookBtn];
+    
+    UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
+    UICollectionView *movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, hotMovieBGView.bottom, kScreen_Width, headerView.size.height*0.57f-35) collectionViewLayout:layout];
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    
+    
+    
     [movieCollectView registerNib:[UINib nibWithNibName:newHotCell bundle:nil] forCellWithReuseIdentifier:newHotCell];
-        movieCollectView.backgroundColor = [UIColor whiteColor];
-        movieCollectView.delegate = self;
-        movieCollectView.dataSource = self;
-        [headerView addSubview:movieCollectView];
+    movieCollectView.backgroundColor = [UIColor whiteColor];
+    movieCollectView.delegate = self;
+    movieCollectView.dataSource = self;
+    [headerView addSubview:movieCollectView];
     
     
     NSArray * titleAry = @[@"全城",@"离我最近",@"特色"];
@@ -191,7 +196,7 @@
         
         [headerView addSubview:selectBtn];
     }
-
+    
     
     return headerView;
 
@@ -365,7 +370,7 @@
     hotScrollView.contentOffset = CGPointMake((a%self.hotMovieSAry.count)*kScreen_Width, 0);
     _page.currentPage = a%self.hotMovieSAry.count;//修改
     a++;
-    MyLog(@"aaaa = %d",a);
+   
 }
 - (void)pageController:(UIPageControl*)page{
     hotScrollView.contentOffset = CGPointMake(_page.currentPage * kScreen_Width, 0);
@@ -373,7 +378,11 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     _page.currentPage = scrollView.contentOffset.x/kScreen_Width;
 }
-
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
+    self.timer = nil;
+}
 
 #pragma mark - 懒加载
 - (UITableView *)movieTableView {

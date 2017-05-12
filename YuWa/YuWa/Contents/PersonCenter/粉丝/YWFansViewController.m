@@ -462,26 +462,27 @@
 -(void)ButtonCancelAbount:(UIButton*)sender{
     AbountAndFansModel*model=self.maMallDatas[sender.tag];
     //变成取消关注
-    model.is_attention=NO;
+   
 //    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:sender.tag inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView reloadData];
+
     
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_DELABOUT];
 
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":model.uid};
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":model.uid,@"auser_type":model.user_type,@"user_type":@(1)};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"取消关注%@",data);
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
             [UserSession instance].attentionCount = [NSString stringWithFormat:@"%zi",[[UserSession instance].attentionCount integerValue]-1];
-            
+             model.is_attention=NO;
            
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
              [self.tableView.mj_header beginRefreshing];
         }
-        
+          [self.tableView reloadData];
         
     }];
 
@@ -494,27 +495,23 @@
 -(void)ButtonAddAbount:(UIButton*)sender{
     AbountAndFansModel*model=self.maMallDatas[sender.tag];
     //变成加为关注
-    model.is_attention=YES;
+ 
 //    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:sender.tag inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView reloadData];
-    
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_ADDABOUT];
-    
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":model.uid};
-    HttpManager*manager=[[HttpManager alloc]init];
-    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
-        NSNumber*number=data[@"errorCode"];
-        NSString*errorCode=[NSString stringWithFormat:@"%@",number];
-        if ([errorCode isEqualToString:@"0"]) {
+
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":model.uid,@"auser_type":model.user_type,@"user_type":@(1)};
+    [[HttpObject manager]postNoHudWithType:YuWaType_RB_ATTENTION_ADD withPragram:params success:^(id responsObj) {
+        MyLog(@"Regieter Code pragram is %@",params);
+        MyLog(@"Regieter Code is %@",responsObj);
+        NSInteger number = [responsObj[@"errorCode"] integerValue];
+        if (number == 0) {
             [UserSession instance].attentionCount = [NSString stringWithFormat:@"%zi",[[UserSession instance].attentionCount integerValue]+1];
-            
-            
-        }else{
-            [JRToast showWithText:data[@"errorMessage"]];
-            [self.tableView.mj_header beginRefreshing];
+            model.is_attention = YES;
         }
-        
-        
+        [self.tableView reloadData];
+
+    } failur:^(id responsObj, NSError *error) {
+        MyLog(@"Regieter Code pragram is %@",params);
+        MyLog(@"Regieter Code error is %@",responsObj);
     }];
 
     
