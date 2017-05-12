@@ -54,8 +54,16 @@
         
     }else{
         NSMutableArray * mtArray = [self.mainModel.business_hours mutableCopy];
+        MyLog(@"高度%f,%ld",[YWShopTimeTableViewCell getHeight:mtArray],mtArray.count);
         return [YWShopTimeTableViewCell getHeight:mtArray];
+        
     }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 0) {
+        return 5.f;
+    }
+    return 0.001f;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {

@@ -1029,7 +1029,7 @@
     if (!_commentView) {
         CGRect rect;
         if (IS_IPHONE_5) {
-            rect= CGRectMake(0, self.bottomBGView.height-42, kScreen_Width,kScreen_Height - self.bottomBGView.height);
+            rect= CGRectMake(0, self.bottomBGView.height-6, kScreen_Width,kScreen_Height - self.bottomBGView.height);
         }else{
             rect= CGRectMake(0, self.bottomBGView.height, kScreen_Width,kScreen_Height - self.bottomBGView.height);
         }

@@ -13,6 +13,7 @@
 @property(nonatomic,strong)NSMutableArray*saveAllLabel;
 @property(nonatomic,strong)NSArray*holidayArray;
 @property(nonatomic,strong)NSString * zhekou;
+@property (weak, nonatomic) IBOutlet UIView *titleBGView;
 
 +(CGFloat)getCellHeight:(NSArray*)array;
 
