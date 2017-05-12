@@ -58,17 +58,27 @@
                             <action selector="chooseDiscountAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7Yd-fk-cjB"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6GN-H9-bhL">
+                        <rect key="frame" x="0.0" y="42.5" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93725490199999995" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="0N7-Rb-BTP"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="6GN-H9-bhL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="57m-83-Fkb"/>
                     <constraint firstItem="NTh-aF-gje" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9oc-xq-JqQ"/>
                     <constraint firstItem="NTh-aF-gje" firstAttribute="leading" secondItem="eM0-CF-vSC" secondAttribute="trailing" constant="10" id="QAX-VU-Nny"/>
                     <constraint firstItem="eM0-CF-vSC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="RZp-Tn-jLr"/>
                     <constraint firstItem="87h-tU-n23" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SYj-4f-BgJ"/>
                     <constraint firstItem="Kan-MW-wmP" firstAttribute="leading" secondItem="EUJ-qo-PYt" secondAttribute="trailing" constant="10" id="Xxu-ud-LUK"/>
                     <constraint firstItem="Kan-MW-wmP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZLj-lT-xsT"/>
+                    <constraint firstAttribute="trailing" secondItem="6GN-H9-bhL" secondAttribute="trailing" id="aOp-bI-UeH"/>
                     <constraint firstItem="EUJ-qo-PYt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dXe-gn-Ojp"/>
                     <constraint firstItem="EUJ-qo-PYt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="fEu-do-dXD"/>
                     <constraint firstAttribute="trailing" secondItem="87h-tU-n23" secondAttribute="trailing" constant="16" id="ohE-JE-GwO"/>
+                    <constraint firstAttribute="bottom" secondItem="6GN-H9-bhL" secondAttribute="bottom" id="qZs-U6-DQ9"/>
                     <constraint firstItem="eM0-CF-vSC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vTu-Vl-RZs"/>
                 </constraints>
             </tableViewCellContentView>

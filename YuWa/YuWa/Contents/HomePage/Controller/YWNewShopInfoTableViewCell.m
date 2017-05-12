@@ -33,7 +33,7 @@
     self.shop_id = self.model.shop_id;
 
     NSArray*specail=self.cart;
-    CGFloat top = 30.0;
+    CGFloat top = 40.0;
     CGFloat left = 13.0;
     //首先移除所有的东西
     for (UIView*view in self.saveAllImage) {
@@ -134,7 +134,7 @@
                 
             }
             
-            top=top+kScreen_Width/7+20;
+            top=top+kScreen_Width/7+25;
 //            NSString * money = [newPriceLaber.text substringFromIndex:1];
 //            totalMoney = totalMoney + [money floatValue];
             
@@ -151,7 +151,7 @@
 }
 + (CGFloat)getHeight:(NSArray *)array{
     NSInteger aa=array.count;
-    return 30+(kScreen_Width/7+20)*aa + 50 ;
+    return 35+(kScreen_Width/7+20)*aa + 50 ;
 }
 - (IBAction)goToAccountAction:(UIButton *)sender {
 //    NSString * money = [self.totalMoneyLabel.text substringFromIndex:3];

@@ -29,6 +29,8 @@
     self.title = @"店铺详情";
     [self.shopDetailTableView registerNib:[UINib nibWithNibName:DetailCell bundle:nil] forCellReuseIdentifier:DetailCell];
     [self.shopDetailTableView registerNib:[UINib nibWithNibName:ActivityCell bundle:nil] forCellReuseIdentifier:ActivityCell];
+    self.shopDetailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -74,6 +76,7 @@
     }else if (indexPath.section == 1){
         YWActivityTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:ActivityCell];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         UILabel * zheLabel = [cell viewWithTag:10];
         NSString*zheNum=[self.mainModel.discount substringFromIndex:2];
         if ([zheNum integerValue] % 10 == 0) {

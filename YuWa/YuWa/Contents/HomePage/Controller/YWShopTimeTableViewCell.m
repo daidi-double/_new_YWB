@@ -75,8 +75,8 @@
         [self.contentView addSubview:dayLabel];
         [self.saveAllLabel addObject:dayLabel];
         
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15, topPoint+62, kScreen_Width-30, 1)];
-        line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
+        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15, topPoint+62, kScreen_Width-30, 0.5)];
+        line.backgroundColor = RGBCOLOR(243, 244, 245, 1);
         [self.contentView addSubview:line];
         [self.saveAllLabel addObject:line];
         topPoint = topPoint+63;

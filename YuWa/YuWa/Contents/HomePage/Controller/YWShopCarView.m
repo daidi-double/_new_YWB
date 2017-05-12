@@ -14,7 +14,7 @@
 #define SHOPCARCELL @"YWShopCarTableViewCell"
 @interface YWShopCarView ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign) CGRect  myFrame;
-
+@property (nonatomic,strong) UIView *carView;
 @end
 @implementation YWShopCarView
 -(id)initWithFrame:(CGRect)frame
@@ -28,8 +28,34 @@
         //监听总额点击出来之后调用的方法
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reduceShopAction1:) name:@"reduceShop1" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addShopAction1:) name:@"addShop1" object:nil];
+        if (self.shopInfoAry.count <= 0) {
+            [self addSubview:self.carView];
+        }else{
+            if (self.carView) {
+                [self.carView removeFromSuperview];
+            }
+        }
     }
     return self;
+}
+- (UIView *)carView{
+    if (!_carView) {
+        _carView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, self.height)];
+        UIImageView * carImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width/2, kScreen_Width/3)];
+        carImageView.centerY = _carView.centerY - 50;
+        carImageView.centerX = _carView.centerX - 20;
+        carImageView.layer.contentsGravity = kCAGravityResizeAspectFill;
+        carImageView.image = [UIImage imageNamed:@"购物车图片"];
+        [_carView addSubview:carImageView];
+        
+        UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, carImageView.bottom +20, kScreen_Width/2, kScreen_Width/6)];
+        textLabel.centerX = _carView.centerX;
+        textLabel.text = @"你还没有相关的订单";
+        textLabel.textAlignment = 1;
+        textLabel.font = [UIFont systemFontOfSize:13];
+        [_carView addSubview:textLabel];
+    }
+    return _carView;
 }
 
 -(UIView*)clearView{
@@ -113,7 +139,7 @@
 
 - (UITableView*)shopTableView{
     if (!_shopTableView) {
-        _shopTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 35, self.width, self.height-35) style:UITableViewStylePlain];
+        _shopTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 35, self.width, self.height-35) style:UITableViewStyleGrouped];
         _shopTableView.delegate = self;
         _shopTableView.dataSource = self;
         
@@ -131,12 +157,24 @@
     return self.shopInfoAry.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.shopInfoAry.count > 0) {
+        
+        if (self.carView) {
+            [self.carView removeFromSuperview];
+        }
+    }
     YWShopCarTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:SHOPCARCELL];
     NSDictionary * dit = self.shopInfoAry[indexPath.row];
         ShopDetailGoodsModel * goodModel = [ShopDetailGoodsModel yy_modelWithDictionary:dit];
     cell.model = goodModel;
     
     return cell;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.01f;
 }
 +(CGFloat)getCellHeight:(NSArray *)array{
     CGFloat top = 35.f;

@@ -48,17 +48,27 @@
                             <action selector="chooseYouhuiquanAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yUG-g1-to2"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cIl-aT-0Db">
+                        <rect key="frame" x="0.0" y="0.0" width="312" height="1"/>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93725490199999995" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="fW5-Ot-8U0"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="cIl-aT-0Db" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6OP-hV-wQA"/>
                     <constraint firstAttribute="trailingMargin" secondItem="TaC-cR-8HE" secondAttribute="trailing" constant="15" id="9lI-EB-TfQ"/>
                     <constraint firstItem="FBl-Nv-aeA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="GIL-UT-yea"/>
                     <constraint firstItem="TaC-cR-8HE" firstAttribute="leading" secondItem="VNM-6C-CF9" secondAttribute="trailing" constant="15" id="Nxq-Rw-9A0"/>
                     <constraint firstItem="TaC-cR-8HE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SpM-fL-LMR"/>
                     <constraint firstItem="TaC-cR-8HE" firstAttribute="leading" secondItem="2RO-Ly-3o8" secondAttribute="trailing" constant="15" id="ViQ-ht-xhJ"/>
+                    <constraint firstAttribute="trailing" secondItem="cIl-aT-0Db" secondAttribute="trailing" id="e9K-lG-rl7"/>
                     <constraint firstItem="FBl-Nv-aeA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gDj-sc-fNm"/>
                     <constraint firstItem="2RO-Ly-3o8" firstAttribute="leading" secondItem="VNM-6C-CF9" secondAttribute="leading" id="ib2-ig-87z"/>
                     <constraint firstItem="VNM-6C-CF9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="toA-a1-He6"/>
                     <constraint firstItem="2RO-Ly-3o8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="viV-87-epg"/>
+                    <constraint firstItem="cIl-aT-0Db" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yef-ca-AuO"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
