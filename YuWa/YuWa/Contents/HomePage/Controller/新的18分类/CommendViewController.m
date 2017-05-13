@@ -9,12 +9,13 @@
 #import "CommendViewController.h"
 #import "ChooseMovieHeaderView.h"
 #import "MovieAddComment.h"//评分
-@interface CommendViewController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UIGestureRecognizerDelegate>
+@interface CommendViewController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UIGestureRecognizerDelegate,MovieAddCommentDelegate>
 {
     UITextView * textCommendView;
 }
 @property (nonatomic,strong) NSMutableArray * headerViewAry;//海报数据
 @property (nonatomic,strong) UITableView * commendTableView;
+@property (nonatomic,assign)NSInteger movieScore;//电影评分
 @end
 
 @implementation CommendViewController
@@ -35,6 +36,7 @@
 }
 - (void)addGrade{
     NSLog(@"发布影评");
+    [self requestData];
 }
 - (void)makeUI{
     
@@ -91,8 +93,13 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"tableViewCell"];
     }
     if (indexPath.section == 0) {
-        MovieAddComment * addComent = [[MovieAddComment alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 2 * cell.height)];
+        MovieAddComment * addComent;
+        if (addComent) {
+            [addComent removeFromSuperview];
+        }
+        addComent = [[MovieAddComment alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 2 * cell.height)];
         cell.backgroundColor = [UIColor clearColor];
+        addComent.delegate = self;
         [cell.contentView addSubview:addComent];
        
     }else{
@@ -143,8 +150,43 @@
 }
 //进入电影详情
 -(void)movieDetailAction{
+    MyLog(@"电影详情");
+}
+//代理
+-(void)movieAddCommentAndScore:(NSInteger)score{
+    self.movieScore = score;
+}
+#pragma mark - requestData
+- (void)requestData{
+    if (self.movieScore == 0) {
+        [JRToast showWithText:@"请滑动星星评分" duration:1];
+        return;
+    }else if (textCommendView.text == nil || [textCommendView.text isEqualToString:@""]){
+        [JRToast showWithText:@"请留下您的宝贵意见" duration:1];
+        return;
+    }
+    self.film_id = @"2";
+    self.order_id = @"211";
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_COMMENTSCORE];
+    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID],@"order_id":self.order_id,@"customer_content":textCommendView.text,@"score":@(self.movieScore),@"film_id":self.film_id};
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"影评%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+//            for (NSDictionary * dict in data[@"data"]) {
+            
+//                BannerModel* model = [BannerModel yy_modelWithDictionary:dict];
+//                [self.hotMovieSAry addObject:model];
+//            }
+        }else{
+            [JRToast showWithText:@"网络超时，请检查网络" duration:1];
+        }
+     
+    }];
+
     
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -11,6 +11,6 @@
 @interface ChooseMovieController : UIViewController
 
 @property (nonatomic,assign) NSInteger  markRow;
-- (instancetype)initWithAry:(NSMutableArray*)ary;
+
 
 @end

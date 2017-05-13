@@ -10,4 +10,7 @@
 
 @interface CommendViewController : UIViewController
 @property (nonatomic,strong) UILabel * comLabel;
+@property (nonatomic,copy)NSString * order_id;
+@property (nonatomic,copy)NSString * film_id;
+
 @end

@@ -32,13 +32,6 @@
 
 @implementation ChooseMovieController
 
-- (instancetype )initWithAry:(NSMutableArray *)ary{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
 
 - (UITableView*)movieTableView{
     if (!_movieTableView) {

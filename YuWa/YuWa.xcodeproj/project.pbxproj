@@ -766,6 +766,7 @@
 		AAD81F341EC46A6800799957 /* home_grayStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F311EC46A6800799957 /* home_grayStar@2x.png */; };
 		AAD81F351EC46A6800799957 /* home_halfStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F321EC46A6800799957 /* home_halfStar@2x.png */; };
 		AAD81F361EC46A6800799957 /* home_lightStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F331EC46A6800799957 /* home_lightStar@2x.png */; };
+		AAD81F3B1EC5EBE600799957 /* HotMovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD81F3A1EC5EBE600799957 /* HotMovieModel.m */; };
 		AAF0EB3A1EAC58EB0003A930 /* YWShopCommitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB391EAC58EB0003A930 /* YWShopCommitView.m */; };
 		AAF0EB431EAC5C940003A930 /* YWShopScoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB411EAC5C940003A930 /* YWShopScoreTableViewCell.m */; };
 		AAF0EB441EAC5C940003A930 /* YWShopScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF0EB421EAC5C940003A930 /* YWShopScoreTableViewCell.xib */; };
@@ -2643,6 +2644,8 @@
 		AAD81F311EC46A6800799957 /* home_grayStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_grayStar@2x.png"; sourceTree = "<group>"; };
 		AAD81F321EC46A6800799957 /* home_halfStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_halfStar@2x.png"; sourceTree = "<group>"; };
 		AAD81F331EC46A6800799957 /* home_lightStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_lightStar@2x.png"; sourceTree = "<group>"; };
+		AAD81F391EC5EBE600799957 /* HotMovieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotMovieModel.h; sourceTree = "<group>"; };
+		AAD81F3A1EC5EBE600799957 /* HotMovieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotMovieModel.m; sourceTree = "<group>"; };
 		AAF0EB381EAC58EB0003A930 /* YWShopCommitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCommitView.h; sourceTree = "<group>"; };
 		AAF0EB391EAC58EB0003A930 /* YWShopCommitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopCommitView.m; sourceTree = "<group>"; };
 		AAF0EB401EAC5C940003A930 /* YWShopScoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopScoreTableViewCell.h; sourceTree = "<group>"; };
@@ -4422,13 +4425,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		AA01310E1EC34C2700A99BD1 /* 首页 */ = {
+		AA01310E1EC34C2700A99BD1 /* model */ = {
 			isa = PBXGroup;
 			children = (
 				AA01310F1EC34C4C00A99BD1 /* BannerModel.h */,
 				AA0131101EC34C4C00A99BD1 /* BannerModel.m */,
 			);
-			name = "首页";
+			name = model;
 			sourceTree = "<group>";
 		};
 		AA024DDB1EBB52A80049D4F1 /* 使用优惠券 */ = {
@@ -4527,13 +4530,8 @@
 			children = (
 				AA3B4DAB1E554871008466C4 /* cell */,
 				AA3805FA1E65082200DB8C4C /* 支付 */,
-				AA1FEB561E55DE9E00239FEC /* ChooseMovieController.h */,
-				AA1FEB571E55DE9E00239FEC /* ChooseMovieController.m */,
-				AA1FEB581E55DE9E00239FEC /* ChooseMovieController.xib */,
 				AA0E29501E57EDD2008828C7 /* DetaliViewController.h */,
 				AA0E29511E57EDD2008828C7 /* DetaliViewController.m */,
-				AA0E29531E5814D9008828C7 /* LookAllViewController.h */,
-				AA0E29541E5814D9008828C7 /* LookAllViewController.m */,
 				AA42110B1E5ABAEF00085650 /* MovieCinemaViewController.h */,
 				AA42110C1E5ABAEF00085650 /* MovieCinemaViewController.m */,
 				AA42110D1E5ABAEF00085650 /* MovieCinemaViewController.xib */,
@@ -4547,8 +4545,6 @@
 				AAAE11851E5C848200D637D7 /* ShopDetaliViewController.m */,
 				AA3AB5321E5D1F92009BD8D9 /* PlayViewController.h */,
 				AA3AB5331E5D1F92009BD8D9 /* PlayViewController.m */,
-				AA3AB5351E5D2166009BD8D9 /* CommendViewController.h */,
-				AA3AB5361E5D2166009BD8D9 /* CommendViewController.m */,
 				AA3CA5591E6015E6000D05FA /* LookDetaliViewController.h */,
 				AA3CA55A1E6015E6000D05FA /* LookDetaliViewController.m */,
 				AA3CA55F1E6058D3000D05FA /* LocationViewController.h */,
@@ -5446,9 +5442,6 @@
 				AAAE11821E5C72CF00D637D7 /* SeeMovieCell.m */,
 				AA3AB5411E5D6AF2009BD8D9 /* PlayMovieCell.h */,
 				AA3AB5421E5D6AF2009BD8D9 /* PlayMovieCell.m */,
-				AAF4484B1EC2C25F0062FCD5 /* NewAllMovieTableViewCell.h */,
-				AAF4484C1EC2C25F0062FCD5 /* NewAllMovieTableViewCell.m */,
-				AAF4484D1EC2C25F0062FCD5 /* NewAllMovieTableViewCell.xib */,
 				AA0130FF1EC2E86200A99BD1 /* MovieShopTableViewCell.h */,
 				AA0131001EC2E86200A99BD1 /* MovieShopTableViewCell.m */,
 				AA0131011EC2E86200A99BD1 /* MovieShopTableViewCell.xib */,
@@ -5629,15 +5622,13 @@
 		AA466CC71E54498F009E9F98 /* 电影类 */ = {
 			isa = PBXGroup;
 			children = (
+				AAD81F371EC5EBAD00799957 /* 首页 */,
 				AAFAC9931EBD7142000AAB78 /* 自定义布局 */,
 				AAF30ABB1E5E926300793382 /* XZSeatsTool */,
 				AAF30A801E5E73A200793382 /* Model */,
 				AA084B7B1E56DDD8002D14F5 /* Custom */,
 				AA1FEB371E55CFC700239FEC /* ViewController */,
 				AA466CCD1E545DD3009E9F98 /* view */,
-				AA466CC81E5449D1009E9F98 /* MovieViewController.h */,
-				AA466CC91E5449D1009E9F98 /* MovieViewController.m */,
-				AA466CCA1E5449D1009E9F98 /* MovieViewController.xib */,
 			);
 			name = "电影类";
 			path = "新的18分类";
@@ -5834,6 +5825,69 @@
 			path = "笔记专辑影评评论/账户设置";
 			sourceTree = "<group>";
 		};
+		AAD81F371EC5EBAD00799957 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				AAD81F3E1EC5F74400799957 /* 影院和购票 */,
+				AA01310E1EC34C2700A99BD1 /* model */,
+				AAD81F3C1EC5EBEE00799957 /* 热映电影 */,
+				AA466CC81E5449D1009E9F98 /* MovieViewController.h */,
+				AA466CC91E5449D1009E9F98 /* MovieViewController.m */,
+				AA466CCA1E5449D1009E9F98 /* MovieViewController.xib */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		AAD81F3C1EC5EBEE00799957 /* 热映电影 */ = {
+			isa = PBXGroup;
+			children = (
+				AAD81F401EC5F97100799957 /* cell */,
+				AAD81F3D1EC5EC0200799957 /* model */,
+				AA0E29531E5814D9008828C7 /* LookAllViewController.h */,
+				AA0E29541E5814D9008828C7 /* LookAllViewController.m */,
+			);
+			name = "热映电影";
+			sourceTree = "<group>";
+		};
+		AAD81F3D1EC5EC0200799957 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AAD81F391EC5EBE600799957 /* HotMovieModel.h */,
+				AAD81F3A1EC5EBE600799957 /* HotMovieModel.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		AAD81F3E1EC5F74400799957 /* 影院和购票 */ = {
+			isa = PBXGroup;
+			children = (
+				AAD81F3F1EC5F78C00799957 /* 影评 */,
+				AA1FEB561E55DE9E00239FEC /* ChooseMovieController.h */,
+				AA1FEB571E55DE9E00239FEC /* ChooseMovieController.m */,
+				AA1FEB581E55DE9E00239FEC /* ChooseMovieController.xib */,
+			);
+			name = "影院和购票";
+			sourceTree = "<group>";
+		};
+		AAD81F3F1EC5F78C00799957 /* 影评 */ = {
+			isa = PBXGroup;
+			children = (
+				AA3AB5351E5D2166009BD8D9 /* CommendViewController.h */,
+				AA3AB5361E5D2166009BD8D9 /* CommendViewController.m */,
+			);
+			name = "影评";
+			sourceTree = "<group>";
+		};
+		AAD81F401EC5F97100799957 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AAF4484B1EC2C25F0062FCD5 /* NewAllMovieTableViewCell.h */,
+				AAF4484C1EC2C25F0062FCD5 /* NewAllMovieTableViewCell.m */,
+				AAF4484D1EC2C25F0062FCD5 /* NewAllMovieTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		AAF0EB4A1EAC72000003A930 /* mdel */ = {
 			isa = PBXGroup;
 			children = (
@@ -5930,7 +5984,6 @@
 		AAF30A801E5E73A200793382 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AA01310E1EC34C2700A99BD1 /* 首页 */,
 				AA47068B1E65671C00D09619 /* 选座 */,
 				AA4706871E655F3300D09619 /* 影城 */,
 				AA4706831E65585F00D09619 /* 电影海报 */,
@@ -11605,6 +11658,7 @@
 				AA2B2C0D1E8CF0D8008CB3C6 /* YWGetMyAwardViewController.m in Sources */,
 				C1F7BDB61DB1C94500CCAF96 /* inputNumberCell.m in Sources */,
 				B38B2F131D8FC82F004D5256 /* RBNodeShowTagModel.m in Sources */,
+				AAD81F3B1EC5EBE600799957 /* HotMovieModel.m in Sources */,
 				AA3BFE371E8559B500D669C2 /* AddBankViewController.m in Sources */,
 				B3CD68AE1D94F9F300C26B1C /* RBPublicLocationViewController.m in Sources */,
 				B38B2E001D8FACD8004D5256 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,

@@ -66,6 +66,9 @@
 
 #pragma 电影模块
 #define HTTP_MOVIE_HOMEPAGE     @"/api.php/Movie/banner/"//电影首页
+#define HTTP_MOVIE_ALLHOTMOVIE  @"/api.php/Movie/allHotFilms/"//所有热映电影
+#define HTTP_MOVIE_COMMENTSCORE @"/api.php/Movie/addFilmScore/"//发布影评，评分
+#define HTTP_MOVIE_HOMEHOTMOVIE  @"/api.php/Movie/hotFilms/"//首页热映电影
 
 
 

@@ -112,6 +112,7 @@
     }else{
         self.lbl_count.text = [NSString stringWithFormat:@"%ld",count];
     }
+     [self.delegate movieAddCommentAndScore:count];
 }
 
 -(void)checkCount:(NSInteger)count{

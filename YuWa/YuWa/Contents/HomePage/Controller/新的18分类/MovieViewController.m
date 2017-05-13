@@ -20,6 +20,8 @@
 
 #import "NewHotMovieCollectCell.h"
 
+
+#import "HotMovieModel.h"//热映电影model
 #import "BannerModel.h"//轮播图模型
 #import "MovieHeaderModel.h"
 
@@ -42,6 +44,7 @@
 @property (nonatomic,strong) NSMutableArray * hotMovieSAry;//轮播热映数组
 @property (nonatomic,strong) NSMutableArray * hotCollectDataAry;//热映影片数组
 @property (nonatomic,strong) NSTimer * timer;
+@property (nonatomic,strong) UICollectionView *movieCollectView;
 @property (nonatomic,assign)BOOL isselected;
 @end
 
@@ -59,17 +62,10 @@
     UIBarButtonItem * searchBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_homepage_search"] style:UIBarButtonItemStylePlain target:self action:@selector(searchMovie)];
     self.navigationItem.rightBarButtonItem = searchBtn;
     
-    //:有数据后删除
-    for (int i = 0; i<5; i++) {
-
-          NSString * image = [NSString stringWithFormat:@"1baobaoLVUP%d@2x.jpg",i+1];
-        [self.hotCollectDataAry addObject:image];
-
-    }
-    
     [self.view addSubview:self.movieTableView];
     [self setRJRefresh];
-    [self requestData];
+    [self requestBannerData];
+    [self requestHotData];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -107,7 +103,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     UIView * headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.7f)];
-    headerView.backgroundColor = [UIColor lightGrayColor];
+    headerView.backgroundColor = RGBCOLOR(240, 244, 240, 1);
     
     //轮播图
     hotScrollView = [[HotMovieScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, headerView.size.height * 0.4f-15) andDataAry:self.hotMovieSAry];
@@ -155,23 +151,26 @@
     [hotMovieBGView addSubview:lookBtn];
     
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
-    UICollectionView *movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, hotMovieBGView.bottom, kScreen_Width, headerView.size.height*0.57f-35) collectionViewLayout:layout];
+    self.movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, hotMovieBGView.bottom, kScreen_Width, headerView.size.height*0.57f-35) collectionViewLayout:layout];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     
     
-    [movieCollectView registerNib:[UINib nibWithNibName:newHotCell bundle:nil] forCellWithReuseIdentifier:newHotCell];
-    movieCollectView.backgroundColor = [UIColor whiteColor];
-    movieCollectView.delegate = self;
-    movieCollectView.dataSource = self;
-    [headerView addSubview:movieCollectView];
+    [_movieCollectView registerNib:[UINib nibWithNibName:newHotCell bundle:nil] forCellWithReuseIdentifier:newHotCell];
+    _movieCollectView.backgroundColor = [UIColor whiteColor];
+    _movieCollectView.delegate = self;
+    _movieCollectView.dataSource = self;
+    [headerView addSubview:_movieCollectView];
     
+    UIView * btnBGView = [[UIView alloc]initWithFrame:CGRectMake(0, headerView.height -30, kScreen_Width, 30)];
+    btnBGView.backgroundColor = [UIColor whiteColor];
+    [headerView addSubview:btnBGView];
     
     NSArray * titleAry = @[@"全城",@"离我最近",@"特色"];
     CGFloat btnWidth = (kScreen_Width-6)/3;
     for (int i = 0; i<3; i++) {
         UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        selectBtn.frame = CGRectMake((btnWidth+3)*i, headerView.height -30,btnWidth , 30);
+        selectBtn.frame = CGRectMake((btnWidth+3)*i, 0 ,btnWidth , 30);
         selectBtn.tag = 1111 + i;
         selectBtn.backgroundColor = [UIColor whiteColor];
         [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
@@ -193,8 +192,14 @@
         if (_isselected == 0) {
             selectBtn.selected = NO;
         }
-        
-        [headerView addSubview:selectBtn];
+        [btnBGView addSubview:selectBtn];
+        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(selectBtn.right+1, 10, 1, 10)];
+        line.centerY = btnBGView.height/2;
+        line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
+        [btnBGView addSubview:line];
+        if (i == 2) {
+            line.hidden = YES;
+        }
     }
     
     
@@ -235,7 +240,7 @@
 #pragma mark - collectViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.hotCollectDataAry.count;
-//    return 8;
+
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
@@ -259,27 +264,26 @@
     markIndexPath = indexPath.item;
     
     //注意修改
-    ChooseMovieController * choseVC = [[ChooseMovieController alloc]initWithAry:self.hotCollectDataAry];
+    ChooseMovieController * choseVC = [[ChooseMovieController alloc]init];
     [self.navigationController pushViewController:choseVC animated:YES];
     
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     NewHotMovieCollectCell * collectCell = (NewHotMovieCollectCell *)[collectionView dequeueReusableCellWithReuseIdentifier:newHotCell forIndexPath:indexPath];
-    MovieHeaderModel * model = self.hotCollectDataAry[indexPath.item];
+    HotMovieModel * model = self.hotCollectDataAry[indexPath.item];
     collectCell.model = model;
-    collectCell.movieImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", self.hotCollectDataAry[indexPath.item]]];
 
     return collectCell;
 }
 
 #pragma mark - requestData
-- (void)requestData{
+- (void)requestBannerData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOMEPAGE];
     NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID]};
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
-        MyLog(@"电影首页%@",data);
+        MyLog(@"电影轮播图%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             for (NSDictionary * dict in data[@"data"]) {
                 
@@ -295,6 +299,30 @@
     [self.movieTableView.mj_footer endRefreshing];
     
 }
+
+- (void)requestHotData{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOMEHOTMOVIE];
+    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID]};
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"电影首页热门影片%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            [self.hotCollectDataAry removeAllObjects];
+            for (NSDictionary * dict in data[@"data"]) {
+                
+                HotMovieModel* model = [HotMovieModel yy_modelWithDictionary:dict];
+                [self.hotCollectDataAry addObject:model];
+            }
+        }else{
+            [JRToast showWithText:@"网络超时，请检查网络" duration:1];
+        }
+        [self.movieCollectView reloadData];
+    }];
+    [self.movieTableView.mj_header endRefreshing];
+    [self.movieTableView.mj_footer endRefreshing];
+    
+}
+
 - (void)lookAll:(UIButton*)btn{
     NSLog(@"查看全部");
     LookAllViewController * lookAllView = [[LookAllViewController alloc]init];

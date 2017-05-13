@@ -84,35 +84,40 @@
         CGFloat realZhengshu;
         CGFloat realXiaoshu;
         //    NSString*starNmuber=self.model.grade;
-        NSString * starNmuber = @"4.2";
+        NSString * starNmuber1 = @"4.2";
+        CGFloat totalScroe = [starNmuber1 floatValue]/2;
+        NSString *starNmuber = [NSString stringWithFormat:@"%.2f",totalScroe];
         NSString*zhengshu=[starNmuber substringToIndex:1];
         realZhengshu=[zhengshu floatValue];
         NSString*xiaoshu=[starNmuber substringFromIndex:1];
         CGFloat CGxiaoshu=[xiaoshu floatValue];
         
-        if (CGxiaoshu>0.5) {
+        if (CGxiaoshu>=0.75) {
             realXiaoshu=0;
             realZhengshu= realZhengshu+1;
-        }else if (CGxiaoshu>0&&CGxiaoshu<=0.5){
-            realXiaoshu=0.5;
-        }else{
+        }else if (CGxiaoshu>0&&CGxiaoshu<0.25){
             realXiaoshu=0;
+        }else{
+            realXiaoshu=0.5;
             
         }
+
         for (int a = 0; a<5; a++) {
             UIImageView * startImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.posterImageView.left +(12+3)*a, self.scoreLabel.origin.y, 15, 15)];
             startImageView.tag = 40 +a;
             if (startImageView.tag-40<realZhengshu) {
                 //亮
-                startImageView.image=[UIImage imageNamed:@"满星"];
-            }else if (startImageView.tag-40==realZhengshu&&realXiaoshu!=0){
+                startImageView.image=[UIImage imageNamed:@"home_lightStar"];
+            }else if (startImageView.tag-40==realZhengshu&&realXiaoshu<0.75 && realXiaoshu >=0.25){
                 //半亮
-                startImageView.image=[UIImage imageNamed:@"半星"];
+                startImageView.image=[UIImage imageNamed:@"home_halfStar"];
                 
             }else{
                 //不亮
-                startImageView.image=[UIImage imageNamed:@"空星"];
+                startImageView.image=[UIImage imageNamed:@"home_grayStar"];
             }
+            
+
             [self addSubview:startImageView];
         }
         

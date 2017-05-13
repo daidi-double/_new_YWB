@@ -95,7 +95,7 @@
     }else{
         
     }
-    ChooseMovieController * chooseVC = [[ChooseMovieController alloc]initWithAry:self.buyTicketData];
+    ChooseMovieController * chooseVC = [[ChooseMovieController alloc]init];
     [self.navigationController pushViewController:chooseVC animated:YES];
 
 }

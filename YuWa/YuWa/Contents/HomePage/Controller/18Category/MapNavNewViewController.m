@@ -84,7 +84,7 @@
 
 
     UIButton * navBtn= [UIButton buttonWithType:UIButtonTypeCustom];
-    navBtn.frame = CGRectMake(10, kScreen_Height- 30, kScreen_Width-40, 30);
+    navBtn.frame = CGRectMake(10, kScreen_Height- 50, kScreen_Width-40, 40);
     navBtn.centerX = kScreen_Width/2;
     navBtn.layer.masksToBounds = YES;
     navBtn.layer.cornerRadius = 5;

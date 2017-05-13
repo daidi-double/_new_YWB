@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MovieHeaderModel.h"
+#import "HotMovieModel.h"
 @interface NewHotMovieCollectCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *movieImageView;
 @property (weak, nonatomic) IBOutlet UILabel *movieNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *movieScoreLabel;
-@property (nonatomic,strong)MovieHeaderModel * model;
+@property (nonatomic,strong)HotMovieModel * model;
 @end

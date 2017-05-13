@@ -20,7 +20,7 @@
             
             _movieImageView.center = CGPointMake(kScreen_Width/2 +(kScreen_Width*0.24+35)*i, self.height/2);
 
-            _movieImageView.image = [UIImage imageNamed:@"a1004"];
+            _movieImageView.image = [UIImage imageNamed:@"baobaoBG3"];
             
             [self addSubview:_movieImageView];
         }
