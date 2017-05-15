@@ -28,4 +28,5 @@
 @property (nonatomic,copy)NSString * status;
 @property (nonatomic,copy)NSString * plateform_income_money;//平台抽成
 @property (nonatomic,copy)NSString * balance;//余额
+@property (nonatomic,copy)NSString * score;//积分
 @end

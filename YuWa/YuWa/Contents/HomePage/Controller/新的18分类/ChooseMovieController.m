@@ -16,6 +16,8 @@
 #import "MovieDetailViewController.h"
 #import "CinemaAndBuyTicketModel.h"
 
+#import "CinemaModel.h"//影院id
+
 @interface ChooseMovieController ()<UITableViewDelegate,UITableViewDataSource,ChooseMovieHeaderViewDelegate,UIGestureRecognizerDelegate>
 {
     UIButton * markTimeBtn;
@@ -35,7 +37,7 @@
 @property (nonatomic,copy) NSString * time;//日期
 @property (nonatomic,strong) UIView * bgView;
 @property (nonatomic,strong) CinemaAndBuyTicketModel * model;
-
+@property (nonatomic,strong) CinemaModel * cinemaModel;//影院model
 @end
 
 @implementation ChooseMovieController
@@ -98,12 +100,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     MovieCinemaViewController * MCinemaVC = [[MovieCinemaViewController alloc]init];
+    MCinemaVC.cinema_id = self.cinemaModel.id;
     [self.navigationController pushViewController:MCinemaVC animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     CinemaTimeCell * cell = [[CinemaTimeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cinemaTimeCell" andDataAry:self.movieDataAry];
+    cell.model = self.cinemaModel;
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -260,9 +264,9 @@
     }
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
-        MyLog(@"电影影院和购票%@",data);
+        MyLog(@"电影影院和购票，影院数据%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
-            self.model = [CinemaAndBuyTicketModel yy_modelWithDictionary:data[@"data"]];
+            self.cinemaModel = [CinemaModel yy_modelWithDictionary:data[@"data"]];
             //            [self.headerViewAry addObject:self.model];//数据是空的，所以暂时注释掉
             
         }else{

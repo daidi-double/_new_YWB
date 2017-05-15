@@ -78,6 +78,7 @@
         
         UIImageView * rightImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 20, 0, 8, 15)];
         rightImageView.centerY = self.height/2 - 15;
+        rightImageView.tag = 1011;
         rightImageView.image = [UIImage imageNamed:@"右箭头"];
         [self addSubview:rightImageView];
         CGFloat realZhengshu;

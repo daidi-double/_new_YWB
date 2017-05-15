@@ -449,7 +449,6 @@
      NSString * payAllmoney = [self.settomMoneyLabel.text substringFromIndex:4];
     self.shouldPayMoney = [payAllmoney floatValue];
     self.noUserCouponMoney = payAllmoney;
-    [self calshouldPayMoney];
     if (([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]- _CouponMoney != 0.00) {
         self.goPay.userInteractionEnabled = YES;
         [self.goPay setBackgroundColor:RGBCOLOR(60, 194, 237, 1)];
@@ -458,6 +457,7 @@
         self.goPay.userInteractionEnabled = NO;
         [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
     }
+    [self calshouldPayMoney];
     //刷新对应行的数据
     [self.payTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,indexPathT,nil] withRowAnimation:UITableViewRowAnimationFade];
 }
@@ -511,7 +511,7 @@
     
     
     //不能小于
-    if (self.otherTotalMoney<self.noDiscountMoney) {
+    if ([self.otherTotalMoney floatValue]<[self.noDiscountMoney floatValue]) {
         
         [JRToast showWithText:@"不打折金额不能大于消费总额"];
 

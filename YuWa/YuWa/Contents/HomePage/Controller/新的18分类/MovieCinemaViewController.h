@@ -10,6 +10,6 @@
 
 @interface MovieCinemaViewController : UIViewController
 @property (nonatomic,strong)UIButton * buy_ticket;
-
+@property (nonatomic,copy)NSString * cinema_code;//影院编码
 
 @end

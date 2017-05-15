@@ -90,7 +90,15 @@
         cell.dateTimeLabel.text = model.dateTime;
         cell.fenhongNameLabel.text = model.type;
         cell.fenhongImageView.image = [UIImage imageNamed:model.type];
-        
+        if ([model.type containsString:@"介绍分红"]) {
+            cell.fenhongImageView.image = [UIImage imageNamed:@"介绍分红"];
+        }
+        if ([model.type isEqualToString:@"直接介绍积分分红"] ||[model.type isEqualToString:@"间接介绍积分分红"]) {
+            cell.fenhongImageView.image = [UIImage imageNamed:@"积分分红"];
+        }
+        if ([model.type containsString:@"提现"]) {
+            cell.fenhongImageView.image = [UIImage imageNamed:@"提现"];
+        }
         cell.payMoney.text = model.money;
     }
     return cell;

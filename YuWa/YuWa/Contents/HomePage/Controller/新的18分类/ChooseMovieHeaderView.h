@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "CinemaAndBuyTicketModel.h"
 @protocol ChooseMovieHeaderViewDelegate <NSObject>
--(void)play;
 -(void)commend;
+@optional
+-(void)play;
+
 @end
 @interface ChooseMovieHeaderView : UIView
 @property (nonatomic,strong) CinemaAndBuyTicketModel * model;

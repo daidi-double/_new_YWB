@@ -73,7 +73,7 @@
 #define HTTP_MOVIE_CINEMANDDATE  @"/api.php/Movie/showCinemaFilm/"//影院和购票的日期选择部分
 #define HTTP_MOVIE_MOVIEDETAIL  @"/api.php/Movie/filmsDetail/"//影片详情
 #define HTTP_MOVIE_CHOOSESEATS  @"/api.php/Movie/queryShowSeats/"//选座
-
+#define HTTP_MOVIE_CINEMAHEADER  @"/api.php/Movie/cinemaFilm/"//影院头部数据
 
 
 

@@ -706,6 +706,7 @@
 		AA3CA5611E6058D3000D05FA /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA5601E6058D3000D05FA /* LocationViewController.m */; };
 		AA3CA5671E606F0B000D05FA /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA5661E606F0B000D05FA /* MapAnnotation.m */; };
 		AA3E98221E7BA6D9007A4FB0 /* libPaymentControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3E98211E7BA6D9007A4FB0 /* libPaymentControl.a */; };
+		AA3FF87A1EC95C370051A766 /* CinemaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3FF8791EC95C370051A766 /* CinemaModel.m */; };
 		AA41E33F1EC0366200FCB498 /* NewHotMovieCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA41E33D1EC0366200FCB498 /* NewHotMovieCollectCell.m */; };
 		AA41E3401EC0366200FCB498 /* NewHotMovieCollectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA41E33E1EC0366200FCB498 /* NewHotMovieCollectCell.xib */; };
 		AA42110E1E5ABAEF00085650 /* MovieCinemaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42110C1E5ABAEF00085650 /* MovieCinemaViewController.m */; };
@@ -2561,6 +2562,8 @@
 		AA3CA5661E606F0B000D05FA /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		AA3E981F1E7BA6D9007A4FB0 /* UPPaymentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPaymentControl.h; sourceTree = "<group>"; };
 		AA3E98211E7BA6D9007A4FB0 /* libPaymentControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentControl.a; sourceTree = "<group>"; };
+		AA3FF8781EC95C370051A766 /* CinemaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaModel.h; sourceTree = "<group>"; };
+		AA3FF8791EC95C370051A766 /* CinemaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaModel.m; sourceTree = "<group>"; };
 		AA41E33C1EC0366200FCB498 /* NewHotMovieCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHotMovieCollectCell.h; sourceTree = "<group>"; };
 		AA41E33D1EC0366200FCB498 /* NewHotMovieCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHotMovieCollectCell.m; sourceTree = "<group>"; };
 		AA41E33E1EC0366200FCB498 /* NewHotMovieCollectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewHotMovieCollectCell.xib; sourceTree = "<group>"; };
@@ -5318,6 +5321,8 @@
 			children = (
 				AA377B6E1EC6A80700E81A88 /* CinemaAndBuyTicketModel.h */,
 				AA377B6F1EC6A80700E81A88 /* CinemaAndBuyTicketModel.m */,
+				AA3FF8781EC95C370051A766 /* CinemaModel.h */,
+				AA3FF8791EC95C370051A766 /* CinemaModel.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -11882,6 +11887,7 @@
 				B3FFF47C1D93A3C700EDD2AB /* XHBranchTextView.m in Sources */,
 				B33A26571D9A68040092CB12 /* EMCDDeviceManager+Remind.m in Sources */,
 				B38B2DE61D8FACD8004D5256 /* UIImage+imageColor.m in Sources */,
+				AA3FF87A1EC95C370051A766 /* CinemaModel.m in Sources */,
 				B38B2E431D8FACD8004D5256 /* SAMTextView.m in Sources */,
 				AAF127E01E8AE11500121621 /* OrderRefundViewController.m in Sources */,
 				AA3A861E1EC1AC45003966F1 /* TotalMoneyTableViewCell.m in Sources */,

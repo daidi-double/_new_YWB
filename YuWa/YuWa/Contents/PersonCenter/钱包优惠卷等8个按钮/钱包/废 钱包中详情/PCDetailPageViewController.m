@@ -94,6 +94,38 @@
             }
         [self.dataAry addObject:order_sn];
         [self.dataAry addObject:type];
+        if ([type containsString:@"积分"]) {
+            CGFloat level;
+            switch ([UserSession instance].baobaoLV) {
+                case 1:
+                   level  = 20.0 * [model.score floatValue];
+                   money = [NSString stringWithFormat:@"%.4f",level];
+                    break;
+                case 2:
+                    level  = 22.0 * [model.score floatValue];
+                      money = [NSString stringWithFormat:@"%.4f",level];
+                    break;
+                case 3:
+                    level  = 25.0 * [model.score floatValue];
+                      money = [NSString stringWithFormat:@"%.4f",level];
+                    break;
+                case 4:
+                    level  = 30.0 * [model.score floatValue];
+                      money = [NSString stringWithFormat:@"%.4f",level];
+                    break;
+                case 5:
+                    level  = 40.0 * [model.score floatValue];
+                      money = [NSString stringWithFormat:@"%.4f",level];
+                    break;
+                case 6:
+                    level  = 60.0 * [model.score floatValue];
+                      money = [NSString stringWithFormat:@"%.4f",level];
+                    break;
+                default:
+                    break;
+            }
+        
+            }
         [self.dataAry addObject:money];
         [self.dataAry addObject:nickname];
         [self.dataAry addObject:ctime];

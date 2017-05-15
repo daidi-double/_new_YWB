@@ -7,7 +7,9 @@
 //
 
 #import "MovieDetailHeaderView.h"
+@interface MovieDetailHeaderView()<ChooseMovieHeaderViewDelegate>
 
+@end
 @implementation MovieDetailHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -18,6 +20,9 @@
         self.backgroundColor = [UIColor whiteColor];
         self.headerView  = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height* 0.3f)];
         self.headerView.playBtn.hidden = YES;
+        self.headerView.delegate = self;
+        UIImageView * view = [self.headerView viewWithTag:1011];
+        view.hidden = YES;
         self.headerView.backgroundColor = [UIColor darkGrayColor];
         [self addSubview:self.headerView];
         
@@ -50,5 +55,9 @@
     CGRect labelHeight = [introduce boundingRectWithSize:CGSizeMake(kScreen_Width-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
     return labelHeight.size.height+kScreen_Height * 0.3f + 35;
 
+}
+
+-(void)commend{
+    [self.delegate toCommentScore];
 }
 @end

@@ -65,6 +65,17 @@
     }
     return _distance;
 }
+
+- (void)setModel:(CinemaModel *)model{
+    _model = model;
+    [self setData];
+}
+
+- (void)setData{
+    self.cinemaName.text = self.model.cinema_name;
+    self.price.text = [NSString stringWithFormat:@"￥%@起",self.model.settlePrice];
+    self.distance.text = [NSString stringWithFormat:@"%@km",self.model.distance];
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

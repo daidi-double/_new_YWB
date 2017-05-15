@@ -13,9 +13,11 @@
 #import "MovieDetailHeaderView.h"
 #import "CommentModel.h"
 
+#import "CommendViewController.h"
+
 #define COMMENTCELl111 @"CommentTableViewCell"
 #define CinemaCell123 @"CinemaCharacteristicTableViewCell"
-@interface MovieDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MovieDetailViewController ()<UITableViewDelegate,UITableViewDataSource,MovieDetailHeaderViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (nonatomic,strong) MovieDetailHeaderView * headerView;
 @property (nonatomic,strong) CommentModel * model;
@@ -30,7 +32,7 @@
 }
 
 -(void)makeUI{
-    self.title = @"";
+    self.title = @"影片详情";
     [self.detailTableView registerNib:[UINib nibWithNibName:CinemaCell123 bundle:nil] forCellReuseIdentifier:CinemaCell123];
     
     [self.detailTableView registerNib:[UINib nibWithNibName:COMMENTCELl111 bundle:nil] forCellReuseIdentifier:COMMENTCELl111];
@@ -106,13 +108,20 @@
     if (!_headerView) {
         CGFloat height = [MovieDetailHeaderView getHeaderHeight:@""];
         _headerView = [[MovieDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, height)];
-                
+        _headerView.delegate =self;
     }
     return _headerView;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)toCommentScore{
+    CommendViewController * commendVC = [[CommendViewController alloc]init];
+    commendVC.film_id = self.model.id;
+//    commendVC.order_id = //在我的订单中评价才需要
+    [self.navigationController pushViewController:commendVC animated:YES];
 }
 
 /*

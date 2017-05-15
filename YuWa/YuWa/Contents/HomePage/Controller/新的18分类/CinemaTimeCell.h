@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CinemaModel.h"
 @interface CinemaTimeCell : UITableViewCell
 @property (nonatomic,strong)UILabel * cinemaName;
 @property (nonatomic,strong)UILabel * price;
 @property (nonatomic,strong)UILabel * distance;
-
+@property (nonatomic,strong)CinemaModel * model;
 //@property (nonatomic,strong)UILabel * screeningTime;//场次时间
 
 

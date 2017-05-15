@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "ChooseMovieHeaderView.h"
 #import "CinemaAndBuyTicketModel.h"
+
+@protocol MovieDetailHeaderViewDelegate <NSObject>
+
+- (void)toCommentScore;
+
+@end
 @interface MovieDetailHeaderView : UIView
 @property (nonatomic,strong)ChooseMovieHeaderView* headerView;
 @property (nonatomic,strong)UILabel * introduceLabel;
 @property (nonatomic,strong) CinemaAndBuyTicketModel * model;
+@property (nonatomic,assign)id<MovieDetailHeaderViewDelegate>delegate;
 +(CGFloat)getHeaderHeight:(NSString *)introduce;
 
 @end
