@@ -20,15 +20,16 @@
 //},
 @interface ChooseSeatModel : NSObject
 
-@property (nonatomic,copy) NSString * code;//座位编码
-@property (nonatomic,copy) NSString * colNum;//列号
+@property (nonatomic,copy) NSString * code;//座位编码   1
+@property (nonatomic,copy) NSString * colNum;//列号  1
 @property (nonatomic,copy) NSString * groupCode;//分组编码
 @property (nonatomic,copy) NSString * loveCode;//情侣座编码
 @property (nonatomic,copy) NSString * rowNum;//行号
-@property (nonatomic,copy) NSString * status;//可售状态（0：不可售，1可售）
+@property (nonatomic,copy) NSNumber * status;//可售状态（0：不可售，1可售）1
 @property (nonatomic,copy) NSString * type;//座位类型1普通，2情侣
 @property (nonatomic,copy) NSString * xcoord;//纵坐标，列
 @property (nonatomic,copy) NSString * ycoord;//横坐标，排
 
++(NSMutableArray *)ChooseSeatModelWithDic:(NSMutableArray * )arr;
 
 @end
