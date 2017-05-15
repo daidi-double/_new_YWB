@@ -38,6 +38,7 @@
     self.shopIconImageView.layer.cornerRadius =5;
     self.shopIconImageView.layer.masksToBounds = YES;
     [self.shopIconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.company_img]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [self.dataAry removeAllObjects];
     for (NSDictionary * dict in self.model.cart) {
         if ([dict isKindOfClass:[NSNull class]]) {
             

@@ -90,24 +90,19 @@
         [self getDatas];
 }
 -(void)notice:(NSNotification*)sender{
-//    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:nil preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction * sure = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
    
     if ((self.isClearShop =1?sender.userInfo[@"isClear"]:NO)) {
-        
-        [self clearNumberOfShop];
-        [self clearShopCar:self.shop_id];
+        if ([sender.userInfo[@"number"] integerValue] != 2 ) {
+            [self clearNumberOfShop];
+            [self clearShopCar:self.shop_id];
+            
+        }
         [self getDatas];
         [self.shops removeAllObjects];
         [self.rightTableView reloadData];
         [self.leftTableView reloadData];
     }
-//    }];
-//    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil];
-//    [alertVC addAction:sure];
-//    [alertVC addAction:cancel];
-//    [self presentViewController:alertVC animated:YES completion:nil];
-//    
+   
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];

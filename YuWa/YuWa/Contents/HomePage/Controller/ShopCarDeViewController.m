@@ -41,6 +41,7 @@
     if (!cell) {
         cell = [[ShopCarDetailTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CARDETAILCELL];
     }
+    
     YWCarListModel * model = self.dataAry[indexPath.section];
     cell.selectionStyle = NO;
     cell.delegate =self;
@@ -100,8 +101,8 @@
 -(void)cleaerShopCarList:(UIButton *)sender{
     ShopCarDetailTableViewCell * cell = (ShopCarDetailTableViewCell*)[[[sender superview]superview]superview];
     NSIndexPath * path = [self.shopCarTableView indexPathForCell:cell];
-    [self clearShopCar:cell.shop_id];
     [self.dataAry removeObjectAtIndex:path.section];
+    [self clearShopCar:cell.shop_id];
 }
 - (void)clearShopCar:(NSString *)shop_id{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_CLEARSHOPCARLIST];
@@ -112,16 +113,15 @@
         NSInteger number = [data[@"errorCode"] integerValue];
         if (number == 0) {
             [JRToast showWithText:data[@"msg"] duration:1];
-            
-            [self.shopCarTableView reloadData];
             //创建一个消息对象
-            NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
+            NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1),@"number":@(2)}];
             //发送消息
             [[NSNotificationCenter defaultCenter]postNotification:notice];
+            [self.shopCarTableView reloadData];
+
         }else{
             [JRToast showWithText:data[@"errorMessage"] duration:1];
         }
-        [self.shopCarTableView reloadData];
     }];
 }
 
