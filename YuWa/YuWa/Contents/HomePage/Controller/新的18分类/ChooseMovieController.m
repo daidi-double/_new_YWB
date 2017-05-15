@@ -100,7 +100,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     MovieCinemaViewController * MCinemaVC = [[MovieCinemaViewController alloc]init];
-    MCinemaVC.cinema_id = self.cinemaModel.id;
+    MCinemaVC.cinema_code = self.cinemaModel.cinema_code;
     [self.navigationController pushViewController:MCinemaVC animated:YES];
 }
 

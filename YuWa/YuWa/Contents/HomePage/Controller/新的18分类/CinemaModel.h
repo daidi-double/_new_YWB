@@ -13,6 +13,6 @@
 @property (nonatomic,copy)NSString * settlePrice;//几元起
 @property (nonatomic,copy)NSString * distance;//距离
 @property (nonatomic,copy)NSString * intro;//简介
-@property (nonatomic,copy)NSString * id;//影院id
+@property (nonatomic,copy)NSString * cinema_code;//影院id
 
 @end
