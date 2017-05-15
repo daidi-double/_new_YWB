@@ -181,7 +181,7 @@
             return [ShopCarDetailTableViewCell getHeight:self.model.cart]-40;
         }else{
 
-            return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count;
+            return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count+20;
         }
     }
         return 44.f;

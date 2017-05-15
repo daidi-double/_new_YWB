@@ -12,7 +12,7 @@
 #import "PersonCenterHeadView.h"
 #import "PCBottomTableViewCell.h"   //底部4种可能的cell
 #import "YWBaoBaoViewController.h"
-#import "YWShoppingDetailViewController.h"   //店铺详情
+#import "ShopDetailViewController.h"   //店铺详情
 
 #import "defineButton.h"
 #import "imageDefineButton.h"
@@ -128,9 +128,10 @@
 }
 
 
+#pragma mark   --- 滚动视图
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    MyLog(@"%@",NSStringFromCGPoint(scrollView.contentOffset));
     CGFloat yoffset=scrollView.contentOffset.y;
+    MyLog(@"%@",NSStringFromCGPoint(scrollView.contentOffset));
     
     if (yoffset>=HEADERVIEWHEIGHT-64&&yoffset<=HEADERVIEWHEIGHT) {
         self.navigationItem.title=[UserSession instance].nickName;
@@ -149,8 +150,8 @@
 
     }
     
-    
 }
+
 
 
 #pragma mark  --UI
@@ -664,7 +665,7 @@
 
 //需要跳转到店铺
 -(void)DelegateForToShopDetail:(NSString*)shopid{
-    YWShoppingDetailViewController*vc=[[YWShoppingDetailViewController alloc]init];
+    ShopDetailViewController*vc=[[ShopDetailViewController alloc]init];
     vc.shop_id=shopid;
     [self.navigationController pushViewController:vc animated:YES];
     

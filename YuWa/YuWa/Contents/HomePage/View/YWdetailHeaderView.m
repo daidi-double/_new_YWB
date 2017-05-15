@@ -19,11 +19,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        NSArray *nibs=[[NSBundle mainBundle]loadNibNamed:@"detailHeaderView" owner:nil options:nil];
-        self=[nibs objectAtIndex:0];
-       
-        
-        self.myFrame = frame;
+//        NSArray *nibs=[[NSBundle mainBundle]loadNibNamed:@"detailHeaderView" owner:nil options:nil];
+//        self=[nibs objectAtIndex:0];
+//       
+//        
+//        self.myFrame = frame;
     }
     return self;
 }

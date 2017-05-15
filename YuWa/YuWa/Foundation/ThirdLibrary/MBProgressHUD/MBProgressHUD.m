@@ -330,7 +330,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		[UIView commitAnimations];
 	}
 	else {
-		self.alpha = 1.0f;
+		self.alpha = 0.6f;
 	}
 }
 
