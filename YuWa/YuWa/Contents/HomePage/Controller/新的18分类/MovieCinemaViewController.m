@@ -206,7 +206,7 @@
     }
 }
 - (void)chooseDate:(UIButton*)sender{
-    NSLog(@"%ld",(long)sender.tag);
+    NSLog(@"%ld,%@",(long)sender.tag,sender.titleLabel.text);
     
     lineView.x = sender.x;
 }

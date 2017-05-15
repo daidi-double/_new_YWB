@@ -643,5 +643,32 @@
     return strTime;
 }
 
++(NSString*)currentTime2{
+    NSDate*current=[NSDate date];
+    NSDateFormatter*dateFormatter=[[NSDateFormatter alloc]init];
+    //   hh:mm:ss
+    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    NSString*strTime=[dateFormatter stringFromDate:current];
+    
+    return strTime;
+}
 
+//得到明天的时间
++(NSString *)tommorowTime{
+    NSDate * date = [NSDate date];
+    NSDate *nextDay = [NSDate dateWithTimeInterval:24*60*60 sinceDate:date];//后一天
+    NSDateFormatter*dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    NSString*strTime=[dateFormatter stringFromDate:nextDay];
+    return strTime;
+}
+//得到后天的时间
++(NSString *)getThreeDayTime{
+    NSDate * date = [NSDate date];
+    NSDate *nextDay = [NSDate dateWithTimeInterval:24*60*60*2 sinceDate:date];
+    NSDateFormatter*dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    NSString*strTime=[dateFormatter stringFromDate:nextDay];
+    return strTime;
+}
 @end

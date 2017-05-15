@@ -630,6 +630,11 @@
 		AA3545CE1E9DF23A00A2EC73 /* 4baobaoBG7@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3543B51E9DF23800A2EC73 /* 4baobaoBG7@2x.jpg */; };
 		AA3545CF1E9DF23A00A2EC73 /* 4baobaoBG8@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3543B61E9DF23800A2EC73 /* 4baobaoBG8@2x.jpg */; };
 		AA3545D01E9DF23A00A2EC73 /* 4baobaoBG9@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3543B71E9DF23800A2EC73 /* 4baobaoBG9@2x.jpg */; };
+		AA377B701EC6A80700E81A88 /* CinemaAndBuyTicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA377B6F1EC6A80700E81A88 /* CinemaAndBuyTicketModel.m */; };
+		AA377B7B1EC6E0C000E81A88 /* MovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA377B791EC6E0C000E81A88 /* MovieDetailViewController.m */; };
+		AA377B7C1EC6E0C000E81A88 /* MovieDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA377B7A1EC6E0C000E81A88 /* MovieDetailViewController.xib */; };
+		AA377B821EC6EA0E00E81A88 /* MovieDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA377B811EC6EA0E00E81A88 /* MovieDetailHeaderView.m */; };
+		AA377B861EC70E5400E81A88 /* ChooseSeatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA377B851EC70E5400E81A88 /* ChooseSeatModel.m */; };
 		AA3805FD1E65086900DB8C4C /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3805FC1E65086900DB8C4C /* PayViewController.m */; };
 		AA3838BD1E82194500A1B5C9 /* ExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3838BB1E82194500A1B5C9 /* ExchangeViewController.m */; };
 		AA3838BE1E82194500A1B5C9 /* ExchangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3838BC1E82194500A1B5C9 /* ExchangeViewController.xib */; };
@@ -2440,6 +2445,15 @@
 		AA3543B51E9DF23800A2EC73 /* 4baobaoBG7@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "4baobaoBG7@2x.jpg"; sourceTree = "<group>"; };
 		AA3543B61E9DF23800A2EC73 /* 4baobaoBG8@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "4baobaoBG8@2x.jpg"; sourceTree = "<group>"; };
 		AA3543B71E9DF23800A2EC73 /* 4baobaoBG9@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "4baobaoBG9@2x.jpg"; sourceTree = "<group>"; };
+		AA377B6E1EC6A80700E81A88 /* CinemaAndBuyTicketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaAndBuyTicketModel.h; sourceTree = "<group>"; };
+		AA377B6F1EC6A80700E81A88 /* CinemaAndBuyTicketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaAndBuyTicketModel.m; sourceTree = "<group>"; };
+		AA377B781EC6E0C000E81A88 /* MovieDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetailViewController.h; sourceTree = "<group>"; };
+		AA377B791EC6E0C000E81A88 /* MovieDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDetailViewController.m; sourceTree = "<group>"; };
+		AA377B7A1EC6E0C000E81A88 /* MovieDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieDetailViewController.xib; sourceTree = "<group>"; };
+		AA377B801EC6EA0E00E81A88 /* MovieDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetailHeaderView.h; sourceTree = "<group>"; };
+		AA377B811EC6EA0E00E81A88 /* MovieDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDetailHeaderView.m; sourceTree = "<group>"; };
+		AA377B841EC70E5400E81A88 /* ChooseSeatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSeatModel.h; sourceTree = "<group>"; };
+		AA377B851EC70E5400E81A88 /* ChooseSeatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSeatModel.m; sourceTree = "<group>"; };
 		AA3805FB1E65086900DB8C4C /* PayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayViewController.h; sourceTree = "<group>"; };
 		AA3805FC1E65086900DB8C4C /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
 		AA3838BA1E82194500A1B5C9 /* ExchangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeViewController.h; sourceTree = "<group>"; };
@@ -4532,17 +4546,6 @@
 				AA3805FA1E65082200DB8C4C /* 支付 */,
 				AA0E29501E57EDD2008828C7 /* DetaliViewController.h */,
 				AA0E29511E57EDD2008828C7 /* DetaliViewController.m */,
-				AA42110B1E5ABAEF00085650 /* MovieCinemaViewController.h */,
-				AA42110C1E5ABAEF00085650 /* MovieCinemaViewController.m */,
-				AA42110D1E5ABAEF00085650 /* MovieCinemaViewController.xib */,
-				AAF628E31E5AED33000FF976 /* CinemaDetaliController.h */,
-				AAF628E41E5AED33000FF976 /* CinemaDetaliController.m */,
-				AAF628E61E5AEE03000FF976 /* FoodViewController.h */,
-				AAF628E71E5AEE03000FF976 /* FoodViewController.m */,
-				AAAE117E1E5C699C00D637D7 /* ChooseSeatController.h */,
-				AAAE117F1E5C699C00D637D7 /* ChooseSeatController.m */,
-				AAAE11841E5C848200D637D7 /* ShopDetaliViewController.h */,
-				AAAE11851E5C848200D637D7 /* ShopDetaliViewController.m */,
 				AA3AB5321E5D1F92009BD8D9 /* PlayViewController.h */,
 				AA3AB5331E5D1F92009BD8D9 /* PlayViewController.m */,
 				AA3CA5591E6015E6000D05FA /* LookDetaliViewController.h */,
@@ -5310,6 +5313,115 @@
 			path = LV5;
 			sourceTree = "<group>";
 		};
+		AA377B6D1EC6A7DA00E81A88 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AA377B6E1EC6A80700E81A88 /* CinemaAndBuyTicketModel.h */,
+				AA377B6F1EC6A80700E81A88 /* CinemaAndBuyTicketModel.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		AA377B711EC6DDC500E81A88 /* 影片详情 */ = {
+			isa = PBXGroup;
+			children = (
+				AA377B7F1EC6E9CD00E81A88 /* view */,
+				AA377B7D1EC6E1C700E81A88 /* cell */,
+				AA377B781EC6E0C000E81A88 /* MovieDetailViewController.h */,
+				AA377B791EC6E0C000E81A88 /* MovieDetailViewController.m */,
+				AA377B7A1EC6E0C000E81A88 /* MovieDetailViewController.xib */,
+			);
+			name = "影片详情";
+			sourceTree = "<group>";
+		};
+		AA377B721EC6DDFD00E81A88 /* 影院 */ = {
+			isa = PBXGroup;
+			children = (
+				AA377B731EC6DE7900E81A88 /* 影院详情 */,
+				AAF237271E5C0A3B002D58B4 /* CinemaHeaderView.h */,
+				AAF237281E5C0A3B002D58B4 /* CinemaHeaderView.m */,
+				AA42110B1E5ABAEF00085650 /* MovieCinemaViewController.h */,
+				AA42110C1E5ABAEF00085650 /* MovieCinemaViewController.m */,
+				AA42110D1E5ABAEF00085650 /* MovieCinemaViewController.xib */,
+			);
+			name = "影院";
+			sourceTree = "<group>";
+		};
+		AA377B731EC6DE7900E81A88 /* 影院详情 */ = {
+			isa = PBXGroup;
+			children = (
+				AAF628E31E5AED33000FF976 /* CinemaDetaliController.h */,
+				AAF628E41E5AED33000FF976 /* CinemaDetaliController.m */,
+			);
+			name = "影院详情";
+			sourceTree = "<group>";
+		};
+		AA377B741EC6DEAD00E81A88 /* 选座 */ = {
+			isa = PBXGroup;
+			children = (
+				AA377B831EC70E1900E81A88 /* model */,
+				AAF30AEF1E5EB20600793382 /* 选座View */,
+				AAAE117E1E5C699C00D637D7 /* ChooseSeatController.h */,
+				AAAE117F1E5C699C00D637D7 /* ChooseSeatController.m */,
+			);
+			name = "选座";
+			sourceTree = "<group>";
+		};
+		AA377B751EC6DEC200E81A88 /* 观影小吃 */ = {
+			isa = PBXGroup;
+			children = (
+				AAF628E61E5AEE03000FF976 /* FoodViewController.h */,
+				AAF628E71E5AEE03000FF976 /* FoodViewController.m */,
+				AAAE11841E5C848200D637D7 /* ShopDetaliViewController.h */,
+				AAAE11851E5C848200D637D7 /* ShopDetaliViewController.m */,
+			);
+			name = "观影小吃";
+			sourceTree = "<group>";
+		};
+		AA377B761EC6DF4000E81A88 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				AA3AB53D1E5D3900009BD8D9 /* MovieAddComment1.xib */,
+				AA3AB53C1E5D38F8009BD8D9 /* MovieAddComment.h */,
+				AA3AB53A1E5D38EF009BD8D9 /* MovieAddComment.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		AA377B771EC6DFFB00E81A88 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				AA14FB171E56855D00E330E7 /* ChooseMovieHeaderView.h */,
+				AA14FB181E56855D00E330E7 /* ChooseMovieHeaderView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		AA377B7D1EC6E1C700E81A88 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		AA377B7F1EC6E9CD00E81A88 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				AA377B801EC6EA0E00E81A88 /* MovieDetailHeaderView.h */,
+				AA377B811EC6EA0E00E81A88 /* MovieDetailHeaderView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		AA377B831EC70E1900E81A88 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AA377B841EC70E5400E81A88 /* ChooseSeatModel.h */,
+				AA377B851EC70E5400E81A88 /* ChooseSeatModel.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		AA3805FA1E65082200DB8C4C /* 支付 */ = {
 			isa = PBXGroup;
 			children = (
@@ -5639,20 +5751,12 @@
 			children = (
 				AAFAC9971EBD7A10000AAB78 /* cell */,
 				AA225B751E63F67300F4D74F /* menuView */,
-				AAF30AEF1E5EB20600793382 /* 选座View */,
-				AA3AB53C1E5D38F8009BD8D9 /* MovieAddComment.h */,
-				AA3AB53A1E5D38EF009BD8D9 /* MovieAddComment.m */,
-				AA3AB53D1E5D3900009BD8D9 /* MovieAddComment1.xib */,
 				AA3B4DA21E553717008466C4 /* HotMovieScrollView.h */,
 				AA3B4DA31E553717008466C4 /* HotMovieScrollView.m */,
-				AA14FB171E56855D00E330E7 /* ChooseMovieHeaderView.h */,
-				AA14FB181E56855D00E330E7 /* ChooseMovieHeaderView.m */,
 				AA9845871E5834B600A3A9F9 /* RecommendScrollView.h */,
 				AA9845881E5834B600A3A9F9 /* RecommendScrollView.m */,
 				AAF628EF1E5B1683000FF976 /* MoviePScrollView.h */,
 				AAF628F01E5B1683000FF976 /* MoviePScrollView.m */,
-				AAF237271E5C0A3B002D58B4 /* CinemaHeaderView.h */,
-				AAF237281E5C0A3B002D58B4 /* CinemaHeaderView.m */,
 				AA3CA5651E606F0B000D05FA /* MapAnnotation.h */,
 				AA3CA5661E606F0B000D05FA /* MapAnnotation.m */,
 				AA3522BF1EBCB55300CA0E2B /* Acceleecet.h */,
@@ -5828,6 +5932,8 @@
 		AAD81F371EC5EBAD00799957 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				AA377B751EC6DEC200E81A88 /* 观影小吃 */,
+				AA377B741EC6DEAD00E81A88 /* 选座 */,
 				AAD81F3E1EC5F74400799957 /* 影院和购票 */,
 				AA01310E1EC34C2700A99BD1 /* model */,
 				AAD81F3C1EC5EBEE00799957 /* 热映电影 */,
@@ -5861,6 +5967,10 @@
 		AAD81F3E1EC5F74400799957 /* 影院和购票 */ = {
 			isa = PBXGroup;
 			children = (
+				AA377B711EC6DDC500E81A88 /* 影片详情 */,
+				AA377B771EC6DFFB00E81A88 /* view */,
+				AA377B721EC6DDFD00E81A88 /* 影院 */,
+				AA377B6D1EC6A7DA00E81A88 /* model */,
 				AAD81F3F1EC5F78C00799957 /* 影评 */,
 				AA1FEB561E55DE9E00239FEC /* ChooseMovieController.h */,
 				AA1FEB571E55DE9E00239FEC /* ChooseMovieController.m */,
@@ -5872,6 +5982,7 @@
 		AAD81F3F1EC5F78C00799957 /* 影评 */ = {
 			isa = PBXGroup;
 			children = (
+				AA377B761EC6DF4000E81A88 /* view */,
 				AA3AB5351E5D2166009BD8D9 /* CommendViewController.h */,
 				AA3AB5361E5D2166009BD8D9 /* CommendViewController.m */,
 			);
@@ -10567,6 +10678,7 @@
 				B33A26851D9A68040092CB12 /* MWPhotoBrowser.bundle in Resources */,
 				AA3545751E9DF23A00A2EC73 /* 3baobaoBG35@2x.jpg in Resources */,
 				AA3544211E9DF23800A2EC73 /* 2baobaoLVUP50@2x.jpg in Resources */,
+				AA377B7C1EC6E0C000E81A88 /* MovieDetailViewController.xib in Resources */,
 				AA35454B1E9DF23A00A2EC73 /* 2baobaoBG51@2x.jpg in Resources */,
 				AA3543F51E9DF23800A2EC73 /* 2baobaoLVUP10@2x.jpg in Resources */,
 				AAF127FE1E8B610100121621 /* 三点.png in Resources */,
@@ -11493,6 +11605,7 @@
 				B33A26721D9A68040092CB12 /* UIImage+EMGIF.m in Sources */,
 				AA3805FD1E65086900DB8C4C /* PayViewController.m in Sources */,
 				C1F7BE341DB1C95400CCAF96 /* PersonCenterHeadView.m in Sources */,
+				AA377B821EC6EA0E00E81A88 /* MovieDetailHeaderView.m in Sources */,
 				B3263B011DD5B25A004788BB /* YWBaoBaoViewController.m in Sources */,
 				B38B2E1B1D8FACD8004D5256 /* MJRefreshBackStateFooter.m in Sources */,
 				B33A26791D9A68040092CB12 /* PSTCollectionView.m in Sources */,
@@ -11597,6 +11710,7 @@
 				C135A1771DDEC49B002B78A5 /* PostCommitTextTableViewCell.m in Sources */,
 				AA47068A1E655F5B00D09619 /* MovieCinemaModel.m in Sources */,
 				AA3BFE3F1E8559B500D669C2 /* PassWordTextView.m in Sources */,
+				AA377B701EC6A80700E81A88 /* CinemaAndBuyTicketModel.m in Sources */,
 				AA9845891E5834B600A3A9F9 /* RecommendScrollView.m in Sources */,
 				C1F7BE5A1DB1C95400CCAF96 /* PCPayRecordViewController.m in Sources */,
 				AA3BFE471E85735700D669C2 /* OrderDetailViewController.m in Sources */,
@@ -11700,6 +11814,7 @@
 				B33A26881D9A68040092CB12 /* EaseMessageModel.m in Sources */,
 				B3AE4DC21D91812D000A389F /* JWImgPickerAlbumChooseView.m in Sources */,
 				B38B2E301D8FACD8004D5256 /* SDWebImageDownloader.m in Sources */,
+				AA377B861EC70E5400E81A88 /* ChooseSeatModel.m in Sources */,
 				AA3860BD1EB1B261002E0805 /* YWLeftCategoryTableViewCell.m in Sources */,
 				C19EB0411DD9F6A200C28F15 /* YWChooseSexView.m in Sources */,
 				B33A267D1D9A68040092CB12 /* PSTCollectionViewFlowLayout.m in Sources */,
@@ -11714,6 +11829,7 @@
 				B32975CF1DADCF1C002CA488 /* YWStormSortTableView.m in Sources */,
 				C1392DC81DBF5083002418EF /* WXApiRequestHandler.m in Sources */,
 				C1F7BE5E1DB1C95400CCAF96 /* PCPacketViewController.m in Sources */,
+				AA377B7B1EC6E0C000E81A88 /* MovieDetailViewController.m in Sources */,
 				B33A26A71D9A68040092CB12 /* EaseBubbleView+Video.m in Sources */,
 				B3FFF4851D93B45500EDD2AB /* RBPublicTagEditorViewController.m in Sources */,
 				B38B2EF71D8FC82F004D5256 /* RBHomeCollectionViewCell.m in Sources */,

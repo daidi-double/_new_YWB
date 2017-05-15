@@ -59,7 +59,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
         
-        ChooseMovieHeaderView * movieView = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.25f) andDataAry:self.headerViewAry];
+        ChooseMovieHeaderView * movieView = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.25f)];
         movieView.backgroundColor = [UIColor darkGrayColor];
         UITapGestureRecognizer * tapTouch = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(movieDetailAction)];
         tapTouch.delegate = self;

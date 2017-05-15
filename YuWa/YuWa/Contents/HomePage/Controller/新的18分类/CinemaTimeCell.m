@@ -15,7 +15,7 @@
         
         [self addSubview:self.cinemaName];
         [self addSubview:self.price];
-        [self addSubview:self.screeningTime];
+//        [self addSubview:self.screeningTime];
         [self addSubview:self.distance];
 
     }
@@ -34,7 +34,7 @@
 
 - (UILabel*)price{
     if (!_price) {
-        _price = [[UILabel alloc]initWithFrame:CGRectMake(10, self.cinemaName.height+7, kScreen_Width*0.4f, self.bounds.size.height*0.25f)];
+        _price = [[UILabel alloc]initWithFrame:CGRectMake(10, self.cinemaName.height+15, kScreen_Width*0.4f, self.bounds.size.height*0.25f)];
         _price.textAlignment = 0;
         _price.font = [UIFont systemFontOfSize:15];
         _price.textColor = [UIColor greenColor];
@@ -42,17 +42,17 @@
     }
     return _price;
 }
-- (UILabel*)screeningTime{
-    if (!_screeningTime) {
-        _screeningTime = [[UILabel alloc]initWithFrame:CGRectMake(10, self.bounds.size.height*0.8+15, kScreen_Width /2, self.bounds.size.height*0.25)];
-        _screeningTime.text = @"近期场次";
-        _screeningTime.textAlignment = 0;
-        _screeningTime.font = [UIFont systemFontOfSize:14];
-        _screeningTime.textColor = [UIColor lightGrayColor];
-        
-    }
-    return _screeningTime;
-}
+//- (UILabel*)screeningTime{
+//    if (!_screeningTime) {
+//        _screeningTime = [[UILabel alloc]initWithFrame:CGRectMake(10, self.bounds.size.height*0.8+15, kScreen_Width /2, self.bounds.size.height*0.25)];
+//        _screeningTime.text = @"近期场次";
+//        _screeningTime.textAlignment = 0;
+//        _screeningTime.font = [UIFont systemFontOfSize:14];
+//        _screeningTime.textColor = [UIColor lightGrayColor];
+//        
+//    }
+//    return _screeningTime;
+//}
 
 - (UILabel*)distance{
     if (!_distance) {

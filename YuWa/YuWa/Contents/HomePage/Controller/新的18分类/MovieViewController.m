@@ -262,9 +262,10 @@
     
 
     markIndexPath = indexPath.item;
-    
+    HotMovieModel * model = self.hotCollectDataAry[indexPath.item];
     //注意修改
     ChooseMovieController * choseVC = [[ChooseMovieController alloc]init];
+    choseVC.filmCode = model.code;
     [self.navigationController pushViewController:choseVC animated:YES];
     
 }
@@ -278,11 +279,12 @@
 }
 
 #pragma mark - requestData
+//轮播图
 - (void)requestBannerData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOMEPAGE];
-    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID]};
+//    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID]};
     HttpManager * manager = [[HttpManager alloc]init];
-    [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+    [manager postDatasNoHudWithUrl:urlStr withParams:nil compliation:^(id data, NSError *error) {
         MyLog(@"电影轮播图%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             for (NSDictionary * dict in data[@"data"]) {
@@ -299,12 +301,12 @@
     [self.movieTableView.mj_footer endRefreshing];
     
 }
-
+//热映电影
 - (void)requestHotData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOMEHOTMOVIE];
-    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID]};
+
     HttpManager * manager = [[HttpManager alloc]init];
-    [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+    [manager postDatasNoHudWithUrl:urlStr withParams:nil compliation:^(id data, NSError *error) {
         MyLog(@"电影首页热门影片%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             [self.hotCollectDataAry removeAllObjects];

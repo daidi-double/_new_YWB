@@ -13,12 +13,11 @@
 @implementation ChooseMovieHeaderView
 
 
-- (instancetype)initWithFrame:(CGRect)frame andDataAry:(NSMutableArray *)ary
-{
+- (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
         self.posterImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, kScreen_Width/3, self.bounds.size.height*0.7)];
-        self.posterImageView.image = [UIImage imageNamed:@"baobaoBG2"];
+        [self.posterImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
         self.posterImageView.userInteractionEnabled = YES;
         _PrivateLetterTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAvatarView)];
         _PrivateLetterTap.numberOfTouchesRequired = 1; //手指数
@@ -41,32 +40,32 @@
         self.title = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width/3+20, 10, kScreen_Width/2, self.bounds.size.height*0.15)];
         _title.font = [UIFont systemFontOfSize:16];
         _title.textColor = [UIColor whiteColor];
-        _title.text = @"侏罗纪公园";
+        _title.text = self.model.name;
         [self addSubview:self.title];
         
         self.daoyanLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x,12+self.bounds.size.height *0.15f, kScreen_Width/2, self.bounds.size.height*0.1f)];
         _daoyanLabel.textColor = [UIColor whiteColor];
         _daoyanLabel.font = [UIFont systemFontOfSize:12];
-        _daoyanLabel.text = @"导演:张三";
+        _daoyanLabel.text = [NSString stringWithFormat:@"导演:%@",self.model.director];
         [self addSubview:self.daoyanLabel];
         
         self.performerLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.daoyanLabel.origin.x, self.daoyanLabel.bottom, (kScreen_Width-30)/2, self.bounds.size.height*0.2f)];
         _performerLabel.textColor = [UIColor whiteColor];
         _performerLabel.numberOfLines = 2;
         _performerLabel.font = [UIFont systemFontOfSize:12];
-        _performerLabel.text = @"主演:黄渤 测试参数参数参数参数长春市";
+        _performerLabel.text = [NSString stringWithFormat:@"主演:%@",self.model.cast];
         [self addSubview:self.performerLabel];
         
         self.categoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x, self.performerLabel.bottom, kScreen_Width/2, self.bounds.size.height*0.1f)];
         _categoryLabel.textColor = [UIColor whiteColor];
         _categoryLabel.font = [UIFont systemFontOfSize:12];
-        _categoryLabel.text = @"类型:历史";
+        _categoryLabel.text = [NSString stringWithFormat:@"类型:%@",self.model.type];
         [self addSubview:self.categoryLabel];
         
         self.countryAndTime = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x, self.categoryLabel.bottom, kScreen_Width/2, self.bounds.size.height*0.1)];
         _countryAndTime.textColor = [UIColor whiteColor];
         _countryAndTime.font = [UIFont systemFontOfSize:13];
-        _countryAndTime.text = @"地区:美国/100分钟";
+        _countryAndTime.text = [NSString stringWithFormat:@"地区:%@",self.model.country];
         [self addSubview:self.countryAndTime];
         
         
@@ -74,7 +73,7 @@
         _scoreLabel.textColor = [UIColor orangeColor];
 
         _scoreLabel.font = [UIFont systemFontOfSize:15];
-         _scoreLabel.text = @"9.0";
+         _scoreLabel.text = self.model.score;
         [self addSubview:self.scoreLabel];
         
         UIImageView * rightImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 20, 0, 8, 15)];
@@ -84,7 +83,7 @@
         CGFloat realZhengshu;
         CGFloat realXiaoshu;
         //    NSString*starNmuber=self.model.grade;
-        NSString * starNmuber1 = @"4.2";
+        NSString * starNmuber1 = self.model.score;
         CGFloat totalScroe = [starNmuber1 floatValue]/2;
         NSString *starNmuber = [NSString stringWithFormat:@"%.2f",totalScroe];
         NSString*zhengshu=[starNmuber substringToIndex:1];
@@ -138,11 +137,8 @@
     }
     return self;
 }
-//- (void)wantToSee:(UIButton*)sender{
-//    sender.selected = _isselected;
-//    _isselected = !_isselected;
-//    NSLog(@"想看，传值给服务器");
-//}
+
+
 - (void)gradeBtn:(UIButton*)sender{
     NSLog(@"评分");
     [self.delegate commend];

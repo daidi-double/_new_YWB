@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CinemaAndBuyTicketModel.h"
 @protocol ChooseMovieHeaderViewDelegate <NSObject>
 -(void)play;
 -(void)commend;
 @end
 @interface ChooseMovieHeaderView : UIView
-
+@property (nonatomic,strong) CinemaAndBuyTicketModel * model;
 @property (nonatomic,strong) UIImageView * posterImageView;//电影图片
 @property (nonatomic,strong) UILabel * title;//电影名称
 @property (nonatomic,strong) UILabel * daoyanLabel;//导演
@@ -28,7 +29,7 @@
 @property (nonatomic,strong) UITapGestureRecognizer * PrivateLetterTap;
 @property (nonatomic,strong)id<ChooseMovieHeaderViewDelegate>delegate;
 
-- (instancetype)initWithFrame:(CGRect)frame andDataAry:(NSMutableArray*)ary;
+
 
 @end
 

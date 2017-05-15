@@ -1,16 +1,14 @@
 //
-//  ChooseMovieController.h
+//  MovieDetailViewController.h
 //  YuWa
 //
-//  Created by double on 2017/2/16.
+//  Created by double on 17/5/13.
 //  Copyright © 2017年 Shanghai DuRui Information Technology Company. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ChooseMovieController : UIViewController
-
-@property (nonatomic,assign) NSInteger  markRow;
+@interface MovieDetailViewController : UIViewController
 @property (nonatomic,copy)NSString * filmCode;
 
 @end

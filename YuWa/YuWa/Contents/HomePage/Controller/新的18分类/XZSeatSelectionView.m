@@ -134,7 +134,7 @@
 
 -(void)initSeatsView:(NSMutableArray *)seatsArray{
     __weak typeof(self) weakSelf = self;
-    XZSeatsView *seatView = [[XZSeatsView alloc]initWithSeatsArray:seatsArray  maxNomarWidth:self.width seatBtnActionBlock:^(XZSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats) {
+    XZSeatsView *seatView = [[XZSeatsView alloc]initWithSeatsArray:seatsArray  maxNomarWidth:self.width * 0.8f seatBtnActionBlock:^(XZSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats) {
 
         
         NSString *errorStr = nil;

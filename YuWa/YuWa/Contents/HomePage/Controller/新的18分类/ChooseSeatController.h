@@ -16,4 +16,6 @@
 @property (nonatomic,strong) UILabel * price_num;//价格和张数
 @property (nonatomic,strong) UILabel * languageLabel;
 @property (nonatomic,strong) UIButton * changeMovieBtn;//更换场次
+@property (nonatomic,copy) NSString * channelShowCode;//渠道场次编码
+
 @end
