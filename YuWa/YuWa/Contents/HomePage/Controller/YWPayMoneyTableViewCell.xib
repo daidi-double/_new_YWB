@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUJ-qo-PYt">
@@ -26,11 +26,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入金额" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kan-MW-wmP">
-                        <rect key="frame" x="57" y="14" width="75.5" height="17"/>
+                        <rect key="frame" x="57" y="0.0" width="263" height="45"/>
                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         <connections>
+                            <action selector="keyBord:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FMm-6n-XD0"/>
                             <outlet property="delegate" destination="-1" id="q3T-6i-Xgq"/>
                         </connections>
                     </textField>
@@ -69,6 +70,7 @@
                 <constraints>
                     <constraint firstItem="6GN-H9-bhL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="57m-83-Fkb"/>
                     <constraint firstItem="NTh-aF-gje" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9oc-xq-JqQ"/>
+                    <constraint firstAttribute="trailing" secondItem="Kan-MW-wmP" secondAttribute="trailing" id="GDY-Gj-fNF"/>
                     <constraint firstItem="NTh-aF-gje" firstAttribute="leading" secondItem="eM0-CF-vSC" secondAttribute="trailing" constant="10" id="QAX-VU-Nny"/>
                     <constraint firstItem="eM0-CF-vSC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="RZp-Tn-jLr"/>
                     <constraint firstItem="87h-tU-n23" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SYj-4f-BgJ"/>
@@ -79,6 +81,7 @@
                     <constraint firstItem="EUJ-qo-PYt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="fEu-do-dXD"/>
                     <constraint firstAttribute="trailing" secondItem="87h-tU-n23" secondAttribute="trailing" constant="16" id="ohE-JE-GwO"/>
                     <constraint firstAttribute="bottom" secondItem="6GN-H9-bhL" secondAttribute="bottom" id="qZs-U6-DQ9"/>
+                    <constraint firstItem="Kan-MW-wmP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="rIg-Qt-UNS"/>
                     <constraint firstItem="eM0-CF-vSC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vTu-Vl-RZs"/>
                 </constraints>
             </tableViewCellContentView>

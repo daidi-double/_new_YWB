@@ -58,6 +58,7 @@
     [super viewDidLoad];
     
     self.title = @"优惠买单";
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.payTableView registerNib:[UINib nibWithNibName:carCell bundle:nil] forCellReuseIdentifier:carCell];
     [self.payTableView registerNib:[UINib nibWithNibName:payMoneyCell bundle:nil] forCellReuseIdentifier:payMoneyCell];
     [self.payTableView registerNib:[UINib nibWithNibName:otherPayCell bundle:nil] forCellReuseIdentifier:otherPayCell];
@@ -102,6 +103,7 @@
         self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
         self.goPay.userInteractionEnabled = NO;
         [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
+
     }
 
 }
@@ -172,7 +174,7 @@
         if (indexPath.section == 0) {
             return 250.f;
         }
-        return 44.f;
+        return 50.f;
     }else{
     if (indexPath.section == 0) {
         if (self.status != 2) {
@@ -181,10 +183,10 @@
             return [ShopCarDetailTableViewCell getHeight:self.model.cart]-40;
         }else{
 
-            return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count;
+            return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count + 20;
         }
     }
-        return 44.f;
+        return 50.f;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -531,6 +533,7 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.view endEditing: YES];
+    [self.view resignFirstResponder];
 }
 
 #pragma mark  --touch
@@ -603,7 +606,7 @@
     }
     //有单品的情况下传path = 1，没有单品则传2；
     NSString * path;
-    if (self.money == nil) {
+    if (self.goods_ids.count == 0) {
         path = @"2";
     }else{
         path = @"1";

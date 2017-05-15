@@ -40,7 +40,7 @@
 @property(nonatomic,assign)CGFloat accountMoney;  //账户余额   这个吊接口
 @property(nonatomic,assign)BOOL isSelectedOn;  //选择了是否使用余额
 @property(nonatomic,assign)CGFloat needPayMoney;  //需要付的钱
-@property(nonatomic,copy)NSString * orderID;
+
 @end
 
 @implementation PCPayViewController
@@ -50,54 +50,13 @@
         self.title=@"支付";
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:CELL3 bundle:nil] forCellReuseIdentifier:CELL3];
-    
-    self.orderID = [NSString stringWithFormat:@"%.0f", self.order_id];
-    [self makeTableViewHeader];
     [self getAccountMoney];   //接口得到账户金额
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tableView reloadData];
 }
--(void)makeTableViewHeader{
-//    UIView*topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 160)];
-//    topView.backgroundColor=CNaviColor;
-//    
-//    UILabel*titleLabel=[[UILabel alloc]initWithFrame:CGRectZero];
-//    titleLabel.text=@"实际支付：￥";
-//    titleLabel.font=[UIFont systemFontOfSize:17];
-//    titleLabel.centerY = topView.centerY + 5;
-//    titleLabel.textColor = [UIColor whiteColor];
-//    titleLabel.textAlignment=NSTextAlignmentRight;
-//    titleLabel.attributedText = [NSString stringWithFirstStr:@"实际支付:" withFont:[UIFont systemFontOfSize:17.f] withColor:[UIColor whiteColor] withSecondtStr:@" ￥" withFont:[UIFont systemFontOfSize:43] withColor:[UIColor whiteColor]];
-//    [topView addSubview:titleLabel];
-//    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(topView.mas_left).offset(15);
-//        make.top.mas_equalTo(@(50));
-//        make.right.mas_equalTo(topView.mas_centerX);
-//    }];
-////    titleLabel.centerY = topView.centerY + 5;
-//    UITextField*textField=[[UITextField alloc]initWithFrame:CGRectZero];
-//    textField.font=[UIFont systemFontOfSize:43];
-//    textField.userInteractionEnabled=NO;
-////    textField.placeholder=@"请输入金额";
-////    if (self.blanceMoney!=0) {
-//    
-//        textField.text=[NSString stringWithFormat:@"%.2f",self.blanceMoney];
-////    }
-//    textField.textColor=[UIColor whiteColor];
-//    [topView addSubview:textField];
-//////    textField.centerY = topView.centerY;
-//    [textField mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.mas_equalTo(titleLabel.mas_centerY);
-//        make.left.mas_equalTo(titleLabel.mas_right);
-//        make.right.mas_equalTo(self.view.right);
-//        
-//    }];
 
-//    self.tableView.tableHeaderView=topView;
-    
-}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -255,21 +214,11 @@
         UIView*backView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
         backView.backgroundColor=[UIColor whiteColor];
         
-        UILabel*leftLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 10, 70, 20)];
+        UILabel*leftLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 10, 150, 20)];
         leftLabel.font=[UIFont systemFontOfSize:14];
-        leftLabel.text=@"需要支付:";
+        leftLabel.text=@"请选择支付方式:";
         [backView addSubview:leftLabel];
-        
-        UILabel*moneyLabel=[[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width-200, 10, 180, 20)];
-        moneyLabel.font=[UIFont systemFontOfSize:14];
-        moneyLabel.textAlignment=NSTextAlignmentRight;
-        CGFloat payMoney = self.accountMoney-self.blanceMoney;
-        if (payMoney < 0) {
-            payMoney = self.blanceMoney - self.accountMoney;
-        }
-        moneyLabel.text=[NSString stringWithFormat:@"￥%.2f",payMoney];
-        self.needPayLabel=moneyLabel;
-        [backView addSubview:moneyLabel];
+
         
         
         return backView;
@@ -294,21 +243,10 @@
     self.isSelectedOn=sender.on;
    
     if (self.isSelectedOn) {
-         self.needPayMoney=self.blanceMoney-self.accountMoney;
-        self.needPayLabel.text=[NSString stringWithFormat:@"￥%.2f",self.needPayMoney];
-         //当钱够的时候  跳警示框 是否要支付    <=
-//        if (self.needPayMoney<=0 ) {
-//            
-            [self pushAlertView];
-//        }
-        
-    }else{
-        self.needPayMoney=self.blanceMoney;
-        self.needPayLabel.text=[NSString stringWithFormat:@"￥%.2f",self.needPayMoney];
 
-        
-    } 
-    
+        [self pushAlertView];
+
+    }
 }
 #pragma mark ---alertViewDelegat
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0){
@@ -590,19 +528,26 @@
 //全部用余额支付的接口
 -(void)BlancePayDatas{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_BALANCE_PAY];
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":@(self.order_id)};
+    NSString * order_ids = [NSString stringWithFormat:@"%.0f",self.order_id];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":order_ids};
     HttpManager*manager=[[HttpManager alloc]init];
-    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {   
 //        MyLog(@"%@",data);
         NSInteger number=[data[@"errorCode"] floatValue];
         if (number==0) {
-            [JRToast showWithText:data[@"data"]];
-            UIViewController*vc=[self.navigationController.viewControllers objectAtIndex:3];
+//            [JRToast showWithText:data[@"data"]];
+
             //创建一个消息对象
             NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
             //发送消息
             [[NSNotificationCenter defaultCenter]postNotification:notice];
-            [self.navigationController popToViewController:vc animated:YES];
+            
+            //创建一个消息对象，清空价格
+            NSNotification * deleMoney = [NSNotification notificationWithName:@"deleteTotalMoney" object:nil userInfo:@{@"isClearMoney":@(1)}];
+            //发送消息
+            [[NSNotificationCenter defaultCenter]postNotification:deleMoney];
+            [self pushToPostComment:self.shop_ID];
+
             
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
@@ -617,8 +562,9 @@
 
 -(void)payWith:(NSString*)aa{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_THIRD_PAY];
+    NSString * isSelectOnStr = [NSString stringWithFormat:@"%d",self.isSelectedOn];
     NSString * orderIDStr = [NSString stringWithFormat:@"%f",self.order_id];
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":orderIDStr,@"is_balance":@(self.isSelectedOn),@"pay_method":aa};
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":orderIDStr,@"is_balance":isSelectOnStr,@"pay_method":aa};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"%@",data);
@@ -655,8 +601,8 @@
 //判断支付成功  还是 失败
 -(void)judgePaySuccessOrNot{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_PAY_RESULT];
-    MyLog(@"order_id = %@",self.orderID);
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":@(self.order_id)};
+    NSString * order_ids = [NSString stringWithFormat:@"%f",self.order_id];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":order_ids};
     
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {

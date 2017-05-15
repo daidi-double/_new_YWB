@@ -339,8 +339,7 @@
                 //清空购物车
                 [self clearShopCar:self.shop_id];
             }else{
-                
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
             }
         }else{
             
