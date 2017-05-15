@@ -29,7 +29,7 @@
                         <rect key="frame" x="57" y="0.0" width="263" height="45"/>
                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                        <textInputTraits key="textInputTraits"/>
                         <connections>
                             <action selector="keyBord:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FMm-6n-XD0"/>
                             <outlet property="delegate" destination="-1" id="q3T-6i-Xgq"/>

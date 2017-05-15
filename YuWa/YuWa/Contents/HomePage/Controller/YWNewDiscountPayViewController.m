@@ -58,7 +58,6 @@
     [super viewDidLoad];
     
     self.title = @"优惠买单";
-    self.view.backgroundColor = [UIColor whiteColor];
     [self.payTableView registerNib:[UINib nibWithNibName:carCell bundle:nil] forCellReuseIdentifier:carCell];
     [self.payTableView registerNib:[UINib nibWithNibName:payMoneyCell bundle:nil] forCellReuseIdentifier:payMoneyCell];
     [self.payTableView registerNib:[UINib nibWithNibName:otherPayCell bundle:nil] forCellReuseIdentifier:otherPayCell];
@@ -103,7 +102,6 @@
         self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
         self.goPay.userInteractionEnabled = NO;
         [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
-
     }
 
 }
@@ -174,7 +172,7 @@
         if (indexPath.section == 0) {
             return 250.f;
         }
-        return 50.f;
+        return 44.f;
     }else{
     if (indexPath.section == 0) {
         if (self.status != 2) {
@@ -183,10 +181,10 @@
             return [ShopCarDetailTableViewCell getHeight:self.model.cart]-40;
         }else{
 
-            return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count + 20;
+            return [YWNewShopInfoTableViewCell getHeight:self.model.cart]*self.dataAry.count;
         }
     }
-        return 50.f;
+        return 44.f;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -444,13 +442,14 @@
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:2];
     NSIndexPath *indexPathT=[NSIndexPath indexPathForRow:2 inSection:2];
     if (self.status == 1 ||self.status == 3) {
-        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]- _CouponMoney];//修;
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]- _CouponMoney +[self.noDiscountMoney floatValue]];//修;
     }else{
-    self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue] + [self.noDiscountMoney floatValue] + [self.money floatValue]- _CouponMoney ];//修
+        self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%.2f",([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue] + [self.noDiscountMoney floatValue] + [self.money floatValue]- _CouponMoney ];//修
     }
      NSString * payAllmoney = [self.settomMoneyLabel.text substringFromIndex:4];
     self.shouldPayMoney = [payAllmoney floatValue];
     self.noUserCouponMoney = payAllmoney;
+    [self calshouldPayMoney];
     if (([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]- _CouponMoney != 0.00) {
         self.goPay.userInteractionEnabled = YES;
         [self.goPay setBackgroundColor:RGBCOLOR(60, 194, 237, 1)];
@@ -459,7 +458,6 @@
         self.goPay.userInteractionEnabled = NO;
         [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
     }
-    [self calshouldPayMoney];
     //刷新对应行的数据
     [self.payTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,indexPathT,nil] withRowAnimation:UITableViewRowAnimationFade];
 }
@@ -533,7 +531,6 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.view endEditing: YES];
-    [self.view resignFirstResponder];
 }
 
 #pragma mark  --touch
@@ -550,7 +547,7 @@
     
     
     
-    if (self.otherTotalMoney<self.noDiscountMoney) {
+    if ([self.otherTotalMoney floatValue]<[self.noDiscountMoney floatValue]) {
         [JRToast showWithText:@"不打折金额不能大于消费总金额"];
         return;
     }

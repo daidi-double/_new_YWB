@@ -18,7 +18,6 @@
     [self.moneyTF addTarget:self action:@selector(moneyChangeAction:) forControlEvents:UIControlEventEditingChanged];
     [self.moneyTF addTarget:self action:@selector(moneyChangeAction2:) forControlEvents:UIControlEventEditingDidEnd];
     self.chooseBtn.enabled = NO;
-
 }
 - (IBAction)chooseDiscountAction:(UIButton *)sender {
 
