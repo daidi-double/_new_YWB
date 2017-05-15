@@ -51,6 +51,12 @@
     }
     return _seatModelAry;
 }
+- (NSMutableArray*)seatsModelArray{
+    if (!_seatsModelArray) {
+        _seatsModelArray = [NSMutableArray array];
+    }
+    return _seatsModelArray;
+}
 - (NSMutableArray*)payInformationArr{
     if (!_payInformationArr) {
         _payInformationArr = [NSMutableArray array];
@@ -238,12 +244,12 @@
     return cell;
 }
 - (void)requestSeatinformation{
-    MBProgressHUD *HUD = [[MBProgressHUD alloc]initWithView:self.view];
-    
-    HUD.tintColor = [UIColor blackColor];
-    [self.view addSubview:HUD];
+//    MBProgressHUD *HUD = [[MBProgressHUD alloc]initWithView:self.view];
+//    
+//    HUD.tintColor = [UIColor blackColor];
+//    [self.view addSubview:HUD];
     WEAKSELF;
-    [HUD show:YES];
+//    [HUD show:YES];
     //修改
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"seats %zd.plist",arc4random_uniform(5)] ofType:nil];
@@ -267,15 +273,14 @@
         NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"channelShowCode":self.channelShowCode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
         HttpManager * manager = [[HttpManager alloc]init];
         [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
-            MyLog(@"选座%@",data);
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+                // NSData转为NSString
+                NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            MyLog(@"选座%@",jsonStr);
             if ([data[@"errorCode"] integerValue] == 0) {
                 [self.seatModelAry removeAllObjects];
-                for (NSDictionary * dict in data[@"data"]) {
-                    
-                    ChooseSeatModel * model = [ChooseSeatModel yy_modelWithDictionary:dict];
-                    [self.seatModelAry addObject:model];
-                }
-                 [weakSelf initSelectionView:self.seatModelAry];
+           self.seatsModelArray =      [ChooseSeatModel ChooseSeatModelWithDic:data[@"data"]];
+                 [weakSelf initSelectionView:self.seatsModelArray];
             }else{
                 [JRToast showWithText:@"网络出现异常，请检查网络" duration:1];
             }
