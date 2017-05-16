@@ -30,7 +30,7 @@
 //        [arrM addObject:model];
         //先找出一排当中的每一个座位model
         XZSeatModel * model = [[XZSeatModel alloc ]init];
-        model.columnId = ChooseSeatModel1.colNum;
+        model.columnId = ChooseSeatModel1.rowNum;
         model.seatNo = ChooseSeatModel1.code;
         model.st = ChooseSeatModel1.status.description;
         if (![arrM containsObject:ChooseSeatModel1.colNum]) {
