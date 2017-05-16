@@ -67,6 +67,7 @@
 
 @property(nonatomic,strong)UIView*belowImageViewView;   //图片下面的视图
 @property(nonatomic,strong)UIView*headerView;   //头视图
+@property (nonatomic, strong) UIImageView *headerImageView;
 @property(nonatomic,strong)YJSegmentedControl*segmentedControl;
 
 @property(nonatomic,strong)UITableView*tableView;
@@ -77,7 +78,7 @@
 @property(nonatomic,assign)int pagen;
 @property(nonatomic,assign)int pages;
 @property(nonatomic,strong)NSMutableArray*maMallDatas;  //所有数据
-
+@property (nonatomic, assign) CGRect headerViewFrame;
 
 @end
 
@@ -131,11 +132,22 @@
 #pragma mark   --- 滚动视图
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat yoffset=scrollView.contentOffset.y;
-    MyLog(@"%@",NSStringFromCGPoint(scrollView.contentOffset));
+    if (yoffset<0) {
+        CGRect f = self.headerImageView.frame;
+        f.origin.x = self.headerViewFrame.origin.x +yoffset/2;
+        f.origin.y=  yoffset ;
+        f.size.height = -yoffset+self.headerViewFrame.size.height;
+        f.size.width = self.headerViewFrame.size.width/self.headerViewFrame.size.height*f.size.height;
+        //改变头部视图的fram
+        MyLog(@"~~~~~~!!!!!!!%@",NSStringFromCGRect(f));
+        self.headerImageView.frame= f;
+    }
     
+//    MyLog(@"%@~~~~~~~~~~",NSStringFromCGPoint(scrollView.contentOffset));
     if (yoffset>=HEADERVIEWHEIGHT-64&&yoffset<=HEADERVIEWHEIGHT) {
-        self.navigationItem.title=[UserSession instance].nickName;
+        
         CGFloat alpha=(yoffset-(HEADERVIEWHEIGHT-64))/64;
+        self.navigationItem.title=[UserSession instance].nickName;
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:alpha];
         
         
@@ -185,14 +197,14 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:SECTION0CELL];
     if (indexPath.section==0&&indexPath.row==0) {
-      PersonCenterZeroCell*  cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
-        cell.selectionStyle=NO;
-
-        NSString*str=[UserSession instance].personality;
-        cell.titleString=str;
-      
-        
-        return cell;
+//      PersonCenterZeroCell*  cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
+//        cell.selectionStyle=NO;
+//
+//        NSString*str=[UserSession instance].personality;
+//        cell.titleString=str;
+//      
+//        
+//        return cell;
     }else if (indexPath.section==1&&indexPath.row==0){
         //8个 按钮
         PersonCenterOneCell*cell=[tableView dequeueReusableCellWithIdentifier:CELL1];
@@ -359,14 +371,13 @@
     imageView.animationDuration=3;
     imageView.animationRepeatCount=0;
     [imageView startAnimating];
-
-    
-    
+    self.headerImageView = imageView;
 
     //超出的图片的高度
 //    CGFloat OTHERHEADER = ((kScreen_Width * imageView.image.size.height / imageView.image.size.width)-195);
     //HEADERVIEWHEIGHT+OTHERHEADER
     imageView.frame=CGRectMake(0, 0, kScreen_Width, ACTUAL_HEIGHT(300));
+    self.headerViewFrame = self.headerImageView.frame;
 
     
     
