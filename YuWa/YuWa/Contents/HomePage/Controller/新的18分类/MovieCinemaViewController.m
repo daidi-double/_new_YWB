@@ -18,13 +18,19 @@
 //#import "LocationViewController.h"
 #import "MapNavNewViewController.h"
 #import "YWLoginViewController.h"
+
+#import "CinemaHeaderModel.h"//头部影院信息
+#import "FilmListModel.h"//滑动电影信息
+
 @interface MovieCinemaViewController ()<UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,CinemaHeaderViewDelegate>
 {
     UIView * lineView;
 }
 
 @property (nonatomic,strong)UITableView * movieTableView;
-
+@property (nonatomic,copy)NSString * time;
+@property (nonatomic,strong) CinemaHeaderModel * headerModel;
+@property (nonatomic,strong) NSMutableArray * filmListAry;//滑动部分电影数据
 @end
 
 @implementation MovieCinemaViewController
@@ -32,7 +38,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"影院";//修改为电影名称
-
+    self.time = [JWTools currentTime2];
+    [self requestHeaderData];
+    [self requestFootData];
     [self.view addSubview:self.movieTableView];
 
 }
@@ -46,7 +54,12 @@
     }
     return _movieTableView;
 }
-
+- (NSMutableArray*)filmListAry{
+    if (!_filmListAry) {
+        _filmListAry = [NSMutableArray array];
+    }
+    return _filmListAry;
+}
 #pragma mark - tableviewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -74,9 +87,11 @@
 }
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        
-        //需要判断下有无小吃；
-        CinemaHeaderView * headerBGview = [[CinemaHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.5f)];
+
+        CinemaHeaderView * headerBGview = [[CinemaHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.5f)andAry:self.filmListAry];
+        headerBGview.cinema_code = self.cinema_code;
+        headerBGview.model = self.headerModel;
+        headerBGview.movies = self.filmListAry;
         headerBGview.delegate =self;
         return headerBGview;
     }else{
@@ -209,6 +224,19 @@
     NSLog(@"%ld,%@",(long)sender.tag,sender.titleLabel.text);
     
     lineView.x = sender.x;
+    switch (sender.tag) {
+        case 1:
+            self.time = [JWTools currentTime2];
+            break;
+        case 2:
+            self.time = [JWTools tommorowTime];
+            break;
+            
+        default:
+            self.time = [JWTools getThreeDayTime];
+            break;
+    }
+    [self requestFootData];
 }
 
 - (void)goToBuyTicket{
@@ -230,9 +258,9 @@
 - (void)ToLocation{
    
     MapNavNewViewController * locationVC = [[MapNavNewViewController alloc]init];
-//    locationVC.coordinatex = self.mainModel.coordinatex;
-//    locationVC.coordinatey = self.mainModel.coordinatey;
-//    locationVC.shopName = self.mainModel.company_name;
+    locationVC.coordinatex = self.headerModel.longitude;
+    locationVC.coordinatey = self.headerModel.latitude;
+    locationVC.shopName = self.headerModel.cinema_name;
     [self.navigationController pushViewController:locationVC animated:YES];
   
 }
@@ -249,8 +277,69 @@
 #pragma mark -- http
 //头部视图数据
 - (void)requestHeaderData{
+    
+    
+    
+    self.cinema_code = @"1002062";
+    
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAHEADER];
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code};
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
+    if ([self judgeLogin]) {
+        
+        [dic setValue:@([UserSession instance].uid) forKey:@"user_id"];
+        [dic setValue:[UserSession instance].token forKey:@"token"];
+    }
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
+        MyLog(@"影院头部%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            self.headerModel = [CinemaHeaderModel yy_modelWithDictionary:data[@"data"][@"cinemaInfo"]];
+            
+//            滑动部分的电影
+            [self.filmListAry removeAllObjects];
+            NSArray * ary = data[@"data"][@"filmList"];
+            for (int i = 0; i <ary.count; i ++ ) {
+                for (NSDictionary * dict in ary) {
+                    
+                    FilmListModel * filmModel = [FilmListModel yy_modelWithDictionary:dict];
+                    [self.filmListAry addObject:filmModel];
+                    
+                }
+                
+            }
+            
+            
+        }else{
+            [JRToast showWithText:@"网络错误，请检查网络" duration:1];
+        }
+        [self.movieTableView reloadData];
+    }];
+    
+}
+- (void)requestFootData{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAFOOT];
+    
+    self.film_code = @"001X00762017";
+    self.cinema_code = @"1002062";
+    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code,@"film_code":self.film_code,@"time":self.time};
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
+    if ([self judgeLogin]) {
+        
+        [dic setValue:@([UserSession instance].uid) forKey:@"user_id"];
+        [dic setValue:[UserSession instance].token forKey:@"token"];
+    }
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
+        MyLog(@"电影场次%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+
+        }else{
+            [JRToast showWithText:@"网络错误，请检查网络" duration:1];
+        }
+        [self.movieTableView reloadData];
+    }];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

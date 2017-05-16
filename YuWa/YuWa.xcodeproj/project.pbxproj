@@ -701,7 +701,6 @@
 		AA3C40C51E8D59EF0052C732 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3C40C31E8D59EF0052C732 /* AlipaySDK.framework */; };
 		AA3C40DC1E8DAFF50052C732 /* 消息.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3C40D01E8DAFF50052C732 /* 消息.jpg */; };
 		AA3C40DE1E8DAFF50052C732 /* 电影展示.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3C40D21E8DAFF50052C732 /* 电影展示.jpg */; };
-		AA3C41881E8E03D40052C732 /* 优惠券展示.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3C41871E8E03D40052C732 /* 优惠券展示.jpg */; };
 		AA3CA55B1E6015E6000D05FA /* LookDetaliViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA55A1E6015E6000D05FA /* LookDetaliViewController.m */; };
 		AA3CA5611E6058D3000D05FA /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA5601E6058D3000D05FA /* LocationViewController.m */; };
 		AA3CA5671E606F0B000D05FA /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA5661E606F0B000D05FA /* MapAnnotation.m */; };
@@ -853,6 +852,8 @@
 		AAF508861EAF25A10007BC78 /* YWOtherPayMoneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF508841EAF25A10007BC78 /* YWOtherPayMoneyTableViewCell.xib */; };
 		AAF5088A1EAF76490007BC78 /* YWNewUseCouponTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF508881EAF76490007BC78 /* YWNewUseCouponTableViewCell.m */; };
 		AAF5088B1EAF76490007BC78 /* YWNewUseCouponTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF508891EAF76490007BC78 /* YWNewUseCouponTableViewCell.xib */; };
+		AAF525D91ECAA528004D62E2 /* CinemaHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF525D81ECAA528004D62E2 /* CinemaHeaderModel.m */; };
+		AAF525DC1ECAAA29004D62E2 /* FilmListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF525DB1ECAAA29004D62E2 /* FilmListModel.m */; };
 		AAF54A111EA8474D00D02D6B /* ShopDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF54A0F1EA8474D00D02D6B /* ShopDetailViewController.m */; };
 		AAF54A121EA8474D00D02D6B /* ShopDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF54A101EA8474D00D02D6B /* ShopDetailViewController.xib */; };
 		AAF628E21E5AE608000FF976 /* 爆米花.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF628E11E5AE608000FF976 /* 爆米花.png */; };
@@ -2553,7 +2554,6 @@
 		AA3C40C31E8D59EF0052C732 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		AA3C40D01E8DAFF50052C732 /* 消息.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "消息.jpg"; sourceTree = "<group>"; };
 		AA3C40D21E8DAFF50052C732 /* 电影展示.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "电影展示.jpg"; sourceTree = "<group>"; };
-		AA3C41871E8E03D40052C732 /* 优惠券展示.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "优惠券展示.jpg"; sourceTree = "<group>"; };
 		AA3CA5591E6015E6000D05FA /* LookDetaliViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookDetaliViewController.h; sourceTree = "<group>"; };
 		AA3CA55A1E6015E6000D05FA /* LookDetaliViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookDetaliViewController.m; sourceTree = "<group>"; };
 		AA3CA55F1E6058D3000D05FA /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
@@ -2785,6 +2785,10 @@
 		AAF508871EAF76490007BC78 /* YWNewUseCouponTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWNewUseCouponTableViewCell.h; sourceTree = "<group>"; };
 		AAF508881EAF76490007BC78 /* YWNewUseCouponTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWNewUseCouponTableViewCell.m; sourceTree = "<group>"; };
 		AAF508891EAF76490007BC78 /* YWNewUseCouponTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWNewUseCouponTableViewCell.xib; sourceTree = "<group>"; };
+		AAF525D71ECAA528004D62E2 /* CinemaHeaderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaHeaderModel.h; sourceTree = "<group>"; };
+		AAF525D81ECAA528004D62E2 /* CinemaHeaderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaHeaderModel.m; sourceTree = "<group>"; };
+		AAF525DA1ECAAA29004D62E2 /* FilmListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmListModel.h; sourceTree = "<group>"; };
+		AAF525DB1ECAAA29004D62E2 /* FilmListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmListModel.m; sourceTree = "<group>"; };
 		AAF54A0E1EA8474D00D02D6B /* ShopDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopDetailViewController.h; sourceTree = "<group>"; };
 		AAF54A0F1EA8474D00D02D6B /* ShopDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopDetailViewController.m; sourceTree = "<group>"; };
 		AAF54A101EA8474D00D02D6B /* ShopDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopDetailViewController.xib; sourceTree = "<group>"; };
@@ -4545,6 +4549,7 @@
 		AA1FEB371E55CFC700239FEC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AAD81F371EC5EBAD00799957 /* 首页 */,
 				AA3B4DAB1E554871008466C4 /* cell */,
 				AA3805FA1E65082200DB8C4C /* 支付 */,
 				AA0E29501E57EDD2008828C7 /* DetaliViewController.h */,
@@ -5342,9 +5347,9 @@
 		AA377B721EC6DDFD00E81A88 /* 影院 */ = {
 			isa = PBXGroup;
 			children = (
+				AAF525D61ECAA503004D62E2 /* model */,
+				AAF525D51ECA9CE2004D62E2 /* view */,
 				AA377B731EC6DE7900E81A88 /* 影院详情 */,
-				AAF237271E5C0A3B002D58B4 /* CinemaHeaderView.h */,
-				AAF237281E5C0A3B002D58B4 /* CinemaHeaderView.m */,
 				AA42110B1E5ABAEF00085650 /* MovieCinemaViewController.h */,
 				AA42110C1E5ABAEF00085650 /* MovieCinemaViewController.m */,
 				AA42110D1E5ABAEF00085650 /* MovieCinemaViewController.xib */,
@@ -5676,7 +5681,6 @@
 		AA3C40C81E8DAFF50052C732 /* 展示图片 */ = {
 			isa = PBXGroup;
 			children = (
-				AA3C41871E8E03D40052C732 /* 优惠券展示.jpg */,
 				AA3C40D01E8DAFF50052C732 /* 消息.jpg */,
 				AA3C40D21E8DAFF50052C732 /* 电影展示.jpg */,
 			);
@@ -5739,11 +5743,9 @@
 		AA466CC71E54498F009E9F98 /* 电影类 */ = {
 			isa = PBXGroup;
 			children = (
-				AAD81F371EC5EBAD00799957 /* 首页 */,
 				AAFAC9931EBD7142000AAB78 /* 自定义布局 */,
 				AAF30ABB1E5E926300793382 /* XZSeatsTool */,
 				AAF30A801E5E73A200793382 /* Model */,
-				AA084B7B1E56DDD8002D14F5 /* Custom */,
 				AA1FEB371E55CFC700239FEC /* ViewController */,
 				AA466CCD1E545DD3009E9F98 /* view */,
 			);
@@ -6224,6 +6226,26 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
+		AAF525D51ECA9CE2004D62E2 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				AAF237271E5C0A3B002D58B4 /* CinemaHeaderView.h */,
+				AAF237281E5C0A3B002D58B4 /* CinemaHeaderView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		AAF525D61ECAA503004D62E2 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AAF525D71ECAA528004D62E2 /* CinemaHeaderModel.h */,
+				AAF525D81ECAA528004D62E2 /* CinemaHeaderModel.m */,
+				AAF525DA1ECAAA29004D62E2 /* FilmListModel.h */,
+				AAF525DB1ECAAA29004D62E2 /* FilmListModel.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		AAF80CEF1E67E41C0000C4BC /* 扫描 */ = {
 			isa = PBXGroup;
 			children = (
@@ -6257,6 +6279,7 @@
 		AAFAC9931EBD7142000AAB78 /* 自定义布局 */ = {
 			isa = PBXGroup;
 			children = (
+				AA084B7B1E56DDD8002D14F5 /* Custom */,
 				AAFAC9941EBD7160000AAB78 /* ViscosityLayout.h */,
 				AAFAC9951EBD7160000AAB78 /* ViscosityLayout.m */,
 			);
@@ -10583,7 +10606,6 @@
 				B38B2E6C1D8FC3B6004D5256 /* JWBasicViewController.xib in Resources */,
 				C13019E41DB20B2400E24C88 /* 美食.png in Resources */,
 				AA2B2BF61E8CB46D008CB3C6 /* AwardViewController.xib in Resources */,
-				AA3C41881E8E03D40052C732 /* 优惠券展示.jpg in Resources */,
 				AA3545041E9DF23900A2EC73 /* 1baobaoBG41@2x.jpg in Resources */,
 				AA3545391E9DF23900A2EC73 /* 2baobaoBG35@2x.jpg in Resources */,
 				C135A1661DDE020F002B78A5 /* 波浪个人_00054.png in Resources */,
@@ -11370,6 +11392,7 @@
 				C1F7BE4F1DB1C95400CCAF96 /* YWFansTableViewCell.m in Sources */,
 				B3CD68A71D94CF3200C26B1C /* RBPublicEditorScrollView.m in Sources */,
 				B33A26811D9A68040092CB12 /* PSTGridLayoutInfo.m in Sources */,
+				AAF525DC1ECAAA29004D62E2 /* FilmListModel.m in Sources */,
 				AA6B5EC71EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m in Sources */,
 				AA399CDA1EAB374900CA22CB /* YWShopCarView.m in Sources */,
 				AA42110E1E5ABAEF00085650 /* MovieCinemaViewController.m in Sources */,
@@ -11782,6 +11805,7 @@
 				B3CD68AE1D94F9F300C26B1C /* RBPublicLocationViewController.m in Sources */,
 				B38B2E001D8FACD8004D5256 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				C122FBF61DB60CF6009A518A /* ScheduleViewController.m in Sources */,
+				AAF525D91ECAA528004D62E2 /* CinemaHeaderModel.m in Sources */,
 				B30F43FD1DC243AA00D7F13C /* JWTabBar.m in Sources */,
 				B33A267F1D9A68040092CB12 /* PSTCollectionViewLayout.m in Sources */,
 				C1F7BE311DB1C95400CCAF96 /* VIPPersonCenterViewController.m in Sources */,

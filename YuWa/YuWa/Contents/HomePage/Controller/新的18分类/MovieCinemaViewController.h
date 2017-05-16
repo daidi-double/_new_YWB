@@ -11,5 +11,6 @@
 @interface MovieCinemaViewController : UIViewController
 @property (nonatomic,strong)UIButton * buy_ticket;
 @property (nonatomic,copy)NSString * cinema_code;//影院编码
+@property (nonatomic,copy)NSString * film_code;//电影编码
 
 @end

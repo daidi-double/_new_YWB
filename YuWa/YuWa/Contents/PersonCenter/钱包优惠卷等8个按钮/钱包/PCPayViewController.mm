@@ -109,7 +109,7 @@
         
         //2、调整大小
         UIImage *image = [UIImage imageNamed:@"wechatPay"];
-        CGSize imageSize = CGSizeMake(30, 30);
+        CGSize imageSize = CGSizeMake(25, 25);
         UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0.0);
         CGRect imageRect = CGRectMake(0.0, 0.0, imageSize.width, imageSize.height);
         [image drawInRect:imageRect];
@@ -121,7 +121,7 @@
         
         //2、调整大小
         UIImage *image = [UIImage imageNamed:@"zhifubaoPay"];
-        CGSize imageSize = CGSizeMake(30, 30);
+        CGSize imageSize = CGSizeMake(25, 25);
         UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0.0);
         CGRect imageRect = CGRectMake(0.0, 0.0, imageSize.width, imageSize.height);
         [image drawInRect:imageRect];
@@ -134,7 +134,7 @@
         
         //2、调整大小
         UIImage *image = [UIImage imageNamed:@"yinlianpay"];
-        CGSize imageSize = CGSizeMake(30, 13);
+        CGSize imageSize = CGSizeMake(30, 25);
         UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0.0);
         CGRect imageRect = CGRectMake(0.0, 0.0, imageSize.width, imageSize.height);
         [image drawInRect:imageRect];
