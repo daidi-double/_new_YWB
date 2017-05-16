@@ -11,7 +11,7 @@
 #import "YWStormPinAnnotationView.h"
 //#import "YWStormSearchViewController.h"
 #import "NewSearchViewController.h"        //搜索界面
-#import "YWShoppingDetailViewController.h"
+#import "ShopDetailViewController.h"
 #import "YWStormSubSortCollectionView.h"
 
 #import <AMapNaviKit/AMapNaviKit.h>
@@ -192,7 +192,7 @@
     __weak typeof(annotationView)weakAnnotationView = annotationView;
     annotationView.callViewBlock = ^(){
         
-        YWShoppingDetailViewController * vc = [[YWShoppingDetailViewController alloc]init];
+        ShopDetailViewController * vc = [[ShopDetailViewController alloc]init];
         vc.shop_id = weakAnnotationView.model.annotationID;
         [self.navigationController pushViewController:vc animated:YES];
     };

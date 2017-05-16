@@ -772,6 +772,13 @@
 		AAD81F351EC46A6800799957 /* home_halfStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F321EC46A6800799957 /* home_halfStar@2x.png */; };
 		AAD81F361EC46A6800799957 /* home_lightStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F331EC46A6800799957 /* home_lightStar@2x.png */; };
 		AAD81F3B1EC5EBE600799957 /* HotMovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD81F3A1EC5EBE600799957 /* HotMovieModel.m */; };
+		AAD988C01ECAE9110055D044 /* FilmShowTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD988BF1ECAE9110055D044 /* FilmShowTimeModel.m */; };
+		AAD988C41ECB29F10055D044 /* PlayTimeShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD988C21ECB29F10055D044 /* PlayTimeShowTableViewCell.m */; };
+		AAD988C51ECB29F10055D044 /* PlayTimeShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAD988C31ECB29F10055D044 /* PlayTimeShowTableViewCell.xib */; };
+		AAD988CB1ECB41110055D044 /* OtherTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD988C91ECB41110055D044 /* OtherTicketViewController.m */; };
+		AAD988CC1ECB41110055D044 /* OtherTicketViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAD988CA1ECB41110055D044 /* OtherTicketViewController.xib */; };
+		AAD988D11ECB43400055D044 /* OtherTicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD988CF1ECB43400055D044 /* OtherTicketTableViewCell.m */; };
+		AAD988D21ECB43400055D044 /* OtherTicketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAD988D01ECB43400055D044 /* OtherTicketTableViewCell.xib */; };
 		AAF0EB3A1EAC58EB0003A930 /* YWShopCommitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB391EAC58EB0003A930 /* YWShopCommitView.m */; };
 		AAF0EB431EAC5C940003A930 /* YWShopScoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB411EAC5C940003A930 /* YWShopScoreTableViewCell.m */; };
 		AAF0EB441EAC5C940003A930 /* YWShopScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF0EB421EAC5C940003A930 /* YWShopScoreTableViewCell.xib */; };
@@ -2663,6 +2670,17 @@
 		AAD81F331EC46A6800799957 /* home_lightStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_lightStar@2x.png"; sourceTree = "<group>"; };
 		AAD81F391EC5EBE600799957 /* HotMovieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotMovieModel.h; sourceTree = "<group>"; };
 		AAD81F3A1EC5EBE600799957 /* HotMovieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotMovieModel.m; sourceTree = "<group>"; };
+		AAD988BE1ECAE9110055D044 /* FilmShowTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmShowTimeModel.h; sourceTree = "<group>"; };
+		AAD988BF1ECAE9110055D044 /* FilmShowTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmShowTimeModel.m; sourceTree = "<group>"; };
+		AAD988C11ECB29F10055D044 /* PlayTimeShowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayTimeShowTableViewCell.h; sourceTree = "<group>"; };
+		AAD988C21ECB29F10055D044 /* PlayTimeShowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayTimeShowTableViewCell.m; sourceTree = "<group>"; };
+		AAD988C31ECB29F10055D044 /* PlayTimeShowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayTimeShowTableViewCell.xib; sourceTree = "<group>"; };
+		AAD988C81ECB41110055D044 /* OtherTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherTicketViewController.h; sourceTree = "<group>"; };
+		AAD988C91ECB41110055D044 /* OtherTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherTicketViewController.m; sourceTree = "<group>"; };
+		AAD988CA1ECB41110055D044 /* OtherTicketViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherTicketViewController.xib; sourceTree = "<group>"; };
+		AAD988CE1ECB43400055D044 /* OtherTicketTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherTicketTableViewCell.h; sourceTree = "<group>"; };
+		AAD988CF1ECB43400055D044 /* OtherTicketTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherTicketTableViewCell.m; sourceTree = "<group>"; };
+		AAD988D01ECB43400055D044 /* OtherTicketTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherTicketTableViewCell.xib; sourceTree = "<group>"; };
 		AAF0EB381EAC58EB0003A930 /* YWShopCommitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCommitView.h; sourceTree = "<group>"; };
 		AAF0EB391EAC58EB0003A930 /* YWShopCommitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopCommitView.m; sourceTree = "<group>"; };
 		AAF0EB401EAC5C940003A930 /* YWShopScoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopScoreTableViewCell.h; sourceTree = "<group>"; };
@@ -5347,6 +5365,8 @@
 		AA377B721EC6DDFD00E81A88 /* 影院 */ = {
 			isa = PBXGroup;
 			children = (
+				AAD988C71ECB40E80055D044 /* 通兑票 */,
+				AAD988C61ECB2A140055D044 /* cell */,
 				AAF525D61ECAA503004D62E2 /* model */,
 				AAF525D51ECA9CE2004D62E2 /* view */,
 				AA377B731EC6DE7900E81A88 /* 影院详情 */,
@@ -6006,6 +6026,45 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
+		AAD988C61ECB2A140055D044 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AAD988C11ECB29F10055D044 /* PlayTimeShowTableViewCell.h */,
+				AAD988C21ECB29F10055D044 /* PlayTimeShowTableViewCell.m */,
+				AAD988C31ECB29F10055D044 /* PlayTimeShowTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		AAD988C71ECB40E80055D044 /* 通兑票 */ = {
+			isa = PBXGroup;
+			children = (
+				AAD988D31ECB46800055D044 /* model */,
+				AAD988CD1ECB431E0055D044 /* cell */,
+				AAD988C81ECB41110055D044 /* OtherTicketViewController.h */,
+				AAD988C91ECB41110055D044 /* OtherTicketViewController.m */,
+				AAD988CA1ECB41110055D044 /* OtherTicketViewController.xib */,
+			);
+			name = "通兑票";
+			sourceTree = "<group>";
+		};
+		AAD988CD1ECB431E0055D044 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AAD988CE1ECB43400055D044 /* OtherTicketTableViewCell.h */,
+				AAD988CF1ECB43400055D044 /* OtherTicketTableViewCell.m */,
+				AAD988D01ECB43400055D044 /* OtherTicketTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		AAD988D31ECB46800055D044 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		AAF0EB4A1EAC72000003A930 /* mdel */ = {
 			isa = PBXGroup;
 			children = (
@@ -6242,6 +6301,8 @@
 				AAF525D81ECAA528004D62E2 /* CinemaHeaderModel.m */,
 				AAF525DA1ECAAA29004D62E2 /* FilmListModel.h */,
 				AAF525DB1ECAAA29004D62E2 /* FilmListModel.m */,
+				AAD988BE1ECAE9110055D044 /* FilmShowTimeModel.h */,
+				AAD988BF1ECAE9110055D044 /* FilmShowTimeModel.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -10593,6 +10654,7 @@
 				AA3544C61E9DF23900A2EC73 /* 0baobaoBG37@2x.jpg in Resources */,
 				AA35449A1E9DF23900A2EC73 /* 4baobaoLVUP51@2x.jpg in Resources */,
 				C1F7BF4A1DB1CA0700CCAF96 /* home_jian@2x.png in Resources */,
+				AAD988C51ECB29F10055D044 /* PlayTimeShowTableViewCell.xib in Resources */,
 				AA35443F1E9DF23800A2EC73 /* 3baobaoLVUP23@2x.jpg in Resources */,
 				AA3544341E9DF23800A2EC73 /* 3baobaoLVUP13@2x.jpg in Resources */,
 				AA466C7E1E53EA1F009E9F98 /* gogogo1.png in Resources */,
@@ -10822,6 +10884,7 @@
 				AA3543FF1E9DF23800A2EC73 /* 2baobaoLVUP1@2x.jpg in Resources */,
 				AA3545031E9DF23900A2EC73 /* 1baobaoBG40@2x.jpg in Resources */,
 				AA3544AB1E9DF23900A2EC73 /* 0baobaoBG12@2x.jpg in Resources */,
+				AAD988CC1ECB41110055D044 /* OtherTicketViewController.xib in Resources */,
 				AA3545701E9DF23A00A2EC73 /* 3baobaoBG30@2x.jpg in Resources */,
 				C13019E21DB20B2400E24C88 /* 电影.png in Resources */,
 				AA3545CF1E9DF23A00A2EC73 /* 4baobaoBG8@2x.jpg in Resources */,
@@ -10922,6 +10985,7 @@
 				C1F7BDAA1DB1C94500CCAF96 /* ShowShoppingTableViewCell.xib in Resources */,
 				B3D219141DB0985100D661F5 /* ShareSDK.bundle in Resources */,
 				C13019E61DB20B2400E24C88 /* 运动健身.png in Resources */,
+				AAD988D21ECB43400055D044 /* OtherTicketTableViewCell.xib in Resources */,
 				AA3545BF1E9DF23A00A2EC73 /* 4baobaoBG48@2x.jpg in Resources */,
 				B3FEB9FF1D9B6465003CDEF2 /* YWMessageTableViewCell.xib in Resources */,
 				B3D2190D1DB0985100D661F5 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -11334,12 +11398,14 @@
 				B33A267C1D9A68040092CB12 /* PSTCollectionViewData.m in Sources */,
 				C1F7BE541DB1C95400CCAF96 /* PCCouponTableViewCell.m in Sources */,
 				C1FB7F751DC7393D0048EBC8 /* showResultsViewController.m in Sources */,
+				AAD988C41ECB29F10055D044 /* PlayTimeShowTableViewCell.m in Sources */,
 				C1F7BDB81DB1C94500CCAF96 /* TwoLabelShowTableViewCell.m in Sources */,
 				C1F7BDAB1DB1C94500CCAF96 /* StoreDescriptionTableViewCell.m in Sources */,
 				B38B2F761D8FC8CD004D5256 /* NSString+JWAppendOtherStr.m in Sources */,
 				C1FB7F6B1DC733AE0048EBC8 /* NewSearchViewController.m in Sources */,
 				B38B2DEA1D8FACD8004D5256 /* HUDLoadingShowView.m in Sources */,
 				B33A26961D9A68040092CB12 /* FixFopen.c in Sources */,
+				AAD988D11ECB43400055D044 /* OtherTicketTableViewCell.m in Sources */,
 				AAF508851EAF25A10007BC78 /* YWOtherPayMoneyTableViewCell.m in Sources */,
 				B38B2E1A1D8FACD8004D5256 /* MJRefreshBackNormalFooter.m in Sources */,
 				B36C7F6D1D9E0DF100B022E0 /* YWMessageNotificationModel.m in Sources */,
@@ -11387,6 +11453,7 @@
 				C10E93A41DD1815300728B3D /* PHCategoryModel.m in Sources */,
 				AA6208121E8E8CCB0001960C /* YWScanViewController.m in Sources */,
 				B33A269D1D9A68040092CB12 /* EaseUserCell.m in Sources */,
+				AAD988C01ECAE9110055D044 /* FilmShowTimeModel.m in Sources */,
 				C135A1731DDEB914002B78A5 /* PostCommitViewController.m in Sources */,
 				B38B2F141D8FC82F004D5256 /* RBNodeUserLevelModel.m in Sources */,
 				C1F7BE4F1DB1C95400CCAF96 /* YWFansTableViewCell.m in Sources */,
@@ -11873,6 +11940,7 @@
 				B38B2E341D8FACD8004D5256 /* UIButton+WebCache.m in Sources */,
 				B34B569B1DAFD46700040D25 /* RBPublishSession.m in Sources */,
 				C1F7BD941DB1C94500CCAF96 /* YWChooseOneView.m in Sources */,
+				AAD988CB1ECB41110055D044 /* OtherTicketViewController.m in Sources */,
 				B33A26981D9A68040092CB12 /* EaseLocationViewController.m in Sources */,
 				B38B2E181D8FACD8004D5256 /* MJRefreshAutoStateFooter.m in Sources */,
 				B33A26781D9A68040092CB12 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,

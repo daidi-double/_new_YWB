@@ -23,11 +23,6 @@
     if (self) {
         [self requestHeaderData];
         self.movies = moviesAry;
-        FilmListModel * listModel;
-        if (self.movies.count>0) {
-            
-            listModel = self.movies[0];
-        }
  
 //        _introduce = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 0, _BGScrollView.height * 0.3f)];
 //        _introduce.text = @"乘风破浪|剧情|邓超MMMMMMMMMMM";
@@ -144,9 +139,12 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     MoviePicCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:MOVIECELL1 forIndexPath:indexPath];
 
-    FilmListModel * filmModel = self.movies[indexPath.item];
-    [cell.movieImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    [self.imageAry addObject:cell.movieImageView.image];
+//    if (self.movies.count>0) {
+        FilmListModel * filmModel = self.flimListAry[indexPath.item];
+        [cell.movieImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [self.imageAry addObject:cell.movieImageView.image];
+        
+//    }
 
     
     if (!_bgImageView) {
@@ -177,7 +175,7 @@
             self.index = i;
         }
     }
-    MyLog(@"偏移量%.f",scrollView.mj_offsetX);
+   
     FilmListModel * filmModel = self.flimListAry[_index];
     _movieTitle.text = filmModel.name;
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
@@ -226,9 +224,9 @@
             [self.flimListAry removeAllObjects];
             NSArray * ary = data[@"data"][@"filmList"];
             for (int i = 0; i <ary.count; i ++ ) {
-                for (NSDictionary * dict in ary) {
+                
                     
-                    FilmListModel * filmModel = [FilmListModel yy_modelWithDictionary:dict];
+                    FilmListModel * filmModel = [FilmListModel yy_modelWithDictionary:ary[i]];
                     [self.flimListAry addObject:filmModel];
                     if (i == 0) {
                         self.movieTitle.text = filmModel.name;
@@ -236,7 +234,7 @@
                         _movieTitle.frame = CGRectMake(0, _BGScrollView.height-10, movieTitleSize.width, _BGScrollView.height*0.3f);
                         _movieTitle.centerX = self.width/2 - 15;
                          self.movieScore.text = [NSString stringWithFormat:@"%@分",filmModel.score];
-                    }
+                    
                 }
                 
             }

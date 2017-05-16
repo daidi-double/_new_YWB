@@ -135,7 +135,9 @@
 
 
 //4种颜色默认颜色 男生
-#define CNaviColor [UIColor colorWithRed:0/255.0 green:183/255.0 blue:231/255.0 alpha:1.0]   //主的naviBar 的颜色     天蓝色
+//#define CNaviColor [UIColor colorWithRed:0/255.0 green:183/255.0 blue:231/255.0 alpha:1.0]   //主的naviBar 的颜色     天蓝色
+#define CNaviColor [UIColor colorWithRed:60/255.0 green:140/255.0 blue:217/255.0 alpha:1.0]   //主的naviBar 的颜色     天蓝色
+//#define CNaviColor  [UIColor colorWithHexString:@"#3c8cd9"]
 #define CpriceColor [UIColor colorWithRed:250/255.0 green:179/255.0 blue:67/255.0 alpha:1.0]   //价格的颜色            闪电黄
 
 #define CtitleColor [UIColor blackColor]   //大的标题 的颜色
