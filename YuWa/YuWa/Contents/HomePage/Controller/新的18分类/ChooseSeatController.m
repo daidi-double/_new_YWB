@@ -318,7 +318,7 @@
                 for (UIView * lblView in _seatLblBGView.subviews) {
                     [lblView removeFromSuperview];
                 }
-                _price_num.text = [NSString stringWithFormat:@"￥39X%ld",self.selecetedSeats.count];
+                _price_num.text = [NSString stringWithFormat:@"￥39X%ld",(unsigned long)self.selecetedSeats.count];
       
                 _allPrice.text = [NSString stringWithFormat:@"一次最多选择4个座位"];
                  _allPrice.font = [UIFont systemFontOfSize:15];

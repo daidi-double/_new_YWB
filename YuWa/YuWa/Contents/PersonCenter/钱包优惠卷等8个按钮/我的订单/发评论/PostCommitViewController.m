@@ -334,12 +334,11 @@
         if ([errorCode isEqualToString:@"0"]) {
             [JRToast showWithText:data[@"msg"]];
 
-            if (self.stauts == 1) {
+            if (self.stauts != 1) {
                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:3] animated:YES];
-                //清空购物车
-                [self clearShopCar:self.shop_id];
+
             }else{
-                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
             }
         }else{
             
@@ -350,21 +349,6 @@
 
     
     
-}
-
-- (void)clearShopCar:(NSString *)shop_id{
-    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_CLEARSHOPCARLIST];
-    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"shop_id":shop_id};
-    HttpManager * manager = [[HttpManager alloc]init];
-    [manager postDatasWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
-        MyLog(@"清空购物车%@",data);
-        NSInteger number = [data[@"errorCode"] integerValue];
-        if (number == 0) {
-
-        }else{
-  
-        }
-    }];
 }
 
 // 将字典或者数组转化为JSON串
