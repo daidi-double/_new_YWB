@@ -133,14 +133,14 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat yoffset=scrollView.contentOffset.y;
     if (yoffset<0) {
-        CGRect f = self.headerImageView.frame;
-        f.origin.x = self.headerViewFrame.origin.x +yoffset/2;
-        f.origin.y=  yoffset ;
-        f.size.height = -yoffset+self.headerViewFrame.size.height;
-        f.size.width = self.headerViewFrame.size.width/self.headerViewFrame.size.height*f.size.height;
+        CGRect frame = self.headerImageView.frame;
+        frame.origin.x = self.headerViewFrame.origin.x +yoffset/2;
+        frame.origin.y=  yoffset ;
+        frame.size.height = -yoffset+self.headerViewFrame.size.height;
+        frame.size.width = self.headerViewFrame.size.width/self.headerViewFrame.size.height*frame.size.height;
         //改变头部视图的fram
-        MyLog(@"~~~~~~!!!!!!!%@",NSStringFromCGRect(f));
-        self.headerImageView.frame= f;
+        MyLog(@"~~~~~~!!!!!!!%@",NSStringFromCGRect(frame));
+        self.headerImageView.frame= frame;
     }
     
 //    MyLog(@"%@~~~~~~~~~~",NSStringFromCGPoint(scrollView.contentOffset));
