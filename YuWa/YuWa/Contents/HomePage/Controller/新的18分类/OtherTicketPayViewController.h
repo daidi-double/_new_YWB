@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface OtherTicketPayViewController : UIViewController
+@property (nonatomic,copy)NSString * ticketNo;//通兑票号
 
 @end

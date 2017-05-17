@@ -8,6 +8,7 @@
 
 #import "OtherTicketViewController.h"
 #import "OtherTicketTableViewCell.h"
+#import "OtherTicketPayViewController.h"
 #import "OtherTicketModel.h"
 #define otherTicketCell  @"OtherTicketTableViewCell"
 @interface OtherTicketViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -50,9 +51,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 20;
 }
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    OtherTicketPayViewController * vc = [[OtherTicketPayViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01f;

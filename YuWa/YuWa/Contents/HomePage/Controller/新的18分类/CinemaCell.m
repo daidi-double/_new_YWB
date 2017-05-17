@@ -15,13 +15,13 @@
 
         [self addSubview:self.cinemaName];
         [self addSubview:self.price];
-        [self addSubview:self.discount];
+//        [self addSubview:self.discount];
         [self addSubview:self.distance];
-        if (self.isdiscount == 0) {
-            self.discount.hidden = NO;
-        }else{
-            self.discount.hidden = YES;
-        }
+//        if (self.isdiscount == 0) {
+//            self.discount.hidden = NO;
+//        }else{
+//            self.discount.hidden = YES;
+//        }
         
     }
     return self;
@@ -29,9 +29,9 @@
 - (UILabel*)cinemaName{
     if (!_cinemaName) {
         _cinemaName = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, kScreen_Width*0.8, self.bounds.size.height/2)];
-        _cinemaName.textColor = [UIColor blackColor];
+        _cinemaName.textColor = RGBCOLOR(112, 114, 113, 1);
         _cinemaName.textAlignment = 0;
-        _cinemaName.font = [UIFont systemFontOfSize:18];
+        _cinemaName.font = [UIFont systemFontOfSize:15];
         _cinemaName.text = @"xxxx影城";
     }
     return _cinemaName;
@@ -39,25 +39,25 @@
 
 - (UILabel*)price{
     if (!_price) {
-        _price = [[UILabel alloc]initWithFrame:CGRectMake(10, self.cinemaName.height+7, kScreen_Width*0.4f, self.bounds.size.height*0.25f)];
+        _price = [[UILabel alloc]initWithFrame:CGRectMake(10, self.cinemaName.height+15, kScreen_Width*0.4f, self.bounds.size.height*0.25f)];
         _price.textAlignment = 0;
-        _price.font = [UIFont systemFontOfSize:15];
-        _price.textColor = [UIColor greenColor];
+        _price.font = [UIFont systemFontOfSize:13];
+        _price.textColor = RGBCOLOR(255, 196, 15, 1);
         _price.text = @"￥  起";
     }
     return _price;
 }
-- (UILabel*)discount{
-    if (!_discount) {
-        _discount = [[UILabel alloc]initWithFrame:CGRectMake(10, self.bounds.size.height*0.8+15, kScreen_Width /2, self.bounds.size.height*0.25)];
-        _discount.text = @"更优惠";
-        _discount.textAlignment = 0;
-        _discount.font = [UIFont systemFontOfSize:12];
-        _discount.textColor = [UIColor lightGrayColor];
-
-    }
-    return _discount;
-}
+//- (UILabel*)discount{
+//    if (!_discount) {
+//        _discount = [[UILabel alloc]initWithFrame:CGRectMake(10, self.bounds.size.height*0.8+15, kScreen_Width /2, self.bounds.size.height*0.25)];
+//        _discount.text = @"更优惠";
+//        _discount.textAlignment = 0;
+//        _discount.font = [UIFont systemFontOfSize:12];
+//        _discount.textColor = [UIColor lightGrayColor];
+//
+//    }
+//    return _discount;
+//}
 
 - (UILabel*)distance{
     if (!_distance) {
@@ -65,8 +65,8 @@
         _distance.center = CGPointMake(kScreen_Width*0.9, self.bounds.size.height/2);
         _distance.text = @"xxxkm";
         _distance.textAlignment = NSTextAlignmentCenter;
-        _distance.font = [UIFont systemFontOfSize:15];
-        _distance.textColor = [UIColor darkGrayColor];
+        _distance.font = [UIFont systemFontOfSize:13];
+        _distance.textColor = RGBCOLOR(112, 113, 114, 1);
     }
     return _distance;
 }

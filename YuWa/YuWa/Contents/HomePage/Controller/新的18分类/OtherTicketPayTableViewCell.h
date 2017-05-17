@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol OtherTicketPayTableViewCellDelegate <NSObject>
 
+- (void)reduceOrAddTicket:(NSInteger)status ;//1是加，2是减
+
+@end
 @interface OtherTicketPayTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *cinemaNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ticketTypeLabel;
@@ -17,5 +21,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UILabel *discountMoneyLabel;//优惠金额
 @property (weak, nonatomic) IBOutlet UIButton *reduceBtn;
-
+@property (nonatomic,assign)id<OtherTicketPayTableViewCellDelegate>delegate;
 @end
+
+
+
+

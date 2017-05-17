@@ -68,7 +68,7 @@
     
     _addressBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _addressBtn.frame = CGRectMake(self.width-45, self.height*0.1, 30, 30);
-    [_addressBtn setImage:[UIImage imageNamed:@"home_locate@2x.png"] forState:UIControlStateNormal];
+    [_addressBtn setImage:[UIImage imageNamed:@"导航"] forState:UIControlStateNormal];
     [_addressBtn setTitleEdgeInsets:UIEdgeInsetsMake(15, 0, -15, 0)];
     
     [_addressBtn addTarget:self action:@selector(locationAddress) forControlEvents:UIControlEventTouchUpInside];
@@ -76,6 +76,7 @@
     
     UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, _addressBtn.bottom, 30, 25)];
     titleLabel.text = @"导航";
+    titleLabel.textColor = CNaviColor;
     titleLabel.font = [UIFont systemFontOfSize:14];
     titleLabel.centerX = _addressBtn.centerX;
     titleLabel.userInteractionEnabled = YES;

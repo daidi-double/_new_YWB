@@ -19,6 +19,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="332" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="xZE-Ox-05X">
+                        <rect key="frame" x="0.0" y="0.0" width="332" height="100"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXM-j4-KfY">
                         <rect key="frame" x="38" y="26" width="11" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -52,6 +55,7 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="xZE-Ox-05X" secondAttribute="bottom" id="0ja-Xh-y9P"/>
                     <constraint firstItem="reR-rQ-ANp" firstAttribute="centerY" secondItem="NXM-j4-KfY" secondAttribute="centerY" id="27x-Vf-RBu"/>
                     <constraint firstItem="9fk-1d-p5E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="95N-JT-XtB"/>
                     <constraint firstItem="XFB-eY-llg" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="25" id="IRS-w9-RFS"/>
@@ -61,8 +65,11 @@
                     <constraint firstItem="9fk-1d-p5E" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SgI-nG-9cH"/>
                     <constraint firstItem="NXM-j4-KfY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="30" id="UZ2-71-Jw8"/>
                     <constraint firstItem="reR-rQ-ANp" firstAttribute="leading" secondItem="NXM-j4-KfY" secondAttribute="trailing" constant="45" id="b4L-UT-b6K"/>
+                    <constraint firstItem="xZE-Ox-05X" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fan-8l-CA1"/>
+                    <constraint firstItem="xZE-Ox-05X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kDM-cD-wxd"/>
                     <constraint firstItem="dLA-cD-bZe" firstAttribute="centerX" secondItem="NXM-j4-KfY" secondAttribute="centerX" id="swi-7b-hgz"/>
                     <constraint firstItem="dLA-cD-bZe" firstAttribute="top" secondItem="9fk-1d-p5E" secondAttribute="bottom" constant="1" id="vql-Iu-Yrt"/>
+                    <constraint firstAttribute="trailing" secondItem="xZE-Ox-05X" secondAttribute="trailing" id="wi5-Av-Uqy"/>
                     <constraint firstItem="9fk-1d-p5E" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="xsw-Xw-jnq"/>
                 </constraints>
             </tableViewCellContentView>
@@ -74,4 +81,7 @@
             <point key="canvasLocation" x="28" y="91.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="bg" width="337" height="97"/>
+    </resources>
 </document>

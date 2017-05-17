@@ -140,17 +140,17 @@
     UILabel * hotLbl = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, kScreen_Width/2, hotMovieBGView.size.height)];
     hotLbl.textAlignment = NSTextAlignmentLeft;
     hotLbl.textColor = RGBCOLOR(123, 124, 125, 1);
-    hotLbl.font = [UIFont systemFontOfSize:20];
+    hotLbl.font = [UIFont systemFontOfSize:15];
     hotLbl.text = @"热映影片";
     
     [hotMovieBGView addSubview:hotLbl];
     
     UIButton * lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    lookBtn.frame = CGRectMake(kScreen_Width*0.75, 5, kScreen_Width*0.25, hotMovieBGView.size.height);
-    [lookBtn setTitle:@"查看全部 >" forState:UIControlStateNormal];
+    lookBtn.frame = CGRectMake(kScreen_Width*0.75-12, 5, kScreen_Width*0.25, hotMovieBGView.size.height);
+    [lookBtn setTitle:@"全部 >" forState:UIControlStateNormal];
     [lookBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [lookBtn addTarget:self action:@selector(lookAll:) forControlEvents:UIControlEventTouchUpInside];
-    lookBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    lookBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [hotMovieBGView addSubview:lookBtn];
     
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
