@@ -29,7 +29,7 @@ static const CGFloat ItemHW = 60;
     [super prepareLayout];
     
     //初始化
-    self.itemSize = CGSizeMake(ItemHW, self.collectionView.frame.size.height * 0.8f);
+    self.itemSize = CGSizeMake(ItemHW, self.collectionView.frame.size.height * 0.7f);
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.minimumLineSpacing = 20;
 
@@ -107,7 +107,6 @@ static const CGFloat ItemHW = 60;
         //差距越小，缩放比例越大
         //根据与屏幕最中间的距离计算缩放比例
         CGFloat scale = 1 + (1 - ABS(itemCenterx - centerX) / self.collectionView.frame.size.width * 0.6)*0.8;//比例值很随意，适合就好
-        NSLog(@"--scale:%f",scale);
         
         //用这个，缩放不会改变frame大小，所以判断可见范围就无效，item即将离开可见范围的时候，突然消失不见
         attrs.transform3D = CATransform3DMakeScale(scale, scale, 1.0);

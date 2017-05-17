@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MoviePScrollView.h"
-
+#import "CinemaHeaderModel.h"
+#import "FilmListModel.h"
 @protocol CinemaHeaderViewDelegate <NSObject>
 
 - (void)ToFoodPage;
@@ -26,6 +27,13 @@
 @property (nonatomic,strong)UILabel * price;
 @property (nonatomic,strong)UIButton * addressBtn;
 @property (nonatomic,strong)UIImageView * ice_cream ;//冰激凌图片
+@property (nonatomic,strong)UIView * touchView;
+
+@property (nonatomic,strong)NSMutableArray * flimListAry;
+@property (nonatomic,strong) CinemaHeaderModel * model;
+
+@property (nonatomic,copy)NSString * cinema_code;//影院编码
+
 
 @property (nonatomic,strong)UIView * BGScrollView;
 @property (nonatomic,strong)UILabel * movieTitle;
@@ -39,7 +47,11 @@
 @property (nonatomic,strong)UIImageView * movieImageView;
 @property (nonatomic,strong)UIImageView * BGroundView;
 
-//@property (nonatomic, strong, readwrite) NSMutableArray *movies;
+@property (nonatomic,strong)NSMutableArray *movies;
+
+-(instancetype)initWithFrame:(CGRect)frame andAry:(NSMutableArray*)moviesAry;
+
+
 @end
 
 

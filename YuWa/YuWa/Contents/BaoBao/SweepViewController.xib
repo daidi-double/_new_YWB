@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SweepViewController">
             <connections>
-                <outlet property="touchBGView" destination="4oS-Ju-jCd" id="gZp-LZ-VP5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,25 +18,9 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="touchbegin.png" translatesAutoresizingMaskIntoConstraints="NO" id="4oS-Ju-jCd">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </imageView>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="4oS-Ju-jCd" secondAttribute="trailing" id="8E4-nl-ze8"/>
-                <constraint firstItem="4oS-Ju-jCd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SZi-JH-Lu9"/>
-                <constraint firstItem="4oS-Ju-jCd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ShV-7r-Udf"/>
-                <constraint firstItem="4oS-Ju-jCd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WcL-lv-dTe"/>
-                <constraint firstItem="4oS-Ju-jCd" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="XcH-G7-edA"/>
-                <constraint firstAttribute="bottom" secondItem="4oS-Ju-jCd" secondAttribute="bottom" id="oIC-Qt-et3"/>
-            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="touchbegin.png" width="621" height="1104"/>
-    </resources>
 </document>

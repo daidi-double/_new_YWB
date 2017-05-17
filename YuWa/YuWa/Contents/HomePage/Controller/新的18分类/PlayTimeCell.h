@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FilmShowTimeModel.h"
 @interface PlayTimeCell : UITableViewCell
 @property (nonatomic,strong)UILabel * beginTime;
 @property (nonatomic,strong)UILabel * language;
@@ -15,6 +15,6 @@
 @property (nonatomic,strong)UILabel * sell_price;
 @property (nonatomic,strong)UILabel * price;
 
-
+@property (nonatomic,strong)FilmShowTimeModel * model;
 
 @end

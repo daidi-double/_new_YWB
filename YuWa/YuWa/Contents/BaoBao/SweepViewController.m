@@ -32,9 +32,12 @@ static const CGFloat kMargin = 30;//扫描窗口的外边距
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setQRAVCap];
     self.view.backgroundColor = [UIColor blackColor];
     self.view.clipsToBounds = YES;
+    [self setupmaskView];//遮罩层
+    [self setupScanWindowView];
+    [self beginQRCode];
+    [self resumeAnimation];
    
 }
 - (void)setupmaskView{
@@ -47,24 +50,7 @@ static const CGFloat kMargin = 30;//扫描窗口的外边距
     mask1.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
     [self.view addSubview:mask1];
 }
-- (void)setQRAVCap{
-    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchBegin:)];
-    tapGesture.delegate = self;
-    tapGesture.numberOfTapsRequired = 1;
-    tapGesture.numberOfTouchesRequired = 1;
-    [self.touchBGView addGestureRecognizer:tapGesture];
-}
 
--(void)touchBegin:(UIGestureRecognizer*)gesture{
-    MyLog(@"开始扫码");
-    self.touchBGView.alpha = 0.f;
-    [self setupmaskView];//遮罩层
-    [self setupScanWindowView];
-    [self beginQRCode];
-    [self resumeAnimation];
-//     [self checkUpUserNumber];
-    
-}
 - (void)beginQRCode{
     AVCaptureDevice * device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     AVCaptureDeviceInput * input = [[AVCaptureDeviceInput alloc]initWithDevice:device error:nil];
@@ -85,8 +71,8 @@ static const CGFloat kMargin = 30;//扫描窗口的外边距
     
 }
 - (void)setupScanWindowView{
-    CGFloat scanWindowH = self.view.width - kMargin * 2;
-    CGFloat scanWindowW = self.view.width - kMargin * 2;
+    CGFloat scanWindowH = kScreen_Width - kMargin * 2;
+    CGFloat scanWindowW = kScreen_Width - kMargin * 2;
     //扫描窗口创建
     _scanWindow = [[UIView alloc] initWithFrame:CGRectMake(kMargin, kBorderW, scanWindowW, scanWindowH)];
     //扫描动画图片是添加在这个扫描窗口上的  窗口以外要隐藏

@@ -14,7 +14,7 @@
 #import "RBNodeShowModel.h"
 #import "RBNodeAddToAldumModel.h"
 
-#import "YWShoppingDetailViewController.h"
+#import "ShopDetailViewController.h"
 #import "RBNodeShowCommentDetailVC.h"
 #import "RBNodeDetailBottomView.h"
 #import "RBNodeDetailHeader.h"
@@ -218,7 +218,7 @@
             
             if ([weakSelf isLogin]) {
             if ([weakSelf.dataModel.user.user_type isEqualToString:@"2"]) {
-                YWShoppingDetailViewController * shopVC = [[YWShoppingDetailViewController alloc]init];
+                ShopDetailViewController * shopVC = [[ShopDetailViewController alloc]init];
                 shopVC.shop_id = weakSelf.dataModel.user.userid;
                 [weakSelf.navigationController pushViewController:shopVC animated:YES];
                 

@@ -101,6 +101,7 @@
 
     MovieCinemaViewController * MCinemaVC = [[MovieCinemaViewController alloc]init];
     MCinemaVC.cinema_code = self.cinemaModel.cinema_code;
+    MCinemaVC.film_code = self.model.code;
     [self.navigationController pushViewController:MCinemaVC animated:YES];
 }
 
