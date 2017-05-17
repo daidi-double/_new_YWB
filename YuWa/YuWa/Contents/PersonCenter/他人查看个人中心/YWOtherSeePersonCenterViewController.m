@@ -44,14 +44,16 @@
 @property(nonatomic,strong) OtherPersonCenterModel*HeaderModel;   //这个model 用来给头赋值的
 @property(nonatomic,strong)NSMutableArray * maMallDatas;
 @property(nonatomic,assign)showViewCategory showWhichView;    //点击的是那个view
-
+//背景图片
+@property (nonatomic, strong) UIImageView *headerImageView;
+//背景图片的frame
+@property (nonatomic, assign) CGRect  headerImageFrame;
 @end
 
 @implementation YWOtherSeePersonCenterViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //只是为了得到cell 高度
+        //只是为了得到cell 高度
     self.heighCell = [[[NSBundle mainBundle]loadNibNamed:@"RBHomeCollectionViewCell" owner:nil options:nil]firstObject];
 
     
@@ -86,6 +88,16 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
 //    MyLog(@"%@",NSStringFromCGPoint(scrollView.contentOffset));
     CGFloat yoffset=scrollView.contentOffset.y;
+    if (yoffset<0) {
+        CGRect frame = self.headerImageView.frame;
+        frame.origin.x = self.headerImageFrame.origin.x +yoffset/2;
+        frame.origin.y=  yoffset ;
+        frame.size.height = -yoffset+self.headerImageFrame.size.height;
+        frame.size.width = self.headerImageFrame.size.width/self.headerImageFrame.size.height*frame.size.height;
+        //改变头部视图的fram
+        MyLog(@"~~~~~~!!!!!!!%@",NSStringFromCGRect(frame));
+        self.headerImageView.frame= frame;
+    }
     
     if (yoffset>=HEADERVIEWHEIGHT-64&&yoffset<=HEADERVIEWHEIGHT) {
         self.navigationItem.title=self.nickName;
@@ -252,6 +264,8 @@
     
     
      imageView.frame=CGRectMake(0, 0, kScreen_Width, ACTUAL_HEIGHT(300));
+    self.headerImageView = imageView;
+    self.headerImageFrame = imageView.frame;
      self.belowImageViewView=[[UIView alloc]initWithFrame:CGRectMake(0, HEADERVIEWHEIGHT-ACTUAL_HEIGHT(300), kScreen_Width, ACTUAL_HEIGHT(300))];
 
     

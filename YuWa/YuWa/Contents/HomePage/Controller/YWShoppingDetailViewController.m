@@ -60,8 +60,7 @@
 @property(nonatomic,strong)NSMutableArray*maMRecommend; //推荐的model
 @property(nonatomic,assign)int conmentHight;
 
-//背景模糊图片的frame
-@property (nonatomic, assign) CGRect headerViewFrame;
+
 @end
 
 @implementation YWShoppingDetailViewController
@@ -182,17 +181,6 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offset_Y = scrollView.contentOffset.y;
-    if (offset_Y<0) {
-        CGRect frame = self.backgroundImageView.frame;
-        frame.origin.x = self.backgroundImageView.origin.x +offset_Y/2;
-        frame.origin.y=  offset_Y ;
-        frame.size.height = -offset_Y+self.headerViewFrame.size.height;
-        frame.size.width = self.headerViewFrame.size.width/self.headerViewFrame.size.height*frame.size.height;
-        //改变头部视图的fram
-        MyLog(@"~~~~~~!!!!!!!%@",NSStringFromCGRect(frame));
-        self.backgroundImageView.frame= frame;
-    }
-    
     
 //    NSLog(@"%f",offset_Y);
     if (offset_Y < 0) {
