@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "OtherTicketModel.h"
 @interface OtherTicketTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *filmTypeLabel;//2D/3D
 @property (weak, nonatomic) IBOutlet UILabel *sellerPriceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *oldPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *markLabel;//备注
 
-
+@property (nonatomic,strong) OtherTicketModel * model;
 
 @end

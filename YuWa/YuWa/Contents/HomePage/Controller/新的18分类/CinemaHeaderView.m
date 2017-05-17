@@ -223,6 +223,7 @@
         if ([data[@"errorCode"] integerValue] == 0) {
             [self.flimListAry removeAllObjects];
             NSArray * ary = data[@"data"][@"filmList"];
+            if (![ary isKindOfClass:[NSNull class]]) {
             for (int i = 0; i <ary.count; i ++ ) {
                 
                     
@@ -236,7 +237,7 @@
                          self.movieScore.text = [NSString stringWithFormat:@"%@分",filmModel.score];
                     
                 }
-                
+             }
             }
     
         }else{

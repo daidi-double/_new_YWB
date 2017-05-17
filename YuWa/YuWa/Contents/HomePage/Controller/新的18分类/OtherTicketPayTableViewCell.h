@@ -1,0 +1,21 @@
+//
+//  OtherTicketPayTableViewCell.h
+//  YuWa
+//
+//  Created by double on 17/5/17.
+//  Copyright © 2017年 Shanghai DuRui Information Technology Company. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface OtherTicketPayTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *cinemaNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ticketTypeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;//有效期
+@property (weak, nonatomic) IBOutlet UILabel *numberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalMoneyLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addBtn;
+@property (weak, nonatomic) IBOutlet UILabel *discountMoneyLabel;//优惠金额
+@property (weak, nonatomic) IBOutlet UIButton *reduceBtn;
+
+@end

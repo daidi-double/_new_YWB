@@ -23,6 +23,10 @@
 #import "FilmListModel.h"//滑动电影信息
 #import "FilmShowTimeModel.h"//影院上映的场次
 
+#import "OtherTicketModel.h"//通兑票model
+#import "OtherTicketViewController.h"
+
+#import <AMapFoundationKit/AMapFoundationKit.h>
 
 #define PLAYSHOWCELL  @"PlayTimeShowTableViewCell"
 @interface MovieCinemaViewController ()<UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,CinemaHeaderViewDelegate>
@@ -36,7 +40,8 @@
 @property (nonatomic,strong) CinemaHeaderModel * headerModel;
 @property (nonatomic,strong) NSMutableArray * filmListAry;//滑动部分电影数据
 @property (nonatomic,strong) NSMutableArray * filmShowAry;//播放场次电影
-
+@property (nonatomic,strong)CLGeocoder * geocoder;
+@property (nonatomic,strong)NSMutableArray * otherTicketAry;//通兑票数组
 @end
 
 @implementation MovieCinemaViewController
@@ -45,8 +50,11 @@
     [super viewDidLoad];
     self.title = @"影院";//修改为电影名称
     self.time = [JWTools currentTime2];
+
     [self requestHeaderData];
+    
     [self requestFootData];
+
     [self.view addSubview:self.movieTableView];
 
 }
@@ -74,6 +82,12 @@
     }
     return _filmShowAry;
 }
+- (NSMutableArray*)otherTicketAry{
+    if (!_otherTicketAry) {
+        _otherTicketAry = [NSMutableArray array];
+    }
+    return _otherTicketAry;
+}
 #pragma mark - tableviewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -86,11 +100,21 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return kScreen_Height *0.46f;
+    if (self.status == 1) {
         
+        if (section == 0) {
+            return kScreen_Height *0.46f;
+            
+        }else{
+            return 100.f;
+        }
     }else{
-        return 100.f;
+        if (section == 0) {
+            return kScreen_Height *0.46f;
+            
+        }else{
+            return 44.f;
+        }
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -225,18 +249,21 @@
 //            滑动部分的电影
             [self.filmListAry removeAllObjects];
             NSArray * ary = data[@"data"][@"filmList"];
+            if (![ary isKindOfClass:[NSNull class]]) {
+                
             for (int i = 0; i <ary.count; i ++ ) {
 
                     FilmListModel * filmModel = [FilmListModel yy_modelWithDictionary:ary[i]];
                     [self.filmListAry addObject:filmModel];
+               }
            
             }
             
             
+            [self.movieTableView reloadData];
         }else{
             [JRToast showWithText:@"网络错误，请检查网络" duration:1];
         }
-        [self.movieTableView reloadData];
     }];
     
 }
@@ -245,6 +272,15 @@
     
     self.film_code = @"001X00762017";
     self.cinema_code = @"1002062";
+    
+    ///////////////////////////////////////////////////////////
+    
+    
+    //测试数据
+    self.time = @"2017-05-16";
+    
+    
+    /////////////////////////////////////////////////////////
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code,@"film_code":self.film_code,@"time":self.time};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
@@ -258,7 +294,7 @@
         if ([data[@"errorCode"] integerValue] == 0) {
 
             [self.filmShowAry removeAllObjects];
-                for (NSDictionary * dict in data[@"data"][@"film_showtime"]) {
+                for (NSDictionary * dict in data[@"data"]) {
                     
                     FilmShowTimeModel * showModel = [FilmShowTimeModel yy_modelWithDictionary:dict];
  
@@ -275,15 +311,73 @@
     
 }
 
--(UIView*)btnTimeView{
-    if (!_btnTimeView) {
+//- (void)getLocalSubName{
+//    CLLocation * location = [[CLLocation alloc]initWithLatitude:self.location.coordinate.latitude longitude:self.location.coordinate.longitude];
+//    [self.geocoder reverseGeocodeLocation: location completionHandler:^(NSArray *array, NSError *error) {
+//        if (array.count > 0) {
+//            CLPlacemark *placemark = [array objectAtIndex:0];
+//            if (placemark != nil) {
+//                NSString *city = placemark.locality;
+//                
+//                NSLog(@"当前城市名称------%@",city);
+////                
+////                BMKOfflineMap * _offlineMap = [[BMKOfflineMap alloc] init];
+////                
+////                NSArray* records = [_offlineMap searchCity:city];
+////                BMKOLSearchRecord* oneRecord = [records objectAtIndex:0];
+////                //城市编码如:北京为131
+////                NSInteger cityId = oneRecord.cityID;
+////                
+////                NSLog(@"当前城市编号-------->%zd",cityId);
+////                //找到了当前位置城市后就关闭服务
+////                [_locService stopUserLocationService];
+//                
+//            }
+//        }
+//    }];
+//   
+//    
+//
+//    
+//}
 
-        _btnTimeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 100)];
-        
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
-        line.backgroundColor = RGBCOLOR(240, 240, 240, 1);
-        [_btnTimeView addSubview:line];
-        
+/**当获取到定位的坐标后，回调函数*/
+//- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
+//    
+//    BMKCoordinateRegion region;
+//    
+//    region.center.latitude  = userLocation.location.coordinate.latitude;
+//    region.center.longitude = userLocation.location.coordinate.longitude;
+//    region.span.latitudeDelta = 0;
+//    region.span.longitudeDelta = 0;
+//    NSLog(@"当前的坐标是:%f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+//    
+//    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+//    [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
+//        if (array.count > 0) {
+//            CLPlacemark *placemark = [array objectAtIndex:0];
+//            if (placemark != nil) {
+//                NSString *city = placemark.locality;
+//                
+//                NSLog(@"当前城市名称------%@",city);
+//                BMKOfflineMap * _offlineMap = [[BMKOfflineMap alloc] init];
+//                _offlineMap.delegate = self;//可以不要
+//                NSArray* records = [_offlineMap searchCity:city];
+//                BMKOLSearchRecord* oneRecord = [records objectAtIndex:0];
+//                //城市编码如:北京为131
+//                NSInteger cityId = oneRecord.cityID;
+//                
+//                NSLog(@"当前城市编号-------->%zd",cityId);
+//                //找到了当前位置城市后就关闭服务
+//                [_locService stopUserLocationService];
+//                
+//            }
+//        }
+//    }];
+//    
+//}
+-(UIView*)btnTimeView{
+   
         NSDate *date = [NSDate date];
         
         NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -343,62 +437,117 @@
         }
         
         NSArray * arr = @[btnTitle,btnTitleT,btnAfterTitle];
-        
+        if (self.status == 1) {
+            if (!_btnTimeView) {
+            _btnTimeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 100)];
+            
+            UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
+            line.backgroundColor = RGBCOLOR(240, 240, 240, 1);
+            [_btnTimeView addSubview:line];
+       
+            
+            lineView = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height-56, kScreen_Width/3, 2)];
+            lineView.backgroundColor = CNaviColor;
+            [_btnTimeView addSubview:lineView];
+         
+            for (int j = 0; j<3; j++) {
+                UIButton * dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                dateBtn.frame = CGRectMake(10 + (kScreen_Width/3-3)*j, 1, kScreen_Width/3-3, _btnTimeView.height - 56);
+                dateBtn.tag = j +1;
+                [dateBtn addTarget:self action:@selector(chooseDate:) forControlEvents:UIControlEventTouchUpInside];
+                [_btnTimeView addSubview:dateBtn];
+                dateBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+                [dateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [dateBtn setTitle:arr[j] forState:UIControlStateNormal];
+                
+                UIView * line3 = [[UIView alloc]initWithFrame:CGRectMake(dateBtn.right+1, _btnTimeView.height - 56, kScreen_Width, 0.5)];
+                line3.backgroundColor = RGBCOLOR(240, 240, 240, 1);
+                [_btnTimeView addSubview:line3];
+                
+                if (j == 2) {
+                    line3.hidden = YES;
+                }
+                
+            }
+            UIView * line2 = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height - 56, kScreen_Width, 0.5)];
+            line2.backgroundColor = RGBCOLOR(240, 240, 240, 1);
+            [_btnTimeView addSubview:line2];
+            UIView * bgView = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height -55.5, kScreen_Width, 55.5)];
+            [_btnTimeView addSubview:bgView];
+            
+            UIImageView * picImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 10, 35.5, 35.5)];
+            picImageView.image = [UIImage imageNamed:@"otherticketpic"];
+            [bgView addSubview:picImageView];
+            
+            UILabel * otherTicketLabel = [[UILabel alloc]initWithFrame:CGRectMake(picImageView.right + 20, 0, kScreen_Width * 0.7f, 30)];
+            otherTicketLabel.textColor = RGBCOLOR(110, 112, 113, 1);
+            otherTicketLabel.centerY = bgView.height/2;
+            otherTicketLabel.font = [UIFont systemFontOfSize:14];
+            otherTicketLabel.text = @"可观看2D,3D,免预约,可升级";
+            [bgView addSubview:otherTicketLabel];
+            
+            UIImageView * picImageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 30, 15, 8, 20)];
+            picImageView.centerY = bgView.height/2;
+            picImageView2.image = [UIImage imageNamed:@"imageTypeChoose_right"];
+            [bgView addSubview:picImageView2];
+            UITapGestureRecognizer * otherTicketTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toOtherTicker)];
+            otherTicketTap.delegate = self;
+            otherTicketTap.numberOfTapsRequired = 1;
+            otherTicketTap.numberOfTouchesRequired = 1;
+            [bgView addGestureRecognizer:otherTicketTap];
+            }
+                return _btnTimeView;
+        }else{
+            if (!_btnTimeView) {
+            _btnTimeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 44)];
+            
+            UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
+            line.backgroundColor = RGBCOLOR(240, 240, 240, 1);
+            [_btnTimeView addSubview:line];
+            
+            
             lineView = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height-2, kScreen_Width/3, 2)];
             lineView.backgroundColor = CNaviColor;
             [_btnTimeView addSubview:lineView];
-
-        
-        for (int j = 0; j<3; j++) {
-            UIButton * dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            dateBtn.frame = CGRectMake(10 + (kScreen_Width/3-3)*j, 1, kScreen_Width/3-3, _btnTimeView.height - 56);
-            dateBtn.tag = j +1;
-            [dateBtn addTarget:self action:@selector(chooseDate:) forControlEvents:UIControlEventTouchUpInside];
-            [_btnTimeView addSubview:dateBtn];
-            dateBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-            [dateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [dateBtn setTitle:arr[j] forState:UIControlStateNormal];
             
-            UIView * line3 = [[UIView alloc]initWithFrame:CGRectMake(dateBtn.right+1, _btnTimeView.height - 56, kScreen_Width, 0.5)];
-            line3.backgroundColor = RGBCOLOR(240, 240, 240, 1);
-            [_btnTimeView addSubview:line3];
-            
-            if (j == 2) {
-                line3.hidden = YES;
+            for (int j = 0; j<3; j++) {
+                UIButton * dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                dateBtn.frame = CGRectMake(10 + (kScreen_Width/3-3)*j, 1, kScreen_Width/3-3, _btnTimeView.height);
+                dateBtn.tag = j +1;
+                [dateBtn addTarget:self action:@selector(chooseDate:) forControlEvents:UIControlEventTouchUpInside];
+                [_btnTimeView addSubview:dateBtn];
+                dateBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+                [dateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [dateBtn setTitle:arr[j] forState:UIControlStateNormal];
+                
+                UIView * line3 = [[UIView alloc]initWithFrame:CGRectMake(dateBtn.right+1, _btnTimeView.height * 0.7f, kScreen_Width, 0.5)];
+                line3.backgroundColor = RGBCOLOR(240, 240, 240, 1);
+                [_btnTimeView addSubview:line3];
+                
+                if (j == 2) {
+                    line3.hidden = YES;
+                }
+                
             }
-            
+          }
+            return _btnTimeView;
         }
-        UIView * line2 = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height - 56, kScreen_Width, 0.5)];
-        line2.backgroundColor = RGBCOLOR(240, 240, 240, 1);
-        [_btnTimeView addSubview:line2];
-        UIView * bgView = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height -55.5, kScreen_Width, 55.5)];
-        [_btnTimeView addSubview:bgView];
-        
-        UIImageView * picImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 10, 35.5, 35.5)];
-        picImageView.image = [UIImage imageNamed:@""];
-        [bgView addSubview:picImageView];
-        
-        UILabel * otherTicketLabel = [[UILabel alloc]initWithFrame:CGRectMake(picImageView.right + 20, 0, kScreen_Width * 0.7f, 30)];
-        otherTicketLabel.textColor = RGBCOLOR(110, 112, 113, 1);
-        otherTicketLabel.centerY = bgView.height/2;
-        otherTicketLabel.font = [UIFont systemFontOfSize:14];
-        otherTicketLabel.text = @"可观看2D,3D,免预约,可升级";
-        [bgView addSubview:otherTicketLabel];
-        
-        UIImageView * picImageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 30, 15, 8, 20)];
-        picImageView.centerY = bgView.height/2;
-        picImageView2.image = [UIImage imageNamed:@"imageTypeChoose_right"];
-        [bgView addSubview:picImageView2];
-        UITapGestureRecognizer * otherTicketTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toOtherTicker)];
-        otherTicketTap.delegate = self;
-        otherTicketTap.numberOfTapsRequired = 1;
-        otherTicketTap.numberOfTouchesRequired = 1;
-        [bgView addGestureRecognizer:otherTicketTap];
+
+}
+
+#pragma mark  -- 得到地理位置
+- (CLGeocoder *)geocoder{
+    if (!_geocoder) {
+        _geocoder = [[CLGeocoder alloc]init];
     }
-    return _btnTimeView;
+    return _geocoder;
 }
 -(void)toOtherTicker{
     //通兑票
+    OtherTicketViewController * VC = [[OtherTicketViewController alloc]init];
+    VC.cinema_code = self.cinema_code;
+    VC.cityCode = self.cityCode;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

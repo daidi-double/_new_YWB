@@ -75,7 +75,7 @@
 #define HTTP_MOVIE_CHOOSESEATS  @"/api.php/Movie/queryShowSeats/"//选座
 #define HTTP_MOVIE_CINEMAHEADER  @"/api.php/Movie/cinemaFilm/"//影院头部数据
 #define HTTP_MOVIE_CINEMAFOOT  @"/api.php/Movie/cinemaFilmShowTime/"//影院尾部数据
-
+#define HTTP_MOVIE_JUDGECONTENTOTHERTICKET  @"/api.php/Movie/queryCommTickets/"//判断是否有通兑票
 
 
 

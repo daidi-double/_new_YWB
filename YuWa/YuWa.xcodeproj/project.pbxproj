@@ -706,6 +706,11 @@
 		AA3CA5671E606F0B000D05FA /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA5661E606F0B000D05FA /* MapAnnotation.m */; };
 		AA3E98221E7BA6D9007A4FB0 /* libPaymentControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3E98211E7BA6D9007A4FB0 /* libPaymentControl.a */; };
 		AA3FF87A1EC95C370051A766 /* CinemaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3FF8791EC95C370051A766 /* CinemaModel.m */; };
+		AA3FFF681ECBF287004E77EB /* OtherTicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3FFF671ECBF287004E77EB /* OtherTicketModel.m */; };
+		AA3FFF6C1ECC1853004E77EB /* OtherTicketPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3FFF6A1ECC1853004E77EB /* OtherTicketPayViewController.m */; };
+		AA3FFF6D1ECC1854004E77EB /* OtherTicketPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3FFF6B1ECC1853004E77EB /* OtherTicketPayViewController.xib */; };
+		AA3FFF711ECC1960004E77EB /* OtherTicketPayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3FFF6F1ECC1960004E77EB /* OtherTicketPayTableViewCell.m */; };
+		AA3FFF721ECC1960004E77EB /* OtherTicketPayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3FFF701ECC1960004E77EB /* OtherTicketPayTableViewCell.xib */; };
 		AA41E33F1EC0366200FCB498 /* NewHotMovieCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA41E33D1EC0366200FCB498 /* NewHotMovieCollectCell.m */; };
 		AA41E3401EC0366200FCB498 /* NewHotMovieCollectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA41E33E1EC0366200FCB498 /* NewHotMovieCollectCell.xib */; };
 		AA42110E1E5ABAEF00085650 /* MovieCinemaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42110C1E5ABAEF00085650 /* MovieCinemaViewController.m */; };
@@ -2571,6 +2576,14 @@
 		AA3E98211E7BA6D9007A4FB0 /* libPaymentControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentControl.a; sourceTree = "<group>"; };
 		AA3FF8781EC95C370051A766 /* CinemaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaModel.h; sourceTree = "<group>"; };
 		AA3FF8791EC95C370051A766 /* CinemaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaModel.m; sourceTree = "<group>"; };
+		AA3FFF661ECBF287004E77EB /* OtherTicketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherTicketModel.h; sourceTree = "<group>"; };
+		AA3FFF671ECBF287004E77EB /* OtherTicketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherTicketModel.m; sourceTree = "<group>"; };
+		AA3FFF691ECC1853004E77EB /* OtherTicketPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherTicketPayViewController.h; sourceTree = "<group>"; };
+		AA3FFF6A1ECC1853004E77EB /* OtherTicketPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherTicketPayViewController.m; sourceTree = "<group>"; };
+		AA3FFF6B1ECC1853004E77EB /* OtherTicketPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherTicketPayViewController.xib; sourceTree = "<group>"; };
+		AA3FFF6E1ECC1960004E77EB /* OtherTicketPayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherTicketPayTableViewCell.h; sourceTree = "<group>"; };
+		AA3FFF6F1ECC1960004E77EB /* OtherTicketPayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherTicketPayTableViewCell.m; sourceTree = "<group>"; };
+		AA3FFF701ECC1960004E77EB /* OtherTicketPayTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherTicketPayTableViewCell.xib; sourceTree = "<group>"; };
 		AA41E33C1EC0366200FCB498 /* NewHotMovieCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHotMovieCollectCell.h; sourceTree = "<group>"; };
 		AA41E33D1EC0366200FCB498 /* NewHotMovieCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHotMovieCollectCell.m; sourceTree = "<group>"; };
 		AA41E33E1EC0366200FCB498 /* NewHotMovieCollectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewHotMovieCollectCell.xib; sourceTree = "<group>"; };
@@ -6044,6 +6057,9 @@
 				AAD988C81ECB41110055D044 /* OtherTicketViewController.h */,
 				AAD988C91ECB41110055D044 /* OtherTicketViewController.m */,
 				AAD988CA1ECB41110055D044 /* OtherTicketViewController.xib */,
+				AA3FFF691ECC1853004E77EB /* OtherTicketPayViewController.h */,
+				AA3FFF6A1ECC1853004E77EB /* OtherTicketPayViewController.m */,
+				AA3FFF6B1ECC1853004E77EB /* OtherTicketPayViewController.xib */,
 			);
 			name = "通兑票";
 			sourceTree = "<group>";
@@ -6054,6 +6070,9 @@
 				AAD988CE1ECB43400055D044 /* OtherTicketTableViewCell.h */,
 				AAD988CF1ECB43400055D044 /* OtherTicketTableViewCell.m */,
 				AAD988D01ECB43400055D044 /* OtherTicketTableViewCell.xib */,
+				AA3FFF6E1ECC1960004E77EB /* OtherTicketPayTableViewCell.h */,
+				AA3FFF6F1ECC1960004E77EB /* OtherTicketPayTableViewCell.m */,
+				AA3FFF701ECC1960004E77EB /* OtherTicketPayTableViewCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -6061,6 +6080,8 @@
 		AAD988D31ECB46800055D044 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				AA3FFF661ECBF287004E77EB /* OtherTicketModel.h */,
+				AA3FFF671ECBF287004E77EB /* OtherTicketModel.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -10229,6 +10250,7 @@
 			files = (
 				AA3544B21E9DF23900A2EC73 /* 0baobaoBG19@2x.jpg in Resources */,
 				B38B2F191D8FC82F004D5256 /* RBNodeShowCommentDetailVC.xib in Resources */,
+				AA3FFF6D1ECC1854004E77EB /* OtherTicketPayViewController.xib in Resources */,
 				C1F7BF581DB1CA0700CCAF96 /* page_downArr.png in Resources */,
 				AA3545941E9DF23A00A2EC73 /* 3baobaoBG9@2x.jpg in Resources */,
 				AA3544DD1E9DF23900A2EC73 /* 0baobaoBG6@2x.jpg in Resources */,
@@ -10363,6 +10385,7 @@
 				AAC86F541E76DA4400F94C84 /* OpenBusinessViewController.xib in Resources */,
 				AA3544201E9DF23800A2EC73 /* 2baobaoLVUP4@2x.jpg in Resources */,
 				AA29C2521EAD9C4E0092EF6F /* YWActivityTableViewCell.xib in Resources */,
+				AA3FFF721ECC1960004E77EB /* OtherTicketPayTableViewCell.xib in Resources */,
 				AA3543C11E9DF23800A2EC73 /* 1baobaoLVUP18@2x.jpg in Resources */,
 				AA3AB5391E5D2693009BD8D9 /* share.png in Resources */,
 				AA3545CC1E9DF23A00A2EC73 /* 4baobaoBG5@2x.jpg in Resources */,
@@ -11823,6 +11846,7 @@
 				B38B2EF91D8FC82F004D5256 /* RBHomeListCommentsModel.m in Sources */,
 				B38B2F151D8FC82F004D5256 /* RBNodeUserModel.m in Sources */,
 				B38B2E2B1D8FACD8004D5256 /* MKAnnotationView+WebCache.m in Sources */,
+				AA3FFF681ECBF287004E77EB /* OtherTicketModel.m in Sources */,
 				AA3A86191EC1A59F003966F1 /* MoviePayTableViewCell.m in Sources */,
 				B38B2E571D8FACD8004D5256 /* VPImageCropperViewController.m in Sources */,
 				B38B2E201D8FACD8004D5256 /* MJChiBaoZiFooter2.m in Sources */,
@@ -11846,6 +11870,7 @@
 				B3FFF48E1D93FF4700EDD2AB /* RBPublicSaveModel.m in Sources */,
 				B38B2F1E1D8FC82F004D5256 /* RBHomeSearchViewController.m in Sources */,
 				AABFC4FA1E88E5E0002B5140 /* MyIncomeViewController.m in Sources */,
+				AA3FFF6C1ECC1853004E77EB /* OtherTicketPayViewController.m in Sources */,
 				C10E94A21DD1C57A00728B3D /* PHSubCategoryModel.m in Sources */,
 				AA2B2BF51E8CB46D008CB3C6 /* AwardViewController.m in Sources */,
 				B33A268F1D9A68040092CB12 /* EaseChineseToPinyin.m in Sources */,
@@ -11854,6 +11879,7 @@
 				B301E7CA1DAC86BD0001336E /* YWMessageSearchFriendAddCell.m in Sources */,
 				B38B2F091D8FC82F004D5256 /* RBNodeDetailHeader.m in Sources */,
 				B3B8510B1DD9879A00E171C8 /* JHPieForeBGView.m in Sources */,
+				AA3FFF711ECC1960004E77EB /* OtherTicketPayTableViewCell.m in Sources */,
 				B33A26931D9A68040092CB12 /* EaseEmojiEmoticons.m in Sources */,
 				AAF30ADC1E5EA74300793382 /* MJProperty.m in Sources */,
 				B33A26891D9A68040092CB12 /* EaseUserModel.m in Sources */,

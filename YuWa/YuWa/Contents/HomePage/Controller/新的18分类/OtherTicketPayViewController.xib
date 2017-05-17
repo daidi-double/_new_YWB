@@ -9,9 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OtherTicketViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OtherTicketPayViewController">
             <connections>
-                <outlet property="otherTableView" destination="JOe-88-NNb" id="X8W-7C-baf"/>
+                <outlet property="payTableView" destination="Nq8-CL-IlN" id="45w-mc-s6F"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,21 +20,21 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="JOe-88-NNb">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nq8-CL-IlN">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="mrf-lI-vx2"/>
-                        <outlet property="delegate" destination="-1" id="Ya6-zJ-ZG7"/>
+                        <outlet property="dataSource" destination="-1" id="srx-WZ-1ts"/>
+                        <outlet property="delegate" destination="-1" id="g2B-pb-ONG"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="JOe-88-NNb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="3ZJ-mf-iYF"/>
-                <constraint firstItem="JOe-88-NNb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JH0-rg-fsL"/>
-                <constraint firstAttribute="trailing" secondItem="JOe-88-NNb" secondAttribute="trailing" id="Kf8-RA-Irx"/>
-                <constraint firstAttribute="bottom" secondItem="JOe-88-NNb" secondAttribute="bottom" id="LPv-9G-PxP"/>
+                <constraint firstAttribute="trailing" secondItem="Nq8-CL-IlN" secondAttribute="trailing" id="8Ki-V8-mIi"/>
+                <constraint firstItem="Nq8-CL-IlN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VVO-yg-49U"/>
+                <constraint firstItem="Nq8-CL-IlN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mNh-PG-OSO"/>
+                <constraint firstAttribute="bottom" secondItem="Nq8-CL-IlN" secondAttribute="bottom" id="rVM-8O-2QR"/>
             </constraints>
         </view>
     </objects>

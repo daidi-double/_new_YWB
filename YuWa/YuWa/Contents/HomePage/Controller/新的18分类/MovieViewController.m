@@ -17,7 +17,7 @@
 #import "LookDetaliViewController.h"
 #import "NewSearchViewController.h"//需要修改
 #import "TableBGView.h"
-
+#import "OtherTicketModel.h"
 #import "NewHotMovieCollectCell.h"
 
 
@@ -44,8 +44,11 @@
 @property (nonatomic,strong) NSMutableArray * hotMovieSAry;//轮播热映数组
 @property (nonatomic,strong) NSMutableArray * hotCollectDataAry;//热映影片数组
 @property (nonatomic,strong) NSTimer * timer;
+@property (nonatomic,copy)NSString * cinema_code;//影院编码
+@property (nonatomic,copy)NSString * cityCode;//城市编码
 @property (nonatomic,strong) UICollectionView *movieCollectView;
 @property (nonatomic,assign)BOOL isselected;
+@property (nonatomic,strong)NSMutableArray * otherTicketAry;//通兑票数组
 @end
 
 @implementation MovieViewController
@@ -223,10 +226,8 @@
    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
- 
-        MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
-        [self.navigationController pushViewController:movieVC animated:YES];
-
+    
+    [self judgeIsContentOtherTicket:self.cinema_code];//修改
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
@@ -324,6 +325,44 @@
     [self.movieTableView.mj_footer endRefreshing];
     
 }
+
+//判断是否含有通兑票
+- (void)judgeIsContentOtherTicket:(NSString*)cinema_code{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_JUDGECONTENTOTHERTICKET];
+    
+    self.cityCode = @"110100";
+    cinema_code = @"01010071";
+    NSDictionary * pragrams = @{@"cityNo":self.cityCode,@"cinemaNo":cinema_code};
+    HttpManager * manage = [[HttpManager alloc]init];
+    [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"是否有通兑票 %@",data);
+        [self.otherTicketAry removeAllObjects];
+        if ([data[@"errorCode"] integerValue] == 0) {
+            for (NSDictionary * dict in data[@"data"]) {
+                OtherTicketModel * model = [OtherTicketModel yy_modelWithDictionary:dict];
+                [self.otherTicketAry addObject:model];
+                
+            }
+            //需要重新判断
+            
+            MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
+
+            movieVC.status = 1;
+
+            [self.navigationController pushViewController:movieVC animated:YES];
+        }else{
+            MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
+            
+            movieVC.status = 0;
+            
+            [self.navigationController pushViewController:movieVC animated:YES];
+
+        }
+        
+    }];
+
+}
+
 
 - (void)lookAll:(UIButton*)btn{
     NSLog(@"查看全部");
@@ -446,6 +485,13 @@
         _hotCollectDataAry = [NSMutableArray array];
     }
     return _hotCollectDataAry;
+}
+
+- (NSMutableArray*)otherTicketAry{
+    if (!_otherTicketAry) {
+        _otherTicketAry = [NSMutableArray array];
+    }
+    return _otherTicketAry;
 }
 - (void)pushToDetailPage:(NSInteger)tag{
     DetaliViewController * detaliVC = [[DetaliViewController alloc]init];
