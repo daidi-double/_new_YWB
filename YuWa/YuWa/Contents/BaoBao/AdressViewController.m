@@ -21,6 +21,8 @@
     UIScrollView*scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
     scrollView.contentSize=CGSizeMake(kScreen_Width, kScreen_Width * image.size.height/image.size.width);
 
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.bounces = NO;
     [self.view addSubview:scrollView];
     
     UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Width * image.size.height/image.size.width)];

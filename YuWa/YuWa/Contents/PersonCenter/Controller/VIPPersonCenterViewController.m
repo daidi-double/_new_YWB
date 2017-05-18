@@ -109,7 +109,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];    self.navigationItem.title=@"";
+    [super viewWillAppear:animated];
+    self.navigationItem.title=@"";
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 //    [self.navigationController setNavigationBarHidden:YES animated:YES]
 
