@@ -305,21 +305,21 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mN3-LH-Rqi">
-                            <rect key="frame" x="0.0" y="560" width="414" height="1"/>
+                            <rect key="frame" x="0.0" y="407" width="414" height="1"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="qSX-8C-1qr"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7i-bv-lal">
-                            <rect key="frame" x="186.66666666666666" y="581" width="40" height="40"/>
+                            <rect key="frame" x="186.66666666666666" y="428" width="40" height="40"/>
                             <state key="normal" image="weix"/>
                             <connections>
                                 <action selector="weiXLoginAction:" destination="-1" eventType="touchUpInside" id="6SL-1f-3At"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEs-Fs-PnC">
-                            <rect key="frame" x="96.666666666666657" y="581" width="39.999999999999972" height="40"/>
+                            <rect key="frame" x="96.666666666666657" y="428" width="39.999999999999972" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="PMS-dm-elJ"/>
                                 <constraint firstAttribute="width" constant="40" id="rOh-lU-I7w"/>
@@ -330,14 +330,14 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKN-Q9-Sc0">
-                            <rect key="frame" x="276.66666666666669" y="581" width="40" height="40"/>
+                            <rect key="frame" x="276.66666666666669" y="428" width="40" height="40"/>
                             <state key="normal" image="weibo"/>
                             <connections>
                                 <action selector="weiboLoginAction:" destination="-1" eventType="touchUpInside" id="mVI-XW-CeO"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa6-D8-RFj">
-                            <rect key="frame" x="168.66666666666666" y="532" width="76.666666666666686" height="18"/>
+                            <rect key="frame" x="168.66666666666666" y="379" width="76.666666666666686" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -352,6 +352,7 @@
                         <constraint firstAttribute="bottom" secondItem="lfA-y7-v66" secondAttribute="bottom" id="9YS-rR-ge9"/>
                         <constraint firstItem="Qjd-xz-zWI" firstAttribute="leading" secondItem="h56-zK-ClW" secondAttribute="leading" id="9oj-EQ-kiy"/>
                         <constraint firstItem="lfA-y7-v66" firstAttribute="top" secondItem="RER-dn-4Gi" secondAttribute="top" id="AWp-pE-7l3"/>
+                        <constraint firstItem="mN3-LH-Rqi" firstAttribute="top" secondItem="Fqa-jp-1OK" secondAttribute="bottom" constant="120" id="CWz-ZL-FnT"/>
                         <constraint firstAttribute="bottom" secondItem="lfA-y7-v66" secondAttribute="bottom" id="Cut-S7-Hsb"/>
                         <constraint firstItem="rhZ-9c-HSX" firstAttribute="leading" secondItem="h56-zK-ClW" secondAttribute="leading" id="Fmb-p5-iF0"/>
                         <constraint firstItem="h56-zK-ClW" firstAttribute="centerY" secondItem="C0h-Ge-i6j" secondAttribute="centerY" id="GW3-qq-wDe"/>
@@ -368,7 +369,6 @@
                         <constraint firstItem="XDP-b6-dHX" firstAttribute="width" secondItem="C0h-Ge-i6j" secondAttribute="width" id="UON-FS-2AM"/>
                         <constraint firstItem="I2s-7R-XsW" firstAttribute="trailing" secondItem="h56-zK-ClW" secondAttribute="trailing" id="UUi-DG-MHG"/>
                         <constraint firstItem="Qjd-xz-zWI" firstAttribute="trailing" secondItem="h56-zK-ClW" secondAttribute="trailing" id="VDI-DB-RIq"/>
-                        <constraint firstAttribute="bottom" secondItem="mN3-LH-Rqi" secondAttribute="bottom" constant="175" id="Vjo-Gp-pxH"/>
                         <constraint firstItem="Qjd-xz-zWI" firstAttribute="centerY" secondItem="XDP-b6-dHX" secondAttribute="centerY" id="W3h-Xb-fje"/>
                         <constraint firstItem="o7i-bv-lal" firstAttribute="top" secondItem="mN3-LH-Rqi" secondAttribute="bottom" constant="20" id="WsC-Np-ASv"/>
                         <constraint firstItem="o7i-bv-lal" firstAttribute="leading" secondItem="zEs-Fs-PnC" secondAttribute="trailing" constant="50" id="Zqh-V2-YHn"/>

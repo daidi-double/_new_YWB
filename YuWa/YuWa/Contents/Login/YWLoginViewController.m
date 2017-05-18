@@ -64,9 +64,14 @@
 - (void)makeNavi{
     self.title = @"登录";
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImageName:@"back" withSelectImage:@"back" withHorizontalAlignment:UIControlContentHorizontalAlignmentCenter withTarget:self action:@selector(backBarAction) forControlEvents:UIControlEventTouchUpInside withSize:CGSizeMake(25.f, 25.f)];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImageName:@"NaviBack" withSelectImage:@"NaviBack" withHorizontalAlignment:UIControlContentHorizontalAlignmentCenter withTarget:self action:@selector(backBarAction) forControlEvents:UIControlEventTouchUpInside withSize:CGSizeMake(25.f, 25.f)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(registerAction)];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIColor whiteColor],
+                                NSForegroundColorAttributeName, nil];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
 }
 //第三方登录
 - (IBAction)QQLoginAction:(UIButton *)sender {
@@ -85,7 +90,6 @@
     self.secuirtyCodeBtn.layer.masksToBounds = YES;
     self.secuirtyCodeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
     self.secuirtyCodeBtn.layer.borderWidth = 1;
-
     NSArray * titleAry = @[@"账号密码登入",@"手机号快速登入"];
     for (int i = 0; i<2; i++) {
         UIButton * segmentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
