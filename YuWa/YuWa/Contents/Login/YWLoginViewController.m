@@ -44,6 +44,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
     if (self.state == 0) {
         [self.accountTextField becomeFirstResponder];
     }else{
@@ -53,6 +54,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     if (self.timer.isValid) {
         [self.timer invalidate];
     }
@@ -68,10 +70,13 @@
 }
 //第三方登录
 - (IBAction)QQLoginAction:(UIButton *)sender {
+    
 }
 - (IBAction)weiXLoginAction:(UIButton *)sender {
+    
 }
 - (IBAction)weiboLoginAction:(UIButton *)sender {
+    
 }
 
 - (void)makeUI{
