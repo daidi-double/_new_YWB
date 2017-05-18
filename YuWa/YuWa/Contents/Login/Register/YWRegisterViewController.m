@@ -52,8 +52,10 @@
     
     self.registerBtn.layer.cornerRadius = 5.f;
     self.registerBtn.layer.masksToBounds = YES;
-    self.secuirtyCodeBtn.layer.cornerRadius = 3.f;
+    self.secuirtyCodeBtn.layer.cornerRadius = 10.f;
     self.secuirtyCodeBtn.layer.masksToBounds = YES;
+    self.secuirtyCodeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.secuirtyCodeBtn.layer.borderWidth = 1;
 
     [self.agreementBtn setImage:[UIImage imageNamed:@"dagougray.png"] forState:UIControlStateNormal];
     [self.agreementBtn setImage:[UIImage imageNamed:@"dagou.png"] forState:UIControlStateSelected];
