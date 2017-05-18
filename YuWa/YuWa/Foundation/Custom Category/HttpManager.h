@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "YWload.h"
 
 typedef void(^resultBlock)(id data,NSError*error);
 
 @interface HttpManager : NSObject<MBProgressHUDDelegate>
-@property(nonatomic,strong)MBProgressHUD*HUD;
+@property(nonatomic,strong)YWload*HUD;
 //@property(nonatomic,strong)resultBlock thisBlock;
 //没有HUD 的get 请求
 -(void)getDatasNoHudWithUrl:(NSString*)urlStr withParams:(NSDictionary*)params compliation:(resultBlock)newBlock;

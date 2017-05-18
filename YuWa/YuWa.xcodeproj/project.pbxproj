@@ -35,6 +35,7 @@
 		25EA9E5B1ECD3E73001CF604 /* load7.png in Resources */ = {isa = PBXBuildFile; fileRef = 25EA9E4F1ECD3E73001CF604 /* load7.png */; };
 		25EA9E5C1ECD3E73001CF604 /* load8.png in Resources */ = {isa = PBXBuildFile; fileRef = 25EA9E501ECD3E73001CF604 /* load8.png */; };
 		25EA9E5D1ECD3E73001CF604 /* load9.png in Resources */ = {isa = PBXBuildFile; fileRef = 25EA9E511ECD3E73001CF604 /* load9.png */; };
+		25EA9E611ECD42D2001CF604 /* YWload.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EA9E601ECD42D2001CF604 /* YWload.m */; };
 		25FE755E1EA9EA70003EA989 /* jieshou.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FE755D1EA9EA70003EA989 /* jieshou.png */; };
 		25FE75601EA9EA76003EA989 /* jujue.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FE755F1EA9EA76003EA989 /* jujue.png */; };
 		AA0131021EC2E86200A99BD1 /* MovieShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0131001EC2E86200A99BD1 /* MovieShopTableViewCell.m */; };
@@ -1829,6 +1830,8 @@
 		25EA9E4F1ECD3E73001CF604 /* load7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = load7.png; sourceTree = "<group>"; };
 		25EA9E501ECD3E73001CF604 /* load8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = load8.png; sourceTree = "<group>"; };
 		25EA9E511ECD3E73001CF604 /* load9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = load9.png; sourceTree = "<group>"; };
+		25EA9E5F1ECD42D2001CF604 /* YWload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWload.h; sourceTree = "<group>"; };
+		25EA9E601ECD42D2001CF604 /* YWload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWload.m; sourceTree = "<group>"; };
 		25FE755D1EA9EA70003EA989 /* jieshou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jieshou.png; sourceTree = "<group>"; };
 		25FE755F1EA9EA76003EA989 /* jujue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jujue.png; sourceTree = "<group>"; };
 		6D91CFB893AA70B1C9A0D506 /* Pods-YuWa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YuWa.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YuWa/Pods-YuWa.debug.xcconfig"; sourceTree = "<group>"; };
@@ -4500,6 +4503,15 @@
 				25EA9E511ECD3E73001CF604 /* load9.png */,
 			);
 			path = load;
+			sourceTree = "<group>";
+		};
+		25EA9E5E1ECD41FB001CF604 /* load */ = {
+			isa = PBXGroup;
+			children = (
+				25EA9E5F1ECD42D2001CF604 /* YWload.h */,
+				25EA9E601ECD42D2001CF604 /* YWload.m */,
+			);
+			name = load;
 			sourceTree = "<group>";
 		};
 		25FE755C1EA9EA65003EA989 /* 通知 */ = {
@@ -7281,6 +7293,7 @@
 		B38B2CA21D8FACD8004D5256 /* Contents */ = {
 			isa = PBXGroup;
 			children = (
+				25EA9E5E1ECD41FB001CF604 /* load */,
 				B3263AFD1DD5B22F004788BB /* BaoBao */,
 				C1F7BD3B1DB1C94500CCAF96 /* HomePage */,
 				C1F7BDBE1DB1C95400CCAF96 /* PersonCenter */,
@@ -11659,6 +11672,7 @@
 				C1FB7F721DC733AE0048EBC8 /* YYCoreData.m in Sources */,
 				B3FFF4791D93A3C700EDD2AB /* XHBranchLayer.m in Sources */,
 				B33A268D1D9A68040092CB12 /* UIViewController+DismissKeyboard.m in Sources */,
+				25EA9E611ECD42D2001CF604 /* YWload.m in Sources */,
 				B36C7F141D9D1DE900B022E0 /* YWMessageFriendAddModel.m in Sources */,
 				C1E5B7811DE55A2700EB1F85 /* PickerChoiceView.m in Sources */,
 				B35778B81D996B0B0058A998 /* YWStormSearchViewController.m in Sources */,
