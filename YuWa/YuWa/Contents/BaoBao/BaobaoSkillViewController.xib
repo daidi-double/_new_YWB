@@ -19,18 +19,22 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="技能" translatesAutoresizingMaskIntoConstraints="NO" id="U8V-1f-bkN">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="freecatch" translatesAutoresizingMaskIntoConstraints="NO" id="U8V-1f-bkN">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1E-Cq-kE5">
-                    <rect key="frame" x="236" y="560.5" width="104" height="79"/>
+                    <rect key="frame" x="250" y="572" width="90" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="75" id="QWb-EI-uOu"/>
+                        <constraint firstAttribute="width" constant="90" id="rjV-l7-nb4"/>
+                    </constraints>
                     <state key="normal" image="娃娃机分布"/>
                     <connections>
                         <action selector="toAwardAction:" destination="-1" eventType="touchUpInside" id="4z5-uC-pPP"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9T-wf-MvO">
-                    <rect key="frame" x="35" y="560" width="104" height="79"/>
+                    <rect key="frame" x="35" y="572" width="90" height="75"/>
                     <state key="normal" image="扫码抓娃娃"/>
                     <connections>
                         <action selector="toCatchBabyAction:" destination="-1" eventType="touchUpInside" id="FwO-vT-fXA"/>
@@ -41,12 +45,12 @@
             <constraints>
                 <constraint firstItem="U8V-1f-bkN" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="481-0h-zJP"/>
                 <constraint firstItem="U8V-1f-bkN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5ra-Z2-HIH"/>
+                <constraint firstItem="d1E-Cq-kE5" firstAttribute="height" secondItem="F9T-wf-MvO" secondAttribute="height" id="6Kz-CA-lpG"/>
                 <constraint firstItem="d1E-Cq-kE5" firstAttribute="centerY" secondItem="F9T-wf-MvO" secondAttribute="centerY" id="9Z1-UD-tPh"/>
                 <constraint firstAttribute="trailing" secondItem="U8V-1f-bkN" secondAttribute="trailing" id="DIo-PB-e2e"/>
-                <constraint firstAttribute="bottom" secondItem="F9T-wf-MvO" secondAttribute="bottom" constant="28" id="One-Mr-CRz"/>
-                <constraint firstItem="d1E-Cq-kE5" firstAttribute="height" secondItem="F9T-wf-MvO" secondAttribute="height" id="QL4-N2-z9N"/>
-                <constraint firstItem="d1E-Cq-kE5" firstAttribute="width" secondItem="F9T-wf-MvO" secondAttribute="width" id="Ror-c4-Zic"/>
-                <constraint firstAttribute="bottom" secondItem="d1E-Cq-kE5" secondAttribute="bottom" constant="28" id="g56-TK-6h9"/>
+                <constraint firstItem="d1E-Cq-kE5" firstAttribute="width" secondItem="F9T-wf-MvO" secondAttribute="width" id="LeZ-7c-mlM"/>
+                <constraint firstAttribute="bottom" secondItem="F9T-wf-MvO" secondAttribute="bottom" constant="20" id="One-Mr-CRz"/>
+                <constraint firstAttribute="bottom" secondItem="d1E-Cq-kE5" secondAttribute="bottom" constant="20" id="g56-TK-6h9"/>
                 <constraint firstAttribute="trailing" secondItem="d1E-Cq-kE5" secondAttribute="trailing" constant="35" id="mvp-Mx-a9W"/>
                 <constraint firstItem="F9T-wf-MvO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="pU0-mO-AvT"/>
                 <constraint firstAttribute="bottom" secondItem="U8V-1f-bkN" secondAttribute="bottom" id="sUw-5s-oe7"/>
@@ -55,8 +59,8 @@
         </view>
     </objects>
     <resources>
+        <image name="freecatch" width="750" height="1334"/>
         <image name="娃娃机分布" width="104" height="79"/>
         <image name="扫码抓娃娃" width="104" height="79"/>
-        <image name="技能" width="750" height="1334"/>
     </resources>
 </document>

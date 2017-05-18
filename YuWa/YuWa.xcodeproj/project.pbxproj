@@ -743,7 +743,6 @@
 		AA8846311E667742005F657D /* AdressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA88462F1E667742005F657D /* AdressViewController.xib */; };
 		AA8846351E667755005F657D /* SweepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8846331E667755005F657D /* SweepViewController.m */; };
 		AA8846361E667755005F657D /* SweepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA8846341E667755005F657D /* SweepViewController.xib */; };
-		AA8846401E668E66005F657D /* freecatch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA88463F1E668E66005F657D /* freecatch.jpg */; };
 		AA9845891E5834B600A3A9F9 /* RecommendScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9845881E5834B600A3A9F9 /* RecommendScrollView.m */; };
 		AA98458C1E58428D00A3A9F9 /* WillPlayMovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA98458B1E58428D00A3A9F9 /* WillPlayMovieCell.m */; };
 		AAA459521E79173400396AE5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA459511E79173400396AE5 /* OpenGLES.framework */; };
@@ -2635,7 +2634,6 @@
 		AA8846321E667755005F657D /* SweepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SweepViewController.h; sourceTree = "<group>"; };
 		AA8846331E667755005F657D /* SweepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SweepViewController.m; sourceTree = "<group>"; };
 		AA8846341E667755005F657D /* SweepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SweepViewController.xib; sourceTree = "<group>"; };
-		AA88463F1E668E66005F657D /* freecatch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = freecatch.jpg; sourceTree = "<group>"; };
 		AA9845871E5834B600A3A9F9 /* RecommendScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendScrollView.h; sourceTree = "<group>"; };
 		AA9845881E5834B600A3A9F9 /* RecommendScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendScrollView.m; sourceTree = "<group>"; };
 		AA98458A1E58428D00A3A9F9 /* WillPlayMovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WillPlayMovieCell.h; sourceTree = "<group>"; };
@@ -4758,7 +4756,6 @@
 				AA2724061EC40CF300F80DB7 /* adress.png */,
 				AAF394FF1E837AD300A93FD1 /* beginCatch@2x.png */,
 				AAF394FD1E836C6100A93FD1 /* sorry@2x.png */,
-				AA88463F1E668E66005F657D /* freecatch.jpg */,
 				AAF80CFD1E67F7C40000C4BC /* gain.jpg */,
 			);
 			path = "技能界面";
@@ -10986,7 +10983,6 @@
 				AA466C7F1E53EA1F009E9F98 /* gogogo2.png in Resources */,
 				AA3544781E9DF23800A2EC73 /* 4baobaoLVUP20@2x.jpg in Resources */,
 				B3FFF4861D93B45500EDD2AB /* RBPublicTagEditorViewController.xib in Resources */,
-				AA8846401E668E66005F657D /* freecatch.jpg in Resources */,
 				B38B2F211D8FC82F004D5256 /* RBHomeSearchDetailViewController.xib in Resources */,
 				AA35443B1E9DF23800A2EC73 /* 3baobaoLVUP1@2x.jpg in Resources */,
 				AA3544E11E9DF23900A2EC73 /* 1baobaoBG0@2x.jpg in Resources */,
