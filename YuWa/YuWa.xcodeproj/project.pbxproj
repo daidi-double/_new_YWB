@@ -86,7 +86,6 @@
 		AA2B2C121E8D010A008CB3C6 /* YWWinnersCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2B2C101E8D010A008CB3C6 /* YWWinnersCollectionViewCell.m */; };
 		AA2B2C131E8D010A008CB3C6 /* YWWinnersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2B2C111E8D010A008CB3C6 /* YWWinnersCollectionViewCell.xib */; };
 		AA2B2C171E8D088F008CB3C6 /* WinnerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2B2C161E8D088F008CB3C6 /* WinnerModel.m */; };
-		AA2DC5171E66619100CAD9BF /* sweep.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA2DC5111E66619000CAD9BF /* sweep.jpg */; };
 		AA2E6AD91E8169CF00A03DAA /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2E6AD81E8169CF00A03DAA /* ProgressView.m */; };
 		AA3009231E56E5BB0025B2A5 /* play1.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3009221E56E5BB0025B2A5 /* play1.png */; };
 		AA3009261E5725CE0025B2A5 /* CinemaTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3009251E5725CE0025B2A5 /* CinemaTimeCell.m */; };
@@ -732,9 +731,6 @@
 		AA8846311E667742005F657D /* AdressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA88462F1E667742005F657D /* AdressViewController.xib */; };
 		AA8846351E667755005F657D /* SweepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8846331E667755005F657D /* SweepViewController.m */; };
 		AA8846361E667755005F657D /* SweepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA8846341E667755005F657D /* SweepViewController.xib */; };
-		AA88463C1E667A49005F657D /* longanBGView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA8846391E667A49005F657D /* longanBGView.jpg */; };
-		AA88463D1E667A49005F657D /* longanBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = AA88463A1E667A49005F657D /* longanBtn.png */; };
-		AA88463E1E667A49005F657D /* touch.png in Resources */ = {isa = PBXBuildFile; fileRef = AA88463B1E667A49005F657D /* touch.png */; };
 		AA8846401E668E66005F657D /* freecatch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA88463F1E668E66005F657D /* freecatch.jpg */; };
 		AA9845891E5834B600A3A9F9 /* RecommendScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9845881E5834B600A3A9F9 /* RecommendScrollView.m */; };
 		AA98458C1E58428D00A3A9F9 /* WillPlayMovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA98458B1E58428D00A3A9F9 /* WillPlayMovieCell.m */; };
@@ -811,7 +807,6 @@
 		AAF127F31E8B58CF00121621 /* PayManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF127F11E8B58CF00121621 /* PayManageViewController.xib */; };
 		AAF127F71E8B5C2A00121621 /* AgainSetPayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF127F51E8B5C2900121621 /* AgainSetPayPasswordViewController.m */; };
 		AAF127F81E8B5C2A00121621 /* AgainSetPayPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF127F61E8B5C2A00121621 /* AgainSetPayPasswordViewController.xib */; };
-		AAF127FA1E8B5E4C00121621 /* touchbegin.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF127F91E8B5E4C00121621 /* touchbegin.png */; };
 		AAF127FE1E8B610100121621 /* 三点.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF127FD1E8B610100121621 /* 三点.png */; };
 		AAF128021E8B72DC00121621 /* ForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF128001E8B72DC00121621 /* ForgetViewController.m */; };
 		AAF128031E8B72DC00121621 /* ForgetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF128011E8B72DC00121621 /* ForgetViewController.xib */; };
@@ -1911,7 +1906,6 @@
 		AA2B2C111E8D010A008CB3C6 /* YWWinnersCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWWinnersCollectionViewCell.xib; sourceTree = "<group>"; };
 		AA2B2C151E8D088F008CB3C6 /* WinnerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinnerModel.h; sourceTree = "<group>"; };
 		AA2B2C161E8D088F008CB3C6 /* WinnerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinnerModel.m; sourceTree = "<group>"; };
-		AA2DC5111E66619000CAD9BF /* sweep.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sweep.jpg; sourceTree = "<group>"; };
 		AA2E6AD71E8169CF00A03DAA /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
 		AA2E6AD81E8169CF00A03DAA /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
 		AA3009221E56E5BB0025B2A5 /* play1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play1.png; sourceTree = "<group>"; };
@@ -2617,9 +2611,6 @@
 		AA8846321E667755005F657D /* SweepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SweepViewController.h; sourceTree = "<group>"; };
 		AA8846331E667755005F657D /* SweepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SweepViewController.m; sourceTree = "<group>"; };
 		AA8846341E667755005F657D /* SweepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SweepViewController.xib; sourceTree = "<group>"; };
-		AA8846391E667A49005F657D /* longanBGView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = longanBGView.jpg; sourceTree = "<group>"; };
-		AA88463A1E667A49005F657D /* longanBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = longanBtn.png; sourceTree = "<group>"; };
-		AA88463B1E667A49005F657D /* touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touch.png; sourceTree = "<group>"; };
 		AA88463F1E668E66005F657D /* freecatch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = freecatch.jpg; sourceTree = "<group>"; };
 		AA9845871E5834B600A3A9F9 /* RecommendScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendScrollView.h; sourceTree = "<group>"; };
 		AA9845881E5834B600A3A9F9 /* RecommendScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendScrollView.m; sourceTree = "<group>"; };
@@ -2729,7 +2720,6 @@
 		AAF127F41E8B5C2900121621 /* AgainSetPayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgainSetPayPasswordViewController.h; sourceTree = "<group>"; };
 		AAF127F51E8B5C2900121621 /* AgainSetPayPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgainSetPayPasswordViewController.m; sourceTree = "<group>"; };
 		AAF127F61E8B5C2A00121621 /* AgainSetPayPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgainSetPayPasswordViewController.xib; sourceTree = "<group>"; };
-		AAF127F91E8B5E4C00121621 /* touchbegin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touchbegin.png; sourceTree = "<group>"; };
 		AAF127FD1E8B610100121621 /* 三点.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "三点.png"; sourceTree = "<group>"; };
 		AAF127FF1E8B72DC00121621 /* ForgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetViewController.h; sourceTree = "<group>"; };
 		AAF128001E8B72DC00121621 /* ForgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetViewController.m; sourceTree = "<group>"; };
@@ -4724,13 +4714,8 @@
 			children = (
 				AA2724061EC40CF300F80DB7 /* adress.png */,
 				AAF394FF1E837AD300A93FD1 /* beginCatch@2x.png */,
-				AAF127F91E8B5E4C00121621 /* touchbegin.png */,
 				AAF394FD1E836C6100A93FD1 /* sorry@2x.png */,
 				AA88463F1E668E66005F657D /* freecatch.jpg */,
-				AA8846391E667A49005F657D /* longanBGView.jpg */,
-				AA88463A1E667A49005F657D /* longanBtn.png */,
-				AA88463B1E667A49005F657D /* touch.png */,
-				AA2DC5111E66619000CAD9BF /* sweep.jpg */,
 				AAF80CFD1E67F7C40000C4BC /* gain.jpg */,
 			);
 			path = "技能界面";
@@ -10281,7 +10266,6 @@
 				AA35450A1E9DF23900A2EC73 /* 1baobaoBG47@2x.jpg in Resources */,
 				AA3A1E631E8F7AE500C12497 /* AMap.bundle in Resources */,
 				AA3544CA1E9DF23900A2EC73 /* 0baobaoBG40@2x.jpg in Resources */,
-				AA88463D1E667A49005F657D /* longanBtn.png in Resources */,
 				AA35449D1E9DF23900A2EC73 /* 4baobaoLVUP54@2x.jpg in Resources */,
 				AA35457A1E9DF23A00A2EC73 /* 3baobaoBG3@2x.jpg in Resources */,
 				AA3543E41E9DF23800A2EC73 /* 1baobaoLVUP4@2x.jpg in Resources */,
@@ -10594,7 +10578,6 @@
 				AA3543EE1E9DF23800A2EC73 /* 1baobaoLVUP59@2x.jpg in Resources */,
 				B38B2F081D8FC82F004D5256 /* RBNodeDetailCommentHeader.xib in Resources */,
 				AA3544871E9DF23900A2EC73 /* 4baobaoLVUP34@2x.jpg in Resources */,
-				AA88463C1E667A49005F657D /* longanBGView.jpg in Resources */,
 				C13019A21DB1FD2F00E24C88 /* qr_top_left@2x.png in Resources */,
 				AA35443C1E9DF23800A2EC73 /* 3baobaoLVUP20@2x.jpg in Resources */,
 				AA35450E1E9DF23900A2EC73 /* 1baobaoBG50@2x.jpg in Resources */,
@@ -10718,7 +10701,6 @@
 				AA3A30581EB02BB600E2FCD7 /* YWNoShopTableViewCell.xib in Resources */,
 				C13019B41DB1FD2F00E24C88 /* zbar-samples.png in Resources */,
 				AA35450C1E9DF23900A2EC73 /* 1baobaoBG49@2x.jpg in Resources */,
-				AA88463E1E667A49005F657D /* touch.png in Resources */,
 				AA3545151E9DF23900A2EC73 /* 1baobaoBG57@2x.jpg in Resources */,
 				B38B2DE91D8FACD8004D5256 /* HUDFailureShowView.xib in Resources */,
 				2531B4831EA4BF33001B240F /* remove@3x.png in Resources */,
@@ -10804,7 +10786,6 @@
 				AA3545021E9DF23900A2EC73 /* 1baobaoBG3@2x.jpg in Resources */,
 				AAC86F711E76E93300F94C84 /* app_logo@2x.png in Resources */,
 				AA3544FB1E9DF23900A2EC73 /* 1baobaoBG33@2x.jpg in Resources */,
-				AA2DC5171E66619100CAD9BF /* sweep.jpg in Resources */,
 				C1F7BD931DB1C94500CCAF96 /* YWChooseOneTableViewCell.xib in Resources */,
 				AA3545241E9DF23900A2EC73 /* 2baobaoBG16@2x.jpg in Resources */,
 				AA3A42C71E90DE6E0038E5CE /* PCDetailPageViewController.xib in Resources */,
@@ -11255,7 +11236,6 @@
 				AAF127D11E8AD3C200121621 /* yinlianpay@3x.png in Resources */,
 				B315823B1D90F86B0096C194 /* YWForgetPassWordViewController.xib in Resources */,
 				AA3545351E9DF23900A2EC73 /* 2baobaoBG31@2x.jpg in Resources */,
-				AAF127FA1E8B5E4C00121621 /* touchbegin.png in Resources */,
 				AA3544821E9DF23900A2EC73 /* 4baobaoLVUP2@2x.jpg in Resources */,
 				AA3545071E9DF23900A2EC73 /* 1baobaoBG44@2x.jpg in Resources */,
 				AAA4595F1E79420500396AE5 /* icon_location@2x.png in Resources */,

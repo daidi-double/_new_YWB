@@ -85,9 +85,7 @@
     self.secuirtyCodeBtn.layer.masksToBounds = YES;
     self.secuirtyCodeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
     self.secuirtyCodeBtn.layer.borderWidth = 1;
-//    self.segmentControl = [YJSegmentedControl segmentedControlFrame:CGRectMake(0.f, NavigationHeight, kScreen_Width, 40.f) titleDataSource:@[@"账号密码登录",@"手机号快捷登录"] backgroundColor:[UIColor whiteColor] titleColor:CtitleColor titleFont:[UIFont systemFontOfSize:15.f] selectColor:CNaviColor buttonDownColor:CNaviColor Delegate:self];
-//    
-//    [self.view addSubview:self.segmentControl];
+
     NSArray * titleAry = @[@"账号密码登入",@"手机号快速登入"];
     for (int i = 0; i<2; i++) {
         UIButton * segmentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
