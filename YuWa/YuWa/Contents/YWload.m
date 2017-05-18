@@ -16,7 +16,7 @@
         imageView.alpha = 0.5;
         [view addSubview:imageView];
         NSMutableArray * arrimages = [NSMutableArray array];
-        for (int i=1; i<12; i++) {
+        for (int i=1; i<40; i++) {
             NSString * path= [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%d",i] ofType:@"png"];
             [arrimages addObject:[UIImage imageWithContentsOfFile:path]];
         }
