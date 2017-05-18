@@ -29,6 +29,7 @@
 #import "MovieViewController.h" //电影界面
 #import "CategoryDetaliViewController.h"//新分类详细界面
 #import "ShopDetailViewController.h"//新店铺详情界面
+#import "YWload.h"
 //
 
 #define CELL0   @"HomeMenuCell"
@@ -57,7 +58,7 @@
 @property(nonatomic,strong)NSMutableArray*mtModelArrCategory;
 @property(nonatomic,strong)NSMutableArray*mtModelArrTopShop;
 @property(nonatomic,strong)NSMutableArray*mtModelArrRecommend;
-
+@property (nonatomic, strong) YWload *HUD;
 
 @end
 
@@ -65,23 +66,13 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30, 60, 60)];
-    [self.view addSubview:imageView];
-    NSMutableArray * arrimages = [NSMutableArray array];
-    for (int i=1; i<11; i++) {
-        NSString * path= [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"load%d",i] ofType:@"png"];
-                [arrimages addObject:[UIImage imageWithContentsOfFile:path]];
-            }
-    
-    imageView.animationImages = arrimages;
-    imageView.animationDuration = 3;
-    imageView.animationRepeatCount = 0;
-    [imageView startAnimating];
+           _HUD=[YWload showOnView:[UIApplication sharedApplication].delegate.window];
+    [_HUD show:YES];
     //得到坐标
-//    [self getLocalSubName];
-//    [self makeNaviBar];
-//    [self addTableVIew];
-//    [self setUpMJRefresh];
+    [self getLocalSubName];
+    [self makeNaviBar];
+    [self addTableVIew];
+    [self setUpMJRefresh];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
