@@ -13,7 +13,7 @@
 -(instancetype)initWithView:(UIView *)view{
     if (self = [super init]) {
         YWload * imageView = [[YWload alloc]initWithFrame:CGRectMake(view.frame.size.width/2-30, view.frame.size.height/2-30, 60, 60)];
-        imageView.alpha = 0.7;
+        imageView.alpha = 0.5;
         [view addSubview:imageView];
         NSMutableArray * arrimages = [NSMutableArray array];
         for (int i=1; i<12; i++) {
