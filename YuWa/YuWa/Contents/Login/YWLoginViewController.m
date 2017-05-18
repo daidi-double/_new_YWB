@@ -12,14 +12,15 @@
 #import "YJSegmentedControl.h"
 #import "JPUSHService.h"
 
-@interface YWLoginViewController ()<UITextFieldDelegate,YJSegmentedControlDelegate>
+@interface YWLoginViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *accountTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordtextField;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *hiddenPasswordBtn;
 
-@property (nonatomic,strong)YJSegmentedControl * segmentControl;
+//@property (nonatomic,strong)YJSegmentedControl * segmentControl;
+@property (nonatomic,strong)UIView * segmentLineView;
 @property (nonatomic,assign)BOOL isHiddenPassword;
 
 @property (weak, nonatomic) IBOutlet UIView *quickLoginView;
@@ -63,22 +64,40 @@
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImageName:@"back" withSelectImage:@"back" withHorizontalAlignment:UIControlContentHorizontalAlignmentCenter withTarget:self action:@selector(backBarAction) forControlEvents:UIControlEventTouchUpInside withSize:CGSizeMake(25.f, 25.f)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(registerAction)];
-    self.navigationItem.rightBarButtonItem.tintColor = CNaviColor;
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+}
+//第三方登录
+- (IBAction)QQLoginAction:(UIButton *)sender {
+}
+- (IBAction)weiXLoginAction:(UIButton *)sender {
+}
+- (IBAction)weiboLoginAction:(UIButton *)sender {
 }
 
 - (void)makeUI{
     self.passwordtextField.secureTextEntry = YES;
-    
-    self.loginBtn.layer.cornerRadius = 5.f;
-    self.loginBtn.layer.masksToBounds = YES;
-    [self.loginBtn setBackgroundColor:CNaviColor];
-    self.quickLoginBtn.layer.cornerRadius = 5.f;
-    self.quickLoginBtn.layer.masksToBounds = YES;
-    self.secuirtyCodeBtn.layer.cornerRadius = 3.f;
+    self.secuirtyCodeBtn.layer.cornerRadius = 10.f;
     self.secuirtyCodeBtn.layer.masksToBounds = YES;
-    
-    self.segmentControl = [YJSegmentedControl segmentedControlFrame:CGRectMake(0.f, NavigationHeight, kScreen_Width, 40.f) titleDataSource:@[@"账号密码登录",@"手机号快捷登录"] backgroundColor:[UIColor whiteColor] titleColor:CtitleColor titleFont:[UIFont systemFontOfSize:15.f] selectColor:CNaviColor buttonDownColor:CNaviColor Delegate:self];
-    [self.view addSubview:self.segmentControl];
+    self.secuirtyCodeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.secuirtyCodeBtn.layer.borderWidth = 1;
+//    self.segmentControl = [YJSegmentedControl segmentedControlFrame:CGRectMake(0.f, NavigationHeight, kScreen_Width, 40.f) titleDataSource:@[@"账号密码登录",@"手机号快捷登录"] backgroundColor:[UIColor whiteColor] titleColor:CtitleColor titleFont:[UIFont systemFontOfSize:15.f] selectColor:CNaviColor buttonDownColor:CNaviColor Delegate:self];
+//    
+//    [self.view addSubview:self.segmentControl];
+    NSArray * titleAry = @[@"账号密码登入",@"手机号快速登入"];
+    for (int i = 0; i<2; i++) {
+        UIButton * segmentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        segmentBtn.frame = CGRectMake(kScreen_Width/2*i, NavigationHeight, kScreen_Width/2, 39.f);
+        [segmentBtn setTitle:titleAry[i] forState:UIControlStateNormal];
+        [segmentBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [segmentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        segmentBtn.tag = 222 + i;
+        [segmentBtn addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:segmentBtn];
+        
+    }
+    self.segmentLineView = [[UIView alloc]initWithFrame:CGRectMake(0, NavigationHeight+39, kScreen_Width/2, 1.f)];
+    self.segmentLineView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.segmentLineView];
 }
 
 #pragma mark - ButtonAction
@@ -174,14 +193,20 @@
     return YES;
 }
 
-#pragma mark - YJSegmentedControlDelegate
-- (void)segumentSelectionChange:(NSInteger)selection{
-    self.state = selection;
-    self.quickLoginView.hidden = selection==0?YES:NO;
-    if (selection == 0) {
-        [self.accountTextField becomeFirstResponder];
-    }else{
-        [self.mobileTextField becomeFirstResponder];
+
+- (void)segmentAction:(UIButton*)sender{
+    self.state = sender.tag - 222;
+    self.segmentLineView.centerX = sender.centerX;
+    switch (sender.tag) {
+        case 222:
+            [self.accountTextField becomeFirstResponder];
+            self.quickLoginView.hidden = YES;
+            break;
+            
+        default:
+             [self.mobileTextField becomeFirstResponder];
+            self.quickLoginView.hidden = NO;
+            break;
     }
 }
 

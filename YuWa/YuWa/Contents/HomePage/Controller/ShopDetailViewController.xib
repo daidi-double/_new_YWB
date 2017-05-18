@@ -43,16 +43,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Juk-A1-IIS">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="311.5"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="312"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bE-9g-SGA">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="183.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="q2o-rm-hr3">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="183.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="USe-o1-cvZ">
-                                    <rect key="frame" x="13" y="68" width="73.5" height="73.5"/>
+                                    <rect key="frame" x="13" y="68" width="74" height="74"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="USe-o1-cvZ" secondAttribute="height" multiplier="1:1" id="Mb6-Of-6Qn"/>
                                     </constraints>
@@ -69,7 +69,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠买单        闪付立享7.5折" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcb-XY-gX3">
-                                    <rect key="frame" x="44" y="151.5" width="154" height="17"/>
+                                    <rect key="frame" x="44" y="152" width="154" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.97254901960784312" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -86,40 +86,40 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXg-TL-tde">
-                                    <rect key="frame" x="97.5" y="71" width="261.5" height="0.0"/>
+                                    <rect key="frame" x="98" y="71" width="261" height="0.0"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="0.97254901960784312" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人均:￥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0G-8D-66M">
-                                    <rect key="frame" x="202.5" y="83" width="40.5" height="15"/>
+                                    <rect key="frame" x="203" y="83" width="41" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.97254901960784312" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月消费人次：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NmI-ai-qE6">
-                                    <rect key="frame" x="97.5" y="108" width="262.5" height="16"/>
+                                    <rect key="frame" x="98" y="108" width="262" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="0.97254901960784312" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" tag="44" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="空星" translatesAutoresizingMaskIntoConstraints="NO" id="LsD-jH-8Fb">
-                                    <rect key="frame" x="177.5" y="83" width="15" height="15"/>
+                                    <rect key="frame" x="178" y="83" width="15" height="15"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" tag="41" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="满星" translatesAutoresizingMaskIntoConstraints="NO" id="pH4-eb-UVa">
-                                    <rect key="frame" x="117.5" y="83" width="15" height="15"/>
+                                    <rect key="frame" x="118" y="83" width="15" height="15"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" tag="42" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="满星" translatesAutoresizingMaskIntoConstraints="NO" id="SOL-Y9-tFQ">
-                                    <rect key="frame" x="137.5" y="83" width="15" height="15"/>
+                                    <rect key="frame" x="138" y="83" width="15" height="15"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" tag="43" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="半星" translatesAutoresizingMaskIntoConstraints="NO" id="QSk-0b-bwl">
-                                    <rect key="frame" x="157.5" y="83" width="15" height="15"/>
+                                    <rect key="frame" x="158" y="83" width="15" height="15"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右下一级" translatesAutoresizingMaskIntoConstraints="NO" id="czI-AT-OS6">
                                     <rect key="frame" x="351" y="82" width="9" height="17"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="特惠" translatesAutoresizingMaskIntoConstraints="NO" id="qmS-kD-MAJ">
-                                    <rect key="frame" x="22" y="151.5" width="17" height="17"/>
+                                    <rect key="frame" x="22" y="152" width="17" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="17" id="JeU-KX-xdB"/>
                                         <constraint firstAttribute="height" constant="17" id="qKU-5E-Czl"/>
@@ -141,14 +141,14 @@
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" tag="40" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="满星" translatesAutoresizingMaskIntoConstraints="NO" id="Jea-Fn-2uy">
-                                    <rect key="frame" x="97.5" y="83" width="15" height="15"/>
+                                    <rect key="frame" x="98" y="83" width="15" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="bmc-yY-Sru"/>
                                         <constraint firstAttribute="width" constant="15" id="brW-hK-40e"/>
                                     </constraints>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfP-jM-g9d">
-                                    <rect key="frame" x="0.0" y="67" width="375" height="116.5"/>
+                                    <rect key="frame" x="0.0" y="67" width="375" height="117"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </subviews>
@@ -217,7 +217,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R42-Qw-m86">
-                            <rect key="frame" x="0.0" y="216.5" width="375" height="40"/>
+                            <rect key="frame" x="0.0" y="217" width="375" height="40"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="买" translatesAutoresizingMaskIntoConstraints="NO" id="u3L-02-qXa">
                                     <rect key="frame" x="16" y="9" width="22" height="22"/>
@@ -251,7 +251,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2KY-pl-TQs">
-                            <rect key="frame" x="0.0" y="183.5" width="375" height="32"/>
+                            <rect key="frame" x="0.0" y="184" width="375" height="32"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_locate.png" translatesAutoresizingMaskIntoConstraints="NO" id="KOB-iu-tTZ">
                                     <rect key="frame" x="22" y="2" width="28" height="28"/>
@@ -261,7 +261,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeI-H6-hLy">
-                                    <rect key="frame" x="60" y="3.5" width="155" height="26"/>
+                                    <rect key="frame" x="60" y="3" width="155" height="26"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="VeI-H6-hLy" secondAttribute="height" multiplier="107:18" id="6UF-Dn-K2d"/>
                                     </constraints>
@@ -338,7 +338,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTm-ya-GMC">
-                            <rect key="frame" x="0.0" y="266.5" width="375" height="35"/>
+                            <rect key="frame" x="0.0" y="267" width="375" height="35"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="wA8-VN-FlA"/>
@@ -364,7 +364,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uC2-rl-xGl">
-                    <rect key="frame" x="80" y="311.5" width="295" height="305.5"/>
+                    <rect key="frame" x="80" y="312" width="295" height="305"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="QPr-si-T9G"/>
@@ -372,7 +372,7 @@
                     </connections>
                 </tableView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="KPj-mJ-NFu">
-                    <rect key="frame" x="0.0" y="311.5" width="80" height="305.5"/>
+                    <rect key="frame" x="0.0" y="312" width="80" height="305"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="Z0u-Zi-l3C"/>
@@ -400,7 +400,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7O-s6-2MJ">
-                            <rect key="frame" x="141.5" y="32" width="52" height="21"/>
+                            <rect key="frame" x="142" y="32" width="52" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.97254901959999995" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -497,7 +497,7 @@
         <image name="home_locate.png" width="32" height="32"/>
         <image name="placeholder" width="394" height="330"/>
         <image name="买" width="22" height="22"/>
-        <image name="买单" width="55" height="22"/>
+        <image name="买单" width="55" height="26"/>
         <image name="付款" width="22" height="22"/>
         <image name="半星" width="26" height="25"/>
         <image name="去结算1" width="751" height="88"/>
