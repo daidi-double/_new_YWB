@@ -20,7 +20,6 @@
 		2535423D1EA4ADF8006F2C7A /* headerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2535423C1EA4ADF8006F2C7A /* headerView.m */; };
 		255222581EB504FF00F22793 /* YWdetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 255222571EB504FF00F22793 /* YWdetailModel.m */; };
 		258163081ECD9B6A004A243C /* LaunchScreenHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 258163071ECD9B6A004A243C /* LaunchScreenHelper.m */; };
-		2581630A1ECD9EAF004A243C /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 258163091ECD9EAF004A243C /* Images-2.xcassets */; };
 		25B3C5A91ECD8E4000674F20 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5801ECD8E4000674F20 /* 1.png */; };
 		25B3C5AA1ECD8E4000674F20 /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5811ECD8E4000674F20 /* 10.png */; };
 		25B3C5AB1ECD8E4000674F20 /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5821ECD8E4000674F20 /* 11.png */; };
@@ -1840,7 +1839,6 @@
 		255222571EB504FF00F22793 /* YWdetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailModel.m; sourceTree = "<group>"; };
 		258163061ECD9B6A004A243C /* LaunchScreenHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreenHelper.h; sourceTree = "<group>"; };
 		258163071ECD9B6A004A243C /* LaunchScreenHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreenHelper.m; sourceTree = "<group>"; };
-		258163091ECD9EAF004A243C /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		25B3C5801ECD8E4000674F20 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		25B3C5811ECD8E4000674F20 /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
 		25B3C5821ECD8E4000674F20 /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
@@ -7344,7 +7342,6 @@
 				B38B2CC51D8FACD8004D5256 /* Foundation */,
 				B38B2CA21D8FACD8004D5256 /* Contents */,
 				B38B2DD71D8FACD8004D5256 /* Supporting File */,
-				258163091ECD9EAF004A243C /* Images-2.xcassets */,
 			);
 			path = YuWa;
 			sourceTree = "<group>";
@@ -10868,7 +10865,6 @@
 				AA3A30581EB02BB600E2FCD7 /* YWNoShopTableViewCell.xib in Resources */,
 				C13019B41DB1FD2F00E24C88 /* zbar-samples.png in Resources */,
 				AA35450C1E9DF23900A2EC73 /* 1baobaoBG49@2x.jpg in Resources */,
-				2581630A1ECD9EAF004A243C /* Images-2.xcassets in Resources */,
 				AA3545151E9DF23900A2EC73 /* 1baobaoBG57@2x.jpg in Resources */,
 				B38B2DE91D8FACD8004D5256 /* HUDFailureShowView.xib in Resources */,
 				2531B4831EA4BF33001B240F /* remove@3x.png in Resources */,

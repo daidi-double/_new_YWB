@@ -66,9 +66,16 @@
     self.payTableView.separatorStyle = UITableViewCellAccessoryNone;
     self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥%@",self.money];
     if ([self.money isEqualToString:@"0.00"]) {
-        self.goPay.selected = NO;
-        [self.goPay setUserInteractionEnabled:NO];
-        [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
+        if (self.whichPay != PayCategoryQRCodePayMethod) {
+            
+            self.goPay.selected = NO;
+            [self.goPay setUserInteractionEnabled:NO];
+            [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
+        }else{
+            self.goPay.selected = YES;
+            [self.goPay setUserInteractionEnabled:YES];
+            [self.goPay setBackgroundColor:CNaviColor];
+        }
     }
     if (self.shopZhekou <= 0.00 || self.shopZhekou >=1) {
         self.shopZhekou = 1;
@@ -89,8 +96,15 @@
 
        if ([self.money isKindOfClass:[NSNull class]]||self.money ==nil) {
         self.settomMoneyLabel.text = @"待支付￥0.00";
-           self.goPay.userInteractionEnabled = NO;
-           [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
+           if (self.whichPay != PayCategoryQRCodePayMethod) {
+               
+               [self.goPay setUserInteractionEnabled:NO];
+               [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
+           }else{
+               [self.goPay setUserInteractionEnabled:YES];
+               [self.goPay setBackgroundColor:CNaviColor];
+           }
+           
     }
 
 }
@@ -100,8 +114,15 @@
         
         self.money = @"0.00";
         self.settomMoneyLabel.text = [NSString stringWithFormat:@"待支付￥0.00"];
-        self.goPay.userInteractionEnabled = NO;
-        [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
+        if (self.whichPay != PayCategoryQRCodePayMethod) {
+            
+            [self.goPay setUserInteractionEnabled:NO];
+            [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
+        }else{
+            [self.goPay setUserInteractionEnabled:YES];
+            [self.goPay setBackgroundColor:CNaviColor];
+        }
+        
     }
 
 }
@@ -450,13 +471,19 @@
     self.shouldPayMoney = [payAllmoney floatValue];
     self.noUserCouponMoney = payAllmoney;
     [self calshouldPayMoney];
-    if (([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]- _CouponMoney != 0.00) {
+    if (([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]- _CouponMoney != 0.00 ) {
         self.goPay.userInteractionEnabled = YES;
         [self.goPay setBackgroundColor:RGBCOLOR(60, 194, 237, 1)];
         
     }else{
-        self.goPay.userInteractionEnabled = NO;
-        [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
+        if (self.whichPay != PayCategoryQRCodePayMethod) {
+            
+            [self.goPay setUserInteractionEnabled:NO];
+            [self.goPay setBackgroundColor:[UIColor lightGrayColor]];
+        }else{
+            [self.goPay setUserInteractionEnabled:YES];
+            [self.goPay setBackgroundColor:CNaviColor];
+        }
     }
     //刷新对应行的数据
     [self.payTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,indexPathT,nil] withRowAnimation:UITableViewRowAnimationFade];

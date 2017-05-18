@@ -73,13 +73,13 @@
                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3WU-dj-aOh">
                     <rect key="frame" x="20" y="10" width="147" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                    <color key="textColor" red="0.25098039215686274" green="0.69411764705882351" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.28235294119999998" green="0.53333333329999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uG4-KY-OtD">
                     <rect key="frame" x="208" y="10" width="147" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                    <color key="textColor" red="0.25098039215686274" green="0.69411764705882351" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.28235294119999998" green="0.53333333329999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总收入" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qyk-oo-0av">

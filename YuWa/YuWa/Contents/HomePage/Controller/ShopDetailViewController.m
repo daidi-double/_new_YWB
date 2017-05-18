@@ -992,6 +992,7 @@
         MyLog(@"清空归零2");
     }
 
+    
     self.totalMoneyLabel.text = @"￥0.00";
     self.numberLabel.text = @"0";
 }
@@ -1036,9 +1037,13 @@
 -(void)clearShop{
     [self.shops removeAllObjects];
     self.isRemove = !self.isRemove;
+    [self clearNumberOfShop];
+    [self clearShopCar:self.shop_id];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self getDatas];
+    });
     [self.shopCarView removeFromSuperview];
     [self.touchView removeFromSuperview];
-    [self clearNumberOfShop];
 }
 
 //清空某件商品

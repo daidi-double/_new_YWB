@@ -31,11 +31,11 @@
                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xyI-hb-sse">
                             <rect key="frame" x="0.0" y="17" width="137" height="23"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.2301255167" green="0.73476451639999996" blue="0.91849935049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="0.28235294119999998" green="0.53333333329999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.23012551665306091" green="0.73476451635360718" blue="0.91849935054779053" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.28235294119999998" green="0.53333333329999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="xyI-hb-sse" firstAttribute="top" secondItem="Oqp-MI-KdM" secondAttribute="bottom" id="623-7b-2Qn"/>
                         <constraint firstItem="x7q-yT-TyC" firstAttribute="leading" secondItem="MAz-4O-S14" secondAttribute="leading" id="65d-mx-pYr"/>

@@ -34,7 +34,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10元" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flQ-2o-JzE">
                         <rect key="frame" x="250" y="17.5" width="125" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.25490196078431371" green="0.70980392156862748" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.28235294119999998" green="0.53333333329999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>

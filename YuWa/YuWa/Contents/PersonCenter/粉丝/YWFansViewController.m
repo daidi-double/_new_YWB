@@ -53,7 +53,7 @@
         default:
             break;
     }
-
+    [self setUpMJRefresh];
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:CELL0 bundle:nil] forCellReuseIdentifier:CELL0];
     
@@ -62,7 +62,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self setUpMJRefresh];
     [[[self.navigationController.navigationBar subviews]objectAtIndex:0] setAlpha:1];
     
 }

@@ -37,10 +37,12 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
     [self.accountTextField becomeFirstResponder];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     if (self.timer.isValid) {
         [self.timer invalidate];
     }
@@ -49,16 +51,14 @@
 
 - (void)makeUI{
     self.passwordtextField.secureTextEntry = YES;
-    
-    self.registerBtn.layer.cornerRadius = 5.f;
-    self.registerBtn.layer.masksToBounds = YES;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImageName:@"NaviBack" withSelectImage:@"NaviBack" withHorizontalAlignment:UIControlContentHorizontalAlignmentCenter withTarget:self action:@selector(backBarAction) forControlEvents:UIControlEventTouchUpInside withSize:CGSizeMake(25.f, 25.f)];
     self.secuirtyCodeBtn.layer.cornerRadius = 10.f;
     self.secuirtyCodeBtn.layer.masksToBounds = YES;
     self.secuirtyCodeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
     self.secuirtyCodeBtn.layer.borderWidth = 1;
 
-    [self.agreementBtn setImage:[UIImage imageNamed:@"dagougray.png"] forState:UIControlStateNormal];
-    [self.agreementBtn setImage:[UIImage imageNamed:@"dagou.png"] forState:UIControlStateSelected];
+    [self.agreementBtn setImage:[UIImage imageNamed:@"未选中"] forState:UIControlStateNormal];
+    [self.agreementBtn setImage:[UIImage imageNamed:@"选中"] forState:UIControlStateSelected];
     self.agreementBtn.selected = YES;
     _index = 1;
     

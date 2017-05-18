@@ -39,13 +39,14 @@
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="圆环" translatesAutoresizingMaskIntoConstraints="NO" id="jg5-qO-9xS">
                     <rect key="frame" x="119.5" y="82.5" width="135" height="135"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.53333333333333333" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="135" id="ek6-ZH-89c"/>
                         <constraint firstAttribute="height" constant="135" id="iop-S2-PKk"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.23012551665306091" green="0.73476451635360718" blue="0.91849935054779053" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.28235294117647058" green="0.53333333333333333" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="xZI-en-2Dh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="73h-BI-PXx"/>
                 <constraint firstAttribute="trailing" secondItem="21h-QG-LbK" secondAttribute="trailing" constant="15" id="AzX-7F-b6n"/>
