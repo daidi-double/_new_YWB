@@ -32,6 +32,7 @@
 #import "WXApiManager.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "UPPaymentControl.h"
+#import "LaunchScreenHelper.h"
 
 #import "YWMessageNotificationViewController.h"
 
@@ -60,7 +61,8 @@
 #pragma mark  -- 根视图
 //    ATNViewController*vc=[[ATNViewController alloc]init];
 //    self.window=[AppDelegate windowInitWithRootVC:vc];
-    
+  
+    // mScreenWidth=self.view.frame.size.width  mScreenHeight=self.view.frame.size.height
     VIPTabBarController *tabBar=[[VIPTabBarController alloc]init];
     self.window= [AppDelegate windowInitWithRootVC:tabBar];
     
