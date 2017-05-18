@@ -66,13 +66,13 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-           _HUD=[YWload showOnView:[UIApplication sharedApplication].delegate.window];
-    [_HUD show:YES];
+//           _HUD=[YWload showOnView:[UIApplication sharedApplication].delegate.window];
+//    [_HUD show:YES];
     //得到坐标
-//    [self getLocalSubName];
-//    [self makeNaviBar];
-//    [self addTableVIew];
-//    [self setUpMJRefresh];
+    [self getLocalSubName];
+    [self makeNaviBar];
+    [self addTableVIew];
+    [self setUpMJRefresh];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
