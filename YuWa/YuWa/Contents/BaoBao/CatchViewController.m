@@ -30,14 +30,14 @@
 }
 - (void)makeUI{
     UIImageView * freeCatch = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    freeCatch.image = [UIImage imageNamed:@"freecatch.jpg"];
+    freeCatch.image = [UIImage imageNamed:@"freecatch"];
     [self.view addSubview:freeCatch];
     freeCatch.userInteractionEnabled = YES;
     CGFloat btnWidth = (kScreen_Width - 10 - 40)/2;
-    NSArray * btnImageArr = @[@"sweepBtn",@"wawaadressBtn"];
+    NSArray * btnImageArr = @[@"扫码抓娃娃",@"娃娃机分布"];
     for (int i = 0; i<2; i++) {
         UIButton * touchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        touchBtn.frame = CGRectMake(20 + (btnWidth + 10)* i, kScreen_Height * 0.7f, btnWidth, btnWidth/3);
+        touchBtn.frame = CGRectMake(20 + (btnWidth + 10)* i, kScreen_Height * 0.85f, btnWidth, btnWidth/2);
         [touchBtn setImage:[UIImage imageNamed:btnImageArr[i] ] forState:UIControlStateNormal];
         touchBtn.tag = i + 1;
         [touchBtn addTarget:self action:@selector(touchCatch:) forControlEvents:UIControlEventTouchUpInside];

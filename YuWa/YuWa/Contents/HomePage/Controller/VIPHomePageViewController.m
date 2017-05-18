@@ -66,8 +66,8 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-//           _HUD=[YWload showOnView:[UIApplication sharedApplication].delegate.window];
-//    [_HUD show:YES];
+           _HUD=[YWload showOnView:[UIApplication sharedApplication].delegate.window];
+    [_HUD show:YES];
     //得到坐标
     [self getLocalSubName];
     [self makeNaviBar];

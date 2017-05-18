@@ -50,10 +50,10 @@
         cell.detailTextLabel.text=[NSString stringWithFormat:@"%.2fMB",aaa];
         
     }else if (indexPath.row==1){
-        cell.textLabel.text=@"退出登录";
         
-    }else if(indexPath.row == 2){
         cell.textLabel.text = @"更改密码";
+    }else if(indexPath.row == 2){
+        cell.textLabel.text=@"退出登录";
     }else {
         cell.textLabel.text = @"关于我们";
     }
@@ -73,14 +73,14 @@
         
     }else if (indexPath.row==1){
         //
-        [UserSession clearUser];
-          VIPTabBarController *tabBar=[[VIPTabBarController alloc]init];
-        [UIApplication sharedApplication].keyWindow.rootViewController=tabBar;
         
-        
-    }else if(indexPath.row == 2){
         YWForgetPassWordViewController * vc = [[YWForgetPassWordViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if(indexPath.row == 2){
+        [UserSession clearUser];
+        VIPTabBarController *tabBar=[[VIPTabBarController alloc]init];
+        [UIApplication sharedApplication].keyWindow.rootViewController=tabBar;
     }else {
         AboutUsViewController * aboutUsVC = [[AboutUsViewController alloc]init];
         [self.navigationController pushViewController:aboutUsVC animated:YES];
