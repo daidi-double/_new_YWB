@@ -73,7 +73,7 @@
         }else{
             self.progressColor  = RGBCOLOR(0, 195, 12, 1);
         }
-        self.progressBackColor  = RGBCOLOR(0, 187, 235, 1);
+        self.progressBackColor  = RGBCOLOR(77, 153, 224, 1);
         
         if (proportion <= 0) {
             proportion = 0;

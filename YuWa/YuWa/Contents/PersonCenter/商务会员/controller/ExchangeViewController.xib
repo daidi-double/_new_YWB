@@ -22,7 +22,7 @@
             <subviews>
                 <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="am4-Bx-Kw5">
                     <rect key="frame" x="30" y="284" width="315" height="34"/>
-                    <color key="backgroundColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.52941176470588236" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="确认兑换">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -63,7 +63,7 @@
                                 <constraint firstAttribute="width" constant="65" id="ZNP-G5-GuA"/>
                             </constraints>
                             <state key="normal" title="全部兑换">
-                                <color key="titleColor" red="0.23137254901960785" green="0.64313725490196083" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.28235294117647058" green="0.52941176470588236" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="exchangeAllGrade:" destination="-1" eventType="touchUpInside" id="lur-dj-Joe"/>

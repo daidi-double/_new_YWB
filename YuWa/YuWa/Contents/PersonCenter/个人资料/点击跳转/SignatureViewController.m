@@ -59,7 +59,7 @@
     if ([self.delegate respondsToSelector:@selector(DelegateForGetSignature:)]) {
         UITextView*textView=[self.view viewWithTag:2];
         [self.delegate DelegateForGetSignature:textView.text];
-        
+        [UserSession instance].personality = textView.text;
     }
     [self.navigationController popViewControllerAnimated:YES];
     

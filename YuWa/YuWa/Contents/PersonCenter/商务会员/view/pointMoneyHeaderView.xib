@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,8 +16,17 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuanhuan" translatesAutoresizingMaskIntoConstraints="NO" id="jg5-qO-9xS">
+                    <rect key="frame" x="112.5" y="74.5" width="150" height="150"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.53333333333333333" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="ZPI-dW-lfL"/>
+                        <constraint firstAttribute="width" constant="150" id="kaO-Pl-MUm"/>
+                        <constraint firstAttribute="width" secondItem="jg5-qO-9xS" secondAttribute="height" multiplier="1:1" id="klV-Br-Oxb"/>
+                    </constraints>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商务会员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMy-2E-h5e">
-                    <rect key="frame" x="15" y="65" width="57.5" height="17"/>
+                    <rect key="frame" x="15" y="65" width="58" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -37,14 +47,6 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="可兑换积分：100"/>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="圆环" translatesAutoresizingMaskIntoConstraints="NO" id="jg5-qO-9xS">
-                    <rect key="frame" x="119.5" y="82.5" width="135" height="135"/>
-                    <color key="backgroundColor" red="0.28235294117647058" green="0.53333333333333333" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="135" id="ek6-ZH-89c"/>
-                        <constraint firstAttribute="height" constant="135" id="iop-S2-PKk"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.28235294117647058" green="0.53333333333333333" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -65,6 +67,6 @@
         </view>
     </objects>
     <resources>
-        <image name="圆环" width="151" height="150"/>
+        <image name="yuanhuan" width="303" height="300"/>
     </resources>
 </document>

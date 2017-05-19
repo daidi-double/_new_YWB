@@ -198,14 +198,14 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:SECTION0CELL];
     if (indexPath.section==0&&indexPath.row==0) {
-//      PersonCenterZeroCell*  cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
-//        cell.selectionStyle=NO;
-//
-//        NSString*str=[UserSession instance].personality;
-//        cell.titleString=str;
-//      
-//        
-//        return cell;
+      PersonCenterZeroCell*  cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
+        cell.selectionStyle=NO;
+
+        NSString*str=[UserSession instance].personality;
+        cell.titleString=str;
+      
+        
+        return cell;
     }else if (indexPath.section==1&&indexPath.row==0){
         //8个 按钮
         PersonCenterOneCell*cell=[tableView dequeueReusableCellWithIdentifier:CELL1];
@@ -861,7 +861,9 @@
         MyLog(@"信息 %@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             self.newsToday_money = data[@"data"][@"money"];
+            [UserSession instance].personality = data[@"data"][@"mark"];
         }
+        [self.tableView reloadData];
     }];
 }
 
