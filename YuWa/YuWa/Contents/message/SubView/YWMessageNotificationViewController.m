@@ -24,7 +24,7 @@
 @property (nonatomic,strong)NSMutableArray * dataArr;
 @property (nonatomic,copy)NSString * pagens;
 @property (nonatomic,assign)NSInteger pages;
-
+@property (nonatomic,strong)UIView * wawaView;
 @property (nonatomic,assign)NSInteger status;
 @property (nonatomic,strong)UISegmentedControl * segmentedControl;
 @property (nonatomic, strong) NSMutableArray *detailArray;
@@ -38,6 +38,7 @@
     [self makeNavi];
     [self makeUI];
     [self dataSet];
+    [self creatWawaView];
     [self setupRefresh];
     [self headerRereshing];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didselectCell:) name:@"push" object:nil];
@@ -66,6 +67,25 @@
     self.segmentedControl = [self makeSegmentedControl];
     self.navigationItem.titleView = self.segmentedControl;
 }
+- (void)creatWawaView{
+    
+    _wawaView = [[UIView alloc]initWithFrame:CGRectMake(0, 104, kScreen_Width, kScreen_Height/2)];
+    _wawaView.hidden = YES;
+    [self.view addSubview:_wawaView];
+    UIImageView * wawaImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width/2, 130, kScreen_Width/3, kScreen_Width/3)];
+    wawaImageView.centerX = kScreen_Width/2;
+    wawaImageView.image = [UIImage imageNamed:@"娃娃"];
+    [_wawaView addSubview:wawaImageView];
+    
+    UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, wawaImageView.bottom, kScreen_Width/2, 40)];
+    textLabel.centerX = kScreen_Width/2;
+    textLabel.textAlignment = 1;
+    textLabel.font = [UIFont systemFontOfSize:14];
+    textLabel.textColor = RGBCOLOR(123, 124, 124, 1);
+    textLabel.text = @"暂无预约通知哦~";
+    [_wawaView addSubview:textLabel];
+    
+}
 
 - (UISegmentedControl *)makeSegmentedControl{
     UISegmentedControl * segmentControl = [[UISegmentedControl alloc]initWithItems:@[@"预约通知",@"付款通知"]];
@@ -85,6 +105,8 @@
 - (void)segmentControlAction:(UISegmentedControl *)sender{
     self.status = sender.selectedSegmentIndex;
     self.payTableView.hidden = sender.selectedSegmentIndex == 0?YES:NO;
+    self.wawaView.hidden = sender.selectedSegmentIndex == 1?YES:NO;
+    self.payTableView.wawaView.hidden = sender.selectedSegmentIndex == 0?YES:NO;
     if (sender.selectedSegmentIndex == 0) {
         [self.tableView.mj_header beginRefreshing];
     }else{
@@ -99,6 +121,11 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.dataArr.count <= 0) {
+        self.wawaView.hidden = NO;
+    }else{
+        self.wawaView.hidden = YES;
+    }
     return self.dataArr.count;
 }
 

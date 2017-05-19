@@ -237,7 +237,7 @@
     [self.mtModelArrRecommend removeAllObjects];
                 self.mtModelArrRecommend=nil;
     HttpManager*manager=[[HttpManager alloc]init];
-    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"%@",data);
         NSString*errorCode=[NSString stringWithFormat:@"%@",data[@"errorCode"]];
         if ([errorCode isEqualToString:@"0"]) {

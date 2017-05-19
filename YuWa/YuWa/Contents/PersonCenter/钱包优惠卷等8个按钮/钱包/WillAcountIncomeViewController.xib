@@ -53,9 +53,9 @@
                         <constraint firstItem="JaM-wE-2im" firstAttribute="centerX" secondItem="tHy-ba-kN3" secondAttribute="centerX" id="ehC-px-4Vp"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qmT-Qj-mlH">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="qmT-Qj-mlH">
                     <rect key="frame" x="0.0" y="224" width="375" height="443"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Ql3-iD-51C"/>
                         <outlet property="delegate" destination="-1" id="w7e-08-E9H"/>

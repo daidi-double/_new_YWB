@@ -16,6 +16,8 @@
 #import "JWCollectionViewFlowLayout.h"
 #import "JWSearchView.h"
 
+
+#import "YWLoginViewController.h"
 #import "RBHomeCollectionViewCell.h"
 
 #define HOMECELL @"RBHomeCollectionViewCell"
@@ -182,6 +184,11 @@
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code error is %@",responsObj);
+        if ([responsObj[@"errorCode"] integerValue] == 9) {
+            [JRToast showWithText:@"您的身份已过期，请重新登入" duration:1];
+            YWLoginViewController * loginVC = [[YWLoginViewController alloc]init];
+            [self.navigationController pushViewController:loginVC animated:YES];
+        }
     }];
 }
 

@@ -60,10 +60,6 @@
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
-    },
-    {
-      "filename" : "applan_BG1_1242x2208.png",
-      "unassigned" : true
     }
   ],
   "info" : {

@@ -7,7 +7,8 @@
 //
 
 #import "AdressViewController.h"
-
+#import "CatchViewController.h"
+#import "IndroduceViewController.h"
 @interface AdressViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *adressScrollView;
 
@@ -17,28 +18,70 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImage * image = [UIImage imageNamed:@"adress.png"];
+    [self makeBtn];
+}
+- (void)makeBtn{
+    UIImage * image;
+    if (self.status == 1) {
+        image = [UIImage imageNamed:@"actionintroduce.png"];
+    }else{
+        
+        image = [UIImage imageNamed:@"adress.png"];
+    }
     UIScrollView*scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
     scrollView.contentSize=CGSizeMake(kScreen_Width, kScreen_Width * image.size.height/image.size.width);
-
+    
     scrollView.showsVerticalScrollIndicator = NO;
     scrollView.bounces = NO;
     [self.view addSubview:scrollView];
     
     UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Width * image.size.height/image.size.width)];
     imageView.image = image;
-
+    
     [scrollView addSubview:imageView];
     self.adressScrollView=scrollView;
+    if (self.status == 1) {
+        CGFloat btnWidth = (kScreen_Width - 10 - 40)/2;
+        NSArray * btnImageArr = @[@"catch2",@"prize"];
+        for (int i = 0; i<2; i++) {
+            UIButton * touchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            touchBtn.frame = CGRectMake(20 + (btnWidth + 10)* i, kScreen_Width * image.size.height/image.size.width* 0.9f, btnWidth, btnWidth/2.5);
+            [touchBtn setImage:[UIImage imageNamed:btnImageArr[i] ] forState:UIControlStateNormal];
+            touchBtn.tag = i + 1;
+            [touchBtn addTarget:self action:@selector(touchCatch:) forControlEvents:UIControlEventTouchUpInside];
+            [self.adressScrollView addSubview:touchBtn];
+        }
+        
+        
+    }
+    
+}
+- (void)touchCatch:(UIButton*)sender{
+    switch (sender.tag) {
+        case 1:
+        {
+            CatchViewController * catch = [[CatchViewController alloc]init];
+            
+            [self.navigationController pushViewController:catch animated:YES];
+        }
+            
+            break;
+        default:
+        {
+            IndroduceViewController * inVC = [[IndroduceViewController alloc]init];
+            [self.navigationController pushViewController:inVC animated:YES];
+        }
+            break;
+    }
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0.f];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.f];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

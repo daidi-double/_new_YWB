@@ -123,13 +123,9 @@
     self.BGImageView.contentMode = UIViewContentModeScaleToFill;
     self.numberLabel.hidden = YES;
     self.numberLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-//    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-//    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-//    //    effectView.backgroundColor = [UIColor orangeColor];
-//    effectView.frame = self.BGImageView.frame;
-//    effectView.alpha  = 0.97;
-//    [self.BGView insertSubview:effectView aboveSubview:self.BGImageView];
-//
+    self.payBtn.layer.cornerRadius = 3;
+    self.payBtn.layer.masksToBounds = YES;
+
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, self.BGView.height)];
     toolbar.barStyle = UIBarStyleBlackTranslucent;
     toolbar.alpha = 0.97;

@@ -14,7 +14,7 @@
 @property (nonatomic,strong)NSMutableArray * dataArr;
 @property (nonatomic,copy)NSString * pagens;
 @property (nonatomic,assign)NSInteger pages;
-
+@property (nonatomic,strong)UIView * wawaView;
 - (void)dataSet;
 
 @end

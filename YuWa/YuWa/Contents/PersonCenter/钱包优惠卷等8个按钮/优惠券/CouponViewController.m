@@ -21,6 +21,7 @@
 @property(nonatomic,strong)UITableView*tableView;
 @property(nonatomic,assign)NSUInteger whichCategory; //0 1 2  可用 已使用 已过期
 
+@property (nonatomic,strong)UIView * wawaView;
 
 @property(nonatomic,strong)NSMutableArray*modelUsed;
 @property(nonatomic,strong)NSMutableArray*modelUnused;
@@ -42,6 +43,7 @@
     [self makeTopView];
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:CELL0 bundle:nil] forCellReuseIdentifier:CELL0];
+    [self creatWawaView];
     NSArray * youhuiquanAry = @[@"youhuiquan_03",@"youhuiquan_06",@"youhuiquan_08",@"youhuiquan_10"];
     NSArray * colorAry = @[RGBCOLOR(255, 193, 0, 1),RGBCOLOR(54, 192, 250, 1),RGBCOLOR(7, 225, 158, 1),RGBCOLOR(255, 94, 108, 1)];
     [self.imageAry addObjectsFromArray:youhuiquanAry];
@@ -58,12 +60,28 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     switch (self.whichCategory) {
         case 0:
+            if (self.modelUnused.count <=0) {
+                self.wawaView.hidden = NO;
+            }else{
+                self.wawaView.hidden = YES;
+            }
             return self.modelUnused.count;
+            
             break;
         case 1:
+            if (self.modelUsed.count <=0) {
+                self.wawaView.hidden = NO;
+            }else{
+                self.wawaView.hidden = YES;
+            }
             return self.modelUsed.count;
             break;
         case 2:
+            if (self.modelOvertime.count <=0) {
+                self.wawaView.hidden = NO;
+            }else{
+                self.wawaView.hidden = YES;
+            }
             return self.modelOvertime.count;
             break;
    
@@ -204,7 +222,25 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
 }
-
+- (void)creatWawaView{
+    
+        _wawaView = [[UIView alloc]initWithFrame:CGRectMake(0, 104, kScreen_Width, kScreen_Height/2)];
+        _wawaView.hidden = YES;
+        [self.view addSubview:_wawaView];
+        UIImageView * wawaImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width/2, 130, kScreen_Width/3, kScreen_Width/3)];
+        wawaImageView.centerX = kScreen_Width/2;
+        wawaImageView.image = [UIImage imageNamed:@"娃娃"];
+        [_wawaView addSubview:wawaImageView];
+        
+        UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, wawaImageView.bottom, kScreen_Width/2, 40)];
+        textLabel.centerX = kScreen_Width/2;
+        textLabel.textAlignment = 1;
+        textLabel.font = [UIFont systemFontOfSize:14];
+        textLabel.textColor = RGBCOLOR(123, 124, 124, 1);
+        textLabel.text = @"暂无优惠券哦~";
+        [_wawaView addSubview:textLabel];
+    
+}
 #pragma mark  --Datas
 -(void)getDatas{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_PERSON_COUPON];
@@ -215,8 +251,10 @@
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
+            
             //成功  给三个model 数组赋值
             NSArray*unused=data[@"data"][@"unused"];
+
             for (NSDictionary*dict in unused) {
                 CouponModel*model=[CouponModel yy_modelWithDictionary:dict];
                 [self.modelUnused addObject:model];

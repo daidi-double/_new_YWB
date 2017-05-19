@@ -61,7 +61,6 @@
 		25B3C5CF1ECD8E4000674F20 /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5A61ECD8E4000674F20 /* 8.png */; };
 		25B3C5D01ECD8E4000674F20 /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5A71ECD8E4000674F20 /* 9.png */; };
 		25B3C5D11ECD8E4000674F20 /* loading.psd in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5A81ECD8E4000674F20 /* loading.psd */; };
-		25BFD44A1ECDA568005EBE26 /* a1.png in Resources */ = {isa = PBXBuildFile; fileRef = 25BFD4491ECDA568005EBE26 /* a1.png */; };
 		25CCE0141EBC6F8B009A58DB /* OrderDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25CCE0131EBC6F8B009A58DB /* OrderDetailViewController.storyboard */; };
 		25CD5E4C1EA762C10069D416 /* YWdetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */; };
 		25D587C81EAA619C00C0178C /* YWpayNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D587C71EAA619C00C0178C /* YWpayNotificationCell.xib */; };
@@ -768,6 +767,9 @@
 		AA6B5EC31EA9FCF900E6A83D /* ShopDetailGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B5EC21EA9FCF900E6A83D /* ShopDetailGoodsModel.m */; };
 		AA6B5EC71EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B5EC51EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m */; };
 		AA6B5EC81EAA0E6F00E6A83D /* CategoryLeftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA6B5EC61EAA0E6F00E6A83D /* CategoryLeftTableViewCell.xib */; };
+		AA73F2951ECEBA9C0002B548 /* beijingBG.png in Resources */ = {isa = PBXBuildFile; fileRef = AA73F2941ECEBA9C0002B548 /* beijingBG.png */; };
+		AA73F2991ECEC4D50002B548 /* toyou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA73F2971ECEC4D50002B548 /* toyou@2x.png */; };
+		AA73F29C1ECEC4FA0002B548 /* yuwa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA73F29B1ECEC4FA0002B548 /* yuwa@2x.png */; };
 		AA7B64731E797ED400406CB8 /* MapNavNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7B64711E797ED400406CB8 /* MapNavNewViewController.m */; };
 		AA88462B1E666FD7005F657D /* CatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8846291E666FD7005F657D /* CatchViewController.m */; };
 		AA88462C1E666FD7005F657D /* CatchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA88462A1E666FD7005F657D /* CatchViewController.xib */; };
@@ -1880,7 +1882,6 @@
 		25B3C5A61ECD8E4000674F20 /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		25B3C5A71ECD8E4000674F20 /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
 		25B3C5A81ECD8E4000674F20 /* loading.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = loading.psd; sourceTree = "<group>"; };
-		25BFD4491ECDA568005EBE26 /* a1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = a1.png; sourceTree = "<group>"; };
 		25CCE0131EBC6F8B009A58DB /* OrderDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderDetailViewController.storyboard; sourceTree = "<group>"; };
 		25CD5E4A1EA762C10069D416 /* YWdetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailHeaderView.h; sourceTree = "<group>"; };
 		25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailHeaderView.m; sourceTree = "<group>"; };
@@ -2689,6 +2690,9 @@
 		AA6B5EC41EAA0E6F00E6A83D /* CategoryLeftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryLeftTableViewCell.h; path = "新的18分类/CategoryLeftTableViewCell.h"; sourceTree = "<group>"; };
 		AA6B5EC51EAA0E6F00E6A83D /* CategoryLeftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryLeftTableViewCell.m; path = "新的18分类/CategoryLeftTableViewCell.m"; sourceTree = "<group>"; };
 		AA6B5EC61EAA0E6F00E6A83D /* CategoryLeftTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoryLeftTableViewCell.xib; path = "新的18分类/CategoryLeftTableViewCell.xib"; sourceTree = "<group>"; };
+		AA73F2941ECEBA9C0002B548 /* beijingBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beijingBG.png; sourceTree = "<group>"; };
+		AA73F2971ECEC4D50002B548 /* toyou@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toyou@2x.png"; sourceTree = "<group>"; };
+		AA73F29B1ECEC4FA0002B548 /* yuwa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuwa@2x.png"; sourceTree = "<group>"; };
 		AA7B64701E797ED400406CB8 /* MapNavNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNavNewViewController.h; sourceTree = "<group>"; };
 		AA7B64711E797ED400406CB8 /* MapNavNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNavNewViewController.m; sourceTree = "<group>"; };
 		AA8846281E666FD7005F657D /* CatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchViewController.h; sourceTree = "<group>"; };
@@ -5978,6 +5982,16 @@
 			children = (
 			);
 			name = "自定义";
+			sourceTree = "<group>";
+		};
+		AA73F2961ECEC4980002B548 /* 启动页 */ = {
+			isa = PBXGroup;
+			children = (
+				AA73F29B1ECEC4FA0002B548 /* yuwa@2x.png */,
+				AA73F2941ECEBA9C0002B548 /* beijingBG.png */,
+				AA73F2971ECEC4D50002B548 /* toyou@2x.png */,
+			);
+			name = "启动页";
 			sourceTree = "<group>";
 		};
 		AA8846271E666F30005F657D /* 抓娃娃 */ = {
@@ -10060,7 +10074,7 @@
 		C1F7BEEC1DB1CA0700CCAF96 /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				25BFD4491ECDA568005EBE26 /* a1.png */,
+				AA73F2961ECEC4980002B548 /* 启动页 */,
 				25B3C57F1ECD8E4000674F20 /* load1 */,
 				AA3541951E9DF23700A2EC73 /* BaoBao */,
 				AA3C40C81E8DAFF50052C732 /* 展示图片 */,
@@ -10321,7 +10335,7 @@
 					B38B2C6B1D8FAC5A004D5256 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = JQ283T24DV;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 0;
@@ -10422,7 +10436,6 @@
 				AA3543EB1E9DF23800A2EC73 /* 1baobaoLVUP56@2x.jpg in Resources */,
 				AA35440C1E9DF23800A2EC73 /* 2baobaoLVUP31@2x.jpg in Resources */,
 				AA3545B21E9DF23A00A2EC73 /* 4baobaoBG36@2x.jpg in Resources */,
-				25BFD44A1ECDA568005EBE26 /* a1.png in Resources */,
 				AA3544DA1E9DF23900A2EC73 /* 0baobaoBG55@2x.jpg in Resources */,
 				B38B2F171D8FC82F004D5256 /* RBNodeShowViewController.xib in Resources */,
 				AA0131031EC2E86200A99BD1 /* MovieShopTableViewCell.xib in Resources */,
@@ -10587,6 +10600,7 @@
 				25B3C5CF1ECD8E4000674F20 /* 8.png in Resources */,
 				AAD81F351EC46A6800799957 /* home_halfStar@2x.png in Resources */,
 				B38B2F551D8FC83A004D5256 /* 总的专辑 个人中心展示小图.json in Resources */,
+				AA73F2991ECEC4D50002B548 /* toyou@2x.png in Resources */,
 				C13019DA1DB20B2400E24C88 /* 宴会.png in Resources */,
 				AA29C2431EAD8EB60092EF6F /* YWShopDetailViewController.xib in Resources */,
 				AA35451D1E9DF23900A2EC73 /* 2baobaoBG0@2x.jpg in Resources */,
@@ -10914,6 +10928,7 @@
 				AA3545821E9DF23A00A2EC73 /* 3baobaoBG47@2x.jpg in Resources */,
 				AA3545101E9DF23900A2EC73 /* 1baobaoBG52@2x.jpg in Resources */,
 				C135A1351DDE020F002B78A5 /* 波浪个人_0001.png in Resources */,
+				AA73F2951ECEBA9C0002B548 /* beijingBG.png in Resources */,
 				AA3543D81E9DF23800A2EC73 /* 1baobaoLVUP39@2x.jpg in Resources */,
 				AA3544531E9DF23800A2EC73 /* 3baobaoLVUP41@2x.jpg in Resources */,
 				AA3545371E9DF23900A2EC73 /* 2baobaoBG33@2x.jpg in Resources */,
@@ -11350,6 +11365,7 @@
 				25FE755E1EA9EA70003EA989 /* jieshou.png in Resources */,
 				AA35448C1E9DF23900A2EC73 /* 4baobaoLVUP39@2x.jpg in Resources */,
 				AA3838BE1E82194500A1B5C9 /* ExchangeViewController.xib in Resources */,
+				AA73F29C1ECEC4FA0002B548 /* yuwa@2x.png in Resources */,
 				C135A13D1DDE020F002B78A5 /* 波浪个人_00017.png in Resources */,
 				AA2724071EC40CF300F80DB7 /* adress.png in Resources */,
 				AA3543F31E9DF23800A2EC73 /* 1baobaoLVUP9@2x.jpg in Resources */,
@@ -12344,10 +12360,11 @@
 			baseConfigurationReference = 6D91CFB893AA70B1C9A0D506 /* Pods-YuWa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = YuWa/YuWa.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mingbang Network Technology Co., Ltd. (JQ283T24DV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JQ283T24DV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12384,8 +12401,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.duruikeji.YuWa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9b9f5f2-2c2c-44e0-87ad-366c261519cb";
-				PROVISIONING_PROFILE_SPECIFIER = luoyun;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -12395,10 +12412,11 @@
 			baseConfigurationReference = BEA125C96C41FEDFE8078293 /* Pods-YuWa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = YuWa/YuWa.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mingbang Network Technology Co., Ltd. (JQ283T24DV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JQ283T24DV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12435,8 +12453,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.duruikeji.YuWa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9b9f5f2-2c2c-44e0-87ad-366c261519cb";
-				PROVISIONING_PROFILE_SPECIFIER = luoyun;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

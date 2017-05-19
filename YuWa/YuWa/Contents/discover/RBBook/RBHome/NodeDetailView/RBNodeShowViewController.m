@@ -64,7 +64,7 @@
     [self makeNavi];
     [self dataSet];
     [self makeUI];
-    [self requestData];
+   
     //获取通知中心单例对象
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
@@ -461,7 +461,8 @@
 }
 - (void)headerRefreshing{
     self.pages = 0;
-    [self requestDataWithPages:self.pages];
+    [self requestData];
+//    [self requestDataWithPages:self.pages];
 }
 - (void)footerRereshing{
     self.pages++;
@@ -508,7 +509,7 @@
         self.note_id = self.model.homeID;
         
     }
-
+//
     NSDictionary * pragram = @{@"note_id":self.note_id,@"pagen":self.pagens,@"pages":[NSString stringWithFormat:@"%zi",page],@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

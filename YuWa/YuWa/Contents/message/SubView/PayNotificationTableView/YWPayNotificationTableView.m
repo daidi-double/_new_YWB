@@ -33,7 +33,28 @@
     self.dataSource = self;
     self.delegate = self;
     [self setupRefresh];
+    [self creatWawaView];
     [self headerRereshing];
+}
+
+- (void)creatWawaView{
+    
+    _wawaView = [[UIView alloc]initWithFrame:CGRectMake(0, 104, kScreen_Width, kScreen_Height/2)];
+    _wawaView.hidden = YES;
+    [self addSubview:_wawaView];
+    UIImageView * wawaImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width/2, 130, kScreen_Width/3, kScreen_Width/3)];
+    wawaImageView.centerX = kScreen_Width/2;
+    wawaImageView.image = [UIImage imageNamed:@"娃娃"];
+    [_wawaView addSubview:wawaImageView];
+    
+    UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, wawaImageView.bottom, kScreen_Width/2, 40)];
+    textLabel.centerX = kScreen_Width/2;
+    textLabel.textAlignment = 1;
+    textLabel.font = [UIFont systemFontOfSize:14];
+    textLabel.textColor = RGBCOLOR(123, 124, 124, 1);
+    textLabel.text = @"暂无付款通知哦~";
+    [_wawaView addSubview:textLabel];
+    
 }
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -42,6 +63,11 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.dataArr.count <= 0) {
+        self.wawaView.hidden = NO;
+    }else{
+        self.wawaView.hidden = YES;
+    }
     return self.dataArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

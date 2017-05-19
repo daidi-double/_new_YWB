@@ -9,6 +9,7 @@
 #import "BaobaoSkillViewController.h"
 #import "IndroduceViewController.h"
 #import "CatchViewController.h"
+#import "AdressViewController.h"
 @interface BaobaoSkillViewController ()
 
 @end
@@ -20,6 +21,11 @@
    }
 - (IBAction)toCatchBabyAction:(UIButton *)sender {
     CatchViewController * vc = [[CatchViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (IBAction)wawaActionDetail:(UIButton *)sender {
+    AdressViewController * vc = [[AdressViewController alloc]init];
+    vc.status = 1;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)toAwardAction:(UIButton *)sender {

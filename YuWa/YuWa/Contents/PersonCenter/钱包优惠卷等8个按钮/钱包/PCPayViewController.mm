@@ -513,11 +513,11 @@
             self.isSelectedOn=YES;
             [self switchAction:self.Myswitch];
 
-            [self.tableView reloadData];
             
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
         }
+        [self.tableView reloadData];
         
         
     }];
@@ -536,7 +536,7 @@
         NSInteger number=[data[@"errorCode"] floatValue];
         if (number==0) {
 //            [JRToast showWithText:data[@"data"]];
-
+            [self getAccountMoney];
             //创建一个消息对象
             NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
             //发送消息

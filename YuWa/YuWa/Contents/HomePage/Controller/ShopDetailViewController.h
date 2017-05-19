@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *BGView;//毛玻璃的底层
 @property (weak, nonatomic) IBOutlet UIImageView *BGImageView;//毛玻璃效果层
+@property (weak, nonatomic) IBOutlet UIButton *payBtn;
 @property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *shopCarBtn;//购物车
 @property (weak, nonatomic) IBOutlet UIButton *moreBtn;//更多

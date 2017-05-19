@@ -9,8 +9,7 @@
 #import "LaunchScreenHelper.h"
 
 #define SCREEN_BOUNDS ([UIScreen mainScreen].bounds)
-#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+
 @interface LaunchScreenHelper ()
 @property (nonatomic, strong) UIImageView	*bgImage;
 @property (nonatomic, strong) UIImageView	*iconImage;

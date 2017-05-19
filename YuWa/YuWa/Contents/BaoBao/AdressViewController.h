@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AdressViewController : UIViewController
-
+@property (nonatomic,assign)NSInteger status;//1为从首页进来介绍活动
 @end

@@ -18,7 +18,7 @@
 @interface MyFavouriteViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView*tableView;
-
+@property (nonatomic,strong)UIView * wawaView;
 @property(nonatomic,strong)NSMutableArray*maMallDatas;
 @property(nonatomic,assign)int pages;
 @property(nonatomic,assign)int pagen;
@@ -32,6 +32,7 @@
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:@"YWMainShoppingTableViewCell" bundle:nil] forCellReuseIdentifier:CELL0];
     [self getDatas];
+    [self creatWawaView];
     [self setUpMJRefresh];
     
 }
@@ -68,11 +69,35 @@
     
 }
 
+- (void)creatWawaView{
+    
+    _wawaView = [[UIView alloc]initWithFrame:CGRectMake(0, 104, kScreen_Width, kScreen_Height/2)];
+    _wawaView.hidden = YES;
+    [self.view addSubview:_wawaView];
+    UIImageView * wawaImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width/2, 130, kScreen_Width/3, kScreen_Width/3)];
+    wawaImageView.centerX = kScreen_Width/2;
+    wawaImageView.image = [UIImage imageNamed:@"娃娃"];
+    [_wawaView addSubview:wawaImageView];
+    
+    UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, wawaImageView.bottom, kScreen_Width/2, 40)];
+    textLabel.centerX = kScreen_Width/2;
+    textLabel.textAlignment = 1;
+    textLabel.font = [UIFont systemFontOfSize:14];
+    textLabel.textColor = RGBCOLOR(123, 124, 124, 1);
+    textLabel.text = @"暂无收藏哦~";
+    [_wawaView addSubview:textLabel];
+    
+}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.maMallDatas.count <= 0) {
+        self.wawaView.hidden = NO;
+    }else{
+        self.wawaView.hidden = YES;
+    }
     return self.maMallDatas.count;
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -205,7 +230,12 @@
     return [YWMainShoppingTableViewCell getCellHeight:model.holiday]-10;
 
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01f;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.01f;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -289,7 +319,7 @@
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
         _tableView.delegate=self;
         _tableView.dataSource=self;
     }
