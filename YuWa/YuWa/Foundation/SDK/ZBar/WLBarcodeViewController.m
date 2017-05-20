@@ -329,6 +329,7 @@
     AVCaptureDevice* inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
     AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:nil];
+    
     [self.captureSession addInput:captureInput];
     
     
