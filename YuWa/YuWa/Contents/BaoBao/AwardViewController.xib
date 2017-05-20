@@ -20,12 +20,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="中奖者" translatesAutoresizingMaskIntoConstraints="NO" id="3HM-vy-e03">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="开奖" translatesAutoresizingMaskIntoConstraints="NO" id="3HM-vy-e03">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="KIQ-5Y-08e">
-                    <rect key="frame" x="8" y="221" width="359" height="414"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="25" y="190" width="325" height="445"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uaJ-bN-E81">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -41,8 +41,8 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="3HM-vy-e03" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6SJ-9H-7nR"/>
-                <constraint firstItem="KIQ-5Y-08e" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="221" id="BhT-dg-glj"/>
-                <constraint firstItem="KIQ-5Y-08e" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Eqg-m3-cAJ"/>
+                <constraint firstItem="KIQ-5Y-08e" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="190" id="BhT-dg-glj"/>
+                <constraint firstItem="KIQ-5Y-08e" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="Eqg-m3-cAJ"/>
                 <constraint firstAttribute="trailing" secondItem="3HM-vy-e03" secondAttribute="trailing" id="OLQ-Kb-Chz"/>
                 <constraint firstItem="3HM-vy-e03" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QBr-qs-1bJ"/>
                 <constraint firstItem="KIQ-5Y-08e" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QYF-uJ-SnA"/>
@@ -50,12 +50,12 @@
                 <constraint firstAttribute="bottom" secondItem="3HM-vy-e03" secondAttribute="bottom" id="Xuv-J6-67E"/>
                 <constraint firstItem="3HM-vy-e03" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="eoI-gC-ccM"/>
                 <constraint firstAttribute="bottom" secondItem="KIQ-5Y-08e" secondAttribute="bottom" constant="32" id="nEc-rO-qNq"/>
-                <constraint firstAttribute="trailing" secondItem="KIQ-5Y-08e" secondAttribute="trailing" constant="8" id="wWH-uV-rqu"/>
+                <constraint firstAttribute="trailing" secondItem="KIQ-5Y-08e" secondAttribute="trailing" constant="25" id="wWH-uV-rqu"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="94.5"/>
         </view>
     </objects>
     <resources>
-        <image name="中奖者" width="450" height="800"/>
+        <image name="开奖" width="750" height="1334"/>
     </resources>
 </document>

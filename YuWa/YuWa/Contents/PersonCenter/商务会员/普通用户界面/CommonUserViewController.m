@@ -58,7 +58,7 @@
     
     UIButton*showButton=[[UIButton alloc]initWithFrame:CGRectMake(40, kScreen_Height-80, kScreen_Width-80, 40)];
     [showButton setTitle:@"我知道" forState:UIControlStateNormal];
-    [showButton setBackgroundColor:[UIColor greenColor]];
+    [showButton setBackgroundColor:CNaviColor];
     showButton.layer.masksToBounds = YES;
     showButton.layer.cornerRadius = 5;
     [showButton addTarget:self action:@selector(touchIntoMain) forControlEvents:UIControlEventTouchUpInside];

@@ -16,6 +16,8 @@
     UIView * exchangeView ;
     UIView *line;
 }
+@property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
+@property (nonatomic,strong)UIImageView * introduceImageView;
 @property (nonatomic,strong)UITextField * codeTextField;
 //@property (nonatomic,strong)NSMutableArray * historyArr;
 @property (nonatomic,strong)NSMutableArray * codeListArr;
@@ -37,6 +39,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self makeUI];
     [self creatInPutExchangeCodeView];
     _codeTextField.text = nil;
     // Do any additional setup after loading the view from its nib.
@@ -46,18 +49,58 @@
 ////    [self getMyExchangeList];
 //    
 //}
+- (void)makeUI{
+    UIImage * image = [UIImage imageNamed:@"娃娃机开大奖"];
+
+    UIScrollView*scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+    scrollView.contentSize=CGSizeMake(kScreen_Width, kScreen_Width * image.size.height/image.size.width);
+    
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.bounces = NO;
+    [self.view addSubview:scrollView];
+    
+    UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Width * image.size.height/image.size.width)];
+    imageView.image = image;
+    
+    [scrollView addSubview:imageView];
+    self.imageScrollView=scrollView;
+   
+        CGFloat btnWidth = (kScreen_Width - 10 - 40)/2;
+        NSArray * btnImageArr = @[@"shuru",@"领奖"];
+        for (int i = 0; i<2; i++) {
+            UIButton * touchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            touchBtn.frame = CGRectMake(20 + (btnWidth + 10)* i, kScreen_Width * image.size.height/image.size.width* 0.43f, btnWidth, btnWidth/2.5);
+            [touchBtn setImage:[UIImage imageNamed:btnImageArr[i] ] forState:UIControlStateNormal];
+            touchBtn.tag = i + 1;
+            [touchBtn addTarget:self action:@selector(toExchangeCodeAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self.imageScrollView addSubview:touchBtn];
+    
+        
+        
+    }
+ 
+}
 - (IBAction)toExchangeCodeAction:(UIButton *)sender {
-    [self getMyExchangeList];
-    bgView.hidden = NO;
-    exchangeView.hidden = NO;
+    switch (sender.tag) {
+        case 1:
+            
+            [self getMyExchangeList];
+            bgView.hidden = NO;
+            exchangeView.hidden = NO;
+            break;
+            
+        default:
+        {
+            AwardViewController * vc = [[AwardViewController alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+    }
 
     
 }
-- (IBAction)getMyAwardAction:(UIButton *)sender {
-    AwardViewController * vc = [[AwardViewController alloc]init];
 
-    [self.navigationController pushViewController:vc animated:YES];
-}
 - (void)creatInPutExchangeCodeView{
     bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
     bgView.alpha = 0.6f;
@@ -65,20 +108,24 @@
     bgView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:bgView];
     
-    exchangeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width *0.9f, kScreen_Height * 0.45f)];
+    exchangeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width*0.9f , kScreen_Height * 0.45f)];
     exchangeView.backgroundColor = [UIColor whiteColor];
     exchangeView.hidden = YES;
     exchangeView.center = bgView.center;
   
-    
     [self.view addSubview:exchangeView];
     
-//    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
-//    tap.numberOfTapsRequired = 1;
-//    tap.numberOfTouchesRequired = 1;
-//    tap.delegate = self;
-//    [bgView addGestureRecognizer:tap];
-//    [exchangeView addGestureRecognizer:tap];
+    UIImageView * backBtn = [[UIImageView alloc]initWithFrame:CGRectMake(exchangeView.right - 17, -17, 17, 17)];
+    backBtn.image = [UIImage imageNamed:@"x"];
+    [exchangeView addSubview:backBtn];
+    
+    UIImage * giftImage = [UIImage imageNamed:@"gift"];
+    UIImageView * picImageView= [[UIImageView alloc]initWithFrame:CGRectMake(0, -50, exchangeView.width/2, exchangeView.height * giftImage.size.height/giftImage.size.width/2)];
+    picImageView.centerX = exchangeView.centerX;
+    picImageView.image = giftImage;
+    
+    [exchangeView addSubview:picImageView];
+    
     
     UITapGestureRecognizer* tapt = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
     tapt.numberOfTapsRequired = 1;
@@ -86,11 +133,11 @@
     tapt.delegate = self;
     [bgView addGestureRecognizer:tapt];
     
-    UILabel * codeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 40, kScreen_Width * 0.2f, 30)];
+    UILabel * codeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, picImageView.bottom +20, kScreen_Width * 0.5f , 30)];
     codeLabel.font = [UIFont systemFontOfSize:14];
     codeLabel.text = @"输入兑换码:";
     CGRect shopNameWidth = [codeLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: codeLabel.font} context:nil];
-    codeLabel.frame= CGRectMake(20, 40, shopNameWidth.size.width , 30);
+    codeLabel.frame= CGRectMake(20, picImageView.bottom +20, shopNameWidth.size.width , 30);
     codeLabel.textColor = RGBCOLOR(105, 105, 105, 1);
     [exchangeView addSubview:codeLabel];
     
@@ -102,13 +149,13 @@
     UIButton * sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     sureBtn.frame = CGRectMake(exchangeView.width*0.78f, codeLabel.y, exchangeView.width * 0.2f, 30);
     [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [sureBtn setBackgroundColor:[UIColor orangeColor]];
+    [sureBtn setBackgroundColor:CNaviColor];
     sureBtn.layer.cornerRadius = 5;
     sureBtn.layer.masksToBounds = YES;
     [sureBtn addTarget:self action:@selector(updataAction) forControlEvents:UIControlEventTouchUpInside];
     [exchangeView addSubview:sureBtn];
     
-    UILabel * historyLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 80, exchangeView.width * 0.5f, 25)];
+    UILabel * historyLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, codeLabel.bottom+5, exchangeView.width * 0.5f +30, 25)];
     historyLabel.font = [UIFont systemFontOfSize:12];
     historyLabel.textColor = RGBCOLOR(140, 140, 140, 1);
     historyLabel.text = @"历史兑换记录";
@@ -179,21 +226,21 @@
             for (NSDictionary * dict in data[@"data"]) {
                 
                 ExchangeCodeModel * model = [ExchangeCodeModel yy_modelWithDictionary:dict];
-                MyLog(@"%@",model.code);
+                
                 [self.codeListArr addObject:model];
                 
             }
-            CGFloat labelWidth = (exchangeView.width -40 -20)/2;
+            CGFloat labelWidth = (exchangeView.width -20 -20)/2;
             for (int i = 0; i< self.codeListArr.count; i++) {
                 ExchangeCodeModel * model = self.codeListArr[i];
                 
-                UILabel * timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, line.y+5 + (30 + 10)*i, labelWidth, 30)];
+                UILabel * timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, line.y+5 + 30 *i, labelWidth, 30)];
                 timeLabel.text = [JWTools getTimeTwo:model.ctime];
                 timeLabel.textColor = RGBCOLOR(123, 123, 123, 1);
                 timeLabel.font = [UIFont systemFontOfSize:14];
                 [exchangeView addSubview:timeLabel];
                 
-                UILabel * historyCodeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20 +(labelWidth +20), line.y+5 + (30 + 10)*i, labelWidth , 30)];
+                UILabel * historyCodeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20 +(labelWidth +20), line.y+5 + 30*i, labelWidth , 30)];
                 historyCodeLabel.text = model.code;
                 historyCodeLabel.textColor = [UIColor lightGrayColor];
                 historyCodeLabel.font = [UIFont systemFontOfSize:14];
