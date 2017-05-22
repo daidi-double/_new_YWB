@@ -46,9 +46,9 @@
     [super viewWillAppear:animated];
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
     if (self.state == 0) {
-        [self.accountTextField becomeFirstResponder];
+//        [self.accountTextField becomeFirstResponder];
     }else{
-        [self.mobileTextField becomeFirstResponder];
+//        [self.mobileTextField becomeFirstResponder];
     }
 }
 
