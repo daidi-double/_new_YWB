@@ -107,7 +107,7 @@
          
          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
-         UIImageView *word_ = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Height/2, kScreen_Width+10, 170, 59)]; //423 148
+         UIImageView *word_ = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Height/2, kScreen_Width +30, 170, 59)]; //423 148
          word_.centerX = kScreen_Width/2;
          word_.image = [UIImage imageNamed:@"toyou@2x.png"];
          [splashView addSubview:word_];
