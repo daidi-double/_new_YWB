@@ -176,7 +176,7 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
         UIView*topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 160)];
-        topView.backgroundColor=CNaviColor;
+        topView.backgroundColor=RGBCOLOR(60, 140, 217, 1);
         
         UILabel*titleLabel=[[UILabel alloc]initWithFrame:CGRectZero];
         titleLabel.text=@"实际支付：￥";
