@@ -35,9 +35,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Sl-B4-iay">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="去结算1" translatesAutoresizingMaskIntoConstraints="NO" id="ptD-e9-EAr">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待支付￥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQh-u0-3z1">
                             <rect key="frame" x="35" y="14" width="57.5" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -55,20 +52,16 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="iQh-u0-3z1" firstAttribute="centerY" secondItem="7Sl-B4-iay" secondAttribute="centerY" id="1Rh-uw-zm9"/>
-                        <constraint firstItem="ptD-e9-EAr" firstAttribute="leading" secondItem="7Sl-B4-iay" secondAttribute="leading" id="2xF-JY-iTi"/>
-                        <constraint firstAttribute="bottom" secondItem="ptD-e9-EAr" secondAttribute="bottom" id="6oe-OJ-B7H"/>
                         <constraint firstItem="86a-0W-lVq" firstAttribute="width" secondItem="7Sl-B4-iay" secondAttribute="width" multiplier="1:3" constant="-6" id="FLD-xJ-d7U"/>
-                        <constraint firstAttribute="trailing" secondItem="ptD-e9-EAr" secondAttribute="trailing" id="FR6-n0-GCt"/>
                         <constraint firstAttribute="trailing" secondItem="86a-0W-lVq" secondAttribute="trailing" id="J4I-f7-fmQ"/>
                         <constraint firstItem="86a-0W-lVq" firstAttribute="top" secondItem="7Sl-B4-iay" secondAttribute="top" id="LTK-kb-6Cy"/>
                         <constraint firstAttribute="bottom" secondItem="86a-0W-lVq" secondAttribute="bottom" id="cWj-bG-Yjh"/>
                         <constraint firstItem="86a-0W-lVq" firstAttribute="centerY" secondItem="7Sl-B4-iay" secondAttribute="centerY" id="e8L-zf-VD9"/>
                         <constraint firstAttribute="height" constant="44" id="jxP-sQ-ecE"/>
                         <constraint firstItem="iQh-u0-3z1" firstAttribute="leading" secondItem="7Sl-B4-iay" secondAttribute="leading" constant="35" id="tTi-oh-I48"/>
-                        <constraint firstItem="ptD-e9-EAr" firstAttribute="top" secondItem="7Sl-B4-iay" secondAttribute="top" id="yPP-4d-O5r"/>
                     </constraints>
                 </view>
             </subviews>
@@ -85,7 +78,4 @@
             <point key="canvasLocation" x="33.5" y="107.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="去结算1" width="751" height="88"/>
-    </resources>
 </document>

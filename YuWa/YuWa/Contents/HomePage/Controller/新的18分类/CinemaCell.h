@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HomeCinemaListModel.h"
 @interface CinemaCell : UITableViewCell
 
 @property (nonatomic,strong)UILabel * cinemaName;
 @property (nonatomic,strong)UILabel * price;
 @property (nonatomic,strong)UILabel * distance;
-
+@property (nonatomic,strong)HomeCinemaListModel * model;
 @property (nonatomic,strong)UILabel * discount;
 @property (nonatomic,assign)BOOL isdiscount;
 

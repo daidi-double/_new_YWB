@@ -13,18 +13,22 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
 
-        [self addSubview:self.cinemaName];
-        [self addSubview:self.price];
-//        [self addSubview:self.discount];
-        [self addSubview:self.distance];
-//        if (self.isdiscount == 0) {
-//            self.discount.hidden = NO;
-//        }else{
-//            self.discount.hidden = YES;
-//        }
         
     }
     return self;
+}
+- (void)setModel:(HomeCinemaListModel *)model{
+    _model = model;
+    [self setData];
+}
+
+-(void)setData{
+    self.cinemaName.text = self.model.cinema_name;
+    self.price.text = [NSString stringWithFormat:@"￥%@起",self.model.province];
+    CGFloat distanceNo = [self.model.distance floatValue] /1000;
+
+    self.distance.text = [NSString stringWithFormat:@"%.2fkm",distanceNo];
+    
 }
 - (UILabel*)cinemaName{
     if (!_cinemaName) {
@@ -32,7 +36,8 @@
         _cinemaName.textColor = RGBCOLOR(112, 114, 113, 1);
         _cinemaName.textAlignment = 0;
         _cinemaName.font = [UIFont systemFontOfSize:15];
-        _cinemaName.text = @"xxxx影城";
+        _cinemaName.text = @"";
+         [self addSubview:self.cinemaName];
     }
     return _cinemaName;
 }
@@ -43,7 +48,8 @@
         _price.textAlignment = 0;
         _price.font = [UIFont systemFontOfSize:13];
         _price.textColor = RGBCOLOR(255, 196, 15, 1);
-        _price.text = @"￥  起";
+        _price.text = @"";
+         [self addSubview:self.price];
     }
     return _price;
 }
@@ -61,12 +67,14 @@
 
 - (UILabel*)distance{
     if (!_distance) {
-        _distance = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width*0.8, 0, kScreen_Width*0.2, self.bounds.size.height/2)];
-        _distance.center = CGPointMake(kScreen_Width*0.9, self.bounds.size.height/2);
-        _distance.text = @"xxxkm";
-        _distance.textAlignment = NSTextAlignmentCenter;
+        _distance = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width*0.6-15, 0, kScreen_Width*0.4, self.bounds.size.height/2)];
+        _distance.center = CGPointMake(kScreen_Width*0.75, self.bounds.size.height/2);
+        _distance.text = @"";
+        _distance.textAlignment = 2;
         _distance.font = [UIFont systemFontOfSize:13];
         _distance.textColor = RGBCOLOR(112, 113, 114, 1);
+        
+        [self addSubview:self.distance];
     }
     return _distance;
 }

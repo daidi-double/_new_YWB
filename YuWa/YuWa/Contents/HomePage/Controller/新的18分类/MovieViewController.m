@@ -26,6 +26,8 @@
 #import "MovieHeaderModel.h"
 
 
+#import "HomeCinemaListModel.h"//影院模型
+
 #define newHotCell  @"NewHotMovieCollectCell"
 
 @interface MovieViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,HotMovieScrollViewDelegate,UIGestureRecognizerDelegate>
@@ -40,15 +42,18 @@
 }
 
 @property (nonatomic,strong) UITableView * movieTableView;
-@property (nonatomic,strong) NSMutableArray * theaterNameAry;//影城名称数据
+@property (nonatomic,strong) NSMutableArray * theaterNameAry;//影城列表数据
 @property (nonatomic,strong) NSMutableArray * hotMovieSAry;//轮播热映数组
 @property (nonatomic,strong) NSMutableArray * hotCollectDataAry;//热映影片数组
 @property (nonatomic,strong) NSTimer * timer;
 @property (nonatomic,copy)NSString * cinema_code;//影院编码
 @property (nonatomic,copy)NSString * cityCode;//城市编码
+@property (nonatomic,copy)NSString * type;//地区类型：1单个地区，0是全部地区
+@property (nonatomic,copy)NSString * typeList;//0：离我最近 1，价格最低，2好评优先
 @property (nonatomic,strong) UICollectionView *movieCollectView;
 @property (nonatomic,assign)BOOL isselected;
 @property (nonatomic,strong)NSMutableArray * otherTicketAry;//通兑票数组
+
 @end
 
 @implementation MovieViewController
@@ -64,11 +69,14 @@
     
     UIBarButtonItem * searchBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_homepage_search"] style:UIBarButtonItemStylePlain target:self action:@selector(searchMovie)];
     self.navigationItem.rightBarButtonItem = searchBtn;
-    
+    self.type = @"0";
+    self.typeList = @"0";
     [self.view addSubview:self.movieTableView];
     [self setRJRefresh];
     [self requestBannerData];
     [self requestHotData];
+    [self getlocatCityCode];
+    [self getHomePageCinemaList];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -98,9 +106,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return _theaterNameAry.count;
+    return self.theaterNameAry.count;
 
-        return 10;
 
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -169,28 +176,24 @@
     btnBGView.backgroundColor = [UIColor whiteColor];
     [headerView addSubview:btnBGView];
     
-    NSArray * titleAry = @[@"全城",@"离我最近",@"特色"];
-    CGFloat btnWidth = (kScreen_Width-6)/3;
-    for (int i = 0; i<3; i++) {
+    NSArray * titleAry = @[@"全部地区",@"离我最近"];
+    CGFloat btnWidth = (kScreen_Width-6)/2;
+    for (int i = 0; i<2; i++) {
         UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         selectBtn.frame = CGRectMake((btnWidth+3)*i, 0 ,btnWidth , 30);
         selectBtn.tag = 1111 + i;
         selectBtn.backgroundColor = [UIColor whiteColor];
         [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
         [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
-        [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_selected"] forState:UIControlStateSelected];
-        [selectBtn setTitleColor:RGBCOLOR(32, 184, 230, 1) forState:UIControlStateSelected];
+        [selectBtn setTitleColor:CNaviColor forState:UIControlStateSelected];
         [selectBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         
         [selectBtn addTarget:self action:@selector(menuBtn:) forControlEvents:UIControlEventTouchUpInside];
-        if (i != 1) {
-            [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
-            [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 40, 0, -40)];
-        }else{
-            [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
-            [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
-        }
+        
+        [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
+        [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
+        
         
         if (_isselected == 0) {
             selectBtn.selected = NO;
@@ -200,7 +203,7 @@
         line.centerY = btnBGView.height/2;
         line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
         [btnBGView addSubview:line];
-        if (i == 2) {
+        if (i == 1) {
             line.hidden = YES;
         }
     }
@@ -230,13 +233,14 @@
     [self judgeIsContentOtherTicket:self.cinema_code];//修改
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-        CinemaCell * cinemaCell = [[CinemaCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cinemaCell"  andDataAry:self.theaterNameAry];
-        cinemaCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-        return cinemaCell;
+    CinemaCell * cinemaCell = [[CinemaCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cinemaCell"  andDataAry:self.theaterNameAry];
+    cinemaCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    HomeCinemaListModel * model = self.theaterNameAry[indexPath.row];
+    cinemaCell.model = model;
+    return cinemaCell;
     
-
+    
 }
 #pragma mark - collectViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -362,6 +366,51 @@
     }];
 
 }
+//获取地区编码
+- (void)getlocatCityCode{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CITYCODE];
+    
+    self.cityCode = @"350500";
+    NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type};
+    HttpManager * manage = [[HttpManager alloc]init];
+    [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"地区编码 %@",data);
+        
+        
+    }];
+    
+}
+//获取首页影院列表
+- (void)getHomePageCinemaList{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOME_CINEMALIST];
+    
+    self.cityCode = @"110100";
+    NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type,@"device_id":[JWTools getUUID],@"typeList":self.typeList};
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
+    if ([UserSession instance].isLogin) {
+        [dic setValue:[UserSession instance].token forKey:@"toke"];
+        [dic setValue:@([UserSession instance].uid) forKey:@"user_id"];
+    }
+    
+    HttpManager * manage = [[HttpManager alloc]init];
+    [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"首页影院列表 %@",data);
+        MyLog(@"参数%@",dic);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            [self.theaterNameAry removeAllObjects];
+            for (NSDictionary * dict in data[@"data"]) {
+                HomeCinemaListModel * model = [HomeCinemaListModel yy_modelWithDictionary:dict];
+                [self.theaterNameAry addObject:model];
+            }
+            [self.movieTableView reloadData];
+        }else{
+            [JRToast showWithText:@"网络异常,请检查网络" duration:1];
+        }
+        [self.movieTableView.mj_header endRefreshing];
+        [self.movieTableView.mj_footer endRefreshing];
+    }];
+    
+}
 
 
 - (void)lookAll:(UIButton*)btn{
@@ -382,9 +431,9 @@
 
 - (void)menuBtn:(UIButton*)btn{
     NSLog(@"%ld",btn.tag);
-    if (btn.selected == YES) {
-        return;
-    }
+//    if (btn.selected == YES) {
+//        return;
+//    }
     btn.selected = YES;
     markBtn.selected = NO;
     markBtn = btn;
@@ -410,12 +459,27 @@
     tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.7f) andTag:btn.tag] ;
     tableViewBG.backgroundColor = [UIColor whiteColor];
     
+    __weak typeof(btn)weakBtn = btn;
+    __weak typeof(menuBG)weakMenuBG = menuBG;
+    WEAKSELF;
+    tableViewBG.titleBlock = ^(NSString *titleStr,NSString * cityCode){
+        weakBtn.selected = NO;
+        [weakBtn setTitle:titleStr forState:UIControlStateNormal];
+        [weakMenuBG removeFromSuperview];
+        if ([titleStr isEqualToString:@"全部地区"]) {
+            weakSelf.type = @"0";
+        }else{
+            weakSelf.type = @"1";
+        }
+        [weakSelf getHomePageCinemaList];
+    };
     [menuBG addSubview:tableViewBG];
     
     
 
 
 }
+//取消手势冲突
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     // 点击的view的类名
     //    NSLog(@"%@", NSStringFromClass([touch.view class]));
@@ -461,7 +525,7 @@
         _movieTableView.delegate = self;
         _movieTableView.dataSource = self;
         _movieTableView.backgroundColor = [UIColor lightGrayColor];
-//        _movieTableView.backgroundColor = [UIColor lightGrayColor];
+
     }
     return _movieTableView;
 }

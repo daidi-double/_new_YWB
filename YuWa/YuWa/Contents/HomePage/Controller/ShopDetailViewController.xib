@@ -16,7 +16,6 @@
                 <outlet property="BGImageView" destination="q2o-rm-hr3" id="FRU-CS-r2H"/>
                 <outlet property="BGView" destination="7bE-9g-SGA" id="2Tu-qn-CEP"/>
                 <outlet property="accountBGView" destination="TcY-h4-Pml" id="jo8-Rk-nfp"/>
-                <outlet property="accountImageView" destination="ShQ-N3-DUa" id="Phs-uf-Wpf"/>
                 <outlet property="addressLabel" destination="VeI-H6-hLy" id="8lK-DG-bSM"/>
                 <outlet property="bottomBGView" destination="Juk-A1-IIS" id="YTm-ch-taY"/>
                 <outlet property="discountLabel" destination="bcb-XY-gX3" id="toj-VF-HwQ"/>
@@ -397,12 +396,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TcY-h4-Pml">
                     <rect key="frame" x="0.0" y="602" width="375" height="65"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="去结算1" translatesAutoresizingMaskIntoConstraints="NO" id="ShQ-N3-DUa">
-                            <rect key="frame" x="0.0" y="15" width="375" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="393-EM-Zh0"/>
-                            </constraints>
-                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mCO-pL-eO3">
                             <rect key="frame" x="0.0" y="15" width="375" height="50"/>
                             <color key="backgroundColor" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -460,16 +453,12 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="ShQ-N3-DUa" secondAttribute="bottom" id="0cc-vr-sUz"/>
                         <constraint firstItem="mCO-pL-eO3" firstAttribute="top" secondItem="TcY-h4-Pml" secondAttribute="top" constant="15" id="3rP-6V-1F2"/>
-                        <constraint firstAttribute="bottom" secondItem="ShQ-N3-DUa" secondAttribute="bottom" id="7QX-7e-EXU"/>
                         <constraint firstAttribute="trailing" secondItem="FfE-p5-Kiq" secondAttribute="trailing" id="CuJ-S9-UQq"/>
                         <constraint firstItem="dEw-zu-tua" firstAttribute="leading" secondItem="TcY-h4-Pml" secondAttribute="leading" id="DdR-05-QdA"/>
                         <constraint firstItem="FfE-p5-Kiq" firstAttribute="top" secondItem="TcY-h4-Pml" secondAttribute="top" constant="15" id="IPy-rN-5Wf"/>
                         <constraint firstItem="fER-LP-Wuq" firstAttribute="top" secondItem="TcY-h4-Pml" secondAttribute="top" id="M2b-ZX-9qD"/>
                         <constraint firstAttribute="bottom" secondItem="FfE-p5-Kiq" secondAttribute="bottom" id="NV1-ax-LnF"/>
-                        <constraint firstItem="ShQ-N3-DUa" firstAttribute="top" secondItem="TcY-h4-Pml" secondAttribute="top" constant="15" id="OxK-WV-jTH"/>
-                        <constraint firstAttribute="trailing" secondItem="ShQ-N3-DUa" secondAttribute="trailing" id="RTK-L1-PHT"/>
                         <constraint firstItem="d7O-s6-2MJ" firstAttribute="centerY" secondItem="TcY-h4-Pml" secondAttribute="centerY" constant="10" id="RVy-es-kUo"/>
                         <constraint firstAttribute="trailing" secondItem="mCO-pL-eO3" secondAttribute="trailing" id="TCE-da-sMI"/>
                         <constraint firstItem="fER-LP-Wuq" firstAttribute="leading" secondItem="TcY-h4-Pml" secondAttribute="leading" constant="36" id="Z1E-um-wd8"/>
@@ -480,7 +469,6 @@
                         <constraint firstAttribute="bottom" secondItem="dEw-zu-tua" secondAttribute="bottom" id="kpp-lC-7vm"/>
                         <constraint firstItem="mCO-pL-eO3" firstAttribute="leading" secondItem="TcY-h4-Pml" secondAttribute="leading" id="p3r-sK-Vkq"/>
                         <constraint firstItem="dEw-zu-tua" firstAttribute="top" secondItem="7U5-8c-bOa" secondAttribute="bottom" id="r50-gk-PSw"/>
-                        <constraint firstItem="ShQ-N3-DUa" firstAttribute="leading" secondItem="TcY-h4-Pml" secondAttribute="leading" id="rva-ME-Ukq"/>
                         <constraint firstItem="7U5-8c-bOa" firstAttribute="top" secondItem="TcY-h4-Pml" secondAttribute="top" id="w4O-MK-Jvo"/>
                         <constraint firstAttribute="height" constant="65" id="xt1-ey-u7L"/>
                     </constraints>
@@ -515,13 +503,12 @@
         <image name="买" width="22" height="22"/>
         <image name="付款" width="22" height="22"/>
         <image name="半星" width="26" height="25"/>
-        <image name="去结算1" width="751" height="88"/>
         <image name="去结算2" width="84" height="84"/>
         <image name="右下一级" width="9" height="17"/>
         <image name="抢" width="22" height="22"/>
         <image name="更多" width="15" height="3"/>
         <image name="满星" width="26" height="25"/>
-        <image name="特惠" width="28" height="28"/>
+        <image name="特惠" width="14" height="14"/>
         <image name="空星" width="26" height="25"/>
         <image name="评分" width="22" height="22"/>
         <image name="购物车" width="22" height="17"/>

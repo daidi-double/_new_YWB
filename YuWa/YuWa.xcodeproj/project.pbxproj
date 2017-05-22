@@ -923,6 +923,8 @@
 		AAF80CFC1E67E45A0000C4BC /* scan_net@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF80CF61E67E45A0000C4BC /* scan_net@2x.png */; };
 		AAF80CFE1E67F7C40000C4BC /* gain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAF80CFD1E67F7C40000C4BC /* gain.jpg */; };
 		AAF80D021E68013E0000C4BC /* CategoryDetaliViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF80D011E68013E0000C4BC /* CategoryDetaliViewController.m */; };
+		AAFA579D1ED2B003006CF2D7 /* CityCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA579C1ED2B003006CF2D7 /* CityCodeModel.m */; };
+		AAFA57A01ED2D038006CF2D7 /* HomeCinemaListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA579F1ED2D038006CF2D7 /* HomeCinemaListModel.m */; };
 		AAFAC9961EBD7160000AAB78 /* ViscosityLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAC9951EBD7160000AAB78 /* ViscosityLayout.m */; };
 		AAFAC99B1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAC9991EBD7A4E000AAB78 /* MoviePicCollectionViewCell.m */; };
 		AAFAC99C1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAFAC99A1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.xib */; };
@@ -2925,6 +2927,10 @@
 		AAF80CFD1E67F7C40000C4BC /* gain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gain.jpg; sourceTree = "<group>"; };
 		AAF80D001E68013E0000C4BC /* CategoryDetaliViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryDetaliViewController.h; sourceTree = "<group>"; };
 		AAF80D011E68013E0000C4BC /* CategoryDetaliViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryDetaliViewController.m; sourceTree = "<group>"; };
+		AAFA579B1ED2B003006CF2D7 /* CityCodeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityCodeModel.h; sourceTree = "<group>"; };
+		AAFA579C1ED2B003006CF2D7 /* CityCodeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityCodeModel.m; sourceTree = "<group>"; };
+		AAFA579E1ED2D038006CF2D7 /* HomeCinemaListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCinemaListModel.h; sourceTree = "<group>"; };
+		AAFA579F1ED2D038006CF2D7 /* HomeCinemaListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCinemaListModel.m; sourceTree = "<group>"; };
 		AAFAC9941EBD7160000AAB78 /* ViscosityLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViscosityLayout.h; sourceTree = "<group>"; };
 		AAFAC9951EBD7160000AAB78 /* ViscosityLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViscosityLayout.m; sourceTree = "<group>"; };
 		AAFAC9981EBD7A4E000AAB78 /* MoviePicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePicCollectionViewCell.h; sourceTree = "<group>"; };
@@ -4621,6 +4627,10 @@
 			children = (
 				AA01310F1EC34C4C00A99BD1 /* BannerModel.h */,
 				AA0131101EC34C4C00A99BD1 /* BannerModel.m */,
+				AAFA579B1ED2B003006CF2D7 /* CityCodeModel.h */,
+				AAFA579C1ED2B003006CF2D7 /* CityCodeModel.m */,
+				AAFA579E1ED2D038006CF2D7 /* HomeCinemaListModel.h */,
+				AAFA579F1ED2D038006CF2D7 /* HomeCinemaListModel.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -11641,6 +11651,7 @@
 				B38B2DFB1D8FACD8004D5256 /* AFURLResponseSerialization.m in Sources */,
 				AAF237261E5BE96A002D58B4 /* PlayTimeCell.m in Sources */,
 				AA3AB5431E5D6AF2009BD8D9 /* PlayMovieCell.m in Sources */,
+				AAFA57A01ED2D038006CF2D7 /* HomeCinemaListModel.m in Sources */,
 				B33A26921D9A68040092CB12 /* EaseEmoji.m in Sources */,
 				C12315431DE6B89400B9D0FE /* YWBusinessMemberViewController.m in Sources */,
 				B30136BE1DB86C1C00691F60 /* RBNodeTagModel.m in Sources */,
@@ -11999,6 +12010,7 @@
 				C123154B1DE6C03C00B9D0FE /* BusinessMoneyTableViewCell.m in Sources */,
 				C135A0CD1DDC549F002B78A5 /* PayRecordModel.m in Sources */,
 				AAF508801EAF1D780007BC78 /* YWPayMoneyTableViewCell.m in Sources */,
+				AAFA579D1ED2B003006CF2D7 /* CityCodeModel.m in Sources */,
 				AA0131071EC2F24E00A99BD1 /* CinemaCharacteristicTableViewCell.m in Sources */,
 				B38B2F121D8FC82F004D5256 /* RBNodeShowShowInfoModel.m in Sources */,
 				C1FB7F6C1DC733AE0048EBC8 /* ResultsCollectionViewCell.m in Sources */,

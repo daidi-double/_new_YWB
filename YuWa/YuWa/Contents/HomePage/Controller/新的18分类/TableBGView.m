@@ -7,6 +7,7 @@
 //
 
 #import "TableBGView.h"
+#import "CityCodeModel.h"
 @interface TableBGView ()<UITableViewDelegate,UITableViewDataSource>
 {
    UIView * line;
@@ -14,8 +15,10 @@
     UIButton * markBtn;
 }
 @property (nonatomic,strong) UITableView * placeTableView;//商圈tableview
+@property (nonatomic,copy) NSString * cityCode;//城市编码
+@property (nonatomic,copy) NSString* type;
+@property (nonatomic,strong)NSMutableArray * cityCodeAry;
 
-@property (nonatomic,assign) NSInteger reset;
 
 @end
 @implementation TableBGView
@@ -23,15 +26,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         _staus = tag;
+        self.type = @"0";
         [self setPlaceBtn];
         [self makeTableView];
-        
+        [self getlocatCityCode];
     }
     return self;
 }
 - (void)setPlaceBtn{
     CGFloat btnWidth = (kScreen_Width - 80 - 100)/2;
-    NSArray * title = @[@"商圈",@"地铁站"];
+    NSArray * title = @[@"全部地区",@"离我最近"];
     for (int i = 0; i<2; i ++) {
         UIButton * placeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         placeBtn.frame = CGRectMake(40 + (100 + btnWidth)*i, 0,btnWidth , self.height*0.1f);
@@ -52,7 +56,7 @@
     grayView.backgroundColor = [UIColor grayColor];
     [self addSubview:grayView];//分割线
     if (_staus == 1111) {
-        _placeTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.height * 0.1f +1 , kScreen_Width* 0.4f, self.height * 0.9f) style:UITableViewStylePlain];
+        _placeTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.height * 0.1f +1 , kScreen_Width, self.height * 0.9f) style:UITableViewStyleGrouped];
         
     }else {
         _placeTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.height * 0.1f +1 , kScreen_Width, self.height * 0.3f) style:UITableViewStylePlain];
@@ -70,15 +74,24 @@
 #pragma mark - tableviewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (_staus == 1111) {
-        return 9;
-    }else if (_staus == 1112){
-        return 3;
+        return self.cityCodeAry.count;
     }else{
-        return 2;
+        return 3;
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (_staus == 1111) {
+        if (self.titleBlock) {
+            CityCodeModel * model = self.cityCodeAry[indexPath.row];
+            for (UIButton *btn in self.subviews) {
+                if (btn.tag == 1111) {
+                    [btn setTitle:model.name forState:UIControlStateNormal];
+                }
+            }
+            self.titleBlock(model.name,model.code);
+        }
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -101,91 +114,67 @@
     }
     if (_staus == 1111) {
         cell.backgroundColor = RGBCOLOR(249, 249, 249, 1);
-        cell.textLabel.text = @"全部";
+        CityCodeModel * model = self.cityCodeAry[indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@(%@)",model.name,model.cinema_count];
         
     }else if (_staus == 1112){
         NSArray *  titleArr = @[@"离我最近",@"价格最低",@"好评优先"];
         cell.textLabel.text = titleArr[indexPath.row];
         cell.textLabel.centerY = cell.height/2;
         return cell;
-    }else{
-        if (indexPath.row == 0) {
-            
-        UILabel * titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, cell.width * 0.3f, 20)];
-        titleLbl.text = @"特色功能";
-        titleLbl.font = [UIFont systemFontOfSize:12];
-        titleLbl.textColor = [UIColor blackColor];
-        [cell.contentView addSubview:titleLbl];
-        NSArray * functionArr = @[@"全部",@"可退票",@"可改签",@"会员卡"];
-        CGFloat btnWidth = (kScreen_Width -20 - 30)/4;
-        for (int i = 0; i<4; i++) {
-            UIButton * functionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            functionBtn.frame = CGRectMake(10 + (btnWidth +10)*i, 20, btnWidth, 22);
-            [functionBtn setTitle:functionArr[i] forState:UIControlStateNormal];
-            [functionBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-            [functionBtn setTitleColor:CNaviColor forState:UIControlStateSelected];
-            functionBtn.tag = 2000 + i;
-            [functionBtn addTarget:self action:@selector(itemBtn:) forControlEvents:UIControlEventTouchUpInside];
-            if (i == 0) {
-                functionBtn.selected = YES;
-                markBtn = functionBtn;
-            }
-            if (_reset == 0) {
-                if (functionBtn.tag == 1111) {
-                    
-                    functionBtn.selected = YES;
-                    markBtn = functionBtn;
-                    markTag = 2000;
-                }
-            }
-            [cell.contentView addSubview:functionBtn];
-        }
-            
-        }else{
-            UIButton * resetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            resetBtn.frame = CGRectMake(10, 5, cell.width * 0.25f, cell.height - 10);
-            resetBtn.layer.masksToBounds = YES;
-            resetBtn.layer.cornerRadius = 5;
-            [resetBtn setTitle:@"重置" forState:UIControlStateNormal];
-            [resetBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-            [resetBtn addTarget:self action:@selector(resetBtn) forControlEvents:UIControlEventTouchUpInside];
-            [cell.contentView addSubview:resetBtn];
-
-            
-            UIButton * completeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            completeBtn.frame = CGRectMake(cell.width * 0.65f, 5, cell.width * 0.25f, cell.height - 10);
-            completeBtn.layer.masksToBounds = YES;
-            completeBtn.layer.cornerRadius = 5;
-            [completeBtn setTitle:@"完成" forState:UIControlStateNormal];
-            [completeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            completeBtn.backgroundColor = CNaviColor;
-            [completeBtn addTarget:self action:@selector(completion) forControlEvents:UIControlEventTouchUpInside];
-            [cell.contentView addSubview:completeBtn];
-
-        }
-
     }
+    
     return cell;
 }
-- (void)resetBtn{
-    _reset = 0;
-    _staus = 1113;
-    markTag = 2000;
-    [_placeTableView reloadData];
+
+//- (void)itemBtn:(UIButton*)sender{
+//    MyLog(@"%ld",sender.tag);
+//    if (sender.isSelected == YES) {
+//        return;
+//    }
+//    sender.selected = YES;
+//    markBtn.selected = NO;
+//    markBtn = sender;
+//    markTag = sender.tag;
+//}
+
+//获取地区编码
+- (void)getlocatCityCode{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CITYCODE];
+    
+    self.cityCode = @"350500";
+    NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type};
+    HttpManager * manage = [[HttpManager alloc]init];
+    [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"参数 %@",pragrams);
+        MyLog(@"地区编码 %@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            [self.cityCodeAry removeAllObjects];
+            for (NSDictionary * dict in data[@"data"]) {
+                CityCodeModel * model = [CityCodeModel yy_modelWithDictionary:dict];
+                [self.cityCodeAry addObject:model];
+            }
+        }else{
+            [JRToast showWithText:@"网络超时,请检查网络" duration:1];
+        }
+        [self.placeTableView reloadData];
+    }];
+    
 }
-- (void)itemBtn:(UIButton*)sender{
-    MyLog(@"%ld",sender.tag);
-    if (sender.isSelected == YES) {
-        return;
-    }
-    sender.selected = YES;
-    markBtn.selected = NO;
-    markBtn = sender;
-    markTag = sender.tag;
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.01f;
 }
+
 - (void)completion{
     MyLog(@"完成%ld",markTag);
     
+}
+
+- (NSMutableArray*)cityCodeAry{
+    if (!_cityCodeAry) {
+        _cityCodeAry = [NSMutableArray array];
+    }
+    return _cityCodeAry;
 }
 /*
 // Only override drawRect: if you perform custom drawing.

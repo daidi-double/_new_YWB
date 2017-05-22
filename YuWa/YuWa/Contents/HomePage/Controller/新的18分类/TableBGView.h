@@ -10,6 +10,9 @@
 
 @interface TableBGView : UIView
 @property (nonatomic,assign) NSInteger staus;
+@property (nonatomic,copy) void (^titleBlock)(NSString * title,NSString * cityCode);
+
 - (instancetype)initWithFrame:(CGRect)frame andTag:(NSInteger)tag;
 
 @end
+

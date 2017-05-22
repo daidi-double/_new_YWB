@@ -77,6 +77,10 @@
 #define HTTP_MOVIE_CINEMAFOOT  @"/api.php/Movie/cinemaFilmShowTime/"//影院尾部数据
 #define HTTP_MOVIE_JUDGECONTENTOTHERTICKET  @"/api.php/Movie/queryCommTickets/"//判断是否有通兑票
 #define HTTP_MOVIE_GETORDERID  @"/api.php/Movie/createCommOrder/"//获取通兑票订单
+#define HTTP_MOVIE_CITYCODE    @"/api.php/Movie/countyList/"//获取当前城市的县市编码
+
+#define HTTP_MOVIE_HOME_CINEMALIST  @"/api.php/Movie/cinemaInfo/"//获取首页影院列表
+
 
 
 #pragma mark - discover
