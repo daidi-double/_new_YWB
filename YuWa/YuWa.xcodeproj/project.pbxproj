@@ -19,7 +19,6 @@
 		2535423A1EA4ABE3006F2C7A /* headerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253542391EA4ABE3006F2C7A /* headerView.xib */; };
 		2535423D1EA4ADF8006F2C7A /* headerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2535423C1EA4ADF8006F2C7A /* headerView.m */; };
 		255222581EB504FF00F22793 /* YWdetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 255222571EB504FF00F22793 /* YWdetailModel.m */; };
-		258163081ECD9B6A004A243C /* LaunchScreenHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 258163071ECD9B6A004A243C /* LaunchScreenHelper.m */; };
 		25B3C5A91ECD8E4000674F20 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5801ECD8E4000674F20 /* 1.png */; };
 		25B3C5AA1ECD8E4000674F20 /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5811ECD8E4000674F20 /* 10.png */; };
 		25B3C5AB1ECD8E4000674F20 /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5821ECD8E4000674F20 /* 11.png */; };
@@ -61,6 +60,7 @@
 		25B3C5CF1ECD8E4000674F20 /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5A61ECD8E4000674F20 /* 8.png */; };
 		25B3C5D01ECD8E4000674F20 /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5A71ECD8E4000674F20 /* 9.png */; };
 		25B3C5D11ECD8E4000674F20 /* loading.psd in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5A81ECD8E4000674F20 /* loading.psd */; };
+		25BA988E1ED3DFB7008B5E50 /* YWStartAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BA988D1ED3DFB7008B5E50 /* YWStartAnimation.m */; };
 		25CCE0141EBC6F8B009A58DB /* OrderDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25CCE0131EBC6F8B009A58DB /* OrderDetailViewController.storyboard */; };
 		25CD5E4C1EA762C10069D416 /* YWdetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */; };
 		25D587C81EAA619C00C0178C /* YWpayNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D587C71EAA619C00C0178C /* YWpayNotificationCell.xib */; };
@@ -1841,8 +1841,6 @@
 		2535423C1EA4ADF8006F2C7A /* headerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = headerView.m; sourceTree = "<group>"; };
 		255222561EB504FF00F22793 /* YWdetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailModel.h; sourceTree = "<group>"; };
 		255222571EB504FF00F22793 /* YWdetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailModel.m; sourceTree = "<group>"; };
-		258163061ECD9B6A004A243C /* LaunchScreenHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreenHelper.h; sourceTree = "<group>"; };
-		258163071ECD9B6A004A243C /* LaunchScreenHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreenHelper.m; sourceTree = "<group>"; };
 		25B3C5801ECD8E4000674F20 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		25B3C5811ECD8E4000674F20 /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
 		25B3C5821ECD8E4000674F20 /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
@@ -1884,6 +1882,8 @@
 		25B3C5A61ECD8E4000674F20 /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		25B3C5A71ECD8E4000674F20 /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
 		25B3C5A81ECD8E4000674F20 /* loading.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = loading.psd; sourceTree = "<group>"; };
+		25BA988C1ED3DFB7008B5E50 /* YWStartAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWStartAnimation.h; sourceTree = "<group>"; };
+		25BA988D1ED3DFB7008B5E50 /* YWStartAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWStartAnimation.m; sourceTree = "<group>"; };
 		25CCE0131EBC6F8B009A58DB /* OrderDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderDetailViewController.storyboard; sourceTree = "<group>"; };
 		25CD5E4A1EA762C10069D416 /* YWdetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailHeaderView.h; sourceTree = "<group>"; };
 		25CD5E4B1EA762C10069D416 /* YWdetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailHeaderView.m; sourceTree = "<group>"; };
@@ -8022,8 +8022,8 @@
 		B38B2DD71D8FACD8004D5256 /* Supporting File */ = {
 			isa = PBXGroup;
 			children = (
-				258163061ECD9B6A004A243C /* LaunchScreenHelper.h */,
-				258163071ECD9B6A004A243C /* LaunchScreenHelper.m */,
+				25BA988C1ED3DFB7008B5E50 /* YWStartAnimation.h */,
+				25BA988D1ED3DFB7008B5E50 /* YWStartAnimation.m */,
 				B38B2DD81D8FACD8004D5256 /* AppDelegate+window.h */,
 				B38B2DD91D8FACD8004D5256 /* AppDelegate+window.m */,
 				B38B2DDA1D8FACD8004D5256 /* AppDelegate.h */,
@@ -11913,7 +11913,6 @@
 				B3D219271DB1241800D661F5 /* YWSharedEditorViewController.m in Sources */,
 				AAF127EA1E8AFA6500121621 /* GetMoneyToBankModel.m in Sources */,
 				2535423D1EA4ADF8006F2C7A /* headerView.m in Sources */,
-				258163081ECD9B6A004A243C /* LaunchScreenHelper.m in Sources */,
 				C1F7BE3D1DB1C95400CCAF96 /* InfoSignatureTableViewCell.m in Sources */,
 				B38B2E5F1D8FACD8004D5256 /* AppDelegate.m in Sources */,
 				C10E93AA1DD19AEB00728B3D /* PHBusinessCircleModel.m in Sources */,
@@ -11978,6 +11977,7 @@
 				B3B851081DD9879A00E171C8 /* JHColumnChart.m in Sources */,
 				B33A26861D9A68040092CB12 /* EaseSDKHelper.m in Sources */,
 				C1F7BE571DB1C95400CCAF96 /* PCMyOrderViewController.m in Sources */,
+				25BA988E1ED3DFB7008B5E50 /* YWStartAnimation.m in Sources */,
 				B33A269C1D9A68040092CB12 /* EaseViewController.m in Sources */,
 				B33A26581D9A68040092CB12 /* EMCDDeviceManagerBase.m in Sources */,
 				C1C148191DE837E4001FCBC3 /* PointMoneyViewController.m in Sources */,
