@@ -48,16 +48,12 @@
     [self registerEMClientWithApplication:application withOptions:(NSDictionary *)launchOptions];//registerEMClient
     [self registerJPushWithOptions:launchOptions];
     
-    
     [UserSession instance];
     [YWLocation shareLocation];
     
 #pragma mark  --微信支付
     //向微信注册wxd930ea5d5a258f4f
     [WXApi registerApp:@"wxda48c07f355bc825" withDescription:@"demo 2.0"];
-    
-    
-    
 #pragma mark  ----国际化语言
     [InternationalLanguage initUserLanguage];//初始化应用语言
 #pragma mark  -- 根视图
@@ -68,16 +64,7 @@
 #pragma mark -- 启动页动画
     [self.window makeKeyAndVisible];
     [YWStartAnimation startAnimationWithView:self.window];
-    
-    
     return YES;
-
-    
-}
--(void)showWord
-{
-    
-    
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
