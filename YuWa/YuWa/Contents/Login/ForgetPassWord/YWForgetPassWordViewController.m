@@ -31,7 +31,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.accountTextField becomeFirstResponder];
+//    [self.accountTextField becomeFirstResponder];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];

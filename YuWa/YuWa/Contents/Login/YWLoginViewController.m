@@ -85,8 +85,8 @@
 }
 
 - (void)makeUI{
-    self.accountTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"placeHoldtext" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    self.mobileTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"placeHoldtext" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.accountTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入手机号" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.mobileTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入手机号" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     self.secuirtyCodeTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"验证码" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     self.passwordtextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     self.passwordtextField.secureTextEntry = YES;

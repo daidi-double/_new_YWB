@@ -38,7 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
      [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    [self.accountTextField becomeFirstResponder];
+//    [self.accountTextField becomeFirstResponder];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
