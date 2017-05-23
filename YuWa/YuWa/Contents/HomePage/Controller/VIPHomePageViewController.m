@@ -237,80 +237,82 @@
     [self.mtModelArrRecommend removeAllObjects];
                 self.mtModelArrRecommend=nil;
     HttpManager*manager=[[HttpManager alloc]init];
-    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
-        MyLog(@"%@",data);
-        NSString*errorCode=[NSString stringWithFormat:@"%@",data[@"errorCode"]];
-        if ([errorCode isEqualToString:@"0"]) {
-            self.mtModelArrBanner=nil;
-            self.mtModelArrCategory=nil;
-            self.mtModelArrTopShop=nil;
-            [self.mtModelArrRecommend removeAllObjects];
-            self.mtModelArrRecommend=nil;
-            
-            
-            NSArray*banner=data[@"data"][@"flash"];
-            for (int i=0; i<banner.count; i++) {
-             HPBannerModel*model= [HPBannerModel yy_modelWithDictionary:banner[i]];
-                [self.mtModelArrBanner addObject:model];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+            MyLog(@"%@",[NSThread  currentThread]);
+            NSString*errorCode=[NSString stringWithFormat:@"%@",data[@"errorCode"]];
+            if ([errorCode isEqualToString:@"0"]) {
+                self.mtModelArrBanner=nil;
+                self.mtModelArrCategory=nil;
+                self.mtModelArrTopShop=nil;
+                [self.mtModelArrRecommend removeAllObjects];
+                self.mtModelArrRecommend=nil;
                 
-            }
-            
-            NSArray*category=data[@"data"][@"category"];
-            for (NSDictionary*dict in category) {
-              HPCategoryModel*model=[HPCategoryModel yy_modelWithDictionary:dict];
-                [self.mtModelArrCategory addObject:model];
                 
-            }
-            
-            NSArray*topShop=data[@"data"][@"top_shop"];
-            for (NSDictionary*dict in topShop) {
-                HPTopShopModel*model=[HPTopShopModel yy_modelWithDictionary:dict];
-                [self.mtModelArrTopShop addObject:model];
-            }
-            
-            NSArray*recommendShop=data[@"data"][@"recommend_shop"];
-            for (NSDictionary*dict in recommendShop) {
-                HPRecommendShopModel*model=[HPRecommendShopModel yy_modelWithDictionary:dict];
-                [self.mtModelArrRecommend addObject:model];
-            }
-            
-            
-            
-            [self.tableView reloadData];
-            
-        }else{
-            [JRToast showWithText:@"errorMessage"];
-        }
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.tableView.mj_header endRefreshing];
-            [self.tableView.mj_footer endRefreshing];
-            //加载完数据之后，判断是否是推送了通知，如果是，就跳转制定页面
-            NSString * documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
-            NSString * filePath1 = [NSString stringWithFormat:@"%@/isPush.plist",documentPath];
-            NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithContentsOfFile:filePath1];
-            if (dic == nil) {
-                //表示没有这个文件时候。我们创建一个.plist文件
-                NSMutableDictionary* arrM = [NSMutableDictionary dictionary];
-                [arrM setObject:@"0" forKey:@"ispush"];
-                [arrM writeToFile:filePath1 atomically:YES];
-            }else{
-                //说明已经有数据，在字典里面
-                NSString * str = dic[@"ispush"];
-                if ([str isEqualToString:@"1"]) {
-                    //说明是通知发送过来的
-                    YWMessageNotificationViewController*vc=[[YWMessageNotificationViewController alloc]init];
-                    [self.navigationController pushViewController:vc animated:YES];
-                    //跳转之后，把数据还原；
-                    [dic setValue:@"0" forKey:@"ispush"];
-                    [dic writeToFile:filePath1 atomically:YES];
+                NSArray*banner=data[@"data"][@"flash"];
+                for (int i=0; i<banner.count; i++) {
+                    HPBannerModel*model= [HPBannerModel yy_modelWithDictionary:banner[i]];
+                    [self.mtModelArrBanner addObject:model];
+                    
                 }
+                
+                NSArray*category=data[@"data"][@"category"];
+                for (NSDictionary*dict in category) {
+                    HPCategoryModel*model=[HPCategoryModel yy_modelWithDictionary:dict];
+                    [self.mtModelArrCategory addObject:model];
+                    
+                }
+                
+                NSArray*topShop=data[@"data"][@"top_shop"];
+                for (NSDictionary*dict in topShop) {
+                    HPTopShopModel*model=[HPTopShopModel yy_modelWithDictionary:dict];
+                    [self.mtModelArrTopShop addObject:model];
+                }
+                
+                NSArray*recommendShop=data[@"data"][@"recommend_shop"];
+                for (NSDictionary*dict in recommendShop) {
+                    HPRecommendShopModel*model=[HPRecommendShopModel yy_modelWithDictionary:dict];
+                    [self.mtModelArrRecommend addObject:model];
+                }
+                
+                
+                
+                [self.tableView reloadData];
+                
+            }else{
+                [JRToast showWithText:@"errorMessage"];
             }
-        });
-        
-        
-        
-    }];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.tableView.mj_header endRefreshing];
+                [self.tableView.mj_footer endRefreshing];
+                //加载完数据之后，判断是否是推送了通知，如果是，就跳转制定页面
+                NSString * documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+                NSString * filePath1 = [NSString stringWithFormat:@"%@/isPush.plist",documentPath];
+                NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithContentsOfFile:filePath1];
+                if (dic == nil) {
+                    //表示没有这个文件时候。我们创建一个.plist文件
+                    NSMutableDictionary* arrM = [NSMutableDictionary dictionary];
+                    [arrM setObject:@"0" forKey:@"ispush"];
+                    [arrM writeToFile:filePath1 atomically:YES];
+                }else{
+                    //说明已经有数据，在字典里面
+                    NSString * str = dic[@"ispush"];
+                    if ([str isEqualToString:@"1"]) {
+                        //说明是通知发送过来的
+                        YWMessageNotificationViewController*vc=[[YWMessageNotificationViewController alloc]init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                        //跳转之后，把数据还原；
+                        [dic setValue:@"0" forKey:@"ispush"];
+                        [dic writeToFile:filePath1 atomically:YES];
+                    }
+                }
+            });
+            
+            
+            
+        }];
+    });
     
 }
 -(void)loadingMoreShowInfo{
