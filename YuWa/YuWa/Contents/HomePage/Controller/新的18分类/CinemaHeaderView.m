@@ -44,7 +44,7 @@
 - (void)setdata{
     _cinemaName = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 0, self.height * 0.2f)];
     _cinemaName.textColor =RGBCOLOR(147, 146, 146, 1);
-    _cinemaName.font = [UIFont systemFontOfSize:17];
+    _cinemaName.font = [UIFont systemFontOfSize:15];
     _cinemaName.text = self.model.cinema_name;
     CGSize size = [self sizeWithSt:_cinemaName.text font:_cinemaName.font];
     _cinemaName.frame = CGRectMake(10, 0, size.width, self.height * 0.17f);

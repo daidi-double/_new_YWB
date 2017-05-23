@@ -36,8 +36,10 @@
 @property (nonatomic,assign) NSInteger pagen;
 @property (nonatomic,copy) NSString * time;//日期
 @property (nonatomic,strong) UIView * bgView;
+@property (nonatomic,strong) ChooseMovieHeaderView * movieView;
 @property (nonatomic,strong) CinemaAndBuyTicketModel * model;
 @property (nonatomic,strong) CinemaModel * cinemaModel;//影院model
+@property (nonatomic,strong) NSString * type;//类型
 @end
 
 @implementation ChooseMovieController
@@ -69,22 +71,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor greenColor];
-    self.title = @"上映影院和购票";
+    self.title = self.movieName;
     [self.view addSubview:self.movieTableView];
     _isselected = 0;
+    self.type = @"0";
     self.pagen = 10;
     self.pages = 0;
     self.time = [self todayDate];
+    
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self requestMovieData];
 }
-
 #pragma mark - tableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.movieDataAry.count;
+    
 }
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
+        self.movieView.model = self.model;
         return self.bgView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -108,6 +115,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     CinemaTimeCell * cell = [[CinemaTimeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cinemaTimeCell" andDataAry:self.movieDataAry];
+
     cell.model = self.cinemaModel;
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -153,18 +161,21 @@
 }
 - (void)menuBtn:(UIButton*)btn{
     NSLog(@"%ld",btn.tag);
-    if (btn.selected == YES) {
-        return;
-    }
-    
+    //    if (btn.selected == YES) {
+    //        return;
+    //    }
     btn.selected = YES;
     markBtn.selected = NO;
     markBtn = btn;
-    [_movieTableView scrollToRowAtIndexPath:markIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    
+    if (self.movieDataAry.count > 0) {
+        
+        [_movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        
+    }
     if (menuBG) {
         [menuBG removeFromSuperview];
     }
+    
     menuBG = [[UIView alloc]initWithFrame:CGRectMake(0, NavigationHeight, kScreen_Width, kScreen_Height)];
     menuBG.backgroundColor = RGBCOLOR(195, 202, 203, 0.3);
     [self.view addSubview:menuBG];
@@ -174,15 +185,30 @@
     cancelFirstObject.delegate= self;
     menuBG.contentMode = UIViewContentModeScaleToFill;
     [menuBG addGestureRecognizer:cancelFirstObject];
-
+    
     if (tableViewBG) {
         [tableViewBG removeFromSuperview];
     }
     tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.7f) andTag:btn.tag] ;
     tableViewBG.backgroundColor = [UIColor whiteColor];
+    
+    __weak typeof(btn)weakBtn = btn;
+    __weak typeof(menuBG)weakMenuBG = menuBG;
+    WEAKSELF;
+    tableViewBG.titleBlock = ^(NSString *titleStr,NSString * cityCode){
+        weakBtn.selected = NO;
+        [weakBtn setTitle:titleStr forState:UIControlStateNormal];
+        [weakMenuBG removeFromSuperview];
+        if ([titleStr isEqualToString:@"全部地区"]) {
+            weakSelf.type = @"0";
+        }else{
+            weakSelf.type = @"1";
+        }
+//        [weakSelf getHomePageCinemaList];
+    };
     [menuBG addSubview:tableViewBG];
-
-
+    
+    
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     // 点击的view的类名
@@ -240,9 +266,11 @@
     [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
         MyLog(@"电影影院和购票%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
-            self.model = [CinemaAndBuyTicketModel yy_modelWithDictionary:data[@"data"]];
-//            [self.headerViewAry addObject:self.model];//数据是空的，所以暂时注释掉
-        
+            for (NSDictionary * dict in data[@"data"][@"filmsInfo"]) {
+                
+                self.model = [CinemaAndBuyTicketModel yy_modelWithDictionary:dict];
+            }
+
         }else{
             [JRToast showWithText:@"网络超时，请检查网络" duration:1];
         }
@@ -283,18 +311,6 @@
     if (!_bgView) {
         _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.3f+65.5)];
         _bgView.backgroundColor = [UIColor whiteColor];
-        
-        ChooseMovieHeaderView * movieView = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.3f)];
-        movieView.delegate =self;
-        movieView.model = self.model;
-        [_bgView addSubview:movieView];
-        UITapGestureRecognizer*PrivateTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDetali)];
-        PrivateTap.numberOfTouchesRequired = 1;
-        PrivateTap.numberOfTapsRequired = 1;
-        PrivateTap.delegate= self;
-        movieView.contentMode = UIViewContentModeScaleToFill;
-        [movieView addGestureRecognizer:PrivateTap];
-        movieView.backgroundColor = [UIColor darkGrayColor];
         
         NSDate *date = [NSDate date];
         
@@ -377,30 +393,25 @@
         [_bgView addSubview:line];
         
         
-        CGFloat btnWidth = (kScreen_Width-6)/3;
-        NSArray * titleAry = @[@"全城",@"离我最近",@"特色"];
+        CGFloat btnWidth = (kScreen_Width-6)/2;
+        NSArray * titleAry = @[@"全部地区",@"离我最近"];
         
-        for (int i = 0; i<3; i++) {
+        for (int i = 0; i<2; i++) {
             UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             selectBtn.frame = CGRectMake((btnWidth+3)*i, _bgView.height - 30,btnWidth , 30);
             selectBtn.tag = 1111 + i;
             selectBtn.backgroundColor = [UIColor whiteColor];
             [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
             [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
-            [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_selected"] forState:UIControlStateSelected];
             [selectBtn setTitleColor:RGBCOLOR(32, 184, 230, 1) forState:UIControlStateSelected];
             [selectBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
             selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
             
             [selectBtn addTarget:self action:@selector(menuBtn:) forControlEvents:UIControlEventTouchUpInside];
-            if (i != 1) {
-                [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
-                [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 40, 0, -40)];
-            }else{
+
                 [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
                 [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
-                
-            }
+
             
             if (_isselected == 0) {
                 selectBtn.selected = NO;
@@ -411,6 +422,23 @@
 
     }
     return _bgView;
+}
+
+- (ChooseMovieHeaderView*)movieView{
+    if (!_movieView) {
+        
+        _movieView = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.3f)];
+        _movieView.delegate =self;
+        [self.bgView addSubview:_movieView];
+        UITapGestureRecognizer*PrivateTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDetali)];
+        PrivateTap.numberOfTouchesRequired = 1;
+        PrivateTap.numberOfTapsRequired = 1;
+        PrivateTap.delegate= self;
+        _movieView.contentMode = UIViewContentModeScaleToFill;
+        [_movieView addGestureRecognizer:PrivateTap];
+        _movieView.backgroundColor = [UIColor darkGrayColor];
+    }
+    return _movieView;
 }
 /*
 #pragma mark - Navigation

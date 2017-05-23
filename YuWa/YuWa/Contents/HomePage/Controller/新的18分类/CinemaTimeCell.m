@@ -13,11 +13,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        [self addSubview:self.cinemaName];
-        [self addSubview:self.price];
-//        [self addSubview:self.screeningTime];
-        [self addSubview:self.distance];
-
+  
     }
     return self;
 }
@@ -27,7 +23,7 @@
         _cinemaName.textColor = [UIColor blackColor];
         _cinemaName.textAlignment = 0;
         _cinemaName.font = [UIFont systemFontOfSize:18];
-        _cinemaName.text = @"xxxx影城";
+         [self.contentView addSubview:_cinemaName];
     }
     return _cinemaName;
 }
@@ -38,7 +34,7 @@
         _price.textAlignment = 0;
         _price.font = [UIFont systemFontOfSize:15];
         _price.textColor = [UIColor greenColor];
-        _price.text = @"￥  起";
+         [self.contentView addSubview:_price];
     }
     return _price;
 }
@@ -58,10 +54,10 @@
     if (!_distance) {
         _distance = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width*0.8, 0, kScreen_Width*0.2, self.bounds.size.height/2)];
         _distance.center = CGPointMake(kScreen_Width*0.9, self.bounds.size.height/2);
-        _distance.text = @"xxxkm";
         _distance.textAlignment = NSTextAlignmentCenter;
         _distance.font = [UIFont systemFontOfSize:15];
         _distance.textColor = [UIColor darkGrayColor];
+        [self.contentView addSubview:_distance];
     }
     return _distance;
 }
@@ -72,9 +68,11 @@
 }
 
 - (void)setData{
+    
     self.cinemaName.text = self.model.cinema_name;
     self.price.text = [NSString stringWithFormat:@"￥%@起",self.model.settlePrice];
-    self.distance.text = [NSString stringWithFormat:@"%@km",self.model.distance];
+    CGFloat distanceNo = [self.model.distance floatValue]/1000;
+    self.distance.text = [NSString stringWithFormat:@"%.2fkm",distanceNo];
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

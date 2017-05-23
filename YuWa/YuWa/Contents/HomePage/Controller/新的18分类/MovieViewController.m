@@ -86,15 +86,15 @@
     
     self.movieTableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
 //        self.pages=0;
-//        self.tableViewDatasModel=[NSMutableArray array];
-//        [self getTableViewAllDatas];
+        self.theaterNameAry=[NSMutableArray array];
+        [self getHomePageCinemaList];
         
     }];
     
     //上拉刷新
     self.movieTableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
 //        self.pages++;
-//        [self getTableViewAllDatas];
+        [self getHomePageCinemaList];
         
     }];
 
@@ -271,6 +271,7 @@
     //注意修改
     ChooseMovieController * choseVC = [[ChooseMovieController alloc]init];
     choseVC.filmCode = model.code;
+    choseVC.movieName = model.name;
     [self.navigationController pushViewController:choseVC animated:YES];
     
 }
@@ -437,7 +438,10 @@
     btn.selected = YES;
     markBtn.selected = NO;
     markBtn = btn;
-    [_movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    if (self.theaterNameAry.count>0) {
+        
+        [_movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
    
     if (menuBG) {
         [menuBG removeFromSuperview];
@@ -524,7 +528,7 @@
         _movieTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavigationHeight, kScreen_Width, kScreen_Height-NavigationHeight) style:UITableViewStyleGrouped];
         _movieTableView.delegate = self;
         _movieTableView.dataSource = self;
-        _movieTableView.backgroundColor = [UIColor lightGrayColor];
+        _movieTableView.backgroundColor = [UIColor whiteColor];
 
     }
     return _movieTableView;
