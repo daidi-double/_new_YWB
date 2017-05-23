@@ -85,6 +85,10 @@
 }
 
 - (void)makeUI{
+    self.accountTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"placeHoldtext" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.mobileTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"placeHoldtext" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.secuirtyCodeTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"验证码" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.passwordtextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     self.passwordtextField.secureTextEntry = YES;
     self.secuirtyCodeBtn.layer.cornerRadius = 10.f;
     self.secuirtyCodeBtn.layer.masksToBounds = YES;
@@ -206,12 +210,10 @@
     self.segmentLineView.centerX = sender.centerX;
     switch (sender.tag) {
         case 222:
-            [self.accountTextField becomeFirstResponder];
             self.quickLoginView.hidden = YES;
             break;
             
         default:
-             [self.mobileTextField becomeFirstResponder];
             self.quickLoginView.hidden = NO;
             break;
     }
