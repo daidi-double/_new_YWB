@@ -183,12 +183,12 @@
     self.centerView=centerView;
     //centview 上的元素
     UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 20, 20)];
-    imageView.image=[UIImage imageNamed:@"page_navi_sousuo"];
+    imageView.image=[UIImage imageNamed:@"home_2_nomal"];
     [self.centerView addSubview:imageView];
     
     UILabel*showLabel=[[UILabel alloc]initWithFrame:CGRectMake(30, 5, self.centerView.width-60, 20)];
     showLabel.font=[UIFont systemFontOfSize:14];
-    showLabel.textColor=CtitleColor;
+    showLabel.textColor=RGBCOLOR(123, 124, 125, 1);
     showLabel.text=@"美食";
     [self.centerView addSubview:showLabel];
     

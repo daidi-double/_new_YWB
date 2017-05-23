@@ -208,7 +208,7 @@
             [btn setTitle:titleAry[i] forState:UIControlStateNormal];
             btn.centerY = bgViewT.frame.size.height/2;
             btn.titleLabel.font = [UIFont systemFontOfSize:13];
-            [btn setTitleColor:[UIColor colorWithHexString:@"#5dc0ea"] forState:UIControlStateSelected];
+            [btn setTitleColor:CNaviColor forState:UIControlStateSelected];
             [btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
             if (i == 0 ) {
                 btn.selected = YES;

@@ -48,8 +48,8 @@
                             <action selector="chooseYouhuiquanAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yUG-g1-to2"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cIl-aT-0Db">
-                        <rect key="frame" x="0.0" y="0.0" width="312" height="1"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIl-aT-0Db">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93725490199999995" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="fW5-Ot-8U0"/>

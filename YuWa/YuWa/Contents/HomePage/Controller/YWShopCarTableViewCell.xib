@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,7 +38,7 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2i-jm-NKY">
                         <rect key="frame" x="216" y="9" width="25" height="25"/>
-                        <state key="normal" image="减号"/>
+                        <state key="normal" image="="/>
                         <connections>
                             <action selector="reduceAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="56O-Fu-jX1"/>
                         </connections>
@@ -55,7 +55,7 @@
                             <constraint firstAttribute="width" constant="25" id="0rb-uG-c0e"/>
                             <constraint firstAttribute="height" constant="25" id="xNc-k4-usj"/>
                         </constraints>
-                        <state key="normal" image="加号"/>
+                        <state key="normal" image="+"/>
                         <connections>
                             <action selector="addAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Gqp-G6-f1S"/>
                         </connections>
@@ -84,7 +84,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="减号" width="44" height="44"/>
-        <image name="加号" width="44" height="44"/>
+        <image name="+" width="17" height="17"/>
+        <image name="=" width="17" height="17"/>
     </resources>
 </document>

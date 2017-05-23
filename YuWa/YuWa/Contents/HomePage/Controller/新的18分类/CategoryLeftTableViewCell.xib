@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="318" height="104"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="318" height="104"/>
+                <rect key="frame" x="0.0" y="0.0" width="318" height="103"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VHc-qy-va0">
@@ -45,24 +45,24 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vq-N1-hcA">
-                        <rect key="frame" x="272" y="79.5" width="9" height="16"/>
+                        <rect key="frame" x="272" y="79" width="9" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eeg-Ng-hNU">
-                        <rect key="frame" x="245" y="76" width="22" height="22"/>
+                        <rect key="frame" x="245" y="75.5" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="tKB-9P-NRo"/>
                         </constraints>
-                        <state key="normal" backgroundImage="减号"/>
+                        <state key="normal" backgroundImage="="/>
                     </button>
-                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuo-Wc-2HW">
-                        <rect key="frame" x="286" y="76" width="22" height="22"/>
+                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuo-Wc-2HW">
+                        <rect key="frame" x="286" y="75.5" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="zuo-Wc-2HW" secondAttribute="height" multiplier="1:1" id="MGV-eT-S2P"/>
                         </constraints>
-                        <state key="normal" backgroundImage="加号"/>
+                        <state key="normal" backgroundImage="+"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTT-1z-nkS">
                         <rect key="frame" x="129" y="68" width="13" height="15"/>
@@ -115,7 +115,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="减号" width="44" height="44"/>
-        <image name="加号" width="44" height="44"/>
+        <image name="+" width="17" height="17"/>
+        <image name="=" width="17" height="17"/>
     </resources>
 </document>

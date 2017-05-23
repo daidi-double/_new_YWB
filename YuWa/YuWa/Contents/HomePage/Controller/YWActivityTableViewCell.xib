@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="323" height="88"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="323" height="88"/>
+                <rect key="frame" x="0.0" y="0.0" width="323" height="87"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aq9-bb-KE4">
@@ -56,14 +56,14 @@
                             <constraint firstAttribute="height" constant="30" id="zq1-An-Qfy"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_zhe.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kpk-re-PSx">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_zhe" translatesAutoresizingMaskIntoConstraints="NO" id="Kpk-re-PSx">
                         <rect key="frame" x="44" y="38" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="ABO-bv-elr"/>
                             <constraint firstAttribute="height" constant="20" id="BeX-a2-W60"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_te.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kgx-6t-XQG">
+                    <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_te" translatesAutoresizingMaskIntoConstraints="NO" id="Kgx-6t-XQG">
                         <rect key="frame" x="44" y="63" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="N2H-De-OkE"/>
@@ -115,8 +115,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="home_te.png" width="32" height="32"/>
-        <image name="home_zhe.png" width="32" height="32"/>
+        <image name="home_te" width="14" height="14"/>
+        <image name="home_zhe" width="14" height="14"/>
         <image name="商家活动" width="16" height="16"/>
     </resources>
 </document>

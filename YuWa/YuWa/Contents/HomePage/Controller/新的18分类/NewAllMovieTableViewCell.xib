@@ -81,7 +81,7 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" title="购票">
-                            <color key="titleColor" red="0.25098039220000001" green="0.70196078429999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.28235294119999998" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
                             <action selector="toBuyTicketAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xaL-z3-oRj"/>

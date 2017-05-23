@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUJ-qo-PYt">
@@ -35,7 +35,7 @@
                             <outlet property="delegate" destination="-1" id="q3T-6i-Xgq"/>
                         </connections>
                     </textField>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_hui.png" translatesAutoresizingMaskIntoConstraints="NO" id="eM0-CF-vSC">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="特惠" translatesAutoresizingMaskIntoConstraints="NO" id="eM0-CF-vSC">
                         <rect key="frame" x="18" y="11.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="GzP-PU-pIs"/>
@@ -95,7 +95,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="home_hui.png" width="32" height="32"/>
         <image name="photo_sel" width="42" height="42"/>
+        <image name="特惠" width="14" height="14"/>
     </resources>
 </document>

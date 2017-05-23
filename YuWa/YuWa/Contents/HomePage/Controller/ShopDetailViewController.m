@@ -155,7 +155,7 @@
         _btn.frame = CGRectMake(kScreen_Width/2*i, 5, kScreen_Width/2, 28);
 //        btn.centerY = self.shopAndCommontView.height/2;
         _btn.tag = 100 + i;
-        [_btn setTitleColor:RGBCOLOR(255, 193, 0, 1) forState:UIControlStateNormal];
+        [_btn setTitleColor:[UIColor colorWithHexString:@"#333333"]  forState:UIControlStateNormal];
         
         [_btn setTitle:btnTitle[i] forState:UIControlStateNormal];
         _btn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -172,7 +172,7 @@
           markBtn = _btn;
         }
         [_btn setTitleEdgeInsets:UIEdgeInsetsMake(-3, 0, 3, 0)];
-        [_btn setTitleColor:[UIColor colorWithHexString:@"#5dc0ea"] forState:UIControlStateSelected];
+        [_btn setTitleColor:CNaviColor forState:UIControlStateSelected];
         [_btn addTarget:self action:@selector(shopAndCommitAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.shopAndCommontView addSubview:_btn];
         
@@ -180,7 +180,7 @@
     }
     line = [[UIView alloc]initWithFrame:CGRectMake(0, 23, kScreen_Width/8, 1)];
     line.centerX = kScreen_Width/4;
-    line.backgroundColor = [UIColor colorWithHexString:@"#5dc0ea"];
+    line.backgroundColor = CNaviColor;
     
     [self.shopAndCommontView addSubview:line];
    
@@ -410,7 +410,7 @@
     if (_btn.tag == 101) {
         [_btn setAttributedTitle:[NSString stringWithFirstStr:@"评价  " withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor colorWithHexString:@"#333333"] withSecondtStr:[NSString stringWithFormat:@"(%@)",self.mainModel.star]  withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor colorWithHexString:@"#fe8238"]] forState:UIControlStateNormal];
 
-        [_btn setAttributedTitle:[NSString stringWithFirstStr:@"评价  " withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor colorWithHexString:@"#5dc0ea"] withSecondtStr:[NSString stringWithFormat:@"(%@)",self.mainModel.star]  withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor colorWithHexString:@"#5dc0ea"]] forState:UIControlStateSelected];
+        [_btn setAttributedTitle:[NSString stringWithFirstStr:@"评价  " withFont:[UIFont systemFontOfSize:13.f] withColor:CNaviColor withSecondtStr:[NSString stringWithFormat:@"(%@)",self.mainModel.star]  withFont:[UIFont systemFontOfSize:13.f] withColor:CNaviColor] forState:UIControlStateSelected];
     }
     CGFloat realZhengshu;
     CGFloat realXiaoshu;
