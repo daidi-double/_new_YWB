@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CinemaAndBuyTicketModel.h"
 @interface CommendViewController : UIViewController
 @property (nonatomic,strong) UILabel * comLabel;
 @property (nonatomic,copy)NSString * order_id;
-@property (nonatomic,copy)NSString * film_id;
-
+@property (nonatomic,copy)NSString * film_code;
+@property (nonatomic,strong)CinemaAndBuyTicketModel * headerModel;
 @end

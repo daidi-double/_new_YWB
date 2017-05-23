@@ -20,5 +20,7 @@
 @property (nonatomic,copy)NSString * cinema_name;//影院名
 @property (nonatomic,copy)NSString * settlePrice;//几元起
 @property (nonatomic,copy)NSString * distance;//距离
-@property (nonatomic,copy)NSString * intro;//简介
+//@property (nonatomic,copy)NSString * intro;//简介
+@property (nonatomic,copy)NSString * highlight;//简介
+
 @end

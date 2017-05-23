@@ -335,7 +335,7 @@
 - (void)judgeIsContentOtherTicket:(NSString*)cinema_code{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_JUDGECONTENTOTHERTICKET];
     
-    self.cityCode = @"110100";
+    self.cityCode = @"110000";
     cinema_code = @"01010071";
     NSDictionary * pragrams = @{@"cityNo":self.cityCode,@"cinemaNo":cinema_code};
     HttpManager * manage = [[HttpManager alloc]init];
@@ -371,7 +371,7 @@
 - (void)getlocatCityCode{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CITYCODE];
     
-    self.cityCode = @"350500";
+    self.cityCode = @"110000";
     NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type};
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
@@ -385,7 +385,7 @@
 - (void)getHomePageCinemaList{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOME_CINEMALIST];
     
-    self.cityCode = @"110100";
+    self.cityCode = @"110000";
     NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type,@"device_id":[JWTools getUUID],@"typeList":self.typeList};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([UserSession instance].isLogin) {

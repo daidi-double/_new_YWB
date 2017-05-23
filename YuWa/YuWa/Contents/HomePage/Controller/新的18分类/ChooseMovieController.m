@@ -230,6 +230,7 @@
     NSLog(@"详细界面");
     MovieDetailViewController * vc = [[MovieDetailViewController alloc]init];
     vc.filmCode = self.filmCode;
+    vc.cinemaDetailModel = self.model;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -240,6 +241,7 @@
 }
 -(void)commend{
     CommendViewController * commendVC = [[CommendViewController alloc]init];
+    commendVC.headerModel = self.model;
     [self.navigationController pushViewController:commendVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {

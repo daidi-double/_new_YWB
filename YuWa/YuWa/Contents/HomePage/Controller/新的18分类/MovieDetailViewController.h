@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CinemaAndBuyTicketModel.h"
 @interface MovieDetailViewController : UIViewController
 @property (nonatomic,copy)NSString * filmCode;
-
+@property (nonatomic,strong)CinemaAndBuyTicketModel * cinemaDetailModel;
 @end

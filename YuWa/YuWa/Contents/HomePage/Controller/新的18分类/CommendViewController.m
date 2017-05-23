@@ -13,18 +13,12 @@
 {
     UITextView * textCommendView;
 }
-@property (nonatomic,strong) NSMutableArray * headerViewAry;//海报数据
 @property (nonatomic,strong) UITableView * commendTableView;
 @property (nonatomic,assign)NSInteger movieScore;//电影评分
 @end
 
 @implementation CommendViewController
-- (NSMutableArray*)headerViewAry{
-    if (!_headerViewAry) {
-        _headerViewAry = [NSMutableArray array];
-    }
-    return _headerViewAry;
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"发影评";
@@ -60,6 +54,7 @@
     if (section == 0) {
         
         ChooseMovieHeaderView * movieView = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.25f)];
+        movieView.model = self.headerModel;
         movieView.backgroundColor = [UIColor darkGrayColor];
         UITapGestureRecognizer * tapTouch = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(movieDetailAction)];
         tapTouch.delegate = self;
@@ -165,19 +160,17 @@
         [JRToast showWithText:@"请留下您的宝贵意见" duration:1];
         return;
     }
-    self.film_id = @"2";
+    self.film_code = self.headerModel.code;
     self.order_id = @"211";
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_COMMENTSCORE];
-    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID],@"order_id":self.order_id,@"customer_content":textCommendView.text,@"score":@(self.movieScore),@"film_id":self.film_id};
+    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID],@"order_id":self.order_id,@"customer_content":textCommendView.text,@"score":@(self.movieScore),@"film_id":self.film_code};
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
         MyLog(@"影评%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
-//            for (NSDictionary * dict in data[@"data"]) {
-            
-//                BannerModel* model = [BannerModel yy_modelWithDictionary:dict];
-//                [self.hotMovieSAry addObject:model];
-//            }
+            [JRToast showWithText:data[@"msg"] duration:1];
+            [self.navigationController popViewControllerAnimated:YES];
+
         }else{
             [JRToast showWithText:@"网络超时，请检查网络" duration:1];
         }

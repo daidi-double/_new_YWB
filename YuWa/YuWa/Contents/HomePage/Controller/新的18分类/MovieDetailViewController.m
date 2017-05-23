@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (nonatomic,strong) MovieDetailHeaderView * headerView;
 @property (nonatomic,strong) CommentModel * model;
+
 @end
 
 @implementation MovieDetailViewController
@@ -73,7 +74,7 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        
+        self.headerView.model = self.cinemaDetailModel;
         return self.headerView;
     }
     return nil;
@@ -119,7 +120,7 @@
 
 - (void)toCommentScore{
     CommendViewController * commendVC = [[CommendViewController alloc]init];
-    commendVC.film_id = self.model.id;
+    commendVC.headerModel = self.cinemaDetailModel;
 //    commendVC.order_id = //在我的订单中评价才需要
     [self.navigationController pushViewController:commendVC animated:YES];
 }
