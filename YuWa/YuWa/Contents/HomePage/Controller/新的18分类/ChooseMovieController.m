@@ -37,7 +37,7 @@
 @property (nonatomic,copy) NSString * time;//日期
 @property (nonatomic,strong) UIView * bgView;
 @property (nonatomic,strong) ChooseMovieHeaderView * movieView;
-@property (nonatomic,strong) CinemaAndBuyTicketModel * model;
+@property (nonatomic,strong) CinemaAndBuyTicketModel * model;//头部model
 @property (nonatomic,strong) CinemaModel * cinemaModel;//影院model
 @property (nonatomic,strong) NSString * type;//类型
 @end
@@ -83,6 +83,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self requestMovieData];
+    [self requestCinemaData];
 }
 #pragma mark - tableViewDelegate
 
@@ -230,7 +231,7 @@
     NSLog(@"详细界面");
     MovieDetailViewController * vc = [[MovieDetailViewController alloc]init];
     vc.filmCode = self.filmCode;
-    vc.cinemaDetailModel = self.model;
+//    vc.cinemaDetailModel = self.model;051100192011
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -297,8 +298,12 @@
     [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
         MyLog(@"电影影院和购票，影院数据%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
-            self.cinemaModel = [CinemaModel yy_modelWithDictionary:data[@"data"]];
-            //            [self.headerViewAry addObject:self.model];//数据是空的，所以暂时注释掉
+            [self.movieDataAry removeAllObjects];
+            for (NSDictionary * cinemaDic in data[@"data"]) {
+                
+                self.cinemaModel = [CinemaModel yy_modelWithDictionary:cinemaDic];
+                [self.movieDataAry addObject:self.cinemaModel];
+            }
             
         }else{
             [JRToast showWithText:@"网络超时，请检查网络" duration:1];

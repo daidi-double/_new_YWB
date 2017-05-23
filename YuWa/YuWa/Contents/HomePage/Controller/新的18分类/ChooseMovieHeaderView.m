@@ -36,11 +36,7 @@
     self.countryAndTime.text = [NSString stringWithFormat:@"地区:%@",self.model.country];
     self.scoreLabel.text = self.model.score;
     [self addSubview:self.gradeBtn];
-    UIImageView * rightImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 20, 0, 8, 15)];
-    rightImageView.centerY = self.height/2 - 15;
-    rightImageView.tag = 1011;
-    rightImageView.image = [UIImage imageNamed:@"右箭头"];
-    [self addSubview:rightImageView];
+    [self addSubview:self.rightImageView];
     CGFloat realZhengshu;
     CGFloat realXiaoshu;
 
@@ -200,6 +196,16 @@
 
     }
     return _gradeBtn;
+}
+- (UIImageView*)rightImageView{
+    if (!_rightImageView) {
+        _rightImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 20, 0, 8, 15)];
+        _rightImageView.centerY = self.height/2 - 15;
+        _rightImageView.tag = 1011;
+        _rightImageView.image = [UIImage imageNamed:@"右箭头"];
+       
+    }
+    return _rightImageView;
 }
 - (void)gradeBtn:(UIButton*)sender{
     NSLog(@"评分");

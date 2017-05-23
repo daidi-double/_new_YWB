@@ -274,14 +274,6 @@
     self.film_code = @"001X00762017";
     self.cinema_code = @"1002062";
     
-    ///////////////////////////////////////////////////////////
-    
-//    
-//    //测试数据
-//    self.time = @"2017-05-16";
-//    
-//    
-    /////////////////////////////////////////////////////////
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code,@"film_code":self.film_code,@"time":self.time};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {

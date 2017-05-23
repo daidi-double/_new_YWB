@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CinemaCharacteristicTableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
+@property (nonatomic,strong)NSArray * imageAry;
 @end

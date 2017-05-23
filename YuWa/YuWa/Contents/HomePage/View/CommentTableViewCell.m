@@ -36,7 +36,7 @@
     UILabel*nameLabel=[self viewWithTag:2];
     nameLabel.text=model.customer_name;
     //判断是否为手机号码，是就隐藏一部分
-    if (model.customer_name.length >= 11 && [JWTools isNumberWithStr:model.customer_name]) {
+    if ([JWTools isNumberWithStr:model.customer_name]) {
         nameLabel.text = [NSString stringWithFormat:@"%@****",[model.customer_name substringToIndex:model.customer_name.length - 4]];
     }
     
@@ -48,38 +48,78 @@
     CGFloat realXiaoshu;
     
     NSString*starNmuber=model.score;
-    NSString*zhengshu=[starNmuber substringToIndex:1];
-    realZhengshu=[zhengshu floatValue];
-    NSString*xiaoshu=[starNmuber substringFromIndex:1];
-    CGFloat CGxiaoshu=[xiaoshu floatValue];
     
-    if (CGxiaoshu>0.5) {
-        realXiaoshu=0;
-        realZhengshu= realZhengshu+1;
-    }else if (CGxiaoshu>0&&CGxiaoshu<=0.5){
-        realXiaoshu=0.5;
-    }else{
-        realXiaoshu=0;
+    if (self.status == 1) {
+        NSString * starNmuber1 = model.score;
+        CGFloat totalScroe = [starNmuber1 floatValue]/2;
+        NSString *starNmuber = [NSString stringWithFormat:@"%.2f",totalScroe];
+        NSString*zhengshu=[starNmuber substringToIndex:1];
+        realZhengshu=[zhengshu floatValue];
+        NSString*xiaoshu=[starNmuber substringFromIndex:1];
+        CGFloat CGxiaoshu=[xiaoshu floatValue];
         
-    }
-    
-    for (int i=30; i<35; i++) {
-        UIImageView*imageView=[self viewWithTag:i];
-        if (imageView.tag-30<realZhengshu) {
-            //亮
-            imageView.image=[UIImage imageNamed:@"home_lightStar"];
-        }else if (imageView.tag-30==realZhengshu&&realXiaoshu!=0){
-            //半亮
-            imageView.image=[UIImage imageNamed:@"home_halfStar"];
-            
+        if (CGxiaoshu>=0.75) {
+            realXiaoshu=0;
+            realZhengshu= realZhengshu+1;
+        }else if (CGxiaoshu>0&&CGxiaoshu<0.25){
+            realXiaoshu=0;
         }else{
-            //不亮
-            imageView.image=[UIImage imageNamed:@"home_grayStar"];
+            realXiaoshu=0.5;
+            
         }
         
+        for (int i=30; i<35; i++) {
+            UIImageView*startImageView=[self viewWithTag:i];;
+            startImageView.tag = 30 +i;
+            if (startImageView.tag-30<realZhengshu) {
+                //亮
+                startImageView.image=[UIImage imageNamed:@"home_lightStar"];
+            }else if (startImageView.tag-30==realZhengshu&&realXiaoshu<0.75 && realXiaoshu >=0.25){
+                //半亮
+                startImageView.image=[UIImage imageNamed:@"home_halfStar"];
+                
+            }else{
+                //不亮
+                startImageView.image=[UIImage imageNamed:@"home_grayStar"];
+            }
+            
+            
+            [self addSubview:startImageView];
+        }
+  
+    }else{
+        NSString*zhengshu=[starNmuber substringToIndex:1];
+        realZhengshu=[zhengshu floatValue];
+        NSString*xiaoshu=[starNmuber substringFromIndex:1];
+        CGFloat CGxiaoshu=[xiaoshu floatValue];
         
+        if (CGxiaoshu>0.5) {
+            realXiaoshu=0;
+            realZhengshu= realZhengshu+1;
+        }else if (CGxiaoshu>0&&CGxiaoshu<=0.5){
+            realXiaoshu=0.5;
+        }else{
+            realXiaoshu=0;
+            
+        }
+        
+        for (int i=30; i<35; i++) {
+            UIImageView*imageView=[self viewWithTag:i];
+            if (imageView.tag-30<realZhengshu) {
+                //亮
+                imageView.image=[UIImage imageNamed:@"home_lightStar"];
+            }else if (imageView.tag-30==realZhengshu&&realXiaoshu!=0){
+                //半亮
+                imageView.image=[UIImage imageNamed:@"home_halfStar"];
+                
+            }else{
+                //不亮
+                imageView.image=[UIImage imageNamed:@"home_grayStar"];
+            }
+            
+            
+        }
     }
-    
     // --------------------------------------------------------
     
 #pragma  50 的地方

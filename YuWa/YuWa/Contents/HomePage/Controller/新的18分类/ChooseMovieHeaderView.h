@@ -24,6 +24,8 @@
 @property (nonatomic,strong) UILabel * countryAndTime;//国家和时长
 @property (nonatomic,strong) UILabel * categoryLabel;//类型
 
+@property (nonatomic,strong) UIImageView * rightImageView;
+
 @property (nonatomic,strong) UIButton * wantSeeBtn;//想看按钮
 @property (nonatomic,strong) UIButton * gradeBtn;//评分按钮
 @property (nonatomic,strong) UIButton * playBtn;//播放按钮

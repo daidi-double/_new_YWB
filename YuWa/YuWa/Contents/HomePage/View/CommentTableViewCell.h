@@ -11,7 +11,7 @@
 @class CommentModel;
 
 @interface CommentTableViewCell : UITableViewCell
-
+@property (nonatomic,assign)NSInteger status;//1为电影评论
 //@property(nonatomic,strong)NSDictionary*allDatas;
 
 -(void)giveValueWithModel:(CommentModel*)model;

@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (nonatomic,strong) MovieDetailHeaderView * headerView;
 @property (nonatomic,strong) CommentModel * model;
+@property (nonatomic,strong) NSMutableArray * commentAry;
 
 @end
 
@@ -29,9 +30,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self makeUI];
-    [self requestData];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestData];
+    
+}
 -(void)makeUI{
     self.title = @"影片详情";
     [self.detailTableView registerNib:[UINib nibWithNibName:CinemaCell123 bundle:nil] forCellReuseIdentifier:CinemaCell123];
@@ -46,7 +50,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 1) {
-        return 8;
+        return self.commentAry.count;
     }
     return 1;
 }
@@ -64,11 +68,11 @@
     if (section == 1) {
         return 25.f;
     }
-    return [MovieDetailHeaderView getHeaderHeight:@"黄发发发卡积分；啊哈；Fiat；副科级案发诶暗访狐恩爱法芙娜； 房间爱偶尔放假啊诶佛教安鹏飞哈皮肤哈佩服"];
+    return [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1) {
-        [CommentTableViewCell getCellHeight:self.model];
+        [CommentTableViewCell getCellHeight:self.commentAry[indexPath.row]];
     }
     return 100;
 }
@@ -82,11 +86,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         CinemaCharacteristicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CinemaCell123];
-        //添加判断有多少图片，多余的隐藏，tag从100开始
+        
+        NSArray * imageAry = [self.cinemaDetailModel.stills componentsSeparatedByString:@","];
+        cell.imageAry = imageAry;
         return cell;
     }else{
         CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:COMMENTCELl111];
-        
+        [cell giveValueWithModel:self.model];
         return cell;
     }
     
@@ -95,23 +101,40 @@
 #pragma mark ---http
 - (void)requestData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_MOVIEDETAIL];
-    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
+    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmNo":self.filmCode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
         MyLog(@"影片详情%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
+            //头部影片数据
+            [self.commentAry removeAllObjects];
+                self.cinemaDetailModel = [CinemaAndBuyTicketModel yy_modelWithDictionary:data[@"data"][@"filmDetail"]];
             
+            //评论部分数据
+            for (NSDictionary * commentDict in data[@"data"][@"filmComment"]) {
+                self.model = [CommentModel yy_modelWithDictionary:commentDict];
+                [self.commentAry addObject:self.model];
+            }
+            
+            [self.detailTableView reloadData];
         }
     }];
 }
 
 - (MovieDetailHeaderView*)headerView{
     if (!_headerView) {
-        CGFloat height = [MovieDetailHeaderView getHeaderHeight:@""];
+        CGFloat height = [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
         _headerView = [[MovieDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, height)];
         _headerView.delegate =self;
     }
     return _headerView;
+}
+
+- (NSMutableArray *)commentAry{
+    if (!_commentAry) {
+        _commentAry = [NSMutableArray array];
+    }
+    return _commentAry;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

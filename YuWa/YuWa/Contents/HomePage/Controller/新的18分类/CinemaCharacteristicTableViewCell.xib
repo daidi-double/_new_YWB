@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,48 +18,24 @@
                 <rect key="frame" x="0.0" y="0.0" width="335" height="82"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baobaoBG0" translatesAutoresizingMaskIntoConstraints="NO" id="yFv-vq-4Sz">
-                        <rect key="frame" x="16" y="8" width="70" height="65.5"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baobaoBG1" translatesAutoresizingMaskIntoConstraints="NO" id="AsM-HL-FOS">
-                        <rect key="frame" x="94" y="8" width="69.5" height="65.5"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baobaoBG3" translatesAutoresizingMaskIntoConstraints="NO" id="YxF-Yb-iB5">
-                        <rect key="frame" x="171.5" y="8" width="70" height="65.5"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baobaoBG4" translatesAutoresizingMaskIntoConstraints="NO" id="kxb-8t-UEw">
-                        <rect key="frame" x="249.5" y="8" width="69.5" height="65.5"/>
-                    </imageView>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dbx-WY-it8">
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="82"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="Y3j-qf-5Ax"/>
+                        </connections>
+                    </scrollView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="kxb-8t-UEw" firstAttribute="height" secondItem="yFv-vq-4Sz" secondAttribute="height" id="AED-80-fvK"/>
-                    <constraint firstItem="AsM-HL-FOS" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="DVg-jp-S1V"/>
-                    <constraint firstItem="YxF-Yb-iB5" firstAttribute="leading" secondItem="AsM-HL-FOS" secondAttribute="trailing" constant="8" id="DfE-7W-Zhl"/>
-                    <constraint firstItem="YxF-Yb-iB5" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="GvB-Bq-qOl"/>
-                    <constraint firstItem="AsM-HL-FOS" firstAttribute="width" secondItem="yFv-vq-4Sz" secondAttribute="width" id="Gwz-Ca-JDH"/>
-                    <constraint firstItem="kxb-8t-UEw" firstAttribute="width" secondItem="yFv-vq-4Sz" secondAttribute="width" id="JT1-i1-MX4"/>
-                    <constraint firstItem="AsM-HL-FOS" firstAttribute="leading" secondItem="yFv-vq-4Sz" secondAttribute="trailing" constant="8" id="MmL-Ay-qUk"/>
-                    <constraint firstItem="AsM-HL-FOS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ND2-QL-svO"/>
-                    <constraint firstItem="kxb-8t-UEw" firstAttribute="leading" secondItem="YxF-Yb-iB5" secondAttribute="trailing" constant="8" id="ZCo-Og-Dty"/>
-                    <constraint firstItem="AsM-HL-FOS" firstAttribute="height" secondItem="yFv-vq-4Sz" secondAttribute="height" id="a0F-M6-jxn"/>
-                    <constraint firstItem="YxF-Yb-iB5" firstAttribute="height" secondItem="yFv-vq-4Sz" secondAttribute="height" id="aUd-Wz-g0c"/>
-                    <constraint firstItem="yFv-vq-4Sz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="aZa-zF-O6d"/>
-                    <constraint firstItem="YxF-Yb-iB5" firstAttribute="width" secondItem="yFv-vq-4Sz" secondAttribute="width" id="ahi-e1-KL4"/>
-                    <constraint firstItem="yFv-vq-4Sz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="gch-Hf-oa7"/>
-                    <constraint firstAttribute="bottom" secondItem="kxb-8t-UEw" secondAttribute="bottom" constant="8" id="r87-w6-ZQq"/>
-                    <constraint firstItem="kxb-8t-UEw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="rFX-fH-M3Z"/>
-                    <constraint firstItem="yFv-vq-4Sz" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="v5k-IA-IY6"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="kxb-8t-UEw" secondAttribute="trailing" constant="8" id="wxU-PQ-sKu"/>
-                    <constraint firstItem="YxF-Yb-iB5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="zZi-yF-Q2j"/>
+                    <constraint firstAttribute="trailing" secondItem="dbx-WY-it8" secondAttribute="trailing" id="4Hf-mY-hgn"/>
+                    <constraint firstItem="dbx-WY-it8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="PFA-9d-crv"/>
+                    <constraint firstItem="dbx-WY-it8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SeF-R5-X0Q"/>
+                    <constraint firstAttribute="bottom" secondItem="dbx-WY-it8" secondAttribute="bottom" id="c6c-Am-dia"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="imageScrollView" destination="dbx-WY-it8" id="Hfk-WW-C7D"/>
+            </connections>
             <point key="canvasLocation" x="26.5" y="83"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="baobaoBG0" width="375" height="603"/>
-        <image name="baobaoBG1" width="375" height="603"/>
-        <image name="baobaoBG3" width="375" height="603"/>
-        <image name="baobaoBG4" width="375" height="603"/>
-    </resources>
 </document>

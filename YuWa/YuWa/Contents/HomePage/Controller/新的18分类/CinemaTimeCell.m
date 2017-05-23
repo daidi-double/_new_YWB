@@ -7,7 +7,7 @@
 //
 
 #import "CinemaTimeCell.h"
-
+#import "NSString+JWAppendOtherStr.h"
 @implementation CinemaTimeCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andDataAry:(NSMutableArray *)dataAry{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -22,7 +22,7 @@
         _cinemaName = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, kScreen_Width*0.8, self.bounds.size.height/2)];
         _cinemaName.textColor = [UIColor blackColor];
         _cinemaName.textAlignment = 0;
-        _cinemaName.font = [UIFont systemFontOfSize:18];
+        _cinemaName.font = [UIFont systemFontOfSize:15];
          [self.contentView addSubview:_cinemaName];
     }
     return _cinemaName;
@@ -33,7 +33,7 @@
         _price = [[UILabel alloc]initWithFrame:CGRectMake(10, self.cinemaName.height+15, kScreen_Width*0.4f, self.bounds.size.height*0.25f)];
         _price.textAlignment = 0;
         _price.font = [UIFont systemFontOfSize:15];
-        _price.textColor = [UIColor greenColor];
+        _price.textColor = RGBCOLOR(253, 202, 75, 1);
          [self.contentView addSubview:_price];
     }
     return _price;
@@ -52,10 +52,10 @@
 
 - (UILabel*)distance{
     if (!_distance) {
-        _distance = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width*0.8, 0, kScreen_Width*0.2, self.bounds.size.height/2)];
-        _distance.center = CGPointMake(kScreen_Width*0.9, self.bounds.size.height/2);
-        _distance.textAlignment = NSTextAlignmentCenter;
-        _distance.font = [UIFont systemFontOfSize:15];
+        _distance = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width*0.8, 0, kScreen_Width*0.23, self.bounds.size.height/2)];
+        _distance.center = CGPointMake(kScreen_Width*0.78, self.bounds.size.height/2);
+        _distance.textAlignment = 2;
+        _distance.font = [UIFont systemFontOfSize:13];
         _distance.textColor = [UIColor darkGrayColor];
         [self.contentView addSubview:_distance];
     }
@@ -70,7 +70,9 @@
 - (void)setData{
     
     self.cinemaName.text = self.model.cinema_name;
-    self.price.text = [NSString stringWithFormat:@"￥%@起",self.model.settlePrice];
+
+    self.price.attributedText = [NSString stringWithFirstStr:[NSString stringWithFormat:@"￥%@",self.model.settlePrice] withFont:self.price.font withColor:RGBCOLOR(253, 202, 75, 1) withSecondtStr:@"起" withFont:[UIFont systemFontOfSize:13] withColor:RGBCOLOR(123, 124, 125, 1)];
+    
     CGFloat distanceNo = [self.model.distance floatValue]/1000;
     self.distance.text = [NSString stringWithFormat:@"%.2fkm",distanceNo];
 }
