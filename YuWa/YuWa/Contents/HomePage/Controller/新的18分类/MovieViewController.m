@@ -229,8 +229,8 @@
    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [self judgeIsContentOtherTicket:self.cinema_code];//修改
+    HomeCinemaListModel * model = self.theaterNameAry[indexPath.row];
+    [self judgeIsContentOtherTicket:model.code];//修改
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -385,7 +385,7 @@
 - (void)getHomePageCinemaList{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOME_CINEMALIST];
     
-    self.cityCode = @"110000";
+    self.cityCode = @"110100";
     NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type,@"device_id":[JWTools getUUID],@"typeList":self.typeList};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([UserSession instance].isLogin) {

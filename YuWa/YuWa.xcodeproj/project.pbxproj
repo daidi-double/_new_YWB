@@ -757,6 +757,8 @@
 		AA41E3401EC0366200FCB498 /* NewHotMovieCollectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA41E33E1EC0366200FCB498 /* NewHotMovieCollectCell.xib */; };
 		AA42110E1E5ABAEF00085650 /* MovieCinemaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42110C1E5ABAEF00085650 /* MovieCinemaViewController.m */; };
 		AA42110F1E5ABAEF00085650 /* MovieCinemaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA42110D1E5ABAEF00085650 /* MovieCinemaViewController.xib */; };
+		AA4517091ED52118007CF813 /* CinameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4517071ED52118007CF813 /* CinameTableViewCell.m */; };
+		AA45170A1ED52118007CF813 /* CinameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA4517081ED52118007CF813 /* CinameTableViewCell.xib */; };
 		AA466C7E1E53EA1F009E9F98 /* gogogo1.png in Resources */ = {isa = PBXBuildFile; fileRef = AA466C7C1E53EA1F009E9F98 /* gogogo1.png */; };
 		AA466C7F1E53EA1F009E9F98 /* gogogo2.png in Resources */ = {isa = PBXBuildFile; fileRef = AA466C7D1E53EA1F009E9F98 /* gogogo2.png */; };
 		AA466CCB1E5449D1009E9F98 /* MovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA466CC91E5449D1009E9F98 /* MovieViewController.m */; };
@@ -2684,6 +2686,9 @@
 		AA42110B1E5ABAEF00085650 /* MovieCinemaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCinemaViewController.h; sourceTree = "<group>"; };
 		AA42110C1E5ABAEF00085650 /* MovieCinemaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCinemaViewController.m; sourceTree = "<group>"; };
 		AA42110D1E5ABAEF00085650 /* MovieCinemaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCinemaViewController.xib; sourceTree = "<group>"; };
+		AA4517061ED52118007CF813 /* CinameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinameTableViewCell.h; sourceTree = "<group>"; };
+		AA4517071ED52118007CF813 /* CinameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinameTableViewCell.m; sourceTree = "<group>"; };
+		AA4517081ED52118007CF813 /* CinameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CinameTableViewCell.xib; sourceTree = "<group>"; };
 		AA466C7C1E53EA1F009E9F98 /* gogogo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gogogo1.png; sourceTree = "<group>"; };
 		AA466C7D1E53EA1F009E9F98 /* gogogo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gogogo2.png; sourceTree = "<group>"; };
 		AA466CC81E5449D1009E9F98 /* MovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieViewController.h; sourceTree = "<group>"; };
@@ -5746,8 +5751,6 @@
 				AA41E33E1EC0366200FCB498 /* NewHotMovieCollectCell.xib */,
 				AA3B4DC31E55AA22008466C4 /* CinemaCell.h */,
 				AA3B4DC41E55AA22008466C4 /* CinemaCell.m */,
-				AA3009241E5725CE0025B2A5 /* CinemaTimeCell.h */,
-				AA3009251E5725CE0025B2A5 /* CinemaTimeCell.m */,
 				AA0E294D1E57E45A008828C7 /* CarouselViewCell.h */,
 				AA0E294E1E57E45A008828C7 /* CarouselViewCell.m */,
 				AAF237241E5BE96A002D58B4 /* PlayTimeCell.h */,
@@ -5913,6 +5916,18 @@
 				AA1FEB541E55DA3000239FEC /* HotMovieCollectCell.m */,
 			);
 			name = "废弃";
+			sourceTree = "<group>";
+		};
+		AA4517051ED520DA007CF813 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA3009241E5725CE0025B2A5 /* CinemaTimeCell.h */,
+				AA3009251E5725CE0025B2A5 /* CinemaTimeCell.m */,
+				AA4517061ED52118007CF813 /* CinameTableViewCell.h */,
+				AA4517071ED52118007CF813 /* CinameTableViewCell.m */,
+				AA4517081ED52118007CF813 /* CinameTableViewCell.xib */,
+			);
+			name = cell;
 			sourceTree = "<group>";
 		};
 		AA466C7B1E53E9F5009E9F98 /* 商家入驻 */ = {
@@ -6185,6 +6200,7 @@
 		AAD81F3E1EC5F74400799957 /* 影院和购票 */ = {
 			isa = PBXGroup;
 			children = (
+				AA4517051ED520DA007CF813 /* cell */,
 				AA377B711EC6DDC500E81A88 /* 影片详情 */,
 				AA377B771EC6DFFB00E81A88 /* view */,
 				AA377B721EC6DDFD00E81A88 /* 影院 */,
@@ -11191,6 +11207,7 @@
 				AA3544AE1E9DF23900A2EC73 /* 0baobaoBG15@2x.jpg in Resources */,
 				AA35453F1E9DF23A00A2EC73 /* 2baobaoBG40@2x.jpg in Resources */,
 				B3A28A531DCA1059008A0A15 /* RBPublicLocationEditorViewController.xib in Resources */,
+				AA45170A1ED52118007CF813 /* CinameTableViewCell.xib in Resources */,
 				AA35449F1E9DF23900A2EC73 /* 4baobaoLVUP56@2x.jpg in Resources */,
 				C1214C071DEC15D200FFC63C /* MybindingShopTableViewCell.xib in Resources */,
 				B3AE4D731D91302B000A389F /* TZImagePickerController.bundle in Resources */,
@@ -11668,6 +11685,7 @@
 				AAF508851EAF25A10007BC78 /* YWOtherPayMoneyTableViewCell.m in Sources */,
 				B38B2E1A1D8FACD8004D5256 /* MJRefreshBackNormalFooter.m in Sources */,
 				B36C7F6D1D9E0DF100B022E0 /* YWMessageNotificationModel.m in Sources */,
+				AA4517091ED52118007CF813 /* CinameTableViewCell.m in Sources */,
 				B38B2EFB1D8FC82F004D5256 /* RBHomeListImagesModel.m in Sources */,
 				B3FEBA0B1D9B71D4003CDEF2 /* YWPayNotificationTableView.m in Sources */,
 				B301E7CE1DAC8C010001336E /* YWMessageSearchFriendAddModel.m in Sources */,

@@ -22,6 +22,8 @@
 @property (nonatomic,strong) MovieDetailHeaderView * headerView;
 @property (nonatomic,strong) CommentModel * model;
 @property (nonatomic,strong) NSMutableArray * commentAry;
+@property (nonatomic,strong)UILabel * textLabel;
+@property (nonatomic,strong) UIButton * commentBtn;
 
 @end
 
@@ -30,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self makeUI];
+    [self creatLabel];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -50,6 +53,13 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 1) {
+        if (self.commentAry.count<=0) {
+            self.textLabel.hidden = NO;
+            self.commentBtn.hidden = NO;
+        }else{
+            self.textLabel.hidden = YES;
+            self.commentBtn.hidden = YES;
+        }
         return self.commentAry.count;
     }
     return 1;
@@ -120,7 +130,36 @@
         }
     }];
 }
-
+- (void)creatLabel{
+    _textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, kScreen_Height * 0.85, kScreen_Width/3, 35)];
+    _textLabel.centerX = kScreen_Width/2;
+    _textLabel.textAlignment = 1;
+    _textLabel.textColor = RGBCOLOR(124, 125, 123, 1);
+    _textLabel.font = [UIFont systemFontOfSize:14];
+    _textLabel.text = @"暂无评论";
+    [self.view addSubview:_textLabel];
+    _commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _commentBtn.frame = CGRectMake(0, kScreen_Height * 0.85, kScreen_Width/3, 28);
+    _commentBtn.centerX = kScreen_Width/2;
+    _commentBtn.centerY = _textLabel.centerY + 30;
+    [_commentBtn setTitle:@"我来评论" forState:UIControlStateNormal];
+    [_commentBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
+    
+    _commentBtn.layer.borderColor = CNaviColor.CGColor;
+    _commentBtn.layer.borderWidth = 1;
+    _commentBtn.layer.masksToBounds = YES;
+    _commentBtn.layer.cornerRadius = 5;
+    [_commentBtn addTarget:self action:@selector(toComment) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_commentBtn];
+    _commentBtn.hidden = YES;
+    _textLabel.hidden = YES;
+}
+- (void)toComment{
+    CommendViewController * commendVC = [[CommendViewController alloc]init];
+    commendVC.film_code = self.filmCode;
+    commendVC.headerModel = self.cinemaDetailModel;
+    [self.navigationController pushViewController:commendVC animated:YES];
+}
 - (MovieDetailHeaderView*)headerView{
     if (!_headerView) {
         CGFloat height = [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];

@@ -8,7 +8,7 @@
 
 #import "ChooseMovieController.h"
 #import "ChooseMovieHeaderView.h"//电影详情海报
-#import "CinemaTimeCell.h"
+#import "CinameTableViewCell.h"
 #import "MovieCinemaViewController.h"
 #import "PlayViewController.h"
 #import "CommendViewController.h"
@@ -17,7 +17,7 @@
 #import "CinemaAndBuyTicketModel.h"
 
 #import "CinemaModel.h"//影院id
-
+#define CINEMASHOWCELL @"CinameTableViewCell"
 @interface ChooseMovieController ()<UITableViewDelegate,UITableViewDataSource,ChooseMovieHeaderViewDelegate,UIGestureRecognizerDelegate>
 {
     UIButton * markTimeBtn;
@@ -73,6 +73,7 @@
     self.view.backgroundColor = [UIColor greenColor];
     self.title = self.movieName;
     [self.view addSubview:self.movieTableView];
+    [self.movieTableView registerNib:[UINib nibWithNibName:CINEMASHOWCELL bundle:nil] forCellReuseIdentifier:CINEMASHOWCELL];
     _isselected = 0;
     self.type = @"0";
     self.pagen = 10;
@@ -115,7 +116,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    CinemaTimeCell * cell = [[CinemaTimeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cinemaTimeCell" andDataAry:self.movieDataAry];
+    CinameTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CINEMASHOWCELL];
 
     cell.model = self.cinemaModel;
     cell.backgroundColor = [UIColor whiteColor];
@@ -257,6 +258,7 @@
 - (void)requestMovieData{
     
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAANDBUYTICKET];
+    self.filmCode = @"001103332016";
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
@@ -284,8 +286,8 @@
 }
 //获取影院数据
 - (void)requestCinemaData{
-    
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMANDDATE];
+    self.filmCode = @"001103332016";
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"time":self.time,@"pages":@(self.pages),@"pagen":@(self.pagen)};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {

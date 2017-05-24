@@ -273,8 +273,8 @@
 - (void)requestFootData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAFOOT];
 
-    self.cinema_code = @"1002062";
-    
+    self.cinema_code = @"01010071";
+
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code,@"film_code":self.film_code,@"time":self.time};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
