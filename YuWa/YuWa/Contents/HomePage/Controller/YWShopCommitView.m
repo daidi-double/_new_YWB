@@ -83,7 +83,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 1) {
-        return 35.f;
+        return 45.f;
     }
     return 0.01f;
 }
@@ -194,9 +194,9 @@
 }
 - (UIView*)bgview{
     if (!_bgview) {
-        _bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 35)];
+        _bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45)];
         _bgview.backgroundColor = RGBCOLOR(240, 240, 240, 1);
-        UIView * bgViewT = [[UIView alloc]initWithFrame:CGRectMake(0, 5, kScreen_Width, 25)];
+        UIView * bgViewT = [[UIView alloc]initWithFrame:CGRectMake(0, 5, kScreen_Width, 35)];
         bgViewT.backgroundColor = [UIColor whiteColor];
         [_bgview addSubview:bgViewT];
         
@@ -204,7 +204,7 @@
         CGFloat btnWidth = (kScreen_Width -2)/3;
         for (int i = 0; i <3;  i++) {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake((btnWidth +1) * i, 0, btnWidth, 25);
+            btn.frame = CGRectMake((btnWidth +1) * i, 0, btnWidth, 35);
             [btn setTitle:titleAry[i] forState:UIControlStateNormal];
             btn.centerY = bgViewT.frame.size.height/2;
             btn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -219,7 +219,7 @@
             [btn addTarget:self action:@selector(seeOtherComment:) forControlEvents:UIControlEventTouchUpInside];
             [bgViewT addSubview:btn];
             
-            UIView * line = [[UIView alloc]initWithFrame:CGRectMake(btnWidth +(1+btnWidth)*i, 5, 1, 15)];
+            UIView * line = [[UIView alloc]initWithFrame:CGRectMake(btnWidth +(1+btnWidth)*i, 8, 1, 19)];
             line.backgroundColor = [UIColor lightGrayColor];
             
             [bgViewT addSubview:line];

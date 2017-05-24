@@ -39,10 +39,10 @@
 
 - (void)creatWawaView{
     
-    _wawaView = [[UIView alloc]initWithFrame:CGRectMake(0, 104, kScreen_Width, kScreen_Height/2)];
+    _wawaView = [[UIView alloc]initWithFrame:CGRectMake(0, 32, kScreen_Width, kScreen_Height/2)];
     _wawaView.hidden = YES;
     [self addSubview:_wawaView];
-    UIImageView * wawaImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width/2, 130, kScreen_Width/3, kScreen_Width/3)];
+    UIImageView * wawaImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width/2, 100, kScreen_Width/3, kScreen_Width/3)];
     wawaImageView.centerX = kScreen_Width/2;
     wawaImageView.image = [UIImage imageNamed:@"娃娃"];
     [_wawaView addSubview:wawaImageView];

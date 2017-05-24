@@ -104,15 +104,18 @@
     _score.font = [UIFont systemFontOfSize:15];
     [self addSubview:_score];
     
-    _bgImageView.image = [Acceleecet boxblurImage:[UIImage imageNamed:@"baobaoBG0"] withBlurNumber:0.9];
+//    _bgImageView.image = [Acceleecet boxblurImage:[UIImage imageNamed:@"baobaoBG0"] withBlurNumber:0.9];
+    
+    
     
     _BGScrollView = [[UIView alloc]initWithFrame:CGRectMake(0,titleLabel.bottom +10, kScreen_Width, self.height *0.55f)];
+
     //        _BGScrollView.backgroundColor = [UIColor clearColor];
     [self addSubview:_BGScrollView];
     
     ViscosityLayout * layout = [[ViscosityLayout alloc]init];
     [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    _movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, self.height * 0.4f - 5, kScreen_Width, self.height * 0.4f) collectionViewLayout:layout];
+    _movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,titleLabel.bottom +20, kScreen_Width, self.height * 0.5f-10) collectionViewLayout:layout];
     
     [_movieCollectView registerClass:[MoviePicCollectionViewCell class] forCellWithReuseIdentifier:MOVIECELL1];
     [_movieCollectView registerNib:[UINib nibWithNibName:MOVIECELL1 bundle:nil] forCellWithReuseIdentifier:MOVIECELL1];
@@ -125,8 +128,12 @@
     _movieCollectView.showsVerticalScrollIndicator = NO;
     _movieCollectView.showsHorizontalScrollIndicator = NO;
     
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, titleLabel.bottom +10, kScreen_Width, _BGScrollView.height -10)];
+   
+    toolbar.barStyle = UIBarStyleBlackTranslucent;
+    toolbar.alpha = 0.8;
+    [self addSubview:toolbar];
     [self addSubview:_movieCollectView];
-
 
 }
 #pragma mark - collectViewDelegate
@@ -134,7 +141,9 @@
     return self.flimListAry.count;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    collectionView.contentOffset = CGPointMake(80*indexPath.item, 0);
     
+    //调用请求数据方法刷新数据
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -159,11 +168,11 @@
         _BGroundView.image = [UIImage imageNamed:@"横条.png"];
         [_bgImageView addSubview:_BGroundView];
         
-        
-        _bgImageView.image = [Acceleecet boxblurImage:self.imageAry[0] withBlurNumber:0.9];
+
+
     }
     
-    
+    _bgImageView.image = self.imageAry[self.index];
     return cell;
 }
 
@@ -171,7 +180,7 @@
 {
     CGFloat offsetX;
     for (int i = 0; i<self.flimListAry.count; i++) {
-        offsetX = kScreen_Width/4*i;
+        offsetX = 80*i;
         if (scrollView.mj_offsetX == offsetX) {
             self.index = i;
         }
@@ -197,7 +206,7 @@
         
     }
     
-    _bgImageView.image = [Acceleecet boxblurImage:self.imageAry[self.index] withBlurNumber:0.9];
+    _bgImageView.image = self.imageAry[self.index];
     
  
 }

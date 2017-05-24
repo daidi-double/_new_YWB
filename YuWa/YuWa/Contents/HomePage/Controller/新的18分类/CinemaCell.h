@@ -16,6 +16,8 @@
 @property (nonatomic,strong)HomeCinemaListModel * model;
 @property (nonatomic,strong)UILabel * discount;
 @property (nonatomic,assign)BOOL isdiscount;
+@property (nonatomic,strong)UILabel * otherTicketLabel;//通兑票图标
+@property (nonatomic,strong)UILabel * seatLabel;//选座图标
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andDataAry:(NSMutableArray*)dataAry;
 @end

@@ -64,7 +64,7 @@
         
     }
     //---------------------------------------------------------------------------
-    self.introduceLabel.text = self.model.intro;
+    self.introduceLabel.text = self.model.highlight;
 
 }
 - (IBAction)toBuyTicketAction:(UIButton *)sender {

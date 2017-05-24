@@ -69,7 +69,7 @@
 }
 - (void)creatWawaView{
     
-    _wawaView = [[UIView alloc]initWithFrame:CGRectMake(0, 104, kScreen_Width, kScreen_Height/2)];
+    _wawaView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height/2)];
     _wawaView.hidden = YES;
     [self.view addSubview:_wawaView];
     UIImageView * wawaImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width/2, 130, kScreen_Width/3, kScreen_Width/3)];

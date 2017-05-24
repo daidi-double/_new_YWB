@@ -29,7 +29,7 @@ static const CGFloat ItemHW = 60;
     [super prepareLayout];
     
     //初始化
-    self.itemSize = CGSizeMake(ItemHW, self.collectionView.frame.size.height * 0.7f);
+    self.itemSize = CGSizeMake(ItemHW, self.collectionView.frame.size.height * 0.62f);
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.minimumLineSpacing = 20;
 

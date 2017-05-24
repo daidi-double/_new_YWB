@@ -179,7 +179,8 @@
         CGRect zoomRect = [weakSelf _zoomRectInView:weakSelf.seatScrollView forScale:maximumZoomScale withCenter:CGPointMake(seatBtn.centerX, seatBtn.centerY)];
         
         [weakSelf.seatScrollView zoomToRect:zoomRect animated:YES];
-                                                }];
+        
+    }];
     self.seatView = seatView;
     seatView.frame = CGRectMake(0, 0,seatView.seatViewWidth, seatView.seatViewHeight);
     [self.seatScrollView insertSubview:seatView atIndex:0];

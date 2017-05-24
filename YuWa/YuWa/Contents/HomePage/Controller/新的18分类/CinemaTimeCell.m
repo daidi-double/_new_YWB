@@ -53,7 +53,7 @@
 - (UILabel*)distance{
     if (!_distance) {
         _distance = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width*0.8, 0, kScreen_Width*0.23, self.bounds.size.height/2)];
-        _distance.center = CGPointMake(kScreen_Width*0.78, self.bounds.size.height/2);
+        _distance.center = CGPointMake(kScreen_Width*0.8, self.bounds.size.height/2+15);
         _distance.textAlignment = 2;
         _distance.font = [UIFont systemFontOfSize:13];
         _distance.textColor = [UIColor darkGrayColor];
@@ -61,7 +61,17 @@
     }
     return _distance;
 }
-
+- (UILabel*)otherTicketLabel{
+    if (!_otherTicketLabel) {
+        _otherTicketLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width*0.8, 0, kScreen_Width*0.23, self.bounds.size.height/2)];
+        _otherTicketLabel.center = CGPointMake(kScreen_Width*0.8, self.bounds.size.height/2+15);
+        _otherTicketLabel.textAlignment = 2;
+        _otherTicketLabel.font = [UIFont systemFontOfSize:13];
+        _otherTicketLabel.textColor = [UIColor darkGrayColor];
+        [self.contentView addSubview:_otherTicketLabel];
+    }
+    return _distance;
+}
 - (void)setModel:(CinemaModel *)model{
     _model = model;
     [self setData];
@@ -72,7 +82,9 @@
     self.cinemaName.text = self.model.cinema_name;
 
     self.price.attributedText = [NSString stringWithFirstStr:[NSString stringWithFormat:@"￥%@",self.model.settlePrice] withFont:self.price.font withColor:RGBCOLOR(253, 202, 75, 1) withSecondtStr:@"起" withFont:[UIFont systemFontOfSize:13] withColor:RGBCOLOR(123, 124, 125, 1)];
-    
+    if (self.model.minprice == nil) {
+        self.price.hidden = YES;
+    }
     CGFloat distanceNo = [self.model.distance floatValue]/1000;
     self.distance.text = [NSString stringWithFormat:@"%.2fkm",distanceNo];
 }

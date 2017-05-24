@@ -50,6 +50,12 @@
 }
 
 - (void)makeUI{
+    
+    self.accountTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入手机号" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.inviteTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入邀请码(选填)" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.secuirtyCodeTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"验证码" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.passwordtextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    
     self.passwordtextField.secureTextEntry = YES;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImageName:@"NaviBack" withSelectImage:@"NaviBack" withHorizontalAlignment:UIControlContentHorizontalAlignmentCenter withTarget:self action:@selector(backBarAction) forControlEvents:UIControlEventTouchUpInside withSize:CGSizeMake(25.f, 25.f)];
     self.secuirtyCodeBtn.layer.cornerRadius = 10.f;

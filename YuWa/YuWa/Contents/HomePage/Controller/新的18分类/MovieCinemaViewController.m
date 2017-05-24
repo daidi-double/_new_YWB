@@ -143,8 +143,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     if (indexPath.section == 1) {
-        
+        FilmShowTimeModel * showModel = self.filmShowAry[indexPath.row];
         ChooseSeatController * chooseSeat = [[ChooseSeatController alloc]init];
+        chooseSeat.channelshowcode = showModel.channelshowcode;
+        chooseSeat.hall_name = showModel.hall_name;
         [self.navigationController pushViewController:chooseSeat animated:YES];
     }
 }
@@ -270,8 +272,7 @@
 
 - (void)requestFootData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAFOOT];
-    
-    self.film_code = @"001X00762017";
+
     self.cinema_code = @"1002062";
     
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code,@"film_code":self.film_code,@"time":self.time};

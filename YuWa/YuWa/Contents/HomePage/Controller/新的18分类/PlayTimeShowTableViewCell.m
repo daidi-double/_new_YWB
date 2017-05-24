@@ -26,9 +26,9 @@
     self.showTimeLabel.text = self.model.showTime;
     self.languageLabel.text = self.model.language;
     //    _price.text = @"影院价:￥70";
-    self.seller_priceLabel.text = [NSString stringWithFormat:@"￥%@",self.model.settlePrice];
+    self.seller_priceLabel.text = [NSString stringWithFormat:@"￥%@",self.model.settle_price];
     self.endTimeLabel.text = [NSString stringWithFormat:@"%@散场",self.model.endTime];
-    self.hallNumber.text = [NSString stringWithFormat:@"%@号厅",self.model.hallname];
+    self.hallNumber.text = [NSString stringWithFormat:@"%@",self.model.hall_name];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

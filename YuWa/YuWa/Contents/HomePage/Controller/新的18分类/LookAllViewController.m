@@ -76,6 +76,9 @@
 
     ChooseMovieController * chooseMC  = [[ChooseMovieController alloc]init];
     chooseMC.markRow = indexPath.row;
+    HotMovieModel * model = self.movieArr[indexPath.row];
+    chooseMC.filmCode = model.code;
+    chooseMC.movieName = model.name;
     [self.navigationController pushViewController:chooseMC animated:YES];
 }
 
@@ -103,6 +106,9 @@
     NSIndexPath * path = [self.leftTableView indexPathForCell:cell];
     chooseMC.markRow = path.row;
     cell.deletage =self;
+    HotMovieModel * model = self.movieArr[path.row];
+    chooseMC.filmCode = model.code;
+    chooseMC.movieName = model.name;
     [self.navigationController pushViewController:chooseMC animated:YES];
 }
 

@@ -21,7 +21,7 @@
     UIButton * markBtn;
 }
 @property(nonatomic,strong)UITableView*tableView;
-
+@property(nonatomic,strong)UIView * wawaView;
 @property(nonatomic,strong)NSMutableArray*maMallDatas;
 @property(nonatomic,strong)NSString*type;
 @property(nonatomic,assign)int pagen;
@@ -44,7 +44,10 @@
     [self makeTopChooseView];
     [self setUpMJRefresh];
     [self.tableView registerNib:[UINib nibWithNibName:USERCELL bundle:nil] forCellReuseIdentifier:USERCELL];
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self creatWawaView];
+    });
 }
 
 #pragma mark  --UI
@@ -72,7 +75,25 @@
     
     
 }
-
+- (void)creatWawaView{
+    
+    _wawaView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height/3+30, kScreen_Width, kScreen_Height/2)];
+    _wawaView.hidden = YES;
+    [self.view addSubview:_wawaView];
+    UIImageView * wawaImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width/2, 30, kScreen_Width/3, kScreen_Width/3)];
+    wawaImageView.centerX = kScreen_Width/2;
+    wawaImageView.image = [UIImage imageNamed:@"娃娃"];
+    [_wawaView addSubview:wawaImageView];
+    
+    UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, wawaImageView.bottom, kScreen_Width/2, 40)];
+    textLabel.centerX = kScreen_Width/2;
+    textLabel.textAlignment = 1;
+    textLabel.font = [UIFont systemFontOfSize:14];
+    textLabel.textColor = RGBCOLOR(123, 124, 124, 1);
+    textLabel.text = @"暂无锁定用户哦~！";
+    [_wawaView addSubview:textLabel];
+    
+}
 
 
 -(void)makeTopChooseView{
@@ -127,6 +148,11 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.maMallDatas.count <=0) {
+        self.wawaView.hidden= NO;
+    }else{
+        self.wawaView.hidden = YES;
+    }
     return self.maMallDatas.count+1;
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

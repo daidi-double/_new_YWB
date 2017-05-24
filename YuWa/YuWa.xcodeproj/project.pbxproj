@@ -4248,8 +4248,8 @@
 		C1F7BD481DB1C94500CCAF96 /* YWMainCategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWMainCategoryViewController.xib; sourceTree = "<group>"; };
 		C1F7BD491DB1C94500CCAF96 /* VIPHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPHomePageViewController.h; sourceTree = "<group>"; };
 		C1F7BD4A1DB1C94500CCAF96 /* VIPHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPHomePageViewController.m; sourceTree = "<group>"; };
-		C1F7BD4B1DB1C94500CCAF96 /* YWShoppingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShoppingDetailViewController.h; sourceTree = "<group>"; };
-		C1F7BD4C1DB1C94500CCAF96 /* YWShoppingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShoppingDetailViewController.m; sourceTree = "<group>"; };
+		C1F7BD4B1DB1C94500CCAF96 /* YWShoppingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWShoppingDetailViewController.h; path = HomePage/Controller/YWShoppingDetailViewController.h; sourceTree = "<group>"; };
+		C1F7BD4C1DB1C94500CCAF96 /* YWShoppingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWShoppingDetailViewController.m; path = HomePage/Controller/YWShoppingDetailViewController.m; sourceTree = "<group>"; };
 		C1F7BD4E1DB1C94500CCAF96 /* ChooseOneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseOneModel.h; sourceTree = "<group>"; };
 		C1F7BD4F1DB1C94500CCAF96 /* ChooseOneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseOneModel.m; sourceTree = "<group>"; };
 		C1F7BD511DB1C94500CCAF96 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -5993,6 +5993,15 @@
 			name = "选座";
 			sourceTree = "<group>";
 		};
+		AA5A19AB1ED4334B00BE3A2F /* 废弃界面 */ = {
+			isa = PBXGroup;
+			children = (
+				C1F7BD4B1DB1C94500CCAF96 /* YWShoppingDetailViewController.h */,
+				C1F7BD4C1DB1C94500CCAF96 /* YWShoppingDetailViewController.m */,
+			);
+			name = "废弃界面";
+			sourceTree = "<group>";
+		};
 		AA62080E1E8E8CA20001960C /* 扫描跳转 */ = {
 			isa = PBXGroup;
 			children = (
@@ -7407,6 +7416,7 @@
 		B38B2CA21D8FACD8004D5256 /* Contents */ = {
 			isa = PBXGroup;
 			children = (
+				AA5A19AB1ED4334B00BE3A2F /* 废弃界面 */,
 				25EA9E5E1ECD41FB001CF604 /* load */,
 				B3263AFD1DD5B22F004788BB /* BaoBao */,
 				C1F7BD3B1DB1C94500CCAF96 /* HomePage */,
@@ -9653,8 +9663,6 @@
 				C1F7BD3D1DB1C94500CCAF96 /* 18Category */,
 				C1F7BD491DB1C94500CCAF96 /* VIPHomePageViewController.h */,
 				C1F7BD4A1DB1C94500CCAF96 /* VIPHomePageViewController.m */,
-				C1F7BD4B1DB1C94500CCAF96 /* YWShoppingDetailViewController.h */,
-				C1F7BD4C1DB1C94500CCAF96 /* YWShoppingDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

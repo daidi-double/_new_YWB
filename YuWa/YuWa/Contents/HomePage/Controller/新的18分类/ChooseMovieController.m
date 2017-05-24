@@ -96,7 +96,7 @@
         return self.bgView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return kScreen_Height *0.3 + 65.5f;
+    return kScreen_Height *0.3 + 35.5f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
   
@@ -124,7 +124,9 @@
    
 }
 - (void)chooseDate:(UIButton*)btn{
-
+    if (btn.selected == YES) {
+        return;
+    }
     MyLog(@"%ld",btn.tag);
     btn.selected = YES;
     markTimeBtn.selected =  NO;
@@ -160,57 +162,54 @@
 - (NSString *)threeDayDate{
     return [JWTools getThreeDayTime];
 }
-- (void)menuBtn:(UIButton*)btn{
-    NSLog(@"%ld",btn.tag);
-    //    if (btn.selected == YES) {
-    //        return;
-    //    }
-    btn.selected = YES;
-    markBtn.selected = NO;
-    markBtn = btn;
-    if (self.movieDataAry.count > 0) {
-        
-        [_movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        
-    }
-    if (menuBG) {
-        [menuBG removeFromSuperview];
-    }
-    
-    menuBG = [[UIView alloc]initWithFrame:CGRectMake(0, NavigationHeight, kScreen_Width, kScreen_Height)];
-    menuBG.backgroundColor = RGBCOLOR(195, 202, 203, 0.3);
-    [self.view addSubview:menuBG];
-    UITapGestureRecognizer*cancelFirstObject=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelFirstObject:)];
-    cancelFirstObject.numberOfTouchesRequired = 1;
-    cancelFirstObject.numberOfTapsRequired = 1;
-    cancelFirstObject.delegate= self;
-    menuBG.contentMode = UIViewContentModeScaleToFill;
-    [menuBG addGestureRecognizer:cancelFirstObject];
-    
-    if (tableViewBG) {
-        [tableViewBG removeFromSuperview];
-    }
-    tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.7f) andTag:btn.tag] ;
-    tableViewBG.backgroundColor = [UIColor whiteColor];
-    
-    __weak typeof(btn)weakBtn = btn;
-    __weak typeof(menuBG)weakMenuBG = menuBG;
-    WEAKSELF;
-    tableViewBG.titleBlock = ^(NSString *titleStr,NSString * cityCode){
-        weakBtn.selected = NO;
-        [weakBtn setTitle:titleStr forState:UIControlStateNormal];
-        [weakMenuBG removeFromSuperview];
-        if ([titleStr isEqualToString:@"全部地区"]) {
-            weakSelf.type = @"0";
-        }else{
-            weakSelf.type = @"1";
-        }
-//        [weakSelf getHomePageCinemaList];
-    };
-    [menuBG addSubview:tableViewBG];
-    
-    
-}
+//- (void)menuBtn:(UIButton*)btn{
+//
+//    btn.selected = YES;
+//    markBtn.selected = NO;
+//    markBtn = btn;
+//    if (self.movieDataAry.count > 0) {
+//        
+//        [_movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//        
+//    }
+//    if (menuBG) {
+//        [menuBG removeFromSuperview];
+//    }
+//    
+//    menuBG = [[UIView alloc]initWithFrame:CGRectMake(0, NavigationHeight, kScreen_Width, kScreen_Height)];
+//    menuBG.backgroundColor = RGBCOLOR(195, 202, 203, 0.3);
+//    [self.view addSubview:menuBG];
+//    UITapGestureRecognizer*cancelFirstObject=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelFirstObject:)];
+//    cancelFirstObject.numberOfTouchesRequired = 1;
+//    cancelFirstObject.numberOfTapsRequired = 1;
+//    cancelFirstObject.delegate= self;
+//    menuBG.contentMode = UIViewContentModeScaleToFill;
+//    [menuBG addGestureRecognizer:cancelFirstObject];
+//    
+//    if (tableViewBG) {
+//        [tableViewBG removeFromSuperview];
+//    }
+//    tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.7f) andTag:btn.tag] ;
+//    tableViewBG.backgroundColor = [UIColor whiteColor];
+//    
+//    __weak typeof(btn)weakBtn = btn;
+//    __weak typeof(menuBG)weakMenuBG = menuBG;
+//    WEAKSELF;
+//    tableViewBG.titleBlock = ^(NSString *titleStr,NSString * cityCode){
+//        weakBtn.selected = NO;
+//        [weakBtn setTitle:titleStr forState:UIControlStateNormal];
+//        [weakMenuBG removeFromSuperview];
+//        if ([titleStr isEqualToString:@"全部地区"]) {
+//            weakSelf.type = @"0";
+//        }else{
+//            weakSelf.type = @"1";
+//        }
+////        [weakSelf ];
+//    };
+//    [menuBG addSubview:tableViewBG];
+//    
+//    
+//}
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     // 点击的view的类名
 //    NSLog(@"%@", NSStringFromClass([touch.view class]));
@@ -400,32 +399,32 @@
         [_bgView addSubview:line];
         
         
-        CGFloat btnWidth = (kScreen_Width-6)/2;
-        NSArray * titleAry = @[@"全部地区",@"离我最近"];
-        
-        for (int i = 0; i<2; i++) {
-            UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            selectBtn.frame = CGRectMake((btnWidth+3)*i, _bgView.height - 30,btnWidth , 30);
-            selectBtn.tag = 1111 + i;
-            selectBtn.backgroundColor = [UIColor whiteColor];
-            [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
-            [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
-            [selectBtn setTitleColor:RGBCOLOR(32, 184, 230, 1) forState:UIControlStateSelected];
-            [selectBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-            selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-            
-            [selectBtn addTarget:self action:@selector(menuBtn:) forControlEvents:UIControlEventTouchUpInside];
-
-                [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
-                [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
-
-            
-            if (_isselected == 0) {
-                selectBtn.selected = NO;
-            }
-            [_bgView addSubview:selectBtn];
-            
-        }
+//        CGFloat btnWidth = (kScreen_Width-6)/2;
+//        NSArray * titleAry = @[@"全部地区",@"离我最近"];
+//        
+//        for (int i = 0; i<2; i++) {
+//            UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//            selectBtn.frame = CGRectMake((btnWidth+3)*i, _bgView.height - 30,btnWidth , 30);
+//            selectBtn.tag = 1111 + i;
+//            selectBtn.backgroundColor = [UIColor whiteColor];
+//            [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
+//            [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
+//            [selectBtn setTitleColor:RGBCOLOR(32, 184, 230, 1) forState:UIControlStateSelected];
+//            [selectBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+//            selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//            
+//            [selectBtn addTarget:self action:@selector(menuBtn:) forControlEvents:UIControlEventTouchUpInside];
+//
+//                [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
+//                [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
+//
+//            
+//            if (_isselected == 0) {
+//                selectBtn.selected = NO;
+//            }
+//            [_bgView addSubview:selectBtn];
+//            
+//        }
 
     }
     return _bgView;

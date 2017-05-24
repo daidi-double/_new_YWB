@@ -57,27 +57,27 @@
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_zhe" translatesAutoresizingMaskIntoConstraints="NO" id="Kpk-re-PSx">
-                        <rect key="frame" x="44" y="38" width="20" height="20"/>
+                        <rect key="frame" x="44" y="38" width="18" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="ABO-bv-elr"/>
-                            <constraint firstAttribute="height" constant="20" id="BeX-a2-W60"/>
+                            <constraint firstAttribute="width" constant="18" id="ABO-bv-elr"/>
+                            <constraint firstAttribute="height" constant="18" id="BeX-a2-W60"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_te" translatesAutoresizingMaskIntoConstraints="NO" id="Kgx-6t-XQG">
-                        <rect key="frame" x="44" y="63" width="20" height="20"/>
+                        <rect key="frame" x="42" y="61" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="N2H-De-OkE"/>
                             <constraint firstAttribute="height" constant="20" id="zeB-au-T7h"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="雨娃闪付  立享8折" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ny0-wa-MMm">
-                        <rect key="frame" x="69" y="41.5" width="100.5" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ny0-wa-MMm">
+                        <rect key="frame" x="69" y="47" width="0.0" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.5568627451" green="0.56470588239999997" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="300" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="雨娃闪付  立享8折" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqB-sQ-ZUB">
-                        <rect key="frame" x="69" y="66.5" width="100.5" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="300" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqB-sQ-ZUB">
+                        <rect key="frame" x="69" y="71" width="0.0" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.5568627451" green="0.56470588239999997" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -93,19 +93,18 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="aq9-bb-KE4" secondAttribute="trailing" id="21i-kq-qZf"/>
                     <constraint firstItem="mqB-sQ-ZUB" firstAttribute="leading" secondItem="ny0-wa-MMm" secondAttribute="leading" id="2PK-gB-UgJ"/>
-                    <constraint firstItem="mqB-sQ-ZUB" firstAttribute="leading" secondItem="Kgx-6t-XQG" secondAttribute="trailing" constant="5" id="FUW-G9-UkX"/>
+                    <constraint firstItem="ny0-wa-MMm" firstAttribute="leading" secondItem="Kpk-re-PSx" secondAttribute="trailing" constant="7" id="AFg-Ib-9NQ"/>
+                    <constraint firstItem="mqB-sQ-ZUB" firstAttribute="leading" secondItem="Kgx-6t-XQG" secondAttribute="trailing" constant="7" id="FUW-G9-UkX"/>
                     <constraint firstItem="Kpk-re-PSx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="36" id="MBy-mW-suw"/>
                     <constraint firstAttribute="trailing" secondItem="fR4-yq-gf6" secondAttribute="trailing" id="Qx1-5N-euQ"/>
                     <constraint firstItem="fR4-yq-gf6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="RTQ-8c-3fr"/>
                     <constraint firstItem="mqB-sQ-ZUB" firstAttribute="centerY" secondItem="Kgx-6t-XQG" secondAttribute="centerY" id="Wc2-rL-F1X"/>
                     <constraint firstItem="Kpk-re-PSx" firstAttribute="top" secondItem="aq9-bb-KE4" secondAttribute="bottom" constant="8" id="XAQ-J9-RWt"/>
-                    <constraint firstItem="Kgx-6t-XQG" firstAttribute="leading" secondItem="Kpk-re-PSx" secondAttribute="leading" id="YqP-3Y-xBR"/>
                     <constraint firstItem="Kgx-6t-XQG" firstAttribute="top" secondItem="Kpk-re-PSx" secondAttribute="bottom" constant="5" id="ZSh-UN-M8i"/>
                     <constraint firstItem="ny0-wa-MMm" firstAttribute="centerY" secondItem="Kpk-re-PSx" secondAttribute="centerY" id="kWd-sh-MTR"/>
                     <constraint firstAttribute="bottom" secondItem="fR4-yq-gf6" secondAttribute="bottom" id="liy-i9-axu"/>
                     <constraint firstItem="aq9-bb-KE4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="sMv-8O-JYO"/>
                     <constraint firstItem="aq9-bb-KE4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="sV1-S7-Mbf"/>
-                    <constraint firstItem="ny0-wa-MMm" firstAttribute="leading" secondItem="Kpk-re-PSx" secondAttribute="trailing" constant="5" id="wGk-q1-dTf"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

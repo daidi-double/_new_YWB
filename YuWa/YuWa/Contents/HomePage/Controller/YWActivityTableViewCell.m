@@ -38,7 +38,7 @@
             
             UIImageView*speImage=[self viewWithTag:200+i];
             if (!speImage) {
-                speImage=[[UIImageView alloc]initWithFrame:CGRectMake(left, top, 20, 20)];
+                speImage=[[UIImageView alloc]initWithFrame:CGRectMake(left-2, top, 20, 20)];
                 speImage.tag=200+i;
             }
             [self.contentView addSubview:speImage];

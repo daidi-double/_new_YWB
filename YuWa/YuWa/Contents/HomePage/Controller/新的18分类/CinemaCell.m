@@ -7,7 +7,7 @@
 //
 
 #import "CinemaCell.h"
-
+#import "NSString+JWAppendOtherStr.h"
 @implementation CinemaCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andDataAry:(NSMutableArray *)dataAry{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -24,7 +24,9 @@
 
 -(void)setData{
     self.cinemaName.text = self.model.cinema_name;
-    self.price.text = [NSString stringWithFormat:@"￥%@起",self.model.province];
+        self.price.attributedText = [NSString stringWithFirstStr:[NSString stringWithFormat:@"￥%@",self.model.minprice] withFont:self.price.font withColor:RGBCOLOR(253, 202, 75, 1) withSecondtStr:@"起" withFont:[UIFont systemFontOfSize:13] withColor:RGBCOLOR(123, 124, 125, 1)];    if (self.model.minprice == nil) {
+        self.price.hidden = YES;
+    }
     CGFloat distanceNo = [self.model.distance floatValue] /1000;
 
     self.distance.text = [NSString stringWithFormat:@"%.2fkm",distanceNo];
@@ -68,7 +70,7 @@
 - (UILabel*)distance{
     if (!_distance) {
         _distance = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width*0.6-15, 0, kScreen_Width*0.4, self.bounds.size.height/2)];
-        _distance.center = CGPointMake(kScreen_Width*0.75, self.bounds.size.height/2);
+        _distance.center = CGPointMake(kScreen_Width*0.8, self.bounds.size.height/2+15);
         _distance.text = @"";
         _distance.textAlignment = 2;
         _distance.font = [UIFont systemFontOfSize:13];

@@ -252,25 +252,9 @@
 //    [HUD show:YES];
     //修改
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"seats %zd.plist",arc4random_uniform(5)] ofType:nil];
-//        //网络加载数据
-//        NSDictionary *seatsDic = [NSDictionary dictionaryWithContentsOfFile:path];
-        //                __block  NSMutableArray *  seatsArray = seatsDic[@"seats"];
-        //
-        //                __block  NSMutableArray *seatsModelArray = [NSMutableArray array];
-        //
-        //                [seatsArray enumerateObjectsUsingBlock:^(NSArray *obj, NSUInteger idx, BOOL *stop) {
-        //                    XZSeatsModel *seatModel = [XZSeatsModel mj_objectWithKeyValues:obj];
-        //                    [seatsModelArray addObject:seatModel];
-        //                }];
-        //                [HUD hide:YES];
-        //                weakSelf.seatsModelArray = seatsModelArray;
-        //
-        //                //数据回来初始化选座模块
-        //                [weakSelf initSelectionView:seatsModelArray];
-        self.channelShowCode = @"171000099327";
+//        self.channelShowCode = @"171000099327";
         NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CHOOSESEATS];
-        NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"channelShowCode":self.channelShowCode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
+        NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"channelShowCode":self.channelshowcode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
         HttpManager * manager = [[HttpManager alloc]init];
         [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
@@ -297,7 +281,7 @@
     NSMutableArray * seatNumAry = [NSMutableArray array];
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
     NSIndexPath *indexPathT=[NSIndexPath indexPathForRow:3 inSection:0];
-    selectionView = [[XZSeatSelectionView alloc]initWithFrame:CGRectMake(0, 0,kScreen_Width, kScreen_Height * 0.6f) SeatsArray:seatsModelArray HallName:@"四号厅银幕" seatBtnActionBlock:^(NSMutableArray *selecetedSeats, NSMutableDictionary *allAvailableSeats, NSMutableArray *cancelAry, NSString *errorStr) {
+    selectionView = [[XZSeatSelectionView alloc]initWithFrame:CGRectMake(0, 0,kScreen_Width, kScreen_Height * 0.6f) SeatsArray:seatsModelArray HallName:self.hall_name seatBtnActionBlock:^(NSMutableArray *selecetedSeats, NSMutableDictionary *allAvailableSeats, NSMutableArray *cancelAry, NSString *errorStr) {
 //        NSLog(@"=====%zd个选中按钮===========%zd个可选座位==========errorStr====%@=========",selecetedSeats.count,allAvailableSeats.count,errorStr);
         UILabel * selectedSeat;
         [seatNumAry removeAllObjects];

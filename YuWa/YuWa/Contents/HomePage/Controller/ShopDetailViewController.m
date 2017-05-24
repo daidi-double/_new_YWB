@@ -122,7 +122,8 @@
     self.BGImageView.userInteractionEnabled = YES;
     self.BGImageView.contentMode = UIViewContentModeScaleToFill;
     self.numberLabel.hidden = YES;
-    self.numberLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+    self.numberLabel.layer.cornerRadius = 3;
+    self.numberLabel.layer.masksToBounds = YES;
     self.payBtn.layer.cornerRadius = 3;
     self.payBtn.layer.masksToBounds = YES;
 
@@ -146,7 +147,7 @@
     shopInfoTap.numberOfTouchesRequired = 1;
     shopInfoTap.delegate = self;
     [self.touchInfoView addGestureRecognizer:shopInfoTap];
-    NSArray * btnTitle = @[@"商品",@"评价（4.3）"];
+    NSArray * btnTitle = @[@"商品",@"评价(4.3)"];
     for (int i = 0; i<2; i++) {
         if (i == 0) {
             
@@ -163,7 +164,7 @@
             if (self.mainModel.score == nil || [self.mainModel.score isKindOfClass:[NSNull class]]) {
                 self.mainModel.score = @"1.0";
             }
-            [_btn setAttributedTitle:[NSString stringWithFirstStr:@"评价  " withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor colorWithHexString:@"#333333"] withSecondtStr:[NSString stringWithFormat:@"(%@)",self.mainModel.score]  withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor colorWithHexString:@"#fe8238"]] forState:UIControlStateNormal];
+            [_btn setAttributedTitle:[NSString stringWithFirstStr:@"评价" withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor colorWithHexString:@"#333333"] withSecondtStr:[NSString stringWithFormat:@"(%@)",self.mainModel.score]  withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor colorWithHexString:@"#fe8238"]] forState:UIControlStateNormal];
         }
         
         if (i == 0) {

@@ -15,5 +15,5 @@
 @property (nonatomic,copy)NSString * score;//评分
 @property (nonatomic,copy)NSString * name;//电影名称
 @property (nonatomic,copy)NSString * publish_date;//上映日期
-@property (nonatomic,copy)NSString * intro;//简介
+@property (nonatomic,copy)NSString * highlight;//简介
 @end
