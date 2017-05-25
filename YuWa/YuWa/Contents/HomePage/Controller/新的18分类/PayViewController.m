@@ -62,7 +62,7 @@
     [super viewDidLoad];
    self.title =@"支付订单";
     self.view.backgroundColor = [UIColor whiteColor];
-    MyLog(@"%ld----%@",self.dataAry.count,self.dataAry);
+    MyLog(@"----%@",self.dataAry);
     [self makeUI];
     [self showMessage:@"选座票购买后无法退换，请仔细核对购票信息"];
     
@@ -101,7 +101,7 @@
         
     }
     
-    self.timerLabel.text = [NSString stringWithFormat:@"电影订单 %ld:%ld",(long)self.minute,(long)self.second];
+    self.timerLabel.text = [NSString stringWithFormat:@"支付订单 %ld:%ld",(long)self.minute,(long)self.second];
     if (self.second==0 && self.minute==0 ) {
         [self.timer invalidate];
         self.timer = nil;
@@ -140,7 +140,7 @@
     
     _settomLabel = [[UILabel alloc]initWithFrame:CGRectMake(24,10, kScreen_Width * 0.4f, 30)];
     _settomLabel.textColor = CNaviColor;
-    _settomLabel.text = @"待结算 ￥0.00";
+    _settomLabel.text = self.dataAry[2];
     _settomLabel.font = [UIFont systemFontOfSize:15];
     
     [accountBGView addSubview:_settomLabel];
@@ -182,6 +182,8 @@
             return 100;
         }else if (indexPath.row == 3){
             return 88.f;
+        }else if (indexPath.row == 4 || indexPath.row == 2){
+            return 0.01f;
         }
         return 50.f;
     }
@@ -194,12 +196,13 @@
     }
 
     if (indexPath.section == 0) {
-        if (indexPath.row !=0 ||indexPath.row !=3||indexPath.row !=5) {
+        if (indexPath.row == 1) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         if (indexPath.row == 0) {
             MoviePayTableViewCell * payCell = [tableView dequeueReusableCellWithIdentifier:PAYCELL];
              payCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            payCell.dataAry = self.dataAry;
             return payCell;
         }else if (indexPath.row == 1){
             cell.textLabel.textColor = RGBCOLOR(142, 143, 144, 1);
@@ -212,7 +215,7 @@
             cell.textLabel.textColor = RGBCOLOR(142, 143, 144, 1);
             cell.textLabel.font = [UIFont systemFontOfSize:15];
              cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLabel.text =@"商家优惠";
+//            cell.textLabel.text =@"商家优惠";
         }else if (indexPath.row == 3){
             TotalMoneyTableViewCell * totalCell = [tableView dequeueReusableCellWithIdentifier:TOTALCELL];
             NSString * totalMoney = [totalCell.totalMoneyLabel.text substringFromIndex:1];
@@ -222,7 +225,7 @@
         }else if (indexPath.row == 4){
             cell.textLabel.textColor = CNaviColor;
             cell.textLabel.font = [UIFont systemFontOfSize:15];
-            cell.textLabel.text =@"办理会员卡本单立减16元";
+//            cell.textLabel.text =@"办理会员卡本单立减16元";
         }else {
             MarkTableViewCell * markCell1 = [tableView dequeueReusableCellWithIdentifier:MARKCELL00];
             markCell1.otherLabel.hidden = YES;
@@ -243,12 +246,13 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1) {
         UseCouponViewController * useVC = [[UseCouponViewController alloc]init];
-        useVC.shop_id = self.shop_id;
+        useVC.shop_id = self.dataAry[9];
         useVC.delegate = self;
-            
-            useVC.total_money = [NSString stringWithFormat:@"%.2f",self.payMoney];
+        useVC.couponType = 1;//标识是电影
+        useVC.total_money = [NSString stringWithFormat:@"%.2f",self.payMoney];
 
         [self.navigationController pushViewController:useVC animated:YES];
 

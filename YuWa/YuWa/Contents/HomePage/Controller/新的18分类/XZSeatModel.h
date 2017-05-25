@@ -17,4 +17,8 @@
 
 /**座位状态 N/表示可以购票 LK／座位已售出 E/表示过道 */
 @property (nonatomic, copy) NSString *st;
+
+/**座位编码**/
+@property (nonatomic,copy)NSString * code;
+
 @end

@@ -78,7 +78,7 @@
     chooseMC.markRow = indexPath.row;
     HotMovieModel * model = self.movieArr[indexPath.row];
     chooseMC.filmCode = model.code;
-    chooseMC.movieName = model.name;
+    chooseMC.filmName = model.name;
     [self.navigationController pushViewController:chooseMC animated:YES];
 }
 
@@ -108,7 +108,7 @@
     cell.deletage =self;
     HotMovieModel * model = self.movieArr[path.row];
     chooseMC.filmCode = model.code;
-    chooseMC.movieName = model.name;
+    chooseMC.filmName = model.name;
     [self.navigationController pushViewController:chooseMC animated:YES];
 }
 

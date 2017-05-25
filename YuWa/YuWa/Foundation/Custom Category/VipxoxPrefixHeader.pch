@@ -98,12 +98,12 @@
 #define fontSize(px)   [UIFont systemFontOfSize:(px/96)*72]
 
 #define  XZseastsColMargin 60 //座位图离上部分距离
-#define  XZseastsRowMargin 40 //座位图离左边距离
+#define  XZseastsRowMargin 30 //座位图离左边距离
 #define  XZCenterLineY 50 //中线离上部分距离
 #define  XZseastMinW_H 10 //座位按钮最小宽高
 #define  XZseastNomarW_H 25 //座位按钮默认开场动画宽高
 #define  XZseastMaxW_H 40 //座位按钮最大宽高
-#define  XZSmallMargin 10 //默认最小间距
+#define  XZSmallMargin 15 //默认最小间距
 #define  XZAppLogoW 200 //applogo的宽度
 #define  XZHallLogoW 200 //halllogo的宽度
 #define  XZSeatBtnScale 0.95 //按钮内图标占按钮大小的比例

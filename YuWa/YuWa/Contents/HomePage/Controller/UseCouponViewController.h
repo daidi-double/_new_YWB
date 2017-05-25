@@ -16,6 +16,7 @@
 @interface UseCouponViewController : UIViewController
 @property (nonatomic,copy)NSString * shop_id;
 @property (nonatomic,copy)NSString * total_money;
-
+@property (nonatomic,assign)NSInteger couponType;//0为其他界面。1为电影
+@property (nonatomic,copy)NSString* cinema_code;
 @property(nonatomic,assign)id<UseCouponViewControllerDelegate>delegate;
 @end

@@ -48,7 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"影院";//修改为电影名称
+    self.title = self.filmName;
     self.time = [JWTools currentTime2];
 
     [self requestHeaderData];
@@ -147,6 +147,10 @@
         ChooseSeatController * chooseSeat = [[ChooseSeatController alloc]init];
         chooseSeat.channelshowcode = showModel.channelshowcode;
         chooseSeat.hall_name = showModel.hall_name;
+        chooseSeat.headerModel = showModel;
+        chooseSeat.cinemaName = self.headerModel.cinema_name;
+        chooseSeat.cinemaCode = self.cinema_code;
+        chooseSeat.filmName = self.filmName;
         [self.navigationController pushViewController:chooseSeat animated:YES];
     }
 }
@@ -168,7 +172,7 @@
         _buy_ticket.layer.borderColor = CNaviColor.CGColor;
         _buy_ticket.layer.borderWidth = 1;
         _buy_ticket.layer.masksToBounds = YES;
-        [_buy_ticket addTarget:self action:@selector(goToBuyTicket) forControlEvents:UIControlEventTouchUpInside];
+        [_buy_ticket addTarget:self action:@selector(goToBuyTicket:) forControlEvents:UIControlEventTouchUpInside];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
@@ -193,9 +197,14 @@
     [self requestFootData];
 }
 
-- (void)goToBuyTicket{
+- (void)goToBuyTicket:(UIButton *)sender{
     if ([self judgeLogin]) {
+        PlayTimeShowTableViewCell * cell = (PlayTimeShowTableViewCell*)[[sender superview]superview];
+        NSIndexPath * path = [self.movieTableView indexPathForCell:cell];
         ChooseSeatController * chooseVC = [[ChooseSeatController alloc]init];
+        chooseVC.filmName = self.filmName;
+        chooseVC.cinemaName = self.headerModel.cinema_name;
+        chooseVC.headerModel = self.filmShowAry[path.row];
         [self.navigationController pushViewController:chooseVC animated:YES];
     }
    
@@ -218,6 +227,9 @@
     [self.navigationController pushViewController:locationVC animated:YES];
   
 }
+- (void)filmName:(NSString *)filmName{
+    self.filmName = filmName;
+}
 - (void)ToVipDetaliPage{
     MyLog(@"会员卡详情");
 }
@@ -232,7 +244,7 @@
 //头部视图数据
 - (void)requestHeaderData{
 
-    self.cinema_code = @"1002062";
+    self.cinema_code = @"01010071";
     
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAHEADER];
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code};
@@ -274,7 +286,7 @@
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAFOOT];
 
     self.cinema_code = @"01010071";
-
+    self.film_code = @"001103332016";
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code,@"film_code":self.film_code,@"time":self.time};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {

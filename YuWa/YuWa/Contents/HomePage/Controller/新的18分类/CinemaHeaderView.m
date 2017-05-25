@@ -188,6 +188,7 @@
    
     FilmListModel * filmModel = self.flimListAry[_index];
     _movieTitle.text = filmModel.name;
+    [self.delegate filmName:filmModel.name];
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
     _movieTitle.width = movieTitleSize.width;
     self.movieScore.text = [NSString stringWithFormat:@"%@分",filmModel.score];
@@ -217,7 +218,7 @@
     
     
     
-    self.cinema_code = @"1002062";
+    self.cinema_code = @"01010071";
     
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAHEADER];
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code};

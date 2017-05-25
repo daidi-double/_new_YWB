@@ -71,21 +71,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor greenColor];
-    self.title = self.movieName;
+    self.title = self.filmName;
     [self.view addSubview:self.movieTableView];
     [self.movieTableView registerNib:[UINib nibWithNibName:CINEMASHOWCELL bundle:nil] forCellReuseIdentifier:CINEMASHOWCELL];
     _isselected = 0;
-    self.type = @"0";
+    self.pages=0;
     self.pagen = 10;
-    self.pages = 0;
+    self.type = @"0";
     self.time = [self todayDate];
+    [self setRJRefresh];
     
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self requestMovieData];
-    [self requestCinemaData];
 }
+
+- (void)setRJRefresh {
+    self.pagen = 10;
+    self.movieTableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+        self.pages=0;
+        self.movieDataAry=[NSMutableArray array];
+         [self requestMovieData];
+         [self requestCinemaData];
+    }];
+    
+    //上拉刷新
+    self.movieTableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+        self.pages++;
+         [self requestCinemaData];
+        
+    }];
+    [self.movieTableView.mj_header beginRefreshing];
+}
+
 #pragma mark - tableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -111,6 +130,7 @@
     MovieCinemaViewController * MCinemaVC = [[MovieCinemaViewController alloc]init];
     MCinemaVC.cinema_code = self.cinemaModel.cinema_code;
     MCinemaVC.film_code = self.model.code;
+    MCinemaVC.filmName = self.filmName;
     [self.navigationController pushViewController:MCinemaVC animated:YES];
 }
 
@@ -268,7 +288,7 @@
     }
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
-        MyLog(@"电影影院和购票%@",data);
+        MyLog(@"电影信息%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             for (NSDictionary * dict in data[@"data"][@"filmsInfo"]) {
                 
@@ -288,7 +308,9 @@
 - (void)requestCinemaData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMANDDATE];
     self.filmCode = @"001103332016";
-    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"time":self.time,@"pages":@(self.pages),@"pagen":@(self.pagen)};
+    NSString * pagesStr = [NSString stringWithFormat:@"%ld",self.pages];
+    NSString * pagenStr = [NSString stringWithFormat:@"%ld",self.pagen];
+    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"time":self.time,@"pages":pagesStr,@"pagen":pagenStr};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
         
@@ -297,9 +319,12 @@
     }
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
-        MyLog(@"电影影院和购票，影院数据%@",data);
+        MyLog(@"电影影院和购票，影院数据下半部%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
-            [self.movieDataAry removeAllObjects];
+            if (self.pages == 0) {
+                
+                [self.movieDataAry removeAllObjects];
+            }
             for (NSDictionary * cinemaDic in data[@"data"]) {
                 
                 self.cinemaModel = [CinemaModel yy_modelWithDictionary:cinemaDic];
@@ -311,8 +336,8 @@
         }
         [self.movieTableView reloadData];
     }];
-    //    [self.movieTableView.mj_header endRefreshing];
-    //    [self.movieTableView.mj_footer endRefreshing];
+        [self.movieTableView.mj_header endRefreshing];
+        [self.movieTableView.mj_footer endRefreshing];
     
 }
 - (UIView*)bgView{

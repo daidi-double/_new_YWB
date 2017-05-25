@@ -19,6 +19,7 @@
 /**座位绑定索引，用于判断独坐*/
 @property (nonatomic,assign) NSInteger seatIndex;
 
+@property (nonatomic,copy)NSString * code;
 /**验证座位是否可选*/
 -(BOOL)isSeatAvailable;
 @end

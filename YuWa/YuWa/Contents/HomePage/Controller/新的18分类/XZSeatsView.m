@@ -36,7 +36,7 @@
         
         if (cloCount % 2) cloCount += 1;//偶数列数加1 防止中线压住座位
         
-        CGFloat seatViewW = maxW - 2 * XZseastsRowMargin;
+        CGFloat seatViewW = maxW - 2 * XZseastsRowMargin ;
         
         CGFloat seatBtnW = seatViewW / cloCount;
         
@@ -49,7 +49,7 @@
         self.seatBtnWidth = seatBtnW;
         self.seatBtnHeight = seatBtnH;
         self.seatViewWidth = seatViewW;
-        self.seatViewHeight = [seatsArray count] * seatBtnH;
+        self.seatViewHeight = [seatsArray count] * (seatBtnH + 4);
         //初始化座位
         [self initSeatBtns:seatsArray];
     }
@@ -67,7 +67,7 @@
             XZSeatButton *seatBtn = [XZSeatButton buttonWithType:UIButtonTypeCustom];
             seatBtn.seatmodel = seatModel;
             seatBtn.seatsmodel = seatsModel;
-
+            seatBtn.code = seatsModel.code;
             //表示可以购票
             if ([seatModel.st isEqualToString:@"1"]) {
                 [seatBtn setImage:[UIImage imageNamed:@"kexuan"] forState:UIControlStateNormal];//这里更改座位图标
@@ -95,7 +95,7 @@
             XZSeatButton *seatBtn = (XZSeatButton *)view;
             NSInteger Col = [seatBtn.seatsmodel.columns indexOfObject:seatBtn.seatmodel];//座位列
             NSInteger Row = [seatBtn.seatsmodel.rowNum integerValue] - 1;//座位行
-            seatBtn.frame = CGRectMake(Col * self.seatBtnHeight,Row * self.seatBtnHeight, self.seatBtnWidth, self.seatBtnHeight);
+            seatBtn.frame = CGRectMake(Col * (self.seatBtnHeight+2)-Col,Row * (self.seatBtnHeight+4), self.seatBtnWidth, self.seatBtnHeight);
         }
     }
     

@@ -12,6 +12,6 @@
 
 @property (nonatomic,assign) NSInteger  markRow;
 @property (nonatomic,copy)NSString * filmCode;
-@property (nonatomic,copy)NSString * movieName;
+@property (nonatomic,copy)NSString * filmName;//电影名称
 
 @end

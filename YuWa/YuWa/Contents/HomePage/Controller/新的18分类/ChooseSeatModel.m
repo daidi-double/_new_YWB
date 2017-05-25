@@ -33,6 +33,7 @@
         model.columnId = ChooseSeatModel1.rowNum;
         model.seatNo = ChooseSeatModel1.code;
         model.st = ChooseSeatModel1.status.description;
+        model.code = ChooseSeatModel1.code;
         if (![arrM containsObject:ChooseSeatModel1.colNum]) {
 
             //先判断是否是添加第一行，如果是，不运行下面代码
@@ -59,6 +60,7 @@
     XZSeatsModel1.columns = seatModelAry;
     XZSeatsModel1.rowId = arrM.lastObject;
     XZSeatsModel1.rowNum = arrM.lastObject;
+
     [seatsModelArray addObject:XZSeatsModel1];
     return seatsModelArray;
 }

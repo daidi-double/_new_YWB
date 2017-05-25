@@ -22,11 +22,12 @@
 - (void)setData{
     
     self.cinemaNameLabel.text = self.model.cinema_name;
-    
-    self.priceLabel.attributedText = [NSString stringWithFirstStr:[NSString stringWithFormat:@"￥%@",self.model.settle_price] withFont:self.priceLabel.font withColor:RGBCOLOR(253, 202, 75, 1) withSecondtStr:@"起" withFont:[UIFont systemFontOfSize:13] withColor:RGBCOLOR(123, 124, 125, 1)];
-    if (self.model.minprice == nil) {
-        self.priceLabel.hidden = YES;
+    if (self.model.settle_price == nil) {
+       self.priceLabel.attributedText = [NSString stringWithFirstStr:[NSString stringWithFormat:@"￥%@",self.model.minprice] withFont:self.priceLabel.font withColor:RGBCOLOR(253, 202, 75, 1) withSecondtStr:@"起" withFont:[UIFont systemFontOfSize:13] withColor:RGBCOLOR(123, 124, 125, 1)];
+    }else{
+      self.priceLabel.attributedText = [NSString stringWithFirstStr:[NSString stringWithFormat:@"￥%@",self.model.settle_price] withFont:self.priceLabel.font withColor:RGBCOLOR(253, 202, 75, 1) withSecondtStr:@"起" withFont:[UIFont systemFontOfSize:13] withColor:RGBCOLOR(123, 124, 125, 1)];
     }
+
     self.otherTicketLabel.layer.cornerRadius = 5;
     self.otherTicketLabel.layer.masksToBounds = YES;
     

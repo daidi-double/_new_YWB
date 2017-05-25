@@ -18,5 +18,8 @@
 /**座位屏幕行，用于算座位frame*/
 @property (nonatomic, copy) NSNumber *rowNum;
 
+/**座位编码**/
+@property (nonatomic,copy)NSString * code;
+
 +(XZSeatsModel*)XZSeatsModelWithAry:(NSMutableArray*)ary;
 @end

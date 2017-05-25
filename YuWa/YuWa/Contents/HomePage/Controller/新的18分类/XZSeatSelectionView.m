@@ -104,7 +104,7 @@
     XZRowIndexView * rowindexView = [[XZRowIndexView alloc]init];
     rowindexView.indexsArray = seatsArray;
     rowindexView.width = 13;
-    rowindexView.height = self.seatView.height + 2 * XZseastMinW_H;
+    rowindexView.height = self.seatView.height + 2 * XZseastMinW_H+4*seatsArray.count ;
     rowindexView.y =  - XZSmallMargin;
     rowindexView.x = self.seatScrollView.contentOffset.x + XZseastMinW_H;
     self.rowindexView = rowindexView;
@@ -134,7 +134,7 @@
 
 -(void)initSeatsView:(NSMutableArray *)seatsArray{
     __weak typeof(self) weakSelf = self;
-    XZSeatsView *seatView = [[XZSeatsView alloc]initWithSeatsArray:seatsArray  maxNomarWidth:self.width * 0.8f seatBtnActionBlock:^(XZSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats) {
+    XZSeatsView *seatView = [[XZSeatsView alloc]initWithSeatsArray:seatsArray  maxNomarWidth:self.width seatBtnActionBlock:^(XZSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats) {
 
         
         NSString *errorStr = nil;
@@ -182,7 +182,7 @@
         
     }];
     self.seatView = seatView;
-    seatView.frame = CGRectMake(0, 0,seatView.seatViewWidth, seatView.seatViewHeight);
+    seatView.frame = CGRectMake(0, 0,seatView.seatViewWidth+30, seatView.seatViewHeight);
     [self.seatScrollView insertSubview:seatView atIndex:0];
     self.seatScrollView.maximumZoomScale = XZseastMaxW_H / seatView.seatBtnWidth;
     self.seatScrollView.contentInset = UIEdgeInsetsMake(XZseastsColMargin,
@@ -210,7 +210,7 @@
     indicatorV.x = 3;
     indicatorV.y = 3 * 3;
     indicatorV.width = MaxWidth;
-    indicatorV.height = MaxHeight;
+    indicatorV.height = MaxHeight+(seatsArray.count*4);
     self.indicatorView = indicatorV;
     [self addSubview:indicatorV];
     
