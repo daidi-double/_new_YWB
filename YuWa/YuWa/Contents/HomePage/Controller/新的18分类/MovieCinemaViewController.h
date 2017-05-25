@@ -15,5 +15,5 @@
 @property (nonatomic,copy)NSString * cityCode;//城市编码
 @property (nonatomic,strong)YWLocation * location;
 @property (nonatomic,assign)NSInteger status;//0是无通兑票，1有通兑票
-
+@property (nonatomic,copy)NSString * filmName;
 @end

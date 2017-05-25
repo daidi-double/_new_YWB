@@ -18,5 +18,5 @@
 
 //座位
 @property (weak, nonatomic) IBOutlet UILabel *seatNumberLabel;
-
+@property (nonatomic,strong)NSMutableArray * dataAry;
 @end

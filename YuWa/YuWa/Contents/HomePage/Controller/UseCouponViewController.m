@@ -29,6 +29,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [self getCouponData];
 }
 - (void)makeUI{
@@ -119,8 +120,15 @@
 }
 
 -(void)getCouponData{
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_PERSON_CANUSECOUPON];
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"shop_id":self.shop_id,@"total_money":self.total_money};
+    NSString*urlStr;
+    NSDictionary*params;
+    if (self.couponType == 1) {
+       urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_CHECKCOUPON];
+        params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"shop_id":self.shop_id,@"total_money":self.total_money};
+    }else{
+       urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_PERSON_CANUSECOUPON];
+       params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"shop_id":self.shop_id,@"total_money":self.total_money};
+    }
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"能使用的优惠券%@",data);

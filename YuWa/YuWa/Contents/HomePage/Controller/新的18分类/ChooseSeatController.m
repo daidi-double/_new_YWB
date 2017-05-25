@@ -18,7 +18,7 @@
 #import "PayViewController.h"
 #import "NSString+JWAppendOtherStr.h"
 #import "ChooseSeatModel.h"//座位model
-
+#import "YWload.h"
 
 @interface ChooseSeatController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -29,12 +29,13 @@
 @property (nonatomic, strong) NSMutableArray *selecetedSeats;//已选的座位
 
 @property (nonatomic,strong) NSMutableDictionary *allAvailableSeats;//所有可选的座位
-
+@property (nonatomic,strong) UILabel * filmNameLabel;
 @property (nonatomic,strong) NSMutableArray *seatsModelArray;
 @property (nonatomic,strong) UITableView * seatTableView;
 @property (nonatomic,strong) UIView * seatLblBGView;
 @property (nonatomic,strong) NSMutableArray * seatModelAry;//座位model数组
 @property (nonatomic,strong) NSMutableArray * payInformationArr;
+@property (nonatomic,strong) YWload*HUD;
 @end
 
 @implementation ChooseSeatController
@@ -72,6 +73,24 @@
     }
     return _price_num;
 }
+- (UILabel * )filmNameLabel{
+    if (!_filmNameLabel) {
+        _filmNameLabel = [[UILabel alloc]init];
+        _filmNameLabel.textColor = [UIColor lightGrayColor];
+        _filmNameLabel.font = [UIFont systemFontOfSize:14];
+        
+    }
+    return _filmNameLabel;
+}
+- (UILabel * )timeLabel{
+    if (!_timeLabel) {
+        _timeLabel = [[UILabel alloc]init];
+        _timeLabel.font = [UIFont systemFontOfSize:12];
+        _timeLabel.textColor = RGBCOLOR(167, 168, 169, 1);
+                      
+    }
+    return _timeLabel;
+}
 - (UIButton*)sureBtn{
     if (!_sureBtn) {
         _sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -93,6 +112,7 @@
     if (!_changeMovieBtn) {
         _changeMovieBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _changeMovieBtn.frame = CGRectMake(_languageLabel.right, 10, kScreen_Width*0.25f, 25);
+        _changeMovieBtn.centerX = kScreen_Width * 0.82;
         [_changeMovieBtn.layer setBorderColor:CNaviColor.CGColor];
         [_changeMovieBtn.layer setBorderWidth:1];
         [_changeMovieBtn.layer setMasksToBounds:YES];
@@ -116,7 +136,7 @@
 - (UILabel *)languageLabel{
     if (!_languageLabel) {
         _languageLabel = [[UILabel alloc]init];
-        _languageLabel.font = [UIFont systemFontOfSize:12];
+        _languageLabel.font = [UIFont systemFontOfSize:11];
         _languageLabel.textColor = RGBCOLOR(167, 168, 169, 1);
         
     }
@@ -169,31 +189,38 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"seatCell"];
     }
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"极限特工";
-        CGRect strWidth = [cell.textLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: cell.textLabel.font} context:nil];
         
-        self.languageLabel.frame = CGRectMake(cell.textLabel.right+25 +strWidth.size.width, cell.textLabel.top +3, kScreen_Width * 0.4, 25);
-        _languageLabel.text = @"国语/2D/7号厅";
+        CGRect strWidth = [self.filmName boundingRectWithSize:CGSizeMake(MAXFLOAT, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: cell.textLabel.font} context:nil];
+        self.filmNameLabel.frame = CGRectMake(10, 5, strWidth.size.width, 30);
+        self.filmNameLabel.text = self.filmName;
+        [cell.contentView addSubview:self.filmNameLabel];
+        
+        self.languageLabel.frame = CGRectMake(self.filmNameLabel.right+25 +strWidth.size.width, self.filmNameLabel.top +3, kScreen_Width * 0.4, 20);
+        _languageLabel.text = [NSString stringWithFormat:@"%@/%@/%@",self.headerModel.language,self.headerModel.show_type,self.headerModel.hall_name];
         [cell.contentView addSubview:self.languageLabel];
-        cell.detailTextLabel.text = @"今日XXXXX";
+        
+        NSString * timeLabelStr = [NSString stringWithFormat:@"%@%@",[JWTools currentTimeStr],self.headerModel.showTime];
+        CGRect timeLabelWidth = [timeLabelStr boundingRectWithSize:CGSizeMake(MAXFLOAT, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: cell.textLabel.font} context:nil];
+        
+        self.timeLabel.frame = CGRectMake(8, _languageLabel.bottom, timeLabelWidth.size.width, 20);
+        self.timeLabel.text = timeLabelStr;
+        [cell.contentView addSubview:self.timeLabel];
 
         [cell.contentView addSubview:self.changeMovieBtn];
-        [self.payInformationArr addObject:cell.textLabel.text];
-        [self.payInformationArr addObject:cell.detailTextLabel.text];
-        [self.payInformationArr addObject:self.title];
+
     }else if (indexPath.row == 1){
-        cell.backgroundColor = [UIColor lightGrayColor];
-        NSArray * seatAry = @[@"kexuan.imageset.png",@"yishou.imageset.png",@"xuanzhong.imageset.png"];
-        NSArray * textAry = @[@"可选",@"不可选",@"已选"];
+    
+        NSArray * seatAry = @[@"kexuan",@"yishou",@"xuanzhong",@"loveseat"];
+        NSArray * textAry = @[@"可选",@"已售",@"已选",@"情侣座"];
         CGFloat imageViewWidth = 15;
         CGFloat textWidth = 40;
-        CGFloat jianju = (kScreen_Width - 165 -100)/2;
-        for (int i = 0; i< 3; i++) {
-            UIImageView * seatsImageView = [[UIImageView alloc]initWithFrame:CGRectMake(60 + (imageViewWidth +jianju+textWidth)*i, cell.height*0.1f, imageViewWidth, cell.height * 0.5f)];
+        CGFloat jianju = (kScreen_Width - 40*4 -15*4-60)/3;
+        for (int i = 0; i< 4; i++) {
+            UIImageView * seatsImageView = [[UIImageView alloc]initWithFrame:CGRectMake(30 + (imageViewWidth +jianju+textWidth)*i, 7, imageViewWidth, imageViewWidth)];
             seatsImageView.image = [UIImage imageNamed:seatAry[i]];
             
             [cell.contentView addSubview:seatsImageView];
-            UILabel * textlbl = [[UILabel alloc]initWithFrame:CGRectMake(80 + (imageViewWidth +jianju+textWidth)*i, cell.height*0.1f, textWidth, cell.height * 0.5f)];
+            UILabel * textlbl = [[UILabel alloc]initWithFrame:CGRectMake(50 + (imageViewWidth +jianju+textWidth)*i, 7, textWidth, cell.height * 0.5f)];
             textlbl.text = textAry[i];
             textlbl.textColor = [UIColor lightGrayColor];
             textlbl.font = [UIFont systemFontOfSize:12];
@@ -244,12 +271,11 @@
     return cell;
 }
 - (void)requestSeatinformation{
-//    MBProgressHUD *HUD = [[MBProgressHUD alloc]initWithView:self.view];
-//    
-//    HUD.tintColor = [UIColor blackColor];
-//    [self.view addSubview:HUD];
+     self.HUD = [YWload showOnView:self.view];
+
+    [self.view addSubview:_HUD];
     WEAKSELF;
-//    [HUD show:YES];
+    [_HUD show:YES];
     //修改
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        self.channelShowCode = @"171000099327";
@@ -263,16 +289,14 @@
             MyLog(@"选座%@",jsonStr);
             if ([data[@"errorCode"] integerValue] == 0) {
                 [self.seatModelAry removeAllObjects];
-           self.seatsModelArray =      [ChooseSeatModel ChooseSeatModelWithDic:data[@"data"]];
+           self.seatsModelArray = [ChooseSeatModel ChooseSeatModelWithDic:data[@"data"]];
                  [weakSelf initSelectionView:self.seatsModelArray];
             }else{
+                [_HUD hide:YES];
                 [JRToast showWithText:@"网络出现异常，请检查网络" duration:1];
             }
         }];
-
-        
-        
-    
+  
     });
 }
 //创建选座模块
@@ -338,9 +362,6 @@
                 for (UIView * lblView in _seatLblBGView.subviews) {
                     [lblView removeFromSuperview];
                 }
-//                if (_seatLblBGView.subviews.count == 0) {
-//                    
-//                }
 
 
                 for (int i = 0; i<seatNumAry.count; i++) {
@@ -358,13 +379,9 @@
         }
 
     }];
+    [_HUD hide:YES];
     [_seatTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,indexPathT,nil] withRowAnimation:UITableViewRowAnimationFade];
-//    [self.payInformationArr addObject:@"厅号"];
-//    if (seatNumAry.count != 0) {
-//        
-//        [self.payInformationArr addObjectsFromArray:seatNumAry];
-//    }
-//    [self.payInformationArr addObject:_allPrice.text];
+
 }
 - (void)sureSelected{
     NSLog(@"确认选座");
@@ -379,16 +396,33 @@
     }else{
         XZSeatsModel * smodel;
         XZSeatModel * model;
+        [self.payInformationArr removeAllObjects];
+        [self.payInformationArr addObject:self.hall_name];
+        [self.payInformationArr addObject:self.channelshowcode];
+        [self.payInformationArr addObject:_allPrice.text];
+        if (self.filmName == nil) {
+            self.filmName = @"";
+        }
+        [self.payInformationArr addObject:self.filmName];
+        [self.payInformationArr addObject:_timeLabel.text];
         
-        [self.payInformationArr addObject:@"厅号"];
+        [self.payInformationArr addObject:self.cinemaName];
+       
+        [self.payInformationArr addObject:self.headerModel.language];
+        [self.payInformationArr addObject:self.headerModel.show_type];
+        NSDictionary * seatDic;
+        NSMutableArray * seatAry = [NSMutableArray array];
         for (XZSeatButton * btn in self.selecetedSeats) {
             smodel = btn.seatsmodel;
             model = btn.seatmodel;
             
             NSString * str = [NSString stringWithFormat:@"%@排%@座",smodel.rowId,model.columnId];
-            [self.payInformationArr addObject:str];
+            seatDic = @{@"seatCode":model.code,@"seatNumber":str};
+            [seatAry addObject:seatDic];
         }
-        [self.payInformationArr addObject:_allPrice.text];
+        [self.payInformationArr addObject:seatAry];
+        [self.payInformationArr addObject:self.cinemaCode];
+        
         [self showMessage:@"正在为您预定座位"];
     }
 

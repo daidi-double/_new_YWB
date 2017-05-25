@@ -80,7 +80,7 @@
 #define HTTP_MOVIE_CITYCODE    @"/api.php/Movie/countyList/"//获取当前城市的县市编码
 
 #define HTTP_MOVIE_HOME_CINEMALIST  @"/api.php/Movie/cinemaInfo/"//获取首页影院列表
-
+#define HTTP_MOVIE_PAY_CHECKCOUPON @"/api.php/Movie/checkCoupon/"//检测可使用的优惠券
 
 
 #pragma mark - discover

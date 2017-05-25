@@ -97,6 +97,7 @@
 +(NSString*)currentTime;
 
 +(NSString*)currentTime2;
++(NSString *)currentTimeStr;
 //得到明天的时间
 +(NSString*)tommorowTime;
 //得到后天的时间

@@ -9,7 +9,7 @@
 #import "MovieViewController.h"
 #import "HotMovieScrollView.h"//轮播scrollview
 #import "HotMovieCollectCell.h"
-#import "CinemaCell.h"
+#import "CinameTableViewCell.h"
 #import "ChooseMovieController.h"
 #import "DetaliViewController.h"
 #import "LookAllViewController.h"
@@ -29,7 +29,7 @@
 #import "HomeCinemaListModel.h"//影院模型
 
 #define newHotCell  @"NewHotMovieCollectCell"
-
+#define CINEMASHOWCELL @"CinameTableViewCell"
 @interface MovieViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,HotMovieScrollViewDelegate,UIGestureRecognizerDelegate>
 {
     UIButton * markBtn;
@@ -53,7 +53,9 @@
 @property (nonatomic,strong) UICollectionView *movieCollectView;
 @property (nonatomic,assign)BOOL isselected;
 @property (nonatomic,strong)NSMutableArray * otherTicketAry;//通兑票数组
-
+@property (nonatomic,strong)UIView * headerView;
+@property (nonatomic,assign)NSInteger pages;
+@property (nonatomic,assign)NSInteger pagen;
 @end
 
 @implementation MovieViewController
@@ -63,6 +65,8 @@
 
     self.title = @"电影";
 
+    self.pagen = 10;
+    self.pages = 0;
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
@@ -72,6 +76,7 @@
     self.type = @"0";
     self.typeList = @"0";
     [self.view addSubview:self.movieTableView];
+    [self.movieTableView registerNib:[UINib nibWithNibName:CINEMASHOWCELL bundle:nil] forCellReuseIdentifier:CINEMASHOWCELL];
     [self setRJRefresh];
     [self requestBannerData];
     [self requestHotData];
@@ -111,25 +116,21 @@
 
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    UIView * headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.7f)];
-    headerView.backgroundColor = RGBCOLOR(240, 244, 240, 1);
-    
     //轮播图
-    hotScrollView = [[HotMovieScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, headerView.size.height * 0.4f-15) andDataAry:self.hotMovieSAry];
-    hotScrollView.contentSize = CGSizeMake(self.hotMovieSAry.count*kScreen_Width, headerView.size.height * 0.4f);//容量要根据数据修改
+    hotScrollView = [[HotMovieScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, self.headerView.size.height * 0.4f-15) andDataAry:self.hotMovieSAry];
+    hotScrollView.contentSize = CGSizeMake(self.hotMovieSAry.count*kScreen_Width, _headerView.size.height * 0.4f);//容量要根据数据修改
     hotScrollView.delegate = self;
     hotScrollView.pagingEnabled = YES;
     hotScrollView.HotDelegate = self;
     hotScrollView.showsHorizontalScrollIndicator = NO;
-    [headerView addSubview:hotScrollView];
+    [_headerView addSubview:hotScrollView];
     
-    UIPageControl * moviePage = [[UIPageControl alloc]initWithFrame:CGRectMake(0, headerView.size.height * 0.3f, kScreen_Width, 30)];
+    UIPageControl * moviePage = [[UIPageControl alloc]initWithFrame:CGRectMake(0, _headerView.size.height * 0.3f, kScreen_Width, 30)];
     moviePage.numberOfPages = self.hotMovieSAry.count;//修改
     moviePage.currentPage = 0;
     moviePage.currentPageIndicatorTintColor = [UIColor redColor];
     moviePage.pageIndicatorTintColor = [UIColor whiteColor];
-    [headerView addSubview:moviePage];
+    [_headerView addSubview:moviePage];
     [moviePage addTarget:self action:@selector(pageController:) forControlEvents:UIControlEventValueChanged];
     if (self.timer == nil) {
         
@@ -139,11 +140,11 @@
     _page = moviePage;
     
     
-    UIView * hotMovieBGView = [[UIView alloc]initWithFrame:CGRectMake(0, hotScrollView.bottom, kScreen_Width, headerView.size.height*0.07f)];
+    UIView * hotMovieBGView = [[UIView alloc]initWithFrame:CGRectMake(0, hotScrollView.bottom, kScreen_Width, _headerView.size.height*0.07f)];
     hotMovieBGView.backgroundColor = [UIColor whiteColor];
     
     
-    [headerView addSubview: hotMovieBGView];
+    [_headerView addSubview: hotMovieBGView];
     UILabel * hotLbl = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, kScreen_Width/2, hotMovieBGView.size.height)];
     hotLbl.textAlignment = NSTextAlignmentLeft;
     hotLbl.textColor = RGBCOLOR(123, 124, 125, 1);
@@ -161,55 +162,17 @@
     [hotMovieBGView addSubview:lookBtn];
     
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
-    self.movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, hotMovieBGView.bottom, kScreen_Width, headerView.size.height*0.57f-35) collectionViewLayout:layout];
+    self.movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, hotMovieBGView.bottom, kScreen_Width, _headerView.size.height*0.57f-35) collectionViewLayout:layout];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    
-    
-    
+
     [_movieCollectView registerNib:[UINib nibWithNibName:newHotCell bundle:nil] forCellWithReuseIdentifier:newHotCell];
     _movieCollectView.backgroundColor = [UIColor whiteColor];
     _movieCollectView.delegate = self;
     _movieCollectView.dataSource = self;
-    [headerView addSubview:_movieCollectView];
-    
-    UIView * btnBGView = [[UIView alloc]initWithFrame:CGRectMake(0, headerView.height -30, kScreen_Width, 30)];
-    btnBGView.backgroundColor = [UIColor whiteColor];
-    [headerView addSubview:btnBGView];
-    
-    NSArray * titleAry = @[@"全部地区",@"离我最近"];
-    CGFloat btnWidth = (kScreen_Width-6)/2;
-    for (int i = 0; i<2; i++) {
-        UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        selectBtn.frame = CGRectMake((btnWidth+3)*i, 0 ,btnWidth , 30);
-        selectBtn.tag = 1111 + i;
-        selectBtn.backgroundColor = [UIColor whiteColor];
-        [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
-        [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
-        [selectBtn setTitleColor:CNaviColor forState:UIControlStateSelected];
-        [selectBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        
-        [selectBtn addTarget:self action:@selector(menuBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
-        [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
-        
-        
-        if (_isselected == 0) {
-            selectBtn.selected = NO;
-        }
-        [btnBGView addSubview:selectBtn];
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(selectBtn.right+1, 10, 1, 10)];
-        line.centerY = btnBGView.height/2;
-        line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
-        [btnBGView addSubview:line];
-        if (i == 1) {
-            line.hidden = YES;
-        }
-    }
+    [_headerView addSubview:_movieCollectView];
     
     
-    return headerView;
+    return self.headerView;
 
 
     
@@ -229,14 +192,14 @@
    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [self judgeIsContentOtherTicket:self.cinema_code];//修改
+    CinemaModel * model = self.theaterNameAry[indexPath.row];
+    [self judgeIsContentOtherTicket:model.code];//修改
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    CinemaCell * cinemaCell = [[CinemaCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cinemaCell"  andDataAry:self.theaterNameAry];
+    CinameTableViewCell * cinemaCell = [tableView dequeueReusableCellWithIdentifier:CINEMASHOWCELL];
     cinemaCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    HomeCinemaListModel * model = self.theaterNameAry[indexPath.row];
+    CinemaModel * model = self.theaterNameAry[indexPath.row];
     cinemaCell.model = model;
     return cinemaCell;
     
@@ -271,7 +234,7 @@
     //注意修改
     ChooseMovieController * choseVC = [[ChooseMovieController alloc]init];
     choseVC.filmCode = model.code;
-    choseVC.movieName = model.name;
+    choseVC.filmName = model.name;
     [self.navigationController pushViewController:choseVC animated:YES];
     
 }
@@ -335,7 +298,7 @@
 - (void)judgeIsContentOtherTicket:(NSString*)cinema_code{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_JUDGECONTENTOTHERTICKET];
     
-    self.cityCode = @"110000";
+    self.cityCode = @"110100";
     cinema_code = @"01010071";
     NSDictionary * pragrams = @{@"cityNo":self.cityCode,@"cinemaNo":cinema_code};
     HttpManager * manage = [[HttpManager alloc]init];
@@ -349,19 +312,22 @@
                 
             }
             //需要重新判断
-            
-            MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
+            if (self.otherTicketAry.count <= 0) {
+                MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
+                
+                movieVC.status = 0;
+                
+                [self.navigationController pushViewController:movieVC animated:YES];
 
-            movieVC.status = 1;
-
-            [self.navigationController pushViewController:movieVC animated:YES];
+            }else{
+                MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
+                
+                movieVC.status = 1;
+                
+                [self.navigationController pushViewController:movieVC animated:YES];
+            }
         }else{
-            MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
             
-            movieVC.status = 0;
-            
-            [self.navigationController pushViewController:movieVC animated:YES];
-
         }
         
     }];
@@ -371,7 +337,7 @@
 - (void)getlocatCityCode{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CITYCODE];
     
-    self.cityCode = @"110000";
+    self.cityCode = @"110100";
     NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type};
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
@@ -385,8 +351,8 @@
 - (void)getHomePageCinemaList{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOME_CINEMALIST];
     
-    self.cityCode = @"110000";
-    NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type,@"device_id":[JWTools getUUID],@"typeList":self.typeList};
+    self.cityCode = @"110100";
+    NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type,@"device_id":[JWTools getUUID],@"typeList":self.typeList,@"pages":@(self.pages),@"pagen":@(self.pagen)};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([UserSession instance].isLogin) {
         [dic setValue:[UserSession instance].token forKey:@"toke"];
@@ -400,7 +366,7 @@
         if ([data[@"errorCode"] integerValue] == 0) {
             [self.theaterNameAry removeAllObjects];
             for (NSDictionary * dict in data[@"data"]) {
-                HomeCinemaListModel * model = [HomeCinemaListModel yy_modelWithDictionary:dict];
+                CinemaModel * model = [CinemaModel yy_modelWithDictionary:dict];
                 [self.theaterNameAry addObject:model];
             }
             [self.movieTableView reloadData];
@@ -533,7 +499,50 @@
     }
     return _movieTableView;
 }
+- (UIView *)headerView{
+    if (!_headerView) {
+        _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.7f)];
+        _headerView.backgroundColor = RGBCOLOR(240, 244, 240, 1);
+        
+        UIView * btnBGView = [[UIView alloc]initWithFrame:CGRectMake(0, _headerView.height -30, kScreen_Width, 30)];
+        btnBGView.backgroundColor = [UIColor whiteColor];
+        [_headerView addSubview:btnBGView];
+        
+        NSArray * titleAry = @[@"全部地区",@"离我最近"];
+        CGFloat btnWidth = (kScreen_Width-6)/2;
+        for (int i = 0; i<2; i++) {
+            UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            selectBtn.frame = CGRectMake((btnWidth+3)*i, 0 ,btnWidth , 30);
+            selectBtn.tag = 1111 + i;
+            selectBtn.backgroundColor = [UIColor whiteColor];
+            [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
+            [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
+            [selectBtn setTitleColor:CNaviColor forState:UIControlStateSelected];
+            [selectBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+            selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+            
+            [selectBtn addTarget:self action:@selector(menuBtn:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
+            [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
+            
+            
+            if (_isselected == 0) {
+                selectBtn.selected = NO;
+            }
+            [btnBGView addSubview:selectBtn];
+            UIView * line = [[UIView alloc]initWithFrame:CGRectMake(selectBtn.right+1, 10, 1, 10)];
+            line.centerY = btnBGView.height/2;
+            line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
+            [btnBGView addSubview:line];
+            if (i == 1) {
+                line.hidden = YES;
+            }
+        }
 
+    }
+    return _headerView;
+}
 - (NSMutableArray *)theaterNameAry{
     
     if (!_theaterNameAry) {

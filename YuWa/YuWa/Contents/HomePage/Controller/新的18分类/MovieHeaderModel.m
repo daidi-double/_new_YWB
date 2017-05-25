@@ -18,8 +18,8 @@
     movieModel.country_time = dic[@""];
     movieModel.play_time = dic[@""];
     movieModel.picUrl = dic[@""];
-    movieModel.isGrade = dic[@""];
-    movieModel.isWantLook = dic[@""];
+//    movieModel.isGrade = dic[@""];
+//    movieModel.isWantLook = dic[@""];
     return movieModel;
 }
 @end

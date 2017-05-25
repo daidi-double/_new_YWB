@@ -652,7 +652,15 @@
     
     return strTime;
 }
-
++(NSString*)currentTimeStr{
+    NSDate*current=[NSDate date];
+    NSDateFormatter*dateFormatter=[[NSDateFormatter alloc]init];
+    //   hh:mm:ss
+    [dateFormatter setDateFormat:@"MM月dd日"];
+    NSString*strTime=[dateFormatter stringFromDate:current];
+    
+    return strTime;
+}
 //得到明天的时间
 +(NSString *)tommorowTime{
     NSDate * date = [NSDate date];
