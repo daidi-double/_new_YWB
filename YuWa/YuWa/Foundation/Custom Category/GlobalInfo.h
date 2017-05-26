@@ -90,6 +90,9 @@
 #define HTTP_MOVIE_PAY_SUREOTHERTICKETORDER   @"/api.php/Movie/createCommOrder/"//确认通兑票订单
 
 #define HTTP_MOVIE_PAY_JUADGEPAYRESURT   @"/api.php/IndexFilm/payToGetMoney/"//判断电影订单支付结果
+#define HTTP_MOVIE_ORDERLIST          @"/api.php/Movie/myOrder/"//电影订单列表
+#define HTTP_MOVIE_ORDERDETAIL         @"/api.php/Movie/orderDetail/"//订单详情
+
 
 
 

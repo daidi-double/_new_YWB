@@ -28,7 +28,7 @@
 @property(nonatomic,assign)int pagen;
 @property(nonatomic,assign)int pages;
 @property(nonatomic,copy)NSString * orderID;
-
+@property (nonatomic,assign)NSInteger status;//1电影，0其他订单
 @end
 
 @implementation PCMyOrderViewController
@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title=@"我的订单";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"电影订单" style:UIBarButtonItemStylePlain target:self action:@selector(MyOrder)];
+
     self.automaticallyAdjustsScrollViewInsets=NO;
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:@"MyOrderTableViewCell" bundle:nil] forCellReuseIdentifier:CELL0];
@@ -45,9 +45,7 @@
     [self setUpMJRefresh];
     
 }
--(void)MyOrder{
-    
-}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.f];
@@ -56,13 +54,37 @@
 }
 
 -(void)addTopView{
+    NSArray * ary = @[@"我的订单",@"电影订单"];
+    UISegmentedControl * segemetVC = [[UISegmentedControl alloc]initWithItems:ary];
+    segemetVC.selectedSegmentIndex = 0;
+    [segemetVC addTarget:self action:@selector(didClicksegmentedControlAction:)forControlEvents:UIControlEventValueChanged];
+    
+    self.navigationItem.titleView = segemetVC;
+    
+    
+    
     NSArray*array=@[@"全部订单",@"待付款",@"待评价",@"退款/售后"];
     YJSegmentedControl*topView=[YJSegmentedControl segmentedControlFrame:CGRectMake(0, 64, kScreen_Width, 44) titleDataSource:array backgroundColor:[UIColor whiteColor] titleColor:[UIColor blackColor] titleFont:[UIFont systemFontOfSize:14] selectColor:CNaviColor buttonDownColor:CNaviColor Delegate:self];
     [self.view addSubview:topView];
     
 }
 
+-(void)didClicksegmentedControlAction:(UISegmentedControl *)Seg{
+    NSInteger Index = Seg.selectedSegmentIndex;
+    MyLog(@"Index %ld", Index);
+    switch (Index) {
+        case 0:
+            self.status = 0;
+            [self.tableView.mj_header beginRefreshing];
+            break;
 
+           
+        default:
+            self.status = 1;
+            [self.tableView.mj_header beginRefreshing];
+            break;
+    }
+}
 -(void)setUpMJRefresh{
     self.maAllDatasModel=[NSMutableArray array];
     self.payType=1;
@@ -127,6 +149,7 @@
     OrderModel * model = self.maAllDatasModel[indexPath.row];
     OrderDetailViewController * orderVC =[[OrderDetailViewController alloc]init];
     orderVC.order_id = model.order_id;
+    orderVC.status = self.status;
     [self.navigationController pushViewController:orderVC animated:YES];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -136,26 +159,43 @@
     OrderModel*model=self.maAllDatasModel[indexPath.row];
     
     UIImageView*imageView=[cell viewWithTag:1];
+    UILabel*titleLabel=[cell viewWithTag:2];
+    UILabel*whereLabel=[cell viewWithTag:3];
+    UILabel*timeLabel=[cell viewWithTag:4];
+    UILabel*moneyLabel=[cell viewWithTag:5];
+    UILabel*assessLabel=[cell viewWithTag:6];
+    
+    if (self.status == 0) {
+
     [imageView sd_setImageWithURL:[NSURL URLWithString:model.shop_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
-    
-    
-    UILabel*titleLabel=[cell viewWithTag:2];
+
     titleLabel.text=model.shop_name;
     
     
-    UILabel*whereLabel=[cell viewWithTag:3];
     whereLabel.text=model.shop_address;
     whereLabel.numberOfLines = 0;
-    UILabel*timeLabel=[cell viewWithTag:4];
+
+        
+    }else{
+        [imageView sd_setImageWithURL:[NSURL URLWithString:model.shop_img] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+        
+        titleLabel.text=model.cinema_name;
+        
+        
+        whereLabel.text=model.address;
+        whereLabel.numberOfLines = 0;
+
+        
+ 
+    }
     timeLabel.text=[NSString stringWithFormat:@"%@",[JWTools getTime:model.create_time]];
     self.orderID = model.order_id;
-    
-    UILabel*moneyLabel=[cell viewWithTag:5];
+
     moneyLabel.text=[NSString stringWithFormat:@"总价：%@",model.pay_money];
-    
-    UILabel*assessLabel=[cell viewWithTag:6];
     assessLabel.text=model.status;
     
     
@@ -255,7 +295,12 @@
 
 #pragma mark  --allDatas
 -(void)getDatas{
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MYORDER];
+    NSString*urlStr;
+    if (self.status == 1) {//电影
+         urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_ORDERLIST];
+    }else{
+         urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MYORDER];
+    }
     NSString*pagen=[NSString stringWithFormat:@"%d",self.pagen];
     NSString*pages=[NSString stringWithFormat:@"%d",self.pages];
     NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"type":@(self.payType),@"pagen":pagen,@"pages":pages};

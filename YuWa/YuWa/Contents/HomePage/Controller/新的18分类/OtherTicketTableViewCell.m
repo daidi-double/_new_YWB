@@ -48,7 +48,7 @@
     
     self.filmTypeLabel.text = [NSString stringWithFormat:@"%@",showType];
     self.sellerPriceLabel.text = [NSString stringWithFormat:@"￥%.2f",sellerPrice];
-    self.markLabel.text = [NSString stringWithFormat:@"可以在本电影院兑换%@电影票",self.filmTypeLabel.text];
+    self.markLabel.text = [NSString stringWithFormat:@"可在%@",self.model.ticketName];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

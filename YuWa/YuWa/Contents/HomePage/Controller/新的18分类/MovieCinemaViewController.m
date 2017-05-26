@@ -256,7 +256,7 @@
         [dic setValue:[UserSession instance].token forKey:@"token"];
     }
     HttpManager * manager = [[HttpManager alloc]init];
-    [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
+    [manager postDatasWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
         MyLog(@"影院头部%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             self.headerModel = [CinemaHeaderModel yy_modelWithDictionary:data[@"data"][@"cinemaInfo"]];
@@ -296,7 +296,7 @@
         [dic setValue:[UserSession instance].token forKey:@"token"];
     }
     HttpManager * manager = [[HttpManager alloc]init];
-    [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
+    [manager postDatasWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
         MyLog(@"电影场次%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
 

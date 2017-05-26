@@ -10,4 +10,5 @@
 
 @interface OrderDetailViewController : UIViewController
 @property (nonatomic,copy)NSString * order_id;
+@property (nonatomic,assign)NSInteger status;
 @end
