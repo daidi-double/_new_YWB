@@ -24,7 +24,7 @@
         sender.enabled = NO;
     }
     self.numberLabel.text = [NSString stringWithFormat:@"%zi",number-1];
-    self.totalMoneyLabel.text = [NSString stringWithFormat:@"%.2f",[self.model.price floatValue] * [self.numberLabel.text integerValue]];
+    self.totalMoneyLabel.text = [NSString stringWithFormat:@"%.2f",[self.model.price floatValue]/100 * [self.numberLabel.text integerValue]];
     [self.delegate reduceOrAddTicket:2];
     
 }
@@ -32,7 +32,7 @@
     self.reduceBtn.enabled = YES;
     NSInteger number = [self.numberLabel.text integerValue];
     self.numberLabel.text = [NSString stringWithFormat:@"%zi",number+1];
-    self.totalMoneyLabel.text = [NSString stringWithFormat:@"%.2f",[self.model.price floatValue] * [self.numberLabel.text integerValue]];
+    self.totalMoneyLabel.text = [NSString stringWithFormat:@"%.2f",[self.model.price floatValue]/100 * [self.numberLabel.text integerValue]];
     [self.delegate reduceOrAddTicket:1];
     
 }
@@ -76,7 +76,7 @@
             self.timeLabel.text = [NSString stringWithFormat:@"有效期%@",self.model.validDate];
             break;
     }
-    self.totalMoneyLabel.text = [NSString stringWithFormat:@"总价:%.2f",[self.model.price floatValue] * [self.numberLabel.text integerValue]];
+    self.totalMoneyLabel.text = [NSString stringWithFormat:@"总价:%.2f",[self.model.price floatValue]/100 * [self.numberLabel.text integerValue]];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

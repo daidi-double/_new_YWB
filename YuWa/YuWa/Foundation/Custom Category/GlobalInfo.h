@@ -76,7 +76,7 @@
 #define HTTP_MOVIE_CINEMAHEADER  @"/api.php/Movie/cinemaFilm/"//影院头部数据
 #define HTTP_MOVIE_CINEMAFOOT  @"/api.php/Movie/cinemaFilmShowTime/"//影院尾部数据
 #define HTTP_MOVIE_JUDGECONTENTOTHERTICKET  @"/api.php/Movie/queryCommTickets/"//判断是否有通兑票
-#define HTTP_MOVIE_GETORDERID  @"/api.php/Movie/createCommOrder/"//获取通兑票订单
+#define HTTP_MOVIE_GETORDERID  @"/api.php/Movie/createMyCommOrder/"//获取通兑票订单
 #define HTTP_MOVIE_CITYCODE    @"/api.php/Movie/countyList/"//获取当前城市的县市编码
 
 #define HTTP_MOVIE_HOME_CINEMALIST  @"/api.php/Movie/cinemaInfo/"//获取首页影院列表
@@ -85,7 +85,7 @@
 #define HTTP_MOVIE_CANCEL_RESEASESEAT @"/api.php/Movie/releaseSeats/"//释放座位
 #define HTTP_MOVIE_PAY_BALANCEPAY     @"/api.php/IndexFilm/payForBalanceMoney/"//全部余额支付
 #define HTTP_MOVIE_PAY_ORDERSTATUS    @"/api.php/Movie/submitOrder/"//查询订单状态，确认订单
-
+#define HTTP_MOVIE_PAY_FILMNOBALANCEPAY     @"/api.php/IndexFilm/payForNoBalanceMoney/"//电影第三方支付
 
 
 

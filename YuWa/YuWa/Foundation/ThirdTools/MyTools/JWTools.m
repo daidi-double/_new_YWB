@@ -225,6 +225,19 @@
     dateFormatter.dateFormat = @"MM-dd HH:mm";
     return [dateFormatter stringFromDate:date];
 }
+//有效期转时间戳
++ (NSString *)dateTimeStrDate:(NSInteger)days{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *stampTimeZone = [NSDate dateWithTimeIntervalSinceNow:days*24*3600];
+    NSString *lastTime = [dateFormatter stringFromDate:stampTimeZone];
+    NSDate *lastDate = [dateFormatter dateFromString:lastTime];
+    //以 1970/01/01 GMT为基准，得到lastDate的时间戳
+    long firstStamp = [lastDate timeIntervalSince1970];
+    NSString * timeStr = [NSString stringWithFormat:@"%ld",firstStamp];
+    return timeStr;
+}
+
 + (NSString *)dateTimeWithStr:(NSString *)dateStr{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd";

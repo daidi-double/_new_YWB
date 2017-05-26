@@ -8,7 +8,7 @@
 
 #import "OtherTicketPayViewController.h"
 #import "OtherTicketPayTableViewCell.h"
-
+#import "PCPayViewController.h"
 #define TICKETPAYCELL  @"OtherTicketPayTableViewCell"
 @interface OtherTicketPayViewController ()<UITableViewDelegate,UITableViewDataSource,OtherTicketPayTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *settmentMoneyLabel;
@@ -17,6 +17,9 @@
 @property (nonatomic,assign) NSInteger ticketNumber;
 @property (nonatomic,assign) BOOL is_coupon;//是否使用优惠券
 @property (nonatomic,assign)CGFloat coupon_money;//优惠券金额
+@property (nonatomic,copy)NSString * orderID;//订单号
+@property (nonatomic,copy)NSString * total_money;//返回的需要支付的金额
+@property (nonatomic,copy)NSString * pay_money;//返回的实际支付金额
 @end
 
 @implementation OtherTicketPayViewController
@@ -89,7 +92,7 @@
         case 1:
         {
             CGFloat settmentMoney = [[self.settmentMoneyLabel.text substringFromIndex:4] floatValue];
-            self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney +[self.model.price floatValue]];
+            self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney +[self.model.price floatValue]/100];
             self.ticketNumber = self.ticketNumber +1;
         }
             break;
@@ -97,7 +100,7 @@
         default:
         {
             CGFloat settmentMoney = [[self.settmentMoneyLabel.text substringFromIndex:4] floatValue];
-            self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney - [self.model.price floatValue]];
+            self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney - [self.model.price floatValue]/100];
             self.ticketNumber = self.ticketNumber -1;
         }
             break;
@@ -110,10 +113,10 @@
     NSString * isCoupon = [NSString stringWithFormat:@"%d",self.is_coupon];
     NSString * coupon_moneyStr = [NSString stringWithFormat:@"%.2f",self.coupon_money];
     //有效期转时间戳
-   NSString * day = [JWTools dateTimeWithStr:self.model.validDays];
+   NSString * day = [JWTools dateTimeStrDate:[self.model.validDays integerValue]];
     
     
-    NSDictionary * pragrams = @{@"mobile":[UserSession instance].account,@"ticketNo":self.ticketNo,@"price":self.model.price,@"count":number,@"cinema_code":self.cinemaCode,@"is_coupon":isCoupon,@"coupon_money":coupon_moneyStr,@"show_type":self.model.showType,@"period_validity":self.model.validDays,};
+    NSDictionary * pragrams = @{@"mobile":[UserSession instance].account,@"ticketNo":self.model.ticketNo,@"price":self.model.price,@"count":number,@"cinema_code":self.cinemaCode,@"is_coupon":isCoupon,@"coupon_money":coupon_moneyStr,@"show_type":self.model.showType,@"period_validity":day,@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"percentage":self.model.percentage};
    
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if (self.is_coupon) {
@@ -121,7 +124,22 @@
         
     }
     HttpManager * manage = [[HttpManager alloc]init];
-
+    [manage postDatasWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",dic);
+        MyLog(@"通兑票订单%@",data);
+        if ([data[@"errorCode"] integerValue]== 0) {
+            self.orderID = data[@"data"][@"id"];
+            self.pay_money = data[@"data"][@"pay_money"];
+            self.total_money= data[@"data"][@"total_money"];
+            PCPayViewController * pcVC = [[PCPayViewController alloc]init];
+            pcVC.blanceMoney = [self.total_money floatValue];
+            pcVC.status = 1;
+            pcVC.order_id = [self.orderID floatValue];
+            pcVC.shop_ID = self.cinemaCode;
+            [self.navigationController pushViewController:pcVC animated:YES];
+        }
+        
+     }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

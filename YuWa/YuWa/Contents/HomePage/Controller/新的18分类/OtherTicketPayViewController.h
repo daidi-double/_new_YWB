@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "OtherTicketModel.h"
 @interface OtherTicketPayViewController : UIViewController
-@property (nonatomic,copy)NSString * ticketNo;//通兑票号
 @property (nonatomic,strong)OtherTicketModel*model;
 @property (nonatomic,copy)NSString * cinemaCode;
 @end

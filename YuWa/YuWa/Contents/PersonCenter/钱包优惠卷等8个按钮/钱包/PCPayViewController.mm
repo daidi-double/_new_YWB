@@ -611,9 +611,15 @@
     [self checkOrderStatus];
 }
 -(void)payWith:(NSString*)aa{
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_THIRD_PAY];
+    
+    NSString*urlStr;
+    if (self.status ==1) {
+      urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_FILMNOBALANCEPAY]; 
+    }else{
+      urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_THIRD_PAY];
+    }
     NSString * isSelectOnStr = [NSString stringWithFormat:@"%d",self.isSelectedOn];
-    NSString * orderIDStr = [NSString stringWithFormat:@"%f",self.order_id];
+    NSString * orderIDStr = [NSString stringWithFormat:@"%zi",self.order_id];
     NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":orderIDStr,@"is_balance":isSelectOnStr,@"pay_method":aa};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {

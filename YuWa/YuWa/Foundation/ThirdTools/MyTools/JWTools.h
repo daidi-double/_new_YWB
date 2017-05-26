@@ -31,6 +31,7 @@
 + (NSString *)dateWithOutYearDate:(NSDate *)date;
 + (NSString *)dateTimeWithStr:(NSString *)dateStr;
 
++ (NSString*) dateTimeStrDate:(NSInteger)days;//有效期转时间戳
 
 + (NSString *)dateWithTodayYearMonthDayStr;
 + (NSString *)dateWithTodayYearMonthDayNumberStr;
