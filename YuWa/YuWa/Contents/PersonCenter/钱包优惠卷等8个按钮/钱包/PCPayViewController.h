@@ -10,10 +10,12 @@
 //#import "YWPayMViewController.h"
 #import "WXApi.h"
 @interface PCPayViewController : UIViewController<WXApiDelegate>
-@property (nonatomic,assign)NSInteger status;//1为电影支付过来，0为其他支付
+@property (nonatomic,assign)NSInteger status;//1为电影支付过来，0为其他支付，2为电影通兑票
 @property(nonatomic,assign)CGFloat blanceMoney;  //需要付多少钱
-@property(nonatomic,assign)CGFloat order_id;  //订单号
+@property(nonatomic,assign)CGFloat order_id;  //订单号、电影订单id
 @property(nonatomic,copy)NSString * shop_ID;//店铺id
+@property(nonatomic,copy)NSString * orderCode;//电影订单号
+
 //微信支付
 +(instancetype)sharedManager;
 -(void)TowechatPay:(NSDictionary*)dict;

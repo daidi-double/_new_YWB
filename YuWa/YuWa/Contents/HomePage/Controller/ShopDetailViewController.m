@@ -65,6 +65,16 @@
 @property (nonatomic,assign)BOOL is_ADD;//判断是否添加到数组
 @property (nonatomic,assign)BOOL isClearShop;//是否清空购物车商品
 
+@property (nonatomic,strong)UIView * introduceView;//商品介绍
+@property (nonatomic,strong)UIView * introView;
+@property (nonatomic,strong) UIImageView * shopImageView;//商品介绍商品图片
+@property (nonatomic,strong) UILabel * shopOfNameLabel;//商品名称
+@property (nonatomic,strong) UILabel * shopIntroLabel;//商品介绍
+@property (nonatomic,strong) UILabel * monthNumberLabel;//月销售量及好评率
+@property (nonatomic,strong) UILabel * priceLaber;//价格
+@property (nonatomic,assign) NSInteger markStatus;//标记是介绍也加的商品
+
+
 @end
 
 @implementation ShopDetailViewController
@@ -77,6 +87,7 @@
     [self getDatas];
     self.is_ADD = YES;
     self.isClearShop = YES;
+    self.markStatus = 0;
     self.totalMoneyLabel.text = @"￥0.00";
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     //清空勾选的物品数量
@@ -184,8 +195,8 @@
     line.backgroundColor = CNaviColor;
     
     [self.shopAndCommontView addSubview:line];
-   
-    
+//    [self.view addSubview:self.introduceView];
+//    [self.view addSubview:self.introView];
 
 }
 //跳店铺详情，有无wifi等
@@ -269,9 +280,9 @@
 
         return cell;
     }else{
+        CategoryLeftTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CATEGORYCELL];
         ShowShoppingModel * model = self.maMDatasGoods[indexPath.section];
         
-        CategoryLeftTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CATEGORYCELL];
         NSDictionary * dit = model.cat_goods[indexPath.row];
         ShopDetailGoodsModel * shopModel = [ShopDetailGoodsModel yy_modelWithDictionary:dit];
 //        [cell.shopCarAry removeAllObjects];
@@ -376,6 +387,29 @@
     }
     if (tableView == self.rightTableView) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        ShowShoppingModel * model = self.maMDatasGoods[indexPath.section];
+        
+        NSDictionary * dit = model.cat_goods[indexPath.row];
+        ShopDetailGoodsModel * shopModel = [ShopDetailGoodsModel yy_modelWithDictionary:dit];
+        markPath = indexPath;
+        self.introduceView.hidden = NO;
+        self.introView.hidden = NO;
+        self.shopOfNameLabel.text = shopModel.goods_name;
+        [self.shopImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",shopModel.goods_img]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        self.shopIntroLabel.text = shopModel.goods_info;
+//        if (shopModel.goods_info == nil) {
+//            self.shopIntroLabel.hidden = YES;
+//        }
+        
+        NSString * price;
+        if (shopModel.goods_disprice == nil) {
+            price = shopModel.goods_price;
+        }else{
+            price = shopModel.goods_disprice;
+        }
+        self.priceLaber.attributedText = [NSString stringWithFirstStr:@"￥" withFont:[UIFont systemFontOfSize:12] withColor:[UIColor redColor] withSecondtStr:[NSString stringWithFormat:@"%@",price] withFont:[UIFont systemFontOfSize:14] withColor:[UIColor redColor]];
+        
+        self.monthNumberLabel.text = [NSString stringWithFormat:@"月售%@份",shopModel.month_sales];
     }
 }
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
@@ -782,7 +816,12 @@
 //加
 - (void)addShopAction:(UIButton *)sender {
 //    MyLog(@"tag = %ld",sender.tag);
-    CategoryLeftTableViewCell * cell = (CategoryLeftTableViewCell *)[[sender superview] superview];
+    CategoryLeftTableViewCell * cell;
+    if (self.markStatus == 1) {
+        cell = (CategoryLeftTableViewCell *)[self.rightTableView cellForRowAtIndexPath:markPath];
+    }else{
+      cell = (CategoryLeftTableViewCell *)[[sender superview] superview];
+    }
     NSIndexPath * path = [self.rightTableView indexPathForCell:cell];
 //    markPath = path;
 //    NSLog(@"index row%@", cell.priceLabel.text);
@@ -999,6 +1038,12 @@
     vc.shop_id=self.shop_id;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+- (void)removeIntroView{
+    self.introduceView.hidden = YES;
+    self.introView.hidden = YES;
+    self.markStatus = 0;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -1030,6 +1075,76 @@
     }
     return _commentView;
 }
+
+- (UIView*)introduceView{
+    if (!_introduceView) {
+        _introduceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        _introduceView.hidden = YES;
+        _introduceView.backgroundColor = [UIColor blackColor];
+        _introduceView.alpha= 0.7f;
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeIntroView)];
+        tap.numberOfTapsRequired = 1;
+        tap.numberOfTouchesRequired = 1;
+        tap.delegate = self;
+        [_introduceView addGestureRecognizer:tap];
+        [self.view addSubview:_introduceView];
+       
+    }
+    return _introduceView;
+}
+- (UIView*)introView{
+    if (!_introView) {
+        _introView = [[UIView alloc]initWithFrame:CGRectMake(20, kScreen_Height * 0.15, kScreen_Width-40, kScreen_Height*0.7)];
+        _introView.backgroundColor = [UIColor whiteColor];
+        _introView.layer.cornerRadius = _introView.height*0.03;
+        _introView.layer.masksToBounds = YES;
+        _introView.hidden = YES;
+        
+        [self.view addSubview:_introView];
+        _shopImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, _introView.width, _introView.height* 0.7f)];
+        [_introView addSubview:_shopImageView];
+        
+        _shopOfNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, _shopImageView.bottom, _introView.width-30, _introView.height* 0.08f)];
+        _shopOfNameLabel.font = [UIFont systemFontOfSize:15];
+        [_introView addSubview:_shopOfNameLabel];
+        
+        _monthNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(_shopOfNameLabel.left, _shopOfNameLabel.bottom-10, _introView.width-30, _introView.height * 0.06f)];
+        _monthNumberLabel.textColor = RGBCOLOR(88, 89, 90, 1);
+        _monthNumberLabel.font = [UIFont systemFontOfSize:12];
+        [_introView addSubview:_monthNumberLabel];
+        
+        _shopIntroLabel = [[UILabel alloc]initWithFrame:CGRectMake(_shopOfNameLabel.left, _monthNumberLabel.bottom, _introView.width-30, _introView.height * 0.06f)];
+        _shopIntroLabel.textColor = RGBCOLOR(112, 113, 114, 1);
+        _shopIntroLabel.font = [UIFont systemFontOfSize:12];
+        [_introView addSubview:_shopIntroLabel];
+        
+        _priceLaber = [[UILabel alloc]initWithFrame:CGRectMake(_shopOfNameLabel.left, _shopIntroLabel.bottom, _introView.width/3, _introView.height* 0.1f)];
+        _priceLaber.font = [UIFont systemFontOfSize:14];
+        _priceLaber.textColor = [UIColor redColor];
+        [_introView addSubview:_priceLaber];
+        
+        UIButton * addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        addBtn.frame = CGRectMake(_introView.width * 0.65f, _priceLaber.top, _introView.width * 0.3f, _introView.height* 0.06f);
+        [addBtn setTitle:@"加入购物车" forState:UIControlStateNormal];
+        [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        addBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        addBtn.backgroundColor = CNaviColor;
+        addBtn.layer.cornerRadius = _introView.height*0.03;
+        addBtn.layer.masksToBounds = YES;
+        [addBtn addTarget:self action:@selector(addShopToCar:) forControlEvents:UIControlEventTouchUpInside];
+        [_introView addSubview:addBtn];
+    }
+    return _introView;
+}
+
+
+- (void)addShopToCar:(UIButton*)sender{
+    self.markStatus = 1;
+    [self addShopAction:sender];
+    [self removeIntroView];
+}
+
 //代理  清空商品
 -(void)clearShop{
     [self.shops removeAllObjects];

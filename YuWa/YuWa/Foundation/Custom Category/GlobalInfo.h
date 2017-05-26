@@ -87,6 +87,9 @@
 #define HTTP_MOVIE_PAY_ORDERSTATUS    @"/api.php/Movie/submitOrder/"//查询订单状态，确认订单
 #define HTTP_MOVIE_PAY_FILMNOBALANCEPAY     @"/api.php/IndexFilm/payForNoBalanceMoney/"//电影第三方支付
 
+#define HTTP_MOVIE_PAY_SUREOTHERTICKETORDER   @"/api.php/Movie/createCommOrder/"//确认通兑票订单
+
+#define HTTP_MOVIE_PAY_JUADGEPAYRESURT   @"/api.php/IndexFilm/payToGetMoney/"//判断电影订单支付结果
 
 
 

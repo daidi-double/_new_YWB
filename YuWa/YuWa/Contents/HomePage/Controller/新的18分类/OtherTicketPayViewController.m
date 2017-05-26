@@ -131,11 +131,12 @@
             self.orderID = data[@"data"][@"id"];
             self.pay_money = data[@"data"][@"pay_money"];
             self.total_money= data[@"data"][@"total_money"];
-            PCPayViewController * pcVC = [[PCPayViewController alloc]init];
+            PCPayViewController * pcVC = [PCPayViewController sharedManager];
             pcVC.blanceMoney = [self.total_money floatValue];
-            pcVC.status = 1;
+            pcVC.status = 2;
             pcVC.order_id = [self.orderID floatValue];
             pcVC.shop_ID = self.cinemaCode;
+            pcVC.orderCode = data[@"data"][@"order_code"];
             [self.navigationController pushViewController:pcVC animated:YES];
         }
         

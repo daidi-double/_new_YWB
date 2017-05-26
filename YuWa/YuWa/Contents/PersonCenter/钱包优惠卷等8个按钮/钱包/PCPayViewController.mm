@@ -296,9 +296,14 @@
     AppDelegate*delegate   =(AppDelegate*)  [UIApplication sharedApplication].delegate;
     WEAKSELF;
     delegate.unionpayBlock=^(NSDictionary*resultDic){
-
-        [weakSelf judgePaySuccessOrNot];
-  
+        if (weakSelf.status == 1) {
+            [weakSelf judgeMoviePaySuccessOrNot];
+        }else if(weakSelf.status == 2){
+            //通兑票查询支付结果
+            [weakSelf judgeMoviePaySuccessOrNot];
+        }else{
+            [weakSelf judgePaySuccessOrNot];
+        }
     };
 
 }
@@ -449,6 +454,12 @@
             if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
 //            UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"支付结果" message:@"支付成功" preferredStyle:UIAlertControllerStyleActionSheet];
 //            UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if (self.status == 1) {
+                    [self judgeMoviePaySuccessOrNot];
+                }else if(self.status == 2){
+                    //通兑票查询支付结果
+                    [self judgeMoviePaySuccessOrNot];
+                }else{
                 //创建一个消息对象
                 NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
                 //发送消息
@@ -459,6 +470,7 @@
                 [[NSNotificationCenter defaultCenter]postNotification:deleMoney];
 
                 [self pushToPostComment:self.shop_ID];
+                }
 //                [self clearShopCar:self.shop_ID];
 //                PostCommitViewController * commitVC = [[PostCommitViewController alloc]init];
 //                commitVC.order_id = [NSString stringWithFormat:@"%.0f",self.order_id];
@@ -471,10 +483,14 @@
         }];
    
     AppDelegate*delegate   =(AppDelegate*)  [UIApplication sharedApplication].delegate;
+    WEAKSELF;
     delegate.aliPayBlock=^(NSDictionary*resultDic){
         
-        [self judgePaySuccessOrNot];
-
+        if (weakSelf.status != 0) {
+            [weakSelf judgeMoviePaySuccessOrNot];
+        }else{
+            [weakSelf judgePaySuccessOrNot];
+        }
     };
     
 }
@@ -529,7 +545,7 @@
 -(void)BlancePayDatas{
     NSString*urlStr;
     NSDictionary*params;
-    if (self.status == 1) {
+    if (self.status == 1 || self.status == 2) {
         //电影的订单
         urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_BALANCEPAY];
         NSString * order_ids = [NSString stringWithFormat:@"%.0f",self.order_id];
@@ -560,9 +576,9 @@
             [[NSNotificationCenter defaultCenter]postNotification:deleMoney];
             [self pushToPostComment:self.shop_ID];
                 
-            }else{
-                //去查询订单
-                [self checkOrderStatus];
+            }else if(self.status == 1 || self.status == 2){
+                //去查询订单支付结果
+                [self judgeMoviePaySuccessOrNot];
             }
             
         }else{
@@ -574,7 +590,7 @@
     
     
 }
-//查询订单状态
+//查询选座票订单状态
 -(void)checkOrderStatus{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_ORDERSTATUS];
     NSString * order_ids = [NSString stringWithFormat:@"%.0f",self.order_id];
@@ -583,14 +599,24 @@
     [manage postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"参数%@",params);
         MyLog(@"订单状态%@",data);
-        if ([data[@"data"] integerValue ] == 0) {
+        if ([data[@"errorCode"] integerValue ] == 0) {
             [JRToast showWithText:@"购买成功" duration:2];
+            if (self.timer) {
+                
+                [self.timer invalidate];
+                self.timer = nil;
+            }
             WEAKSELF;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:1] animated:YES];
             });
         }else if([data[@"data"] integerValue ] == 1){
             [JRToast showWithText:@"购买失败" duration:2];
+            if (self.timer) {
+                
+                [self.timer invalidate];
+                self.timer = nil;
+            }
             WEAKSELF;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:1] animated:YES];
@@ -610,16 +636,68 @@
     
     [self checkOrderStatus];
 }
+//确认通兑票订单
+- (void)sureOrder{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_SUREOTHERTICKETORDER];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_code":self.orderCode};
+    HttpManager * manage = [[HttpManager alloc]init];
+ 
+    [manage postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",params);
+        MyLog(@"确认通兑票订单%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+//            data = {
+//                amount = 1,
+//                code = 001,
+//                orderTime = 2017-05-26 14:01:32,
+//                msg = 操作成功,
+//                orderNo = 1000284233
+//            },
+//            errorCode = 0
+//        }
+    }
+    }];
+    
+}
+
+//判断电影支付成功  还是 失败
+-(void)judgeMoviePaySuccessOrNot{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_JUADGEPAYRESURT];
+    NSString * order_ids = [NSString stringWithFormat:@"%f",self.order_id];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":order_ids};
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",params);
+        MyLog(@"判断支付结果%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            if ([data[@"data"][@"is_paid"] integerValue] == 1) {
+                
+                [JRToast showWithText:@"支付成功" duration:1];
+                [self getAccountMoney];
+                if (self.status == 1) {
+                    
+                    [self checkStatus];
+                }else if (self.status == 2){
+                    
+                    [self sureOrder];
+            }
+            }else{
+                [JRToast showWithText:@"支付失败" duration:1];
+            }
+        }
+    }];
+}
 -(void)payWith:(NSString*)aa{
     
     NSString*urlStr;
-    if (self.status ==1) {
+    if (self.status ==1 || self.status == 2) {
       urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_FILMNOBALANCEPAY]; 
     }else{
       urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_THIRD_PAY];
     }
     NSString * isSelectOnStr = [NSString stringWithFormat:@"%d",self.isSelectedOn];
-    NSString * orderIDStr = [NSString stringWithFormat:@"%zi",self.order_id];
+    NSString * orderIDStr = [NSString stringWithFormat:@"%.0f",self.order_id];
     NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":orderIDStr,@"is_balance":isSelectOnStr,@"pay_method":aa};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
@@ -736,6 +814,12 @@
             {
 //                [self.navigationController popViewControllerAnimated:YES];
                 strMsg = @"支付结果：成功！";
+                if (self.status == 1) {
+                    [self judgeMoviePaySuccessOrNot];
+                }else if(self.status == 2){
+                    //通兑票查询支付结果
+                    [self judgeMoviePaySuccessOrNot];
+                }else{
                 //发送消息  //清空详情页面勾选物品，数据
 //                ShopDetailViewController
                 NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
@@ -751,9 +835,11 @@
 //                commitVC.order_id = [NSString stringWithFormat:@"%.0f",self.order_id];
 //                commitVC.shop_id = self.shop_ID;
 //                [self.navigationController pushViewController:commitVC animated:YES];
+             
                 [self pushToPostComment:self.shop_ID];
                 //清空购物车商品，有shopid的时候在解注释调用
                 [self clearShopCar:self.shop_ID];
+                }
         }
                 break;
                 

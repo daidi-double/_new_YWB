@@ -31,12 +31,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self requestData];
     [self makeUI];
     [self creatLabel];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self requestData];
     
 }
 -(void)makeUI{
