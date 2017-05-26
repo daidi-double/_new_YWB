@@ -1820,13 +1820,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		258581151ED7C74400108250 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B38B2C641D8FAC5A004D5256 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 258581111ED7C72000108250;
-			remoteInfo = scriptTarget;
-		};
 		B38B2C861D8FAC5A004D5256 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B38B2C641D8FAC5A004D5256 /* Project object */;
@@ -10330,23 +10323,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXLegacyTarget section */
-		258581111ED7C72000108250 /* scriptTarget */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = 258581121ED7C72000108250 /* Build configuration list for PBXLegacyTarget "scriptTarget" */;
-			buildPhases = (
-			);
-			buildToolPath = /Users/lhuihuiy/Desktop/deletePhoto;
-			buildWorkingDirectory = "";
-			dependencies = (
-			);
-			name = scriptTarget;
-			passBuildSettingsInEnvironment = 1;
-			productName = scriptTarget;
-		};
-/* End PBXLegacyTarget section */
-
 /* Begin PBXNativeTarget section */
 		B38B2C6B1D8FAC5A004D5256 /* YuWa */ = {
 			isa = PBXNativeTarget;
@@ -10362,7 +10338,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				258581161ED7C74400108250 /* PBXTargetDependency */,
 			);
 			name = YuWa;
 			productName = YuWa;
@@ -10415,10 +10390,6 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Shanghai DuRui Information Technology Company";
 				TargetAttributes = {
-					258581111ED7C72000108250 = {
-						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
-					};
 					B38B2C6B1D8FAC5A004D5256 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = JQ283T24DV;
@@ -10474,7 +10445,6 @@
 				B38B2C6B1D8FAC5A004D5256 /* YuWa */,
 				B38B2C841D8FAC5A004D5256 /* YuWaTests */,
 				B38B2C8F1D8FAC5A004D5256 /* YuWaUITests */,
-				258581111ED7C72000108250 /* scriptTarget */,
 			);
 		};
 /* End PBXProject section */
@@ -12329,11 +12299,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		258581161ED7C74400108250 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 258581111ED7C72000108250 /* scriptTarget */;
-			targetProxy = 258581151ED7C74400108250 /* PBXContainerItemProxy */;
-		};
 		B38B2C871D8FAC5A004D5256 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B38B2C6B1D8FAC5A004D5256 /* YuWa */;
@@ -12376,35 +12341,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		258581131ED7C72000108250 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		258581141ED7C72000108250 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		B38B2C971D8FAC5A004D5256 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -12647,14 +12583,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		258581121ED7C72000108250 /* Build configuration list for PBXLegacyTarget "scriptTarget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				258581131ED7C72000108250 /* Debug */,
-				258581141ED7C72000108250 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
 		B38B2C671D8FAC5A004D5256 /* Build configuration list for PBXProject "YuWa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
