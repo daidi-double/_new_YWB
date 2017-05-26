@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *filmTypeLabel;//2D/3D
 @property (weak, nonatomic) IBOutlet UILabel *sellerPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *markLabel;//备注
+@property (weak, nonatomic) IBOutlet UIView *BGView;
 
 @property (nonatomic,strong) OtherTicketModel * model;
 

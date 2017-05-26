@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *settmentMoneyLabel;
 @property (weak, nonatomic) IBOutlet UITableView *payTableView;
 @property (nonatomic,strong) UITextField * iPhoneNumberTF;
+@property (nonatomic,assign) NSInteger ticketNumber;
+@property (nonatomic,assign) BOOL is_coupon;//是否使用优惠券
+@property (nonatomic,assign)CGFloat coupon_money;//优惠券金额
 @end
 
 @implementation OtherTicketPayViewController
@@ -22,6 +25,9 @@
     [super viewDidLoad];
     [self makeUI];
     self.title = @"通兑券确认";
+    self.ticketNumber = 0;
+    self.is_coupon = 0;
+    self.coupon_money = 0;
     self.settmentMoneyLabel.text = @"待结算￥0.00";
 }
 
@@ -44,6 +50,7 @@
     cell.selectionStyle = NO;
     cell.delegate = self;
     self.payTableView.separatorStyle = NO;
+    cell.model = self.model;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -71,6 +78,8 @@
 }
 //去结算
 - (IBAction)toPayAction:(UIButton *)sender {
+    //先生成订单号
+    [self getOrderID];
 }
 
 -(void)reduceOrAddTicket:(NSInteger)status{
@@ -80,14 +89,16 @@
         case 1:
         {
             CGFloat settmentMoney = [[self.settmentMoneyLabel.text substringFromIndex:4] floatValue];
-            self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney +30];
+            self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney +[self.model.price floatValue]];
+            self.ticketNumber = self.ticketNumber +1;
         }
             break;
             
         default:
         {
             CGFloat settmentMoney = [[self.settmentMoneyLabel.text substringFromIndex:4] floatValue];
-            self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney - 30];
+            self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney - [self.model.price floatValue]];
+            self.ticketNumber = self.ticketNumber -1;
         }
             break;
     }
@@ -95,8 +106,20 @@
 
 - (void)getOrderID{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_GETORDERID];
-
-    NSDictionary * pragrams = @{@"mobile":[UserSession instance].account,@"ticketNo":self.ticketNo};
+    NSString * number = [NSString stringWithFormat:@"%zi",self.ticketNumber];
+    NSString * isCoupon = [NSString stringWithFormat:@"%d",self.is_coupon];
+    NSString * coupon_moneyStr = [NSString stringWithFormat:@"%.2f",self.coupon_money];
+    //有效期转时间戳
+   NSString * day = [JWTools dateTimeWithStr:self.model.validDays];
+    
+    
+    NSDictionary * pragrams = @{@"mobile":[UserSession instance].account,@"ticketNo":self.ticketNo,@"price":self.model.price,@"count":number,@"cinema_code":self.cinemaCode,@"is_coupon":isCoupon,@"coupon_money":coupon_moneyStr,@"show_type":self.model.showType,@"period_validity":self.model.validDays,};
+   
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
+    if (self.is_coupon) {
+        [dic setValue:@"" forKey:@"coupon_id"];
+        
+    }
     HttpManager * manage = [[HttpManager alloc]init];
 
 }

@@ -33,6 +33,9 @@
 @property (nonatomic,assign) CGFloat couponMoney;//优惠券金额
 @property (nonatomic,strong) UILabel * useCouponLabel;
 @property (nonatomic,assign) BOOL is_cancel;//取消代理
+@property (nonatomic,strong) NSString* order_id;
+@property (nonatomic,assign) BOOL is_lockseat;//是否已经锁定座位
+
 @end
 
 @implementation PayViewController
@@ -64,12 +67,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     MyLog(@"----%@",self.dataAry);
     [self makeUI];
+    [self.navigationItem setHidesBackButton:YES];
     [self showMessage:@"选座票购买后无法退换，请仔细核对购票信息"];
     
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //开启定时器
     [self.timer setFireDate:[NSDate distantPast]];
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -116,6 +119,11 @@
 
 }
 - (void)makeUI{
+    
+    UIBarButtonItem * backBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"NaviBack"] style:UIBarButtonItemStylePlain target:self action:@selector(backAction)];
+    self.navigationItem.leftBarButtonItem = backBtn;
+
+    
     _payInforTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-50) style:UITableViewStyleGrouped];
     _payInforTableView.delegate = self;
     _payInforTableView.dataSource = self;
@@ -128,7 +136,6 @@
     self.timerLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 100, kScreen_Width/2, 100)];
     
     self.timerLabel.textAlignment = NSTextAlignmentCenter;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeHeadle) userInfo:nil repeats:YES];
     self.second = 59;
     self.minute = 14;
     self.navigationItem.titleView = self.timerLabel;
@@ -145,6 +152,9 @@
     
     [accountBGView addSubview:_settomLabel];
     
+     NSString * pay = [self.dataAry[2] substringFromIndex:4];
+    self.payMoney = [pay floatValue];
+    
     UIButton * accountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     accountBtn.frame = CGRectMake(accountBGView.width * 0.65f, 0, accountBGView.width * 0.35f, 50);
     accountBtn.backgroundColor = CNaviColor;
@@ -155,14 +165,32 @@
     
     
 }
+//返回，释放座位
+- (void)backAction{
+    //没锁定座位就直接退出，锁定了座位就先释放座位，在退出
+    if (self.is_lockseat) {
+    
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"返回将取消您的订单,是否继续" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [controller addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self releaseSeat];
+
+    }]];
+    [controller addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:controller animated:YES completion:nil];
+        
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+}
+
 //去结算，支付
 - (void)toAccountAction{
-    PCPayViewController * pcVC = [[PCPayViewController alloc]init];
-    pcVC.blanceMoney = self.payMoney;
-    pcVC.shop_ID = self.shop_id;
-    pcVC.order_id = self.order_id;
-    [self.navigationController pushViewController:pcVC animated:YES];
+    [self getOrder];
 }
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
 }
@@ -218,9 +246,11 @@
 //            cell.textLabel.text =@"商家优惠";
         }else if (indexPath.row == 3){
             TotalMoneyTableViewCell * totalCell = [tableView dequeueReusableCellWithIdentifier:TOTALCELL];
-            NSString * totalMoney = [totalCell.totalMoneyLabel.text substringFromIndex:1];
+            totalCell.totalMoneyLabel.text = [NSString stringWithFormat:@"￥%.2f",self.payMoney];
+            NSMutableArray * seatAry = self.dataAry[8];
+            totalCell.price_numLabel.text = [NSString stringWithFormat:@"￥%@x%zi张(已含服务费)",self.dataAry[10],seatAry.count];
             totalCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            self.payMoney = [totalMoney floatValue];
+            
             return totalCell;
         }else if (indexPath.row == 4){
             cell.textLabel.textColor = CNaviColor;
@@ -274,6 +304,7 @@
 //计算所需要支付的金额
 -(void)accountPayMoney{
     self.settomLabel.text = [NSString stringWithFormat:@"待结算%.2f",self.payMoney - self.couponMoney];
+    
 }
 
 //使用了优惠券
@@ -294,6 +325,67 @@
     
 
  
+}
+//去付款前，生成订单
+-(void)getOrder{
+
+    NSMutableArray * seatCodeAry = [NSMutableArray array];
+    NSMutableArray * seatAry = [NSMutableArray array];
+    for (NSDictionary * seatCode in self.dataAry[8]) {
+        [seatCodeAry addObject:seatCode[@"seatCode"]];
+        [seatAry addObject:seatCode[@"seatNumber"]];
+    }
+    NSString * seatCodes = [seatCodeAry componentsJoinedByString:@","];//座位编码
+    NSString * seats = [seatAry componentsJoinedByString:@","];//座位
+    
+    //抵用券金额
+    NSString * couponMoneyStr = [NSString stringWithFormat:@"%.2f",self.couponMoney];
+    //是否使用优惠券
+    NSString * isUseCouponStr = [NSString stringWithFormat:@"%d",self.is_useCoupon];
+    
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_GETMOVIEORDER];
+    NSDictionary*dict=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"cinema_code":self.cinemaCode,@"is_coupon":isUseCouponStr,@"channelShowCode":self.dataAry[1],@"seatCodes":seatCodes,@"mobile":[UserSession instance].account,@"coupon_money":couponMoneyStr,@"seat":seats};
+    NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
+    if (self.is_useCoupon==YES) {
+        [params setObject:@(self.is_useCoupon) forKey:@"coupon_id"];
+    }
+    
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",params);
+        MyLog(@"锁定座位%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            //开启定时器
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeHeadle) userInfo:nil repeats:YES];
+            NSDictionary * dict = data[@"data"];
+            self.order_id = dict[@"order_code"];
+            self.is_lockseat = 1;
+            PCPayViewController * pcVC = [[PCPayViewController alloc]init];
+            pcVC.blanceMoney = self.payMoney;
+            pcVC.shop_ID = self.cinemaCode;
+            pcVC.status = 1;
+            pcVC.order_id = [self.order_id floatValue];
+            [self.navigationController pushViewController:pcVC animated:YES];
+        }else{
+            [JRToast showWithText:data[@"errorMessage"] duration:1];
+        }
+    }];
+}
+
+//释放座位
+- (void)releaseSeat{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CANCEL_RESEASESEAT];
+    NSString * orderID = [NSString stringWithFormat:@"%@",self.order_id];
+    NSDictionary * dict = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"orderCode":orderID,@"type":@"0"};
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:dict compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",dict);
+        MyLog(@"释放座位%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

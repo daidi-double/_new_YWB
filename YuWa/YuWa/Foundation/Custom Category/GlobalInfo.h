@@ -81,6 +81,13 @@
 
 #define HTTP_MOVIE_HOME_CINEMALIST  @"/api.php/Movie/cinemaInfo/"//获取首页影院列表
 #define HTTP_MOVIE_PAY_CHECKCOUPON @"/api.php/Movie/checkCoupon/"//检测可使用的优惠券
+#define HTTP_MOVIE_PAY_GETMOVIEORDER  @"/api.php/Movie/lockSeats/"//生成订单id,锁定座位
+#define HTTP_MOVIE_CANCEL_RESEASESEAT @"/api.php/Movie/releaseSeats/"//释放座位
+#define HTTP_MOVIE_PAY_BALANCEPAY     @"/api.php/IndexFilm/payForBalanceMoney/"//全部余额支付
+#define HTTP_MOVIE_PAY_ORDERSTATUS    @"/api.php/Movie/submitOrder/"//查询订单状态，确认订单
+
+
+
 
 
 #pragma mark - discover

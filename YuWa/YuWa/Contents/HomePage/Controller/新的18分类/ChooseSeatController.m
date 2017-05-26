@@ -97,7 +97,7 @@
         _sureBtn.frame = CGRectMake(0, 0, kScreen_Width/3, 35);
         _sureBtn.center = CGPointMake(kScreen_Width * 0.8f, 22);
         
-        _sureBtn.backgroundColor = [UIColor colorWithRed:176/255.0 green:233/255.0 blue:250/255.0 alpha:1];
+        _sureBtn.backgroundColor = [UIColor colorWithRed:116/255.0 green:176/255.0 blue:233/255.0 alpha:1];
         [_sureBtn setTitle:@"请先选座" forState:UIControlStateNormal];
         _sureBtn.userInteractionEnabled = NO;
         _sureBtn.layer.masksToBounds = YES;
@@ -148,6 +148,7 @@
     self.title = @"选座";
     self.view.backgroundColor = [UIColor whiteColor];
     [self makeUI];
+    MyLog(@"渠道编码%@",self.channelshowcode);
     [self requestSeatinformation];
 
  
@@ -173,9 +174,9 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        return 44.f;
+        return 50.f;
     }else if (indexPath.row == 1){
-        return 30;
+        return 25;
     }else if (indexPath.row == 2){
         return kScreen_Height * 0.6f;
     }else{
@@ -195,8 +196,27 @@
         self.filmNameLabel.text = self.filmName;
         [cell.contentView addSubview:self.filmNameLabel];
         
-        self.languageLabel.frame = CGRectMake(self.filmNameLabel.right+25 +strWidth.size.width, self.filmNameLabel.top +3, kScreen_Width * 0.4, 20);
-        _languageLabel.text = [NSString stringWithFormat:@"%@/%@/%@",self.headerModel.language,self.headerModel.show_type,self.headerModel.hall_name];
+        self.languageLabel.frame = CGRectMake(self.filmNameLabel.right, self.filmNameLabel.top +3, kScreen_Width * 0.4, 20);
+        //价格放映类型（1：2D 2：3D 3：MAX2D 4：MAX3D 6：DMAX）
+        NSString * showType;
+        switch ([self.headerModel.show_type integerValue]) {
+            case 1:
+                showType = @"2D";
+                break;
+            case 2:
+                showType = @"3D";
+                break;
+            case 3:
+                showType = @"MAX2D";
+                break;
+            case 4:
+                showType = @"MAX3D";
+                break;
+            default:
+                showType = @"DMAX";
+                break;
+        }
+        _languageLabel.text = [NSString stringWithFormat:@"%@/%@/%@",self.headerModel.language,showType,self.headerModel.hall_name];
         [cell.contentView addSubview:self.languageLabel];
         
         NSString * timeLabelStr = [NSString stringWithFormat:@"%@%@",[JWTools currentTimeStr],self.headerModel.showTime];
@@ -216,11 +236,11 @@
         CGFloat textWidth = 40;
         CGFloat jianju = (kScreen_Width - 40*4 -15*4-60)/3;
         for (int i = 0; i< 4; i++) {
-            UIImageView * seatsImageView = [[UIImageView alloc]initWithFrame:CGRectMake(30 + (imageViewWidth +jianju+textWidth)*i, 7, imageViewWidth, imageViewWidth)];
+            UIImageView * seatsImageView = [[UIImageView alloc]initWithFrame:CGRectMake(30 + (imageViewWidth +jianju+textWidth)*i, 3, imageViewWidth, imageViewWidth)];
             seatsImageView.image = [UIImage imageNamed:seatAry[i]];
             
             [cell.contentView addSubview:seatsImageView];
-            UILabel * textlbl = [[UILabel alloc]initWithFrame:CGRectMake(50 + (imageViewWidth +jianju+textWidth)*i, 7, textWidth, cell.height * 0.5f)];
+            UILabel * textlbl = [[UILabel alloc]initWithFrame:CGRectMake(50 + (imageViewWidth +jianju+textWidth)*i, 3, textWidth, cell.height * 0.5f)];
             textlbl.text = textAry[i];
             textlbl.textColor = [UIColor lightGrayColor];
             textlbl.font = [UIFont systemFontOfSize:12];
@@ -278,7 +298,6 @@
     [_HUD show:YES];
     //修改
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.channelShowCode = @"171000099327";
         NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CHOOSESEATS];
         NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"channelShowCode":self.channelshowcode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
         HttpManager * manager = [[HttpManager alloc]init];
@@ -337,8 +356,8 @@
                 _sureBtn.backgroundColor = CNaviColor;
                 [_sureBtn setTitle:@"去结算" forState:UIControlStateNormal];
                 _price_num.hidden = NO;
-                _price_num.text = [NSString stringWithFormat:@"￥39X%ld",self.selecetedSeats.count];
-                CGFloat p = self.selecetedSeats.count * 39;
+                _price_num.text = [NSString stringWithFormat:@"%@X%ld",self.headerModel.settle_price,self.selecetedSeats.count];
+                CGFloat p = self.selecetedSeats.count * [self.headerModel.settle_price floatValue];
                 _allPrice.font = [UIFont systemFontOfSize:17];
                 
                 NSAttributedString * attributedText = [NSString stringWithFirstStr:@"待结算" withFont:[UIFont systemFontOfSize:12] withColor:CNaviColor withSecondtStr:[NSString stringWithFormat:@"￥%.2f",p] withFont:[UIFont systemFontOfSize:15] withColor:CNaviColor];
@@ -422,6 +441,7 @@
         }
         [self.payInformationArr addObject:seatAry];
         [self.payInformationArr addObject:self.cinemaCode];
+        [self.payInformationArr addObject:self.headerModel.settle_price];
         
         [self showMessage:@"正在为您预定座位"];
     }
@@ -437,6 +457,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 *NSEC_PER_SEC)),dispatch_get_main_queue(), ^{
        [self dismissViewControllerAnimated:controller completion:^{
            PayViewController * payVC = [[PayViewController alloc]initWithDataArray:self.payInformationArr];
+           payVC.cinemaCode = self.cinemaCode;
            [self.navigationController pushViewController:payVC animated:YES];
        }];
     });

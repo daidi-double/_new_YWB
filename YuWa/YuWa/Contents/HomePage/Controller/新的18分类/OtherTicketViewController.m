@@ -40,6 +40,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OtherTicketTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:otherTicketCell];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    cell.backgroundColor = self.otherTableView.backgroundColor;
     OtherTicketModel * model = self.otherTicketAry[indexPath.section];
     cell.model = model;
     
@@ -53,7 +55,10 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    OtherTicketModel * model = self.otherTicketAry[indexPath.section];
     OtherTicketPayViewController * vc = [[OtherTicketPayViewController alloc]init];
+    vc.cinemaCode = self.cinema_code;
+    vc.model = model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -68,7 +73,7 @@
     NSDictionary * pragrams = @{@"cityNo":self.cityCode,@"cinemaNo":self.cinema_code};
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
-        MyLog(@"是否有通兑票 %@",data);
+        MyLog(@"通兑票 %@",data);
         [self.otherTicketAry removeAllObjects];
         if ([data[@"errorCode"] integerValue] == 0) {
             for (NSDictionary * dict in data[@"data"]) {

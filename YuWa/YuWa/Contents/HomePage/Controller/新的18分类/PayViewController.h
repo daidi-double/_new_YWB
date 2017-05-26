@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PayViewController : UIViewController
-@property (nonatomic,strong) NSString * shop_id;
-@property (nonatomic,assign) CGFloat order_id;
+@property (nonatomic,strong) NSString * cinemaCode;
 - (instancetype)initWithDataArray:(NSMutableArray*)ary;
 @end

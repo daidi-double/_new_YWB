@@ -30,6 +30,8 @@
 + (NSString *)dateWithOutYearStr:(NSString *)dateStr;
 + (NSString *)dateWithOutYearDate:(NSDate *)date;
 + (NSString *)dateTimeWithStr:(NSString *)dateStr;
+
+
 + (NSString *)dateWithTodayYearMonthDayStr;
 + (NSString *)dateWithTodayYearMonthDayNumberStr;
 + (NSString *)dateWithDate:(NSString *)dateStr;

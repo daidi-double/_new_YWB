@@ -20,6 +20,9 @@
 }
 
 -(void)setData{
+    self.BGView.layer.cornerRadius = 5;
+    self.BGView.layer.masksToBounds = YES;
+    
     self.filmTypeLabel.text = [NSString stringWithFormat:@"%@D",self.model.showType];
     self.sellerPriceLabel.text = [NSString stringWithFormat:@"￥%@",self.model.price];
     self.markLabel.text = [NSString stringWithFormat:@"可以在本电影院兑换%@电影票",self.filmTypeLabel.text];

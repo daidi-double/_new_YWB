@@ -151,6 +151,7 @@
         chooseSeat.cinemaName = self.headerModel.cinema_name;
         chooseSeat.cinemaCode = self.cinema_code;
         chooseSeat.filmName = self.filmName;
+         MyLog(@"渠道编码2 = %@",showModel.channelshowcode);
         [self.navigationController pushViewController:chooseSeat animated:YES];
     }
 }

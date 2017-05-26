@@ -40,7 +40,7 @@
 @property(nonatomic,assign)CGFloat accountMoney;  //账户余额   这个吊接口
 @property(nonatomic,assign)BOOL isSelectedOn;  //选择了是否使用余额
 @property(nonatomic,assign)CGFloat needPayMoney;  //需要付的钱
-
+@property(nonatomic,strong)NSTimer * timer;
 @end
 
 @implementation PCPayViewController
@@ -527,9 +527,19 @@
 
 //全部用余额支付的接口
 -(void)BlancePayDatas{
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_BALANCE_PAY];
-    NSString * order_ids = [NSString stringWithFormat:@"%.0f",self.order_id];
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":order_ids};
+    NSString*urlStr;
+    NSDictionary*params;
+    if (self.status == 1) {
+        //电影的订单
+        urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_BALANCEPAY];
+        NSString * order_ids = [NSString stringWithFormat:@"%.0f",self.order_id];
+        params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"orderCode":order_ids};
+
+    }else{
+        urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_BALANCE_PAY];
+        NSString * order_ids = [NSString stringWithFormat:@"%.0f",self.order_id];
+        params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":order_ids};
+    }
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {   
 //        MyLog(@"%@",data);
@@ -537,6 +547,8 @@
         if (number==0) {
 //            [JRToast showWithText:data[@"data"]];
             [self getAccountMoney];
+            if (self.status !=1) {
+
             //创建一个消息对象
             NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
             //发送消息
@@ -547,7 +559,11 @@
             //发送消息
             [[NSNotificationCenter defaultCenter]postNotification:deleMoney];
             [self pushToPostComment:self.shop_ID];
-
+                
+            }else{
+                //去查询订单
+                [self checkOrderStatus];
+            }
             
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
@@ -558,8 +574,42 @@
     
     
 }
-
-
+//查询订单状态
+-(void)checkOrderStatus{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_ORDERSTATUS];
+    NSString * order_ids = [NSString stringWithFormat:@"%.0f",self.order_id];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"orderCode":order_ids};
+    HttpManager * manage = [[HttpManager alloc]init];
+    [manage postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",params);
+        MyLog(@"订单状态%@",data);
+        if ([data[@"data"] integerValue ] == 0) {
+            [JRToast showWithText:@"购买成功" duration:2];
+            WEAKSELF;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:1] animated:YES];
+            });
+        }else if([data[@"data"] integerValue ] == 1){
+            [JRToast showWithText:@"购买失败" duration:2];
+            WEAKSELF;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                  });
+        }else{
+            static int a = 0;
+            if (a>15) {
+                return ;
+            }
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(checkStatus) userInfo:nil repeats:YES];
+           a ++;
+            
+        }
+    }];
+}
+- (void)checkStatus{
+    
+    [self checkOrderStatus];
+}
 -(void)payWith:(NSString*)aa{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_THIRD_PAY];
     NSString * isSelectOnStr = [NSString stringWithFormat:@"%d",self.isSelectedOn];
@@ -792,6 +842,7 @@
     return payMVC;
 }
 -(void)dealloc{
-    
+    [self.timer invalidate];
+    self.timer = nil;
 }
 @end
