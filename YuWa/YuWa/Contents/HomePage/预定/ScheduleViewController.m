@@ -46,10 +46,6 @@
     self.automaticallyAdjustsScrollViewInsets=YES;
     self.title=@"预约";
     [self.view addSubview:self.tableView];
-    [self.tableView registerNib:[UINib nibWithNibName:CELL0 bundle:nil] forCellReuseIdentifier:CELL0];
-    [self.tableView registerNib:[UINib nibWithNibName:CELL1 bundle:nil] forCellReuseIdentifier:CELL1];
-    [self.tableView registerNib:[UINib nibWithNibName:CELL2 bundle:nil] forCellReuseIdentifier:CELL2];
-    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -69,7 +65,6 @@
     UITableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-        
     }
     cell.selectionStyle=NO;
     
@@ -80,9 +75,7 @@
         cell.titleLabel.text=@"人数";
         cell.detailLabel.text=@"";
         
-        
         return cell;
-        
     }else if (indexPath.section==0&&indexPath.row==1){
         //时间
        ScheduleTableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
@@ -105,7 +98,6 @@
             self.scheduleSex=str;
         };
         
-        
         return cell;
     }else if (indexPath.section==1&&indexPath.row==1){
         //手机号
@@ -126,7 +118,6 @@
         return cell;
         
     }
-    
     
     cell.textLabel.text=@"6666";
     
@@ -153,14 +144,8 @@
         weakSelf.scheduleTime=str;
             ScheduleTableViewCell* cell=[tableView cellForRowAtIndexPath:indexPath];
             cell.detailLabel.text=weakSelf.scheduleTime;
-            
-            
         }];
-
-        
     }
-    
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -189,10 +174,7 @@
         button.titleLabel.font=[UIFont systemFontOfSize:14];
         [button addTarget:self action:@selector(touchButton) forControlEvents:UIControlEventTouchUpInside];
         [backView addSubview:button];
-        
-        
         return backView;
-        
     }
     return nil;
 }
@@ -205,10 +187,7 @@
     NSString*str=[self judgeSave];
     if (!_canSave) {
         [JRToast showWithText:str];
-        //
-        //
         return;
-        
     }
     //接口
     self.scheduleName=self.scheduleNameLabel.text;
@@ -239,10 +218,7 @@
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
         }
-        
-        
     }];
-    
 }
 
 -(NSString*)judgeSave{
@@ -275,9 +251,6 @@
     ScheduleTableViewCell* cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     self.personNumber=str;
     cell.detailLabel.text=str;
-
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -285,25 +258,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-#pragma mark  -- set
--(UITableView *)tableView{
-    if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
-        _tableView.delegate=self;
-        _tableView.dataSource=self;
-    }
-    return _tableView;
-}
 
 #pragma mark  -- tools
 - (NSString *)dateStringWithDate:(NSDate *)date DateFormat:(NSString *)dateFormat
@@ -324,8 +278,6 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [[self findFirstResponderBeneathView:self.view] resignFirstResponder];
 }
-
-
 - (UIView*)findFirstResponderBeneathView:(UIView*)view
 {
     // Search recursively for first responder
@@ -338,5 +290,19 @@
     }
     return nil;
 }
-
+#pragma mark  -- set
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
+        _tableView.delegate=self;
+        _tableView.dataSource=self;
+        [_tableView registerNib:[UINib nibWithNibName:CELL0 bundle:nil] forCellReuseIdentifier:CELL0];
+        [_tableView registerNib:[UINib nibWithNibName:CELL1 bundle:nil] forCellReuseIdentifier:CELL1];
+        [_tableView registerNib:[UINib nibWithNibName:CELL2 bundle:nil] forCellReuseIdentifier:CELL2];
+    }
+    return _tableView;
+}
+-(void)dealloc{
+    
+}
 @end

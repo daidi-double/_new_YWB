@@ -66,8 +66,6 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-//           _HUD=[YWload showOnView:[UIApplication sharedApplication].delegate.window];
-//    [_HUD show:YES];
     //得到坐标
     [self getLocalSubName];
     [self makeNaviBar];
@@ -86,10 +84,6 @@
 -(void)addTableVIew{
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
     [self.view addSubview:self.tableView];
-    //注册cell
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    [self.tableView registerClass:[ShoppingTableViewCell class] forCellReuseIdentifier:CELL1];
-    [self.tableView registerNib:[UINib nibWithNibName:CELL2 bundle:nil] forCellReuseIdentifier:CELL2];
     //起别名
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [JPUSHService setAlias:[UserSession instance].account callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
@@ -114,8 +108,6 @@
             }else{
                 //泉州市    就是没有定位
                 MyLog(@"11");
-                
-                
             }
         }];
     }];
@@ -144,7 +136,6 @@
             
             [UIView animateWithDuration:0.25 animations:^{
             self.centerView.width=kScreen_Width/2;
-                
             }];
 
         }
@@ -212,8 +203,6 @@
     self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self loadingMoreShowInfo];
     }];
- 
-    
     //立即刷新
     [self.tableView.mj_header beginRefreshing];
 }
@@ -224,7 +213,6 @@
 -(void)getDatas{
     self.pagen=10;
     self.pages=-1;
-    
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_HOME_PAGE];
 
     NSMutableDictionary*params=[NSMutableDictionary dictionary];
@@ -247,7 +235,6 @@
                 self.mtModelArrTopShop=nil;
                 [self.mtModelArrRecommend removeAllObjects];
                 self.mtModelArrRecommend=nil;
-                
                 
                 NSArray*banner=data[@"data"][@"flash"];
                 for (int i=0; i<banner.count; i++) {
@@ -274,8 +261,6 @@
                     HPRecommendShopModel*model=[HPRecommendShopModel yy_modelWithDictionary:dict];
                     [self.mtModelArrRecommend addObject:model];
                 }
-                
-                
                 
                 [self.tableView reloadData];
                 
@@ -347,8 +332,6 @@
             
         }
         
-        
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (array.count == 0) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -382,8 +365,6 @@
     }];
   
 }
-
-
 -(void)getDatasWithIDD:(NSString*)idd{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_QRCODE_ID];
     NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"code":idd};
@@ -506,8 +487,6 @@
             
         }
 //---------------------------------------------------------------------------
-        
-        
         //人均
         UILabel*per_capitaLabel=[cell viewWithTag:3];
        
@@ -697,39 +676,24 @@
             }
         }else{
            //扫描结果不成功
-            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫码结果" message:@"无法识别" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
         }
     }];
-    
-    
-    
-    
     [self presentViewController:vc animated:YES completion:nil];
     
 }
-
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     //没有0 的 只有1
     if (buttonIndex==1) {
         H5LinkViewController *h5LinkVC = [[H5LinkViewController alloc]init];
         h5LinkVC.h5LinkString = self.saveQRCode;
         [self.navigationController pushViewController:h5LinkVC animated:YES];
-        
     }
-    
-    
 }
-
-
 -(void)touchLingdang{
     YWMessageNotificationViewController*vc=[[YWMessageNotificationViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
-
-    
-   
-    
 }
 //点击输入框
 -(void)touchinPut{
@@ -792,11 +756,27 @@
         _tableView.delegate=self;
         _tableView.dataSource=self;
         _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+        //注册cell
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+        [_tableView registerClass:[ShoppingTableViewCell class] forCellReuseIdentifier:CELL1];
+        [_tableView registerNib:[UINib nibWithNibName:CELL2 bundle:nil] forCellReuseIdentifier:CELL2];
     }
     return _tableView;
 }
 
-
+-(void)dealloc{
+    [_mtModelArrBanner removeAllObjects];
+    _mtModelArrBanner = nil;
+    
+    [_mtModelArrCategory removeAllObjects];
+    _mtModelArrCategory = nil;
+    
+    [_mtModelArrRecommend removeAllObjects];
+    _mtModelArrRecommend = nil;
+    
+    [_zheAry removeAllObjects];
+    _zheAry = nil;
+}
 
 
 -(NSMutableArray *)mtModelArrBanner{
