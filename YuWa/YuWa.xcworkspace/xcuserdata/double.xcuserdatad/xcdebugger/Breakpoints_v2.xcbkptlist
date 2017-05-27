@@ -13,5 +13,53 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YuWa/Contents/PersonCenter/&#x94b1;&#x5305;&#x4f18;&#x60e0;&#x5377;&#x7b49;8&#x4e2a;&#x6309;&#x94ae;/&#x94b1;&#x5305;/PCPayViewController.mm"
+            timestampString = "517567441.905301"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "560"
+            endingLineNumber = "560"
+            landmarkName = "-BlancePayDatas"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[PCPayViewController BlancePayDatas]"
+                  moduleName = "YuWa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/double/Desktop/yuwabaoProject(new)/yuwabaoProject/_new_YWB/YuWa/YuWa/Contents/PersonCenter/%E9%92%B1%E5%8C%85%E4%BC%98%E6%83%A0%E5%8D%B7%E7%AD%898%E4%B8%AA%E6%8C%89%E9%92%AE/%E9%92%B1%E5%8C%85/PCPayViewController.mm"
+                  timestampString = "517567442.237113"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "560"
+                  endingLineNumber = "560"
+                  offsetFromSymbolStart = "2537">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__37-[PCPayViewController BlancePayDatas]_block_invoke"
+                  moduleName = "YuWa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/double/Desktop/yuwabaoProject(new)/yuwabaoProject/_new_YWB/YuWa/YuWa/Contents/PersonCenter/%E9%92%B1%E5%8C%85%E4%BC%98%E6%83%A0%E5%8D%B7%E7%AD%898%E4%B8%AA%E6%8C%89%E9%92%AE/%E9%92%B1%E5%8C%85/PCPayViewController.mm"
+                  timestampString = "517567442.242646"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "560"
+                  endingLineNumber = "560"
+                  offsetFromSymbolStart = "29">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
