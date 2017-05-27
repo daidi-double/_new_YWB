@@ -279,6 +279,7 @@
     
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAANDBUYTICKET];
     self.filmCode = @"001103332016";
+    
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {

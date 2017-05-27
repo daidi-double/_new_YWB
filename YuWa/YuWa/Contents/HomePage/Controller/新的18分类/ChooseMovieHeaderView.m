@@ -115,6 +115,7 @@
         _title = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width/3+20, 10, kScreen_Width/2, self.bounds.size.height*0.15)];
         _title.font = [UIFont systemFontOfSize:16];
         _title.textColor = [UIColor whiteColor];
+        _title.text = @"";
         [self addSubview:_title];
     }
     return _title;
@@ -125,7 +126,7 @@
         _daoyanLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x,12+self.bounds.size.height *0.15f, kScreen_Width/2, self.bounds.size.height*0.1f)];
         _daoyanLabel.textColor = [UIColor whiteColor];
         _daoyanLabel.font = [UIFont systemFontOfSize:12];
-        
+         self.daoyanLabel.text = @"导演:";
         [self addSubview:_daoyanLabel];
     }
     return _daoyanLabel;
@@ -136,7 +137,8 @@
         _performerLabel.textColor = [UIColor whiteColor];
         _performerLabel.numberOfLines = 2;
         _performerLabel.font = [UIFont systemFontOfSize:12];
-        
+        self.performerLabel.text = @"主演:";
+
         [self addSubview:_performerLabel];
      }
     return _performerLabel;
@@ -149,6 +151,7 @@
         _categoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x, self.performerLabel.bottom, kScreen_Width/2, self.bounds.size.height*0.1f)];
         _categoryLabel.textColor = [UIColor whiteColor];
         _categoryLabel.font = [UIFont systemFontOfSize:12];
+        self.categoryLabel.text = @"类型:";
         
         [self addSubview:_categoryLabel];
     }
@@ -160,7 +163,7 @@
         _countryAndTime = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x, self.categoryLabel.bottom, kScreen_Width/2, self.bounds.size.height*0.1)];
         _countryAndTime.textColor = [UIColor whiteColor];
         _countryAndTime.font = [UIFont systemFontOfSize:13];
-        
+        self.countryAndTime.text = @"地区:";
         [self addSubview:_countryAndTime];
         
     }

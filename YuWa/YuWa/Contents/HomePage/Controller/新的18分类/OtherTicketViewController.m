@@ -26,6 +26,7 @@
     [self makeUI];
 }
 -(void)makeUI{
+    self.title = @"通兑票";
     [self judgeIsContentOtherTicket];
     [self.otherTableView registerNib:[UINib nibWithNibName:otherTicketCell bundle:nil] forCellReuseIdentifier:otherTicketCell];
 }
