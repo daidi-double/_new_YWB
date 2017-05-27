@@ -18,13 +18,10 @@
     [self.LadyButton setImage:[UIImage imageNamed:@"unselected.png"] forState:UIControlStateNormal];
     [self.LadyButton setImage:[UIImage imageNamed:@"seoected.png"] forState:UIControlStateSelected];
 
-    
-    
     self.manButton.imageEdgeInsets=UIEdgeInsetsMake(0, -10,0, 10);
     [self.manButton addTarget:self action:@selector(touchManButton:) forControlEvents:UIControlEventTouchUpInside];
     self.LadyButton.imageEdgeInsets=UIEdgeInsetsMake(0,-10,0,10);
     [self.LadyButton addTarget:self action:@selector(touchLadyButton:) forControlEvents:UIControlEventTouchUpInside];
-    
 }
 
 -(void)touchManButton:(UIButton*)sender{
