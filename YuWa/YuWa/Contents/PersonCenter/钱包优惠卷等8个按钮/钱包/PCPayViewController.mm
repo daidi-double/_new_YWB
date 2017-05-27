@@ -28,6 +28,8 @@
 #import <PassKit/PassKit.h>
 #import "UPPaymentControl.h"
 
+
+#import "OrderDetailViewController.h"
 #define CELL3  @"AccountMoneyTableViewCell"
 
 
@@ -549,7 +551,7 @@
         //电影的订单
         urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_BALANCEPAY];
         NSString * order_ids = [NSString stringWithFormat:@"%.0f",self.order_id];
-        params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"orderCode":order_ids};
+        params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"order_id":order_ids};
 
     }else{
         urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_BALANCE_PAY];
@@ -563,7 +565,7 @@
         if (number==0) {
 //            [JRToast showWithText:data[@"data"]];
             [self getAccountMoney];
-            if (self.status !=1) {
+            if (self.status ==0) {
 
             //创建一个消息对象
             NSNotification * notice = [NSNotification notificationWithName:@"deleteNun" object:nil userInfo:@{@"isClear":@(1)}];
@@ -646,6 +648,10 @@
         MyLog(@"参数%@",params);
         MyLog(@"确认通兑票订单%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
+            [JRToast showWithText:data[@"msg"] duration:2];
+            OrderDetailViewController * vc = [[OrderDetailViewController alloc]init];
+            vc.order_id = [NSString stringWithFormat:@"%.0f",self.order_id];
+            vc.status = 1;
 //            data = {
 //                amount = 1,
 //                code = 001,
