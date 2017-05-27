@@ -15,6 +15,7 @@
     if (self) {
         [self addSubview:self.imageView];
         [self addSubview:self.shopNameLabel];
+        [self addSubview:self.filmNameLabel];
     }
     return self;
 }
@@ -31,12 +32,22 @@
 
 - (UILabel*)shopNameLabel{
     if (!_shopNameLabel) {
-        _shopNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20 + self.height * 0.8f, 5, kScreen_Width * 0.85, self.height * 0.8)];
+        _shopNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20 + self.height * 0.8f, 5, kScreen_Width * 0.85, self.height * 0.5)];
         _shopNameLabel.centerY = self.height/2;
         _shopNameLabel.textColor = [UIColor blackColor];
-        _shopNameLabel.font = [UIFont systemFontOfSize:17];
+        _shopNameLabel.font = [UIFont systemFontOfSize:15];
         
     }
     return _shopNameLabel;
+}
+
+- (UILabel*)filmNameLabel{
+    if (!_filmNameLabel) {
+        _filmNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20 + self.height * 0.8f, self.shopNameLabel.bottom-20, kScreen_Width * 0.85, self.height * 0.3)];
+        _filmNameLabel.textColor = RGBCOLOR(122, 124, 123, 1);
+        _filmNameLabel.font = [UIFont systemFontOfSize:13];
+        
+    }
+    return _filmNameLabel;
 }
 @end

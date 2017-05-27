@@ -5516,7 +5516,6 @@
 			isa = PBXGroup;
 			children = (
 				AA377B7F1EC6E9CD00E81A88 /* view */,
-				AA377B7D1EC6E1C700E81A88 /* cell */,
 				AA377B781EC6E0C000E81A88 /* MovieDetailViewController.h */,
 				AA377B791EC6E0C000E81A88 /* MovieDetailViewController.m */,
 				AA377B7A1EC6E0C000E81A88 /* MovieDetailViewController.xib */,
@@ -5587,13 +5586,6 @@
 				AA14FB181E56855D00E330E7 /* ChooseMovieHeaderView.m */,
 			);
 			name = view;
-			sourceTree = "<group>";
-		};
-		AA377B7D1EC6E1C700E81A88 /* cell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = cell;
 			sourceTree = "<group>";
 		};
 		AA377B7F1EC6E9CD00E81A88 /* view */ = {

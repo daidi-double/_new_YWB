@@ -9,8 +9,11 @@
 #import "OtherTicketPayViewController.h"
 #import "OtherTicketPayTableViewCell.h"
 #import "PCPayViewController.h"
+#import "CouponModel.h"
+#import "UseCouponViewController.h"
+
 #define TICKETPAYCELL  @"OtherTicketPayTableViewCell"
-@interface OtherTicketPayViewController ()<UITableViewDelegate,UITableViewDataSource,OtherTicketPayTableViewCellDelegate>
+@interface OtherTicketPayViewController ()<UITableViewDelegate,UITableViewDataSource,OtherTicketPayTableViewCellDelegate,UseCouponViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *settmentMoneyLabel;
 @property (weak, nonatomic) IBOutlet UITableView *payTableView;
 @property (nonatomic,strong) UITextField * iPhoneNumberTF;
@@ -20,6 +23,8 @@
 @property (nonatomic,copy)NSString * orderID;//订单号
 @property (nonatomic,copy)NSString * total_money;//返回的需要支付的金额
 @property (nonatomic,copy)NSString * pay_money;//返回的实际支付金额
+@property (nonatomic,copy)NSString * coupon_id;
+@property (nonatomic,assign)CGFloat shouldPay_money;//需要支付的金额
 @end
 
 @implementation OtherTicketPayViewController
@@ -43,10 +48,10 @@
     return 1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 180.f;
+    return 230.f;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 120.f;
+    return 135.f;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OtherTicketPayTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TICKETPAYCELL];
@@ -84,7 +89,40 @@
     //先生成订单号
     [self getOrderID];
 }
+//使用优惠券
+-(void)useCouponActionTouch:(UIButton *)sender{
+    UseCouponViewController * useVC = [[UseCouponViewController alloc]init];
+    useVC.shop_id = self.cinemaCode;
+    useVC.delegate = self;
+    useVC.couponType = 1;//标识是电影
+    useVC.total_money = [NSString stringWithFormat:@"%@",self.total_money];
+    
+    [self.navigationController pushViewController:useVC animated:YES];
+}
 
+//使用了优惠券
+- (void)DelegateGetCouponInfo:(CouponModel *)model{
+    NSIndexPath * path = [NSIndexPath indexPathForRow:0 inSection:0];
+    OtherTicketPayTableViewCell * cell = (OtherTicketPayTableViewCell*)[_payTableView cellForRowAtIndexPath:path];
+    self.is_coupon = YES;
+    self.coupon_id = model.coupon_id ;
+    cell.discountMoneyLabel.text = [NSString stringWithFormat:@"优惠:￥%@",model.discount_fee];
+    [cell.couponBtn setTitle:[NSString stringWithFormat:@"满%@抵%@",model.min_fee,model.discount_fee] forState:UIControlStateNormal];
+    
+    NSString*aa=model.discount_fee;
+    self.coupon_money=[aa floatValue];
+    [self accountPayMoney];
+    [self.payTableView reloadData];
+    
+    
+    
+}
+
+//计算所需要支付的金额
+-(void)accountPayMoney{
+    self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",self.shouldPay_money - self.coupon_money];
+    
+}
 -(void)reduceOrAddTicket:(NSInteger)status{
 
     [self.payTableView reloadData];
@@ -93,6 +131,7 @@
         {
             CGFloat settmentMoney = [[self.settmentMoneyLabel.text substringFromIndex:4] floatValue];
             self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney +[self.model.price floatValue]/100];
+            self.shouldPay_money = settmentMoney +[self.model.price floatValue]/100;
             self.ticketNumber = self.ticketNumber +1;
         }
             break;
@@ -101,6 +140,7 @@
         {
             CGFloat settmentMoney = [[self.settmentMoneyLabel.text substringFromIndex:4] floatValue];
             self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney - [self.model.price floatValue]/100];
+            self.shouldPay_money = settmentMoney - [self.model.price floatValue]/100;
             self.ticketNumber = self.ticketNumber -1;
         }
             break;
@@ -120,7 +160,7 @@
    
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if (self.is_coupon) {
-        [dic setValue:@"" forKey:@"coupon_id"];
+        [dic setValue:self.coupon_id forKey:@"coupon_id"];
         
     }
     HttpManager * manage = [[HttpManager alloc]init];

@@ -65,8 +65,8 @@
 
     [self.agreementBtn setImage:[UIImage imageNamed:@"未选中"] forState:UIControlStateNormal];
     [self.agreementBtn setImage:[UIImage imageNamed:@"选中"] forState:UIControlStateSelected];
-    self.agreementBtn.selected = YES;
-    _index = 1;
+    self.agreementBtn.selected = NO;
+    _index = 0;
     
 }
 

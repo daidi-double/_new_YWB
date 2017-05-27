@@ -11,13 +11,14 @@
 @protocol OtherTicketPayTableViewCellDelegate <NSObject>
 
 - (void)reduceOrAddTicket:(NSInteger)status ;//1是加，2是减
-
+- (void)useCouponActionTouch:(UIButton*)sender;
 @end
 @interface OtherTicketPayTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *cinemaNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ticketTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;//有效期
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;
+@property (weak, nonatomic) IBOutlet UIButton *couponBtn;
 @property (weak, nonatomic) IBOutlet UILabel *totalMoneyLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UILabel *discountMoneyLabel;//优惠金额

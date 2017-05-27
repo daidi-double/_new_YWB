@@ -23,10 +23,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Nq8-CL-IlN">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="455"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="585"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="Nq8-CL-IlN" secondAttribute="height" multiplier="375:455" id="CBl-S9-fI7"/>
+                        <constraint firstAttribute="width" secondItem="Nq8-CL-IlN" secondAttribute="height" multiplier="375:455" constant="-107.14285714285711" id="CBl-S9-fI7"/>
                     </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="srx-WZ-1ts"/>

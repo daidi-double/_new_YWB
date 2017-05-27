@@ -9,6 +9,8 @@
 #import "CommendViewController.h"
 #import "ChooseMovieHeaderView.h"
 #import "MovieAddComment.h"//评分
+#import "CinemaAndBuyTicketModel.h"
+
 @interface CommendViewController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UIGestureRecognizerDelegate,MovieAddCommentDelegate>
 {
     UITextView * textCommendView;
@@ -26,6 +28,9 @@
     UIBarButtonItem * issuBtn = [[UIBarButtonItem alloc]initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(addGrade)];
     self.navigationItem.rightBarButtonItem = issuBtn;
     [self makeUI];
+    if (self.status == 1) {
+        [self requestMovieData];
+    }
     // Do any additional setup after loading the view.
 }
 - (void)addGrade{
@@ -33,19 +38,41 @@
     [self requestData];
 }
 - (void)makeUI{
-    
-    _commendTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
+    self.view.backgroundColor = RGBCOLOR(244, 245, 246, 1);
+    _commendTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.4) style:UITableViewStyleGrouped];
     
     _commendTableView.delegate = self;
     _commendTableView.dataSource = self;
     
     [self.view addSubview:_commendTableView];
     
+    MovieAddComment * addComent = [[MovieAddComment alloc]initWithFrame:CGRectMake(15, _commendTableView.bottom, kScreen_Width-30, 88)];
+    addComent.layer.cornerRadius = 10;
+    addComent.layer.masksToBounds = YES;
+    addComent.delegate = self;
+
+    [self.view addSubview:addComent];
     
+    
+    textCommendView = [[UITextView alloc]initWithFrame:CGRectMake(15,addComent.bottom+20, kScreen_Width-30, 88)];
+    textCommendView.delegate = self;
+    textCommendView.layer.cornerRadius = 10;
+    textCommendView.layer.masksToBounds = YES;
+    textCommendView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:textCommendView];
+    
+    self.comLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, kScreen_Width/5, 20)];
+    _comLabel.text = @"写下你影评";
+    _comLabel.textColor = [UIColor lightGrayColor];
+    _comLabel.font = [UIFont systemFontOfSize:10];
+    [textCommendView addSubview:_comLabel];
+
 }
+
+
 #pragma mark - tableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -81,35 +108,14 @@
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 88;
+    return 0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"tableViewCell"];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"tableViewCell"];
     }
-    if (indexPath.section == 0) {
-        MovieAddComment * addComent;
-        if (addComent) {
-            [addComent removeFromSuperview];
-        }
-        addComent = [[MovieAddComment alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 2 * cell.height)];
-        cell.backgroundColor = [UIColor clearColor];
-        addComent.delegate = self;
-        [cell.contentView addSubview:addComent];
-       
-    }else{
-        textCommendView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, cell.width, 2* cell.height)];
-        textCommendView.delegate = self;
-        textCommendView.backgroundColor = [UIColor clearColor];
-        [cell.contentView addSubview:textCommendView];
-        
-        _comLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, kScreen_Width/5, 20)];
-        _comLabel.text = @"写下你影评";
-        _comLabel.textColor = [UIColor lightGrayColor];
-        _comLabel.font = [UIFont systemFontOfSize:10];
-        [cell.contentView addSubview:_comLabel];
-    }
+
     return cell;
 }
 //设置textView的placeholder
@@ -121,19 +127,19 @@
     }
     if (textCommendView.text.length==0){//textview长度为0
         if ([text isEqualToString:@""]) {//判断是否为删除键
-            _comLabel.hidden=NO;//隐藏文字
+            self.comLabel.hidden=NO;//隐藏文字
         }else{
-            _comLabel.hidden=YES;
+            self.comLabel.hidden=YES;
         }
     }else{//textview长度不为0
-        if (textCommendView.text.length==1){//textview长度为1时候
+        if (textCommendView.text.length>=1){//textview长度为1时候
             if ([text isEqualToString:@""]) {//判断是否为删除键
-                _comLabel.hidden=NO;
+                self.comLabel.hidden=NO;
             }else{//不是删除
                 _comLabel.hidden=YES;
             }
         }else{//长度不为1时候
-            _comLabel.hidden=YES;
+            self.comLabel.hidden=YES;
         }
     }
 
@@ -152,6 +158,12 @@
 -(void)movieAddCommentAndScore:(NSInteger)score{
     self.movieScore = score;
 }
+
+//判断是否登入
+- (BOOL)judgeLogin{
+    
+    return [UserSession instance].isLogin;
+}
 #pragma mark - requestData
 - (void)requestData{
     if (self.movieScore == 0) {
@@ -162,9 +174,13 @@
         return;
     }
     self.film_code = self.headerModel.code;
-    self.order_id = @"211";
+
+    
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_COMMENTSCORE];
-    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID],@"order_id":self.order_id,@"customer_content":textCommendView.text,@"score":@(self.movieScore),@"film_id":self.film_code};
+    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID],@"customer_content":textCommendView.text,@"score":@(self.movieScore),@"film_id":self.film_code};
+    if (self.status != 0) {
+        pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID],@"order_id":self.order_id,@"customer_content":textCommendView.text,@"score":@(self.movieScore),@"film_id":self.film_code};
+    }
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
         MyLog(@"影评%@",data);
@@ -180,6 +196,36 @@
 
     
 }
+- (void)requestMovieData{
+    
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAANDBUYTICKET];
+    self.film_code = @"001103332016";
+    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.film_code};
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
+    if ([self judgeLogin]) {
+        
+        [dic setValue:@([UserSession instance].uid) forKey:@"user_id"];
+        [dic setValue:[UserSession instance].token forKey:@"token"];
+    }
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
+        MyLog(@"电影信息%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            for (NSDictionary * dict in data[@"data"][@"filmsInfo"]) {
+                
+                self.headerModel = [CinemaAndBuyTicketModel yy_modelWithDictionary:dict];
+            }
+            
+        }else{
+            [JRToast showWithText:@"网络超时，请检查网络" duration:1];
+        }
+        [self.commendTableView reloadData];
+    }];
+    //    [self.movieTableView.mj_header endRefreshing];
+    //    [self.movieTableView.mj_footer endRefreshing];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

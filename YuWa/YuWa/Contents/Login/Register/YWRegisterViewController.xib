@@ -51,9 +51,9 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWA-pH-Qtt">
-                    <rect key="frame" x="118" y="304" width="140" height="44"/>
+                    <rect key="frame" x="118" y="304" width="140" height="38"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="f6s-M8-l0O"/>
+                        <constraint firstAttribute="height" constant="38" id="f6s-M8-l0O"/>
                         <constraint firstAttribute="width" constant="140" id="rbT-lc-VF6"/>
                     </constraints>
                     <state key="normal" image="注册">
@@ -64,13 +64,13 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我已阅读并同意" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uA6-gd-Dyy">
-                    <rect key="frame" x="93.5" y="362.5" width="86" height="14.5"/>
+                    <rect key="frame" x="93.5" y="356.5" width="86" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RW9-RK-N0N">
-                    <rect key="frame" x="179.5" y="356" width="86" height="27"/>
+                    <rect key="frame" x="179.5" y="350" width="86" height="27"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="雨娃宝用户协议">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -80,12 +80,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEA-Ml-ZzY">
-                    <rect key="frame" x="265.5" y="352.5" width="35" height="35"/>
+                    <rect key="frame" x="265.5" y="346.5" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="4aZ-MT-p8d"/>
                         <constraint firstAttribute="height" constant="35" id="NDp-Mj-D8v"/>
                     </constraints>
-                    <state key="normal" image="选中"/>
+                    <state key="normal" image="未选中"/>
                     <connections>
                         <action selector="agreement:" destination="-1" eventType="touchUpInside" id="vkn-gF-52z"/>
                     </connections>
@@ -98,7 +98,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJ1-ma-mXT">
-                    <rect key="frame" x="0.0" y="447.5" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="441.5" width="375" height="1"/>
                     <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="AJQ-46-XLN"/>
@@ -181,13 +181,13 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qi7-JE-6Jh">
-                    <rect key="frame" x="152" y="420.5" width="71.5" height="17"/>
+                    <rect key="frame" x="152" y="414.5" width="71.5" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzN-fk-LPP">
-                    <rect key="frame" x="167" y="468.5" width="40" height="40"/>
+                    <rect key="frame" x="167" y="462.5" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="YVA-dG-054"/>
                         <constraint firstAttribute="height" constant="40" id="hHY-vR-7rL"/>
@@ -195,11 +195,11 @@
                     <state key="normal" image="weix"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ghd-Jp-ihx">
-                    <rect key="frame" x="77" y="468.5" width="40" height="40"/>
+                    <rect key="frame" x="77" y="462.5" width="40" height="40"/>
                     <state key="normal" image="Tencent_QQ"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJ2-b0-IJ3">
-                    <rect key="frame" x="257" y="468.5" width="40" height="40"/>
+                    <rect key="frame" x="257" y="462.5" width="40" height="40"/>
                     <state key="normal" image="weibo"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ckp-WR-HxR">
@@ -293,7 +293,7 @@
         <image name="weibo" width="29" height="26"/>
         <image name="weix" width="34" height="28"/>
         <image name="yaoqingren" width="19" height="17"/>
+        <image name="未选中" width="9" height="9"/>
         <image name="注册" width="93" height="39"/>
-        <image name="选中" width="9" height="9"/>
     </resources>
 </document>

@@ -31,9 +31,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self requestData];
-    [self makeUI];
+    [self setRJRefresh];
     [self creatLabel];
+    [self makeUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -46,6 +46,23 @@
     [self.detailTableView registerNib:[UINib nibWithNibName:COMMENTCELl111 bundle:nil] forCellReuseIdentifier:COMMENTCELl111];
     
     
+}
+- (void)setRJRefresh {
+    
+    self.detailTableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+        //        self.pages=0;
+        self.commentAry=[NSMutableArray array];
+        [self requestData];
+        
+    }];
+    
+    //上拉刷新
+    self.detailTableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+        //        self.pages++;
+        [self requestData];
+        
+    }];
+    [self.detailTableView.mj_header beginRefreshing];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -103,6 +120,7 @@
     }else{
         CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:COMMENTCELl111];
         [cell giveValueWithModel:self.model];
+        cell.selectionStyle = NO;
         return cell;
     }
     
@@ -129,6 +147,8 @@
             [self.detailTableView reloadData];
         }
     }];
+    [self.detailTableView.mj_header endRefreshing];
+    [self.detailTableView.mj_footer endRefreshing];
 }
 - (void)creatLabel{
     _textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, kScreen_Height * 0.85, kScreen_Width/3, 35)];

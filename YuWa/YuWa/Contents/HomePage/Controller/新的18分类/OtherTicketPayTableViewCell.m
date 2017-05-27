@@ -36,6 +36,11 @@
     [self.delegate reduceOrAddTicket:1];
     
 }
+
+- (IBAction)useCouponAction:(UIButton *)sender {
+    [self.delegate useCouponActionTouch:sender];
+}
+
 - (void)setModel:(OtherTicketModel *)model{
     _model = model;
     [self setData];
