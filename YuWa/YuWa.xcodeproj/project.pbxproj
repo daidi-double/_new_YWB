@@ -903,7 +903,6 @@
 		AAF525DC1ECAAA29004D62E2 /* FilmListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF525DB1ECAAA29004D62E2 /* FilmListModel.m */; };
 		AAF54A111EA8474D00D02D6B /* ShopDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF54A0F1EA8474D00D02D6B /* ShopDetailViewController.m */; };
 		AAF54A121EA8474D00D02D6B /* ShopDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF54A101EA8474D00D02D6B /* ShopDetailViewController.xib */; };
-		AAF628E21E5AE608000FF976 /* 爆米花.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF628E11E5AE608000FF976 /* 爆米花.png */; };
 		AAF628E51E5AED33000FF976 /* CinemaDetaliController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF628E41E5AED33000FF976 /* CinemaDetaliController.m */; };
 		AAF628E81E5AEE03000FF976 /* FoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF628E71E5AEE03000FF976 /* FoodViewController.m */; };
 		AAF628EE1E5B120D000FF976 /* 横条.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF628ED1E5B120D000FF976 /* 横条.png */; };
@@ -2906,7 +2905,6 @@
 		AAF54A0E1EA8474D00D02D6B /* ShopDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopDetailViewController.h; sourceTree = "<group>"; };
 		AAF54A0F1EA8474D00D02D6B /* ShopDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopDetailViewController.m; sourceTree = "<group>"; };
 		AAF54A101EA8474D00D02D6B /* ShopDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopDetailViewController.xib; sourceTree = "<group>"; };
-		AAF628E11E5AE608000FF976 /* 爆米花.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "爆米花.png"; path = "图片/爆米花.png"; sourceTree = "<group>"; };
 		AAF628E31E5AED33000FF976 /* CinemaDetaliController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaDetaliController.h; sourceTree = "<group>"; };
 		AAF628E41E5AED33000FF976 /* CinemaDetaliController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaDetaliController.m; sourceTree = "<group>"; };
 		AAF628E61E5AEE03000FF976 /* FoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodViewController.h; sourceTree = "<group>"; };
@@ -5911,7 +5909,6 @@
 			children = (
 				AA3BDE761E63C2430019F02F /* vip.png */,
 				AAF628ED1E5B120D000FF976 /* 横条.png */,
-				AAF628E11E5AE608000FF976 /* 爆米花.png */,
 				AA3009221E56E5BB0025B2A5 /* play1.png */,
 				AA14FB2C1E56D65300E330E7 /* heartselected.png */,
 				AA14FB281E56D5B900E330E7 /* heartgray.png */,
@@ -10602,7 +10599,6 @@
 				C10E94B11DD356BE00728B3D /* store.png in Resources */,
 				AA3544441E9DF23800A2EC73 /* 3baobaoLVUP28@2x.jpg in Resources */,
 				B38B2F571D8FC83A004D5256 /* 点进个人中心的一个专辑.json in Resources */,
-				AAF628E21E5AE608000FF976 /* 爆米花.png in Resources */,
 				AA3544D01E9DF23900A2EC73 /* 0baobaoBG46@2x.jpg in Resources */,
 				AA3544591E9DF23800A2EC73 /* 3baobaoLVUP47@2x.jpg in Resources */,
 				AA3545401E9DF23A00A2EC73 /* 2baobaoBG41@2x.jpg in Resources */,
