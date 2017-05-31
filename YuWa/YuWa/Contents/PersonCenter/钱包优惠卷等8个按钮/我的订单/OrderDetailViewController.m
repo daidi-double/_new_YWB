@@ -19,6 +19,7 @@
 @property (nonatomic,strong)UITableView * orderTableView;
 @property (nonatomic,strong)NSMutableArray * orderAry;
 @property (nonatomic,strong)NSString * shop_id;
+@property (nonatomic,strong)OrderModel * orModel;
 //@property (nonatomic,strong)OrderModel * model;
 
 @end
@@ -78,7 +79,11 @@
 //}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.status==1) {
-        return 8;
+        if (([self.orModel.status integerValue] == 3 ||[self.orModel.status integerValue] ==4||[self.orModel.status integerValue] ==5)&&![self.orModel.hall_name containsString:@"通兑票"]){
+        return 11;
+        }else if (([self.orModel.status integerValue] == 3 ||[self.orModel.status integerValue] ==4||[self.orModel.status integerValue] ==5)&&[self.orModel.hall_name containsString:@"通兑票"]){
+            return 9;
+        }
     }
     return 7;
 }
@@ -118,15 +123,15 @@
         return 80.f;
     }else if(indexPath.row ==1){
         if (self.status == 1) {
-            return 44.f;
+            return 35.f;
         }
-        return 44.f * model.buy_shopAry.count;
+        return 35.f * model.buy_shopAry.count;
     }else{
 
-        return 44.f;
+        return 35.f;
     }
     }
-    return 44;
+    return 35;
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -334,6 +339,40 @@
                 cell.textLabel.text = [NSString stringWithFormat:@"订单状态:%@",orderStatus];
                 
             }else if (indexPath.row == 7){
+                if ([orderModel.status integerValue] == 3 ||[orderModel.status integerValue] ==4||[orderModel.status integerValue] ==5) {
+                    cell.textLabel.text = [NSString stringWithFormat:@"凭证号:%@",orderModel.voucher_code];
+                }else{
+                    cell.textLabel.text = [NSString stringWithFormat:@"下单时间:%@",[JWTools getTime:orderModel.create_time]];
+                    UIButton * questionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                    
+                    questionBtn.frame = CGRectMake(kScreen_Width * 0.65f, 5, kScreen_Width * 0.3f, 34);
+                    [questionBtn setTitle:@"对订单有疑问?" forState:UIControlStateNormal];
+                    questionBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+                    [questionBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
+                    [questionBtn addTarget:self action:@selector(callKeFu) forControlEvents:UIControlEventTouchDown];
+                    [cell.contentView addSubview:questionBtn];
+                }
+            }else if (indexPath.row == 8){
+                if (([orderModel.status integerValue] == 3 ||[orderModel.status integerValue] ==4||[orderModel.status integerValue] ==5) && [orderModel.hall_name containsString:@"通兑票"]) {
+                    cell.textLabel.text = [NSString stringWithFormat:@"下单时间:%@",[JWTools getTime:orderModel.create_time]];
+                    UIButton * questionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                    
+                    questionBtn.frame = CGRectMake(kScreen_Width * 0.65f, 5, kScreen_Width * 0.3f, 34);
+                    [questionBtn setTitle:@"对订单有疑问?" forState:UIControlStateNormal];
+                    questionBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+                    [questionBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
+                    [questionBtn addTarget:self action:@selector(callKeFu) forControlEvents:UIControlEventTouchDown];
+                    [cell.contentView addSubview:questionBtn];
+                }else{
+                    if ([orderModel.status integerValue] == 3 ||[orderModel.status integerValue] ==4||[orderModel.status integerValue] ==5) {
+                    cell.textLabel.text = [NSString stringWithFormat:@"取票号:%@",orderModel.print_code];
+                }
+                }
+            }else if (indexPath.row == 9){
+                  if (([orderModel.status integerValue] == 3 ||[orderModel.status integerValue] ==4||[orderModel.status integerValue] ==5) && ![orderModel.hall_name containsString:@"通兑票"]) {
+                    cell.textLabel.text = [NSString stringWithFormat:@"取票验证码:%@",orderModel.verify_code];
+                }
+            }else{
                 cell.textLabel.text = [NSString stringWithFormat:@"下单时间:%@",[JWTools getTime:orderModel.create_time]];
                 UIButton * questionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 
@@ -343,7 +382,7 @@
                 [questionBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
                 [questionBtn addTarget:self action:@selector(callKeFu) forControlEvents:UIControlEventTouchDown];
                 [cell.contentView addSubview:questionBtn];
-                
+
             }
         }
         
@@ -384,6 +423,7 @@
         if ([errorCode isEqualToString:@"0"]) {
             NSDictionary*dict = responseObject[@"data"];
             OrderModel*model=[OrderModel yy_modelWithDictionary:dict];
+            self.orModel = [OrderModel yy_modelWithDictionary:dict];
             self.shop_id = model.shop_id;
             [self.orderAry addObject:model];
             

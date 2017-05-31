@@ -74,6 +74,9 @@
 @property (nonatomic,copy)NSString * third_pay_money;
 @property (nonatomic,copy)NSString * filmName;
 @property (nonatomic,copy)NSString * order_coder;
+@property (nonatomic,copy)NSString * voucher_code;//凭证号
+@property (nonatomic,copy)NSString * print_code;//取票号
+@property (nonatomic,copy)NSString * verify_code;//取票验证码
 +(OrderModel *)orderModelWithDic:(NSDictionary*)dic;
 
 @end

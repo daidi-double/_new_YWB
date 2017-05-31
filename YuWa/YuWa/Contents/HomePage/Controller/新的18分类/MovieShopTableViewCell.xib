@@ -20,52 +20,52 @@
                 <rect key="frame" x="0.0" y="0.0" width="409" height="204"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baobaoBG3" translatesAutoresizingMaskIntoConstraints="NO" id="mnc-Sz-2sg">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mnc-Sz-2sg">
                         <rect key="frame" x="16" y="16" width="103.5" height="77"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="mnc-Sz-2sg" secondAttribute="height" multiplier="114:85" id="2Gu-CS-AGx"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dianhua" translatesAutoresizingMaskIntoConstraints="NO" id="PLH-9c-Bd6">
-                        <rect key="frame" x="16" y="152.5" width="29" height="28"/>
+                        <rect key="frame" x="16" y="161.5" width="12" height="19"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="满星" translatesAutoresizingMaskIntoConstraints="NO" id="1qK-Un-DQm">
-                        <rect key="frame" x="127.5" y="44" width="15" height="15"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1qK-Un-DQm">
+                        <rect key="frame" x="127.5" y="26" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="NRW-wj-bNc"/>
                             <constraint firstAttribute="height" constant="15" id="irp-Zs-DkR"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="满星" translatesAutoresizingMaskIntoConstraints="NO" id="EB0-eG-Lcg">
-                        <rect key="frame" x="145.5" y="44" width="15" height="15"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EB0-eG-Lcg">
+                        <rect key="frame" x="145.5" y="26" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="aiE-TT-OKJ"/>
                             <constraint firstAttribute="height" constant="15" id="tk4-1o-qeI"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="满星" translatesAutoresizingMaskIntoConstraints="NO" id="Iyu-oL-bgE">
-                        <rect key="frame" x="163.5" y="44" width="15" height="15"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iyu-oL-bgE">
+                        <rect key="frame" x="163.5" y="26" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="Nlj-pJ-UyP"/>
                             <constraint firstAttribute="height" constant="15" id="R5G-2R-R8D"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="满星" translatesAutoresizingMaskIntoConstraints="NO" id="i3L-cc-J9q">
-                        <rect key="frame" x="181.5" y="44" width="15" height="15"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i3L-cc-J9q">
+                        <rect key="frame" x="181.5" y="26" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="vYl-kZ-6fT"/>
                             <constraint firstAttribute="width" constant="15" id="ykM-jc-emP"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="空星" translatesAutoresizingMaskIntoConstraints="NO" id="kug-v7-fFC">
-                        <rect key="frame" x="199.5" y="44" width="15" height="15"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kug-v7-fFC">
+                        <rect key="frame" x="199.5" y="26" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="4QP-aG-zvD"/>
                             <constraint firstAttribute="width" constant="15" id="Mh3-VB-wCy"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="万达影视城" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0D-1z-hhl">
-                        <rect key="frame" x="127.5" y="18" width="76.5" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0D-1z-hhl">
+                        <rect key="frame" x="127.5" y="18" width="0.0" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -84,14 +84,14 @@
                             <constraint firstAttribute="width" constant="1" id="0rE-QL-Hda"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="晋江" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8c-lJ-HWm">
-                        <rect key="frame" x="16" y="110.5" width="282" height="37"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8c-lJ-HWm">
+                        <rect key="frame" x="16" y="110.5" width="282" height="46"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345678909" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qx5-XN-bGT">
-                        <rect key="frame" x="50" y="152.5" width="86.5" height="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qx5-XN-bGT">
+                        <rect key="frame" x="33" y="161.5" width="0.0" height="19"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.5568627451" green="0.56470588239999997" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -105,8 +105,8 @@
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <inset key="titleEdgeInsets" minX="-15" minY="20" maxX="15" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="15" minY="-15" maxX="0.0" maxY="15"/>
-                        <state key="normal" title="导航" image="home_locate.png">
-                            <color key="titleColor" red="0.25098039220000001" green="0.70196078429999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" title="导航" image="导航">
+                            <color key="titleColor" red="0.28235294119999998" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
                             <action selector="navBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="GZd-we-ac9"/>
@@ -168,10 +168,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="baobaoBG3" width="375" height="603"/>
-        <image name="dianhua" width="29" height="28"/>
-        <image name="home_locate.png" width="32" height="32"/>
-        <image name="满星" width="26" height="25"/>
-        <image name="空星" width="26" height="25"/>
+        <image name="dianhua" width="12" height="19"/>
+        <image name="导航" width="16" height="20"/>
     </resources>
 </document>
