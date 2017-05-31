@@ -48,9 +48,10 @@
 //    [super viewWillAppear:animated];
 ////    [self getMyExchangeList];
 //    
-//}
+//}png
 - (void)makeUI{
-    UIImage * image = [UIImage imageNamed:@"娃娃机开大奖"];
+    NSString * path = [[NSBundle mainBundle]pathForResource:@"娃娃机开大奖" ofType:@"png"];
+    UIImage * image = [UIImage imageWithContentsOfFile:path];
 
     UIScrollView*scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
     scrollView.contentSize=CGSizeMake(kScreen_Width, kScreen_Width * image.size.height/image.size.width);

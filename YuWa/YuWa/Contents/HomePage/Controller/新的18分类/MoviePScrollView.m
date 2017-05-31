@@ -19,9 +19,8 @@
             _movieImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, imageWidth, self.height *0.7)];
             
             _movieImageView.center = CGPointMake(kScreen_Width/2 +(kScreen_Width*0.24+35)*i, self.height/2);
-
-            _movieImageView.image = [UIImage imageNamed:@"baobaoBG3"];
-            
+           
+            _movieImageView.image =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"baobaoBG3" ofType:@"png"]];
             [self addSubview:_movieImageView];
         }
     }
