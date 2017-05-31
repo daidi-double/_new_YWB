@@ -261,8 +261,13 @@
     UIAlertController*alertVC=[UIAlertController alertControllerWithTitle:@"余额支付" message:@"确实要用余额支付？" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
        //接口
-
-        [self BlancePayDatas];
+        if (self.blanceMoney <= self.accountMoney) {
+            [self BlancePayDatas];
+            
+        }else{
+             [self.Myswitch setOn:NO];
+            [JRToast showWithText:@"账户余额不足"];
+        }
         
     }];
     
@@ -529,6 +534,7 @@
             
             self.accountMoney=[[UserSession instance].money floatValue];
             self.isSelectedOn=YES;
+        
             [self switchAction:self.Myswitch];
 
             
@@ -564,6 +570,7 @@
         NSInteger number=[data[@"errorCode"] floatValue];
         if (number==0) {
 //            [JRToast showWithText:data[@"data"]];
+            [self.Myswitch setOn:NO];
             [self getAccountMoney];
             if (self.status ==0) {
 
@@ -679,7 +686,7 @@
         if ([data[@"errorCode"] integerValue] == 0) {
             if ([data[@"data"][@"is_paid"] integerValue] == 1) {
                 
-                [JRToast showWithText:@"支付成功" duration:1];
+//                [JRToast showWithText:@"支付成功" duration:1];
                 [self getAccountMoney];
                 if (self.status == 1) {
                     

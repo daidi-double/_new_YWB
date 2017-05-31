@@ -92,7 +92,7 @@
 #define HTTP_MOVIE_PAY_JUADGEPAYRESURT   @"/api.php/IndexFilm/payToGetMoney/"//判断电影订单支付结果
 #define HTTP_MOVIE_ORDERLIST          @"/api.php/Movie/myOrder/"//电影订单列表
 #define HTTP_MOVIE_ORDERDETAIL         @"/api.php/Movie/orderDetail/"//订单详情
-
+#define HTTP_MOVIE_CINEMADETAIL     @"/api.php/Movie/cinemaDetail/"//影院详情
 
 
 
@@ -186,6 +186,7 @@
 #define HTTP_MYORDERDETAIL         @"/api.php/User/setMyOrder/"//我的订单详情
 #define HTTP_REFUNDORDER           @"/api.php/Refund/applyRefund/"//申请退款
 #define HTTP_DELETEORDER           @"/api.php/Index/delOrder/"       //1 删除未付款的订单
+#define HTTP_MOVIE_DELETEMOVIEORDER @"/api.php/Movie/delOrder/"//删除未付款电影订单
 #define HTTP_POSTCOMMIT            @"/api.php/Shop/addShopComment/"   //1 订单付款后的评价 发布评价
 #define HTTP_SHOWCOLLECTION        @"/api.php/User/getMyCollection/"   //1 显示收藏
 #define HTTP_DELETECOLLECTION      @"/api.php/User/delCollection/"     //1 删除收藏

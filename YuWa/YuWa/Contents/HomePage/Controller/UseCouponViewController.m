@@ -128,7 +128,7 @@
     NSDictionary*params;
     if (self.couponType == 1) {
        urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_CHECKCOUPON];
-        params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"shop_id":self.shop_id,@"total_money":self.total_money};
+        params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"cinema_code":self.shop_id,@"total_money":self.total_money};
     }else{
        urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_PERSON_CANUSECOUPON];
        params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"shop_id":self.shop_id,@"total_money":self.total_money};
@@ -145,6 +145,7 @@
             }
             
         }else{
+            MyLog(@"参数 %@",params);
             [JRToast showWithText:@"网络异常，稍后再试" duration:1];
         }
         [self.useCouponTabeleView reloadData];

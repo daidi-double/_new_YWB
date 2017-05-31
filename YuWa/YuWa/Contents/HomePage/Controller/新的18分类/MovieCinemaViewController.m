@@ -150,6 +150,10 @@
         chooseSeat.headerModel = showModel;
         chooseSeat.cinemaName = self.headerModel.cinema_name;
         chooseSeat.cinemaCode = self.cinema_code;
+        FilmListModel * model = self.filmListAry[indexPath.row];
+        if (self.filmName == nil) {
+            self.filmName = model.name;
+        }
         chooseSeat.filmName = self.filmName;
          MyLog(@"渠道编码2 = %@",showModel.channelshowcode);
         [self.navigationController pushViewController:chooseSeat animated:YES];
@@ -203,8 +207,13 @@
         PlayTimeShowTableViewCell * cell = (PlayTimeShowTableViewCell*)[[sender superview]superview];
         NSIndexPath * path = [self.movieTableView indexPathForCell:cell];
         ChooseSeatController * chooseVC = [[ChooseSeatController alloc]init];
+        FilmListModel * model = self.filmListAry[path.row];
+        if (self.filmName == nil) {
+            self.filmName = model.name;
+        }
         chooseVC.filmName = self.filmName;
         chooseVC.cinemaName = self.headerModel.cinema_name;
+        chooseVC.cinemaCode = self.cinema_code;
         chooseVC.headerModel = self.filmShowAry[path.row];
         [self.navigationController pushViewController:chooseVC animated:YES];
     }
@@ -212,6 +221,7 @@
 }
 - (void)ToCinemaDetaliPage{
     CinemaDetaliController * detaliVC = [[CinemaDetaliController alloc]init];
+    detaliVC.cinemaCode = self.cinema_code;
     [self.navigationController pushViewController:detaliVC animated:YES];
 
 }

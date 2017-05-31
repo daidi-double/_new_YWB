@@ -89,6 +89,8 @@
 		AA14FB1B1E56994E00E330E7 /* headerline.png in Resources */ = {isa = PBXBuildFile; fileRef = AA14FB1A1E56994E00E330E7 /* headerline.png */; };
 		AA14FB2A1E56D5B900E330E7 /* heartgray.png in Resources */ = {isa = PBXBuildFile; fileRef = AA14FB281E56D5B900E330E7 /* heartgray.png */; };
 		AA14FB2D1E56D65300E330E7 /* heartselected.png in Resources */ = {isa = PBXBuildFile; fileRef = AA14FB2C1E56D65300E330E7 /* heartselected.png */; };
+		AA158F391EDE6D500017CC6F /* CinemaDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA158F381EDE6D500017CC6F /* CinemaDetailModel.m */; };
+		AA158F3C1EDE72A80017CC6F /* CinemaLabelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA158F3B1EDE72A80017CC6F /* CinemaLabelModel.m */; };
 		AA17A2CD1E824AC700B9E7B4 /* SignUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA17A2CC1E824AC700B9E7B4 /* SignUserCell.xib */; };
 		AA17A2CF1E82674800B9E7B4 /* pointBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = AA17A2CE1E82674800B9E7B4 /* pointBottom.png */; };
 		AA17A2D21E82B9F200B9E7B4 /* CatchWawaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA17A2D11E82B9F200B9E7B4 /* CatchWawaModel.m */; };
@@ -1935,6 +1937,10 @@
 		AA14FB1A1E56994E00E330E7 /* headerline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headerline.png; sourceTree = "<group>"; };
 		AA14FB281E56D5B900E330E7 /* heartgray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heartgray.png; sourceTree = "<group>"; };
 		AA14FB2C1E56D65300E330E7 /* heartselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heartselected.png; sourceTree = "<group>"; };
+		AA158F371EDE6D500017CC6F /* CinemaDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaDetailModel.h; sourceTree = "<group>"; };
+		AA158F381EDE6D500017CC6F /* CinemaDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaDetailModel.m; sourceTree = "<group>"; };
+		AA158F3A1EDE72A80017CC6F /* CinemaLabelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaLabelModel.h; sourceTree = "<group>"; };
+		AA158F3B1EDE72A80017CC6F /* CinemaLabelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaLabelModel.m; sourceTree = "<group>"; };
 		AA17A2CC1E824AC700B9E7B4 /* SignUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUserCell.xib; sourceTree = "<group>"; };
 		AA17A2CE1E82674800B9E7B4 /* pointBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointBottom.png; sourceTree = "<group>"; };
 		AA17A2D01E82B9F200B9E7B4 /* CatchWawaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchWawaModel.h; sourceTree = "<group>"; };
@@ -4721,6 +4727,17 @@
 			name = "自定义类";
 			sourceTree = "<group>";
 		};
+		AA158F361EDE6D2F0017CC6F /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AA158F371EDE6D500017CC6F /* CinemaDetailModel.h */,
+				AA158F381EDE6D500017CC6F /* CinemaDetailModel.m */,
+				AA158F3A1EDE72A80017CC6F /* CinemaLabelModel.h */,
+				AA158F3B1EDE72A80017CC6F /* CinemaLabelModel.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		AA17A2D31E82B9FB00B9E7B4 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -5539,6 +5556,7 @@
 		AA377B731EC6DE7900E81A88 /* 影院详情 */ = {
 			isa = PBXGroup;
 			children = (
+				AA158F361EDE6D2F0017CC6F /* model */,
 				AAF628E31E5AED33000FF976 /* CinemaDetaliController.h */,
 				AAF628E41E5AED33000FF976 /* CinemaDetaliController.m */,
 			);
@@ -12121,6 +12139,7 @@
 				AA3A1E6D1E8F90A000C12497 /* ScanModel.m in Sources */,
 				B3FFF4931D94037D00EDD2AB /* RBPublicEditorViewController.m in Sources */,
 				AA17A2D21E82B9F200B9E7B4 /* CatchWawaModel.m in Sources */,
+				AA158F391EDE6D500017CC6F /* CinemaDetailModel.m in Sources */,
 				AAF5088A1EAF76490007BC78 /* YWNewUseCouponTableViewCell.m in Sources */,
 				B3FEBA291D9BC2C2003CDEF2 /* YWMessageAddressBookHeader.m in Sources */,
 				C1F7BE421DB1C95400CCAF96 /* DatePickerView.m in Sources */,
@@ -12217,6 +12236,7 @@
 				B38B2DE61D8FACD8004D5256 /* UIImage+imageColor.m in Sources */,
 				AA3FF87A1EC95C370051A766 /* CinemaModel.m in Sources */,
 				B38B2E431D8FACD8004D5256 /* SAMTextView.m in Sources */,
+				AA158F3C1EDE72A80017CC6F /* CinemaLabelModel.m in Sources */,
 				AAF127E01E8AE11500121621 /* OrderRefundViewController.m in Sources */,
 				AA3A861E1EC1AC45003966F1 /* TotalMoneyTableViewCell.m in Sources */,
 				B33A265E1D9A68040092CB12 /* MBProgressHUD+Add.m in Sources */,

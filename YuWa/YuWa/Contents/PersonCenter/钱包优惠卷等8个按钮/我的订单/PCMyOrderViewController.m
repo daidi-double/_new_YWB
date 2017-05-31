@@ -196,6 +196,9 @@
     self.orderID = model.order_id;
 
     moneyLabel.text=[NSString stringWithFormat:@"总价：%@",model.pay_money];
+    if (self.status == 1) {
+        moneyLabel.text = [NSString stringWithFormat:@"总价：%.2f",[model.pay_money floatValue]/100];
+    }
     assessLabel.text=model.status;
     
     
@@ -268,7 +271,11 @@
     MyLog(@"付钱");
     OrderModel*model=self.maAllDatasModel[sender.tag];
     PCPayViewController*vc=[[PCPayViewController alloc]init];
-    vc.blanceMoney=[model.pay_money floatValue];
+    if (self.status == 1) {
+       vc.blanceMoney=[model.pay_money floatValue]/100;
+    }else{
+       vc.blanceMoney=[model.pay_money floatValue];
+    }
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -347,8 +354,14 @@
 //接口 删除订单
 -(void)removeDatasWithModel:(OrderModel*)model{
     NSString*order_id=model.order_id;
-    
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_DELETEORDER];
+    NSString*urlStr;
+    if (self.status == 1) {
+        urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_DELETEMOVIEORDER];
+ 
+    }else{
+        urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_DELETEORDER];
+  
+    }
     NSDictionary*params=@{@"order_id":order_id,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID]};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {

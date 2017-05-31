@@ -18,6 +18,16 @@
     [self.titleBtn.layer setMasksToBounds:YES];
 }
 
+-(void)setModel:(CinemaLabelModel *)model{
+    _model = model;
+    [self setData];
+    
+}
+
+- (void)setData{
+    [self.titleBtn setTitle:self.model.name forState:UIControlStateNormal];
+    self.infoLabel.text = self.model.introduce;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

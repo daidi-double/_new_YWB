@@ -11,6 +11,8 @@
 #import "CinemaCharacteristicTableViewCell.h"
 #import "InfomationTableViewCell.h"
 #import "CommentTableViewCell.h"
+#import "CinemaDetailModel.h"
+#import "CinemaLabelModel.h"//标签model
 
 #define COMMENTCELL00  @"CommentTableViewCell"
 #define INFOCELL23  @"InfomationTableViewCell"
@@ -20,6 +22,7 @@
 @property (nonatomic,strong)UITableView * cinemaTableView;
 @property (nonatomic,strong)NSMutableArray * cellDataArr;
 @property (nonatomic,strong)NSMutableArray * cellImageArr;
+@property (nonatomic,strong)CinemaDetailModel * cinemaDetailModel;
 @end
 
 @implementation CinemaDetaliController
@@ -39,6 +42,7 @@
     [super viewDidLoad];
     self.title = @"影院详情";
     [self makeUI];
+    [self requestCinemaDetail];
     // Do any additional setup after loading the view.
 }
 - (void)makeUI
@@ -59,10 +63,19 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return 1;
+    }else if(section == 1){
+        return 2;
+        
     }else{
-        return 6;//修改
+        int a= 0;
+        for (CinemaLabelModel * model in self.cellDataArr) {
+            if ([model.status integerValue]== 1) {
+                a++;
+            }
+        }
+        return a;//修改
     }
-    
+    return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
@@ -72,24 +85,48 @@
         if (indexPath.row == 0) {
             return 25.f;
         }else if (indexPath.row == 1){
-            return 80.f;
+            if ([self.cinemaDetailModel.feature_img isEqualToString:@""] || [self.cinemaDetailModel.feature_img isKindOfClass:[NSNull class]] || self.cinemaDetailModel.feature_img == nil) {
+                return 0.01f;
+            }else{
+                return 80.f;
+            }
         }else {
             return 50.f;
         }
        
     }else if (indexPath.section == 2){
-        if (indexPath.row == 0) {
-            return 25.f;
-        }else {
+        CinemaLabelModel * model;
+        if (self.cellDataArr.count>0) {
+            
+            model = self.cellDataArr[indexPath.row];
+        }
+        CGRect shopNameWidth;
+        if ([model.status integerValue] == 1) {
+          
+           shopNameWidth = [model.introduce boundingRectWithSize:CGSizeMake(200, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:13]} context:nil];
+            
+        }
+
+        if (shopNameWidth.size.height <= 50.f) {
             return 50.f;
         }
+
+            return shopNameWidth.size.height;
+      
     }
     return 50.f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 1) {
+        return 0.01f;
+    }
     return 1;
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 2) {
+        return 0.01f;
+    }
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -98,9 +135,10 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cinemaCell"];
     }
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.cinemaTableView.separatorStyle = NO;
     if (indexPath.section == 0) {
         MovieShopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:MOVIECELL12];
-        
+        cell.cinemaDetailModel = self.cinemaDetailModel;
         return cell;
         
         
@@ -110,43 +148,88 @@
             cell.textLabel.textColor = RGBCOLOR(123, 124, 125, 1);
             cell.textLabel.font = [UIFont systemFontOfSize:14];
         }else if(indexPath.row == 1) {
-            CinemaCharacteristicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CharacteristicCell];
-            //添加判断有多少图片，多余的隐藏，tag从100开始
-            return cell;
-        }else {
-            InfomationTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:INFOCELL23];
-            return cell;
+              if ([self.cinemaDetailModel.feature_img isEqualToString:@""] || [self.cinemaDetailModel.feature_img isKindOfClass:[NSNull class]]|| self.cinemaDetailModel.feature_img == nil) {
+                return cell;
+            }else{
+                CinemaCharacteristicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CharacteristicCell];
+                cell.imageAry = [self.cinemaDetailModel.feature_img componentsSeparatedByString:@","];
+                return cell;
+            }
         }
         }else{
-            if (indexPath.row == 0) {
-                cell.textLabel.text = @"网友点评";
-                cell.textLabel.textColor = RGBCOLOR(123, 124, 125, 1);
-                cell.textLabel.font = [UIFont systemFontOfSize:14];
-            }else{
-            CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:COMMENTCELL00];
-            for (UIView * view in cell.contentView.subviews) {
-                //            MyLog(@"%ld",(long)view.tag);
-                if ((2100>=view.tag&&view.tag >= 2000)||(1100>=view.tag&&view.tag >= 1000)) {
-                    [view removeFromSuperview];
+            
+                InfomationTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:INFOCELL23];
+                cell.selectionStyle = NO;
+            if (self.cellDataArr.count > 0) {
+                
+                CinemaLabelModel * model = self.cellDataArr[indexPath.row];
+                if ([model.status integerValue] == 1) {
+                    cell.model = model;
                 }
             }
-            cell.selectionStyle=NO;
-
-            return cell;
-            }
+            
+                return cell;
+//            if (indexPath.row == 0) {
+//                cell.textLabel.text = @"网友点评";
+//                cell.textLabel.textColor = RGBCOLOR(123, 124, 125, 1);
+//                cell.textLabel.font = [UIFont systemFontOfSize:14];
+//            }else{
+//            CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:COMMENTCELL00];
+//            for (UIView * view in cell.contentView.subviews) {
+//                //            MyLog(@"%ld",(long)view.tag);
+//                if ((2100>=view.tag&&view.tag >= 2000)||(1100>=view.tag&&view.tag >= 1000)) {
+//                    [view removeFromSuperview];
+//                }
+//            }
+//            cell.selectionStyle=NO;
+//
+//            return cell;
+//            }
     }
     return cell;
 }
 - (void)iphoneNum{
     MyLog(@"拨打电话");
-    NSString *allString = [NSString stringWithFormat:@"tel:17759725085"];
+    NSString *allString;
+    if (self.cinemaDetailModel.tel != nil || ![self.cinemaDetailModel.tel isKindOfClass:[NSNull class]]) {
+        
+        allString = [NSString stringWithFormat:@"tel:%@",self.cinemaDetailModel.tel];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
+    }else{
+        [JRToast showWithText:@"暂无影院电话"];
+    }
    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
 
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
+}
+
+- (void)requestCinemaDetail{
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMADETAIL];
+//https://www.yuwabao.cn/api.php/Movie/cinemaDetail/&device_id=7D8297C8-F723-4A97-9D4B-8A7F76224FCD&cinemaCode=01010071&token=d6edde1b02e675b82d83b63579efa556&user_id=12
+    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinemaCode":self.cinemaCode};
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
+    if ([UserSession instance].isLogin) {
+        
+        [dic setValue:[UserSession instance].token forKey:@"token"];
+        [dic setValue:@([UserSession instance].uid) forKey:@"user_id"];
+    }
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",dic);
+        MyLog(@"影院详情%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+            [self.cellDataArr removeAllObjects];
+            self.cinemaDetailModel = [CinemaDetailModel yy_modelWithDictionary:data[@"data"]];
+            for (NSDictionary * dict in data[@"data"][@"feature"]) {
+                CinemaLabelModel * model = [CinemaLabelModel yy_modelWithDictionary:dict];
+                [self.cellDataArr addObject:model];//标签
+            }
+        }
+        [self.cinemaTableView reloadData];
+    }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

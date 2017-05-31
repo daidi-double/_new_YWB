@@ -280,7 +280,7 @@
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAANDBUYTICKET];
     self.filmCode = @"001103332016";
     
-    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode};
+    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"coordinatex":self.coordinatex,@"coordinatey":self.coordinatey};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
        
@@ -311,7 +311,7 @@
     self.filmCode = @"001103332016";
     NSString * pagesStr = [NSString stringWithFormat:@"%ld",self.pages];
     NSString * pagenStr = [NSString stringWithFormat:@"%ld",self.pagen];
-    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"time":self.time,@"pages":pagesStr,@"pagen":pagenStr};
+    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"time":self.time,@"pages":pagesStr,@"pagen":pagenStr,@"coordinatex":self.coordinatex,@"coordinatey":self.coordinatey};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
         

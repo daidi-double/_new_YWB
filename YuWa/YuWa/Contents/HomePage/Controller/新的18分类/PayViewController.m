@@ -35,41 +35,20 @@
 @property (nonatomic,assign) BOOL is_cancel;//取消代理
 @property (nonatomic,strong) NSString* order_id;
 @property (nonatomic,assign) BOOL is_lockseat;//是否已经锁定座位
-
+@property (nonatomic,assign)NSInteger index;
 @end
 
 @implementation PayViewController
-- (NSMutableArray *)dataAry{
-    if (!_dataAry) {
-        _dataAry = [NSMutableArray array];
-    }
-    return _dataAry;
-}
-- (UILabel*)useCouponLabel{
-    if (!_useCouponLabel) {
-        _useCouponLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width * 0.6, 10, kScreen_Width * 0.45f, 30)];
-        _useCouponLabel.textColor = RGBCOLOR(143, 144, 145, 1);
-        _useCouponLabel.font = [UIFont systemFontOfSize:15];
-        _useCouponLabel.text = @"使用优惠券";
-    }
-    return _useCouponLabel;
-}
-- (instancetype)initWithDataArray:(NSMutableArray *)ary{
-    self = [super init];
-    if (self) {
-        [self.dataAry addObjectsFromArray:ary];
-    }
-    return self;
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-   self.title =@"支付订单";
     self.view.backgroundColor = [UIColor whiteColor];
     MyLog(@"----%@",self.dataAry);
     [self makeUI];
     [self.navigationItem setHidesBackButton:YES];
     [self showMessage:@"选座票购买后无法退换，请仔细核对购票信息"];
-    
+    self.title =@"支付订单";
+    [self timeHeadle];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -96,7 +75,9 @@
 
 }
 - (void)timeHeadle{
-    
+    if (self.index == 0) {
+        self.timerLabel.text = @"支付订单";
+    }else{
     self.second--;
     if (self.second==-1) {
         self.second=59;
@@ -109,7 +90,7 @@
         [self.timer invalidate];
         self.timer = nil;
         [self quitPayPage];
-        
+    }
     }
 }
 -(void)showMessage:(NSString *)message{
@@ -356,6 +337,7 @@
         MyLog(@"锁定座位%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             //开启定时器
+            self.index = 1;
             self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeHeadle) userInfo:nil repeats:YES];
             NSDictionary * dict = data[@"data"];
             self.order_id = dict[@"order_code"];
@@ -386,6 +368,29 @@
         }
         
     }];
+}
+
+- (NSMutableArray *)dataAry{
+    if (!_dataAry) {
+        _dataAry = [NSMutableArray array];
+    }
+    return _dataAry;
+}
+- (UILabel*)useCouponLabel{
+    if (!_useCouponLabel) {
+        _useCouponLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width * 0.6, 10, kScreen_Width * 0.45f, 30)];
+        _useCouponLabel.textColor = RGBCOLOR(143, 144, 145, 1);
+        _useCouponLabel.font = [UIFont systemFontOfSize:15];
+        _useCouponLabel.text = @"使用优惠券";
+    }
+    return _useCouponLabel;
+}
+- (instancetype)initWithDataArray:(NSMutableArray *)ary{
+    self = [super init];
+    if (self) {
+        [self.dataAry addObjectsFromArray:ary];
+    }
+    return self;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CinemaDetailModel.h"
 @interface MovieShopTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *shopIconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *shopAddressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *shopIhoneNumberLabel;
 
-
+@property (nonatomic,strong)CinemaDetailModel * cinemaDetailModel;
 
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CinemaLabelModel.h"
 @interface InfomationTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *titleBtn;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
-
+@property (nonatomic,strong) CinemaLabelModel * model;
 @end

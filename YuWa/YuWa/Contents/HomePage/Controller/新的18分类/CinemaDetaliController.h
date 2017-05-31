@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CinemaDetaliController : UIViewController
-
+@property (nonatomic,copy)NSString * cinemaCode;
 @end

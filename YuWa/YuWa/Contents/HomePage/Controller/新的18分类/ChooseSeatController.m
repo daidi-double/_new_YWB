@@ -39,109 +39,6 @@
 @end
 
 @implementation ChooseSeatController
-- (NSMutableArray*)selecetedSeats{
-    if (!_selecetedSeats) {
-        _selecetedSeats = [NSMutableArray array];
-        
-    }
-    return _selecetedSeats;
-}
-- (NSMutableArray*)seatModelAry{
-    if (!_seatModelAry) {
-        _seatModelAry = [NSMutableArray array];
-    }
-    return _seatModelAry;
-}
-- (NSMutableArray*)seatsModelArray{
-    if (!_seatsModelArray) {
-        _seatsModelArray = [NSMutableArray array];
-    }
-    return _seatsModelArray;
-}
-- (NSMutableArray*)payInformationArr{
-    if (!_payInformationArr) {
-        _payInformationArr = [NSMutableArray array];
-    }
-    return _payInformationArr;
-}
-- (UILabel * )price_num{
-    if (!_price_num) {
-        _price_num = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 70, 14)];
-        _price_num.textColor = [UIColor lightGrayColor];
-        _price_num.font = [UIFont systemFontOfSize:12];
-
-    }
-    return _price_num;
-}
-- (UILabel * )filmNameLabel{
-    if (!_filmNameLabel) {
-        _filmNameLabel = [[UILabel alloc]init];
-        _filmNameLabel.textColor = [UIColor lightGrayColor];
-        _filmNameLabel.font = [UIFont systemFontOfSize:14];
-        
-    }
-    return _filmNameLabel;
-}
-- (UILabel * )timeLabel{
-    if (!_timeLabel) {
-        _timeLabel = [[UILabel alloc]init];
-        _timeLabel.font = [UIFont systemFontOfSize:12];
-        _timeLabel.textColor = RGBCOLOR(167, 168, 169, 1);
-                      
-    }
-    return _timeLabel;
-}
-- (UIButton*)sureBtn{
-    if (!_sureBtn) {
-        _sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _sureBtn.frame = CGRectMake(0, 0, kScreen_Width/3, 35);
-        _sureBtn.center = CGPointMake(kScreen_Width * 0.8f, 22);
-        
-        _sureBtn.backgroundColor = [UIColor colorWithRed:116/255.0 green:176/255.0 blue:233/255.0 alpha:1];
-        [_sureBtn setTitle:@"请先选座" forState:UIControlStateNormal];
-        _sureBtn.userInteractionEnabled = NO;
-        _sureBtn.layer.masksToBounds = YES;
-        _sureBtn.layer.cornerRadius = 5;
-        [_sureBtn addTarget:self action:@selector(sureSelected) forControlEvents:UIControlEventTouchUpInside];
-
-    }
-    return _sureBtn;
-}
-
-- (UIButton*)changeMovieBtn{
-    if (!_changeMovieBtn) {
-        _changeMovieBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _changeMovieBtn.frame = CGRectMake(_languageLabel.right, 10, kScreen_Width*0.25f, 25);
-        _changeMovieBtn.centerX = kScreen_Width * 0.82;
-        [_changeMovieBtn.layer setBorderColor:CNaviColor.CGColor];
-        [_changeMovieBtn.layer setBorderWidth:1];
-        [_changeMovieBtn.layer setMasksToBounds:YES];
-        [_changeMovieBtn setTitle:@"更换场次" forState:UIControlStateNormal];
-        [_changeMovieBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
-        _changeMovieBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-        _changeMovieBtn.layer.masksToBounds = YES;
-        _changeMovieBtn.layer.cornerRadius = 5;
-        [_changeMovieBtn addTarget:self action:@selector(changeMovieAction) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    return _changeMovieBtn;
-}
--(UILabel *)allPrice{
-    if (!_allPrice) {
-        _allPrice = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, kScreen_Width/2, 30)];
-        _allPrice.textColor = CNaviColor;
-    }
-    return _allPrice;
-}
-- (UILabel *)languageLabel{
-    if (!_languageLabel) {
-        _languageLabel = [[UILabel alloc]init];
-        _languageLabel.font = [UIFont systemFontOfSize:11];
-        _languageLabel.textColor = RGBCOLOR(167, 168, 169, 1);
-        
-    }
-    return _languageLabel;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -163,6 +60,7 @@
     _seatTableView.scrollEnabled = NO;
     [self.view addSubview:_seatTableView];
     [self.sureBtn setEnabled:NO];
+    
     
 }
 //更换场次
@@ -296,6 +194,9 @@
     [self.view addSubview:_HUD];
     WEAKSELF;
     [_HUD show:YES];
+    if (self.channelshowcode == nil) {
+        self.channelshowcode = self.headerModel.channelshowcode;
+    }
     //修改
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CHOOSESEATS];
@@ -322,6 +223,9 @@
 -(void)initSelectionView:(NSMutableArray *)seatsModelArray{
     __weak typeof(self) weakSelf = self;
     NSMutableArray * seatNumAry = [NSMutableArray array];
+    if (self.hall_name == nil) {
+        self.hall_name = self.headerModel.hall_name;
+    }
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
     NSIndexPath *indexPathT=[NSIndexPath indexPathForRow:3 inSection:0];
     selectionView = [[XZSeatSelectionView alloc]initWithFrame:CGRectMake(0, 0,kScreen_Width, kScreen_Height * 0.6f) SeatsArray:seatsModelArray HallName:self.hall_name seatBtnActionBlock:^(NSMutableArray *selecetedSeats, NSMutableDictionary *allAvailableSeats, NSMutableArray *cancelAry, NSString *errorStr) {
@@ -468,6 +372,111 @@
      CGRect strWidth = [str boundingRectWithSize:CGSizeMake(MAXFLOAT, height) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]} context:nil];
     return strWidth;
 }
+
+- (NSMutableArray*)selecetedSeats{
+    if (!_selecetedSeats) {
+        _selecetedSeats = [NSMutableArray array];
+        
+    }
+    return _selecetedSeats;
+}
+- (NSMutableArray*)seatModelAry{
+    if (!_seatModelAry) {
+        _seatModelAry = [NSMutableArray array];
+    }
+    return _seatModelAry;
+}
+- (NSMutableArray*)seatsModelArray{
+    if (!_seatsModelArray) {
+        _seatsModelArray = [NSMutableArray array];
+    }
+    return _seatsModelArray;
+}
+- (NSMutableArray*)payInformationArr{
+    if (!_payInformationArr) {
+        _payInformationArr = [NSMutableArray array];
+    }
+    return _payInformationArr;
+}
+- (UILabel * )price_num{
+    if (!_price_num) {
+        _price_num = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 70, 14)];
+        _price_num.textColor = [UIColor lightGrayColor];
+        _price_num.font = [UIFont systemFontOfSize:12];
+        
+    }
+    return _price_num;
+}
+- (UILabel * )filmNameLabel{
+    if (!_filmNameLabel) {
+        _filmNameLabel = [[UILabel alloc]init];
+        _filmNameLabel.textColor = [UIColor lightGrayColor];
+        _filmNameLabel.font = [UIFont systemFontOfSize:14];
+        
+    }
+    return _filmNameLabel;
+}
+- (UILabel * )timeLabel{
+    if (!_timeLabel) {
+        _timeLabel = [[UILabel alloc]init];
+        _timeLabel.font = [UIFont systemFontOfSize:12];
+        _timeLabel.textColor = RGBCOLOR(167, 168, 169, 1);
+        
+    }
+    return _timeLabel;
+}
+- (UIButton*)sureBtn{
+    if (!_sureBtn) {
+        _sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _sureBtn.frame = CGRectMake(0, 0, kScreen_Width/3, 35);
+        _sureBtn.center = CGPointMake(kScreen_Width * 0.8f, 22);
+        
+        _sureBtn.backgroundColor = [UIColor colorWithRed:116/255.0 green:176/255.0 blue:233/255.0 alpha:1];
+        [_sureBtn setTitle:@"请先选座" forState:UIControlStateNormal];
+        _sureBtn.userInteractionEnabled = NO;
+        _sureBtn.layer.masksToBounds = YES;
+        _sureBtn.layer.cornerRadius = 5;
+        [_sureBtn addTarget:self action:@selector(sureSelected) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _sureBtn;
+}
+
+- (UIButton*)changeMovieBtn{
+    if (!_changeMovieBtn) {
+        _changeMovieBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _changeMovieBtn.frame = CGRectMake(_languageLabel.right, 10, kScreen_Width*0.25f, 25);
+        _changeMovieBtn.centerX = kScreen_Width * 0.82;
+        [_changeMovieBtn.layer setBorderColor:CNaviColor.CGColor];
+        [_changeMovieBtn.layer setBorderWidth:1];
+        [_changeMovieBtn.layer setMasksToBounds:YES];
+        [_changeMovieBtn setTitle:@"更换场次" forState:UIControlStateNormal];
+        [_changeMovieBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
+        _changeMovieBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        _changeMovieBtn.layer.masksToBounds = YES;
+        _changeMovieBtn.layer.cornerRadius = 5;
+        [_changeMovieBtn addTarget:self action:@selector(changeMovieAction) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _changeMovieBtn;
+}
+-(UILabel *)allPrice{
+    if (!_allPrice) {
+        _allPrice = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, kScreen_Width/2, 30)];
+        _allPrice.textColor = CNaviColor;
+    }
+    return _allPrice;
+}
+- (UILabel *)languageLabel{
+    if (!_languageLabel) {
+        _languageLabel = [[UILabel alloc]init];
+        _languageLabel.font = [UIFont systemFontOfSize:11];
+        _languageLabel.textColor = RGBCOLOR(167, 168, 169, 1);
+        
+    }
+    return _languageLabel;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

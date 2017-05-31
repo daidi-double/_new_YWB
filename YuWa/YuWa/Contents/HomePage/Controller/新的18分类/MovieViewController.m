@@ -90,7 +90,7 @@
 - (void)setRJRefresh {
     
     self.movieTableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-//        self.pages=0;
+        self.pages=0;
         self.theaterNameAry=[NSMutableArray array];
         [self getHomePageCinemaList];
         
@@ -98,7 +98,7 @@
     
     //上拉刷新
     self.movieTableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-//        self.pages++;
+        self.pages++;
         [self getHomePageCinemaList];
         
     }];
@@ -235,6 +235,8 @@
     ChooseMovieController * choseVC = [[ChooseMovieController alloc]init];
     choseVC.filmCode = model.code;
     choseVC.filmName = model.name;
+    choseVC.coordinatex = self.coordinatex;
+    choseVC.coordinatey = self.coordinatey;
     [self.navigationController pushViewController:choseVC animated:YES];
     
 }
@@ -352,7 +354,7 @@
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOME_CINEMALIST];
     
     self.cityCode = @"110100";
-    NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type,@"device_id":[JWTools getUUID],@"typeList":self.typeList,@"pages":@(self.pages),@"pagen":@(self.pagen)};
+    NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type,@"device_id":[JWTools getUUID],@"typeList":self.typeList,@"pages":@(self.pages),@"pagen":@(self.pagen),@"coordinatex":self.coordinatex,@"coordinatey":self.coordinatey};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([UserSession instance].isLogin) {
         [dic setValue:[UserSession instance].token forKey:@"toke"];

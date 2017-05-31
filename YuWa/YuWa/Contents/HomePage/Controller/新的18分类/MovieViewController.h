@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MovieViewController : UIViewController
-
+@property(nonatomic,strong)NSString*coordinatex;   //经度
+@property(nonatomic,strong)NSString*coordinatey;   //维度
 @end

@@ -723,8 +723,10 @@
     //    MyLog(@"aaa%lu,bbb%@",number,idd);
     if (number == 1 ) {
         //电影
-                MovieViewController * movieVC = [[MovieViewController alloc]init];
-                [self.navigationController pushViewController:movieVC animated:YES];
+        MovieViewController * movieVC = [[MovieViewController alloc]init];
+        movieVC.coordinatex = self.coordinatex;//经度
+        movieVC.coordinatey = self.coordinatey;//维度
+        [self.navigationController pushViewController:movieVC animated:YES];
         //        CategoryDetaliViewController * categoryVC = [[CategoryDetaliViewController alloc]init];
         //        [self.navigationController pushViewController:categoryVC animated:YES];
     }else if (number !=1 ){
