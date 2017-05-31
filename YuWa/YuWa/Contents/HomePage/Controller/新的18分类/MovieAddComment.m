@@ -43,12 +43,11 @@
     self.lbl_counttext.text = @"请滑动星星评分";
     self.lbl_counttext.textColor = [UIColor lightGrayColor];
     self.count = -1;
-    
-    [self.img_star1 setImage:[UIImage imageNamed:@"home_grayStar@2x.png"]];
-    [self.img_star2 setImage:[UIImage imageNamed:@"home_grayStar@2x.png"]];
-    [self.img_star3 setImage:[UIImage imageNamed:@"home_grayStar@2x.png"]];
-    [self.img_star4 setImage:[UIImage imageNamed:@"home_grayStar@2x.png"]];
-    [self.img_star5 setImage:[UIImage imageNamed:@"home_grayStar@2x.png"]];
+    [self.img_star1 setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"home_grayStar@2x" ofType:@"png"]]];
+    [self.img_star2 setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"home_grayStar@2x" ofType:@"png"]]];
+    [self.img_star3 setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"home_grayStar@2x" ofType:@"png"]]];
+    [self.img_star4 setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"home_grayStar@2x" ofType:@"png"]]];
+    [self.img_star5 setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"home_grayStar@2x" ofType:@"png"]]];
 
 }
 

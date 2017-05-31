@@ -28,8 +28,9 @@
     [[UIApplication sharedApplication].keyWindow addSubview:HUD];
     
     // The sample image is based on the work by http://www.pixelpressicons.com, http://creativecommons.org/licenses/by/2.5/ca/
-    // Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)
-    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]] ;
+    // Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)=
+    NSString * path = [[NSBundle mainBundle]pathForResource:@"37x-Checkmark" ofType:@"png"];
+    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]] ;
     
     // Set custom view mode
     HUD.mode = MBProgressHUDModeCustomView;

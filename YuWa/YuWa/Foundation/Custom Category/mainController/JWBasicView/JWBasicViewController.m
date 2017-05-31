@@ -49,7 +49,8 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = showHud;
     if (isSuccess) {
-        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+        NSString * path = [[NSBundle mainBundle]pathForResource:@"37x-Checkmark" ofType:@"png"];
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
     }
     hud.alpha = 0.4;
     hud.mode = MBProgressHUDModeCustomView;

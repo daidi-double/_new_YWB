@@ -59,6 +59,7 @@
 @property(nonatomic,strong)NSMutableArray*mtModelArrTopShop;
 @property(nonatomic,strong)NSMutableArray*mtModelArrRecommend;
 @property (nonatomic, strong) YWload *HUD;
+@property (nonatomic, strong) NewMainCategoryViewController *NewMainCategoryViewController;
 
 @end
 
@@ -730,9 +731,12 @@
         //        CategoryDetaliViewController * categoryVC = [[CategoryDetaliViewController alloc]init];
         //        [self.navigationController pushViewController:categoryVC animated:YES];
     }else if (number !=1 ){
-        NewMainCategoryViewController*vc=[[NewMainCategoryViewController alloc]init];
-        vc.categoryTouch=number;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (self.NewMainCategoryViewController == nil) {
+             NewMainCategoryViewController*vc=[[NewMainCategoryViewController alloc]init];
+            self.NewMainCategoryViewController = vc;
+        }
+        self.NewMainCategoryViewController.categoryTouch=number;
+        [self.navigationController pushViewController:self.NewMainCategoryViewController animated:YES];
         
         
     }
