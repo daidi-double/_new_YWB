@@ -23,10 +23,11 @@
 - (void)makeBtn{
     UIImage * image;
     if (self.status == 1) {
-        image = [UIImage imageNamed:@"actionintroduce.png"];
+        NSString * path = [[NSBundle mainBundle]pathForResource:@"actionintroduce" ofType:@"png"];
+        image = [UIImage imageWithContentsOfFile:path];
     }else{
-        
-        image = [UIImage imageNamed:@"adress.png"];
+        NSString * path = [[NSBundle mainBundle]pathForResource:@"adress" ofType:@"png"];
+        image = [UIImage imageWithContentsOfFile:path];
     }
     UIScrollView*scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
     scrollView.contentSize=CGSizeMake(kScreen_Width, kScreen_Width * image.size.height/image.size.width);

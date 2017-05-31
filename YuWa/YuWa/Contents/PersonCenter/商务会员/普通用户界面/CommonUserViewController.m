@@ -44,7 +44,8 @@
 
 //这个是轮播图
 -(void)addScrollView{
-    UIImage * image = [UIImage imageNamed:@"商务会员_750x7220.jpg"];
+    NSString * path = [[NSBundle mainBundle]pathForResource:@"商务会员_750x7220" ofType:@"jpg"];
+    UIImage * image = [UIImage imageWithContentsOfFile:path];
     UIScrollView*scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height-64)];
     scrollView.contentSize=CGSizeMake(kScreen_Width, kScreen_Width * image.size.height/image.size.width + 100);
 //    scrollView.contentSize=CGSizeMake(kScreen_Width, ACTUAL_HEIGHT(7220));
@@ -80,7 +81,8 @@
 //这个是 主界面
 -(void)addHeader{
     UIImageView*imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height-84)];
-    imageView.image=[UIImage imageNamed:@"商务会员_show.jpg"];
+    NSString * path = [[NSBundle mainBundle]pathForResource:@"商务会员_show" ofType:@"jpg"];
+    imageView.image= [UIImage imageWithContentsOfFile:path];
     imageView.userInteractionEnabled=YES;
     
     UITapGestureRecognizer*tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchTap)];

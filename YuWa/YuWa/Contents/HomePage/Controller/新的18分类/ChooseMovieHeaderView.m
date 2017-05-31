@@ -101,8 +101,8 @@
         _playBtn.frame = CGRectMake(self.posterImageView.width-40, self.posterImageView.height-40, 40, 40);
         _playBtn.layer.cornerRadius = 20;
         _playBtn.layer.masksToBounds = YES;
-        
-        [_playBtn setImage:[UIImage imageNamed:@"play1.png"] forState:UIControlStateNormal];
+        NSString * path = [[NSBundle mainBundle]pathForResource:@"play1" ofType:@"png"];
+        [_playBtn setImage:[UIImage imageWithContentsOfFile:path] forState:UIControlStateNormal];
         [_playBtn addTarget:self action:@selector(tapAvatarView) forControlEvents:UIControlEventTouchUpInside];
         _playBtn.backgroundColor = [UIColor clearColor];
        
