@@ -85,7 +85,8 @@
     }
     
     UIImageView * titleImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 15, 25, 25)];
-    titleImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",self.titleDataAry[indexPath.section]]];
+    NSString * path = [[NSBundle mainBundle]pathForResource:[NSString stringWithFormat:@"%@",self.titleDataAry[indexPath.section]] ofType:@"png"];
+    titleImageView.image = [UIImage imageWithContentsOfFile:path];
     [headerView addSubview:titleImageView];
     
 

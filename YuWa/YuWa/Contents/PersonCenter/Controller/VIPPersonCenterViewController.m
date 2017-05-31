@@ -355,7 +355,6 @@
         NSString*imageName=[NSString stringWithFormat:@"波浪个人_000%d",i];
         NSBundle*bundle=[NSBundle mainBundle];
         NSString*path=[bundle pathForResource:imageName ofType:@"png"];
-        
         UIImage*image=[UIImage imageWithContentsOfFile:path];
         [imageArrays addObject:image];
     }

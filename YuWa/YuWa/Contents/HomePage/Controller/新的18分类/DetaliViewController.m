@@ -44,14 +44,16 @@
     _movieScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
     _movieScrollView.contentSize = CGSizeMake(kScreen_Width, kScreen_Height * 1.3f);
     [self.view addSubview:_movieScrollView];
-    _HPicImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"baobaoBG1"]];
+    NSString * path = [[NSBundle mainBundle]pathForResource:@"baobaoBG1" ofType:@"png"];
+    _HPicImageView = [[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:path]];
     _HPicImageView.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Height * 1.3f);
     _HPicImageView.userInteractionEnabled = YES;
     [_movieScrollView addSubview:_HPicImageView];
     
     for (int i = 0; i<2; i++) {
         UIImageView * movieImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, _HPicImageView.height*0.4f +(25 +kScreen_Height/4)*i, kScreen_Width-40, kScreen_Height/4)];
-        movieImageView.image = [UIImage imageNamed:@"baobaoBG3"];
+        NSString * path = [[NSBundle mainBundle]pathForResource:@"baobaoBG3" ofType:@"png"];
+        movieImageView.image = [UIImage imageWithContentsOfFile:path];
         movieImageView.userInteractionEnabled = YES;
         [_HPicImageView addSubview:movieImageView];
         
@@ -76,7 +78,8 @@
     [_HPicImageView addSubview:_look_more];
     
     UIImageView * yuwaLogo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width/2, 45)];
-    yuwaLogo.image = [UIImage imageNamed:@"yuwalogo.png"];
+    NSString * path1 = [[NSBundle mainBundle]pathForResource:@"yuwalogo" ofType:@"png"];
+    yuwaLogo.image = [UIImage imageWithContentsOfFile:path1];
     yuwaLogo.center = CGPointMake(kScreen_Width/2, _HPicImageView.height*0.975f);
     [self.HPicImageView addSubview:yuwaLogo];
 //    UILabel* title = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width * 0.3f, 25)];

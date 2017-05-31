@@ -732,8 +732,8 @@
 
         _annimationAry = [[NSMutableArray alloc]initWithCapacity:0];
         for (int i = 0; i<2; i++) {
-            
-            UIImage * image = [UIImage imageNamed:[NSString stringWithFormat:@"gogogo%d",i+1]];
+            NSString * path = [[NSBundle mainBundle  ]pathForResource:[NSString stringWithFormat:@"gogogo%d",i+1] ofType:@"png"];
+            UIImage * image = [UIImage imageWithContentsOfFile:path];
             [_annimationAry addObject:image];
 
         }

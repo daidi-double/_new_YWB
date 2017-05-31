@@ -22,7 +22,8 @@
     self.isOn = !self.isOn;
     if (self.isOn) {
         //开启
-        self.chooseImageView.image = [UIImage imageNamed:@"imageTypeChoose_up"];
+        NSString  * path = [[NSBundle mainBundle]pathForResource:@"imageTypeChoose_up" ofType:@"png"];
+        self.chooseImageView.image = [UIImage imageWithContentsOfFile:path];
         if (!self.typeTableV) {
             self.typeTableV = [[[NSBundle mainBundle]loadNibNamed:@"JWImgPickerAlbumChooseTableView" owner:nil options:nil]firstObject];
             self.typeTableV.dataArr = self.dataArr;
@@ -43,7 +44,8 @@
         [[UIApplication sharedApplication].keyWindow addSubview:self.typeTableV];
         [[UIApplication sharedApplication].keyWindow addSubview:self.typeView];
     }else{
-        self.chooseImageView.image = [UIImage imageNamed:@"imageTypeChoose_down"];
+                NSString  * path = [[NSBundle mainBundle]pathForResource:@"imageTypeChoose_down" ofType:@"png"];
+        self.chooseImageView.image = [UIImage imageWithContentsOfFile:path];
         [self.typeTableV removeFromSuperview];
         [self.typeView removeFromSuperview];
     }

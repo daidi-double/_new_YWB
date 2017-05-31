@@ -200,8 +200,8 @@
         [_BGScrollView addSubview:_bgImageView];
         _BGroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height)];
         ;
-        
-        _BGroundView.image = [UIImage imageNamed:@"横条.png"];
+        NSString * path = [[NSBundle mainBundle]pathForResource:@"横条" ofType:@"png"];
+        _BGroundView.image = [UIImage imageWithContentsOfFile:path];
         [_bgImageView addSubview:_BGroundView];
         
         
