@@ -59,7 +59,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-    
     self.automaticallyAdjustsScrollViewInsets=NO;
     
     //得到title 上的内容   接口
@@ -72,7 +71,44 @@
     [self makeAnimation];
 
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [annimationImage stopAnimating];
+    [annimationImage removeFromSuperview];
+    _annimationAry = nil;
+    [_data1 removeAllObjects];
+    [_data2 removeAllObjects];
+    [_data3 removeAllObjects];
+    _data1 = nil;
+    _data2= nil;
+    _data3 = nil;
+    [_annimationAry removeAllObjects];
+    [_maCityModel removeAllObjects];
+    [_maCategoryModel removeAllObjects];
+    [_maCityModel removeAllObjects];
+    [_maCityModel removeAllObjects];
+    [_maSortModel removeAllObjects];
+    _annimationAry = nil;
+    _maCityModel= nil;
+    _maCategoryModel = nil;
+    _maCityModel = nil;
+    _maCityModel= nil;
+    _maSortModel = nil;
+    [self.tableView removeFromSuperview];
+    self.tableView = nil;
+}
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //得到title 上的内容   接口
+    [self getCategoryDatas];
+    
+    [self setUpTableView];
+    
+    [self setUpMJRefresh];
+    
+    [self makeAnimation];
+}
 #pragma mark --  UI
 -(void)initDropMenu{
     //决定了 初始选择的位置 导航栏下的（美食、附近、离我最近）
@@ -610,8 +646,6 @@
     [params setObject:pagen forKey:@"pagen"];
     [params setObject:pages forKey:@"pages"];
     
- 
-    
     PHCategoryModel*model=self.maCategoryModel[_currentData1Index];
     NSString*categoryName=model.class_name;
     
@@ -672,28 +706,15 @@
             }
             [self.tableView reloadData];
         }else{
-            
             [JRToast showWithText:data[@"errorMessage"]];
-            
         }
-
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
-       
-        
     }];
     
 
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-
-    [annimationImage stopAnimating];
-    [annimationImage removeFromSuperview];
-    _annimationAry = nil;
-
-}
 
 
 
@@ -740,5 +761,8 @@
     }
     return _annimationAry;
 }
+-(void)dealloc{
 
+    
+}
 @end
