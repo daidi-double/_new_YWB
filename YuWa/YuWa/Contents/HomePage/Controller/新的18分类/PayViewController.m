@@ -276,7 +276,7 @@
         MyLog(@"参数%@",params);
         MyLog(@"锁定座位%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
-            //开启定时器
+            
             self.index = 1;
 
             NSDictionary * dict = data[@"data"];

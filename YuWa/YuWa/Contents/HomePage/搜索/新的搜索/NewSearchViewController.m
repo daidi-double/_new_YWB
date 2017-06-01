@@ -81,18 +81,7 @@
 }
 -(void)setDatas{
    YYCoreData*coreData= [YYCoreData shareCoreData];
-//    self.hisTArr=[NSMutableArray arrayWithContentsOfFile:[coreData userResPath:SEARCHFILE]];
-//    if (!self.hisTArr) {
-//         self.hisTArr = [NSMutableArray array];
-//        }
-//    NSDictionary*dict=@{@"title":@"饭店"};
-//    self.hisTArr = [@[@{@"title":@"饭店1"},@{@"title":@"饭店2"},@{@"title":@"饭店3"},@{@"title":@"4饭店"},@{@"title":@"5饭店"},@{@"title":@"6饭店"}]mutableCopy];
-//    for (NSDictionary*dict in self.hisTArr) {
-//        
-//        ResultsModel*model=[ResultsModel cellModel:dict];
-//        [self.historyArr addObject:model];
-//    }
-    
+
     
 //热门
     self.hotmutableArray=[NSMutableArray arrayWithContentsOfFile:[coreData userResPath:HOTFILE]];

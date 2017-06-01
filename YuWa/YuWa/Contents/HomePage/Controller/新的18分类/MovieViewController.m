@@ -15,7 +15,7 @@
 #import "LookAllViewController.h"
 #import "MovieCinemaViewController.h"
 #import "LookDetaliViewController.h"
-#import "NewSearchViewController.h"//需要修改
+#import "SearchViewController.h"//需要修改
 #import "TableBGView.h"
 #import "OtherTicketModel.h"
 #import "NewHotMovieCollectCell.h"
@@ -86,6 +86,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.timer setFireDate:[NSDate distantPast]];
     self.navigationController.navigationBarHidden = NO;
 }
 - (void)setRJRefresh {
@@ -250,7 +251,6 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
 
     markIndexPath = indexPath.item;
     HotMovieModel * model = self.hotCollectDataAry[indexPath.item];
@@ -336,7 +336,7 @@
                 [self.otherTicketAry addObject:model];
                 
             }
-            //需要重新判断
+            
             if (self.otherTicketAry.count <= 0) {
                 MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
                 
@@ -426,9 +426,12 @@
 //    LookDetaliViewController * lookVC = [[LookDetaliViewController alloc]init];
 //    [self.navigationController pushViewController:lookVC animated:YES];
 //}
-
+//搜索
 - (void)searchMovie{
-    NewSearchViewController*vc=[[NewSearchViewController alloc]init];
+    SearchViewController*vc=[[SearchViewController alloc]init];
+    vc.coordinatey = self.coordinatey;
+    vc.coordinatex = self.coordinatex;
+    vc.cityCode = self.cityCode;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -535,7 +538,27 @@
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
     [_movieTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
 }
-
+//轮播图点击后的界面
+- (void)pushToDetailPage:(BannerModel *)model{
+    if ([model.type integerValue] == 0) {//0影片，1链接
+        ChooseMovieController * vc = [[ChooseMovieController alloc]init];
+        vc.filmCode = model.film_code;
+        vc.filmName = model.film_name;
+        vc.coordinatex = self.coordinatex;
+        vc.coordinatey = self.coordinatey;
+        if (self.otherTicketAry.count <= 0) {
+            vc.isOtherTicket = 0;
+        }else{
+            vc.isOtherTicket = 1;
+        }
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        //链接到活动界面
+        //    DetaliViewController * detaliVC = [[DetaliViewController alloc]init];
+        //    detaliVC.markTag = tag;
+        //    [self.navigationController pushViewController:detaliVC animated:YES];
+    }
+}
 - (void)timer:(NSTimer*)timer{
     static int a = 0;
     
@@ -552,10 +575,12 @@
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+- (void)dealloc{
     [self.timer invalidate];
     self.timer = nil;
 }
-
 #pragma mark - 懒加载
 - (UITableView *)movieTableView {
     
@@ -642,11 +667,7 @@
     }
     return _cityCodeAry;
 }
-- (void)pushToDetailPage:(NSInteger)tag{
-    DetaliViewController * detaliVC = [[DetaliViewController alloc]init];
-    detaliVC.markTag = tag;
-    [self.navigationController pushViewController:detaliVC animated:YES];
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

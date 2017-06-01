@@ -43,8 +43,9 @@
     
     NSMutableArray*imageArrays=[NSMutableArray array];
     for (int i=0; i<32; i++) {
-        NSString * path = [[NSBundle mainBundle]pathForResource:[NSString stringWithFormat:@"赛亚人000%d",i] ofType:@"jpg"];
+        NSString * path = [[NSBundle mainBundle]pathForResource:[NSString stringWithFormat:@"sayaren00%d",i] ofType:@"jpg"];
         UIImage*image=[UIImage imageWithContentsOfFile:path];
+        
         [imageArrays addObject:image];
     }
     

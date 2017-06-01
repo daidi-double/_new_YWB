@@ -45,29 +45,6 @@
 @implementation ChooseMovieController
 
 
-- (UITableView*)movieTableView{
-    if (!_movieTableView) {
-        _movieTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
-        _movieTableView.delegate = self;
-        _movieTableView.dataSource = self;
-        
-    }
-    return _movieTableView;
-}
-
-- (NSMutableArray*)headerViewAry{
-    if (!_headerViewAry) {
-        _headerViewAry = [NSMutableArray array];
-    }
-    return _headerViewAry;
-}
-
-- (NSMutableArray*)movieDataAry{
-    if (!_movieDataAry) {
-        _movieDataAry = [NSMutableArray array];
-    }
-    return _movieDataAry;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor greenColor];
@@ -128,9 +105,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     MovieCinemaViewController * MCinemaVC = [[MovieCinemaViewController alloc]init];
+    CinemaModel * models = self.movieDataAry[indexPath.row];
     MCinemaVC.cinema_code = self.cinemaModel.cinema_code;
     MCinemaVC.film_code = self.model.code;
     MCinemaVC.filmName = self.filmName;
+    if ([models.goodstype integerValue] !=1) {
+        
+        MCinemaVC.status = 1;
+    }else{
+        MCinemaVC.status = 0;
+    }
+    
     [self.navigationController pushViewController:MCinemaVC animated:YES];
 }
 
@@ -183,54 +168,7 @@
 - (NSString *)threeDayDate{
     return [JWTools getThreeDayTime];
 }
-//- (void)menuBtn:(UIButton*)btn{
-//
-//    btn.selected = YES;
-//    markBtn.selected = NO;
-//    markBtn = btn;
-//    if (self.movieDataAry.count > 0) {
-//        
-//        [_movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-//        
-//    }
-//    if (menuBG) {
-//        [menuBG removeFromSuperview];
-//    }
-//    
-//    menuBG = [[UIView alloc]initWithFrame:CGRectMake(0, NavigationHeight, kScreen_Width, kScreen_Height)];
-//    menuBG.backgroundColor = RGBCOLOR(195, 202, 203, 0.3);
-//    [self.view addSubview:menuBG];
-//    UITapGestureRecognizer*cancelFirstObject=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelFirstObject:)];
-//    cancelFirstObject.numberOfTouchesRequired = 1;
-//    cancelFirstObject.numberOfTapsRequired = 1;
-//    cancelFirstObject.delegate= self;
-//    menuBG.contentMode = UIViewContentModeScaleToFill;
-//    [menuBG addGestureRecognizer:cancelFirstObject];
-//    
-//    if (tableViewBG) {
-//        [tableViewBG removeFromSuperview];
-//    }
-//    tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.7f) andTag:btn.tag] ;
-//    tableViewBG.backgroundColor = [UIColor whiteColor];
-//    
-//    __weak typeof(btn)weakBtn = btn;
-//    __weak typeof(menuBG)weakMenuBG = menuBG;
-//    WEAKSELF;
-//    tableViewBG.titleBlock = ^(NSString *titleStr,NSString * cityCode){
-//        weakBtn.selected = NO;
-//        [weakBtn setTitle:titleStr forState:UIControlStateNormal];
-//        [weakMenuBG removeFromSuperview];
-//        if ([titleStr isEqualToString:@"全部地区"]) {
-//            weakSelf.type = @"0";
-//        }else{
-//            weakSelf.type = @"1";
-//        }
-////        [weakSelf ];
-//    };
-//    [menuBG addSubview:tableViewBG];
-//    
-//    
-//}
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     // 点击的view的类名
 //    NSLog(@"%@", NSStringFromClass([touch.view class]));
@@ -474,6 +412,31 @@
     }
     return _movieView;
 }
+
+- (UITableView*)movieTableView{
+    if (!_movieTableView) {
+        _movieTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
+        _movieTableView.delegate = self;
+        _movieTableView.dataSource = self;
+        
+    }
+    return _movieTableView;
+}
+
+- (NSMutableArray*)headerViewAry{
+    if (!_headerViewAry) {
+        _headerViewAry = [NSMutableArray array];
+    }
+    return _headerViewAry;
+}
+
+- (NSMutableArray*)movieDataAry{
+    if (!_movieDataAry) {
+        _movieDataAry = [NSMutableArray array];
+    }
+    return _movieDataAry;
+}
+
 /*
 #pragma mark - Navigation
 

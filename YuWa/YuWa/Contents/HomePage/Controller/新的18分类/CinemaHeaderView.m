@@ -24,15 +24,6 @@
         [self requestHeaderData];
         self.movies = moviesAry;
  
-//        _introduce = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 0, _BGScrollView.height * 0.3f)];
-//        _introduce.text = @"乘风破浪|剧情|邓超MMMMMMMMMMM";
-//        _introduce.font = [UIFont systemFontOfSize:13];
-//        CGSize introduceSize = [self sizeWithSt:_introduce.text font:_introduce.font];
-//        _introduce.frame = CGRectMake(0, _movieTitle.bottom-10, introduceSize.width, _BGScrollView.height*0.2f);
-//        _introduce.centerX = self.width/2;
-//        _introduce.textAlignment = 1;
-//        [_BGScrollView addSubview:_introduce];
-
     }
     return self;
 }
@@ -149,14 +140,10 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     MoviePicCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:MOVIECELL1 forIndexPath:indexPath];
 
-//    if (self.movies.count>0) {
         FilmListModel * filmModel = self.flimListAry[indexPath.item];
         [cell.movieImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
         [self.imageAry addObject:cell.movieImageView.image];
-        
-//    }
 
-    
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height -10)];
         
@@ -188,7 +175,6 @@
    
     FilmListModel * filmModel = self.flimListAry[_index];
     _movieTitle.text = filmModel.name;
-    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
     _movieTitle.width = movieTitleSize.width;
     self.movieScore.text = [NSString stringWithFormat:@"%@分",filmModel.score];
@@ -211,7 +197,10 @@
     
  
 }
-
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    FilmListModel * filmModel = self.flimListAry[_index];
+    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
+}
 #pragma mark -- http
 //头部视图数据
 - (void)requestHeaderData{

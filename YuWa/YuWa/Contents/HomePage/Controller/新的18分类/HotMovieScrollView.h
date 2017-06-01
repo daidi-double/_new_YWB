@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BannerModel.h"
 @protocol HotMovieScrollViewDelegate <NSObject>
 
-- (void)pushToDetailPage:(NSInteger)tag;
+- (void)pushToDetailPage:(BannerModel*)model;
 
 @end
 @interface HotMovieScrollView : UIScrollView

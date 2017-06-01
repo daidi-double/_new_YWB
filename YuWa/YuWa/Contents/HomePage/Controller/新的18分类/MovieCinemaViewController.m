@@ -123,7 +123,7 @@
         chooseSeat.headerModel = showModel;
         chooseSeat.cinemaName = self.headerModel.cinema_name;
         chooseSeat.cinemaCode = self.cinema_code;
-        FilmListModel * model = self.filmListAry[indexPath.row];
+        FilmListModel * model = self.filmListAry[_index];
         if (self.filmName == nil) {
             self.filmName = model.name;
         }
@@ -270,7 +270,7 @@
 
 - (void)requestFootData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAFOOT];
-
+    
     self.cinema_code = @"01010071";
     self.film_code = @"001103332016";
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code,@"film_code":self.film_code,@"time":self.time};

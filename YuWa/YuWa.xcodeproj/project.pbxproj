@@ -96,6 +96,39 @@
 		AA17A2CD1E824AC700B9E7B4 /* SignUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA17A2CC1E824AC700B9E7B4 /* SignUserCell.xib */; };
 		AA17A2CF1E82674800B9E7B4 /* pointBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = AA17A2CE1E82674800B9E7B4 /* pointBottom.png */; };
 		AA17A2D21E82B9F200B9E7B4 /* CatchWawaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA17A2D11E82B9F200B9E7B4 /* CatchWawaModel.m */; };
+		AA19CBEC1EE0412000B18990 /* MovieResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19CBEB1EE0412000B18990 /* MovieResultViewController.m */; };
+		AA19CC0E1EE059FC00B18990 /* sayaren000.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBEE1EE059FC00B18990 /* sayaren000.jpg */; };
+		AA19CC0F1EE059FC00B18990 /* sayaren001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBEF1EE059FC00B18990 /* sayaren001.jpg */; };
+		AA19CC101EE059FC00B18990 /* sayaren0010.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBF01EE059FC00B18990 /* sayaren0010.jpg */; };
+		AA19CC111EE059FC00B18990 /* sayaren0012.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBF11EE059FC00B18990 /* sayaren0012.jpg */; };
+		AA19CC121EE059FC00B18990 /* sayaren0013.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBF21EE059FC00B18990 /* sayaren0013.jpg */; };
+		AA19CC131EE059FC00B18990 /* sayaren0014.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBF31EE059FC00B18990 /* sayaren0014.jpg */; };
+		AA19CC141EE059FC00B18990 /* sayaren0015.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBF41EE059FC00B18990 /* sayaren0015.jpg */; };
+		AA19CC151EE059FC00B18990 /* sayaren0016.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBF51EE059FC00B18990 /* sayaren0016.jpg */; };
+		AA19CC161EE059FC00B18990 /* sayaren0017.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBF61EE059FC00B18990 /* sayaren0017.jpg */; };
+		AA19CC171EE059FC00B18990 /* sayaren0018.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBF71EE059FC00B18990 /* sayaren0018.jpg */; };
+		AA19CC181EE059FC00B18990 /* sayaren0019.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBF81EE059FC00B18990 /* sayaren0019.jpg */; };
+		AA19CC191EE059FC00B18990 /* sayaren002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBF91EE059FC00B18990 /* sayaren002.jpg */; };
+		AA19CC1A1EE059FC00B18990 /* sayaren0020.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBFA1EE059FC00B18990 /* sayaren0020.jpg */; };
+		AA19CC1B1EE059FC00B18990 /* sayaren0021.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBFB1EE059FC00B18990 /* sayaren0021.jpg */; };
+		AA19CC1C1EE059FC00B18990 /* sayaren0022.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBFC1EE059FC00B18990 /* sayaren0022.jpg */; };
+		AA19CC1D1EE059FC00B18990 /* sayaren0023.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBFD1EE059FC00B18990 /* sayaren0023.jpg */; };
+		AA19CC1E1EE059FC00B18990 /* sayaren0024.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBFE1EE059FC00B18990 /* sayaren0024.jpg */; };
+		AA19CC1F1EE059FC00B18990 /* sayaren0025.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CBFF1EE059FC00B18990 /* sayaren0025.jpg */; };
+		AA19CC201EE059FC00B18990 /* sayaren0026.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC001EE059FC00B18990 /* sayaren0026.jpg */; };
+		AA19CC211EE059FC00B18990 /* sayaren0027.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC011EE059FC00B18990 /* sayaren0027.jpg */; };
+		AA19CC221EE059FC00B18990 /* sayaren0028.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC021EE059FC00B18990 /* sayaren0028.jpg */; };
+		AA19CC231EE059FC00B18990 /* sayaren0029.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC031EE059FC00B18990 /* sayaren0029.jpg */; };
+		AA19CC241EE059FC00B18990 /* sayaren003.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC041EE059FC00B18990 /* sayaren003.jpg */; };
+		AA19CC251EE059FC00B18990 /* sayaren0030.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC051EE059FC00B18990 /* sayaren0030.jpg */; };
+		AA19CC261EE059FC00B18990 /* sayaren004.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC061EE059FC00B18990 /* sayaren004.jpg */; };
+		AA19CC271EE059FC00B18990 /* sayaren005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC071EE059FC00B18990 /* sayaren005.jpg */; };
+		AA19CC281EE059FC00B18990 /* sayaren006.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC081EE059FC00B18990 /* sayaren006.jpg */; };
+		AA19CC291EE059FC00B18990 /* sayaren007.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC091EE059FC00B18990 /* sayaren007.jpg */; };
+		AA19CC2A1EE059FC00B18990 /* sayaren008.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC0A1EE059FC00B18990 /* sayaren008.jpg */; };
+		AA19CC2B1EE059FC00B18990 /* sayaren009.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC0B1EE059FC00B18990 /* sayaren009.jpg */; };
+		AA19CC2C1EE059FC00B18990 /* sayaren0011.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC0C1EE059FC00B18990 /* sayaren0011.jpg */; };
+		AA19CC2D1EE059FC00B18990 /* sayaren0031.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC0D1EE059FC00B18990 /* sayaren0031.jpg */; };
 		AA1FEB551E55DA3000239FEC /* HotMovieCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1FEB541E55DA3000239FEC /* HotMovieCollectCell.m */; };
 		AA1FEB591E55DE9E00239FEC /* ChooseMovieController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1FEB571E55DE9E00239FEC /* ChooseMovieController.m */; };
 		AA1FEB5A1E55DE9E00239FEC /* ChooseMovieController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA1FEB581E55DE9E00239FEC /* ChooseMovieController.xib */; };
@@ -1949,6 +1982,40 @@
 		AA17A2CE1E82674800B9E7B4 /* pointBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointBottom.png; sourceTree = "<group>"; };
 		AA17A2D01E82B9F200B9E7B4 /* CatchWawaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchWawaModel.h; sourceTree = "<group>"; };
 		AA17A2D11E82B9F200B9E7B4 /* CatchWawaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatchWawaModel.m; sourceTree = "<group>"; };
+		AA19CBEA1EE0412000B18990 /* MovieResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieResultViewController.h; sourceTree = "<group>"; };
+		AA19CBEB1EE0412000B18990 /* MovieResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieResultViewController.m; sourceTree = "<group>"; };
+		AA19CBEE1EE059FC00B18990 /* sayaren000.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren000.jpg; sourceTree = "<group>"; };
+		AA19CBEF1EE059FC00B18990 /* sayaren001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren001.jpg; sourceTree = "<group>"; };
+		AA19CBF01EE059FC00B18990 /* sayaren0010.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0010.jpg; sourceTree = "<group>"; };
+		AA19CBF11EE059FC00B18990 /* sayaren0012.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0012.jpg; sourceTree = "<group>"; };
+		AA19CBF21EE059FC00B18990 /* sayaren0013.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0013.jpg; sourceTree = "<group>"; };
+		AA19CBF31EE059FC00B18990 /* sayaren0014.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0014.jpg; sourceTree = "<group>"; };
+		AA19CBF41EE059FC00B18990 /* sayaren0015.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0015.jpg; sourceTree = "<group>"; };
+		AA19CBF51EE059FC00B18990 /* sayaren0016.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0016.jpg; sourceTree = "<group>"; };
+		AA19CBF61EE059FC00B18990 /* sayaren0017.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0017.jpg; sourceTree = "<group>"; };
+		AA19CBF71EE059FC00B18990 /* sayaren0018.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0018.jpg; sourceTree = "<group>"; };
+		AA19CBF81EE059FC00B18990 /* sayaren0019.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0019.jpg; sourceTree = "<group>"; };
+		AA19CBF91EE059FC00B18990 /* sayaren002.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren002.jpg; sourceTree = "<group>"; };
+		AA19CBFA1EE059FC00B18990 /* sayaren0020.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0020.jpg; sourceTree = "<group>"; };
+		AA19CBFB1EE059FC00B18990 /* sayaren0021.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0021.jpg; sourceTree = "<group>"; };
+		AA19CBFC1EE059FC00B18990 /* sayaren0022.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0022.jpg; sourceTree = "<group>"; };
+		AA19CBFD1EE059FC00B18990 /* sayaren0023.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0023.jpg; sourceTree = "<group>"; };
+		AA19CBFE1EE059FC00B18990 /* sayaren0024.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0024.jpg; sourceTree = "<group>"; };
+		AA19CBFF1EE059FC00B18990 /* sayaren0025.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0025.jpg; sourceTree = "<group>"; };
+		AA19CC001EE059FC00B18990 /* sayaren0026.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0026.jpg; sourceTree = "<group>"; };
+		AA19CC011EE059FC00B18990 /* sayaren0027.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0027.jpg; sourceTree = "<group>"; };
+		AA19CC021EE059FC00B18990 /* sayaren0028.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0028.jpg; sourceTree = "<group>"; };
+		AA19CC031EE059FC00B18990 /* sayaren0029.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0029.jpg; sourceTree = "<group>"; };
+		AA19CC041EE059FC00B18990 /* sayaren003.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren003.jpg; sourceTree = "<group>"; };
+		AA19CC051EE059FC00B18990 /* sayaren0030.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0030.jpg; sourceTree = "<group>"; };
+		AA19CC061EE059FC00B18990 /* sayaren004.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren004.jpg; sourceTree = "<group>"; };
+		AA19CC071EE059FC00B18990 /* sayaren005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren005.jpg; sourceTree = "<group>"; };
+		AA19CC081EE059FC00B18990 /* sayaren006.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren006.jpg; sourceTree = "<group>"; };
+		AA19CC091EE059FC00B18990 /* sayaren007.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren007.jpg; sourceTree = "<group>"; };
+		AA19CC0A1EE059FC00B18990 /* sayaren008.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren008.jpg; sourceTree = "<group>"; };
+		AA19CC0B1EE059FC00B18990 /* sayaren009.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren009.jpg; sourceTree = "<group>"; };
+		AA19CC0C1EE059FC00B18990 /* sayaren0011.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0011.jpg; sourceTree = "<group>"; };
+		AA19CC0D1EE059FC00B18990 /* sayaren0031.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0031.jpg; sourceTree = "<group>"; };
 		AA1FEB531E55DA3000239FEC /* HotMovieCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotMovieCollectCell.h; sourceTree = "<group>"; };
 		AA1FEB541E55DA3000239FEC /* HotMovieCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotMovieCollectCell.m; sourceTree = "<group>"; };
 		AA1FEB561E55DE9E00239FEC /* ChooseMovieController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseMovieController.h; sourceTree = "<group>"; };
@@ -4753,6 +4820,56 @@
 			name = model;
 			sourceTree = "<group>";
 		};
+		AA19CBE91EE040DB00B18990 /* 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				AA3BDE781E63C6800019F02F /* SearchViewController.h */,
+				AA3BDE791E63C6800019F02F /* SearchViewController.m */,
+				AA19CBEA1EE0412000B18990 /* MovieResultViewController.h */,
+				AA19CBEB1EE0412000B18990 /* MovieResultViewController.m */,
+			);
+			name = "搜索";
+			sourceTree = "<group>";
+		};
+		AA19CBED1EE059FC00B18990 /* 赛亚人 */ = {
+			isa = PBXGroup;
+			children = (
+				AA19CBEE1EE059FC00B18990 /* sayaren000.jpg */,
+				AA19CBEF1EE059FC00B18990 /* sayaren001.jpg */,
+				AA19CBF01EE059FC00B18990 /* sayaren0010.jpg */,
+				AA19CBF11EE059FC00B18990 /* sayaren0012.jpg */,
+				AA19CBF21EE059FC00B18990 /* sayaren0013.jpg */,
+				AA19CBF31EE059FC00B18990 /* sayaren0014.jpg */,
+				AA19CBF41EE059FC00B18990 /* sayaren0015.jpg */,
+				AA19CBF51EE059FC00B18990 /* sayaren0016.jpg */,
+				AA19CBF61EE059FC00B18990 /* sayaren0017.jpg */,
+				AA19CBF71EE059FC00B18990 /* sayaren0018.jpg */,
+				AA19CBF81EE059FC00B18990 /* sayaren0019.jpg */,
+				AA19CBF91EE059FC00B18990 /* sayaren002.jpg */,
+				AA19CBFA1EE059FC00B18990 /* sayaren0020.jpg */,
+				AA19CBFB1EE059FC00B18990 /* sayaren0021.jpg */,
+				AA19CBFC1EE059FC00B18990 /* sayaren0022.jpg */,
+				AA19CBFD1EE059FC00B18990 /* sayaren0023.jpg */,
+				AA19CBFE1EE059FC00B18990 /* sayaren0024.jpg */,
+				AA19CBFF1EE059FC00B18990 /* sayaren0025.jpg */,
+				AA19CC001EE059FC00B18990 /* sayaren0026.jpg */,
+				AA19CC011EE059FC00B18990 /* sayaren0027.jpg */,
+				AA19CC021EE059FC00B18990 /* sayaren0028.jpg */,
+				AA19CC031EE059FC00B18990 /* sayaren0029.jpg */,
+				AA19CC041EE059FC00B18990 /* sayaren003.jpg */,
+				AA19CC051EE059FC00B18990 /* sayaren0030.jpg */,
+				AA19CC061EE059FC00B18990 /* sayaren004.jpg */,
+				AA19CC071EE059FC00B18990 /* sayaren005.jpg */,
+				AA19CC081EE059FC00B18990 /* sayaren006.jpg */,
+				AA19CC091EE059FC00B18990 /* sayaren007.jpg */,
+				AA19CC0A1EE059FC00B18990 /* sayaren008.jpg */,
+				AA19CC0B1EE059FC00B18990 /* sayaren009.jpg */,
+				AA19CC0C1EE059FC00B18990 /* sayaren0011.jpg */,
+				AA19CC0D1EE059FC00B18990 /* sayaren0031.jpg */,
+			);
+			path = "赛亚人";
+			sourceTree = "<group>";
+		};
 		AA1FEB371E55CFC700239FEC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -4767,8 +4884,6 @@
 				AA3CA55A1E6015E6000D05FA /* LookDetaliViewController.m */,
 				AA3CA55F1E6058D3000D05FA /* LocationViewController.h */,
 				AA3CA5601E6058D3000D05FA /* LocationViewController.m */,
-				AA3BDE781E63C6800019F02F /* SearchViewController.h */,
-				AA3BDE791E63C6800019F02F /* SearchViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -6161,6 +6276,7 @@
 		AAD81F371EC5EBAD00799957 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				AA19CBE91EE040DB00B18990 /* 搜索 */,
 				AA377B751EC6DEC200E81A88 /* 观影小吃 */,
 				AA377B741EC6DEAD00E81A88 /* 选座 */,
 				AAD81F3E1EC5F74400799957 /* 影院和购票 */,
@@ -10116,6 +10232,7 @@
 		C1F7BEEC1DB1CA0700CCAF96 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				AA19CBED1EE059FC00B18990 /* 赛亚人 */,
 				AA73F2961ECEC4980002B548 /* 启动页 */,
 				25B3C57F1ECD8E4000674F20 /* load1 */,
 				AA3541951E9DF23700A2EC73 /* BaoBao */,
@@ -10465,6 +10582,7 @@
 				AA3544311E9DF23800A2EC73 /* 3baobaoLVUP10@2x.jpg in Resources */,
 				C10E94B91DD3609B00728B3D /* home_cricle_ok.png in Resources */,
 				AA3544F51E9DF23900A2EC73 /* 1baobaoBG28@2x.jpg in Resources */,
+				AA19CC0F1EE059FC00B18990 /* sayaren001.jpg in Resources */,
 				AA01310D1EC2F54400A99BD1 /* InfomationTableViewCell.xib in Resources */,
 				AA35458E1E9DF23A00A2EC73 /* 3baobaoBG58@2x.jpg in Resources */,
 				AA35455D1E9DF23A00A2EC73 /* 3baobaoBG13@2x.jpg in Resources */,
@@ -10511,6 +10629,7 @@
 				AA3544121E9DF23800A2EC73 /* 2baobaoLVUP37@2x.jpg in Resources */,
 				AA3544131E9DF23800A2EC73 /* 2baobaoLVUP38@2x.jpg in Resources */,
 				AA3545A21E9DF23A00A2EC73 /* 4baobaoBG21@2x.jpg in Resources */,
+				AA19CC191EE059FC00B18990 /* sayaren002.jpg in Resources */,
 				AA3545A91E9DF23A00A2EC73 /* 4baobaoBG28@2x.jpg in Resources */,
 				B38B2E451D8FACD8004D5256 /* banner_selected6.png in Resources */,
 				AA3545A41E9DF23A00A2EC73 /* 4baobaoBG23@2x.jpg in Resources */,
@@ -10528,6 +10647,7 @@
 				B3192ACE1D92470F00FD6578 /* RBPublicToolView.xib in Resources */,
 				AA35445F1E9DF23800A2EC73 /* 3baobaoLVUP52@2x.jpg in Resources */,
 				AA3543FC1E9DF23800A2EC73 /* 2baobaoLVUP17@2x.jpg in Resources */,
+				AA19CC1D1EE059FC00B18990 /* sayaren0023.jpg in Resources */,
 				AAF80CF91E67E45A0000C4BC /* scan_2@2x.png in Resources */,
 				AAFA57BC1ED2EC8E006CF2D7 /* home_hui.png in Resources */,
 				AA35447B1E9DF23800A2EC73 /* 4baobaoLVUP23@2x.jpg in Resources */,
@@ -10612,6 +10732,7 @@
 				AACC80C01E901E070023CA6D /* CustomTableViewCell.xib in Resources */,
 				C13019B01DB1FD2F00E24C88 /* qrcode_scan_btn_photo_nor@2x.png in Resources */,
 				AA3BDE771E63C2430019F02F /* vip.png in Resources */,
+				AA19CC261EE059FC00B18990 /* sayaren004.jpg in Resources */,
 				AA3544A91E9DF23900A2EC73 /* 0baobaoBG10@2x.jpg in Resources */,
 				C1FB7F7A1DC73B910048EBC8 /* 垃圾桶@2x.png in Resources */,
 				AA3544631E9DF23800A2EC73 /* 3baobaoLVUP56@2x.jpg in Resources */,
@@ -10629,6 +10750,7 @@
 				AA3544591E9DF23800A2EC73 /* 3baobaoLVUP47@2x.jpg in Resources */,
 				AA3545401E9DF23A00A2EC73 /* 2baobaoBG41@2x.jpg in Resources */,
 				AA3544401E9DF23800A2EC73 /* 3baobaoLVUP24@2x.jpg in Resources */,
+				AA19CC2D1EE059FC00B18990 /* sayaren0031.jpg in Resources */,
 				AA3543E71E9DF23800A2EC73 /* 1baobaoLVUP52@2x.jpg in Resources */,
 				C1E5B77D1DE549FC00EB1F85 /* MHSelectPickerView.xib in Resources */,
 				AA35459D1E9DF23A00A2EC73 /* 4baobaoBG17@2x.jpg in Resources */,
@@ -10694,6 +10816,7 @@
 				AA3543B81E9DF23800A2EC73 /* 1baobaoLVUP0@2x.jpg in Resources */,
 				AAF127E61E8AF2B900121621 /* GetMoneyToBankViewController.xib in Resources */,
 				B3D2190A1DB0985100D661F5 /* ShareSDKUI.bundle in Resources */,
+				AA19CC1B1EE059FC00B18990 /* sayaren0021.jpg in Resources */,
 				B3263B021DD5B25A004788BB /* YWBaoBaoViewController.xib in Resources */,
 				AA3543F41E9DF23800A2EC73 /* 2baobaoLVUP0@2x.jpg in Resources */,
 				AA3544641E9DF23800A2EC73 /* 3baobaoLVUP57@2x.jpg in Resources */,
@@ -10701,6 +10824,7 @@
 				C135A15A1DDE020F002B78A5 /* 波浪个人_00043.png in Resources */,
 				C135A0F31DDCAC86002B78A5 /* home_08.png in Resources */,
 				AA3545BC1E9DF23A00A2EC73 /* 4baobaoBG45@2x.jpg in Resources */,
+				AA19CC161EE059FC00B18990 /* sayaren0017.jpg in Resources */,
 				AA42110F1E5ABAEF00085650 /* MovieCinemaViewController.xib in Resources */,
 				25B3C5CA1ECD8E4000674F20 /* 4.png in Resources */,
 				AA3545C61E9DF23A00A2EC73 /* 4baobaoBG54@2x.jpg in Resources */,
@@ -10725,6 +10849,8 @@
 				AA35450F1E9DF23900A2EC73 /* 1baobaoBG51@2x.jpg in Resources */,
 				AA3544FD1E9DF23900A2EC73 /* 1baobaoBG35@2x.jpg in Resources */,
 				AA2B2C001E8CC7D3008CB3C6 /* IndroduceViewController.xib in Resources */,
+				AA19CC201EE059FC00B18990 /* sayaren0026.jpg in Resources */,
+				AA19CC151EE059FC00B18990 /* sayaren0016.jpg in Resources */,
 				AA3544261E9DF23800A2EC73 /* 2baobaoLVUP55@2x.jpg in Resources */,
 				C135A1581DDE020F002B78A5 /* 波浪个人_00041.png in Resources */,
 				AA2B2C0E1E8CF0D8008CB3C6 /* YWGetMyAwardViewController.xib in Resources */,
@@ -10827,6 +10953,7 @@
 				AA3545801E9DF23A00A2EC73 /* 3baobaoBG45@2x.jpg in Resources */,
 				C135A13E1DDE020F002B78A5 /* 波浪个人_00018.png in Resources */,
 				AA3543D31E9DF23800A2EC73 /* 1baobaoLVUP34@2x.jpg in Resources */,
+				AA19CC1F1EE059FC00B18990 /* sayaren0025.jpg in Resources */,
 				AAA459601E79420500396AE5 /* icon_location@3x.png in Resources */,
 				C123155C1DE6FFDA00B9D0FE /* 下拉按钮.png in Resources */,
 				C135A1461DDE020F002B78A5 /* 波浪个人_00025.png in Resources */,
@@ -10979,6 +11106,7 @@
 				AA3544531E9DF23800A2EC73 /* 3baobaoLVUP41@2x.jpg in Resources */,
 				AA3545371E9DF23900A2EC73 /* 2baobaoBG33@2x.jpg in Resources */,
 				C13019A01DB1FD2F00E24C88 /* qr_scan_line@2x.png in Resources */,
+				AA19CC141EE059FC00B18990 /* sayaren0015.jpg in Resources */,
 				AA3544E31E9DF23900A2EC73 /* 1baobaoBG11@2x.jpg in Resources */,
 				C135A16C1DDE020F002B78A5 /* 波浪个人_0006.png in Resources */,
 				C135A1341DDE020F002B78A5 /* 波浪个人_0000.png in Resources */,
@@ -10994,6 +11122,7 @@
 				C1E5B7701DE45DA400EB1F85 /* ScheduleTextFieldTableViewCell.xib in Resources */,
 				B38B2E441D8FACD8004D5256 /* banner_normal6.png in Resources */,
 				AA29C24D1EAD985B0092EF6F /* YWShopDetailTableViewCell.xib in Resources */,
+				AA19CC231EE059FC00B18990 /* sayaren0029.jpg in Resources */,
 				C1F7BDB21DB1C94500CCAF96 /* StorePhotoCollectionViewCell.xib in Resources */,
 				B33A26851D9A68040092CB12 /* MWPhotoBrowser.bundle in Resources */,
 				AA3545751E9DF23A00A2EC73 /* 3baobaoBG35@2x.jpg in Resources */,
@@ -11033,6 +11162,7 @@
 				AA35457B1E9DF23A00A2EC73 /* 3baobaoBG40@2x.jpg in Resources */,
 				AA35459A1E9DF23A00A2EC73 /* 4baobaoBG14@2x.jpg in Resources */,
 				B3B851181DD987F900E171C8 /* YWPayAnalysisViewController.xib in Resources */,
+				AA19CC271EE059FC00B18990 /* sayaren005.jpg in Resources */,
 				AA3545481E9DF23A00A2EC73 /* 2baobaoBG49@2x.jpg in Resources */,
 				AA35447F1E9DF23900A2EC73 /* 4baobaoLVUP27@2x.jpg in Resources */,
 				AA35451F1E9DF23900A2EC73 /* 2baobaoBG11@2x.jpg in Resources */,
@@ -11044,6 +11174,7 @@
 				C13019AB1DB1FD2F00E24C88 /* qrcode_scan_btn_flash_down@2x.png in Resources */,
 				B35778A21D98CD8E0058A998 /* JWLocationBasicViewController.xib in Resources */,
 				B3FEBA331D9BE4EE003CDEF2 /* YWMessageNotificationCell.xib in Resources */,
+				AA19CC2B1EE059FC00B18990 /* sayaren009.jpg in Resources */,
 				AA35452F1E9DF23900A2EC73 /* 2baobaoBG26@2x.jpg in Resources */,
 				B38B2F521D8FC83A004D5256 /* 国家 选择币种.json in Resources */,
 				AA35440E1E9DF23800A2EC73 /* 2baobaoLVUP33@2x.jpg in Resources */,
@@ -11053,12 +11184,14 @@
 				AA35454E1E9DF23A00A2EC73 /* 2baobaoBG54@2x.jpg in Resources */,
 				AA3545C51E9DF23A00A2EC73 /* 4baobaoBG53@2x.jpg in Resources */,
 				AA3545111E9DF23900A2EC73 /* 1baobaoBG53@2x.jpg in Resources */,
+				AA19CC2A1EE059FC00B18990 /* sayaren008.jpg in Resources */,
 				AA35440B1E9DF23800A2EC73 /* 2baobaoLVUP30@2x.jpg in Resources */,
 				25B3C5BF1ECD8E4000674F20 /* 3.png in Resources */,
 				AA3544361E9DF23800A2EC73 /* 3baobaoLVUP15@2x.jpg in Resources */,
 				AA3544101E9DF23800A2EC73 /* 2baobaoLVUP35@2x.jpg in Resources */,
 				AAF508811EAF1D780007BC78 /* YWPayMoneyTableViewCell.xib in Resources */,
 				AA35457F1E9DF23A00A2EC73 /* 3baobaoBG44@2x.jpg in Resources */,
+				AA19CC281EE059FC00B18990 /* sayaren006.jpg in Resources */,
 				AA3543CE1E9DF23800A2EC73 /* 1baobaoLVUP2@2x.jpg in Resources */,
 				C1F7BDB51DB1C94500CCAF96 /* AccountMoneyTableViewCell.xib in Resources */,
 				25B3C5AD1ECD8E4000674F20 /* 13.png in Resources */,
@@ -11104,10 +11237,12 @@
 				C135A1601DDE020F002B78A5 /* 波浪个人_00049.png in Resources */,
 				AA3545A61E9DF23A00A2EC73 /* 4baobaoBG25@2x.jpg in Resources */,
 				AA35451C1E9DF23900A2EC73 /* 1baobaoBG9@2x.jpg in Resources */,
+				AA19CC131EE059FC00B18990 /* sayaren0014.jpg in Resources */,
 				C135A1481DDE020F002B78A5 /* 波浪个人_00027.png in Resources */,
 				B3192AC81D9229E100FD6578 /* JWImgPickerAlbumChooseTableView.xib in Resources */,
 				AA3545531E9DF23A00A2EC73 /* 2baobaoBG59@2x.jpg in Resources */,
 				AA3BFE3D1E8559B500D669C2 /* CheckUpBankInfomationViewController.xib in Resources */,
+				AA19CC1E1EE059FC00B18990 /* sayaren0024.jpg in Resources */,
 				AA3545C21E9DF23A00A2EC73 /* 4baobaoBG50@2x.jpg in Resources */,
 				AAC9BB7A1ED7D94100893D3B /* 33.png in Resources */,
 				25B3C5BA1ECD8E4000674F20 /* 25.png in Resources */,
@@ -11135,9 +11270,11 @@
 				AA35453B1E9DF23900A2EC73 /* 2baobaoBG37@2x.jpg in Resources */,
 				AA3545AF1E9DF23A00A2EC73 /* 4baobaoBG33@2x.jpg in Resources */,
 				AA3544C41E9DF23900A2EC73 /* 0baobaoBG35@2x.jpg in Resources */,
+				AA19CC181EE059FC00B18990 /* sayaren0019.jpg in Resources */,
 				AA3545AD1E9DF23A00A2EC73 /* 4baobaoBG31@2x.jpg in Resources */,
 				AA3545121E9DF23900A2EC73 /* 1baobaoBG54@2x.jpg in Resources */,
 				C135A1361DDE020F002B78A5 /* 波浪个人_00010.png in Resources */,
+				AA19CC1C1EE059FC00B18990 /* sayaren0022.jpg in Resources */,
 				AA3544FE1E9DF23900A2EC73 /* 1baobaoBG36@2x.jpg in Resources */,
 				AA3545381E9DF23900A2EC73 /* 2baobaoBG34@2x.jpg in Resources */,
 				25B3C5B31ECD8E4000674F20 /* 19.png in Resources */,
@@ -11185,6 +11322,7 @@
 				C1214C111DEC40B400FFC63C /* SignUserTableViewCell.xib in Resources */,
 				AA3544AE1E9DF23900A2EC73 /* 0baobaoBG15@2x.jpg in Resources */,
 				AA35453F1E9DF23A00A2EC73 /* 2baobaoBG40@2x.jpg in Resources */,
+				AA19CC251EE059FC00B18990 /* sayaren0030.jpg in Resources */,
 				B3A28A531DCA1059008A0A15 /* RBPublicLocationEditorViewController.xib in Resources */,
 				AA45170A1ED52118007CF813 /* CinameTableViewCell.xib in Resources */,
 				AA35449F1E9DF23900A2EC73 /* 4baobaoLVUP56@2x.jpg in Resources */,
@@ -11199,6 +11337,7 @@
 				C1F7BF4B1DB1CA0700CCAF96 /* home_leftArr@2x.png in Resources */,
 				B34BCE181DAA8165001AB98D /* YWNodeAddAldumShowTableViewCell.xib in Resources */,
 				AA3544321E9DF23800A2EC73 /* 3baobaoLVUP11@2x.jpg in Resources */,
+				AA19CC121EE059FC00B18990 /* sayaren0013.jpg in Resources */,
 				AA3544451E9DF23800A2EC73 /* 3baobaoLVUP29@2x.jpg in Resources */,
 				AA3544981E9DF23900A2EC73 /* 4baobaoLVUP4@2x.jpg in Resources */,
 				AA29C2691EADF24C0092EF6F /* ShopCarDetailTableViewCell.xib in Resources */,
@@ -11209,6 +11348,7 @@
 				AA3544CF1E9DF23900A2EC73 /* 0baobaoBG45@2x.jpg in Resources */,
 				C13019A71DB1FD2F00E24C88 /* qr_vc_left@3x.png in Resources */,
 				AABFC5071E88EB29002B5140 /* MyIncomeTableViewCell.xib in Resources */,
+				AA19CC171EE059FC00B18990 /* sayaren0018.jpg in Resources */,
 				AA3544351E9DF23800A2EC73 /* 3baobaoLVUP14@2x.jpg in Resources */,
 				AA3544EF1E9DF23900A2EC73 /* 1baobaoBG22@2x.jpg in Resources */,
 				25B3C5BE1ECD8E4000674F20 /* 29.png in Resources */,
@@ -11251,6 +11391,7 @@
 				AAF127D81E8AD3C200121621 /* 时间@2x.png in Resources */,
 				AA3543D41E9DF23800A2EC73 /* 1baobaoLVUP35@2x.jpg in Resources */,
 				C130199C1DB1FD2F00E24C88 /* qr_bottom_left@2x.png in Resources */,
+				AA19CC1A1EE059FC00B18990 /* sayaren0020.jpg in Resources */,
 				AAF127D71E8AD3C200121621 /* 勾勾未选择@3x.png in Resources */,
 				AA3545321E9DF23900A2EC73 /* 2baobaoBG29@2x.jpg in Resources */,
 				AA3544DF1E9DF23900A2EC73 /* 0baobaoBG8@2x.jpg in Resources */,
@@ -11315,6 +11456,7 @@
 				AA3544611E9DF23800A2EC73 /* 3baobaoLVUP54@2x.jpg in Resources */,
 				AA35444C1E9DF23800A2EC73 /* 3baobaoLVUP35@2x.jpg in Resources */,
 				AA41E3401EC0366200FCB498 /* NewHotMovieCollectCell.xib in Resources */,
+				AA19CC241EE059FC00B18990 /* sayaren003.jpg in Resources */,
 				25B3C5B11ECD8E4000674F20 /* 17.png in Resources */,
 				AAF0EB441EAC5C940003A930 /* YWShopScoreTableViewCell.xib in Resources */,
 				C135A0CF1DDC5F69002B78A5 /* page_collection.png in Resources */,
@@ -11329,6 +11471,7 @@
 				AA35444F1E9DF23800A2EC73 /* 3baobaoLVUP38@2x.jpg in Resources */,
 				AA35440F1E9DF23800A2EC73 /* 2baobaoLVUP34@2x.jpg in Resources */,
 				C1F7BF331DB1CA0700CCAF96 /* menuData.plist in Resources */,
+				AA19CC0E1EE059FC00B18990 /* sayaren000.jpg in Resources */,
 				AA3544791E9DF23800A2EC73 /* 4baobaoLVUP21@2x.jpg in Resources */,
 				C1F7BE501DB1C95400CCAF96 /* YWFansTableViewCell.xib in Resources */,
 				AA35441E1E9DF23800A2EC73 /* 2baobaoLVUP48@2x.jpg in Resources */,
@@ -11393,6 +11536,7 @@
 				AA3544DE1E9DF23900A2EC73 /* 0baobaoBG7@2x.jpg in Resources */,
 				AA3543F01E9DF23800A2EC73 /* 1baobaoLVUP6@2x.jpg in Resources */,
 				AA3544001E9DF23800A2EC73 /* 2baobaoLVUP20@2x.jpg in Resources */,
+				AA19CC101EE059FC00B18990 /* sayaren0010.jpg in Resources */,
 				C122FBE61DB5F5C1009A518A /* CommitShopView.xib in Resources */,
 				AA3543DD1E9DF23800A2EC73 /* 1baobaoLVUP43@2x.jpg in Resources */,
 				B31582471D9108200096C194 /* MDHotelRightBtn.xib in Resources */,
@@ -11401,6 +11545,7 @@
 				AA3545AC1E9DF23A00A2EC73 /* 4baobaoBG30@2x.jpg in Resources */,
 				AA3543FE1E9DF23800A2EC73 /* 2baobaoLVUP19@2x.jpg in Resources */,
 				AA14FB2A1E56D5B900E330E7 /* heartgray.png in Resources */,
+				AA19CC211EE059FC00B18990 /* sayaren0027.jpg in Resources */,
 				AA3545011E9DF23900A2EC73 /* 1baobaoBG39@2x.jpg in Resources */,
 				AA3543DA1E9DF23800A2EC73 /* 1baobaoLVUP40@2x.jpg in Resources */,
 				AA3544F01E9DF23900A2EC73 /* 1baobaoBG23@2x.jpg in Resources */,
@@ -11428,6 +11573,7 @@
 				AA3545261E9DF23900A2EC73 /* 2baobaoBG18@2x.jpg in Resources */,
 				AA3543C61E9DF23800A2EC73 /* 1baobaoLVUP22@2x.jpg in Resources */,
 				C1F7BF561DB1CA0700CCAF96 /* icon_homepage_search.png in Resources */,
+				AA19CC291EE059FC00B18990 /* sayaren007.jpg in Resources */,
 				AA3544BD1E9DF23900A2EC73 /* 0baobaoBG29@2x.jpg in Resources */,
 				AA3544151E9DF23800A2EC73 /* 2baobaoLVUP3@2x.jpg in Resources */,
 				AA35450B1E9DF23900A2EC73 /* 1baobaoBG48@2x.jpg in Resources */,
@@ -11443,6 +11589,7 @@
 				B31582451D9108200096C194 /* MDHotelChooseTypeTableVC.xib in Resources */,
 				B3FFF4801D93A3C700EDD2AB /* tag-center@3x.png in Resources */,
 				AA35456B1E9DF23A00A2EC73 /* 3baobaoBG26@2x.jpg in Resources */,
+				AA19CC2C1EE059FC00B18990 /* sayaren0011.jpg in Resources */,
 				B32EFFAB1DB9C4F600A4FCFB /* JWLocalNotificationShowView.xib in Resources */,
 				C1F7BF3F1DB1CA0700CCAF96 /* home_shoucangjia.png in Resources */,
 				AA3545571E9DF23A00A2EC73 /* 2baobaoBG8@2x.jpg in Resources */,
@@ -11451,6 +11598,7 @@
 				C135A1391DDE020F002B78A5 /* 波浪个人_00013.png in Resources */,
 				AA35458F1E9DF23A00A2EC73 /* 3baobaoBG59@2x.jpg in Resources */,
 				AA3545931E9DF23A00A2EC73 /* 3baobaoBG8@2x.jpg in Resources */,
+				AA19CC221EE059FC00B18990 /* sayaren0028.jpg in Resources */,
 				AA3543D91E9DF23800A2EC73 /* 1baobaoLVUP3@2x.jpg in Resources */,
 				B38B2F5E1D8FC83A004D5256 /* xhsemoji.plist in Resources */,
 				AA3BFE411E8559B500D669C2 /* YWBankViewController.xib in Resources */,
@@ -11508,6 +11656,7 @@
 				AAFA57B51ED2E55B006CF2D7 /* 休闲娱乐@3x.png in Resources */,
 				AA35442E1E9DF23800A2EC73 /* 2baobaoLVUP8@2x.jpg in Resources */,
 				AAF127D51E8AD3C200121621 /* 勾勾已选择@3x.png in Resources */,
+				AA19CC111EE059FC00B18990 /* sayaren0012.jpg in Resources */,
 				AA35442C1E9DF23800A2EC73 /* 2baobaoLVUP6@2x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -11830,6 +11979,7 @@
 				AAAE11801E5C699C00D637D7 /* ChooseSeatController.m in Sources */,
 				B33A26A91D9A68040092CB12 /* EaseBubbleView.m in Sources */,
 				C1F7BF791DB1CB6500CCAF96 /* SQMenuShowCell.m in Sources */,
+				AA19CBEC1EE0412000B18990 /* MovieResultViewController.m in Sources */,
 				C1F7BDB11DB1C94500CCAF96 /* StorePhotoCollectionViewCell.m in Sources */,
 				C1F7BE581DB1C95400CCAF96 /* MyOrderTableViewCell.m in Sources */,
 				B38B2EFF1D8FC82F004D5256 /* RBNodeDCommentTableViewCell.m in Sources */,

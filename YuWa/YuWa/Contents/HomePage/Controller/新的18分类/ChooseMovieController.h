@@ -14,6 +14,8 @@
 @property (nonatomic,copy)NSString * filmCode;
 @property (nonatomic,copy)NSString * filmName;//电影名称
 
+@property (nonatomic,assign)BOOL isOtherTicket;//是否含有通兑票
+
 @property(nonatomic,strong)NSString*coordinatex;   //经度
 @property(nonatomic,strong)NSString*coordinatey;   //维度
 @end

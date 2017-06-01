@@ -10,7 +10,8 @@
 
 @interface BannerModel : NSObject
 @property (nonatomic,copy)NSString * image;
-@property (nonatomic,copy)NSString * film_id;
-@property (nonatomic,copy)NSString * id;
-
+@property (nonatomic,copy)NSString * film_code;//影片编码或链接
+@property (nonatomic,copy)NSString * type;//0影片，1链接
+@property (nonatomic,copy)NSString * sort;//排序，越大越优先
+@property (nonatomic,copy)NSString * film_name;
 @end

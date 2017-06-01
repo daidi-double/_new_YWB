@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchViewController : UIViewController
+@property(nonatomic,strong)NSString*coordinatex;   //经度
+@property(nonatomic,strong)NSString*coordinatey;   //维度
+@property(nonatomic,strong)NSString*cityCode;
 
 @end
