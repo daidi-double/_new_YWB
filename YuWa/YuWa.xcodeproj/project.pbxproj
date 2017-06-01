@@ -62,6 +62,8 @@
 		25D587C81EAA619C00C0178C /* YWpayNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D587C71EAA619C00C0178C /* YWpayNotificationCell.xib */; };
 		25D587CB1EAA627300C0178C /* YWpayNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D587CA1EAA627300C0178C /* YWpayNotificationCell.m */; };
 		25EA9E611ECD42D2001CF604 /* YWload.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EA9E601ECD42D2001CF604 /* YWload.m */; };
+		25F9B1FB1EDFA9AE00C6A6C6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 25F9B1FA1EDFA9AD00C6A6C6 /* libsqlite3.0.tbd */; };
+		25F9B1FD1EDFAD5B00C6A6C6 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25F9B1FC1EDFAD5B00C6A6C6 /* UMMobClick.framework */; };
 		25FE755E1EA9EA70003EA989 /* jieshou.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FE755D1EA9EA70003EA989 /* jieshou.png */; };
 		25FE75601EA9EA76003EA989 /* jujue.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FE755F1EA9EA76003EA989 /* jujue.png */; };
 		AA0131021EC2E86200A99BD1 /* MovieShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0131001EC2E86200A99BD1 /* MovieShopTableViewCell.m */; };
@@ -1890,6 +1892,8 @@
 		25D587CA1EAA627300C0178C /* YWpayNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWpayNotificationCell.m; path = ../../../HomePage/View/YWpayNotificationCell.m; sourceTree = "<group>"; };
 		25EA9E5F1ECD42D2001CF604 /* YWload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWload.h; sourceTree = "<group>"; };
 		25EA9E601ECD42D2001CF604 /* YWload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWload.m; sourceTree = "<group>"; };
+		25F9B1FA1EDFA9AD00C6A6C6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		25F9B1FC1EDFAD5B00C6A6C6 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		25FE755D1EA9EA70003EA989 /* jieshou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jieshou.png; sourceTree = "<group>"; };
 		25FE755F1EA9EA76003EA989 /* jujue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jujue.png; sourceTree = "<group>"; };
 		6D91CFB893AA70B1C9A0D506 /* Pods-YuWa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YuWa.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YuWa/Pods-YuWa.debug.xcconfig"; sourceTree = "<group>"; };
@@ -4435,6 +4439,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B36C7F241D9D492F00B022E0 /* Security.framework in Frameworks */,
+				25F9B1FB1EDFA9AE00C6A6C6 /* libsqlite3.0.tbd in Frameworks */,
+				B33A1BFB1D9A46E90092CB12 /* libz.tbd in Frameworks */,
+				B36C7F1A1D9D490000B022E0 /* CoreTelephony.framework in Frameworks */,
 				AA3522BE1EBCB3E400CA0E2B /* Accelerate.framework in Frameworks */,
 				AA3A1E651E8F7C1C00C12497 /* GLKit.framework in Frameworks */,
 				AAA459561E79179800396AE5 /* AdSupport.framework in Frameworks */,
@@ -4452,8 +4460,6 @@
 				B36C7F1E1D9D491200B022E0 /* CoreGraphics.framework in Frameworks */,
 				C1392DD01DC042A5002418EF /* CoreText.framework in Frameworks */,
 				C13019B91DB1FD8D00E24C88 /* QuartzCore.framework in Frameworks */,
-				B36C7F1A1D9D490000B022E0 /* CoreTelephony.framework in Frameworks */,
-				B33A1BFB1D9A46E90092CB12 /* libz.tbd in Frameworks */,
 				B33A1BF91D9A46DC0092CB12 /* libc++.tbd in Frameworks */,
 				B33A1BF31D9A46B90092CB12 /* AVFoundation.framework in Frameworks */,
 				B33A1BEF1D9A46A40092CB12 /* CoreMedia.framework in Frameworks */,
@@ -4469,7 +4475,6 @@
 				B3D219171DB098FD00D661F5 /* libicucore.tbd in Frameworks */,
 				B32975D11DAE1DB1002CA488 /* Photos.framework in Frameworks */,
 				B3D2190C1DB0985100D661F5 /* TencentOpenAPI.framework in Frameworks */,
-				B36C7F241D9D492F00B022E0 /* Security.framework in Frameworks */,
 				C1DB58FA1E51AC06004B386F /* libUPAPayPlugin.a in Frameworks */,
 				B3D219131DB0985100D661F5 /* MOBFoundation.framework in Frameworks */,
 				B3D219091DB0985100D661F5 /* ShareSDKExtension.framework in Frameworks */,
@@ -4480,6 +4485,7 @@
 				B33A1BFD1D9A46F70092CB12 /* libstdc++.6.0.9.tbd in Frameworks */,
 				B3D219101DB0985100D661F5 /* libWeChatSDK.a in Frameworks */,
 				B36C7F2A1D9D4BBB00B022E0 /* jpush-ios-2.1.9.a in Frameworks */,
+				25F9B1FD1EDFAD5B00C6A6C6 /* UMMobClick.framework in Frameworks */,
 				B33A1BF51D9A46C40092CB12 /* MobileCoreServices.framework in Frameworks */,
 				B33A1E471D9A4F7D0092CB12 /* libHyphenateFullSDK.a in Frameworks */,
 				AA3A1E5B1E8F72E300C12497 /* AMapFoundationKit.framework in Frameworks */,
@@ -10239,6 +10245,8 @@
 		EDD1BC4F3FB283CECFE57A3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25F9B1FC1EDFAD5B00C6A6C6 /* UMMobClick.framework */,
+				25F9B1FA1EDFA9AD00C6A6C6 /* libsqlite3.0.tbd */,
 				AA3522BD1EBCB3E400CA0E2B /* Accelerate.framework */,
 				AA3A1E641E8F7C1C00C12497 /* GLKit.framework */,
 				AAA459551E79179800396AE5 /* AdSupport.framework */,
@@ -12397,6 +12405,7 @@
 					"$(PROJECT_DIR)/YuWa/Foundation/SDK/ShareSDK/Support/Required",
 					"$(PROJECT_DIR)/YuWa/Foundation/SDK/aliPay",
 					"$(PROJECT_DIR)/YuWa/Foundation/SDK",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YuWa/Foundation/Custom Category/VipxoxPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -12449,6 +12458,7 @@
 					"$(PROJECT_DIR)/YuWa/Foundation/SDK/ShareSDK/Support/Required",
 					"$(PROJECT_DIR)/YuWa/Foundation/SDK/aliPay",
 					"$(PROJECT_DIR)/YuWa/Foundation/SDK",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YuWa/Foundation/Custom Category/VipxoxPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
