@@ -19,6 +19,8 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
+
+
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 
@@ -37,6 +39,8 @@
 
 #import "YWMessageNotificationViewController.h"
 
+#import "UMMobClick/MobClick.h"//crash 崩溃监控日志
+
 @interface AppDelegate ()<EMContactManagerDelegate,EMChatManagerDelegate,EMGroupManagerDelegate,EMClientDelegate,JPUSHRegisterDelegate,WXApiDelegate>
 
 @end
@@ -50,7 +54,8 @@
     
     [UserSession instance];
     [YWLocation shareLocation];
-    
+    //集成友盟crash日志记录
+    [self umengTrack];
 #pragma mark  --微信支付
     //向微信注册wxd930ea5d5a258f4f
     [WXApi registerApp:@"wxda48c07f355bc825" withDescription:@"demo 2.0"];
@@ -601,7 +606,14 @@ fetchCompletionHandler:
      return  [WXApi handleOpenURL:url delegate:[PCPayViewController sharedManager]];
     
 }
-
+- (void)umengTrack {
+    //    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    [MobClick setLogEnabled:YES];
+    UMConfigInstance.appKey = @"592f8adc45297d77e9001477";
+    UMConfigInstance.secret = @"secretstringaldfkals";
+    //    UMConfigInstance.eSType = E_UM_GAME;
+    [MobClick startWithConfigure:UMConfigInstance];
+}
 //    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingPrettyPrinted error:nil];
 //    // NSData转为NSString
 //    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];

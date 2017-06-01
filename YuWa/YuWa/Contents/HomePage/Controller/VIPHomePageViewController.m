@@ -72,6 +72,20 @@
     [self makeNaviBar];
     [self addTableVIew];
     [self setUpMJRefresh];
+
+//    Class cls = NSClassFromString(@"UMANUtil");
+//    SEL deviceIDSelector = @selector(openUDIDString);
+//    NSString *deviceID = nil;
+//    if(cls && [cls respondsToSelector:deviceIDSelector]){
+//        deviceID = [cls performSelector:deviceIDSelector];
+//    }
+//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:@{@"oid" : deviceID}
+//                                                       options:NSJSONWritingPrettyPrinted
+//                                                         error:nil];
+//    
+//    NSLog(@"!!!!!%@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+//    NSArray *arr = @[@1];
+//    NSNumber * a = arr[3];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -731,10 +745,10 @@
         //        CategoryDetaliViewController * categoryVC = [[CategoryDetaliViewController alloc]init];
         //        [self.navigationController pushViewController:categoryVC animated:YES];
     }else if (number !=1 ){
-        if (self.NewMainCategoryViewController == nil) {
+//        if (self.NewMainCategoryViewController == nil) {
              NewMainCategoryViewController*vc=[[NewMainCategoryViewController alloc]init];
             self.NewMainCategoryViewController = vc;
-        }
+//        }
         self.NewMainCategoryViewController.categoryTouch=number;
         [self.navigationController pushViewController:self.NewMainCategoryViewController animated:YES];
         
