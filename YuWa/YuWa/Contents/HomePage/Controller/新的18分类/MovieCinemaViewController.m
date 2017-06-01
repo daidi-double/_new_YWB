@@ -41,6 +41,7 @@
 @property (nonatomic,strong) NSMutableArray * filmListAry;//滑动部分电影数据
 @property (nonatomic,strong) NSMutableArray * filmShowAry;//播放场次电影
 @property (nonatomic,strong)CLGeocoder * geocoder;
+@property (nonatomic,assign) NSInteger index;//标记滚动部分是哪部电影
 @property (nonatomic,strong)NSMutableArray * otherTicketAry;//通兑票数组
 @end
 
@@ -50,7 +51,7 @@
     [super viewDidLoad];
     self.title = self.filmName;
     self.time = [JWTools currentTime2];
-
+    self.index = 0;
     [self requestHeaderData];
     
     [self requestFootData];
@@ -59,35 +60,7 @@
 
 }
 
-- (UITableView*)movieTableView{
-    if (!_movieTableView) {
-        _movieTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,  0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
-        _movieTableView.backgroundColor = [UIColor whiteColor];
-        _movieTableView.delegate = self;
-        _movieTableView.dataSource = self;
-        [_movieTableView registerNib:[UINib nibWithNibName:PLAYSHOWCELL bundle:nil] forCellReuseIdentifier:PLAYSHOWCELL];
-    }
-    return _movieTableView;
-}
-- (NSMutableArray*)filmListAry{
-    if (!_filmListAry) {
-        _filmListAry = [NSMutableArray array];
-    }
-    return _filmListAry;
-}
 
-- (NSMutableArray*)filmShowAry{
-    if (!_filmShowAry ) {
-        _filmShowAry = [NSMutableArray array];
-    }
-    return _filmShowAry;
-}
-- (NSMutableArray*)otherTicketAry{
-    if (!_otherTicketAry) {
-        _otherTicketAry = [NSMutableArray array];
-    }
-    return _otherTicketAry;
-}
 #pragma mark - tableviewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -207,7 +180,7 @@
         PlayTimeShowTableViewCell * cell = (PlayTimeShowTableViewCell*)[[sender superview]superview];
         NSIndexPath * path = [self.movieTableView indexPathForCell:cell];
         ChooseSeatController * chooseVC = [[ChooseSeatController alloc]init];
-        FilmListModel * model = self.filmListAry[path.row];
+        FilmListModel * model = self.filmListAry[_index];
         if (self.filmName == nil) {
             self.filmName = model.name;
         }
@@ -238,12 +211,14 @@
     [self.navigationController pushViewController:locationVC animated:YES];
   
 }
-- (void)filmName:(NSString *)filmName{
+- (void)filmName:(NSString *)filmName andIndex:(NSInteger)index andfilmCode:(NSString *)filmCode{
     self.filmName = filmName;
+    self.index = index;
+    self.title = filmName;
+    self.film_code = filmCode;
+    [self requestFootData];
 }
-- (void)ToVipDetaliPage{
-    MyLog(@"会员卡详情");
-}
+
 - (BOOL)judgeLogin{
     if (![UserSession instance].isLogin) {
         YWLoginViewController * vc = [[YWLoginViewController alloc]init];
@@ -327,7 +302,9 @@
     }];
     
 }
-
+- (void)ToVipDetaliPage{
+    
+}
 //- (void)getLocalSubName{
 //    CLLocation * location = [[CLLocation alloc]initWithLatitude:self.location.coordinate.latitude longitude:self.location.coordinate.longitude];
 //    [self.geocoder reverseGeocodeLocation: location completionHandler:^(NSArray *array, NSError *error) {
@@ -565,6 +542,36 @@
     VC.cinema_code = self.cinema_code;
     VC.cityCode = self.cityCode;
     [self.navigationController pushViewController:VC animated:YES];
+}
+
+- (UITableView*)movieTableView{
+    if (!_movieTableView) {
+        _movieTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,  0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
+        _movieTableView.backgroundColor = [UIColor whiteColor];
+        _movieTableView.delegate = self;
+        _movieTableView.dataSource = self;
+        [_movieTableView registerNib:[UINib nibWithNibName:PLAYSHOWCELL bundle:nil] forCellReuseIdentifier:PLAYSHOWCELL];
+    }
+    return _movieTableView;
+}
+- (NSMutableArray*)filmListAry{
+    if (!_filmListAry) {
+        _filmListAry = [NSMutableArray array];
+    }
+    return _filmListAry;
+}
+
+- (NSMutableArray*)filmShowAry{
+    if (!_filmShowAry ) {
+        _filmShowAry = [NSMutableArray array];
+    }
+    return _filmShowAry;
+}
+- (NSMutableArray*)otherTicketAry{
+    if (!_otherTicketAry) {
+        _otherTicketAry = [NSMutableArray array];
+    }
+    return _otherTicketAry;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

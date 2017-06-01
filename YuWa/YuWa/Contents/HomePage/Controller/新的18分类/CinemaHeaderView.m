@@ -188,7 +188,7 @@
    
     FilmListModel * filmModel = self.flimListAry[_index];
     _movieTitle.text = filmModel.name;
-    [self.delegate filmName:filmModel.name];
+    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
     _movieTitle.width = movieTitleSize.width;
     self.movieScore.text = [NSString stringWithFormat:@"%@分",filmModel.score];

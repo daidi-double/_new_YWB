@@ -70,7 +70,11 @@
             seatBtn.code = seatsModel.code;
             //表示可以购票
             if ([seatModel.st isEqualToString:@"1"]) {
-                [seatBtn setImage:[UIImage imageNamed:@"kexuan"] forState:UIControlStateNormal];//这里更改座位图标
+                if ([seatModel.type integerValue]== 2) {
+                   [seatBtn setImage:[UIImage imageNamed:@"loveseat"] forState:UIControlStateNormal];
+                }else{
+                   [seatBtn setImage:[UIImage imageNamed:@"kexuan"] forState:UIControlStateNormal];//这里更改座位图标
+                }
                 [seatBtn setImage:[UIImage imageNamed:@"xuanzhong"] forState:UIControlStateSelected];
                 seatBtn.seatIndex = seatIndex;
                 [self.allAvailableSeats setObject:seatBtn forKey:[@(seatIndex) stringValue]];

@@ -16,7 +16,7 @@
 - (void)ToCinemaDetaliPage;
 - (void)ToLocation;
 - (void)ToVipDetaliPage;
-- (void)filmName:(NSString *)filmName;
+- (void)filmName:(NSString *)filmName andIndex:(NSInteger)index andfilmCode:(NSString *)filmCode;
 @end
 
 @interface CinemaHeaderView : UIView

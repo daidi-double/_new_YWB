@@ -26,10 +26,7 @@
 @property (nonatomic,assign) CGFloat payMoney;//需要支付的金额
 @property (nonatomic,assign)BOOL is_useCoupon;
 @property (nonatomic,copy)NSString * coupon_id;
-@property (nonatomic, strong)NSTimer *timer;
-@property (nonatomic,assign)NSInteger second;
-@property (nonatomic,assign)NSInteger minute;
-@property (nonatomic,strong)UILabel * timerLabel;
+
 @property (nonatomic,assign) CGFloat couponMoney;//优惠券金额
 @property (nonatomic,strong) UILabel * useCouponLabel;
 @property (nonatomic,assign) BOOL is_cancel;//取消代理
@@ -43,67 +40,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    MyLog(@"----%@",self.dataAry);
+//    MyLog(@"----%@",self.dataAry);
     [self makeUI];
-    [self.navigationItem setHidesBackButton:YES];
+    
     [self showMessage:@"选座票购买后无法退换，请仔细核对购票信息"];
     self.title =@"支付订单";
     [self timeHeadle];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.timer setFireDate:[NSDate distantPast]];
+   
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.timer setFireDate:[NSDate distantFuture]];
-}
-- (void)popToPage{
-  
-   [self quitPayPage];
-
-}
-#pragma mark - 倒计时
-
-- (void)quitPayPage{
-    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您选择场次信息已过期或者支付超时，请重新选座购买" preferredStyle:UIAlertControllerStyleAlert];
-
-      [controller addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-          [self.navigationController popViewControllerAnimated:YES];
-      }]];
-    [self presentViewController:controller animated:YES completion:nil];
-
-}
-- (void)timeHeadle{
-    if (self.index == 0) {
-        self.timerLabel.text = @"支付订单";
-    }else{
-    self.second--;
-    if (self.second==-1) {
-        self.second=59;
-        self.minute--;
-        
-    }
     
-    self.timerLabel.text = [NSString stringWithFormat:@"支付订单 %ld:%ld",(long)self.minute,(long)self.second];
-    if (self.second==0 && self.minute==0 ) {
-        [self.timer invalidate];
-        self.timer = nil;
-        [self quitPayPage];
-    }
-    }
 }
 -(void)showMessage:(NSString *)message{
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"温馨提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        [controller addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [controller addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:controller animated:YES completion:nil];
+    
+}
+
+- (void)timeHeadle{
+    
+    self.title = @"支付订单";
 
 }
-- (void)makeUI{
-    
-    UIBarButtonItem * backBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"NaviBack"] style:UIBarButtonItemStylePlain target:self action:@selector(backAction)];
-    self.navigationItem.leftBarButtonItem = backBtn;
 
+- (void)makeUI{
     
     _payInforTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-50) style:UITableViewStyleGrouped];
     _payInforTableView.delegate = self;
@@ -114,12 +79,6 @@
     [_payInforTableView registerNib:[UINib nibWithNibName:MARKCELL00 bundle:nil] forCellReuseIdentifier:MARKCELL00];
     
     [self.view addSubview:_payInforTableView];
-    self.timerLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 100, kScreen_Width/2, 100)];
-    
-    self.timerLabel.textAlignment = NSTextAlignmentCenter;
-    self.second = 59;
-    self.minute = 14;
-    self.navigationItem.titleView = self.timerLabel;
     
     
     UIView * accountBGView = [[UIView alloc]initWithFrame:CGRectMake(0, _payInforTableView.bottom, kScreen_Width, 50)];
@@ -145,25 +104,6 @@
     [accountBGView addSubview:accountBtn];
     
     
-}
-//返回，释放座位
-- (void)backAction{
-    //没锁定座位就直接退出，锁定了座位就先释放座位，在退出
-    if (self.is_lockseat) {
-    
-    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"返回将取消您的订单,是否继续" preferredStyle:UIAlertControllerStyleAlert];
-    
-    [controller addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self releaseSeat];
-
-    }]];
-    [controller addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:controller animated:YES completion:nil];
-        
-    }else{
-        [self.navigationController popViewControllerAnimated:YES];
-        
-    }
 }
 
 //去结算，支付
@@ -338,14 +278,15 @@
         if ([data[@"errorCode"] integerValue] == 0) {
             //开启定时器
             self.index = 1;
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeHeadle) userInfo:nil repeats:YES];
+
             NSDictionary * dict = data[@"data"];
-            self.order_id = dict[@"order_code"];
+            self.order_id = dict[@"id"];
             self.is_lockseat = 1;
-            PCPayViewController * pcVC = [[PCPayViewController alloc]init];
+            PCPayViewController * pcVC = [PCPayViewController sharedManager];
             pcVC.blanceMoney = self.payMoney;
             pcVC.shop_ID = self.cinemaCode;
             pcVC.status = 1;
+            pcVC.orderCode = dict[@"order_code"];
             pcVC.order_id = [self.order_id floatValue];
             [self.navigationController pushViewController:pcVC animated:YES];
         }else{
@@ -354,21 +295,6 @@
     }];
 }
 
-//释放座位
-- (void)releaseSeat{
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CANCEL_RESEASESEAT];
-    NSString * orderID = [NSString stringWithFormat:@"%@",self.order_id];
-    NSDictionary * dict = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"orderCode":orderID,@"type":@"0"};
-    HttpManager * manager = [[HttpManager alloc]init];
-    [manager postDatasNoHudWithUrl:urlStr withParams:dict compliation:^(id data, NSError *error) {
-        MyLog(@"参数%@",dict);
-        MyLog(@"释放座位%@",data);
-        if ([data[@"errorCode"] integerValue] == 0) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        
-    }];
-}
 
 - (NSMutableArray *)dataAry{
     if (!_dataAry) {

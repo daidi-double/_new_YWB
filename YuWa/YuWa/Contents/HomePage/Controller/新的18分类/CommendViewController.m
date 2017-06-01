@@ -82,7 +82,10 @@
         
         ChooseMovieHeaderView * movieView = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.25f)];
         movieView.model = self.headerModel;
-        [movieView.posterImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.headerModel.poster]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        if (self.headerModel.image == nil) {
+            
+            [movieView.posterImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.headerModel.poster]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        }
         movieView.backgroundColor = [UIColor darkGrayColor];
         UITapGestureRecognizer * tapTouch = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(movieDetailAction)];
         tapTouch.delegate = self;

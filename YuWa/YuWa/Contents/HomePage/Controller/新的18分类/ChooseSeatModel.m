@@ -33,7 +33,12 @@
         model.columnId = ChooseSeatModel1.rowNum;
         model.seatNo = ChooseSeatModel1.code;
         model.st = ChooseSeatModel1.status.description;
+        model.type = ChooseSeatModel1.type;
+        if ([ChooseSeatModel1.type integerValue]== 2) {
+            model.st = @"LOVE";
+        }
         model.code = ChooseSeatModel1.code;
+
         if (![arrM containsObject:ChooseSeatModel1.colNum]) {
 
             //先判断是否是添加第一行，如果是，不运行下面代码

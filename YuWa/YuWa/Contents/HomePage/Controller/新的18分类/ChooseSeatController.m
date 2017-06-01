@@ -45,7 +45,6 @@
     self.title = @"选座";
     self.view.backgroundColor = [UIColor whiteColor];
     [self makeUI];
-    MyLog(@"渠道编码%@",self.channelshowcode);
     [self requestSeatinformation];
 
  
@@ -61,6 +60,10 @@
     [self.view addSubview:_seatTableView];
     [self.sureBtn setEnabled:NO];
     
+    if (self.channelshowcode == nil) {
+        self.channelshowcode = self.headerModel.channelshowcode;
+    }
+    MyLog(@"渠道编码%@",self.channelshowcode);
     
 }
 //更换场次
@@ -203,10 +206,10 @@
         NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"channelShowCode":self.channelshowcode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
         HttpManager * manager = [[HttpManager alloc]init];
         [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
-                // NSData转为NSString
-                NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-            MyLog(@"选座%@",jsonStr);
+//                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+//                // NSData转为NSString
+//                NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//            MyLog(@"选座%@",jsonStr);
             if ([data[@"errorCode"] integerValue] == 0) {
                 [self.seatModelAry removeAllObjects];
            self.seatsModelArray = [ChooseSeatModel ChooseSeatModelWithDic:data[@"data"]];

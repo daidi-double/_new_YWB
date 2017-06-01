@@ -43,9 +43,7 @@
     self.title = @"影片详情";
     [self.detailTableView registerNib:[UINib nibWithNibName:CinemaCell123 bundle:nil] forCellReuseIdentifier:CinemaCell123];
     
-    [self.detailTableView registerNib:[UINib nibWithNibName:COMMENTCELl111 bundle:nil] forCellReuseIdentifier:COMMENTCELl111];
-    
-    
+    [self.detailTableView registerNib:[UINib nibWithNibName:COMMENTCELl111 bundle:nil] forCellReuseIdentifier:COMMENTCELl111];    
 }
 - (void)setRJRefresh {
     

@@ -244,7 +244,7 @@
 - (void)cancelFirstObject:(UIGestureRecognizer*)tap{
     [tap.view removeFromSuperview];
     _isselected = 0;
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:1];
     [_movieTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
 }
 - (void)tapDetali{

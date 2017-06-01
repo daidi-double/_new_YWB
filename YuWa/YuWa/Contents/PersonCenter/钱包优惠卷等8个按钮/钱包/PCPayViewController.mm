@@ -38,6 +38,12 @@
 @property(nonatomic,strong)UITableView*tableView;
 @property(nonatomic,strong)UILabel*needPayLabel;  //需要支付的钱
 @property(nonatomic,strong)UISwitch*Myswitch;
+/* 电影支付 */
+@property (nonatomic, strong)NSTimer * cinemaTimer;
+@property (nonatomic,assign)NSInteger second;
+@property (nonatomic,assign)NSInteger minute;
+@property (nonatomic,strong)UILabel * timerLabel;
+
 
 @property(nonatomic,assign)CGFloat accountMoney;  //账户余额   这个吊接口
 @property(nonatomic,assign)BOOL isSelectedOn;  //选择了是否使用余额
@@ -52,11 +58,80 @@
         self.title=@"支付";
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:CELL3 bundle:nil] forCellReuseIdentifier:CELL3];
-    [self getAccountMoney];   //接口得到账户金额
+    [self getAccountMoney];//接口得到账户金额
+    
+    if (self.status == 1) {
+        [self.navigationItem setHidesBackButton:YES];
+
+    self.timerLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 100, kScreen_Width/2, 100)];
+    
+    self.timerLabel.textAlignment = NSTextAlignmentCenter;
+    self.second = 59;
+    self.minute = 14;
+    self.navigationItem.titleView = self.timerLabel;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeHeadle) userInfo:nil repeats:YES];
+    UIBarButtonItem * backBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"NaviBack"] style:UIBarButtonItemStylePlain target:self action:@selector(backAction)];
+        self.navigationItem.leftBarButtonItem = backBtn;
+
+    }
+    
+    
+}
+//返回，释放座位
+- (void)backAction{
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"返回将取消您的订单,是否继续" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [controller addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self releaseSeat];
+            
+        }]];
+        [controller addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:controller animated:YES completion:nil];
+        
+
+}
+
+- (void)timeHeadle{
+    self.second--;
+    if (self.second==-1) {
+        self.second=59;
+        self.minute--;
+        
+    }
+    
+    self.timerLabel.text = [NSString stringWithFormat:@"支付订单 %ld:%ld",(long)self.minute,(long)self.second];
+    if (self.second==0 && self.minute==0 ) {
+        [self.timer invalidate];
+        self.timer = nil;
+        [self quitPayPage];
+    }
+
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.timer setFireDate:[NSDate distantPast]];
     [self.tableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+#pragma mark - 倒计时
+
+- (void)quitPayPage{
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您选择场次信息已过期或者支付超时，请重新选座购买" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [controller addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }]];
+    [self presentViewController:controller animated:YES completion:nil];
+    
+}
+- (void)popToPage{
+    
+    [self quitPayPage];
+    
 }
 
 
@@ -602,8 +677,7 @@
 //查询选座票订单状态
 -(void)checkOrderStatus{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_ORDERSTATUS];
-    NSString * order_ids = [NSString stringWithFormat:@"%.0f",self.order_id];
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"orderCode":order_ids};
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"orderCode":self.orderCode};
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"参数%@",params);
@@ -898,10 +972,23 @@
         MyLog(@"清空购物车%@",data);
         NSInteger number = [data[@"errorCode"] integerValue];
         if (number == 0) {
-           
-                }else{
-           
-                }
+        }
+    }];
+}
+//释放座位
+- (void)releaseSeat{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CANCEL_RESEASESEAT];
+    
+    NSDictionary * dict = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"orderCode":self.orderCode,@"type":@"0"};
+    HttpManager * manager = [[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:dict compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",dict);
+        MyLog(@"释放座位%@",data);
+        if ([data[@"errorCode"] integerValue] == 0) {
+//            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
     }];
 }
 
@@ -948,6 +1035,8 @@
 }
 -(void)dealloc{
     [self.timer invalidate];
+    [self.cinemaTimer invalidate];
+    self.cinemaTimer = nil;
     self.timer = nil;
 }
 @end
