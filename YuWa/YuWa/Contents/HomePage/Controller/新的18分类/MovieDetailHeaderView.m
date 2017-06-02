@@ -31,6 +31,7 @@
     self.backgroundColor = [UIColor whiteColor];
     self.headerView.model = self.model;
 
+    
     [self.headerView.posterImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.poster]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.introduceLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, self.headerView.bottom + 15, kScreen_Width -30, self.height * 0.3f - 35.f)];
     self.introduceLabel.textColor = RGBCOLOR(160, 160, 160, 1);
