@@ -302,47 +302,47 @@ fetchCompletionHandler:
     completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
 }
 
-//- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
-//    
-//    NSDictionary * userInfo = response.notification.request.content.userInfo;
-//    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
-//    UNNotificationContent *content = request.content; // 收到推送的消息内容
-//    
-//    NSNumber *badge = content.badge;  // 推送消息的角标
-//    NSString *body = content.body;    // 推送消息体
-//    UNNotificationSound *sound = content.sound;  // 推送消息的声音
-//    NSString *subtitle = content.subtitle;  // 推送消息的副标题
-//    NSString *title = content.title;  // 推送消息的标题
-//    
-//    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-//        [JPUSHService handleRemoteNotification:userInfo];
-//        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
-//        [self saveJupshNotificationDicWithDic:userInfo];
-////        YWMessageNotificationViewController*vc=[[YWMessageNotificationViewController alloc]init];
-////        UINavigationController * Nav = [[UINavigationController alloc]initWithRootViewController:vc];//这里加导航栏是因为我跳转的页面带导航栏，如果跳转的页面不带导航，那这句话请省去。
-////        [self.window.rootViewController presentViewController:Nav animated:YES completion:nil];
-//        NSString * documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
-//        NSString * filePath1 = [NSString stringWithFormat:@"%@/isPush.plist",documentPath];
-//        NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithContentsOfFile:filePath1];
-//        if ([dic objectForKey:@"ispush"]) {
-//            //表示存在这个key，
-//            [dic setValue:@"1" forKey:@"ispush"];
-//        }else{
-//            [dic setValue:@"1" forKey:@"ispush"];
-//        }
-//        [dic writeToFile:filePath1 atomically:YES];
-//        
-//        VIPTabBarController *tabBar=[[VIPTabBarController alloc]init];
-//        self.window= [AppDelegate windowInitWithRootVC:tabBar];
-//        //发送通知。是远程推送的通知
-//        [[NSNotificationCenter defaultCenter]postNotificationName:@"didReceiveNotification" object:nil];
-//    }else {
-//        // 判断为本地通知
-//        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
-//    }
-//    
-//    completionHandler();  // 系统要求执行这个方法
-//}
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
+        [self saveJupshNotificationDicWithDic:userInfo];
+//        YWMessageNotificationViewController*vc=[[YWMessageNotificationViewController alloc]init];
+//        UINavigationController * Nav = [[UINavigationController alloc]initWithRootViewController:vc];//这里加导航栏是因为我跳转的页面带导航栏，如果跳转的页面不带导航，那这句话请省去。
+//        [self.window.rootViewController presentViewController:Nav animated:YES completion:nil];
+        NSString * documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)firstObject];
+        NSString * filePath1 = [documentPath stringByAppendingPathComponent:@"push.plist"];
+        NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithContentsOfFile:filePath1];
+        if ([dic objectForKey:@"ispush"]) {
+            //表示存在这个key，
+            [dic setValue:@"1" forKey:@"ispush"];
+        }else{
+            [dic setValue:@"1" forKey:@"ispush"];
+        }
+        [dic writeToFile:filePath1 atomically:YES];
+        
+        VIPTabBarController *tabBar=[[VIPTabBarController alloc]init];
+        self.window= [AppDelegate windowInitWithRootVC:tabBar];
+        //发送通知。是远程推送的通知
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"didReceiveNotification" object:nil];
+    }else {
+        // 判断为本地通知
+        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    
+    completionHandler();  // 系统要求执行这个方法
+}
 #endif
 // log NSSet with UTF8
 // if not ,log will be \Uxxx
