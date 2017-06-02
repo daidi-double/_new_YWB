@@ -89,7 +89,6 @@
 		AA0E29521E57EDD2008828C7 /* DetaliViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E29511E57EDD2008828C7 /* DetaliViewController.m */; };
 		AA0E29551E5814D9008828C7 /* LookAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E29541E5814D9008828C7 /* LookAllViewController.m */; };
 		AA14FB191E56855D00E330E7 /* ChooseMovieHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA14FB181E56855D00E330E7 /* ChooseMovieHeaderView.m */; };
-		AA14FB1B1E56994E00E330E7 /* headerline.png in Resources */ = {isa = PBXBuildFile; fileRef = AA14FB1A1E56994E00E330E7 /* headerline.png */; };
 		AA158F391EDE6D500017CC6F /* CinemaDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA158F381EDE6D500017CC6F /* CinemaDetailModel.m */; };
 		AA158F3C1EDE72A80017CC6F /* CinemaLabelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA158F3B1EDE72A80017CC6F /* CinemaLabelModel.m */; };
 		AA17A2CD1E824AC700B9E7B4 /* SignUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA17A2CC1E824AC700B9E7B4 /* SignUserCell.xib */; };
@@ -162,7 +161,6 @@
 		AA2B2C131E8D010A008CB3C6 /* YWWinnersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2B2C111E8D010A008CB3C6 /* YWWinnersCollectionViewCell.xib */; };
 		AA2B2C171E8D088F008CB3C6 /* WinnerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2B2C161E8D088F008CB3C6 /* WinnerModel.m */; };
 		AA2E6AD91E8169CF00A03DAA /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2E6AD81E8169CF00A03DAA /* ProgressView.m */; };
-		AA3009231E56E5BB0025B2A5 /* play1.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3009221E56E5BB0025B2A5 /* play1.png */; };
 		AA3009261E5725CE0025B2A5 /* CinemaTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3009251E5725CE0025B2A5 /* CinemaTimeCell.m */; };
 		AA3522B91EBC20ED00CA0E2B /* MyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3522B81EBC20ED00CA0E2B /* MyLabel.m */; };
 		AA3522BE1EBCB3E400CA0E2B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3522BD1EBCB3E400CA0E2B /* Accelerate.framework */; };
@@ -742,10 +740,6 @@
 		AA3AB53B1E5D38EF009BD8D9 /* MovieAddComment.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3AB53A1E5D38EF009BD8D9 /* MovieAddComment.m */; };
 		AA3AB53E1E5D3900009BD8D9 /* MovieAddComment1.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3AB53D1E5D3900009BD8D9 /* MovieAddComment1.xib */; };
 		AA3AB5431E5D6AF2009BD8D9 /* PlayMovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3AB5421E5D6AF2009BD8D9 /* PlayMovieCell.m */; };
-		AA3AB5461E5D82F6009BD8D9 /* yishou.imageset.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3AB5451E5D82F6009BD8D9 /* yishou.imageset.png */; };
-		AA3AB5481E5D8309009BD8D9 /* xuanzhong.imageset.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3AB5471E5D8309009BD8D9 /* xuanzhong.imageset.png */; };
-		AA3AB54A1E5D8323009BD8D9 /* kexuan.imageset.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3AB5491E5D8323009BD8D9 /* kexuan.imageset.png */; };
-		AA3AB54C1E5D833D009BD8D9 /* maoyan_logo.imageset.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3AB54B1E5D833D009BD8D9 /* maoyan_logo.imageset.png */; };
 		AA3B4DA41E553717008466C4 /* HotMovieScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3B4DA31E553717008466C4 /* HotMovieScrollView.m */; };
 		AA3B4DC51E55AA22008466C4 /* CinemaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3B4DC41E55AA22008466C4 /* CinemaCell.m */; };
 		AA3BD3B91E777B5D0024BECD /* aboutuslogo.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD3B81E777B5D0024BECD /* aboutuslogo.png */; };
@@ -772,7 +766,6 @@
 		AA3C40C41E8D59EF0052C732 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA3C40C21E8D59EF0052C732 /* AlipaySDK.bundle */; };
 		AA3C40C51E8D59EF0052C732 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3C40C31E8D59EF0052C732 /* AlipaySDK.framework */; };
 		AA3C40DC1E8DAFF50052C732 /* 消息.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3C40D01E8DAFF50052C732 /* 消息.jpg */; };
-		AA3C40DE1E8DAFF50052C732 /* 电影展示.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3C40D21E8DAFF50052C732 /* 电影展示.jpg */; };
 		AA3CA55B1E6015E6000D05FA /* LookDetaliViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA55A1E6015E6000D05FA /* LookDetaliViewController.m */; };
 		AA3CA5611E6058D3000D05FA /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA5601E6058D3000D05FA /* LocationViewController.m */; };
 		AA3CA5671E606F0B000D05FA /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3CA5661E606F0B000D05FA /* MapAnnotation.m */; };
@@ -883,7 +876,6 @@
 		AAF127F31E8B58CF00121621 /* PayManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF127F11E8B58CF00121621 /* PayManageViewController.xib */; };
 		AAF127F71E8B5C2A00121621 /* AgainSetPayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF127F51E8B5C2900121621 /* AgainSetPayPasswordViewController.m */; };
 		AAF127F81E8B5C2A00121621 /* AgainSetPayPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF127F61E8B5C2A00121621 /* AgainSetPayPasswordViewController.xib */; };
-		AAF127FE1E8B610100121621 /* 三点.png in Resources */ = {isa = PBXBuildFile; fileRef = AAF127FD1E8B610100121621 /* 三点.png */; };
 		AAF128021E8B72DC00121621 /* ForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF128001E8B72DC00121621 /* ForgetViewController.m */; };
 		AAF128031E8B72DC00121621 /* ForgetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF128011E8B72DC00121621 /* ForgetViewController.xib */; };
 		AAF128081E8B753F00121621 /* ForgetPayPasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF128061E8B753F00121621 /* ForgetPayPasswordTableViewCell.m */; };
@@ -1962,7 +1954,6 @@
 		AA0E29541E5814D9008828C7 /* LookAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookAllViewController.m; sourceTree = "<group>"; };
 		AA14FB171E56855D00E330E7 /* ChooseMovieHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseMovieHeaderView.h; sourceTree = "<group>"; };
 		AA14FB181E56855D00E330E7 /* ChooseMovieHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseMovieHeaderView.m; sourceTree = "<group>"; };
-		AA14FB1A1E56994E00E330E7 /* headerline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headerline.png; sourceTree = "<group>"; };
 		AA158F371EDE6D500017CC6F /* CinemaDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaDetailModel.h; sourceTree = "<group>"; };
 		AA158F381EDE6D500017CC6F /* CinemaDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaDetailModel.m; sourceTree = "<group>"; };
 		AA158F3A1EDE72A80017CC6F /* CinemaLabelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaLabelModel.h; sourceTree = "<group>"; };
@@ -2064,7 +2055,6 @@
 		AA2B2C161E8D088F008CB3C6 /* WinnerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinnerModel.m; sourceTree = "<group>"; };
 		AA2E6AD71E8169CF00A03DAA /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
 		AA2E6AD81E8169CF00A03DAA /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
-		AA3009221E56E5BB0025B2A5 /* play1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play1.png; sourceTree = "<group>"; };
 		AA3009241E5725CE0025B2A5 /* CinemaTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaTimeCell.h; sourceTree = "<group>"; };
 		AA3009251E5725CE0025B2A5 /* CinemaTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaTimeCell.m; sourceTree = "<group>"; };
 		AA3522B71EBC20ED00CA0E2B /* MyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLabel.h; sourceTree = "<group>"; };
@@ -2668,10 +2658,6 @@
 		AA3AB53D1E5D3900009BD8D9 /* MovieAddComment1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieAddComment1.xib; sourceTree = "<group>"; };
 		AA3AB5411E5D6AF2009BD8D9 /* PlayMovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayMovieCell.h; sourceTree = "<group>"; };
 		AA3AB5421E5D6AF2009BD8D9 /* PlayMovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayMovieCell.m; sourceTree = "<group>"; };
-		AA3AB5451E5D82F6009BD8D9 /* yishou.imageset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yishou.imageset.png; sourceTree = "<group>"; };
-		AA3AB5471E5D8309009BD8D9 /* xuanzhong.imageset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xuanzhong.imageset.png; sourceTree = "<group>"; };
-		AA3AB5491E5D8323009BD8D9 /* kexuan.imageset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kexuan.imageset.png; sourceTree = "<group>"; };
-		AA3AB54B1E5D833D009BD8D9 /* maoyan_logo.imageset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = maoyan_logo.imageset.png; sourceTree = "<group>"; };
 		AA3B4DA21E553717008466C4 /* HotMovieScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotMovieScrollView.h; sourceTree = "<group>"; };
 		AA3B4DA31E553717008466C4 /* HotMovieScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotMovieScrollView.m; sourceTree = "<group>"; };
 		AA3B4DC31E55AA22008466C4 /* CinemaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaCell.h; sourceTree = "<group>"; };
@@ -2713,7 +2699,6 @@
 		AA3C40C21E8D59EF0052C732 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		AA3C40C31E8D59EF0052C732 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		AA3C40D01E8DAFF50052C732 /* 消息.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "消息.jpg"; sourceTree = "<group>"; };
-		AA3C40D21E8DAFF50052C732 /* 电影展示.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "电影展示.jpg"; sourceTree = "<group>"; };
 		AA3CA5591E6015E6000D05FA /* LookDetaliViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookDetaliViewController.h; sourceTree = "<group>"; };
 		AA3CA55A1E6015E6000D05FA /* LookDetaliViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookDetaliViewController.m; sourceTree = "<group>"; };
 		AA3CA55F1E6058D3000D05FA /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
@@ -2878,7 +2863,6 @@
 		AAF127F41E8B5C2900121621 /* AgainSetPayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgainSetPayPasswordViewController.h; sourceTree = "<group>"; };
 		AAF127F51E8B5C2900121621 /* AgainSetPayPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgainSetPayPasswordViewController.m; sourceTree = "<group>"; };
 		AAF127F61E8B5C2A00121621 /* AgainSetPayPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgainSetPayPasswordViewController.xib; sourceTree = "<group>"; };
-		AAF127FD1E8B610100121621 /* 三点.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "三点.png"; sourceTree = "<group>"; };
 		AAF127FF1E8B72DC00121621 /* ForgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetViewController.h; sourceTree = "<group>"; };
 		AAF128001E8B72DC00121621 /* ForgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetViewController.m; sourceTree = "<group>"; };
 		AAF128011E8B72DC00121621 /* ForgetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetViewController.xib; sourceTree = "<group>"; };
@@ -5824,17 +5808,6 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
-		AA3AB5441E5D82DB009BD8D9 /* 电影选座 */ = {
-			isa = PBXGroup;
-			children = (
-				AA3AB54B1E5D833D009BD8D9 /* maoyan_logo.imageset.png */,
-				AA3AB5491E5D8323009BD8D9 /* kexuan.imageset.png */,
-				AA3AB5471E5D8309009BD8D9 /* xuanzhong.imageset.png */,
-				AA3AB5451E5D82F6009BD8D9 /* yishou.imageset.png */,
-			);
-			name = "电影选座";
-			sourceTree = "<group>";
-		};
 		AA3B4DAB1E554871008466C4 /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -5970,7 +5943,6 @@
 			isa = PBXGroup;
 			children = (
 				AA3C40D01E8DAFF50052C732 /* 消息.jpg */,
-				AA3C40D21E8DAFF50052C732 /* 电影展示.jpg */,
 			);
 			path = "展示图片";
 			sourceTree = "<group>";
@@ -6027,8 +5999,6 @@
 			isa = PBXGroup;
 			children = (
 				AAF628ED1E5B120D000FF976 /* 横条.png */,
-				AA3009221E56E5BB0025B2A5 /* play1.png */,
-				AA14FB1A1E56994E00E330E7 /* headerline.png */,
 				AA466C7C1E53EA1F009E9F98 /* gogogo1.png */,
 				AA466C7D1E53EA1F009E9F98 /* gogogo2.png */,
 			);
@@ -10213,7 +10183,6 @@
 				AAA4595C1E7941F300396AE5 /* 地图 */,
 				AAF80CEF1E67E41C0000C4BC /* 扫描 */,
 				AA2DC50D1E66619000CAD9BF /* 技能界面 */,
-				AA3AB5441E5D82DB009BD8D9 /* 电影选座 */,
 				AA466C7B1E53E9F5009E9F98 /* 商家入驻 */,
 				C135A0F71DDE020F002B78A5 /* 新波浪 */,
 				C1F7BEED1DB1CA0700CCAF96 /* menuData.plist */,
@@ -10232,7 +10201,6 @@
 				C12315581DE6FF0E00B9D0FE /* 商务会员image */,
 				C1E5B7541DE41A7E00EB1F85 /* otherPersonImage.png */,
 				C135A0E31DDCAC86002B78A5 /* 个人中心icon */,
-				AAF127FD1E8B610100121621 /* 三点.png */,
 				AA3BD3B81E777B5D0024BECD /* aboutuslogo.png */,
 				AAC86F701E76E93300F94C84 /* app_logo@2x.png */,
 				C135A17C1DDEF3BC002B78A5 /* addImage.png */,
@@ -10643,7 +10611,6 @@
 				B38B2F791D8FC8CD004D5256 /* JWTagCollectionViewCell.xib in Resources */,
 				C1E5B7741DE4626900EB1F85 /* seoected.png in Resources */,
 				25B3C5D01ECD8E4000674F20 /* 9.png in Resources */,
-				AA3AB5481E5D8309009BD8D9 /* xuanzhong.imageset.png in Resources */,
 				C1F7BDB71DB1C94500CCAF96 /* inputNumberCell.xib in Resources */,
 				AA3544A71E9DF23900A2EC73 /* 4baobaoLVUP9@2x.jpg in Resources */,
 				AA3543E21E9DF23800A2EC73 /* 1baobaoLVUP48@2x.jpg in Resources */,
@@ -10684,7 +10651,6 @@
 				C135A0F21DDCAC86002B78A5 /* home_07.png in Resources */,
 				C1E5B75D1DE454C200EB1F85 /* ScheduleTableViewCell.xib in Resources */,
 				C1F7BF5E1DB1CA0700CCAF96 /* whiteChoose.jpg in Resources */,
-				AA3AB5461E5D82F6009BD8D9 /* yishou.imageset.png in Resources */,
 				AA3545631E9DF23A00A2EC73 /* 3baobaoBG19@2x.jpg in Resources */,
 				AA3545491E9DF23A00A2EC73 /* 2baobaoBG4@2x.jpg in Resources */,
 				AA3543B91E9DF23800A2EC73 /* 1baobaoLVUP10@2x.jpg in Resources */,
@@ -11096,7 +11062,6 @@
 				AA377B7C1EC6E0C000E81A88 /* MovieDetailViewController.xib in Resources */,
 				AA35454B1E9DF23A00A2EC73 /* 2baobaoBG51@2x.jpg in Resources */,
 				AA3543F51E9DF23800A2EC73 /* 2baobaoLVUP10@2x.jpg in Resources */,
-				AAF127FE1E8B610100121621 /* 三点.png in Resources */,
 				AA3545C01E9DF23A00A2EC73 /* 4baobaoBG49@2x.jpg in Resources */,
 				AA3543FA1E9DF23800A2EC73 /* 2baobaoLVUP15@2x.jpg in Resources */,
 				C1F7BF451DB1CA0700CCAF96 /* back@2x.png in Resources */,
@@ -11199,7 +11164,6 @@
 				AA3545B71E9DF23A00A2EC73 /* 4baobaoBG40@2x.jpg in Resources */,
 				AA3543C41E9DF23800A2EC73 /* 1baobaoLVUP20@2x.jpg in Resources */,
 				C135A14E1DDE020F002B78A5 /* 波浪个人_00032.png in Resources */,
-				AA3AB54A1E5D8323009BD8D9 /* kexuan.imageset.png in Resources */,
 				C135A1601DDE020F002B78A5 /* 波浪个人_00049.png in Resources */,
 				AA3545A61E9DF23A00A2EC73 /* 4baobaoBG25@2x.jpg in Resources */,
 				AA35451C1E9DF23900A2EC73 /* 1baobaoBG9@2x.jpg in Resources */,
@@ -11225,7 +11189,6 @@
 				C135A14D1DDE020F002B78A5 /* 波浪个人_00031.png in Resources */,
 				25B3C5CC1ECD8E4000674F20 /* 5.png in Resources */,
 				AA3544601E9DF23800A2EC73 /* 3baobaoLVUP53@2x.jpg in Resources */,
-				AA14FB1B1E56994E00E330E7 /* headerline.png in Resources */,
 				AA3544371E9DF23800A2EC73 /* 3baobaoLVUP16@2x.jpg in Resources */,
 				AA3544671E9DF23800A2EC73 /* 3baobaoLVUP5@2x.jpg in Resources */,
 				AA3545211E9DF23900A2EC73 /* 2baobaoBG13@2x.jpg in Resources */,
@@ -11324,7 +11287,6 @@
 				AA3544651E9DF23800A2EC73 /* 3baobaoLVUP58@2x.jpg in Resources */,
 				AA3544D11E9DF23900A2EC73 /* 0baobaoBG47@2x.jpg in Resources */,
 				B38B2E711D8FC3F3004D5256 /* YWLoginViewController.xib in Resources */,
-				AA3C40DE1E8DAFF50052C732 /* 电影展示.jpg in Resources */,
 				C1F7BDAA1DB1C94500CCAF96 /* ShowShoppingTableViewCell.xib in Resources */,
 				B3D219141DB0985100D661F5 /* ShareSDK.bundle in Resources */,
 				C13019E61DB20B2400E24C88 /* 运动健身.png in Resources */,
@@ -11364,7 +11326,6 @@
 				AA3545301E9DF23900A2EC73 /* 2baobaoBG27@2x.jpg in Resources */,
 				B3D2190F1DB0985100D661F5 /* WeiboSDK.bundle in Resources */,
 				AA3543D61E9DF23800A2EC73 /* 1baobaoLVUP37@2x.jpg in Resources */,
-				AA3AB54C1E5D833D009BD8D9 /* maoyan_logo.imageset.png in Resources */,
 				AA17A2CD1E824AC700B9E7B4 /* SignUserCell.xib in Resources */,
 				AA3544B01E9DF23900A2EC73 /* 0baobaoBG17@2x.jpg in Resources */,
 				AA35441A1E9DF23800A2EC73 /* 2baobaoLVUP44@2x.jpg in Resources */,
@@ -11393,7 +11354,6 @@
 				C1214C1C1DED468500FFC63C /* rightToTo.png in Resources */,
 				B3192AD41D9257AA00FD6578 /* RBIMGToolsCollectionViewCell.xib in Resources */,
 				C135A16A1DDE020F002B78A5 /* 波浪个人_00058.png in Resources */,
-				AA3009231E56E5BB0025B2A5 /* play1.png in Resources */,
 				C135A17D1DDEF3BC002B78A5 /* addImage.png in Resources */,
 				AA2B2C131E8D010A008CB3C6 /* YWWinnersCollectionViewCell.xib in Resources */,
 				AA2B2BFB1E8CB57B008CB3C6 /* BaobaoSkillViewController.xib in Resources */,

@@ -68,7 +68,7 @@
     _titleView = [[customBtn alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width/2, 44)];
     [_titleView setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _titleView.titleLbl.text = @"收支明细";
-    _titleView.downImageView.image = [UIImage imageNamed:@"收支明细标题"];
+    _titleView.downImageView.image = [UIImage imageNamed:@"down"];
     [_titleView addTarget:self action:@selector(chooseMethod:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = _titleView;
     
@@ -86,7 +86,7 @@
     WEAKSELF;
     _btnView.titleBlock = ^(NSInteger row,NSString * title){
         weakSelf.titleView.titleLbl.text = title;
-        weakSelf.titleView.downImageView.image = [UIImage imageNamed:@"收支明细标题"];
+        weakSelf.titleView.downImageView.image = [UIImage imageNamed:@"down"];
         sender.selected = !sender.selected;
         weakSelf.btnView.hidden = YES;
        weakSelf.bgView.hidden = YES;
@@ -169,7 +169,7 @@
     headerView * headerView = [[[NSBundle mainBundle]loadNibNamed:@"headerView" owner:nil options:nil]lastObject ];
     headerView.backgroundColor = RGBCOLOR(246, 246, 245, 1);
     NSNumber * nub = self.sectionData[section];
-    NSArray *income =  self.zhichuData.firstObject;
+    NSArray * income = self.zhichuData.firstObject;
     NSArray * pay = self.zhichuData.lastObject;
     NSNumber * incomeStr = income[section];
     NSString * str = incomeStr.description;
@@ -177,8 +177,24 @@
     
     NSNumber * payStr = pay[section];
     NSString * payStr2 = payStr.description;
-    
     headerView.pay = payStr2;
+    if (section == 0) {//判断下，当前第一区的月份是否与当前月份匹配，不匹配说明是上个月的，本月还没收支，所以赋值从第二个开始
+        if (nub != [NSNumber numberWithInteger:[self getYearOrMonth:@"month"]]) {
+            incomeStr = income[section +1];
+            str = incomeStr.description;
+            headerView.income = str;
+
+            payStr = pay[section+1];
+            payStr2 = payStr.description;
+            headerView.pay = payStr2;
+        }
+    }else if (section == 5){//给予一个值，避免翻页到当前出现闪退
+
+        headerView.income = @"0";
+       
+        headerView.pay = @"0";
+    }
+
     if (nub == [NSNumber numberWithInteger:[self getYearOrMonth:@"month"]]) {
             headerView.month.text = [NSString stringWithFormat:@"本月"];
         
@@ -364,6 +380,7 @@
     
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",params);
         MyLog(@"data = %@",data);
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
@@ -469,11 +486,11 @@
     NSDate *date = [NSDate date];
     NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     if ([yearOrMonth isEqualToString:@"year"]) {
-        NSLog(@"Year: %ld", [calendar component:NSCalendarUnitYear fromDate:date]);
+//        NSLog(@"Year: %ld", [calendar component:NSCalendarUnitYear fromDate:date]);
         return  [calendar component:NSCalendarUnitYear fromDate:date];
     }
     if ([yearOrMonth isEqualToString:@"month"]) {
-        NSLog(@"Year: %ld", [calendar component:NSCalendarUnitYear fromDate:date]);
+//        NSLog(@"Year: %ld", [calendar component:NSCalendarUnitYear fromDate:date]);
         return  [calendar component:NSCalendarUnitMonth fromDate:date];
     }
     return 0;

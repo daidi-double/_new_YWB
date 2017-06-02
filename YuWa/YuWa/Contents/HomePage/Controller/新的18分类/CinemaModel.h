@@ -35,5 +35,5 @@
 @property (nonatomic,copy)NSString * film_code;
 @property (nonatomic,copy)NSString * film_end_time;
 @property (nonatomic,copy)NSString * address;
-
+@property (nonatomic,copy)NSString * code;//影院编码，选择影院界面
 @end

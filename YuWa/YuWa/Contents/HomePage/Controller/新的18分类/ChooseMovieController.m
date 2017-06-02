@@ -106,7 +106,7 @@
 
     MovieCinemaViewController * MCinemaVC = [[MovieCinemaViewController alloc]init];
     CinemaModel * models = self.movieDataAry[indexPath.row];
-    MCinemaVC.cinema_code = self.cinemaModel.cinema_code;
+    MCinemaVC.cinema_code = self.cinemaModel.code;
     MCinemaVC.film_code = self.model.code;
     MCinemaVC.filmName = self.filmName;
     if ([models.goodstype integerValue] !=1) {
