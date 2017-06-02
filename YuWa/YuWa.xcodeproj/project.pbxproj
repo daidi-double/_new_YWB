@@ -12,6 +12,7 @@
 		2514AA5A1EB091B200E3DF30 /* ic_right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2514AA591EB091B100E3DF30 /* ic_right_arrow.png */; };
 		251522C91EA9F9A600BA4FF9 /* detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 251522C81EA9F9A600BA4FF9 /* detail.storyboard */; };
 		251522CC1EA9FA1400BA4FF9 /* YWdetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 251522CB1EA9FA1400BA4FF9 /* YWdetailViewController.m */; };
+		251DB3B11EE0FAD4008668E2 /* pushData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 251DB3B01EE0FAD4008668E2 /* pushData.plist */; };
 		2531B4821EA4BF33001B240F /* remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2531B47E1EA4BF33001B240F /* remove@2x.png */; };
 		2531B4831EA4BF33001B240F /* remove@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2531B47F1EA4BF33001B240F /* remove@3x.png */; };
 		2531B4841EA4BF33001B240F /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2531B4801EA4BF33001B240F /* add@2x.png */; };
@@ -1871,6 +1872,7 @@
 		251522C81EA9F9A600BA4FF9 /* detail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = detail.storyboard; sourceTree = "<group>"; };
 		251522CA1EA9FA1400BA4FF9 /* YWdetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailViewController.h; sourceTree = "<group>"; };
 		251522CB1EA9FA1400BA4FF9 /* YWdetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailViewController.m; sourceTree = "<group>"; };
+		251DB3B01EE0FAD4008668E2 /* pushData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pushData.plist; sourceTree = "<group>"; };
 		2531B47E1EA4BF33001B240F /* remove@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remove@2x.png"; sourceTree = "<group>"; };
 		2531B47F1EA4BF33001B240F /* remove@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remove@3x.png"; sourceTree = "<group>"; };
 		2531B4801EA4BF33001B240F /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
@@ -8173,9 +8175,10 @@
 				AA29FFFA1E78EFC100113FFF /* NSObject+MapService.h */,
 				AA29FFFB1E78EFC100113FFF /* NSObject+MapService.m */,
 				B38B2DDC1D8FACD8004D5256 /* Assets.xcassets */,
-				B38B2DDD1D8FACD8004D5256 /* LaunchScreen.storyboard */,
 				B38B2DDF1D8FACD8004D5256 /* Info.plist */,
 				B38B2DE01D8FACD8004D5256 /* main.m */,
+				251DB3B01EE0FAD4008668E2 /* pushData.plist */,
+				B38B2DDD1D8FACD8004D5256 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting File";
 			sourceTree = "<group>";
@@ -10863,6 +10866,7 @@
 				AA3545961E9DF23A00A2EC73 /* 4baobaoBG10@2x.jpg in Resources */,
 				AA35455C1E9DF23A00A2EC73 /* 3baobaoBG12@2x.jpg in Resources */,
 				B38B2E621D8FACD8004D5256 /* Info.plist in Resources */,
+				251DB3B11EE0FAD4008668E2 /* pushData.plist in Resources */,
 				AA3545511E9DF23A00A2EC73 /* 2baobaoBG57@2x.jpg in Resources */,
 				AAF127F31E8B58CF00121621 /* PayManageViewController.xib in Resources */,
 				AA3545741E9DF23A00A2EC73 /* 3baobaoBG34@2x.jpg in Resources */,
