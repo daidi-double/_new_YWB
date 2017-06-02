@@ -103,8 +103,11 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        self.headerView.model = self.cinemaDetailModel;
-        return self.headerView;
+        CGFloat height = [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
+        _headerView = [[MovieDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, height)];
+        _headerView.delegate =self;
+        _headerView.model = self.cinemaDetailModel;
+        return _headerView;
     }
     return nil;
 }
@@ -178,14 +181,14 @@
     commendVC.headerModel = self.cinemaDetailModel;
     [self.navigationController pushViewController:commendVC animated:YES];
 }
-- (MovieDetailHeaderView*)headerView{
-    if (!_headerView) {
-        CGFloat height = [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
-        _headerView = [[MovieDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, height)];
-        _headerView.delegate =self;
-    }
-    return _headerView;
-}
+//- (MovieDetailHeaderView*)headerView{
+//    if (!_headerView) {
+//        CGFloat height = [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
+//        _headerView = [[MovieDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, height)];
+//        _headerView.delegate =self;
+//    }
+//    return _headerView;
+//}
 
 - (NSMutableArray *)commentAry{
     if (!_commentAry) {

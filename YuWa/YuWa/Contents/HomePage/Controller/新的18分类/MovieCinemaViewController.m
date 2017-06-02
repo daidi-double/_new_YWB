@@ -126,7 +126,7 @@
             self.filmName = model.name;
         }
         chooseSeat.filmName = self.filmName;
-         MyLog(@"渠道编码2 = %@",showModel.channelshowcode);
+         MyLog(@"渠道编码2 = %@",showModel.channelshowcode);//1710490158461
         [self.navigationController pushViewController:chooseSeat animated:YES];
     }
 }
@@ -227,9 +227,7 @@
 #pragma mark -- http
 //头部视图数据
 - (void)requestHeaderData{
-//
-//    self.cinema_code = @"01010071";
-    
+
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAHEADER];
 
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code};

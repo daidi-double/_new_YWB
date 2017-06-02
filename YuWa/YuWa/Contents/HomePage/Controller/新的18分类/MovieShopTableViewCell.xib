@@ -105,8 +105,8 @@
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <inset key="titleEdgeInsets" minX="-15" minY="20" maxX="15" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="15" minY="-15" maxX="0.0" maxY="15"/>
-                        <state key="normal" title="导航" image="导航">
-                            <color key="titleColor" red="0.28235294119999998" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" title="导航" image="home_locate.png">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
                             <action selector="navBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="GZd-we-ac9"/>
@@ -169,6 +169,6 @@
     </objects>
     <resources>
         <image name="dianhua" width="12" height="19"/>
-        <image name="导航" width="16" height="20"/>
+        <image name="home_locate.png" width="32" height="32"/>
     </resources>
 </document>

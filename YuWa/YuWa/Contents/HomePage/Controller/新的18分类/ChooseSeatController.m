@@ -204,8 +204,11 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CHOOSESEATS];
         NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"channelShowCode":self.channelshowcode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
+        
         HttpManager * manager = [[HttpManager alloc]init];
         [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+            MyLog(@"参数%@",pragrams);
+            MyLog(@"场次数据%@",data);
 //                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
 //                // NSData转为NSString
 //                NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -232,13 +235,14 @@
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
     NSIndexPath *indexPathT=[NSIndexPath indexPathForRow:3 inSection:0];
     selectionView = [[XZSeatSelectionView alloc]initWithFrame:CGRectMake(0, 0,kScreen_Width, kScreen_Height * 0.6f) SeatsArray:seatsModelArray HallName:self.hall_name seatBtnActionBlock:^(NSMutableArray *selecetedSeats, NSMutableDictionary *allAvailableSeats, NSMutableArray *cancelAry, NSString *errorStr) {
-//        NSLog(@"=====%zd个选中按钮===========%zd个可选座位==========errorStr====%@=========",selecetedSeats.count,allAvailableSeats.count,errorStr);
+
         UILabel * selectedSeat;
         [seatNumAry removeAllObjects];
 
         if (errorStr) {
             //错误信息
-            [self showMessage:errorStr];
+            [JRToast showWithText:errorStr];
+           
             
         }else{
             //储存选好的座位及全部可选座位
@@ -305,6 +309,7 @@
         }
 
     }];
+
     [_HUD hide:YES];
     [_seatTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,indexPathT,nil] withRowAnimation:UITableViewRowAnimationFade];
 

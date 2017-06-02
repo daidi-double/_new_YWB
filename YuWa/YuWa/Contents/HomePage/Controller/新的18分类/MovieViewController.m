@@ -144,7 +144,11 @@
         
         self.timer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(timer:) userInfo:nil repeats:YES];
     }
-    
+        if (self.hotMovieSAry.count>0) {
+            [self.timer setFireDate:[NSDate distantPast]];
+        }else{
+            [self.timer setFireDate:[NSDate distantFuture]];
+        }
     _page = moviePage;
     
     

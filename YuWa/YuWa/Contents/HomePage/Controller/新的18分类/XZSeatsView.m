@@ -49,7 +49,7 @@
         self.seatBtnWidth = seatBtnW;
         self.seatBtnHeight = seatBtnH;
         self.seatViewWidth = seatViewW;
-        self.seatViewHeight = [seatsArray count] * (seatBtnH + 4);
+        self.seatViewHeight = [seatsArray count] * (seatBtnH +1);
         //初始化座位
         [self initSeatBtns:seatsArray];
     }
@@ -99,7 +99,7 @@
             XZSeatButton *seatBtn = (XZSeatButton *)view;
             NSInteger Col = [seatBtn.seatsmodel.columns indexOfObject:seatBtn.seatmodel];//座位列
             NSInteger Row = [seatBtn.seatsmodel.rowNum integerValue] - 1;//座位行
-            seatBtn.frame = CGRectMake(Col * (self.seatBtnHeight+2)-Col,Row * (self.seatBtnHeight+4), self.seatBtnWidth, self.seatBtnHeight);
+            seatBtn.frame = CGRectMake(Col * (self.seatBtnHeight+2)-Col,Row * (self.seatBtnHeight+1), self.seatBtnWidth, self.seatBtnHeight);
         }
     }
     

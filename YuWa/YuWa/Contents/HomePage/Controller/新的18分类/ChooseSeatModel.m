@@ -30,7 +30,7 @@
 //        [arrM addObject:model];
         //先找出一排当中的每一个座位model
         XZSeatModel * model = [[XZSeatModel alloc ]init];
-        model.columnId = ChooseSeatModel1.rowNum;
+        model.columnId = ChooseSeatModel1.colNum;
         model.seatNo = ChooseSeatModel1.code;
         model.st = ChooseSeatModel1.status.description;
         model.type = ChooseSeatModel1.type;
@@ -52,7 +52,7 @@
                 //清空一行座位model  的数据
                 [seatModelAry removeAllObjects];
             }
-            //表示不包含，则添加  同事把一行座位清空
+            //表示不包含，则添加  同时把一行座位清空
             [arrM addObject:ChooseSeatModel1.colNum];
             //在添加下一行的数据
             [seatModelAry addObject:model];
