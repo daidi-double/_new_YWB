@@ -53,8 +53,6 @@
     self.time = [JWTools currentTime2];
     self.index = 0;
     [self requestHeaderData];
-    
-    [self requestFootData];
 
     [self.view addSubview:self.movieTableView];
 
@@ -229,10 +227,11 @@
 #pragma mark -- http
 //头部视图数据
 - (void)requestHeaderData{
-
-    self.cinema_code = @"01010071";
+//
+//    self.cinema_code = @"01010071";
     
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAHEADER];
+
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
@@ -255,8 +254,12 @@
 
                     FilmListModel * filmModel = [FilmListModel yy_modelWithDictionary:ary[i]];
                     [self.filmListAry addObject:filmModel];
+                if (i == 0) {
+                    
+                    self.film_code = filmModel.code;
+                    [self requestFootData];
+                }
                }
-           
             }
             
             
@@ -270,9 +273,9 @@
 
 - (void)requestFootData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAFOOT];
-    
-    self.cinema_code = @"01010071";
-    self.film_code = @"001103332016";
+//    
+//    self.cinema_code = @"01010071";
+    self.film_code = @"";
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code,@"film_code":self.film_code,@"time":self.time};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {

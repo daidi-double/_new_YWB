@@ -31,9 +31,21 @@
     [self.posterImageView addSubview:self.playBtn];
     self.title.text = self.model.name;
     self.daoyanLabel.text = [NSString stringWithFormat:@"导演:%@",self.model.director];
+    if (self.model.director== nil) {
+        self.daoyanLabel.text = @"导演:";
+    }
     self.performerLabel.text = [NSString stringWithFormat:@"主演:%@",self.model.cast];
+    if (self.model.cast== nil) {
+        self.performerLabel.text = @"主演:";
+    }
     self.categoryLabel.text = [NSString stringWithFormat:@"类型:%@",self.model.type];
+    if (self.model.type== nil) {
+        self.categoryLabel.text = @"类型:";
+    }
     self.countryAndTime.text = [NSString stringWithFormat:@"地区:%@",self.model.country];
+    if (self.model.country== nil) {
+        self.countryAndTime.text = @"地区:";
+    }
     self.scoreLabel.text = self.model.score;
     [self addSubview:self.gradeBtn];
     [self addSubview:self.rightImageView];

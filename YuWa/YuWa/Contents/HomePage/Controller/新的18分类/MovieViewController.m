@@ -65,6 +65,7 @@
     [super viewDidLoad];
 
     self.title = @"电影";
+    self.cityCode = @"350500";//目前只使用泉州地区编码
 
     self.pagen = 10;
     self.pages = 0;
@@ -209,7 +210,19 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     CinemaModel * model = self.theaterNameAry[indexPath.row];
-    [self judgeIsContentOtherTicket:model.code];//修改
+    
+    MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
+    movieVC.cinema_code = model.code;
+    if ([model.goodstype integerValue] != 1) {
+        movieVC.status = 1;
+        
+    }else{
+        
+        movieVC.status = 0;
+        
+    }
+    [self.navigationController pushViewController:movieVC animated:YES];
+//    [self judgeIsContentOtherTicket:model.code andFilmCode:model.film_code];//修改
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section != 0) {
@@ -276,7 +289,7 @@
 //轮播图
 - (void)requestBannerData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOMEPAGE];
-//    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token,@"device_id":[JWTools getUUID]};
+
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:nil compliation:^(id data, NSError *error) {
         MyLog(@"电影轮播图%@",data);
@@ -320,11 +333,8 @@
 }
 
 //判断是否含有通兑票
-- (void)judgeIsContentOtherTicket:(NSString*)cinema_code{
+- (void)judgeIsContentOtherTicket:(NSString*)cinema_code andFilmCode:(NSString*)filmCode{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_JUDGECONTENTOTHERTICKET];
-    
-    self.cityCode = @"110100";
-    cinema_code = @"01010071";
     NSDictionary * pragrams = @{@"cityNo":self.cityCode,@"cinemaNo":cinema_code};
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
@@ -336,21 +346,7 @@
                 [self.otherTicketAry addObject:model];
                 
             }
-            
-            if (self.otherTicketAry.count <= 0) {
-                MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
-                
-                movieVC.status = 0;
-                
-                [self.navigationController pushViewController:movieVC animated:YES];
 
-            }else{
-                MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
-                
-                movieVC.status = 1;
-                
-                [self.navigationController pushViewController:movieVC animated:YES];
-            }
         }else{
             
         }
@@ -361,8 +357,6 @@
 //获取地区编码
 - (void)getlocatCityCode{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CITYCODE];
-    
-    self.cityCode = @"110000";
     NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type};
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
@@ -384,8 +378,6 @@
 //获取首页影院列表
 - (void)getHomePageCinemaList{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_HOME_CINEMALIST];
-    
-    self.cityCode = @"110100";
     NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type,@"device_id":[JWTools getUUID],@"typeList":self.typeList,@"pages":@(self.pages),@"pagen":@(self.pagen),@"coordinatex":self.coordinatex,@"coordinatey":self.coordinatey};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([UserSession instance].isLogin) {
@@ -484,6 +476,7 @@
         tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, hight) andTag:tag] ;
     }
     tableViewBG.delegate = self;
+    tableViewBG.cityCode = self.cityCode;
     tableViewBG.backgroundColor = [UIColor whiteColor];
 
     __weak typeof(markBtn)weakBtn = markBtn;

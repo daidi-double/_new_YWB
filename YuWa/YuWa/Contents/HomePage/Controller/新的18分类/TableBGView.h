@@ -14,6 +14,7 @@
 @end
 @interface TableBGView : UIView
 @property (nonatomic,assign) NSInteger staus;
+@property (nonatomic,copy)NSString * cityCode;
 @property (nonatomic,copy) void (^titleBlock)(NSString * title,NSString * cityCode);
 @property (nonatomic,copy) void (^titleBlockT)(NSString * title,NSString * listType);
 @property (nonatomic,assign)id<TableBGViewDelegate>delegate;

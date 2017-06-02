@@ -47,7 +47,6 @@
     }
 }
 - (void)touchToDetail:(UITapGestureRecognizer*)tap{
-    NSLog(@"tap.view.tag=%ld",tap.view.tag);
     BannerModel * model = self.dataArr[tap.view.tag-100];
     [self.HotDelegate pushToDetailPage:model];
 }

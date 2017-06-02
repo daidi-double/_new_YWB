@@ -216,8 +216,7 @@
 - (void)requestMovieData{
     
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAANDBUYTICKET];
-    self.filmCode = @"001103332016";
-    
+
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"coordinatex":self.coordinatex,@"coordinatey":self.coordinatey};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
@@ -246,7 +245,6 @@
 //获取影院数据
 - (void)requestCinemaData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMANDDATE];
-    self.filmCode = @"001103332016";
     NSString * pagesStr = [NSString stringWithFormat:@"%ld",self.pages];
     NSString * pagenStr = [NSString stringWithFormat:@"%ld",self.pagen];
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"time":self.time,@"pages":pagesStr,@"pagen":pagenStr,@"coordinatex":self.coordinatex,@"coordinatey":self.coordinatey};
@@ -364,33 +362,7 @@
         line.backgroundColor = RGBCOLOR(240, 240, 240, 1);
         [_bgView addSubview:line];
         
-        
-//        CGFloat btnWidth = (kScreen_Width-6)/2;
-//        NSArray * titleAry = @[@"全部地区",@"离我最近"];
-//        
-//        for (int i = 0; i<2; i++) {
-//            UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//            selectBtn.frame = CGRectMake((btnWidth+3)*i, _bgView.height - 30,btnWidth , 30);
-//            selectBtn.tag = 1111 + i;
-//            selectBtn.backgroundColor = [UIColor whiteColor];
-//            [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
-//            [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
-//            [selectBtn setTitleColor:RGBCOLOR(32, 184, 230, 1) forState:UIControlStateSelected];
-//            [selectBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-//            selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-//            
-//            [selectBtn addTarget:self action:@selector(menuBtn:) forControlEvents:UIControlEventTouchUpInside];
-//
-//                [selectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
-//                [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
-//
-//            
-//            if (_isselected == 0) {
-//                selectBtn.selected = NO;
-//            }
-//            [_bgView addSubview:selectBtn];
-//            
-//        }
+
 
     }
     return _bgView;

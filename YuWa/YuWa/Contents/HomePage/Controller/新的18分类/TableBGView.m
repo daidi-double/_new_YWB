@@ -16,7 +16,6 @@
 }
 @property (nonatomic,strong) UITableView * placeTableView;//商圈tableview
 @property (nonatomic,strong) UITableView * rightTableView;
-@property (nonatomic,copy) NSString * cityCode;//城市编码
 @property (nonatomic,copy) NSString* type;
 @property (nonatomic,strong)NSMutableArray * cityCodeAry;
 
@@ -160,8 +159,7 @@
 //获取地区编码
 - (void)getlocatCityCode{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CITYCODE];
-    
-    self.cityCode = @"110000";
+
     NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type};
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {

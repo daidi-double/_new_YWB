@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setRJRefresh];
+    [self requestData];
     [self creatLabel];
     [self makeUI];
 }
@@ -142,11 +142,11 @@
                 [self.commentAry addObject:self.model];
             }
             
-            [self.detailTableView reloadData];
         }
+        [self.detailTableView reloadData];
     }];
-    [self.detailTableView.mj_header endRefreshing];
-    [self.detailTableView.mj_footer endRefreshing];
+//    [self.detailTableView.mj_header endRefreshing];
+//    [self.detailTableView.mj_footer endRefreshing];
 }
 - (void)creatLabel{
     _textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, kScreen_Height * 0.85, kScreen_Width/3, 35)];

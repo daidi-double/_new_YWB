@@ -21,7 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame andAry:(NSMutableArray *)moviesAry{
     self = [super initWithFrame:frame];
     if (self) {
-        [self requestHeaderData];
+
         self.movies = moviesAry;
  
     }
@@ -33,6 +33,7 @@
 }
 
 - (void)setdata{
+    [self requestHeaderData];
     _cinemaName = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 0, self.height * 0.2f)];
     _cinemaName.textColor =RGBCOLOR(147, 146, 146, 1);
     _cinemaName.font = [UIFont systemFontOfSize:15];
@@ -204,10 +205,6 @@
 #pragma mark -- http
 //头部视图数据
 - (void)requestHeaderData{
-    
-    
-    
-    self.cinema_code = @"01010071";
     
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAHEADER];
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code};
