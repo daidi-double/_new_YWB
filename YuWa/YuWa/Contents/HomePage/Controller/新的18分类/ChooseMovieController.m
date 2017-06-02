@@ -189,6 +189,7 @@
     NSLog(@"详细界面");
     MovieDetailViewController * vc = [[MovieDetailViewController alloc]init];
     vc.filmCode = self.filmCode;
+    MyLog(@"filmCode233 = %@",self.filmCode);
 //    vc.cinemaDetailModel = self.model;051100192011
     [self.navigationController pushViewController:vc animated:YES];
     

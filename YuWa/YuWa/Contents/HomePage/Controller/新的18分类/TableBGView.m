@@ -159,7 +159,7 @@
 //获取地区编码
 - (void)getlocatCityCode{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CITYCODE];
-
+    self.cityCode = @"350500";
     NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type};
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {

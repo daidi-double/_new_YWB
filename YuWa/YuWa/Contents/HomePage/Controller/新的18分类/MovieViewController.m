@@ -213,6 +213,7 @@
     
     MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
     movieVC.cinema_code = model.code;
+    movieVC.cityCode = model.city;
     if ([model.goodstype integerValue] != 1) {
         movieVC.status = 1;
         

@@ -14,7 +14,7 @@
 @interface OtherTicketViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *otherTableView;
 @property (nonatomic,strong)NSMutableArray * otherTicketAry;//通兑票数组
-
+@property (nonatomic,strong)UIView * wawaView;
 
 @end
 
@@ -27,11 +27,36 @@
 }
 -(void)makeUI{
     self.title = @"通兑票";
+    [self creatWawaView];
     [self judgeIsContentOtherTicket];
     [self.otherTableView registerNib:[UINib nibWithNibName:otherTicketCell bundle:nil] forCellReuseIdentifier:otherTicketCell];
 }
+- (void)creatWawaView{
+    
+    _wawaView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height/2)];
+    _wawaView.hidden = YES;
+    [self.view addSubview:_wawaView];
+    UIImageView * wawaImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width/2, 100, kScreen_Width/3, kScreen_Width/3+20)];
+    wawaImageView.centerX = kScreen_Width/2;
+    wawaImageView.image = [UIImage imageNamed:@"娃娃"];
+    [_wawaView addSubview:wawaImageView];
+    
+    UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, wawaImageView.bottom, kScreen_Width, 40)];
+    textLabel.centerX = kScreen_Width/2;
+    textLabel.textAlignment = 1;
+    textLabel.font = [UIFont systemFontOfSize:14];
+    textLabel.textColor = RGBCOLOR(123, 124, 124, 1);
+    textLabel.text = @"来晚了，该影院已经没有通兑票了哦~";
+    [_wawaView addSubview:textLabel];
+    
+}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (self.otherTicketAry.count<=0) {
+        self.wawaView.hidden = NO;
+    }else{
+        self.wawaView.hidden = YES;
+    }
     return self.otherTicketAry.count;
 }
 
@@ -68,9 +93,6 @@
 //获取通兑票
 - (void)judgeIsContentOtherTicket{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_JUDGECONTENTOTHERTICKET];
-    
-    self.cityCode = @"110100";
-    self.cinema_code = @"01010071";
     NSDictionary * pragrams = @{@"cityNo":self.cityCode,@"cinemaNo":self.cinema_code};
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {

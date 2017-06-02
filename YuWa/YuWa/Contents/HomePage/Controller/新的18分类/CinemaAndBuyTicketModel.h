@@ -23,6 +23,7 @@
 @property (nonatomic,copy)NSString * distance;//距离
 @property (nonatomic,copy)NSString * intro;//简介
 @property (nonatomic,copy)NSString * highlight;
+@property (nonatomic,copy)NSString * showTypes;
 
 //影片详情的图片字段
 @property (nonatomic,copy)NSString * stills;

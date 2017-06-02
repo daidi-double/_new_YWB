@@ -134,7 +134,13 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     collectionView.contentOffset = CGPointMake(80*indexPath.item, 0);
-    
+    FilmListModel * filmModel = self.flimListAry[indexPath.item];
+    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
+    self.movieTitle.text = filmModel.name;
+    CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
+    _movieTitle.frame = CGRectMake(0, _BGScrollView.height-10, movieTitleSize.width, _BGScrollView.height*0.3f);
+    _movieTitle.centerX = self.width/2 - 15;
+    self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _BGScrollView.height,40, _BGScrollView.height * 0.2f);
     //调用请求数据方法刷新数据
 }
 
@@ -201,6 +207,12 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     FilmListModel * filmModel = self.flimListAry[_index];
     [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
+    self.movieTitle.text = filmModel.name;
+    CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
+    _movieTitle.frame = CGRectMake(0, _BGScrollView.height-10, movieTitleSize.width, _BGScrollView.height*0.3f);
+    _movieTitle.centerX = self.width/2 - 15;
+    self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _BGScrollView.height,40, _BGScrollView.height * 0.2f);
+
 }
 #pragma mark -- http
 //头部视图数据

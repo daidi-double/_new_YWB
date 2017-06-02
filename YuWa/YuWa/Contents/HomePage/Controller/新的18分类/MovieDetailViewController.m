@@ -45,23 +45,23 @@
     
     [self.detailTableView registerNib:[UINib nibWithNibName:COMMENTCELl111 bundle:nil] forCellReuseIdentifier:COMMENTCELl111];    
 }
-- (void)setRJRefresh {
-    
-    self.detailTableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-        //        self.pages=0;
-        self.commentAry=[NSMutableArray array];
-        [self requestData];
-        
-    }];
-    
-    //上拉刷新
-    self.detailTableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-        //        self.pages++;
-        [self requestData];
-        
-    }];
-    [self.detailTableView.mj_header beginRefreshing];
-}
+//- (void)setRJRefresh {
+//    
+//    self.detailTableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+//        //        self.pages=0;
+//        self.commentAry=[NSMutableArray array];
+//        [self requestData];
+//        
+//    }];
+//    
+//    //上拉刷新
+//    self.detailTableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+//        //        self.pages++;
+//        [self requestData];
+//        
+//    }];
+//    [self.detailTableView.mj_header beginRefreshing];
+//}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
@@ -134,9 +134,9 @@
         if ([data[@"errorCode"] integerValue] == 0) {
             //头部影片数据
             [self.commentAry removeAllObjects];
-                self.cinemaDetailModel = [CinemaAndBuyTicketModel yy_modelWithDictionary:data[@"data"][@"filmDetail"]];
+                self.cinemaDetailModel = [CinemaAndBuyTicketModel yy_modelWithDictionary:data[@"film"]];
             
-            //评论部分数据
+            //评论部分数据001100562011
             for (NSDictionary * commentDict in data[@"data"][@"filmComment"]) {
                 self.model = [CommentModel yy_modelWithDictionary:commentDict];
                 [self.commentAry addObject:self.model];
