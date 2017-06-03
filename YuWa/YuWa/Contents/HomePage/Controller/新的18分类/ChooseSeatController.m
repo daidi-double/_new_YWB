@@ -208,7 +208,8 @@
         HttpManager * manager = [[HttpManager alloc]init];
         [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
             MyLog(@"参数%@",pragrams);
-            MyLog(@"场次数据%@",data);
+//            MyLog(@"场次数据%@",data);
+            
 //                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
 //                // NSData转为NSString
 //                NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];

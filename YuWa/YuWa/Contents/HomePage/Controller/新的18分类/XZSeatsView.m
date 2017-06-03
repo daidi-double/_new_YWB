@@ -60,8 +60,9 @@
     //给可以用的座位绑定索引用来判断是否座位落单
     static NSInteger seatIndex = 0;
     [seatsArray enumerateObjectsUsingBlock:^(XZSeatsModel *seatsModel, NSUInteger idx, BOOL *stop) {
-        
+
         for (int i = 0; i < seatsModel.columns.count; i++) {
+            
             seatIndex++;
             XZSeatModel *seatModel = seatsModel.columns[i];
             XZSeatButton *seatBtn = [XZSeatButton buttonWithType:UIButtonTypeCustom];
