@@ -47,10 +47,15 @@
         [self initSeatsView:seatsArray];
         [self initindicator:seatsArray];
         [self initRowIndexView:seatsArray];
-        [self initcenterLine:seatsArray];
         [self inithallLogo:hallName];
         [self  startAnimation];//开场动画
-        
+        NSInteger maxCount = 0;
+        for (XZSeatsModel *seatsModel in seatsArray) {
+            if (seatsModel.columns.count>maxCount ) {
+                maxCount = seatsModel.columns.count;
+            }
+        }
+        [self initcenterLine:seatsArray withMaxcount:(NSInteger)maxCount];
     }
     return self;
 }
@@ -108,13 +113,13 @@
     self.rowindexView = rowindexView;
     [self.seatScrollView addSubview:rowindexView];
 }
--(void)initcenterLine:(NSMutableArray *)seatsArray{
+-(void)initcenterLine:(NSMutableArray *)seatsArray withMaxcount:(NSInteger)Maxcount{
     XZCenterLineView *centerLine = [[XZCenterLineView alloc]init];
     centerLine.backgroundColor = [UIColor clearColor];
     centerLine.width = 1;
     centerLine.height = seatsArray.count * XZseastNomarW_H + 2 * XZSmallMargin ;
     self.centerLine = centerLine;
-    self.centerLine.centerX = self.seatView.centerX;
+    self.centerLine.centerX = self.seatView.centerX-Maxcount;
     self.centerLine.y = self.seatScrollView.contentOffset.y + XZCenterLineY;
     [self.seatScrollView addSubview:self.centerLine];
 }
