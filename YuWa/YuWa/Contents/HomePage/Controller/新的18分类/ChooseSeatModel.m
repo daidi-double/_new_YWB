@@ -18,6 +18,8 @@
     return self;
 }
 +(NSMutableArray *)ChooseSeatModelWithDic:(NSMutableArray *)arr {
+    //json数组  转字典数组
+    arr = [[[ChooseSeatModel alloc]init] jsonToDicWithArr:arr];
     //对数据进行排序
     for (int i=0; i<arr.count; i++) {
         for (int j=0; j<arr.count-1; j++) {
@@ -33,15 +35,11 @@
         }
         
     }
-    
-    
-    
     //返回的数组model
     NSMutableArray * seatsModelArray = [NSMutableArray arrayWithCapacity:arr.count];
     //用来判断是否是同一行
     NSMutableArray * arrM = [NSMutableArray array ];
-
-    
+      //一行数组里面的列数
     NSMutableArray * seatModelAry = [NSMutableArray array ];
     for (NSDictionary * dic in arr) {
         //添加一行当中的座位数组
@@ -65,23 +63,29 @@
                 //添加一行的数组
                 XZSeatsModel * XZSeatsModel1 = [[XZSeatsModel alloc]init];
                 XZSeatsModel1.columns = seatModelAry;
-                MyLog(@"!!!!!!!!!!!%lu~~~%lu", (unsigned long)XZSeatsModel1.columns.count,seatModelAry.count);
+                 MyLog(@"!!!!!!!!!!!%lu~~~", seatModelAry.count);
                 XZSeatsModel1.rowId = arrM.lastObject;
                 XZSeatsModel1.rowNum = arrM.lastObject;
                 [seatsModelArray addObject:XZSeatsModel1];
+                 MyLog(@"%lu~~~", XZSeatsModel1.columns.count);
                 //清空一行座位model  的数据
-                [seatModelAry removeAllObjects];
-                
+                seatModelAry = [NSMutableArray array ];
             }
             //表示不包含，则添加  同时把一行座位清空
             [arrM addObject:ChooseSeatModel1.rowNum];
+            NSString * count = arrM.lastObject;
+            if (count.integerValue == arr.count) {
+                seatModelAry = [NSMutableArray array ];
+            }
             //在添加下一行的数据
             [seatModelAry addObject:model];
+           
         }else{
             [seatModelAry addObject:model];
         }
         
     }
+    
     XZSeatsModel * XZSeatsModel1 = [[XZSeatsModel alloc]init];
     XZSeatsModel1.columns = seatModelAry;
     XZSeatsModel1.rowId = arrM.lastObject;
@@ -90,11 +94,86 @@
     [seatsModelArray addObject:XZSeatsModel1];
     
     for (XZSeatsModel *seatsModel in seatsModelArray) {
-                MyLog(@"~~~~%lu",(unsigned long)seatsModel.columns.count);
+        MyLog(@"~~~~%lu",(unsigned long)seatsModel.columns.count);
     }
     return seatsModelArray;
 }
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key   {
     
 }
+//json  转字典
+-(NSMutableArray *) jsonToDicWithArr:(NSArray *)arr{
+    NSMutableArray * arr1 = [NSMutableArray array];
+    for (int i = 0; i<arr.count; i++) {
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[i] options:NSJSONWritingPrettyPrinted error:nil];
+        // NSData转为NSString
+        NSDictionary * getDict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+        [arr1 addObject:getDict];
+    }
+    //json数组 转换成功的字典数组
+    return arr1;
+}
+//arrM1 = @[
+//          @{
+//              @"code":@"03010101",
+//              @"colNum":@"3",
+//              @"groupCode":@"01",
+//              @"loveCode":@"",
+//              @"rowNum":@"1",
+//              @"status":@1,
+//              @"type":@"1",
+//              @"xcoord":@"1",
+//              @"ycoord":@"1",
+//              },
+//          @{@"code":@"03010101",
+//            @"colNum":@"2",
+//            @"groupCode":@"01",
+//            @"loveCode":@"",
+//            @"rowNum":@"1",
+//            @"status":@1,
+//            @"type":@"1",
+//            @"xcoord":@"1",
+//            @"ycoord":@"2",},
+//          @{
+//              @"code":@"03010101",
+//              @"colNum":@"1",
+//              @"groupCode":@"01",
+//              @"loveCode":@"",
+//              @"rowNum":@"1",
+//              @"status":@1,
+//              @"type":@"1",
+//              @"xcoord":@"1",
+//              @"ycoord":@"3",
+//              },
+//          @{@"code":@"03010101",
+//            @"colNum":@"2",
+//            @"groupCode":@"01",
+//            @"loveCode":@"",
+//            @"rowNum":@"2",
+//            @"status":@1,
+//            @"type":@"1",
+//            @"xcoord":@"2",
+//            @"ycoord":@"1",},
+//          @{
+//              @"code":@"03010101",
+//              @"colNum":@"1",
+//              @"groupCode":@"01",
+//              @"loveCode":@"",
+//              @"rowNum":@"2",
+//              @"status":@1,
+//              @"type":@"1",
+//              @"xcoord":@"2",
+//              @"ycoord":@"2",
+//              },@{
+//              @"code":@"03010101",
+//              @"colNum":@"1",
+//              @"groupCode":@"01",
+//              @"loveCode":@"",
+//              @"rowNum":@"3",
+//              @"status":@1,
+//              @"type":@"1",
+//              @"xcoord":@"2",
+//              @"ycoord":@"2",
+//              }];
+
 @end

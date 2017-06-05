@@ -209,19 +209,10 @@
         [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
             MyLog(@"参数%@",pragrams);
 //            MyLog(@"场次数据%@",data);
-            NSMutableArray * arr = [NSMutableArray array];
-            arr = data[@"data"];
-            NSMutableArray * arr1 = [NSMutableArray array];
-            for (int i = 0; i<arr.count; i++) {
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[i] options:NSJSONWritingPrettyPrinted error:nil];
-                // NSData转为NSString
-                NSDictionary * getDict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
-                [arr1 addObject:getDict];
-            }
             
             if ([data[@"errorCode"] integerValue] == 0) {
                 [self.seatModelAry removeAllObjects];
-           self.seatsModelArray = [ChooseSeatModel ChooseSeatModelWithDic:arr1];
+           self.seatsModelArray = [ChooseSeatModel ChooseSeatModelWithDic:data[@"data"]];
                  [weakSelf initSelectionView:self.seatsModelArray];
             }else{
                 [_HUD hide:YES];
