@@ -42,9 +42,9 @@
     NSMutableArray * arrM = [NSMutableArray array ];
 
     
+    NSMutableArray * seatModelAry = [NSMutableArray array ];
     for (NSDictionary * dic in arr) {
         //添加一行当中的座位数组
-        NSMutableArray * seatModelAry = [NSMutableArray array ];
         ChooseSeatModel * ChooseSeatModel1 =  [[ChooseSeatModel alloc]initWithDic:dic];
 //        [arrM addObject:model];
         //先找出一排当中的每一个座位model
@@ -82,7 +82,6 @@
         }
         
     }
-    NSMutableArray * seatModelAry = [NSMutableArray array ];
     XZSeatsModel * XZSeatsModel1 = [[XZSeatsModel alloc]init];
     XZSeatsModel1.columns = seatModelAry;
     XZSeatsModel1.rowId = arrM.lastObject;
