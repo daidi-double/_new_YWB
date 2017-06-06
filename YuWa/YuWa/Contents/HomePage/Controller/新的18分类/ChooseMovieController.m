@@ -18,7 +18,7 @@
 
 #import "CinemaModel.h"//影院id
 #define CINEMASHOWCELL @"CinameTableViewCell"
-@interface ChooseMovieController ()<UITableViewDelegate,UITableViewDataSource,ChooseMovieHeaderViewDelegate,UIGestureRecognizerDelegate>
+@interface ChooseMovieController ()<UITableViewDelegate,UITableViewDataSource,ChooseMovieHeaderViewDelegate,UIGestureRecognizerDelegate,TableBGViewDelegate>
 {
     UIButton * markTimeBtn;
     UIView * lineView;
@@ -40,6 +40,8 @@
 @property (nonatomic,strong) CinemaAndBuyTicketModel * model;//头部model
 @property (nonatomic,strong) CinemaModel * cinemaModel;//影院model
 @property (nonatomic,strong) NSString * type;//类型
+@property (nonatomic,copy)NSString * cityType;//地区类型：1单个地区，0是全部地区
+@property (nonatomic,copy)NSString * typeList;//0：离我最近 1，价格最低，2好评优先
 @end
 
 @implementation ChooseMovieController
@@ -47,7 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.title = self.filmName;
     [self.view addSubview:self.movieTableView];
     [self.movieTableView registerNib:[UINib nibWithNibName:CINEMASHOWCELL bundle:nil] forCellReuseIdentifier:CINEMASHOWCELL];
@@ -55,6 +57,8 @@
     self.pages=0;
     self.pagen = 10;
     self.type = @"0";
+    self.typeList = @"0";
+    self.cityType = @"0";
     self.time = [self todayDate];
     [self setRJRefresh];
     
@@ -93,7 +97,7 @@
         return self.bgView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return kScreen_Height *0.3 + 35.5f;
+    return kScreen_Height *0.3 + 40.f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
   
@@ -129,33 +133,112 @@
     return cell;
    
 }
-- (void)chooseDate:(UIButton*)btn{
-    if (btn.selected == YES) {
-        return;
-    }
-    MyLog(@"%ld",btn.tag);
+- (void)menuBtnAction:(UIButton*)btn{
+    NSLog(@"%ld",btn.tag);
+    
     btn.selected = YES;
-    markTimeBtn.selected =  NO;
-    markTimeBtn = btn;
-    lineView.x = btn.x;
-    self.pages = 0;
-    switch (btn.tag) {
-        case 100:
-            self.time = [self todayDate];
-            break;
-        case 101:
-            self.time = [self tomorrowDate];
+    markBtn.selected = NO;
+    markBtn = btn;
 
-            break;
-        case 102:
-            self.time = [self threeDayDate];
+    
+    [self creatPlaceView:btn.tag andTitle:btn.titleLabel.text];
+    
+}
 
-            break;
-        default:
-            break;
+- (void)creatPlaceView:(NSInteger)tag andTitle:(NSString *)title{
+    UIView * bgView2;
+    if (!menuBG) {
+       bgView2 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 64)];
+        bgView2.backgroundColor = [UIColor whiteColor];
+        bgView2.backgroundColor = CNaviColor;
+        [self.view addSubview:bgView2];
+        menuBG = [[UIView alloc]initWithFrame:CGRectMake(0, NavigationHeight, kScreen_Width, kScreen_Height)];
+        menuBG.backgroundColor = RGBCOLOR(195, 202, 203, 0.3);
+        
+        [self.view addSubview:menuBG];
     }
-    MyLog(@"%@",self.time);
-    [self requestCinemaData];
+    bgView2.hidden = NO;
+    menuBG.hidden = NO;
+    UITapGestureRecognizer*cancelFirstObject=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelMenuBG:)];
+    cancelFirstObject.numberOfTouchesRequired = 1;
+    cancelFirstObject.numberOfTapsRequired = 1;
+    cancelFirstObject.delegate= self;
+    menuBG.contentMode = UIViewContentModeScaleToFill;
+    [menuBG addGestureRecognizer:cancelFirstObject];
+    UIView * bgView;
+    if (tableViewBG) {
+        [tableViewBG removeFromSuperview];
+    }
+    if (bgView) {
+        [bgView removeFromSuperview];
+    }
+    if (tag == 1112) {
+        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45*3 + 30) andTag:tag andTitle:title] ;
+    }else{
+        CGFloat hight;
+        if (44 * self.cityCodeAry.count <= kScreen_Height * 0.7f) {
+            hight = 44* self.cityCodeAry.count;
+        }else{
+            hight = kScreen_Height * 0.7f;
+        }
+        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, hight) andTag:tag andTitle:title];
+    }
+    tableViewBG.delegate = self;
+    tableViewBG.cityCode = self.cityCode;
+    tableViewBG.backgroundColor = [UIColor whiteColor];
+    if (markBtn.tag != tag) {
+        for (UIButton * touchBtn in _bgView.subviews) {
+            if (touchBtn.tag == tag) {
+                markBtn = touchBtn;
+            }
+        }
+    }
+    __weak typeof(markBtn)weakBtn = markBtn;
+    __weak typeof(menuBG)weakMenuBG = menuBG;
+    __weak typeof(bgView2)weakBgView = bgView2;
+    WEAKSELF;
+    tableViewBG.titleBlock = ^(NSString *titleStr,NSString * cityCode){
+        weakBtn.selected = NO;
+        [weakBtn setTitle:titleStr forState:UIControlStateNormal];
+        weakMenuBG.hidden = YES;
+        weakBgView.hidden = YES;
+        if ([titleStr isEqualToString:@"全部地区"]) {
+            weakSelf.cityType = @"0";
+        }else{
+            weakSelf.cityType = @"1";
+        }
+        weakSelf.cityCode = cityCode;
+        
+        [weakSelf requestCinemaData];
+    };
+    tableViewBG.titleBlockT = ^(NSString * titleStr,NSString * listType){
+        weakBtn.selected = NO;
+        [weakBtn setTitle:titleStr forState:UIControlStateNormal];
+        weakMenuBG.hidden = YES;
+        weakBgView.hidden = YES;
+        weakSelf.typeList = listType;
+        
+        [weakSelf requestCinemaData];
+        
+    };
+    [menuBG addSubview:tableViewBG];
+    if (tag == 1111) {
+        
+        bgView = [[UIView alloc]initWithFrame:CGRectMake(0, tableViewBG.bottom+30, kScreen_Width, kScreen_Height)];
+    }else{
+       bgView = [[UIView alloc]initWithFrame:CGRectMake(0, tableViewBG.bottom, kScreen_Width, kScreen_Height)];
+    }
+    bgView.backgroundColor = [UIColor lightGrayColor];
+    bgView.alpha = 0.7f;
+    [menuBG addSubview:bgView];
+    
+    
+}
+- (void)cancelMenuBG:(UIGestureRecognizer*)tap{
+    tap.view.hidden = YES;
+    _isselected = 0;
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+    [_movieTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
     
 }
 //获取今天的日期
@@ -248,7 +331,7 @@
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMANDDATE];
     NSString * pagesStr = [NSString stringWithFormat:@"%ld",self.pages];
     NSString * pagenStr = [NSString stringWithFormat:@"%ld",self.pagen];
-    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"time":self.time,@"pages":pagesStr,@"pagen":pagenStr,@"coordinatex":self.coordinatex,@"coordinatey":self.coordinatey};
+    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"pages":pagesStr,@"pagen":pagenStr,@"coordinatex":self.coordinatex,@"coordinatey":self.coordinatey,@"type":self.cityType,@"typeList":self.typeList};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
         
@@ -283,88 +366,28 @@
         _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.3f+65.5)];
         _bgView.backgroundColor = [UIColor whiteColor];
         
-        NSDate *date = [NSDate date];
+
+        NSArray * arr = @[@"全部地区",@"离我最近"];
         
-        NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-        NSDateComponents *comps = [[NSDateComponents alloc] init];
-        
-        NSInteger unitFlags =  kCFCalendarUnitYear|kCFCalendarUnitMonth|kCFCalendarUnitDay;
-        comps = [calendar components:unitFlags fromDate:date];
-        
-        NSInteger month = [comps month];
-        NSInteger day = [comps day];
-        NSInteger year = [comps year];
-        NSString *btnTitle =[NSString stringWithFormat:@"今天%ld月%ld日",(long)month,(long)day];
-        NSString * btnTitleT;
-        NSString * btnAfterTitle;
-        if (month == 1|month ==3|month ==5|month ==7|month ==8|month ==10|month ==12) {
-            if (day == 30) {
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
-                btnAfterTitle = [NSString stringWithFormat:@"后天%ld月1日",(long)month+1];
-                
-            }
-            if (day == 31) {
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月1日",(long)month+1];
-                btnAfterTitle = [NSString stringWithFormat:@"后天%ld月2日",(long)month+1];
-                if (month == 12) {
-                    btnTitleT = @"明天1月1日";
-                    btnAfterTitle = @"后天1月2日";
-                }
-            }else{
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
-                btnAfterTitle = [NSString stringWithFormat:@"后天%ld月%ld日",(long)month,(long)day+2];
-            }
-            
-        }else if (year%4 ==0 && month == 2 && day == 29){
-            btnTitleT = @"明天3月1日";
-            btnAfterTitle = @"后天3月2日";
-        }else if (year%4 != 0 && month == 2 && day == 28){
-            btnTitleT = @"明天3月1日";
-            btnAfterTitle = @"后天3月2日";
-        }else if (month == 4|month ==6|month ==9|month ==10|month ==11){
-            if (day == 29) {
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
-                btnAfterTitle = [NSString stringWithFormat:@"后天%ld月1日",(long)month+1];
-                
-            }else if (day == 30) {
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月1日",(long)month+1];
-                btnAfterTitle = [NSString stringWithFormat:@"后天%ld月2日",(long)month+1];
-            }else{
-                
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
-                btnAfterTitle = [NSString stringWithFormat:@"后天%ld月%ld日",(long)month,(long)day+2];
-            }
-            
-        }else{
-            
-            btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
-            btnAfterTitle = [NSString stringWithFormat:@"后天%ld月%ld日",(long)month,(long)day+2];
-        }
-        NSArray * arr = @[btnTitle,btnTitleT,btnAfterTitle];
-        
-        for (int i = 0; i<3; i++) {
+        for (int i = 0; i<2; i++) {
             UIButton * timeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            timeBtn.frame = CGRectMake(kScreen_Width/3*i, _bgView.height - 65.5, kScreen_Width/3, 35);
+            timeBtn.frame = CGRectMake(kScreen_Width/2*i, _bgView.height - 65.5, kScreen_Width/2, 40);
             NSString * titleTime = [NSString stringWithFormat:arr[i],i];
             [timeBtn setTitle:titleTime forState:UIControlStateNormal];
             [timeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            timeBtn.tag = 100 +i;
-            timeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-            [timeBtn setTitleColor:RGBCOLOR(33, 184, 230, 1) forState:UIControlStateSelected];
-            if (i == 0) {
-                timeBtn.selected = YES;
-                markTimeBtn = timeBtn;
-            }
-            [timeBtn addTarget:self action:@selector(chooseDate:) forControlEvents:UIControlEventTouchUpInside];
+            timeBtn.tag = 1111 + i;
+            timeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+            [timeBtn setTitleColor:[UIColor colorWithHexString:@"#d5d5d5"] forState:UIControlStateSelected];
+            [timeBtn setImage:[UIImage imageNamed:@"dropdown"] forState:UIControlStateNormal];
+            [timeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
+            [timeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
+            
+            [timeBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+
+            [timeBtn addTarget:self action:@selector(menuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
             [_bgView addSubview:timeBtn];
             
         }
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, _bgView.height -30.5, kScreen_Width, 0.5)];
-        line.backgroundColor = RGBCOLOR(240, 240, 240, 1);
-        [_bgView addSubview:line];
-        
-
-
     }
     return _bgView;
 }

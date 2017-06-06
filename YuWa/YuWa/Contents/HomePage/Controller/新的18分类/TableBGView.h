@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol TableBGViewDelegate <NSObject>
 
-- (void)creatPlaceView:(NSInteger)tag;
+- (void)creatPlaceView:(NSInteger)tag andTitle:(NSString *)title;
 
 @end
 @interface TableBGView : UIView
@@ -19,7 +19,7 @@
 @property (nonatomic,copy) void (^titleBlockT)(NSString * title,NSString * listType);
 @property (nonatomic,assign)id<TableBGViewDelegate>delegate;
 
-- (instancetype)initWithFrame:(CGRect)frame andTag:(NSInteger)tag;
+- (instancetype)initWithFrame:(CGRect)frame andTag:(NSInteger)tag andTitle:(NSString *)title;
 
 @end
 

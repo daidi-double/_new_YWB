@@ -13,6 +13,7 @@
    UIView * line;
     NSInteger markTag;
     UIButton * markBtn;
+    NSString * markTitle;
 }
 @property (nonatomic,strong) UITableView * placeTableView;//商圈tableview
 @property (nonatomic,strong) UITableView * rightTableView;
@@ -22,10 +23,11 @@
 
 @end
 @implementation TableBGView
-- (instancetype)initWithFrame:(CGRect)frame andTag:(NSInteger)tag{
+- (instancetype)initWithFrame:(CGRect)frame andTag:(NSInteger)tag andTitle:(NSString *)title{
     self = [super initWithFrame:frame];
     if (self) {
         _staus = tag;
+        markTitle = title;
         self.type = @"0";
         [self setPlaceBtn];
         [self makeTableView];
@@ -35,22 +37,49 @@
 }
 - (void)setPlaceBtn{
     CGFloat btnWidth = (kScreen_Width - 80 - 100)/2;
-    NSArray * title = @[@"全部地区",@"离我最近"];
+    NSArray * title;
+    if (self.staus == 1111) {
+        title = @[markTitle,@"离我最近"];
+
+    }else{
+      title = @[@"全部地区",markTitle];
+    }
     for (int i = 0; i<2; i ++) {
         UIButton * placeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         placeBtn.frame = CGRectMake(40 + (100 + btnWidth)*i, 0,btnWidth ,30);
         [placeBtn setTitle:title[i] forState:UIControlStateNormal];
         [placeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         placeBtn.tag = 1111+i;
+        [placeBtn setImage:[UIImage imageNamed:@"dropdown"] forState:UIControlStateNormal];
+        [placeBtn setImage:[UIImage imageNamed:@"dropdown_sel"] forState:UIControlStateSelected];
+        [placeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 20)];
+        [placeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, -60)];
+        
         [placeBtn setTitleColor:CNaviColor forState:UIControlStateSelected];
         placeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [placeBtn addTarget:self action:@selector(choosePlace:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:placeBtn];
     }
-    line = [[UIView alloc]initWithFrame:CGRectMake(40, 25, btnWidth, 1)];
+    line = [[UIView alloc]initWithFrame:CGRectMake(40, 25, btnWidth + 30, 1)];
     if (self.staus == 1111) {
         line.centerX = 40 + btnWidth/2;
+        for (UIButton * placeBtn in self.subviews) {
+            if (placeBtn.tag == 1111) {
+                placeBtn.selected = YES;
+                markTitle = placeBtn.titleLabel.text;
+            }else{
+                placeBtn.selected = NO;
+            }
+        }
     }else{
+        for (UIButton * placeBtn in self.subviews) {
+            if (placeBtn.tag == 1112) {
+                placeBtn.selected = YES;
+                markTitle = placeBtn.titleLabel.text;
+            }else{
+                placeBtn.selected = NO;
+            }
+        }
         line.centerX = 40 +btnWidth+100+btnWidth/2;
     }
     line.backgroundColor = CNaviColor;
@@ -66,7 +95,7 @@
     _placeTableView.dataSource = self;
     
     [self addSubview:_placeTableView];
-    self.rightTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,30 , kScreen_Width, self.height) style:UITableViewStyleGrouped];
+    self.rightTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,30 , kScreen_Width, self.height-30) style:UITableViewStyleGrouped];
     self.rightTableView.delegate = self;
     self.rightTableView.dataSource = self;
     
@@ -86,13 +115,13 @@
     switch (sender.tag) {
         case 1111:
             self.rightTableView.hidden = YES;
-            [self.delegate creatPlaceView:sender.tag];
+            [self.delegate creatPlaceView:sender.tag andTitle:@"全部地区"];
             break;
             
         default:
             
             self.placeTableView.hidden = YES;
-            [self.delegate creatPlaceView:sender.tag];
+            [self.delegate creatPlaceView:sender.tag andTitle:@"离我最近"];
             break;
     }
     
@@ -116,6 +145,8 @@
             for (UIButton *btn in self.subviews) {
                 if (btn.tag == 1111) {
                     [btn setTitle:model.name forState:UIControlStateNormal];
+                    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+                    [btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
                 }
             }
             self.titleBlock(model.name,model.code);
@@ -126,6 +157,8 @@
             for (UIButton *btn in self.subviews) {
                 if (btn.tag == 1112) {
                     [btn setTitle:titleArr[indexPath.row] forState:UIControlStateNormal];
+                    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+                    [btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
                 }
             }
             NSString * listCode = [NSString stringWithFormat:@"%ld",indexPath.row];
@@ -146,10 +179,20 @@
         cell.backgroundColor = RGBCOLOR(249, 249, 249, 1);
         CityCodeModel * model = self.cityCodeAry[indexPath.row];
         cell.textLabel.text = [NSString stringWithFormat:@"%@(%@)",model.name,model.cinema_count];
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.textLabel.textColor= [UIColor colorWithHexString:@"#333333"];
+        if ([cell.textLabel.text containsString:markTitle]) {
+            cell.textLabel.textColor = CNaviColor;
+        }
     }else{
         NSArray *  titleArr = @[@"离我最近",@"价格最低",@"好评优先"];
         cell.textLabel.text = titleArr[indexPath.row];
         cell.textLabel.centerY = cell.height/2;
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.textLabel.textColor= [UIColor colorWithHexString:@"#333333"];
+        if ([cell.textLabel.text containsString:markTitle]) {
+            cell.textLabel.textColor = CNaviColor;
+        }
         return cell;
     }
     return cell;

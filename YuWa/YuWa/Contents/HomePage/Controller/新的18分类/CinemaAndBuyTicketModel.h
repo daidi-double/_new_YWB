@@ -24,6 +24,8 @@
 @property (nonatomic,copy)NSString * intro;//简介
 @property (nonatomic,copy)NSString * highlight;
 @property (nonatomic,copy)NSString * showTypes;
+@property (nonatomic,copy)NSString * duration;//时长
+@property (nonatomic,copy)NSString * publish_date;//上映时间
 
 //影片详情的图片字段
 @property (nonatomic,copy)NSString * stills;

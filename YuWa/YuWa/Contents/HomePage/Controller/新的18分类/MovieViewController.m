@@ -39,6 +39,8 @@
     TableBGView * tableViewBG;
     UIView * menuBG;
     HotMovieScrollView * hotScrollView;
+    UIView * bgView2;//遮挡层
+    UIView * btnView12;//筛选地区
 }
 
 @property (nonatomic,strong) UITableView * movieTableView;
@@ -298,6 +300,8 @@
     ChooseMovieController * choseVC = [[ChooseMovieController alloc]init];
     choseVC.filmCode = model.code;
     choseVC.filmName = model.name;
+    choseVC.cityCodeAry = self.cityCodeAry;
+    choseVC.cityCode = self.cityCode;
     choseVC.coordinatex = self.coordinatex;
     choseVC.coordinatey = self.coordinatey;
     [self.navigationController pushViewController:choseVC animated:YES];
@@ -456,29 +460,28 @@
 
 - (void)menuBtn:(UIButton*)btn{
     NSLog(@"%ld",btn.tag);
-//    if (btn.selected == YES) {
-//        return;
-//    }
+
     btn.selected = YES;
     markBtn.selected = NO;
     markBtn = btn;
-    if (self.theaterNameAry.count>0) {
-        
-        [_movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    }
 
-    [self creatPlaceView:btn.tag];
+    [self creatPlaceView:btn.tag andTitle:btn.titleLabel.text];
  
 }
 
-- (void)creatPlaceView:(NSInteger)tag{
+- (void)creatPlaceView:(NSInteger)tag andTitle:(NSString *)title{
     if (!menuBG) {
-        menuBG = [[UIView alloc]initWithFrame:CGRectMake(0, NavigationHeight, kScreen_Width, kScreen_Height)];
+        bgView2 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 64)];
+        bgView2.backgroundColor = [UIColor whiteColor];
+        bgView2.backgroundColor = CNaviColor;
+        [self.view addSubview:bgView2];
+        menuBG = [[UIView alloc]initWithFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height)];
         menuBG.backgroundColor = RGBCOLOR(195, 202, 203, 0.3);
         
         [self.view addSubview:menuBG];
     }
     menuBG.hidden = NO;
+    bgView2.hidden = NO;
     UITapGestureRecognizer*cancelFirstObject=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelMenuBG:)];
     cancelFirstObject.numberOfTouchesRequired = 1;
     cancelFirstObject.numberOfTapsRequired = 1;
@@ -493,27 +496,35 @@
         [bgView removeFromSuperview];
     }
     if (tag == 1112) {
-        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45*3) andTag:tag] ;
+        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45*3 + 30) andTag:tag andTitle:title];
     }else{
         CGFloat hight;
         if (44 * self.cityCodeAry.count <= kScreen_Height * 0.7f) {
-            hight = 44* self.cityCodeAry.count;
+            hight = 44* self.cityCodeAry.count+30;
         }else{
-            hight = kScreen_Height * 0.7f;
+            hight = kScreen_Height * 0.7f+30;
         }
-        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, hight) andTag:tag] ;
+        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, hight) andTag:tag andTitle:title] ;
     }
     tableViewBG.delegate = self;
     tableViewBG.cityCode = self.cityCode;
     tableViewBG.backgroundColor = [UIColor whiteColor];
-
+    if (markBtn.tag != tag) {
+        for (UIButton * touchBtn in btnView12.subviews) {
+            if (touchBtn.tag == tag) {
+                markBtn = touchBtn;
+            }
+        }
+    }
     __weak typeof(markBtn)weakBtn = markBtn;
     __weak typeof(menuBG)weakMenuBG = menuBG;
+    __weak typeof(bgView2)weakBgView12  = bgView2;
     WEAKSELF;
     tableViewBG.titleBlock = ^(NSString *titleStr,NSString * cityCode){
         weakBtn.selected = NO;
         [weakBtn setTitle:titleStr forState:UIControlStateNormal];
         weakMenuBG.hidden = YES;
+        weakBgView12.hidden = YES;
         if ([titleStr isEqualToString:@"全部地区"]) {
             weakSelf.type = @"0";
         }else{
@@ -527,7 +538,7 @@
         weakBtn.selected = NO;
         [weakBtn setTitle:titleStr forState:UIControlStateNormal];
         weakMenuBG.hidden = YES;
-
+        weakBgView12.hidden = YES;
         weakSelf.typeList = listType;
         
         [weakSelf getHomePageCinemaList];
@@ -535,7 +546,12 @@
     };
     [menuBG addSubview:tableViewBG];
     
-    bgView = [[UIView alloc]initWithFrame:CGRectMake(0, tableViewBG.bottom +30, kScreen_Width, kScreen_Height)];
+    if (tag == 1111) {
+        
+        bgView = [[UIView alloc]initWithFrame:CGRectMake(0, tableViewBG.bottom+30, kScreen_Width, kScreen_Height)];
+    }else{
+        bgView = [[UIView alloc]initWithFrame:CGRectMake(0, tableViewBG.bottom, kScreen_Width, kScreen_Height)];
+    }
     bgView.backgroundColor = [UIColor lightGrayColor];
     bgView.alpha = 0.7f;
     [menuBG addSubview:bgView];
@@ -675,7 +691,7 @@
         [nameView addSubview:line3];
         
         
-        UIView * btnView12 = [[UIView alloc]initWithFrame:CGRectMake(0, 40, kScreen_Width, 40)];
+        btnView12 = [[UIView alloc]initWithFrame:CGRectMake(0, 40, kScreen_Width, 40)];
         
         
         [_headerView addSubview:btnView12];
@@ -687,8 +703,7 @@
             selectBtn.tag = 1111 + i;
             selectBtn.backgroundColor = [UIColor whiteColor];
             [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
-            [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
-            [selectBtn setTitleColor:[UIColor colorWithHexString:@"#d5d5d5"] forState:UIControlStateSelected];
+            [selectBtn setImage:[UIImage imageNamed:@"dropdown"] forState:UIControlStateNormal];
             [selectBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
             selectBtn.titleLabel.font = [UIFont systemFontOfSize:15];
             
