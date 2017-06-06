@@ -32,6 +32,8 @@
 /**指示框*/
 @property (nonatomic, weak) XZIndicatorView *indicatorView;
 /*  取消了的座位*/
+//选座按钮的宽度
+@property (nonatomic, assign) NSInteger SeatsBntWidth;
 @property (nonatomic,strong)NSMutableArray * cancelAry;
 @property (nonatomic,copy) void (^actionBlock)(NSMutableArray *, NSMutableDictionary *,NSMutableArray* ,NSString *);
 
@@ -119,7 +121,8 @@
     centerLine.width = 1;
     centerLine.height = seatsArray.count * XZseastNomarW_H + 2 * XZSmallMargin ;
     self.centerLine = centerLine;
-    self.centerLine.centerX = self.seatView.centerX-Maxcount;
+    
+    self.centerLine.centerX = self.seatView.centerX ;
     self.centerLine.y = self.seatScrollView.contentOffset.y + XZCenterLineY;
     [self.seatScrollView addSubview:self.centerLine];
 }
@@ -138,7 +141,7 @@
 -(void)initSeatsView:(NSMutableArray *)seatsArray{
     __weak typeof(self) weakSelf = self;
     XZSeatsView *seatView = [[XZSeatsView alloc]initWithSeatsArray:seatsArray  maxNomarWidth:self.width seatBtnActionBlock:^(XZSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats) {
-
+       
         
         NSString *errorStr = nil;
         
@@ -182,14 +185,15 @@
         CGRect zoomRect = [weakSelf _zoomRectInView:weakSelf.seatScrollView forScale:maximumZoomScale withCenter:CGPointMake(seatBtn.centerX, seatBtn.centerY)];
         
         [weakSelf.seatScrollView zoomToRect:zoomRect animated:YES];
-        
     }];
+    //获取按钮的宽度
+    self.SeatsBntWidth = [seatView  getSeatBtnHeight];
     self.seatView = seatView;
     seatView.frame = CGRectMake(0, 0,seatView.seatViewWidth+30, seatView.seatViewHeight);
     [self.seatScrollView insertSubview:seatView atIndex:0];
     self.seatScrollView.maximumZoomScale = XZseastMaxW_H / seatView.seatBtnWidth;
     self.seatScrollView.contentInset = UIEdgeInsetsMake(XZseastsColMargin,
-        (self.width - seatView.seatViewWidth)/2,XZseastsColMargin,(self.width - seatView.seatViewWidth)/2);
+        (self.width - self.seatView.seatViewWidth)/2,XZseastsColMargin,(self.width - seatView.seatViewWidth)/2);
 }
 -(void)initindicator:(NSMutableArray *)seatsArray{
     

@@ -27,6 +27,6 @@
 /**  seatsArray座位数组 maxW默认最大座位父控件的宽度 actionBlock按钮点击回调－>传回是当前选中的按钮和全部可选的座位*/
 
 -(instancetype)initWithSeatsArray:(NSMutableArray *)seatsArray maxNomarWidth:(CGFloat)maxW seatBtnActionBlock:(void(^)(XZSeatButton *seatBtn,NSMutableDictionary *allAvailableSeats))actionBlock;
-
+-(NSInteger) getSeatBtnHeight;
 
 @end
