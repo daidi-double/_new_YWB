@@ -7,6 +7,8 @@
 //
 
 #import "NewAllMovieTableViewCell.h"
+#import "NSString+JWAppendOtherStr.h"
+
 
 @implementation NewAllMovieTableViewCell
 
@@ -16,6 +18,11 @@
     self.buyBtn.layer.borderWidth = 1;
     self.buyBtn.layer.cornerRadius = 5;
     [self.buyBtn.layer setMasksToBounds:YES];
+    
+    self.showTypeLabel.layer.cornerRadius = 3;
+    self.showTypeLabel.layer.masksToBounds = YES;
+    
+    
 }
 
 - (void)setModel:(HotMovieModel *)model{
@@ -23,49 +30,45 @@
     [self setCellData];
 }
 -(void)setCellData{
+    
     [self.movieImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    self.movieNameLabel.textColor = [UIColor colorWithHexString:@"#333333"];
     self.movieNameLabel.text = self.model.name;
+    NSArray*scores=[self.model.score componentsSeparatedByString:@"."];
     
-    //星星数量 -------------------------------------------------------
-    CGFloat realZhengshu;
-    CGFloat realXiaoshu;
-    NSString*starNmuber1=self.model.score;
-    CGFloat totalScroe = [starNmuber1 floatValue]/2;
-    NSString *starNmuber = [NSString stringWithFormat:@"%.2f",totalScroe];
-    NSString*zhengshu=[starNmuber substringToIndex:1];
-    realZhengshu=[zhengshu floatValue];
-    NSString*xiaoshu=[starNmuber substringFromIndex:1];
-    CGFloat CGxiaoshu=[xiaoshu floatValue];
-    
-    if (CGxiaoshu>=0.75) {
-        realXiaoshu=0;
-        realZhengshu= realZhengshu+1;
-    }else if (CGxiaoshu>0&&CGxiaoshu<0.25){
-        realXiaoshu=0;
-    }else{
-        realXiaoshu=0.5;
+    if (scores.count>=2) {
         
+        self.scoreLabel.attributedText = [NSString stringWithFirstStr:[NSString stringWithFormat:@"%@.",scores[0]] withFont:[UIFont systemFontOfSize:15] withColor:[UIColor colorWithHexString:@"#ff7800"] withSecondtStr:[NSString stringWithFormat:@"%@",scores[1]] withFont:[UIFont systemFontOfSize:13] withColor:[UIColor colorWithHexString:@"#ff7800"]];
+    }else{
+        self.scoreLabel.text = [NSString stringWithFormat:@"%@",self.model.score];
     }
-    
-    for (int i=40; i<45; i++) {
-        UIImageView*imageView=[self viewWithTag:i];
-        if (imageView.tag-40<realZhengshu) {
-            //亮
-            imageView.image=[UIImage imageNamed:@"home_lightStar"];
-        }else if (imageView.tag-40==realZhengshu&&realXiaoshu<0.75 && realXiaoshu >=0.25){
-            //半亮
-            imageView.image=[UIImage imageNamed:@"home_halfStar"];
-            
-        }else{
-            //不亮
-            imageView.image=[UIImage imageNamed:@"home_grayStar"];
+    self.showTypeLabel.text = self.model.showtypes;
+    self.filmCountLabel.textColor = [UIColor colorWithHexString:@"#333333"];
+    self.filmCountLabel.text = [NSString stringWithFormat:@"今日%@家%@场",self.model.cinema_count,self.model.cinema_film_count];
+    if (self.model.cinema_count == nil && self.model.cinema_film_count == nil){
+        self.filmCountLabel.text = @"今日-/-家-/-场";
+    }else if (self.model.cinema_film_count == nil) {
+        self.filmCountLabel.text = [NSString stringWithFormat:@"今日%@家-/-场",self.model.cinema_count];
+    }else if (self.model.cinema_count == nil){
+        self.filmCountLabel.text = [NSString stringWithFormat:@"今日-/-家%@场",self.model.cinema_film_count];
+    }
+    self.introduceLabel.textColor = [UIColor colorWithHexString:@"#666666"];
+    self.introduceLabel.text = self.model.highlight;
+    self.buyBtn.hidden= NO;
+    self.showTypeLabel.hidden = NO;
+    self.scoreLabel.hidden = NO;
+    if (self.status == 1) {
+        self.showTypeLabel.hidden = YES;
+        self.scoreLabel.hidden = YES;
+        NSString * publishDate = [JWTools getTime:self.model.publish_date];
+        self.filmCountLabel.text= [NSString stringWithFormat:@"%@上映",publishDate];
+        [self.buyBtn setTitle:@"预售" forState:UIControlStateNormal];
+        if ([self.model.isCF isEqualToString:@"0"]) {
+            self.buyBtn.hidden = YES;
         }
         
         
     }
-    //---------------------------------------------------------------------------
-    self.introduceLabel.text = self.model.highlight;
-
 }
 - (IBAction)toBuyTicketAction:(UIButton *)sender {
     [self.deletage toBuyTicket:sender];

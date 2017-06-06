@@ -44,16 +44,16 @@
     _movieScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
     _movieScrollView.contentSize = CGSizeMake(kScreen_Width, kScreen_Height * 1.3f);
     [self.view addSubview:_movieScrollView];
-    NSString * path = [[NSBundle mainBundle]pathForResource:@"baobaoBG1" ofType:@"png"];
-    _HPicImageView = [[UIImageView alloc]initWithImage:[UIImage imageWithContentsOfFile:path]];
+
+    _HPicImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"baobaoBG1"]];
     _HPicImageView.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Height * 1.3f);
     _HPicImageView.userInteractionEnabled = YES;
     [_movieScrollView addSubview:_HPicImageView];
     
     for (int i = 0; i<2; i++) {
         UIImageView * movieImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, _HPicImageView.height*0.4f +(25 +kScreen_Height/4)*i, kScreen_Width-40, kScreen_Height/4)];
-        NSString * path = [[NSBundle mainBundle]pathForResource:@"baobaoBG3" ofType:@"png"];
-        movieImageView.image = [UIImage imageWithContentsOfFile:path];
+
+        movieImageView.image = [UIImage imageNamed:@"baobaoBG3"];
         movieImageView.userInteractionEnabled = YES;
         [_HPicImageView addSubview:movieImageView];
         

@@ -30,8 +30,7 @@
 }
 - (void)makeUI{
     UIImageView * freeCatch = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    NSString * path = [[NSBundle mainBundle]pathForResource:@"freecatch"ofType:@"png"];
-    freeCatch.image = [UIImage imageWithContentsOfFile:path];
+    freeCatch.image = [UIImage imageNamed:@"freecatch"];
     [self.view addSubview:freeCatch];
     freeCatch.userInteractionEnabled = YES;
     CGFloat btnWidth = (kScreen_Width - 10 - 40)/2;

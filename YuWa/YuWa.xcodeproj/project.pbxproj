@@ -960,6 +960,10 @@
 		AAFAC9961EBD7160000AAB78 /* ViscosityLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAC9951EBD7160000AAB78 /* ViscosityLayout.m */; };
 		AAFAC99B1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAC9991EBD7A4E000AAB78 /* MoviePicCollectionViewCell.m */; };
 		AAFAC99C1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAFAC99A1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.xib */; };
+		AAFAE3D91EE63E8500D24DCF /* freecatch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFAE3D81EE63E8500D24DCF /* freecatch@2x.png */; };
+		AAFAE3DB1EE6408000D24DCF /* 娃娃机开大奖.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFAE3DA1EE6408000D24DCF /* 娃娃机开大奖.png */; };
+		AAFAE3DD1EE640B200D24DCF /* 开奖.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFAE3DC1EE640B200D24DCF /* 开奖.png */; };
+		AAFAE3DF1EE640D600D24DCF /* wawaactionBG.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFAE3DE1EE640D600D24DCF /* wawaactionBG.png */; };
 		B30136BE1DB86C1C00691F60 /* RBNodeTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B30136BD1DB86C1C00691F60 /* RBNodeTagModel.m */; };
 		B301E7CA1DAC86BD0001336E /* YWMessageSearchFriendAddCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B301E7C81DAC86BD0001336E /* YWMessageSearchFriendAddCell.m */; };
 		B301E7CB1DAC86BD0001336E /* YWMessageSearchFriendAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B301E7C91DAC86BD0001336E /* YWMessageSearchFriendAddCell.xib */; };
@@ -2993,6 +2997,10 @@
 		AAFAC9981EBD7A4E000AAB78 /* MoviePicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePicCollectionViewCell.h; sourceTree = "<group>"; };
 		AAFAC9991EBD7A4E000AAB78 /* MoviePicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePicCollectionViewCell.m; sourceTree = "<group>"; };
 		AAFAC99A1EBD7A4E000AAB78 /* MoviePicCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoviePicCollectionViewCell.xib; sourceTree = "<group>"; };
+		AAFAE3D81EE63E8500D24DCF /* freecatch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "freecatch@2x.png"; sourceTree = "<group>"; };
+		AAFAE3DA1EE6408000D24DCF /* 娃娃机开大奖.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "娃娃机开大奖.png"; path = "../娃娃机开大奖.png"; sourceTree = "<group>"; };
+		AAFAE3DC1EE640B200D24DCF /* 开奖.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "开奖.png"; sourceTree = "<group>"; };
+		AAFAE3DE1EE640D600D24DCF /* wawaactionBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wawaactionBG.png; sourceTree = "<group>"; };
 		B30136BC1DB86C1C00691F60 /* RBNodeTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBNodeTagModel.h; sourceTree = "<group>"; };
 		B30136BD1DB86C1C00691F60 /* RBNodeTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBNodeTagModel.m; sourceTree = "<group>"; };
 		B301E7C71DAC86BD0001336E /* YWMessageSearchFriendAddCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWMessageSearchFriendAddCell.h; sourceTree = "<group>"; };
@@ -4977,6 +4985,10 @@
 		AA2DC50D1E66619000CAD9BF /* 技能界面 */ = {
 			isa = PBXGroup;
 			children = (
+				AAFAE3DE1EE640D600D24DCF /* wawaactionBG.png */,
+				AAFAE3DC1EE640B200D24DCF /* 开奖.png */,
+				AAFAE3DA1EE6408000D24DCF /* 娃娃机开大奖.png */,
+				AAFAE3D81EE63E8500D24DCF /* freecatch@2x.png */,
 				AA2724061EC40CF300F80DB7 /* adress.png */,
 				AAF394FF1E837AD300A93FD1 /* beginCatch@2x.png */,
 				AAF394FD1E836C6100A93FD1 /* sorry@2x.png */,
@@ -10434,7 +10446,7 @@
 					B38B2C6B1D8FAC5A004D5256 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = JQ283T24DV;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 0;
@@ -10709,6 +10721,7 @@
 				AA3544051E9DF23800A2EC73 /* 2baobaoLVUP25@2x.jpg in Resources */,
 				AA3545A71E9DF23A00A2EC73 /* 4baobaoBG26@2x.jpg in Resources */,
 				25B3C5B01ECD8E4000674F20 /* 16.png in Resources */,
+				AAFAE3D91EE63E8500D24DCF /* freecatch@2x.png in Resources */,
 				AA3544491E9DF23800A2EC73 /* 3baobaoLVUP32@2x.jpg in Resources */,
 				C13019A61DB1FD2F00E24C88 /* qr_vc_left@2x.png in Resources */,
 				B38B2F2E1D8FC82F004D5256 /* RBNodeBGView.xib in Resources */,
@@ -10990,6 +11003,7 @@
 				AA3545C31E9DF23A00A2EC73 /* 4baobaoBG51@2x.jpg in Resources */,
 				AA3543C51E9DF23800A2EC73 /* 1baobaoLVUP21@2x.jpg in Resources */,
 				AA3544F31E9DF23900A2EC73 /* 1baobaoBG26@2x.jpg in Resources */,
+				AAFAE3DB1EE6408000D24DCF /* 娃娃机开大奖.png in Resources */,
 				C1F7BE381DB1C95400CCAF96 /* PersonCenterZeroCell.xib in Resources */,
 				AA35444B1E9DF23800A2EC73 /* 3baobaoLVUP34@2x.jpg in Resources */,
 				AAF128131E8B9D5500121621 /* SetPayPasswordViewController.xib in Resources */,
@@ -11014,6 +11028,7 @@
 				AA35458B1E9DF23A00A2EC73 /* 3baobaoBG55@2x.jpg in Resources */,
 				AA3544EB1E9DF23900A2EC73 /* 1baobaoBG19@2x.jpg in Resources */,
 				C135A0D11DDC654E002B78A5 /* page_collection_selected.png in Resources */,
+				AAFAE3DD1EE640B200D24DCF /* 开奖.png in Resources */,
 				AA35448E1E9DF23900A2EC73 /* 4baobaoLVUP40@2x.jpg in Resources */,
 				C1F7BF351DB1CA0700CCAF96 /* center_set@2x.png in Resources */,
 				C1F7BD9C1DB1C94500CCAF96 /* CommentTableViewCell.xib in Resources */,
@@ -11141,6 +11156,7 @@
 				AA3544B11E9DF23900A2EC73 /* 0baobaoBG18@2x.jpg in Resources */,
 				AA3545B41E9DF23A00A2EC73 /* 4baobaoBG38@2x.jpg in Resources */,
 				AA3545B51E9DF23A00A2EC73 /* 4baobaoBG39@2x.jpg in Resources */,
+				AAFAE3DF1EE640D600D24DCF /* wawaactionBG.png in Resources */,
 				C11F14F21DC83B92005C58CF /* banner_selected@3x.png in Resources */,
 				C13019D91DB20B2400E24C88 /* 宠物.png in Resources */,
 				AA3BFE361E8559B500D669C2 /* AddBankSuccessViewController.xib in Resources */,
@@ -12523,8 +12539,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.duruikeji.YuWa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9b9f5f2-2c2c-44e0-87ad-366c261519cb";
-				PROVISIONING_PROFILE_SPECIFIER = luoyun;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -12576,8 +12592,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.duruikeji.YuWa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9b9f5f2-2c2c-44e0-87ad-366c261519cb";
-				PROVISIONING_PROFILE_SPECIFIER = luoyun;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

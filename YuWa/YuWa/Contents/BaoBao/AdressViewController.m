@@ -23,8 +23,7 @@
 - (void)makeBtn{
     UIImage * image;
     if (self.status == 1) {
-        NSString * path = [[NSBundle mainBundle]pathForResource:@"actionintroduce" ofType:@"png"];
-        image = [UIImage imageWithContentsOfFile:path];
+        image = [UIImage imageNamed:@"actionintroduce"];
     }else{
         NSString * path = [[NSBundle mainBundle]pathForResource:@"adress" ofType:@"png"];
         image = [UIImage imageWithContentsOfFile:path];

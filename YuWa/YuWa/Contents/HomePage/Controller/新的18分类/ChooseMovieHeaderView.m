@@ -28,7 +28,6 @@
 
 - (void)setData{
    [self.posterImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    [self.posterImageView addSubview:self.playBtn];
     self.title.text = self.model.name;
     self.daoyanLabel.text = [NSString stringWithFormat:@"导演:%@",self.model.director];
     if (self.model.director== nil) {
@@ -106,22 +105,22 @@
     }
     return _posterImageView;
 }
-- (UIButton*)playBtn{
-    if (!_playBtn) {
-        
-        _playBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _playBtn.frame = CGRectMake(self.posterImageView.width-40, self.posterImageView.height-40, 40, 40);
-        _playBtn.layer.cornerRadius = 20;
-        _playBtn.layer.masksToBounds = YES;
-        NSString * path = [[NSBundle mainBundle]pathForResource:@"play1" ofType:@"png"];
-        [_playBtn setImage:[UIImage imageWithContentsOfFile:path] forState:UIControlStateNormal];
-        [_playBtn addTarget:self action:@selector(tapAvatarView) forControlEvents:UIControlEventTouchUpInside];
-        _playBtn.backgroundColor = [UIColor clearColor];
-       
-
-    }
-    return _playBtn;
-}
+//- (UIButton*)playBtn{
+//    if (!_playBtn) {
+//        
+//        _playBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _playBtn.frame = CGRectMake(self.posterImageView.width-40, self.posterImageView.height-40, 40, 40);
+//        _playBtn.layer.cornerRadius = 20;
+//        _playBtn.layer.masksToBounds = YES;
+//
+//        [_playBtn setImage:[UIImage imageNamed:@"freecatch"] forState:UIControlStateNormal];
+//        [_playBtn addTarget:self action:@selector(tapAvatarView) forControlEvents:UIControlEventTouchUpInside];
+//        _playBtn.backgroundColor = [UIColor clearColor];
+//       
+//
+//    }
+//    return _playBtn;
+//}
 - (UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width/3+20, 10, kScreen_Width/2, self.bounds.size.height*0.15)];

@@ -92,7 +92,6 @@
         tapTouch.numberOfTapsRequired = 1;
         tapTouch.numberOfTouchesRequired = 1;
         [movieView addGestureRecognizer:tapTouch];
-        [movieView.playBtn removeFromSuperview];
         [movieView.PrivateLetterTap removeTarget:self action:@selector(tapAvatarView)];
         [movieView.wantSeeBtn removeFromSuperview];
         [movieView.gradeBtn removeFromSuperview];

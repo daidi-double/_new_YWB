@@ -97,7 +97,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-        return 65.f;
+        return 100.f;
     
     
 }
@@ -122,7 +122,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     CinameTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CINEMASHOWCELL];
-
+    self.cinemaModel = self.movieDataAry[indexPath.row];
     cell.model = self.cinemaModel;
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
