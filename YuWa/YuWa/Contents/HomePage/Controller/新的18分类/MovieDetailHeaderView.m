@@ -49,7 +49,6 @@
     if (!_headerView) {
         _headerView  = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height* 0.3f)];
         _headerView.delegate = self;
-        _headerView.playBtn.hidden = YES;
         _headerView.rightImageView.hidden = YES;
         _headerView.backgroundColor = [UIColor darkGrayColor];
         [self addSubview:_headerView];

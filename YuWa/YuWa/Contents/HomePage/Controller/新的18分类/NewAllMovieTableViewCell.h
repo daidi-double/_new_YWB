@@ -14,12 +14,15 @@
 
 @end
 @interface NewAllMovieTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *showTypeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *filmCountLabel;
 @property (nonatomic,strong) HotMovieModel * model;
 @property (weak, nonatomic) IBOutlet UIImageView *movieImageView;
 @property (weak, nonatomic) IBOutlet UILabel *movieNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *introduceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *buyBtn;
-
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (nonatomic,assign)NSInteger status;//0正在热映，1即将上映
 @property (nonatomic,assign)id<NewAllMovieTableViewCellDeletage>deletage;
 
 @end

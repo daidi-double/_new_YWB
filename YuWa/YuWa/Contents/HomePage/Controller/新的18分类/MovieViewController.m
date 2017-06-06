@@ -64,7 +64,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = @"电影";
     self.cityCode = @"350500";//目前只使用泉州地区编码
 
     self.pagen = 10;
@@ -73,8 +72,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIBarButtonItem * searchBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_homepage_search"] style:UIBarButtonItemStylePlain target:self action:@selector(searchMovie)];
-    self.navigationItem.rightBarButtonItem = searchBtn;
+//    UIBarButtonItem * searchBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_homepage_search"] style:UIBarButtonItemStylePlain target:self action:@selector(searchMovie)];
+//    self.navigationItem.rightBarButtonItem = searchBtn;
     self.type = @"0";
     self.typeList = @"0";
     [self.view addSubview:self.movieTableView];
@@ -84,12 +83,21 @@
     [self requestHotData];
     [self getlocatCityCode];
     [self getHomePageCinemaList];
+
+   UIImage * image = [UIImage imageNamed:@"yuwabaomovie"];
+
+    UIImageView * titleImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, image.size.width*20/image.size.height, 20)];
+    titleImageView.image = image;
+    titleImageView.centerX = kScreen_Width/2;
+    self.navigationItem.titleView = titleImageView;
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.timer setFireDate:[NSDate distantPast]];
-    self.navigationController.navigationBarHidden = NO;
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0.f];
 }
+
 - (void)setRJRefresh {
     
     self.movieTableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
@@ -107,6 +115,9 @@
     }];
 
 }
+
+
+
 #pragma mark - tableViewDelete
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -123,82 +134,92 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        UIView * headerFirstView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.6f)];
-    //轮播图
-    hotScrollView = [[HotMovieScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, headerFirstView.size.height * 0.4f) andDataAry:self.hotMovieSAry];
-    hotScrollView.contentSize = CGSizeMake(self.hotMovieSAry.count*kScreen_Width, headerFirstView.size.height * 0.4f);//容量要根据数据修改
-    hotScrollView.delegate = self;
-    hotScrollView.pagingEnabled = YES;
-    hotScrollView.HotDelegate = self;
-    hotScrollView.showsHorizontalScrollIndicator = NO;
-    [headerFirstView addSubview:hotScrollView];
-    
-    UIPageControl * moviePage = [[UIPageControl alloc]initWithFrame:CGRectMake(0, headerFirstView.size.height * 0.3f, kScreen_Width, 30)];
-    moviePage.numberOfPages = self.hotMovieSAry.count;//修改
-    moviePage.currentPage = 0;
-    moviePage.currentPageIndicatorTintColor = [UIColor redColor];
-    moviePage.pageIndicatorTintColor = [UIColor whiteColor];
-    [headerFirstView addSubview:moviePage];
-    [moviePage addTarget:self action:@selector(pageController:) forControlEvents:UIControlEventValueChanged];
-    if (self.timer == nil) {
+        UIView * headerFirstView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 1052/1334.f)];
+        //轮播图
+        hotScrollView = [[HotMovieScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, headerFirstView.size.height * 610/1052.f) andDataAry:self.hotMovieSAry];
+        hotScrollView.contentSize = CGSizeMake(self.hotMovieSAry.count*kScreen_Width, headerFirstView.size.height * 0.4f);//容量要根据数据修改
+        hotScrollView.delegate = self;
+        hotScrollView.pagingEnabled = YES;
+        hotScrollView.HotDelegate = self;
+        hotScrollView.showsHorizontalScrollIndicator = NO;
+        [headerFirstView addSubview:hotScrollView];
         
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(timer:) userInfo:nil repeats:YES];
-    }
+        UIPageControl * moviePage = [[UIPageControl alloc]initWithFrame:CGRectMake(0, hotScrollView.height* 0.85f, kScreen_Width, 30)];
+        moviePage.numberOfPages = self.hotMovieSAry.count;//修改
+        moviePage.currentPage = 0;
+        moviePage.currentPageIndicatorTintColor = [UIColor redColor];
+        moviePage.pageIndicatorTintColor = [UIColor whiteColor];
+        [headerFirstView addSubview:moviePage];
+        [moviePage addTarget:self action:@selector(pageController:) forControlEvents:UIControlEventValueChanged];
+        if (self.timer == nil) {
+            
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(timer:) userInfo:nil repeats:YES];
+        }
         if (self.hotMovieSAry.count>0) {
             [self.timer setFireDate:[NSDate distantPast]];
         }else{
             [self.timer setFireDate:[NSDate distantFuture]];
         }
-    _page = moviePage;
-    
-    
-    UIView * hotMovieBGView = [[UIView alloc]initWithFrame:CGRectMake(0, hotScrollView.bottom, kScreen_Width, headerFirstView.size.height*0.1f)];
-    hotMovieBGView.backgroundColor = [UIColor whiteColor];
-    
-    
-    [headerFirstView addSubview: hotMovieBGView];
-    UILabel * hotLbl = [[UILabel alloc]initWithFrame:CGRectMake(5, 3, kScreen_Width/2, hotMovieBGView.size.height)];
-    hotLbl.textAlignment = NSTextAlignmentLeft;
-    hotLbl.textColor = RGBCOLOR(123, 124, 125, 1);
-    hotLbl.font = [UIFont systemFontOfSize:15];
-    hotLbl.text = @"热映影片";
-    
-    [hotMovieBGView addSubview:hotLbl];
-    
-    UIButton * lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    lookBtn.frame = CGRectMake(kScreen_Width*0.75, 3, kScreen_Width*0.25, hotMovieBGView.size.height);
-    [lookBtn setTitle:@"全部 >" forState:UIControlStateNormal];
-    [lookBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [lookBtn addTarget:self action:@selector(lookAll:) forControlEvents:UIControlEventTouchUpInside];
-    lookBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [hotMovieBGView addSubview:lookBtn];
-    
-    UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
-    self.movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, hotMovieBGView.bottom, kScreen_Width, headerFirstView.size.height*0.5f-10) collectionViewLayout:layout];
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-
-    [_movieCollectView registerNib:[UINib nibWithNibName:newHotCell bundle:nil] forCellWithReuseIdentifier:newHotCell];
-    _movieCollectView.backgroundColor = [UIColor whiteColor];
-    _movieCollectView.delegate = self;
-    _movieCollectView.dataSource = self;
-    [headerFirstView addSubview:_movieCollectView];
-    
+        _page = moviePage;
+        
+        
+        UIView * hotMovieBGView = [[UIView alloc]initWithFrame:CGRectMake(0, hotScrollView.bottom, kScreen_Width, 40)];
+        UIView * line3 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
+        
+        line3.backgroundColor = RGBCOLOR(245, 246, 247, 1);
+        [hotMovieBGView addSubview:line3];
+        
+        [headerFirstView addSubview: hotMovieBGView];
+        UILabel * hotLbl = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, kScreen_Width/2, 40)];
+        hotLbl.textAlignment = NSTextAlignmentLeft;
+        hotLbl.textColor = [UIColor colorWithHexString:@"#333333"];
+        hotLbl.font = [UIFont systemFontOfSize:15];
+        hotLbl.text = @"正在热映";
+        
+        [hotMovieBGView addSubview:hotLbl];
+        
+        UIView * blueView = [[UIView alloc]initWithFrame:CGRectMake(0, 8, 6, 24)];
+        blueView.backgroundColor = CNaviColor;
+        [hotMovieBGView addSubview:blueView];
+        
+        UIButton * lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        lookBtn.frame = CGRectMake(kScreen_Width - 13 - 70, 3, 70, hotMovieBGView.size.height);
+        [lookBtn setTitle:@"全部 >" forState:UIControlStateNormal];
+        [lookBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [lookBtn addTarget:self action:@selector(lookAll:) forControlEvents:UIControlEventTouchUpInside];
+        lookBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [hotMovieBGView addSubview:lookBtn];
+        
+        UIView * line2 = [[UIView alloc]initWithFrame:CGRectMake(0, 39.5, kScreen_Width, 0.5)];
+        line2.backgroundColor = RGBCOLOR(234, 235, 236, 1);
+        [hotMovieBGView addSubview:line2];
+        
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
+        self.movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, hotMovieBGView.bottom+12, kScreen_Width, headerFirstView.size.height*328/1052)  collectionViewLayout:layout];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        self.movieCollectView.showsHorizontalScrollIndicator = FALSE;
+        [_movieCollectView registerNib:[UINib nibWithNibName:newHotCell bundle:nil] forCellWithReuseIdentifier:newHotCell];
+        _movieCollectView.backgroundColor = [UIColor whiteColor];
+        _movieCollectView.delegate = self;
+        _movieCollectView.dataSource = self;
+        [headerFirstView addSubview:_movieCollectView];
+        
         
         return headerFirstView;
     }else{
         return self.headerView;
     }
-
-
+    
+    
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return kScreen_Height * 0.6f;
+        return kScreen_Height * 1052/1334.f;
         
     }else{
-        return 30;
+        return 80.f;
     }
 
 }
@@ -207,9 +228,9 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return 0.01f;
+        return 0.1f;
     }else{
-        return 70.f;
+        return 100.f;
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -227,7 +248,7 @@
         
     }
     [self.navigationController pushViewController:movieVC animated:YES];
-//    [self judgeIsContentOtherTicket:model.code andFilmCode:model.film_code];//修改
+
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section != 0) {
@@ -254,18 +275,19 @@
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 5;
+    return 12;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 5;
+    return 12;
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(5, 5, 5, 5);
+    return UIEdgeInsetsMake(12, 12, 12, 12);
 }
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake((kScreen_Width-35)/3, kScreen_Height*0.3f);
+
+    return CGSizeMake(kScreen_Width*184/750, kScreen_Height*(256+72)/1052);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -423,14 +445,14 @@
 //    LookDetaliViewController * lookVC = [[LookDetaliViewController alloc]init];
 //    [self.navigationController pushViewController:lookVC animated:YES];
 //}
-//搜索
-- (void)searchMovie{
-    SearchViewController*vc=[[SearchViewController alloc]init];
-    vc.coordinatey = self.coordinatey;
-    vc.coordinatex = self.coordinatex;
-    vc.cityCode = self.cityCode;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+////搜索
+//- (void)searchMovie{
+//    SearchViewController*vc=[[SearchViewController alloc]init];
+//    vc.coordinatey = self.coordinatey;
+//    vc.coordinatex = self.coordinatex;
+//    vc.cityCode = self.cityCode;
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 - (void)menuBtn:(UIButton*)btn{
     NSLog(@"%ld",btn.tag);
@@ -444,6 +466,7 @@
         
         [_movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
+
     [self creatPlaceView:btn.tag];
  
 }
@@ -535,6 +558,7 @@
     _isselected = 0;
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
     [_movieTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+
 }
 //轮播图点击后的界面
 - (void)pushToDetailPage:(BannerModel *)model{
@@ -569,11 +593,37 @@
     hotScrollView.contentOffset = CGPointMake(_page.currentPage * kScreen_Width, 0);
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    _page.currentPage = scrollView.contentOffset.x/kScreen_Width;
+    if (scrollView == self.movieTableView) {
+        CGFloat yoffset=scrollView.contentOffset.y;
+        if (yoffset<=0) {
+            [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0.f];
+        }
+        if (yoffset<64) {
+            
+            CGFloat alpha=yoffset/64;
+            
+            [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:alpha];
+            
+            
+        }else if (yoffset>=64){
+            
+            //        self.navigationItem.title=@"";
+            [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+            
+        }else{
+            
+            [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+            
+        }
+
+    }else{
+       _page.currentPage = scrollView.contentOffset.x/kScreen_Width;
+    }
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.timer setFireDate:[NSDate distantFuture]];
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.f];
 }
 - (void)dealloc{
     [self.timer invalidate];
@@ -583,7 +633,7 @@
 - (UITableView *)movieTableView {
     
     if (!_movieTableView) {
-        _movieTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, NavigationHeight, kScreen_Width, kScreen_Height-NavigationHeight) style:UITableViewStyleGrouped];
+        _movieTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
         _movieTableView.delegate = self;
         _movieTableView.dataSource = self;
         _movieTableView.backgroundColor = [UIColor whiteColor];
@@ -593,22 +643,54 @@
 }
 - (UIView *)headerView{
     if (!_headerView) {
-        _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 30)];
-        _headerView.backgroundColor = RGBCOLOR(240, 244, 240, 1);
+        _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 80)];
+        _headerView.backgroundColor = [UIColor whiteColor];
+        UIView * nameView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 5)];
+        nameView1.backgroundColor = RGBCOLOR(245, 246, 247, 1);
+        [_headerView addSubview:nameView1];
+        UIView * nameView = [[UIView alloc]initWithFrame:CGRectMake(0, 5, kScreen_Width, 35)];
+        [_headerView addSubview:nameView];
         
+        UILabel * titleLable = [[UILabel alloc]initWithFrame:CGRectMake(14, 0, 150, 35)];
+        titleLable.font = [UIFont systemFontOfSize:15];
+        titleLable.textColor = [UIColor colorWithHexString:@"#333333"];
+        titleLable.text = @"推荐影院";
+        [nameView addSubview:titleLable];
+        
+        UIButton * allCinemaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        allCinemaBtn.frame = CGRectMake(kScreen_Width - 13- 70, 0, 70, 35);
+        [allCinemaBtn setTitle:@"全部 >" forState:UIControlStateNormal];
+        [allCinemaBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [allCinemaBtn addTarget:self action:@selector(lookAll:) forControlEvents:UIControlEventTouchUpInside];
+        allCinemaBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [nameView addSubview:allCinemaBtn];
 
+        
+        UIView * blueView = [[UIView alloc]initWithFrame:CGRectMake(0, 5, 6, 25)];
+        blueView.backgroundColor = CNaviColor;
+        [nameView addSubview:blueView];
+        
+        UIView * line3 = [[UIView alloc]initWithFrame:CGRectMake(0, 34.5, kScreen_Width, 0.5)];
+        line3.backgroundColor = RGBCOLOR(234, 235, 236, 1);
+        [nameView addSubview:line3];
+        
+        
+        UIView * btnView12 = [[UIView alloc]initWithFrame:CGRectMake(0, 40, kScreen_Width, 40)];
+        
+        
+        [_headerView addSubview:btnView12];
         NSArray * titleAry = @[@"全部地区",@"离我最近"];
         CGFloat btnWidth = (kScreen_Width-6)/2;
         for (int i = 0; i<2; i++) {
             UIButton * selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            selectBtn.frame = CGRectMake((btnWidth+3)*i, 0 ,btnWidth , 30);
+            selectBtn.frame = CGRectMake((btnWidth+3)*i, 0 ,btnWidth , 40);
             selectBtn.tag = 1111 + i;
             selectBtn.backgroundColor = [UIColor whiteColor];
             [selectBtn setTitle:titleAry[i] forState:UIControlStateNormal];
             [selectBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal.png"] forState:UIControlStateNormal];
-            [selectBtn setTitleColor:CNaviColor forState:UIControlStateSelected];
-            [selectBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-            selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+            [selectBtn setTitleColor:[UIColor colorWithHexString:@"#d5d5d5"] forState:UIControlStateSelected];
+            [selectBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            selectBtn.titleLabel.font = [UIFont systemFontOfSize:15];
             
             [selectBtn addTarget:self action:@selector(menuBtn:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -619,11 +701,11 @@
             if (_isselected == 0) {
                 selectBtn.selected = NO;
             }
-            [_headerView addSubview:selectBtn];
+            [btnView12 addSubview:selectBtn];
             UIView * line = [[UIView alloc]initWithFrame:CGRectMake(selectBtn.right+1, 10, 1, 10)];
             line.centerY = _headerView.height/2;
             line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
-            [_headerView addSubview:line];
+            [btnView12 addSubview:line];
             if (i == 1) {
                 line.hidden = YES;
             }

@@ -28,7 +28,7 @@
 
 @property (nonatomic,strong) UIButton * wantSeeBtn;//想看按钮
 @property (nonatomic,strong) UIButton * gradeBtn;//评分按钮
-@property (nonatomic,strong) UIButton * playBtn;//播放按钮
+
 @property (nonatomic,assign) BOOL isselected;
 @property (nonatomic,strong) UITapGestureRecognizer * PrivateLetterTap;
 @property (nonatomic,strong)id<ChooseMovieHeaderViewDelegate>delegate;
