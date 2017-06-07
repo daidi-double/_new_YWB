@@ -29,11 +29,17 @@
 - (void)setData{
 
     self.backgroundColor = [UIColor whiteColor];
-//    self.headerView.model = self.model;
-//    [self.headerView.posterImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.poster]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-//    self.introduceLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, self.headerView.bottom + 15 , kScreen_Width -30, self.height * 0.3f - 35.f)];
+
+    self.daoyanLabel.height = [self getLabelHeight:self.model.director];
+    self.daoyanLabel.text = [NSString stringWithFormat:@"导演:%@",self.model.director];
+    self.performerLabel.height = [self getLabelHeight:self.model.cast];
+    self.performerLabel.text = [NSString stringWithFormat:@"主演:%@",self.model.cast];
+    self.categoryLabel.height = [self getLabelHeight:self.model.type];
+    self.categoryLabel.text = [NSString stringWithFormat:@"类型:%@",self.model.type];
+    self.countryLabel.height = [self getLabelHeight:self.model.country];
+    self.countryLabel.text = [NSString stringWithFormat:@"地区/国家:%@",self.model.country];
     self.introduceLabel.text = self.model.intro;
-    _introduceLabel.frame= CGRectMake(16, self.line.bottom + 18, kScreen_Width -32 , [self getLabelHeight:self.model.intro]);
+    [self moreBtn];
 
 }
 
@@ -50,7 +56,7 @@
 }
 - (UILabel*)performerLabel{
     if (!_performerLabel) {
-        _performerLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.daoyanLabel.origin.x, self.daoyanLabel.bottom, kScreen_Width-32, self.bounds.size.height*0.2f)];
+        _performerLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.daoyanLabel.origin.x, self.daoyanLabel.bottom+10, kScreen_Width-32, self.bounds.size.height*0.1f)];
         _performerLabel.textColor = [UIColor colorWithHexString:@"#333333"];
         _performerLabel.numberOfLines = 0;
         _performerLabel.font = [UIFont systemFontOfSize:12];
@@ -62,7 +68,7 @@
 }
 - (UILabel*)categoryLabel{
     if (!_categoryLabel) {
-        _categoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.daoyanLabel.origin.x, self.performerLabel.bottom, kScreen_Width-32, self.bounds.size.height*0.1f)];
+        _categoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.daoyanLabel.origin.x, self.performerLabel.bottom+10, kScreen_Width-32, self.bounds.size.height*0.1f)];
         _categoryLabel.textColor = [UIColor colorWithHexString:@"#333333"];
         _categoryLabel.font = [UIFont systemFontOfSize:12];
         _categoryLabel.text = @"类型:";
@@ -74,7 +80,7 @@
 
 - (UILabel*)countryLabel{
     if (!_countryLabel) {
-        _countryLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.daoyanLabel.origin.x, self.categoryLabel.bottom, kScreen_Width-32, self.bounds.size.height*0.1f)];
+        _countryLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.daoyanLabel.origin.x, self.categoryLabel.bottom+10, kScreen_Width-32, self.bounds.size.height*0.1f)];
         _countryLabel.textColor = [UIColor colorWithHexString:@"#333333"];
         _countryLabel.font = [UIFont systemFontOfSize:12];
         _countryLabel.text = @"地区/国家:";
@@ -94,11 +100,11 @@
 
 - (UILabel*)introduceLabel{
     if (!_introduceLabel) {
-        _introduceLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, self.line.bottom + 18, kScreen_Width - 32, 20)];
+        _introduceLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, self.line.bottom + 10, kScreen_Width - 32, 20)];
         if (self.model.intro == nil) {
             _introduceLabel.height = 0;
         }else{
-            _introduceLabel.height = 200;
+            _introduceLabel.height = 100;
         }
         _introduceLabel.numberOfLines = 0;
         _introduceLabel.textColor = [UIColor colorWithHexString:@"#333333"];
@@ -110,9 +116,10 @@
 - (UIButton*)moreBtn{
     if (!_moreBtn) {
         _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _moreBtn.frame = CGRectMake(0, self.introduceLabel.bottom +35, 35, 35);
+        _moreBtn.frame = CGRectMake(0, self.introduceLabel.bottom +20, 35, 35);
+        _moreBtn.centerX = kScreen_Width/2;
         [_moreBtn setImage:[UIImage imageNamed:@"dropdown"] forState:UIControlStateNormal];
-        [_moreBtn addTarget:self action:@selector(moreIntro) forControlEvents:UIControlEventTouchUpInside];
+        [_moreBtn addTarget:self action:@selector(moreIntro:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_moreBtn];
     }
     return _moreBtn;
@@ -124,18 +131,38 @@
 }
 
 +(CGFloat)getHeaderHeight:(NSString *)introduce{
+    
     CGRect labelHeight = [introduce boundingRectWithSize:CGSizeMake(kScreen_Width-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
     return labelHeight.size.height+kScreen_Height * 0.3f + 35;
 
 }
-
++(CGFloat)getHeaderAllHeight:(NSString *)introduce{
+    
+    CGRect labelHeight = [introduce boundingRectWithSize:CGSizeMake(kScreen_Width-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
+    return labelHeight.size.height+kScreen_Height * 0.3f + 35;
+    
+}
 -(void)commend{
     [self.delegate toCommentScore];
 }
-- (void)moreIntro{
-    [self layoutIfNeeded];
+- (void)moreIntro:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        self.status = 1;
+       
+    }else{
+        self.status = 0;
+    }
+     [self layoutIfNeeded];
 }
 - (void)layoutIfNeeded{
-    self.introduceLabel.frame = CGRectMake(16, self.line.bottom + 18, kScreen_Width - 32, [self getLabelHeight:self.model.intro]);
+    if (self.status == 1) {
+        
+        self.introduceLabel.frame = CGRectMake(16, self.line.bottom + 18, kScreen_Width - 32, [self getLabelHeight:self.model.intro]);
+    }else{
+        self.introduceLabel.frame = CGRectMake(16, self.line.bottom + 18, kScreen_Width - 32, 100);
+    }
+    _moreBtn.frame = CGRectMake(0, self.introduceLabel.bottom +30, 35, 35);
+    _moreBtn.centerX = kScreen_Width/2;
 }
 @end

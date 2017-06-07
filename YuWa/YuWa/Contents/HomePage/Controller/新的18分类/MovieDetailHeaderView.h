@@ -23,6 +23,7 @@
 @property (nonatomic,strong) UIView * line;
 @property (nonatomic,strong) UILabel * introduceLabel;
 @property (nonatomic,strong) UIButton * moreBtn;
+@property (nonatomic,assign) NSInteger  status;//0省略的介绍，1展开介绍
 @property (nonatomic,strong) CinemaAndBuyTicketModel * model;
 @property (nonatomic,assign)id<MovieDetailHeaderViewDelegate>delegate;
 +(CGFloat)getHeaderHeight:(NSString *)introduce;
