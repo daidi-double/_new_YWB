@@ -34,6 +34,9 @@
 /*  取消了的座位*/
 //选座按钮的宽度
 @property (nonatomic, assign) NSInteger SeatsBntWidth;
+//选座按钮的宽度 一行中最多座位的个数
+@property (nonatomic, assign) NSInteger maxCount;
+
 @property (nonatomic,strong)NSMutableArray * cancelAry;
 @property (nonatomic,copy) void (^actionBlock)(NSMutableArray *, NSMutableDictionary *,NSMutableArray* ,NSString *);
 
@@ -55,6 +58,7 @@
         for (XZSeatsModel *seatsModel in seatsArray) {
             if (seatsModel.columns.count>maxCount ) {
                 maxCount = seatsModel.columns.count;
+                self.maxCount = maxCount;
             }
         }
         [self initcenterLine:seatsArray withMaxcount:(NSInteger)maxCount];
@@ -140,7 +144,7 @@
 
 -(void)initSeatsView:(NSMutableArray *)seatsArray{
     __weak typeof(self) weakSelf = self;
-    XZSeatsView *seatView = [[XZSeatsView alloc]initWithSeatsArray:seatsArray  maxNomarWidth:self.width seatBtnActionBlock:^(XZSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats) {
+    XZSeatsView *seatView = [[XZSeatsView alloc]initWithSeatsArray:seatsArray  maxNomarWidth:self.width maxCount:self.maxCount seatBtnActionBlock:^(XZSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats) {
        
         
         NSString *errorStr = nil;
@@ -189,7 +193,7 @@
     //获取按钮的宽度
     self.SeatsBntWidth = [seatView  getSeatBtnHeight];
     self.seatView = seatView;
-    seatView.frame = CGRectMake(0, 0,seatView.seatViewWidth+30, seatView.seatViewHeight);
+    seatView.frame = CGRectMake(0, 0,seatView.seatViewWidth, seatView.seatViewHeight);
     [self.seatScrollView insertSubview:seatView atIndex:0];
     self.seatScrollView.maximumZoomScale = XZseastMaxW_H / seatView.seatBtnWidth;
     self.seatScrollView.contentInset = UIEdgeInsetsMake(XZseastsColMargin,

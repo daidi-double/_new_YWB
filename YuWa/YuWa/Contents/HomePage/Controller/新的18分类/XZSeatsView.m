@@ -23,26 +23,27 @@
     }
     return _allAvailableSeats;
 }
-
--(instancetype)initWithSeatsArray:(NSMutableArray *)seatsArray maxNomarWidth:(CGFloat)maxW seatBtnActionBlock:(void (^)(XZSeatButton *, NSMutableDictionary *))actionBlock{
+-(instancetype)initWithSeatsArray:(NSMutableArray *)seatsArray maxNomarWidth:(CGFloat)maxW maxCount:(NSInteger)maxCount seatBtnActionBlock:(void (^)(XZSeatButton *, NSMutableDictionary *))actionBlock{
     
     if (self = [super init]) {
         
         self.actionBlock = actionBlock;
-        
-        XZSeatsModel * seatsModel = seatsArray.firstObject;
-        
-        NSUInteger cloCount = [seatsModel.columns count];
+        NSInteger cloCount = 0;
+        for (XZSeatsModel *seatsModel in seatsArray) {
+            if (seatsModel.columns.count>cloCount ) {
+                cloCount = seatsModel.columns.count;
+            }
+        }
         
         if (cloCount % 2) cloCount += 1;//偶数列数加1 防止中线压住座位
         
         CGFloat seatViewW = maxW - 2 * XZseastsRowMargin ;
         
-        CGFloat seatBtnW = seatViewW / cloCount;
+        CGFloat seatBtnW = seatViewW / (cloCount+2);
         
         if (seatBtnW > XZseastMinW_H) {
             seatBtnW = XZseastMinW_H;
-            seatViewW = cloCount * XZseastMinW_H;
+            seatViewW = cloCount * (XZseastMinW_H+2);
         }
         //初始化就回调算出按钮和自身的宽高
         CGFloat seatBtnH = seatBtnW;
