@@ -14,8 +14,11 @@
 //#import "CommentModel.h"
 #import "ChooseMovieHeaderView.h"//第一区头部
 #import "CommendViewController.h"
+#import "FilmDetailTableViewCell.h"
 
-#define COMMENTCELl111 @"CommentTableViewCell"
+
+#define FILMDETAILCELL @"FilmDetailTableViewCell"
+//#define COMMENTCELl111 @"CommentTableViewCell"
 #define CinemaCell123 @"CinemaCharacteristicTableViewCell"
 @interface MovieDetailViewController ()<UITableViewDelegate,UITableViewDataSource,MovieDetailHeaderViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
@@ -43,7 +46,7 @@
     self.title = @"影片详情";
     [self.detailTableView registerNib:[UINib nibWithNibName:CinemaCell123 bundle:nil] forCellReuseIdentifier:CinemaCell123];
     
-    [self.detailTableView registerNib:[UINib nibWithNibName:COMMENTCELl111 bundle:nil] forCellReuseIdentifier:COMMENTCELl111];    
+    [self.detailTableView registerNib:[UINib nibWithNibName:FILMDETAILCELL bundle:nil] forCellReuseIdentifier:FILMDETAILCELL];
 }
 //- (void)setRJRefresh {
 //    
@@ -90,7 +93,7 @@
     if (indexPath.section == 1) {
         return 0.01f;
     }
-    return 80.f;
+    return 40.f;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
@@ -110,7 +113,8 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-
+        FilmDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:FILMDETAILCELL];
+        
         return cell;
     }else{
         CinemaCharacteristicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CinemaCell123];

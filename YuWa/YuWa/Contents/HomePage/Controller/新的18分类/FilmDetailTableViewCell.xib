@@ -15,28 +15,40 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drS-J0-34U">
-                        <rect key="frame" x="179" y="6" width="46" height="30"/>
-                        <state key="normal" title="Button"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drS-J0-34U">
+                        <rect key="frame" x="153" y="13" width="52" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="赞一下" image="good">
+                            <color key="titleColor" red="0.28235294119999998" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="goodAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lDC-B0-e0s"/>
+                        </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PHU-gf-pu9">
-                        <rect key="frame" x="253" y="6" width="46" height="30"/>
-                        <state key="normal" title="Button"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PHU-gf-pu9">
+                        <rect key="frame" x="233" y="13" width="66" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="吐槽一下" image="bad">
+                            <color key="titleColor" red="0.28235294119999998" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="badAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UR6-iQ-NUX"/>
+                        </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RM9-5L-dSB">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likesee" translatesAutoresizingMaskIntoConstraints="NO" id="RM9-5L-dSB">
                         <rect key="frame" x="16" y="11" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="dmS-q1-94h"/>
                             <constraint firstAttribute="width" constant="20" id="yDf-OA-abu"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVQ-bC-Z6f">
-                        <rect key="frame" x="46" y="11" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喜欢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVQ-bC-Z6f">
+                        <rect key="frame" x="46" y="13" width="31" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.5450980392" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -51,6 +63,14 @@
                     <constraint firstAttribute="trailing" secondItem="PHU-gf-pu9" secondAttribute="trailing" constant="21" id="wF4-d3-uLj"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="likeLabel" destination="EVQ-bC-Z6f" id="Ruc-X2-dqs"/>
+            </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="bad" width="12" height="13"/>
+        <image name="good" width="12" height="13"/>
+        <image name="likesee" width="26" height="26"/>
+    </resources>
 </document>

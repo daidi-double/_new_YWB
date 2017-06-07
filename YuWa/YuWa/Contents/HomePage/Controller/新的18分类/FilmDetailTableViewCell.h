@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FilmDetailTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *likeLabel;
 
 @end

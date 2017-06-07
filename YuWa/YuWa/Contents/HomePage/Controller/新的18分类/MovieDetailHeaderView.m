@@ -55,6 +55,31 @@
 //    }
 //    return _headerView;
 //}
+
+//- (UILabel*)daoyanLabel{
+//    if (!_daoyanLabel) {
+//        _daoyanLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x,12+self.bounds.size.height *0.15f, kScreen_Width/2, self.bounds.size.height*0.1f)];
+//        _daoyanLabel.textColor = [UIColor whiteColor];
+//        _daoyanLabel.font = [UIFont systemFontOfSize:12];
+//         self.daoyanLabel.text = @"导演:";
+//        [self addSubview:_daoyanLabel];
+//    }
+//    return _daoyanLabel;
+//}
+//- (UILabel*)performerLabel{
+//    if (!_performerLabel) {
+//        _performerLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.daoyanLabel.origin.x, self.daoyanLabel.bottom, (kScreen_Width-30)/2, self.bounds.size.height*0.2f)];
+//        _performerLabel.textColor = [UIColor whiteColor];
+//        _performerLabel.numberOfLines = 2;
+//        _performerLabel.font = [UIFont systemFontOfSize:12];
+//        self.performerLabel.text = @"主演:";
+//
+//        [self addSubview:_performerLabel];
+//     }
+//    return _performerLabel;
+//}
+
+
 +(CGFloat)getHeaderHeight:(NSString *)introduce{
     CGRect labelHeight = [introduce boundingRectWithSize:CGSizeMake(kScreen_Width-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
     return labelHeight.size.height+kScreen_Height * 0.3f + 35;
