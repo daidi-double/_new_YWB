@@ -964,6 +964,8 @@
 		AAFAE3DB1EE6408000D24DCF /* 娃娃机开大奖.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFAE3DA1EE6408000D24DCF /* 娃娃机开大奖.png */; };
 		AAFAE3DD1EE640B200D24DCF /* 开奖.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFAE3DC1EE640B200D24DCF /* 开奖.png */; };
 		AAFAE3DF1EE640D600D24DCF /* wawaactionBG.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFAE3DE1EE640D600D24DCF /* wawaactionBG.png */; };
+		AAFAE3E31EE6F31500D24DCF /* FilmDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAE3E11EE6F31500D24DCF /* FilmDetailTableViewCell.m */; };
+		AAFAE3E41EE6F31500D24DCF /* FilmDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAFAE3E21EE6F31500D24DCF /* FilmDetailTableViewCell.xib */; };
 		B30136BE1DB86C1C00691F60 /* RBNodeTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B30136BD1DB86C1C00691F60 /* RBNodeTagModel.m */; };
 		B301E7CA1DAC86BD0001336E /* YWMessageSearchFriendAddCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B301E7C81DAC86BD0001336E /* YWMessageSearchFriendAddCell.m */; };
 		B301E7CB1DAC86BD0001336E /* YWMessageSearchFriendAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B301E7C91DAC86BD0001336E /* YWMessageSearchFriendAddCell.xib */; };
@@ -3001,6 +3003,9 @@
 		AAFAE3DA1EE6408000D24DCF /* 娃娃机开大奖.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "娃娃机开大奖.png"; path = "../娃娃机开大奖.png"; sourceTree = "<group>"; };
 		AAFAE3DC1EE640B200D24DCF /* 开奖.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "开奖.png"; sourceTree = "<group>"; };
 		AAFAE3DE1EE640D600D24DCF /* wawaactionBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wawaactionBG.png; sourceTree = "<group>"; };
+		AAFAE3E01EE6F31500D24DCF /* FilmDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmDetailTableViewCell.h; sourceTree = "<group>"; };
+		AAFAE3E11EE6F31500D24DCF /* FilmDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmDetailTableViewCell.m; sourceTree = "<group>"; };
+		AAFAE3E21EE6F31500D24DCF /* FilmDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilmDetailTableViewCell.xib; sourceTree = "<group>"; };
 		B30136BC1DB86C1C00691F60 /* RBNodeTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBNodeTagModel.h; sourceTree = "<group>"; };
 		B30136BD1DB86C1C00691F60 /* RBNodeTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBNodeTagModel.m; sourceTree = "<group>"; };
 		B301E7C71DAC86BD0001336E /* YWMessageSearchFriendAddCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWMessageSearchFriendAddCell.h; sourceTree = "<group>"; };
@@ -6003,6 +6008,9 @@
 				AA4517061ED52118007CF813 /* CinameTableViewCell.h */,
 				AA4517071ED52118007CF813 /* CinameTableViewCell.m */,
 				AA4517081ED52118007CF813 /* CinameTableViewCell.xib */,
+				AAFAE3E01EE6F31500D24DCF /* FilmDetailTableViewCell.h */,
+				AAFAE3E11EE6F31500D24DCF /* FilmDetailTableViewCell.m */,
+				AAFAE3E21EE6F31500D24DCF /* FilmDetailTableViewCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -10805,6 +10813,7 @@
 				AA3545971E9DF23A00A2EC73 /* 4baobaoBG11@2x.jpg in Resources */,
 				AA3544AF1E9DF23900A2EC73 /* 0baobaoBG16@2x.jpg in Resources */,
 				AA3545461E9DF23A00A2EC73 /* 2baobaoBG47@2x.jpg in Resources */,
+				AAFAE3E41EE6F31500D24DCF /* FilmDetailTableViewCell.xib in Resources */,
 				B3FEBA2B1D9BC2D9003CDEF2 /* YWMessageAddressBookHeader.xib in Resources */,
 				B38B2F591D8FC83A004D5256 /* 首页数据.json in Resources */,
 				AA3545961E9DF23A00A2EC73 /* 4baobaoBG10@2x.jpg in Resources */,
@@ -12122,6 +12131,7 @@
 				AAF30A901E5E7A8C00793382 /* XZSeatSelectionView.m in Sources */,
 				C1214C021DEC106E00FFC63C /* SignShopViewController.m in Sources */,
 				B38B2E4E1D8FACD8004D5256 /* TADotView.m in Sources */,
+				AAFAE3E31EE6F31500D24DCF /* FilmDetailTableViewCell.m in Sources */,
 				B38B2E4F1D8FACD8004D5256 /* TAPageControl.m in Sources */,
 				B33A26971D9A68040092CB12 /* EaseConversationListViewController.m in Sources */,
 				B38B2DF71D8FACD8004D5256 /* AFNetworkReachabilityManager.m in Sources */,

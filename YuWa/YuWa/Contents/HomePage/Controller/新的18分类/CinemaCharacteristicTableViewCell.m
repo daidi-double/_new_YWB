@@ -31,6 +31,13 @@
         [self.imageScrollView addSubview:imageView];
     }
 }
+
+//查看所有的剧照
+- (IBAction)allPhotoAction:(UIButton *)sender {
+    
+    
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

@@ -27,7 +27,11 @@
 }
 
 - (void)setData{
+    [self bgImageView];
    [self.posterImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    if (self.status == 1) {
+        [self.posterImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.poster]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    }
     self.title.text = self.model.name;
 
     self.categoryLabel.width = [self getLabelWidth:self.model.type];
@@ -40,8 +44,8 @@
     if (self.model.country== nil) {
         self.countryLabel.text = @"";
     }
-    self.timeLabel.frame = CGRectMake(self.countryLabel.right +10, self.publishDateLabel.bottom+10, [self getLabelWidth:self.model.duration], self.bounds.size.height*0.15);
-    _timeLabel.text = self.model.duration;
+    self.timeLabel.frame = CGRectMake(self.countryLabel.right +10, self.publishDateLabel.bottom+10, [self getLabelWidth:[NSString stringWithFormat:@"%@分钟",self.model.duration]], self.bounds.size.height*0.15);
+    _timeLabel.text = [NSString stringWithFormat:@"%@分钟",self.model.duration];
     self.publishDateLabel.text = [JWTools getTime:self.model.publish_date];
     self.scoreLabel.text = self.model.score;
     [self addSubview:self.gradeBtn];
@@ -87,6 +91,17 @@
     }
     
 
+}
+- (UIImageView *)bgImageView{
+    if (!_bgImageView) {
+        _bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, self.bounds.size.height*0.7)];
+        _bgImageView.image = [UIImage imageNamed:@"headerBGView"];
+        _bgImageView.userInteractionEnabled = YES;
+        
+        _bgImageView.contentMode = UIViewContentModeScaleToFill;
+        [self addSubview:_bgImageView];
+    }
+    return _bgImageView;
 }
 - (UIImageView *)posterImageView{
     if (!_posterImageView) {

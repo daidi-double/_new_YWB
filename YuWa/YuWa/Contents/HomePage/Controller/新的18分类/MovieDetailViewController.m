@@ -11,8 +11,8 @@
 #import "CommentTableViewCell.h"
 #import "CinemaCharacteristicTableViewCell.h"
 #import "MovieDetailHeaderView.h"
-#import "CommentModel.h"
-
+//#import "CommentModel.h"
+#import "ChooseMovieHeaderView.h"//第一区头部
 #import "CommendViewController.h"
 
 #define COMMENTCELl111 @"CommentTableViewCell"
@@ -20,6 +20,7 @@
 @interface MovieDetailViewController ()<UITableViewDelegate,UITableViewDataSource,MovieDetailHeaderViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (nonatomic,strong) MovieDetailHeaderView * headerView;
+@property (nonatomic,strong) ChooseMovieHeaderView* firstHeaderView;
 @property (nonatomic,strong) CommentModel * model;
 @property (nonatomic,strong) NSMutableArray * commentAry;
 @property (nonatomic,strong)UILabel * textLabel;
@@ -32,7 +33,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self requestData];
-    [self creatLabel];
     [self makeUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -68,61 +68,57 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 1) {
-        if (self.commentAry.count<=0) {
-            self.textLabel.hidden = NO;
-            self.commentBtn.hidden = NO;
-        }else{
-            self.textLabel.hidden = YES;
-            self.commentBtn.hidden = YES;
-        }
-        return self.commentAry.count;
+    return 1;
     }
     return 1;
 }
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (section == 1) {
-        return @"网友点评";
-    }
-    return nil;
-}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 0) {
+        return 10;
+    }
     return 0.01f;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 1) {
-        return 25.f;
+        return [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
     }
-    return [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
+    return kScreen_Height* 0.3f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1) {
-        [CommentTableViewCell getCellHeight:self.commentAry[indexPath.row]];
+        return 0.01f;
     }
-    return 100;
+    return 80.f;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
+        self.firstHeaderView.model = self.cinemaDetailModel;
+        self.firstHeaderView.status = 1;
+        self.firstHeaderView.backgroundColor = [UIColor whiteColor];
+        return self.firstHeaderView;
+    }else{
         CGFloat height = [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
         _headerView = [[MovieDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, height)];
         _headerView.delegate =self;
         _headerView.model = self.cinemaDetailModel;
         return _headerView;
+        
     }
-    return nil;
+    
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
+
+        return cell;
+    }else{
         CinemaCharacteristicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CinemaCell123];
         
         NSArray * imageAry = [self.cinemaDetailModel.stills componentsSeparatedByString:@","];
         cell.imageAry = imageAry;
         return cell;
-    }else{
-        CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:COMMENTCELl111];
-        [cell giveValueWithModel:self.model];
-        cell.selectionStyle = NO;
-        return cell;
+
     }
     
 }
@@ -133,17 +129,15 @@
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmNo":self.filmCode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@    %@",pragrams,urlStr);
         MyLog(@"影片详情%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             //头部影片数据
             [self.commentAry removeAllObjects];
-                self.cinemaDetailModel = [CinemaAndBuyTicketModel yy_modelWithDictionary:data[@"film"]];
-            
-            //评论部分数据001100562011
-            for (NSDictionary * commentDict in data[@"data"][@"filmComment"]) {
-                self.model = [CommentModel yy_modelWithDictionary:commentDict];
-                [self.commentAry addObject:self.model];
-            }
+                self.cinemaDetailModel = [CinemaAndBuyTicketModel yy_modelWithDictionary:data[@"data"][@"filmDetail"]];
+        
+            //评论部分数据
+
             
         }
         [self.detailTableView reloadData];
@@ -151,45 +145,28 @@
 //    [self.detailTableView.mj_header endRefreshing];
 //    [self.detailTableView.mj_footer endRefreshing];
 }
-- (void)creatLabel{
-    _textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, kScreen_Height * 0.85, kScreen_Width/3, 35)];
-    _textLabel.centerX = kScreen_Width/2;
-    _textLabel.textAlignment = 1;
-    _textLabel.textColor = RGBCOLOR(124, 125, 123, 1);
-    _textLabel.font = [UIFont systemFontOfSize:14];
-    _textLabel.text = @"暂无评论";
-    [self.view addSubview:_textLabel];
-    _commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _commentBtn.frame = CGRectMake(0, kScreen_Height * 0.85, kScreen_Width/3, 28);
-    _commentBtn.centerX = kScreen_Width/2;
-    _commentBtn.centerY = _textLabel.centerY + 30;
-    [_commentBtn setTitle:@"我来评论" forState:UIControlStateNormal];
-    [_commentBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
-    
-    _commentBtn.layer.borderColor = CNaviColor.CGColor;
-    _commentBtn.layer.borderWidth = 1;
-    _commentBtn.layer.masksToBounds = YES;
-    _commentBtn.layer.cornerRadius = 5;
-    [_commentBtn addTarget:self action:@selector(toComment) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_commentBtn];
-    _commentBtn.hidden = YES;
-    _textLabel.hidden = YES;
-}
+
 - (void)toComment{
     CommendViewController * commendVC = [[CommendViewController alloc]init];
     commendVC.film_code = self.filmCode;
     commendVC.headerModel = self.cinemaDetailModel;
     [self.navigationController pushViewController:commendVC animated:YES];
 }
-//- (MovieDetailHeaderView*)headerView{
-//    if (!_headerView) {
-//        CGFloat height = [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
-//        _headerView = [[MovieDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, height)];
-//        _headerView.delegate =self;
-//    }
-//    return _headerView;
-//}
-
+- (MovieDetailHeaderView*)headerView{
+    if (!_headerView) {
+        CGFloat height = [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
+        _headerView = [[MovieDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, height)];
+        _headerView.delegate =self;
+    }
+    return _headerView;
+}
+- (ChooseMovieHeaderView *)firstHeaderView{
+    if (!_firstHeaderView) {
+        _firstHeaderView = [[ChooseMovieHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height * 0.3f)];
+        
+    }
+    return _firstHeaderView;
+}
 - (NSMutableArray *)commentAry{
     if (!_commentAry) {
         _commentAry = [NSMutableArray array];
