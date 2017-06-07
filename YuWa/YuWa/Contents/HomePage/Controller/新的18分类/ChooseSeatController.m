@@ -97,7 +97,7 @@
         self.filmNameLabel.text = self.filmName;
         [cell.contentView addSubview:self.filmNameLabel];
         
-        self.languageLabel.frame = CGRectMake(self.filmNameLabel.right, self.filmNameLabel.top +3, kScreen_Width * 0.4, 20);
+        self.languageLabel.frame = CGRectMake(self.filmNameLabel.right, self.filmNameLabel.top +5, kScreen_Width * 0.4, 20);
         //价格放映类型（1：2D 2：3D 3：MAX2D 4：MAX3D 6：DMAX）
         NSString * showType;
         switch ([self.headerModel.show_type integerValue]) {
@@ -154,7 +154,7 @@
         
         static int i = 0;
         if (i == 0) {
-            UILabel * select = [[UILabel alloc]initWithFrame:CGRectMake(10, 2, 50, 20)];
+            UILabel * select = [[UILabel alloc]initWithFrame:CGRectMake(10, 4, 50, 20)];
             
             select.font = [UIFont systemFontOfSize:12];
             select.textColor = [UIColor blackColor];
@@ -450,7 +450,7 @@
 - (UIButton*)changeMovieBtn{
     if (!_changeMovieBtn) {
         _changeMovieBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _changeMovieBtn.frame = CGRectMake(_languageLabel.right, 10, kScreen_Width*0.25f, 25);
+        _changeMovieBtn.frame = CGRectMake(_languageLabel.right+2, 10, kScreen_Width*0.2f, 25);
         _changeMovieBtn.centerX = kScreen_Width * 0.82;
         [_changeMovieBtn.layer setBorderColor:CNaviColor.CGColor];
         [_changeMovieBtn.layer setBorderWidth:1];
