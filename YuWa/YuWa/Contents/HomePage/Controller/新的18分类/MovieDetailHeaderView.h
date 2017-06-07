@@ -20,7 +20,9 @@
 @property (nonatomic,strong) UILabel * performerLabel;//主演
 @property (nonatomic,strong) UILabel * countryLabel;//国家
 @property (nonatomic,strong) UILabel * categoryLabel;//类型
-@property (nonatomic,strong)UILabel * introduceLabel;
+@property (nonatomic,strong) UIView * line;
+@property (nonatomic,strong) UILabel * introduceLabel;
+@property (nonatomic,strong) UIButton * moreBtn;
 @property (nonatomic,strong) CinemaAndBuyTicketModel * model;
 @property (nonatomic,assign)id<MovieDetailHeaderViewDelegate>delegate;
 +(CGFloat)getHeaderHeight:(NSString *)introduce;
