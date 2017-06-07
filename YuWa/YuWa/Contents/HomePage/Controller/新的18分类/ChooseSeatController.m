@@ -154,7 +154,7 @@
         
         static int i = 0;
         if (i == 0) {
-            UILabel * select = [[UILabel alloc]initWithFrame:CGRectMake(10, 4, 50, 20)];
+            UILabel * select = [[UILabel alloc]initWithFrame:CGRectMake(10, 2, 50, 20)];
             
             select.font = [UIFont systemFontOfSize:12];
             select.textColor = [UIColor blackColor];
