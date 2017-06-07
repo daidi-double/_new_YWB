@@ -126,6 +126,7 @@
     toolbar.alpha = 0.8;
     [self addSubview:toolbar];
     [self addSubview:_movieCollectView];
+    
 
 }
 #pragma mark - collectViewDelegate
