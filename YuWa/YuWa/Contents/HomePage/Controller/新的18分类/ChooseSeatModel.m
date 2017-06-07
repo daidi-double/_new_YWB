@@ -20,77 +20,7 @@
 +(NSMutableArray *)ChooseSeatModelWithDic:(NSMutableArray *)arr {
     //json数组  转字典数组
     arr = [[[ChooseSeatModel alloc]init] jsonToDicWithArr:arr];
-    //取出一共有多少排
-    int row= 0;
-    //对数据进行排序
-    for (int i=0; i<arr.count; i++) {
-        for (int j=0; j<arr.count-1; j++) {
-           NSDictionary * dic =  arr[j];
-            NSDictionary * dic1 =  arr[j+1];
-            NSString * rowNun = dic[@"rowNum"];
-            NSString * rowNun1 = dic1[@"rowNum"];
-            
-            if (row< rowNun.intValue) {
-                //知道一个有几排
-                row = rowNun.intValue;
-            }
-            if (rowNun.intValue >rowNun1.intValue) {
-                NSDictionary * temp = arr[j];
-                arr[j] = dic1;
-                arr[j+1] = temp;
-            }
-        }
-    }
-    //获取每行有多少列的总数
-    NSMutableArray * allColNum = [NSMutableArray array];
-    //总数组
-    NSMutableArray * all = [NSMutableArray array];
-    for (int h = 0; h<row; h++) {
-        //创建一行的数组
-        NSMutableArray * arrRow = [NSMutableArray array];
-        //一行的总列数
-        int colnum = 0;
-        for (int y= 0; y<arr.count; y++) {
-            NSDictionary * dic10 = arr[y];
-            NSString *rowNum =  dic10[@"rowNum"];
-            if (h+1 == rowNum.intValue ) {
-                NSString *colNumDic =  dic10[@"colNum"];
-                if (colnum< colNumDic.intValue) {
-                    colnum = colNumDic.intValue;
-                }
-                [arrRow addObject:arr[y]];
-            }
-        }
-        //一行数完之后。添加到数组中区
-        [allColNum addObject:[NSString stringWithFormat:@"%d",colnum]];
-        [all addObject:arrRow];
-    }
-    NSMutableArray * arrM1 = [NSMutableArray array];
-////    在对数据座位进行排序。排序成从左往右开始
-    NSMutableArray * allDate = [NSMutableArray array];
-    for (NSMutableArray * arr1 in all) {
-        for (int i=0; i<arr1.count; i++) {
-            for (int j=0; j<arr1.count-1; j++) {
-                NSDictionary * dic =  arr1[j];
-                NSDictionary * dic1 =  arr1[j+1];
-                NSString * rowNun = dic[@"colNum"];
-                NSString * rowNun1 = dic1[@"colNum"];
-                if (rowNun.intValue >rowNun1.intValue) {
-                    NSDictionary * temp = arr1[j];
-                    arr1[j] = dic1;
-                    arr1[j+1] = temp;
-                }
-            }
-        }
-        //排序好之后加到总数据数组中
-        for (NSDictionary * dic in arr1) {
-            [allDate addObject:dic];
-        }
-    }
-    arr = allDate;
-    
-    
-    
+    arr = [[[ChooseSeatModel alloc]init] dateSequenceWithArr:arr];;
     //返回的数组model
     NSMutableArray * seatsModelArray = [NSMutableArray arrayWithCapacity:arr.count];
     //用来判断是否是同一行
@@ -157,6 +87,75 @@
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key   {
     
 }
+-(NSMutableArray *)dateSequenceWithArr:(NSMutableArray *)arr{
+    //取出一共有多少排
+    int row= 0;
+    //对数据进行排序
+    for (int i=0; i<arr.count; i++) {
+        for (int j=0; j<arr.count-1; j++) {
+            NSDictionary * dic =  arr[j];
+            NSDictionary * dic1 =  arr[j+1];
+            NSString * rowNun = dic[@"rowNum"];
+            NSString * rowNun1 = dic1[@"rowNum"];
+            
+            if (row< rowNun.intValue) {
+                //知道一个有几排
+                row = rowNun.intValue;
+            }
+            if (rowNun.intValue >rowNun1.intValue) {
+                NSDictionary * temp = arr[j];
+                arr[j] = dic1;
+                arr[j+1] = temp;
+            }
+        }
+    }
+    //获取每行有多少列的总数
+    NSMutableArray * allColNum = [NSMutableArray array];
+    //总数组
+    NSMutableArray * all = [NSMutableArray array];
+    for (int h = 0; h<row; h++) {
+        //创建一行的数组
+        NSMutableArray * arrRow = [NSMutableArray array];
+        //一行的总列数
+        int colnum = 0;
+        for (int y= 0; y<arr.count; y++) {
+            NSDictionary * dic10 = arr[y];
+            NSString *rowNum =  dic10[@"rowNum"];
+            if (h+1 == rowNum.intValue ) {
+                NSString *colNumDic =  dic10[@"colNum"];
+                if (colnum< colNumDic.intValue) {
+                    colnum = colNumDic.intValue;
+                }
+                [arrRow addObject:arr[y]];
+            }
+        }
+        //一行数完之后。添加到数组中区
+        [allColNum addObject:[NSString stringWithFormat:@"%d",colnum]];
+        [all addObject:arrRow];
+    }
+    ////    在对数据座位进行排序。排序成从左往右开始
+    NSMutableArray * allDate = [NSMutableArray array];
+    for (NSMutableArray * arr1 in all) {
+        for (int i=0; i<arr1.count; i++) {
+            for (int j=0; j<arr1.count-1; j++) {
+                NSDictionary * dic =  arr1[j];
+                NSDictionary * dic1 =  arr1[j+1];
+                NSString * rowNun = dic[@"colNum"];
+                NSString * rowNun1 = dic1[@"colNum"];
+                if (rowNun.intValue >rowNun1.intValue) {
+                    NSDictionary * temp = arr1[j];
+                    arr1[j] = dic1;
+                    arr1[j+1] = temp;
+                }
+            }
+        }
+        //排序好之后加到总数据数组中
+        for (NSDictionary * dic in arr1) {
+            [allDate addObject:dic];
+        }
+    }
+    return arr;
+}
 //json  转字典
 -(NSMutableArray *) jsonToDicWithArr:(NSArray *)arr{
     NSMutableArray * arr1 = [NSMutableArray array];
@@ -169,67 +168,5 @@
     //json数组 转换成功的字典数组
     return arr1;
 }
-//arrM1 = @[
-//          @{
-//              @"code":@"03010101",
-//              @"colNum":@"3",
-//              @"groupCode":@"01",
-//              @"loveCode":@"",
-//              @"rowNum":@"1",
-//              @"status":@1,
-//              @"type":@"1",
-//              @"xcoord":@"1",
-//              @"ycoord":@"1",
-//              },
-//          @{@"code":@"03010101",
-//            @"colNum":@"2",
-//            @"groupCode":@"01",
-//            @"loveCode":@"",
-//            @"rowNum":@"1",
-//            @"status":@1,
-//            @"type":@"1",
-//            @"xcoord":@"1",
-//            @"ycoord":@"2",},
-//          @{
-//              @"code":@"03010101",
-//              @"colNum":@"1",
-//              @"groupCode":@"01",
-//              @"loveCode":@"",
-//              @"rowNum":@"1",
-//              @"status":@1,
-//              @"type":@"1",
-//              @"xcoord":@"1",
-//              @"ycoord":@"3",
-//              },
-//          @{@"code":@"03010101",
-//            @"colNum":@"2",
-//            @"groupCode":@"01",
-//            @"loveCode":@"",
-//            @"rowNum":@"2",
-//            @"status":@1,
-//            @"type":@"1",
-//            @"xcoord":@"2",
-//            @"ycoord":@"1",},
-//          @{
-//              @"code":@"03010101",
-//              @"colNum":@"1",
-//              @"groupCode":@"01",
-//              @"loveCode":@"",
-//              @"rowNum":@"2",
-//              @"status":@1,
-//              @"type":@"1",
-//              @"xcoord":@"2",
-//              @"ycoord":@"2",
-//              },@{
-//              @"code":@"03010101",
-//              @"colNum":@"1",
-//              @"groupCode":@"01",
-//              @"loveCode":@"",
-//              @"rowNum":@"3",
-//              @"status":@1,
-//              @"type":@"1",
-//              @"xcoord":@"2",
-//              @"ycoord":@"2",
-//              }];
 
 @end
