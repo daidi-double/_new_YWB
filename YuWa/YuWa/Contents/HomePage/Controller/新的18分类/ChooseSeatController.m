@@ -275,14 +275,12 @@
                 
                 XZSeatsModel * smodel;
                 XZSeatModel * model;
-                NSString * seatStr ;
                 for (XZSeatButton * btn in weakSelf.selecetedSeats) {
                     smodel = btn.seatsmodel;
                     model = btn.seatmodel;
                     
                     NSString * str = [NSString stringWithFormat:@"%@排%@座",smodel.rowId,model.columnId];
                     [seatNumAry addObject:str];
-                    seatStr = str;
                     
                 }
  

@@ -385,7 +385,7 @@
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
-            NSMutableArray *arr = [NSMutableArray array];
+            NSMutableArray *arr ;
             arr = data[@"data"];
             if (arr.count) {
 //                MyLog(@"count = %lu",(unsigned long)arr.count);
