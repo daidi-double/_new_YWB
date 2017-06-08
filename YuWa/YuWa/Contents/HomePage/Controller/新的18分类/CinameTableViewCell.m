@@ -49,15 +49,20 @@
         case 0:
             self.otherTicketLabel.text = @"兑";
             self.seatLabel.text = @"座";
+            self.seatLabel.hidden = NO;
+            self.otherTicketLabel.hidden = NO;
             break;
         case 1:
              self.seatLabel.text = @"座";
+            self.seatLabel.hidden = NO;
             self.otherTicketLabel.hidden = YES;
             break;
         
         default:
             self.seatLabel.hidden = YES;
+            self.otherTicketLabel.hidden = NO;
              self.otherTicketLabel.text = @"兑";
+            
             break;
     }
 }

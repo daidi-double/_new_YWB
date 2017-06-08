@@ -112,6 +112,7 @@
     CinemaModel * models = self.movieDataAry[indexPath.row];
     MCinemaVC.cinema_code = self.cinemaModel.code;
     MCinemaVC.film_code = self.model.code;
+    MCinemaVC.cityCode = self.cityCode;
     MCinemaVC.filmName = self.filmName;
     if ([models.goodstype integerValue] !=1) {
         
@@ -331,7 +332,7 @@
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMANDDATE];
     NSString * pagesStr = [NSString stringWithFormat:@"%ld",self.pages];
     NSString * pagenStr = [NSString stringWithFormat:@"%ld",self.pagen];
-    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"pages":pagesStr,@"pagen":pagenStr,@"coordinatex":self.coordinatex,@"coordinatey":self.coordinatey,@"type":self.cityType,@"typeList":self.typeList};
+    NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.filmCode,@"pages":pagesStr,@"pagen":pagenStr,@"coordinatex":self.coordinatex,@"coordinatey":self.coordinatey,@"type":self.cityType,@"typeList":self.typeList,@"area":self.cityCode};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
         

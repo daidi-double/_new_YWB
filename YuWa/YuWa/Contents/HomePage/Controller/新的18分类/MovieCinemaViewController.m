@@ -74,14 +74,14 @@
     if (self.status == 1) {
         
         if (section == 0) {
-            return kScreen_Height *0.46f;
+            return kScreen_Height *850/1334.f;
             
         }else{
             return 100.f;
         }
     }else{
         if (section == 0) {
-            return kScreen_Height *0.46f;
+            return kScreen_Height *850/1334.f;
             
         }else{
             return 44.f;

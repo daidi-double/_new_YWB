@@ -16,5 +16,5 @@
 @property (nonatomic,copy) NSString * image;
 @property (nonatomic,copy) NSString * publish_date;//上映时间
 @property (nonatomic,copy) NSString * highlight;//简介
-
+@property (nonatomic,copy) NSString * duration;//时长
 @end

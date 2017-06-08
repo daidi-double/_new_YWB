@@ -7,7 +7,7 @@
 //
 
 #import "MovieDetailViewController.h"
-#import "ChooseMovieHeaderView.h"
+#import "MovieCinemaViewController.h"
 #import "CommentTableViewCell.h"
 #import "CinemaCharacteristicTableViewCell.h"
 #import "MovieDetailHeaderView.h"
@@ -15,20 +15,21 @@
 #import "ChooseMovieHeaderView.h"//第一区头部
 #import "CommendViewController.h"
 #import "FilmDetailTableViewCell.h"
-
+#import "AllPhotoViewController.h"
 
 #define FILMDETAILCELL @"FilmDetailTableViewCell"
 //#define COMMENTCELl111 @"CommentTableViewCell"
 #define CinemaCell123 @"CinemaCharacteristicTableViewCell"
-@interface MovieDetailViewController ()<UITableViewDelegate,UITableViewDataSource,MovieDetailHeaderViewDelegate>
+@interface MovieDetailViewController ()<UITableViewDelegate,UITableViewDataSource,MovieDetailHeaderViewDelegate,CinemaCharacteristicTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (nonatomic,strong) MovieDetailHeaderView * headerView;
+@property (weak, nonatomic) IBOutlet UIView *footView;
 @property (nonatomic,strong) ChooseMovieHeaderView* firstHeaderView;
 @property (nonatomic,strong) CommentModel * model;
 @property (nonatomic,strong) NSMutableArray * commentAry;
 @property (nonatomic,strong)UILabel * textLabel;
 @property (nonatomic,strong) UIButton * commentBtn;
-
+@property (nonatomic,assign) BOOL isAllIntro;//是否展开介绍
 @end
 
 @implementation MovieDetailViewController
@@ -47,31 +48,22 @@
     [self.detailTableView registerNib:[UINib nibWithNibName:CinemaCell123 bundle:nil] forCellReuseIdentifier:CinemaCell123];
     
     [self.detailTableView registerNib:[UINib nibWithNibName:FILMDETAILCELL bundle:nil] forCellReuseIdentifier:FILMDETAILCELL];
+    self.isAllIntro = 0;
 }
-//- (void)setRJRefresh {
-//    
-//    self.detailTableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-//        //        self.pages=0;
-//        self.commentAry=[NSMutableArray array];
-//        [self requestData];
-//        
-//    }];
-//    
-//    //上拉刷新
-//    self.detailTableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-//        //        self.pages++;
-//        [self requestData];
-//        
-//    }];
-//    [self.detailTableView.mj_header beginRefreshing];
-//}
+//选座购票
+- (IBAction)chooseSeatAction:(UIButton *)sender {
+
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 1) {
-    return 1;
+        return 1;
     }
     return 1;
 }
@@ -80,18 +72,24 @@
     if (section == 0) {
         return 10;
     }
-    return 0.01f;
+    return 40.f;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 1) {
-        return [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
+        if (self.isAllIntro) {
+            
+            return [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
+        }else{
+            return 320;
+        }
     }
     return kScreen_Height* 0.3f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1) {
-        return 0.01f;
+
+        return kScreen_Height * 232/1334.f +20;
     }
     return 40.f;
 }
@@ -99,18 +97,27 @@
     if (section == 0) {
         self.firstHeaderView.model = self.cinemaDetailModel;
         self.firstHeaderView.status = 1;
+        self.firstHeaderView.rightImageView.hidden =YES;
         self.firstHeaderView.backgroundColor = [UIColor whiteColor];
         return self.firstHeaderView;
     }else{
-        CGFloat height = [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
+        CGFloat height;
+        if (self.isAllIntro) {
+            
+            height = [MovieDetailHeaderView getHeaderHeight:self.cinemaDetailModel.intro];
+        }else{
+            height = 320;
+        }
         _headerView = [[MovieDetailHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, height)];
         _headerView.delegate =self;
+        _headerView.status = self.isAllIntro;
         _headerView.model = self.cinemaDetailModel;
         return _headerView;
         
     }
     
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         FilmDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:FILMDETAILCELL];
@@ -118,7 +125,7 @@
         return cell;
     }else{
         CinemaCharacteristicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CinemaCell123];
-        
+        cell.delegate = self;
         NSArray * imageAry = [self.cinemaDetailModel.stills componentsSeparatedByString:@","];
         cell.imageAry = imageAry;
         return cell;
@@ -126,14 +133,31 @@
     }
     
 }
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView == self.detailTableView) {
 
+        
+        CGFloat height = scrollView.frame.size.height;
+        CGFloat contentOffsetY = scrollView.contentOffset.y;
+        CGFloat bottomOffset = scrollView.contentSize.height - contentOffsetY;
+        if (bottomOffset <= height)
+        {
+            //在最底部
+           
+        } else {
+            
+        }
+        
+    }
+
+}
 #pragma mark ---http
 - (void)requestData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_MOVIEDETAIL];
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmNo":self.filmCode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
-        MyLog(@"参数%@    %@",pragrams,urlStr);
+        MyLog(@"参数%@  /n  %@",pragrams,urlStr);
         MyLog(@"影片详情%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             //头部影片数据
@@ -149,12 +173,19 @@
 //    [self.detailTableView.mj_header endRefreshing];
 //    [self.detailTableView.mj_footer endRefreshing];
 }
-
+//去吐槽（还没用）
 - (void)toComment{
-    CommendViewController * commendVC = [[CommendViewController alloc]init];
-    commendVC.film_code = self.filmCode;
-    commendVC.headerModel = self.cinemaDetailModel;
-    [self.navigationController pushViewController:commendVC animated:YES];
+//    CommendViewController * commendVC = [[CommendViewController alloc]init];
+//    commendVC.film_code = self.filmCode;
+//    commendVC.headerModel = self.cinemaDetailModel;
+//    [self.navigationController pushViewController:commendVC animated:YES];
+}
+//查看剧照
+- (void)seeAllPhoto{
+    AllPhotoViewController * vc = [[AllPhotoViewController alloc]init];
+    NSArray * imageAry = [self.cinemaDetailModel.stills componentsSeparatedByString:@","];
+    vc.imageAry = imageAry;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (MovieDetailHeaderView*)headerView{
     if (!_headerView) {
@@ -188,7 +219,11 @@
 //    commendVC.order_id = //在我的订单中评价才需要
     [self.navigationController pushViewController:commendVC animated:YES];
 }
-
+- (void)refreshUI:(NSInteger)status{
+    self.isAllIntro= status;
+//    NSIndexPath * path = [self.detailTableView ]
+    [self.detailTableView reloadData];
+}
 /*
 #pragma mark - Navigation
 

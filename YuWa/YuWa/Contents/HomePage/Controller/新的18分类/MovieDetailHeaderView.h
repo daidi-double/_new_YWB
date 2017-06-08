@@ -13,9 +13,13 @@
 @protocol MovieDetailHeaderViewDelegate <NSObject>
 
 - (void)toCommentScore;
+- (void)refreshUI:(NSInteger)status;
 
 @end
 @interface MovieDetailHeaderView : UIView
+{
+    UIButton * markBtn;
+}
 @property (nonatomic,strong) UILabel * daoyanLabel;//导演
 @property (nonatomic,strong) UILabel * performerLabel;//主演
 @property (nonatomic,strong) UILabel * countryLabel;//国家
@@ -26,6 +30,7 @@
 @property (nonatomic,assign) NSInteger  status;//0省略的介绍，1展开介绍
 @property (nonatomic,strong) CinemaAndBuyTicketModel * model;
 @property (nonatomic,assign)id<MovieDetailHeaderViewDelegate>delegate;
+
 +(CGFloat)getHeaderHeight:(NSString *)introduce;
 
 @end

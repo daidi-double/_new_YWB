@@ -133,6 +133,11 @@
 		AA225B781E63F69E00F4D74F /* TableBGView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA225B771E63F69E00F4D74F /* TableBGView.m */; };
 		AA2724071EC40CF300F80DB7 /* adress.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2724061EC40CF300F80DB7 /* adress.png */; };
 		AA27F5411E86778B00B29B17 /* ShopNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27F5401E86778B00B29B17 /* ShopNameView.m */; };
+		AA28F1561EE7DA3C00BA8438 /* AllPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA28F1541EE7DA3C00BA8438 /* AllPhotoViewController.m */; };
+		AA28F1571EE7DA3C00BA8438 /* AllPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA28F1551EE7DA3C00BA8438 /* AllPhotoViewController.xib */; };
+		AA28F15C1EE7E46700BA8438 /* FilmPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA28F15A1EE7E46700BA8438 /* FilmPhotoCollectionViewCell.m */; };
+		AA28F15D1EE7E46700BA8438 /* FilmPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA28F15B1EE7E46700BA8438 /* FilmPhotoCollectionViewCell.xib */; };
+		AA28F1611EE7EECE00BA8438 /* PhotoScalView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA28F1601EE7EECE00BA8438 /* PhotoScalView.m */; };
 		AA29C2421EAD8EB60092EF6F /* YWShopDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29C2401EAD8EB60092EF6F /* YWShopDetailViewController.m */; };
 		AA29C2431EAD8EB60092EF6F /* YWShopDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA29C2411EAD8EB60092EF6F /* YWShopDetailViewController.xib */; };
 		AA29C24C1EAD985B0092EF6F /* YWShopDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA29C24A1EAD985B0092EF6F /* YWShopDetailTableViewCell.m */; };
@@ -2012,6 +2017,14 @@
 		AA2724061EC40CF300F80DB7 /* adress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = adress.png; sourceTree = "<group>"; };
 		AA27F53F1E86778B00B29B17 /* ShopNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopNameView.h; sourceTree = "<group>"; };
 		AA27F5401E86778B00B29B17 /* ShopNameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopNameView.m; sourceTree = "<group>"; };
+		AA28F1531EE7DA3C00BA8438 /* AllPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllPhotoViewController.h; sourceTree = "<group>"; };
+		AA28F1541EE7DA3C00BA8438 /* AllPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllPhotoViewController.m; sourceTree = "<group>"; };
+		AA28F1551EE7DA3C00BA8438 /* AllPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllPhotoViewController.xib; sourceTree = "<group>"; };
+		AA28F1591EE7E46700BA8438 /* FilmPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		AA28F15A1EE7E46700BA8438 /* FilmPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		AA28F15B1EE7E46700BA8438 /* FilmPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilmPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		AA28F15F1EE7EECE00BA8438 /* PhotoScalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoScalView.h; sourceTree = "<group>"; };
+		AA28F1601EE7EECE00BA8438 /* PhotoScalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoScalView.m; sourceTree = "<group>"; };
 		AA29C23F1EAD8EB60092EF6F /* YWShopDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopDetailViewController.h; sourceTree = "<group>"; };
 		AA29C2401EAD8EB60092EF6F /* YWShopDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopDetailViewController.m; sourceTree = "<group>"; };
 		AA29C2411EAD8EB60092EF6F /* YWShopDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopDetailViewController.xib; sourceTree = "<group>"; };
@@ -4874,6 +4887,37 @@
 			name = menuView;
 			sourceTree = "<group>";
 		};
+		AA28F1521EE7DA0D00BA8438 /* 剧照 */ = {
+			isa = PBXGroup;
+			children = (
+				AA28F15E1EE7EEAA00BA8438 /* view */,
+				AA28F1581EE7E42900BA8438 /* cell */,
+				AA28F1531EE7DA3C00BA8438 /* AllPhotoViewController.h */,
+				AA28F1541EE7DA3C00BA8438 /* AllPhotoViewController.m */,
+				AA28F1551EE7DA3C00BA8438 /* AllPhotoViewController.xib */,
+			);
+			name = "剧照";
+			sourceTree = "<group>";
+		};
+		AA28F1581EE7E42900BA8438 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA28F1591EE7E46700BA8438 /* FilmPhotoCollectionViewCell.h */,
+				AA28F15A1EE7E46700BA8438 /* FilmPhotoCollectionViewCell.m */,
+				AA28F15B1EE7E46700BA8438 /* FilmPhotoCollectionViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		AA28F15E1EE7EEAA00BA8438 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				AA28F15F1EE7EECE00BA8438 /* PhotoScalView.h */,
+				AA28F1601EE7EECE00BA8438 /* PhotoScalView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 		AA29C25E1EADEA920092EF6F /* 购物车 */ = {
 			isa = PBXGroup;
 			children = (
@@ -5632,6 +5676,7 @@
 		AA377B711EC6DDC500E81A88 /* 影片详情 */ = {
 			isa = PBXGroup;
 			children = (
+				AA28F1521EE7DA0D00BA8438 /* 剧照 */,
 				AA377B7F1EC6E9CD00E81A88 /* view */,
 				AA377B781EC6E0C000E81A88 /* MovieDetailViewController.h */,
 				AA377B791EC6E0C000E81A88 /* MovieDetailViewController.m */,
@@ -11388,6 +11433,7 @@
 				B3CD68AF1D94F9F300C26B1C /* RBPublicLocationViewController.xib in Resources */,
 				AAFA57B41ED2E55B006CF2D7 /* 休闲娱乐@2x.png in Resources */,
 				AA3544581E9DF23800A2EC73 /* 3baobaoLVUP46@2x.jpg in Resources */,
+				AA28F1571EE7DA3C00BA8438 /* AllPhotoViewController.xib in Resources */,
 				AA3544AC1E9DF23900A2EC73 /* 0baobaoBG13@2x.jpg in Resources */,
 				AA3544861E9DF23900A2EC73 /* 4baobaoLVUP33@2x.jpg in Resources */,
 				C12315541DE6CB7800B9D0FE /* MyUserCell.xib in Resources */,
@@ -11399,6 +11445,7 @@
 				25B3C5C71ECD8E4000674F20 /* 37.png in Resources */,
 				B38B2F021D8FC82F004D5256 /* RBNodeDetailTableViewCell.xib in Resources */,
 				AA35459C1E9DF23A00A2EC73 /* 4baobaoBG16@2x.jpg in Resources */,
+				AA28F15D1EE7E46700BA8438 /* FilmPhotoCollectionViewCell.xib in Resources */,
 				C130199F1DB1FD2F00E24C88 /* qr_bottom_right@3x.png in Resources */,
 				C135A1531DDE020F002B78A5 /* 波浪个人_00037.png in Resources */,
 				AA3544F61E9DF23900A2EC73 /* 1baobaoBG29@2x.jpg in Resources */,
@@ -11764,6 +11811,7 @@
 				B33A26911D9A68040092CB12 /* EaseMessageReadManager.m in Sources */,
 				C1F7BD961DB1C94500CCAF96 /* YWMainCategoryViewController.m in Sources */,
 				B38B2E211D8FACD8004D5256 /* MJChiBaoZiHeader.m in Sources */,
+				AA28F15C1EE7E46700BA8438 /* FilmPhotoCollectionViewCell.m in Sources */,
 				AA2B2BFF1E8CC7D3008CB3C6 /* IndroduceViewController.m in Sources */,
 				C1F7BD9F1DB1C94500CCAF96 /* DetailStorePreferentialTableViewCell.m in Sources */,
 				AAAE11831E5C72CF00D637D7 /* SeeMovieCell.m in Sources */,
@@ -12106,6 +12154,7 @@
 				B38B2E4D1D8FACD8004D5256 /* TAAnimatedDotView.m in Sources */,
 				B38B2F051D8FC82F004D5256 /* RBNodeDetailCommendFooter.m in Sources */,
 				B3B851081DD9879A00E171C8 /* JHColumnChart.m in Sources */,
+				AA28F1611EE7EECE00BA8438 /* PhotoScalView.m in Sources */,
 				B33A26861D9A68040092CB12 /* EaseSDKHelper.m in Sources */,
 				C1F7BE571DB1C95400CCAF96 /* PCMyOrderViewController.m in Sources */,
 				25BA988E1ED3DFB7008B5E50 /* YWStartAnimation.m in Sources */,
@@ -12327,6 +12376,7 @@
 				AA01310C1EC2F54400A99BD1 /* InfomationTableViewCell.m in Sources */,
 				AA399CE11EAB3B6E00CA22CB /* YWShopCarTableViewCell.m in Sources */,
 				B34BCE071DAA3D61001AB98D /* RBNodeAddToAldumModel.m in Sources */,
+				AA28F1561EE7DA3C00BA8438 /* AllPhotoViewController.m in Sources */,
 				B38B2E4A1D8FACD8004D5256 /* SDCollectionViewCell.m in Sources */,
 				C1214C061DEC15D200FFC63C /* MybindingShopTableViewCell.m in Sources */,
 				AA084B7E1E56DDF9002D14F5 /* CustomBtn.m in Sources */,

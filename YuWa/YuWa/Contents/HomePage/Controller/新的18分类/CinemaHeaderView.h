@@ -26,6 +26,7 @@
 @property (nonatomic,strong)UILabel * foodName;
 @property (nonatomic,strong)UILabel * price;
 @property (nonatomic,strong)UIButton * addressBtn;
+@property (nonatomic,strong)UIButton * iphoneBtn;
 @property (nonatomic,strong)UIImageView * ice_cream ;//冰激凌图片
 @property (nonatomic,strong)UIView * touchView;
 
@@ -39,7 +40,7 @@
 @property (nonatomic,strong)UILabel * movieTitle;
 @property (nonatomic,strong)UILabel * introduce;
 @property (nonatomic,strong)UILabel * movieScore;
-
+@property (nonatomic,strong)UILabel * durationLabel;//时长
 @property (nonatomic,assign)BOOL isDiscount;//0是不存在优惠卡，1是存在优惠卡
 
 @property (nonatomic,assign) id<CinemaHeaderViewDelegate>delegate;

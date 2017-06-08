@@ -7,7 +7,7 @@
 //
 
 #import "ViscosityLayout.h"
-static const CGFloat ItemHW = 60;
+static const CGFloat ItemHW = 75;
 //static const CGFloat ItemMaigin = 20;
 
 @implementation ViscosityLayout
@@ -29,9 +29,9 @@ static const CGFloat ItemHW = 60;
     [super prepareLayout];
     
     //初始化
-    self.itemSize = CGSizeMake(ItemHW, self.collectionView.frame.size.height * 0.62f);
+    self.itemSize = CGSizeMake(ItemHW, self.collectionView.frame.size.height * 0.5f);
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    self.minimumLineSpacing = 20;
+    self.minimumLineSpacing = 40;
 
     CGFloat inset = (self.collectionView.frame.size.width - ItemHW) / 2;
     self.sectionInset = UIEdgeInsetsMake(0, inset, 0, inset);

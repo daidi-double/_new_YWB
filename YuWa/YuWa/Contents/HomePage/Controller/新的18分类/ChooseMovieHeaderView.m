@@ -64,7 +64,7 @@
     if (CGxiaoshu>=0.75) {
         realXiaoshu=0;
         realZhengshu= realZhengshu+1;
-    }else if (CGxiaoshu>0&&CGxiaoshu<0.25){
+    }else if (CGxiaoshu>=0&&CGxiaoshu<0.25){
         realXiaoshu=0;
     }else{
         realXiaoshu=0.5;

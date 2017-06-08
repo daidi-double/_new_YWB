@@ -28,8 +28,8 @@
 }
 - (void)setData{
 
-    self.backgroundColor = [UIColor whiteColor];
 
+    self.backgroundColor = [UIColor whiteColor];
     self.daoyanLabel.height = [self getLabelHeight:self.model.director];
     self.daoyanLabel.text = [NSString stringWithFormat:@"导演:%@",self.model.director];
     self.performerLabel.height = [self getLabelHeight:self.model.cast];
@@ -40,6 +40,9 @@
     self.countryLabel.text = [NSString stringWithFormat:@"地区/国家:%@",self.model.country];
     self.introduceLabel.text = self.model.intro;
     [self moreBtn];
+    if (self.status == 1) {
+        [self layoutIfNeeded];
+    }
 
 }
 
@@ -120,6 +123,7 @@
         _moreBtn.centerX = kScreen_Width/2;
         [_moreBtn setImage:[UIImage imageNamed:@"dropdown"] forState:UIControlStateNormal];
         [_moreBtn addTarget:self action:@selector(moreIntro:) forControlEvents:UIControlEventTouchUpInside];
+        markBtn = _moreBtn;
         [self addSubview:_moreBtn];
     }
     return _moreBtn;
@@ -127,33 +131,30 @@
 //自动计算label宽高
 - (CGFloat)getLabelHeight:(NSString *)str{
     CGRect labelHeight = [str boundingRectWithSize:CGSizeMake(kScreen_Width-32, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
-    return labelHeight.size.height;
+    return labelHeight.size.height ;
 }
 
 +(CGFloat)getHeaderHeight:(NSString *)introduce{
     
+    
     CGRect labelHeight = [introduce boundingRectWithSize:CGSizeMake(kScreen_Width-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
-    return labelHeight.size.height+kScreen_Height * 0.3f + 35;
+    return labelHeight.size.height+kScreen_Height * 0.3f + 60;
 
 }
-+(CGFloat)getHeaderAllHeight:(NSString *)introduce{
-    
-    CGRect labelHeight = [introduce boundingRectWithSize:CGSizeMake(kScreen_Width-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
-    return labelHeight.size.height+kScreen_Height * 0.3f + 35;
-    
-}
+
 -(void)commend{
     [self.delegate toCommentScore];
 }
 - (void)moreIntro:(UIButton *)sender{
-    sender.selected = !sender.selected;
-    if (sender.selected) {
+    static int a = 0;
+    if (a%2 == 0) {
         self.status = 1;
-       
     }else{
         self.status = 0;
     }
-     [self layoutIfNeeded];
+    a++;
+    [self layoutIfNeeded];
+    [self.delegate refreshUI:self.status];
 }
 - (void)layoutIfNeeded{
     if (self.status == 1) {
@@ -162,7 +163,17 @@
     }else{
         self.introduceLabel.frame = CGRectMake(16, self.line.bottom + 18, kScreen_Width - 32, 100);
     }
+  
     _moreBtn.frame = CGRectMake(0, self.introduceLabel.bottom +30, 35, 35);
     _moreBtn.centerX = kScreen_Width/2;
+    CGAffineTransform transform= CGAffineTransformMakeRotation(M_PI*self.status);
+    /*关于M_PI
+     #define M_PI     3.14159265358979323846264338327950288
+     其实它就是圆周率的值，在这里代表弧度，相当于角度制 0-360 度，M_PI=180度
+     旋转方向为：顺时针旋转
+     
+     */
+    _moreBtn.transform = transform;//旋转
+    
 }
 @end
