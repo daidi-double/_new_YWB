@@ -735,13 +735,13 @@
                 UIAlertAction * alertACNO =[UIAlertAction actionWithTitle:@"商家未预留电话哦,您可以进行预约！" style:UIAlertActionStyleDefault handler:nil];
                 [alertVC addAction:alertACNO];
             }else{
-                
+                __weak typeof(self) weakSelf = self;
                 UIAlertAction * alertAC2 =[UIAlertAction actionWithTitle:self.mainModel.company_second_tel style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     
                     NSString*str=[NSString stringWithFormat:@"tel:%@",self.mainModel.company_second_tel];
                     UIWebView*callWebView=[[UIWebView alloc]init];
                     [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-                    [self.view addSubview:callWebView];
+                    [weakSelf.view addSubview:callWebView];
                     
                     [alertVC addAction:alertAC2];
                 }];

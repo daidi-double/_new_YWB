@@ -376,7 +376,7 @@
         NSDate *date = [NSDate date];
         
         NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-        NSDateComponents *comps = [[NSDateComponents alloc] init];
+        NSDateComponents *comps ;
         
         NSInteger unitFlags =  kCFCalendarUnitYear|kCFCalendarUnitMonth|kCFCalendarUnitDay;
         comps = [calendar components:unitFlags fromDate:date];
@@ -385,8 +385,8 @@
         NSInteger day = [comps day];
         NSInteger year = [comps year];
         NSString *btnTitle =[NSString stringWithFormat:@"今天%ld月%ld日",(long)month,(long)day];
-        NSString * btnTitleT;
-        NSString * btnAfterTitle;
+        NSString * btnTitleT = nil;
+        NSString * btnAfterTitle = nil;
         if (month == 1|month ==3|month ==5|month ==7|month ==8|month ==10|month ==12) {
             if (day == 30) {
                 btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
