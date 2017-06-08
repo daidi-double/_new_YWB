@@ -442,6 +442,7 @@
     LookAllViewController * lookAllView = [[LookAllViewController alloc]init];
     lookAllView.coordinatex = self.coordinatex;
     lookAllView.coordinatey = self.coordinatey;
+    lookAllView.cityCode = self.cityCode;
     [self.navigationController pushViewController:lookAllView animated:YES];
 }
 //- (void)lookDetail:(UIButton*)sender{

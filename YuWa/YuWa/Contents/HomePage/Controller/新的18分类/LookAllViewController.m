@@ -109,6 +109,7 @@
         HotMovieModel * model = self.movieArr[indexPath.row];
         chooseMC.filmCode = model.code;
         chooseMC.filmName = model.name;
+        chooseMC.cityCode = self.cityCode;
         chooseMC.coordinatey = self.coordinatey;
         chooseMC.coordinatex = self.coordinatex;
         [self.navigationController pushViewController:chooseMC animated:YES];

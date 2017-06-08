@@ -20,6 +20,10 @@
 }
 
 - (void)setData{
+    self.showTimeLabel.textColor = [UIColor colorWithHexString:@"#333333"];
+    self.endTimeLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+    self.languageLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+    self.hallNumber.textColor = [UIColor colorWithHexString:@"#999999"];
     UIView * line = [[UIView alloc]initWithFrame:CGRectMake(8, 0, kScreen_Width-16, 0.5)];
     line.backgroundColor = RGBCOLOR(240, 240, 240, 1);
     [self.contentView addSubview:line];

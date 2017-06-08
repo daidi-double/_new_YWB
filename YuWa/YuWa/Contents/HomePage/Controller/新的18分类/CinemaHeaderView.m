@@ -67,7 +67,7 @@
     _addressBtn.frame = CGRectMake(self.width-45, self.cinemaName.y, 30, 30);
     [_addressBtn setImage:[UIImage imageNamed:@"home_locate@2x.png"] forState:UIControlStateNormal];
     [_addressBtn setTitleEdgeInsets:UIEdgeInsetsMake(15, 0, -15, 0)];
-    
+    _addressBtn.centerY = _cinemaName.centerY;
     [_addressBtn addTarget:self action:@selector(locationAddress) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addressBtn];
     
@@ -78,20 +78,21 @@
     
     [_iphoneBtn addTarget:self action:@selector(iphoneNumer) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_iphoneBtn];
-    UIView * line2 = [[UIView alloc]initWithFrame:CGRectMake(kScreen_Width-65, line1.bottom+10, 0.5, kScreen_Height*114/1334-20)];
+    UIView * line2 = [[UIView alloc]initWithFrame:CGRectMake(kScreen_Width-50, line1.bottom+10, 0.5, kScreen_Height*114/1334-20)];
     line2.backgroundColor = RGBCOLOR(234, 235, 236, 1);
     line2.centerY = _addressBtn.centerY;
     [self addSubview:line2];
+    
+    UIView * line = [[UIView alloc]initWithFrame:CGRectMake(kScreen_Width-50, 10, 0.5, kScreen_Height*114/1334-20)];
+    line.backgroundColor = RGBCOLOR(234, 235, 236, 1);
+    line.centerY = _address.centerY;
+    [self addSubview:line];
     
     UIImageView * rightImageView = [[UIImageView alloc]initWithFrame:CGRectMake(_addressBtn.left-30, self.cinemaName.height - 30, 10, 15)];
     rightImageView.centerY = _addressBtn.centerY;
     rightImageView.image = [UIImage imageNamed:@"common_icon_arrow"];
     [self addSubview:rightImageView];
     
-    UIView * line = [[UIView alloc]initWithFrame:CGRectMake(kScreen_Width-65, 10, 0.5, kScreen_Height*114/1334-20)];
-    line.backgroundColor = RGBCOLOR(234, 235, 236, 1);
-    line.centerY = _addressBtn.centerY;
-    [self addSubview:line];
     
 
     _BGScrollView = [[UIView alloc]initWithFrame:CGRectMake(0,self.address.bottom +16, kScreen_Width, kScreen_Height*452/1334)];
@@ -132,9 +133,9 @@
     [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
     self.movieTitle.text = filmModel.name;
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
-    _movieTitle.frame = CGRectMake(0, _BGScrollView.height, movieTitleSize.width, _BGScrollView.height*0.3f);
-    self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _BGScrollView.height,40, _BGScrollView.height * 0.2f);
-    self.durationLabel.frame = CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom+20,kScreen_Width/2, _BGScrollView.height * 0.3f);
+    _movieTitle.frame = CGRectMake(0, _BGScrollView.height+10, movieTitleSize.width, _BGScrollView.height*0.15f);
+    self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _movieTitle.top,40, _BGScrollView.height * 0.15f);
+    self.durationLabel.frame = CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom,kScreen_Width/2, _BGScrollView.height * 0.15f);
     self.durationLabel.text = [NSString stringWithFormat:@"时长:%@分钟",filmModel.duration];
     //调用请求数据方法刷新数据
 }
@@ -182,8 +183,8 @@
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
     _movieTitle.width = movieTitleSize.width;
     self.movieScore.text = [NSString stringWithFormat:@"%@分",filmModel.score];
-    self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _BGScrollView.height,40, _BGScrollView.height * 0.2f);
-    self.durationLabel.frame = CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom+20,kScreen_Width/2, _BGScrollView.height * 0.3f);
+    self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _movieTitle.top,40, _BGScrollView.height * 0.15f);
+    self.durationLabel.frame = CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom,kScreen_Width/2, _BGScrollView.height * 0.15f);
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height)];
         
@@ -206,10 +207,10 @@
     [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
     self.movieTitle.text = filmModel.name;
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
-    _movieTitle.frame = CGRectMake(12, _BGScrollView.height, movieTitleSize.width, _BGScrollView.height*0.3f);
-    self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _BGScrollView.height,40, _BGScrollView.height * 0.2f);
+    _movieTitle.frame = CGRectMake(12, _BGScrollView.height+10, movieTitleSize.width, _BGScrollView.height*0.15f);
+    self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _movieTitle.top,40, _BGScrollView.height * 0.15f);
     self.movieScore.text = [NSString stringWithFormat:@"%@分",filmModel.score];
-    self.durationLabel.frame = CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom+20,kScreen_Width/2, _BGScrollView.height * 0.3f);
+    self.durationLabel.frame = CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom,kScreen_Width/2, _BGScrollView.height * 0.15f);
     self.durationLabel.text = [NSString stringWithFormat:@"时长:%@分钟",filmModel.duration];
 }
 #pragma mark -- http
@@ -239,10 +240,10 @@
                     if (i == 0) {
                         self.movieTitle.text = filmModel.name;
                         CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
-                        _movieTitle.frame = CGRectMake(12, _BGScrollView.height, movieTitleSize.width, _BGScrollView.height*0.3f);
-                        self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _BGScrollView.height,40, _BGScrollView.height * 0.2f);
+                        _movieTitle.frame = CGRectMake(12, _BGScrollView.height+10, movieTitleSize.width, _BGScrollView.height*0.15f);
+                        self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _movieTitle.top,40, _BGScrollView.height * 0.15f);
                          self.movieScore.text = [NSString stringWithFormat:@"%@分",filmModel.score];
-                        self.durationLabel.frame = CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom+20,kScreen_Width/2, _BGScrollView.height * 0.3f);
+                        self.durationLabel.frame = CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom,kScreen_Width/2, _BGScrollView.height * 0.15f);
                         self.durationLabel.text = [NSString stringWithFormat:@"时长:%@分钟",filmModel.duration];
                 }
              }
@@ -307,7 +308,7 @@
 
 - (UILabel*)movieTitle{
     if (!_movieTitle) {
-        _movieTitle = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 0, _BGScrollView.height * 0.3f)];
+        _movieTitle = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 0, _BGScrollView.height * 0.15f)];
         _movieTitle.textColor = [UIColor colorWithHexString:@"#333333"];
         _movieTitle.font = [UIFont systemFontOfSize:13];
         [_BGScrollView addSubview:_movieTitle];
@@ -317,7 +318,7 @@
 }
 - (UILabel*)movieScore{
     if (!_movieScore) {
-        _movieScore = [[UILabel alloc]initWithFrame:CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _BGScrollView.height,40, _BGScrollView.height * 0.2f)];
+        _movieScore = [[UILabel alloc]initWithFrame:CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, self.movieTitle.top,40, _BGScrollView.height * 0.15f)];
         _movieScore.textColor = [UIColor colorWithHexString:@"#f6c018"];
         _movieScore.font = [UIFont systemFontOfSize:13];
         [_BGScrollView addSubview:_movieScore];
@@ -326,7 +327,7 @@
 }
 - (UILabel*)durationLabel{
     if (!_durationLabel) {
-        _durationLabel = [[UILabel alloc]initWithFrame:CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom+20,kScreen_Width/2, _BGScrollView.height * 0.3f)];
+        _durationLabel = [[UILabel alloc]initWithFrame:CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom,kScreen_Width/2, _BGScrollView.height * 0.15f)];
         _durationLabel.textColor = [UIColor colorWithHexString:@"#999999"];
         _durationLabel.font = [UIFont systemFontOfSize:13];
         [_BGScrollView addSubview:_durationLabel];

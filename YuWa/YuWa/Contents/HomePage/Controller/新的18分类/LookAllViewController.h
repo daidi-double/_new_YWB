@@ -12,4 +12,5 @@
 @property(nonatomic,strong)NSString*coordinatex;   //经度
 @property(nonatomic,strong)NSString*coordinatey;   //维度
 @property (nonatomic,strong) UIButton * sellBtn;
+@property (nonatomic,copy)NSString * cityCode;
 @end
