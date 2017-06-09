@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Shanghai DuRui Information Technology Company. All rights reserved.
 //
 
+#import "VIPTabBarController.h"
 #import "YWMessageViewController.h"
 #import "YWLoginViewController.h"
 #import "YWMessageNotificationViewController.h"
@@ -34,16 +35,18 @@
 @property (nonatomic,strong)YWMessageAddressBookTableView * addressBooktableView;
 @property (nonatomic,strong)UIBarButtonItem * rightBarBtn;
 
+//为tabbar右上角提供红色数字提示用的
+@property (nonatomic, assign) int badgeValue;
 @end
 
 @implementation YWMessageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self makeNavi];
-//    [self makeUI];
-//    [self dataSet];
-//    [self setupRefresh];
+    [self makeNavi];
+    [self makeUI];
+    [self dataSet];
+    [self setupRefresh];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -89,6 +92,7 @@
     [self.view addSubview:self.noChatlabel];
     
     [self addressBookMake];
+
 }
 - (void)makeNavi{
     self.segmentedControl = [self makeSegmentedControl];
@@ -232,7 +236,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     YWMessageTableViewCell * messageCell = [tableView dequeueReusableCellWithIdentifier:MESSAGECELL];
     messageCell.model = self.dataArr[indexPath.row];
-    
+    //给tabbar 增加一个红色提示数字
+    if (!self.badgeValue) {
+        for (EaseConversationModel * model in self.dataArr) {
+            self.badgeValue += model.conversation.unreadMessagesCount;
+        }
+        VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
+        item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
+    }else{
+        VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
+        item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
+    }
     return messageCell;
 }
 

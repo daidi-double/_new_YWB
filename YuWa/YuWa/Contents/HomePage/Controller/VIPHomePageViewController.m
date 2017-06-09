@@ -31,6 +31,7 @@
 #import "ShopDetailViewController.h"//新店铺详情界面
 #import "YWload.h"
 //
+#import "YWMessageViewController.h"
 
 #define CELL0   @"HomeMenuCell"
 #define CELL1   @"ShoppingTableViewCell"
@@ -72,20 +73,6 @@
     [self makeNaviBar];
     [self addTableVIew];
     [self setUpMJRefresh];
-
-//    Class cls = NSClassFromString(@"UMANUtil");
-//    SEL deviceIDSelector = @selector(openUDIDString);
-//    NSString *deviceID = nil;
-//    if(cls && [cls respondsToSelector:deviceIDSelector]){
-//        deviceID = [cls performSelector:deviceIDSelector];
-//    }
-//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:@{@"oid" : deviceID}
-//                                                       options:NSJSONWritingPrettyPrinted
-//                                                         error:nil];
-//    
-//    NSLog(@"!!!!!%@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
-//    NSArray *arr = @[@1];
-//    NSNumber * a = arr[3];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

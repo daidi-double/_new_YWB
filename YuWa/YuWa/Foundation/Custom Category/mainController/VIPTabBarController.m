@@ -28,8 +28,9 @@
     [UITabBar appearance].tintColor=CNaviColor;
     [self addChildViewControllers];
     [self delTopLine];
-    
     self.delegate=self;
+//    self .selectedIndex =3;
+//    self .selectedIndex =0;
 }
 
 - (void)delTopLine{
