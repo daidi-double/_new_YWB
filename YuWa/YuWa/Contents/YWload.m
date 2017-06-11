@@ -8,6 +8,8 @@
 
 #import "YWload.h"
 
+@interface YWload();
+@end
 @implementation YWload
 
 -(instancetype)initWithView:(UIView *)view{
@@ -40,4 +42,6 @@
 +(instancetype )showOnView:(UIView *)view{
  return  [[self alloc]initWithView:view];
 }
+
+
 @end

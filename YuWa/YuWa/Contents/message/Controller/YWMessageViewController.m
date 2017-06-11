@@ -18,6 +18,7 @@
 
 #import "YWMessageTableViewCell.h"
 
+
 #define MESSAGECELL @"YWMessageTableViewCell"
 @interface YWMessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -236,19 +237,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     YWMessageTableViewCell * messageCell = [tableView dequeueReusableCellWithIdentifier:MESSAGECELL];
     messageCell.model = self.dataArr[indexPath.row];
-    //给tabbar 增加一个红色提示数字
-    if (!self.badgeValue) {
-        for (EaseConversationModel * model in self.dataArr) {
-            self.badgeValue += model.conversation.unreadMessagesCount;
-        }
-        VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-        UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
-        item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
-    }else{
-        VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-        UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
-        item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
-    }
     return messageCell;
 }
 
@@ -318,6 +306,20 @@
                 count++;
                 if (count >= sorted.count) {
                     [self.tableView reloadData];
+                }
+                //给tabbar 增加一个红色提示数字
+                if (!self.badgeValue) {
+                    for (EaseConversationModel * model in self.dataArr) {
+                        self.badgeValue += model.conversation.unreadMessagesCount;
+                        MyLog(@"%d",model.conversation.unreadMessagesCount);
+                    }
+                    VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                    UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
+                    item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
+                }else{
+                    VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                    UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
+                    item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
                 }
             } failur:^(id responsObj, NSError *error) {
                 MyLog(@"Regieter Code pragram is %@",pragram);
