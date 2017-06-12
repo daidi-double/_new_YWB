@@ -115,7 +115,11 @@
                 VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
                 UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
                 item.badgeValue=[NSString stringWithFormat:@"%d",badgeValue];
+                if (badgeValue == 0) {
+                    item.badgeValue = nil;
+                }
                 //还原
+                
             } failur:^(id responsObj, NSError *error) {
             }];
         }

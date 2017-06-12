@@ -98,17 +98,6 @@
 - (void)makeNavi{
     self.segmentedControl = [self makeSegmentedControl];
     self.navigationItem.titleView = self.segmentedControl;
-    
-    self.rightBarBtn = [UIBarButtonItem barItemWithImageName:nil withSelectImage:nil withHorizontalAlignment:UIControlContentHorizontalAlignmentCenter withTittle:@"通知" withTittleColor:[UIColor whiteColor] withTarget:self action:@selector(pushMessagesViewAction) forControlEvents:UIControlEventTouchUpInside withWidth:35.f];
-    CGFloat redWidth = 8.f;
-    UILabel * redLabel = [[UILabel alloc]initWithFrame:CGRectMake(25.f, 5.f, redWidth, redWidth)];
-    redLabel.backgroundColor = [UIColor redColor];
-    redLabel.layer.cornerRadius = redWidth/2;
-    redLabel.layer.masksToBounds = YES;
-    redLabel.tag = 1001;
-    redLabel.hidden = YES;
-    [self.rightBarBtn.customView addSubview:redLabel];
-    self.navigationItem.rightBarButtonItem = self.rightBarBtn;
 }
 
 - (UISegmentedControl *)makeSegmentedControl{
@@ -177,11 +166,6 @@
     }else{
         [self.addressBooktableView.mj_header beginRefreshing];
     }
-}
-
-- (void)pushMessagesViewAction{
-    YWMessageNotificationViewController * vc = [[YWMessageNotificationViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)isNewNotification:(BOOL)isNew{
@@ -308,7 +292,6 @@
                     [self.tableView reloadData];
                 }
                 //给tabbar 增加一个红色提示数字
-                if (!self.badgeValue) {
                     for (EaseConversationModel * model in self.dataArr) {
                         self.badgeValue += model.conversation.unreadMessagesCount;
                         MyLog(@"%d",model.conversation.unreadMessagesCount);
@@ -316,11 +299,10 @@
                     VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
                     UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
                     item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
-                }else{
-                    VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-                    UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
-                    item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
+                if (self.badgeValue == 0) {
+                    item.badgeValue = nil;
                 }
+                self.badgeValue = 0;
             } failur:^(id responsObj, NSError *error) {
                 MyLog(@"Regieter Code pragram is %@",pragram);
                 MyLog(@"Regieter Code error is %@",responsObj);
