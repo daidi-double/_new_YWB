@@ -40,6 +40,7 @@
         self.categoryLabel.text = @"";
     }
     self.countryLabel.width = [self getLabelWidth:self.model.country];
+
     self.countryLabel.text = [NSString stringWithFormat:@"%@",self.model.country];
     if (self.model.country== nil) {
         self.countryLabel.text = @"";
@@ -144,8 +145,8 @@
         _countryLabel.font = [UIFont systemFontOfSize:13];
         _countryLabel.textAlignment = 1;
         _countryLabel.text = @"";
-        _countryLabel.layer.cornerRadius = 2;
-        _categoryLabel.layer.masksToBounds = YES;
+        _countryLabel.layer.cornerRadius = 3;
+        _countryLabel.layer.masksToBounds = YES;
         [self addSubview:_countryLabel];
         
     }
@@ -159,7 +160,7 @@
         _timeLabel.font = [UIFont systemFontOfSize:13];
         _timeLabel.text = @"";
         _timeLabel.textAlignment =1;
-        _timeLabel.layer.cornerRadius = 2;
+        _timeLabel.layer.cornerRadius = 3;
         _timeLabel.layer.masksToBounds = YES;
         [self addSubview:_timeLabel];
         
@@ -176,7 +177,7 @@
         _categoryLabel.font = [UIFont systemFontOfSize:13];
         _categoryLabel.text = @"";
         _categoryLabel.textAlignment = 1;
-        _categoryLabel.layer.cornerRadius = 2;
+        _categoryLabel.layer.cornerRadius = 3;
         _categoryLabel.layer.masksToBounds = YES;
         [self addSubview:_categoryLabel];
     }
@@ -196,25 +197,7 @@
     }
     return _scoreLabel;
 }
-//- (UIButton*)gradeBtn{
-//    if (!_gradeBtn) {
-//        _gradeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        
-//        _gradeBtn.frame = CGRectMake(kScreen_Width * 0.65f, self.bounds.size.height*0.8, kScreen_Width*0.3f, self.bounds.size.height*0.15f);
-//        [_gradeBtn setTitle:@"评分" forState:UIControlStateNormal];
-//        _gradeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-//        [_gradeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [_gradeBtn addTarget:self action:@selector(gradeBtn:) forControlEvents:UIControlEventTouchUpInside];
-//        _gradeBtn.layer.borderWidth = 0.5f;
-//        
-//        _gradeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-//        _gradeBtn.layer.cornerRadius = 5;
-//        _gradeBtn.layer.masksToBounds = YES;
-//        
-//        
-//    }
-//    return _gradeBtn;
-//}
+
 - (UIImageView*)rightImageView{
     if (!_rightImageView) {
         _rightImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 38, 0, 8, 15)];
@@ -226,28 +209,6 @@
     return _rightImageView;
 }
 
-//- (UILabel*)daoyanLabel{
-//    if (!_daoyanLabel) {
-//        _daoyanLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.title.origin.x,12+self.bounds.size.height *0.15f, kScreen_Width/2, self.bounds.size.height*0.1f)];
-//        _daoyanLabel.textColor = [UIColor whiteColor];
-//        _daoyanLabel.font = [UIFont systemFontOfSize:12];
-//         self.daoyanLabel.text = @"导演:";
-//        [self addSubview:_daoyanLabel];
-//    }
-//    return _daoyanLabel;
-//}
-//- (UILabel*)performerLabel{
-//    if (!_performerLabel) {
-//        _performerLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.daoyanLabel.origin.x, self.daoyanLabel.bottom, (kScreen_Width-30)/2, self.bounds.size.height*0.2f)];
-//        _performerLabel.textColor = [UIColor whiteColor];
-//        _performerLabel.numberOfLines = 2;
-//        _performerLabel.font = [UIFont systemFontOfSize:12];
-//        self.performerLabel.text = @"主演:";
-//
-//        [self addSubview:_performerLabel];
-//     }
-//    return _performerLabel;
-//}
 
 - (void)gradeBtn:(UIButton*)sender{
     NSLog(@"评分");

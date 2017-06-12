@@ -17,7 +17,7 @@
 @property (nonatomic,strong) UILabel * languageLabel;
 @property (nonatomic,strong) UILabel * timeLabel;
 @property (nonatomic,strong) NSString * cinemaName;
-@property (nonatomic,strong) UIButton * changeMovieBtn;//更换场次
+//@property (nonatomic,strong) UIButton * changeMovieBtn;//更换场次
 @property (nonatomic,copy) NSString * channelshowcode;//渠道场次编码
 @property (nonatomic,copy)NSString * hall_name;
 @property (nonatomic,strong)FilmShowTimeModel * headerModel;

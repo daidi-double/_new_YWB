@@ -12,10 +12,9 @@
 #import "FilmListModel.h"
 @protocol CinemaHeaderViewDelegate <NSObject>
 
-- (void)ToFoodPage;
 - (void)ToCinemaDetaliPage;
 - (void)ToLocation;
-- (void)ToVipDetaliPage;
+
 - (void)filmName:(NSString *)filmName andIndex:(NSInteger)index andfilmCode:(NSString *)filmCode;
 @end
 
@@ -29,8 +28,8 @@
 @property (nonatomic,strong)UIButton * iphoneBtn;
 @property (nonatomic,strong)UIImageView * ice_cream ;//冰激凌图片
 @property (nonatomic,strong)UIView * touchView;
-
-@property (nonatomic,strong)NSMutableArray * flimListAry;
+@property (nonatomic,assign)NSInteger num;//记录初始偏移量
+//@property (nonatomic,strong)NSMutableArray * flimListAry;
 @property (nonatomic,strong) CinemaHeaderModel * model;
 
 @property (nonatomic,copy)NSString * cinema_code;//影院编码
@@ -49,8 +48,6 @@
 @property (nonatomic,strong)UIImageView * BGroundView;
 
 @property (nonatomic,strong)NSMutableArray *movies;
-
--(instancetype)initWithFrame:(CGRect)frame andAry:(NSMutableArray*)moviesAry;
 
 
 @end

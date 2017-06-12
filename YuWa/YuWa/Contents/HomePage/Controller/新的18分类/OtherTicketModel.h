@@ -23,5 +23,5 @@
 @property (nonatomic,copy)NSString * range;//使用范围
 @property (nonatomic,copy)NSString * validDays;//有效天数validType=1时为空
 @property (nonatomic,copy)NSString * percentage;//调价比例
-
+@property (nonatomic,copy)NSString * per_price;//单价（原价）：分
 @end

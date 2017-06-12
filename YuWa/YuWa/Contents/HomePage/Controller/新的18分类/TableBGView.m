@@ -19,16 +19,19 @@
 @property (nonatomic,strong) UITableView * rightTableView;
 @property (nonatomic,copy) NSString* type;
 @property (nonatomic,strong)NSMutableArray * cityCodeAry;
-
+@property (nonatomic,assign)NSInteger index;
 
 @end
 @implementation TableBGView
-- (instancetype)initWithFrame:(CGRect)frame andTag:(NSInteger)tag andTitle:(NSString *)title{
+- (instancetype)initWithFrame:(CGRect)frame andTag:(NSInteger)tag andTitle:(NSString *)title andIndex:(NSInteger)index andFilmCode:(NSString *)filmCode andCityCode:(NSString *)cityCode{
     self = [super initWithFrame:frame];
     if (self) {
+        _index = index;
         _staus = tag;
         markTitle = title;
         self.type = @"0";
+        self.cityCode = cityCode;
+        self.filmCode = filmCode;
         [self setPlaceBtn];
         [self makeTableView];
         [self getlocatCityCode];
@@ -201,9 +204,17 @@
 
 //获取地区编码
 - (void)getlocatCityCode{
-    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CITYCODE];
-    self.cityCode = @"350500";
-    NSDictionary * pragrams = @{@"area":self.cityCode,@"type":self.type};
+    NSString * urlStr;
+    NSDictionary * pragrams;
+    if (self.index == 0) {
+          urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CITYCODE];
+
+        pragrams = @{@"area":self.cityCode};
+    }else{
+         urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CITYCODENEW];
+        pragrams = @{@"area":self.cityCode,@"filmCode":self.filmCode};
+
+    }
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
         MyLog(@"参数 %@",pragrams);

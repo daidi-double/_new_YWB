@@ -121,7 +121,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         FilmDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:FILMDETAILCELL];
-        
+        cell.present_like = self.cinemaDetailModel.like_percent;
+        cell.ctype = [self.cinemaDetailModel.ctype integerValue];
+        cell.filmNo = self.cinemaDetailModel.code;
+        cell.selectionStyle = NO;
+      
         return cell;
     }else{
         CinemaCharacteristicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CinemaCell123];
@@ -224,6 +228,7 @@
 //    NSIndexPath * path = [self.detailTableView ]
     [self.detailTableView reloadData];
 }
+
 /*
 #pragma mark - Navigation
 

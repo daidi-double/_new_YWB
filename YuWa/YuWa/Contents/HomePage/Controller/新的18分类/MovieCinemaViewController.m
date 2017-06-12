@@ -43,6 +43,7 @@
 @property (nonatomic,strong)CLGeocoder * geocoder;
 @property (nonatomic,assign) NSInteger index;//标记滚动部分是哪部电影
 @property (nonatomic,strong)NSMutableArray * otherTicketAry;//通兑票数组
+@property (nonatomic,assign)NSInteger Num;//记录当前选择的电影位于第几个
 @end
 
 @implementation MovieCinemaViewController
@@ -50,12 +51,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = self.filmName;
-    self.time = [JWTools currentTime2];
     self.index = 0;
     [self requestHeaderData];
-
+    
     [self.view addSubview:self.movieTableView];
-
+    
 }
 
 
@@ -74,6 +74,9 @@
     if (self.status == 1) {
         
         if (section == 0) {
+            if (self.filmListAry.count<=0) {
+                return kScreen_Height *342/1334.f;
+            }
             return kScreen_Height *850/1334.f;
             
         }else{
@@ -81,6 +84,10 @@
         }
     }else{
         if (section == 0) {
+            if (self.filmListAry.count<=0) {
+                return kScreen_Height *342/1334.f;
+            }
+
             return kScreen_Height *850/1334.f;
             
         }else{
@@ -97,22 +104,87 @@
 }
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-
-        CinemaHeaderView * headerBGview = [[CinemaHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.5f)andAry:self.filmListAry];
-        headerBGview.cinema_code = self.cinema_code;
-        headerBGview.model = self.headerModel;
-        headerBGview.movies = self.filmListAry;
-        headerBGview.delegate =self;
-        return headerBGview;
+        if (self.headerModel != nil) {
+            
+            CinemaHeaderView * headerBGview = [[CinemaHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.5f)];
+            headerBGview.cinema_code = self.cinema_code;
+            headerBGview.movies = self.filmListAry;
+            headerBGview.num = self.Num;
+            headerBGview.model = self.headerModel;
+            headerBGview.delegate =self;
+            
+            return headerBGview;
+        }else{
+            return nil;
+        }
     }else{
-
+        if (self.filmName != nil) {
+            //从热映电影点击进来的
+            for (FilmListModel * model in self.filmListAry) {
+                if ([self.film_code isEqualToString:model.code]) {
+                    NSArray * date = [model.allDate componentsSeparatedByString:@","];
+                    if (date.count>0) {
+                        
+                        for (UIButton * dateBtn in self.btnTimeView.subviews) {
+                            if (dateBtn.tag>=1) {
+                              
+                                if (dateBtn.tag<=date.count) {
+                                    
+                                    [dateBtn setTitle:date[dateBtn.tag-1] forState:UIControlStateNormal];
+                                    if ([dateBtn.titleLabel.text isEqualToString:@""]||dateBtn.titleLabel.text == nil) {
+                                        [dateBtn setUserInteractionEnabled:NO];
+                                    }else{
+                                        [dateBtn setUserInteractionEnabled:YES];
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        
+                        self.time = @"";
+                    }
+                    
+                }
+            }
+        }else{
+            //            还未选择电影，即从影院数据进来的
+            FilmListModel * model;
+            if (self.filmListAry.count >0) {
+                
+                model= self.filmListAry[_index];
+            }
+            NSArray * dateAry = [model.allDate componentsSeparatedByString:@","];
+            if (dateAry.count>0) {
+                
+                for (UIButton * dateBtn in self.btnTimeView.subviews) {
+                    if (dateBtn.tag>=1) {
+                        
+                        if (dateBtn.tag<=dateAry.count) {
+                            [dateBtn setTitle:dateAry[dateBtn.tag-1] forState:UIControlStateNormal];
+                            if ([dateBtn.titleLabel.text isEqualToString:@""]||dateBtn.titleLabel.text == nil) {
+                                [dateBtn setUserInteractionEnabled:NO];
+                            }else{
+                                [dateBtn setUserInteractionEnabled:YES];
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+            
+        }
+        if (self.filmListAry.count<=0) {
+            return nil;
+        }
+        
         return self.btnTimeView;
     }
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    
     if (indexPath.section == 1) {
         FilmShowTimeModel * showModel = self.filmShowAry[indexPath.row];
         ChooseSeatController * chooseSeat = [[ChooseSeatController alloc]init];
@@ -126,7 +198,7 @@
             self.filmName = model.name;
         }
         chooseSeat.filmName = self.filmName;
-         MyLog(@"渠道编码2 = %@",showModel.channelshowcode);//1710490158461
+        MyLog(@"渠道编码2 = %@",showModel.channelshowcode);//1710490158461
         [self.navigationController pushViewController:chooseSeat animated:YES];
     }
 }
@@ -156,20 +228,17 @@
     return cell;
 }
 - (void)chooseDate:(UIButton*)sender{
-
-    lineView.centerX = sender.centerX;
-    switch (sender.tag) {
-        case 1:
-            self.time = [JWTools currentTime2];
-            break;
-        case 2:
-            self.time = [JWTools tommorowTime];
-            break;
-            
-        default:
-            self.time = [JWTools getThreeDayTime];
-            break;
+    FilmListModel * filmModel;
+    if (self.filmName != nil) {
+        filmModel = self.filmListAry[self.Num];
+        
+    }else{
+        filmModel = self.filmListAry[self.index];
     }
+    NSArray * date = [filmModel.allDate componentsSeparatedByString:@","];
+    lineView.centerX = sender.centerX;
+    
+    self.time = date[sender.tag-1];
     [self requestFootData];
 }
 
@@ -188,26 +257,26 @@
         chooseVC.headerModel = self.filmShowAry[path.row];
         [self.navigationController pushViewController:chooseVC animated:YES];
     }
-   
+    
 }
 - (void)ToCinemaDetaliPage{
     CinemaDetaliController * detaliVC = [[CinemaDetaliController alloc]init];
     detaliVC.cinemaCode = self.cinema_code;
     [self.navigationController pushViewController:detaliVC animated:YES];
-
+    
 }
 - (void)ToFoodPage{
     FoodViewController * foodVC = [[FoodViewController alloc]init];
     [self.navigationController pushViewController:foodVC animated:YES];
 }
 - (void)ToLocation{
-   
+    
     MapNavNewViewController * locationVC = [[MapNavNewViewController alloc]init];
     locationVC.coordinatex = self.headerModel.longitude;
     locationVC.coordinatey = self.headerModel.latitude;
     locationVC.shopName = self.headerModel.cinema_name;
     [self.navigationController pushViewController:locationVC animated:YES];
-  
+    
 }
 - (void)filmName:(NSString *)filmName andIndex:(NSInteger)index andfilmCode:(NSString *)filmCode{
     self.filmName = filmName;
@@ -227,9 +296,9 @@
 #pragma mark -- http
 //头部视图数据
 - (void)requestHeaderData{
-
+    
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAHEADER];
-
+    
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
@@ -237,27 +306,49 @@
         [dic setValue:@([UserSession instance].uid) forKey:@"user_id"];
         [dic setValue:[UserSession instance].token forKey:@"token"];
     }
+
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
         MyLog(@"影院头部%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             self.headerModel = [CinemaHeaderModel yy_modelWithDictionary:data[@"data"][@"cinemaInfo"]];
             
-//            滑动部分的电影
+            //            滑动部分的电影
             [self.filmListAry removeAllObjects];
             NSArray * ary = data[@"data"][@"filmList"];
             if (![ary isKindOfClass:[NSNull class]]) {
                 
-            for (int i = 0; i <ary.count; i ++ ) {
-
+                for (int i = 0; i <ary.count; i ++ ) {
+                    
                     FilmListModel * filmModel = [FilmListModel yy_modelWithDictionary:ary[i]];
                     [self.filmListAry addObject:filmModel];
-                if (i == 0) {
                     
-                    self.film_code = filmModel.code;
-                    [self requestFootData];
+                    if (self.film_code == nil) {
+                        if (i == 0) {
+                            self.film_code = filmModel.code;
+                            self.Num = 0;
+                            NSArray * date = [filmModel.allDate componentsSeparatedByString:@","];
+                            if (date.count>0) {
+                                
+                                self.time = date[0];
+                            }else{
+                                self.time = @"";
+                            }
+                            [self requestFootData];
+                        }
+                    }else if ([self.film_code isEqualToString:filmModel.code]) {
+                        self.Num = i;
+                        self.film_code = filmModel.code;
+                        NSArray * date = [filmModel.allDate componentsSeparatedByString:@","];
+                        if (date.count>0) {
+                            
+                            self.time = date[0];
+                        }else{
+                            self.time = @"";
+                        }
+                        [self requestFootData];
+                    }
                 }
-               }
             }
             
             
@@ -271,9 +362,7 @@
 
 - (void)requestFootData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAFOOT];
-//    
-//    self.cinema_code = @"01010071";
-//    self.film_code = @"";
+    
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code,@"film_code":self.film_code,@"time":self.time};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
@@ -283,15 +372,16 @@
     }
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",dic);
         MyLog(@"电影场次%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
-
+            
             [self.filmShowAry removeAllObjects];
-                for (NSDictionary * dict in data[@"data"]) {
-                    
-                    FilmShowTimeModel * showModel = [FilmShowTimeModel yy_modelWithDictionary:dict];
- 
-                    [self.filmShowAry addObject:showModel];
+            for (NSDictionary * dict in data[@"data"]) {
+                
+                FilmShowTimeModel * showModel = [FilmShowTimeModel yy_modelWithDictionary:dict];
+                
+                [self.filmShowAry addObject:showModel];
             }
             
             
@@ -303,156 +393,33 @@
     }];
     
 }
-- (void)ToVipDetaliPage{
-    
-}
-//- (void)getLocalSubName{
-//    CLLocation * location = [[CLLocation alloc]initWithLatitude:self.location.coordinate.latitude longitude:self.location.coordinate.longitude];
-//    [self.geocoder reverseGeocodeLocation: location completionHandler:^(NSArray *array, NSError *error) {
-//        if (array.count > 0) {
-//            CLPlacemark *placemark = [array objectAtIndex:0];
-//            if (placemark != nil) {
-//                NSString *city = placemark.locality;
-//                
-//                NSLog(@"当前城市名称------%@",city);
-////                
-////                BMKOfflineMap * _offlineMap = [[BMKOfflineMap alloc] init];
-////                
-////                NSArray* records = [_offlineMap searchCity:city];
-////                BMKOLSearchRecord* oneRecord = [records objectAtIndex:0];
-////                //城市编码如:北京为131
-////                NSInteger cityId = oneRecord.cityID;
-////                
-////                NSLog(@"当前城市编号-------->%zd",cityId);
-////                //找到了当前位置城市后就关闭服务
-////                [_locService stopUserLocationService];
-//                
-//            }
-//        }
-//    }];
-//   
-//    
-//
-//    
-//}
 
-/**当获取到定位的坐标后，回调函数*/
-//- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-//    
-//    BMKCoordinateRegion region;
-//    
-//    region.center.latitude  = userLocation.location.coordinate.latitude;
-//    region.center.longitude = userLocation.location.coordinate.longitude;
-//    region.span.latitudeDelta = 0;
-//    region.span.longitudeDelta = 0;
-//    NSLog(@"当前的坐标是:%f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-//    
-//    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-//    [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
-//        if (array.count > 0) {
-//            CLPlacemark *placemark = [array objectAtIndex:0];
-//            if (placemark != nil) {
-//                NSString *city = placemark.locality;
-//                
-//                NSLog(@"当前城市名称------%@",city);
-//                BMKOfflineMap * _offlineMap = [[BMKOfflineMap alloc] init];
-//                _offlineMap.delegate = self;//可以不要
-//                NSArray* records = [_offlineMap searchCity:city];
-//                BMKOLSearchRecord* oneRecord = [records objectAtIndex:0];
-//                //城市编码如:北京为131
-//                NSInteger cityId = oneRecord.cityID;
-//                
-//                NSLog(@"当前城市编号-------->%zd",cityId);
-//                //找到了当前位置城市后就关闭服务
-//                [_locService stopUserLocationService];
-//                
-//            }
-//        }
-//    }];
-//    
-//}
 -(UIView*)btnTimeView{
-   
-        NSDate *date = [NSDate date];
-        
-        NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-        NSDateComponents *comps ;
-        
-        NSInteger unitFlags =  kCFCalendarUnitYear|kCFCalendarUnitMonth|kCFCalendarUnitDay;
-        comps = [calendar components:unitFlags fromDate:date];
-        
-        NSInteger month = [comps month];
-        NSInteger day = [comps day];
-        NSInteger year = [comps year];
-        NSString *btnTitle =[NSString stringWithFormat:@"今天%ld月%ld日",(long)month,(long)day];
-        NSString * btnTitleT = nil;
-        NSString * btnAfterTitle = nil;
-        if (month == 1|month ==3|month ==5|month ==7|month ==8|month ==10|month ==12) {
-            if (day == 30) {
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
-                btnAfterTitle = [NSString stringWithFormat:@"后天%ld月1日",(long)month+1];
-                
-            }
-            if (day == 31) {
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月1日",(long)month+1];
-                btnAfterTitle = [NSString stringWithFormat:@"后天%ld月2日",(long)month+1];
-                if (month == 12) {
-                    btnTitleT = @"明天1月1日";
-                    btnAfterTitle = @"后天1月2日";
-                }
-            }else{
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
-                btnAfterTitle = [NSString stringWithFormat:@"明日%ld月%ld日",(long)month,(long)day+2];
-            }
-            
-        }else if (year%4 ==0 && month == 2 && day == 29){
-            btnTitleT = @"明天3月1日";
-            btnAfterTitle = @"后天3月2日";
-        }else if (year%4 != 0 && month == 2 && day == 28){
-            btnTitleT = @"明天3月1日";
-            btnAfterTitle = @"后天3月2日";
-        }else if (month == 4|month ==6|month ==9|month ==10|month ==11){
-            if (day == 29) {
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
-                btnAfterTitle = [NSString stringWithFormat:@"后天%ld月1日",(long)month+1];
-                
-            }else if (day == 30) {
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月1日",(long)month+1];
-                btnAfterTitle = [NSString stringWithFormat:@"后天%ld月2日",(long)month+1];
-            }else{
-                
-                btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
-                btnAfterTitle = [NSString stringWithFormat:@"明日%ld月%ld日",(long)month,(long)day+2];
-            }
-            
-        }else{
-            
-            btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
-            btnAfterTitle = [NSString stringWithFormat:@"明日%ld月%ld日",(long)month,(long)day+2];
-        }
-        
-        NSArray * arr = @[btnTitle,btnTitleT,btnAfterTitle];
-        if (self.status == 1) {
-            if (!_btnTimeView) {
+    
+    NSArray * arr = @[@"",@"",@""];
+    if (self.status == 1) {
+        if (!_btnTimeView) {
             _btnTimeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 100)];
             
             UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
             line.backgroundColor = RGBCOLOR(240, 240, 240, 1);
             [_btnTimeView addSubview:line];
-       
+            UIView * blakView = [[UIView alloc]initWithFrame:CGRectMake(0, -10, kScreen_Width, 10)];
+            blakView.backgroundColor = RGBCOLOR(234, 235, 236, 1);
+            [_btnTimeView addSubview:blakView];
             
-            lineView = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height-56, kScreen_Width/3, 2)];
+            lineView = [[UIView alloc]initWithFrame:CGRectMake(5, _btnTimeView.height-56, kScreen_Width/3, 2)];
             lineView.backgroundColor = CNaviColor;
             [_btnTimeView addSubview:lineView];
-         
+            
             for (int j = 0; j<3; j++) {
                 UIButton * dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 dateBtn.frame = CGRectMake(10 + (kScreen_Width/3-3)*j, 1, kScreen_Width/3-3, _btnTimeView.height - 56);
                 dateBtn.tag = j +1;
                 [dateBtn addTarget:self action:@selector(chooseDate:) forControlEvents:UIControlEventTouchUpInside];
                 [_btnTimeView addSubview:dateBtn];
-                dateBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-                [dateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                dateBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+                [dateBtn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
                 [dateBtn setTitle:arr[j] forState:UIControlStateNormal];
                 
                 UIView * line3 = [[UIView alloc]initWithFrame:CGRectMake(dateBtn.right+1, _btnTimeView.height - 56, kScreen_Width, 0.5)];
@@ -470,30 +437,30 @@
             UIView * bgView = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height -55.5, kScreen_Width, 55.5)];
             [_btnTimeView addSubview:bgView];
             
-            UIImageView * picImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 10, 35.5, 35.5)];
+            UIImageView * picImageView = [[UIImageView alloc]initWithFrame:CGRectMake(12, 10, 35.5, 35.5)];
             picImageView.image = [UIImage imageNamed:@"otherticketpic"];
             [bgView addSubview:picImageView];
             
             UILabel * otherTicketLabel = [[UILabel alloc]initWithFrame:CGRectMake(picImageView.right + 20, 0, kScreen_Width * 0.7f, 30)];
-            otherTicketLabel.textColor = RGBCOLOR(110, 112, 113, 1);
+            otherTicketLabel.textColor = [UIColor colorWithHexString:@"#333333"];
             otherTicketLabel.centerY = bgView.height/2;
-            otherTicketLabel.font = [UIFont systemFontOfSize:14];
+            otherTicketLabel.font = [UIFont systemFontOfSize:13];
             otherTicketLabel.text = @"可观看2D,3D,免预约,可升级";
             [bgView addSubview:otherTicketLabel];
             
-            UIImageView * picImageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 30, 15, 8, 20)];
+            UIImageView * picImageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 30, 15, 8, 15)];
             picImageView.centerY = bgView.height/2;
-            picImageView2.image = [UIImage imageNamed:@"imageTypeChoose_right"];
+            picImageView2.image = [UIImage imageNamed:@"common_icon_arrow"];
             [bgView addSubview:picImageView2];
             UITapGestureRecognizer * otherTicketTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toOtherTicker)];
             otherTicketTap.delegate = self;
             otherTicketTap.numberOfTapsRequired = 1;
             otherTicketTap.numberOfTouchesRequired = 1;
             [bgView addGestureRecognizer:otherTicketTap];
-            }
-                return _btnTimeView;
-        }else{
-            if (!_btnTimeView) {
+        }
+        return _btnTimeView;
+    }else{
+        if (!_btnTimeView) {
             _btnTimeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 44)];
             
             UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
@@ -504,7 +471,9 @@
             lineView = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height-2, kScreen_Width/3, 2)];
             lineView.backgroundColor = CNaviColor;
             [_btnTimeView addSubview:lineView];
-            
+            UIView * blakView = [[UIView alloc]initWithFrame:CGRectMake(0, -10, kScreen_Width, 10)];
+            blakView.backgroundColor = RGBCOLOR(234, 235, 236, 1);
+            [_btnTimeView addSubview:blakView];
             for (int j = 0; j<3; j++) {
                 UIButton * dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 dateBtn.frame = CGRectMake(10 + (kScreen_Width/3-3)*j, 1, kScreen_Width/3-3, _btnTimeView.height);
@@ -524,10 +493,10 @@
                 }
                 
             }
-          }
-            return _btnTimeView;
         }
-
+        return _btnTimeView;
+    }
+    
 }
 
 #pragma mark  -- 得到地理位置
@@ -551,6 +520,7 @@
         _movieTableView.backgroundColor = [UIColor whiteColor];
         _movieTableView.delegate = self;
         _movieTableView.dataSource = self;
+        
         [_movieTableView registerNib:[UINib nibWithNibName:PLAYSHOWCELL bundle:nil] forCellReuseIdentifier:PLAYSHOWCELL];
     }
     return _movieTableView;
@@ -580,13 +550,140 @@
 }
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
+//- (void)getLocalSubName{
+//    CLLocation * location = [[CLLocation alloc]initWithLatitude:self.location.coordinate.latitude longitude:self.location.coordinate.longitude];
+//    [self.geocoder reverseGeocodeLocation: location completionHandler:^(NSArray *array, NSError *error) {
+//        if (array.count > 0) {
+//            CLPlacemark *placemark = [array objectAtIndex:0];
+//            if (placemark != nil) {
+//                NSString *city = placemark.locality;
+//
+//                NSLog(@"当前城市名称------%@",city);
+////
+////                BMKOfflineMap * _offlineMap = [[BMKOfflineMap alloc] init];
+////
+////                NSArray* records = [_offlineMap searchCity:city];
+////                BMKOLSearchRecord* oneRecord = [records objectAtIndex:0];
+////                //城市编码如:北京为131
+////                NSInteger cityId = oneRecord.cityID;
+////
+////                NSLog(@"当前城市编号-------->%zd",cityId);
+////                //找到了当前位置城市后就关闭服务
+////                [_locService stopUserLocationService];
+//
+//            }
+//        }
+//    }];
+//
+//
+//
+//
+//}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+/**当获取到定位的坐标后，回调函数*/
+//- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
+//
+//    BMKCoordinateRegion region;
+//
+//    region.center.latitude  = userLocation.location.coordinate.latitude;
+//    region.center.longitude = userLocation.location.coordinate.longitude;
+//    region.span.latitudeDelta = 0;
+//    region.span.longitudeDelta = 0;
+//    NSLog(@"当前的坐标是:%f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+//
+//    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+//    [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
+//        if (array.count > 0) {
+//            CLPlacemark *placemark = [array objectAtIndex:0];
+//            if (placemark != nil) {
+//                NSString *city = placemark.locality;
+//
+//                NSLog(@"当前城市名称------%@",city);
+//                BMKOfflineMap * _offlineMap = [[BMKOfflineMap alloc] init];
+//                _offlineMap.delegate = self;//可以不要
+//                NSArray* records = [_offlineMap searchCity:city];
+//                BMKOLSearchRecord* oneRecord = [records objectAtIndex:0];
+//                //城市编码如:北京为131
+//                NSInteger cityId = oneRecord.cityID;
+//
+//                NSLog(@"当前城市编号-------->%zd",cityId);
+//                //找到了当前位置城市后就关闭服务
+//                [_locService stopUserLocationService];
+//
+//            }
+//        }
+//    }];
+//
+//}
 
+/*
+ 
+ NSDate *date = [NSDate date];
+ 
+ NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+ NSDateComponents *comps = [[NSDateComponents alloc] init];
+ 
+ NSInteger unitFlags =  kCFCalendarUnitYear|kCFCalendarUnitMonth|kCFCalendarUnitDay;
+ comps = [calendar components:unitFlags fromDate:date];
+ 
+ NSInteger month = [comps month];
+ NSInteger day = [comps day];
+ NSInteger year = [comps year];
+ NSString *btnTitle =[NSString stringWithFormat:@"今天%ld月%ld日",(long)month,(long)day];
+ NSString * btnTitleT;
+ NSString * btnAfterTitle;
+ if (month == 1|month ==3|month ==5|month ==7|month ==8|month ==10|month ==12) {
+ if (day == 30) {
+ btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
+ btnAfterTitle = [NSString stringWithFormat:@"后天%ld月1日",(long)month+1];
+ 
+ }
+ if (day == 31) {
+ btnTitleT = [NSString stringWithFormat:@"明天%ld月1日",(long)month+1];
+ btnAfterTitle = [NSString stringWithFormat:@"后天%ld月2日",(long)month+1];
+ if (month == 12) {
+ btnTitleT = @"明天1月1日";
+ btnAfterTitle = @"后天1月2日";
+ }
+ }else{
+ btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
+ btnAfterTitle = [NSString stringWithFormat:@"明日%ld月%ld日",(long)month,(long)day+2];
+ }
+ 
+ }else if (year%4 ==0 && month == 2 && day == 29){
+ btnTitleT = @"明天3月1日";
+ btnAfterTitle = @"后天3月2日";
+ }else if (year%4 != 0 && month == 2 && day == 28){
+ btnTitleT = @"明天3月1日";
+ btnAfterTitle = @"后天3月2日";
+ }else if (month == 4|month ==6|month ==9|month ==10|month ==11){
+ if (day == 29) {
+ btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
+ btnAfterTitle = [NSString stringWithFormat:@"后天%ld月1日",(long)month+1];
+ 
+ }else if (day == 30) {
+ btnTitleT = [NSString stringWithFormat:@"明天%ld月1日",(long)month+1];
+ btnAfterTitle = [NSString stringWithFormat:@"后天%ld月2日",(long)month+1];
+ }else{
+ 
+ btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
+ btnAfterTitle = [NSString stringWithFormat:@"明日%ld月%ld日",(long)month,(long)day+2];
+ }
+ 
+ }else{
+ 
+ btnTitleT = [NSString stringWithFormat:@"明天%ld月%ld日",(long)month,(long)day+1];
+ btnAfterTitle = [NSString stringWithFormat:@"明日%ld月%ld日",(long)month,(long)day+2];
+ }
+ 
+ 
+ */
 @end

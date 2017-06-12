@@ -24,6 +24,7 @@
                         <state key="normal" title="赞一下" image="good">
                             <color key="titleColor" red="0.28235294119999998" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <state key="selected" title="赞一下" image="goodsel"/>
                         <connections>
                             <action selector="goodAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lDC-B0-e0s"/>
                         </connections>
@@ -34,6 +35,7 @@
                         <state key="normal" title="吐槽一下" image="bad">
                             <color key="titleColor" red="0.28235294119999998" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <state key="selected" title="吐槽一下" image="badsel"/>
                         <connections>
                             <action selector="badAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UR6-iQ-NUX"/>
                         </connections>
@@ -64,13 +66,17 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="badBtn" destination="PHU-gf-pu9" id="z5z-8L-WEH"/>
+                <outlet property="goodBtn" destination="drS-J0-34U" id="60E-Cp-v37"/>
                 <outlet property="likeLabel" destination="EVQ-bC-Z6f" id="Ruc-X2-dqs"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
         <image name="bad" width="12" height="13"/>
+        <image name="badsel" width="12" height="13"/>
         <image name="good" width="12" height="13"/>
+        <image name="goodsel" width="12" height="13"/>
         <image name="likesee" width="26" height="26"/>
     </resources>
 </document>

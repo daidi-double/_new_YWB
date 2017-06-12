@@ -12,6 +12,7 @@
 #import "MarkTableViewCell.h"
 #import "UseCouponViewController.h"
 #import "PCPayViewController.h"
+#import "NSString+JWAppendOtherStr.h"
 
 #define MARKCELL00  @"MarkTableViewCell"
 #define TOTALCELL @"TotalMoneyTableViewCell"
@@ -33,6 +34,7 @@
 @property (nonatomic,strong) NSString* order_id;
 @property (nonatomic,assign) BOOL is_lockseat;//是否已经锁定座位
 @property (nonatomic,assign)NSInteger index;
+@property (nonatomic,copy)NSString * iphone;
 @end
 
 @implementation PayViewController
@@ -117,7 +119,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 6;
+        return 3;
     }else if (section == 1){
         return 1;
     }else{
@@ -128,15 +130,13 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 100;
-        }else if (indexPath.row == 3){
+            return 150;
+        }else if (indexPath.row == 2){
             return 88.f;
-        }else if (indexPath.row == 4 || indexPath.row == 2){
-            return 0.01f;
         }
-        return 50.f;
+        return 44.f;
     }
-    return 50.f;
+    return 44.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"payCell"];
@@ -155,17 +155,12 @@
             return payCell;
         }else if (indexPath.row == 1){
             cell.textLabel.textColor = RGBCOLOR(142, 143, 144, 1);
-            cell.textLabel.font = [UIFont systemFontOfSize:15];
+            cell.textLabel.font = [UIFont systemFontOfSize:14];
             cell.textLabel.text = @"优惠券抵用";
             
             [cell.contentView addSubview:self.useCouponLabel];
             markPath = indexPath;
         }else if (indexPath.row == 2){
-            cell.textLabel.textColor = RGBCOLOR(142, 143, 144, 1);
-            cell.textLabel.font = [UIFont systemFontOfSize:15];
-             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            cell.textLabel.text =@"商家优惠";
-        }else if (indexPath.row == 3){
             TotalMoneyTableViewCell * totalCell = [tableView dequeueReusableCellWithIdentifier:TOTALCELL];
             totalCell.totalMoneyLabel.text = [NSString stringWithFormat:@"￥%.2f",self.payMoney];
             NSMutableArray * seatAry = self.dataAry[8];
@@ -173,31 +168,21 @@
             totalCell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             return totalCell;
-        }else if (indexPath.row == 4){
-            cell.textLabel.textColor = CNaviColor;
-            cell.textLabel.font = [UIFont systemFontOfSize:15];
-//            cell.textLabel.text =@"办理会员卡本单立减16元";
-        }else {
-            MarkTableViewCell * markCell1 = [tableView dequeueReusableCellWithIdentifier:MARKCELL00];
-            markCell1.otherLabel.hidden = YES;
-            UIImageView * otherImageView = [markCell1 viewWithTag:3];
-            otherImageView.hidden = YES;
-            markCell1.selectionStyle = UITableViewCellSelectionStyleNone;
-            return markCell1;
         }
     }else if (indexPath.section == 1){
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.textLabel.textColor = RGBCOLOR(143, 144, 145, 1);
+        MarkTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:MARKCELL00];
+        cell.iphoneTextFild.textColor = [UIColor colorWithHexString:@"#333333"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        NSString * threeStr = [[UserSession instance].account substringToIndex:3];
-        NSString * fourStr = [[UserSession instance].account substringFromIndex:[UserSession instance].account.length-4];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@****%@",threeStr,fourStr];
-        
+
+        cell.iphoneTextFild.text = [NSString stringWithFormat:@"%@",[UserSession instance].account];
+        self.iphone = cell.iphoneTextFild.text;
     }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0) {
+
     if (indexPath.row == 1) {
         UseCouponViewController * useVC = [[UseCouponViewController alloc]init];
         useVC.shop_id = self.dataAry[9];
@@ -207,10 +192,11 @@
 
         [self.navigationController pushViewController:useVC animated:YES];
 
-    }else if (indexPath.row == 2) {
+    }
         
-    }else if (indexPath.row == 4) {
-        
+    }else if (indexPath.section == 1&&indexPath.row == 0){
+        NSIndexPath * path = [self.payInforTableView indexPathForSelectedRow];
+//        MarkTableViewCell * cell = [self.payInforTableView ]
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -258,14 +244,13 @@
     }
     NSString * seatCodes = [seatCodeAry componentsJoinedByString:@","];//座位编码
     NSString * seats = [seatAry componentsJoinedByString:@","];//座位
-    
     //抵用券金额
     NSString * couponMoneyStr = [NSString stringWithFormat:@"%.2f",self.couponMoney];
     //是否使用优惠券
     NSString * isUseCouponStr = [NSString stringWithFormat:@"%d",self.is_useCoupon];
     
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_PAY_GETMOVIEORDER];
-    NSDictionary*dict=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"cinema_code":self.cinemaCode,@"is_coupon":isUseCouponStr,@"channelShowCode":self.dataAry[1],@"seatCodes":seatCodes,@"mobile":[UserSession instance].account,@"coupon_money":couponMoneyStr,@"seat":seats};
+    NSDictionary*dict=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"cinema_code":self.cinemaCode,@"is_coupon":isUseCouponStr,@"channelShowCode":self.dataAry[1],@"seatCodes":seatCodes,@"mobile":self.iphone,@"coupon_money":couponMoneyStr,@"seat":seats};
     NSMutableDictionary*params=[NSMutableDictionary dictionaryWithDictionary:dict];
     if (self.is_useCoupon==YES) {
         [params setObject:@(self.is_useCoupon) forKey:@"coupon_id"];
@@ -306,7 +291,7 @@
     if (!_useCouponLabel) {
         _useCouponLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width * 0.6, 10, kScreen_Width * 0.45f, 30)];
         _useCouponLabel.textColor = RGBCOLOR(143, 144, 145, 1);
-        _useCouponLabel.font = [UIFont systemFontOfSize:15];
+        _useCouponLabel.font = [UIFont systemFontOfSize:14];
         _useCouponLabel.text = @"使用优惠券";
     }
     return _useCouponLabel;
@@ -322,7 +307,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 /*
 #pragma mark - Navigation
 

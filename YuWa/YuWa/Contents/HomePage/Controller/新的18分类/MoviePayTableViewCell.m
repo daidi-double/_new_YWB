@@ -21,6 +21,11 @@
 }
 
 - (void)setData{
+    
+    self.movieNameLabel.textColor = [UIColor colorWithHexString:@"#333333"];
+    self.cinemaNameLabel.textColor = [UIColor colorWithHexString:@"#666666"];
+    self.playTimeLabel.textColor = [UIColor colorWithHexString:@"#4b95dd"];
+    self.seatNumberLabel.textColor = [UIColor colorWithHexString:@"#666666"];
     self.movieNameLabel.text = self.dataAry[3];
     //价格放映类型（1：2D 2：3D 3：MAX2D 4：MAX3D 6：DMAX）
     NSString * showType;
