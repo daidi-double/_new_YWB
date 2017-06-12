@@ -454,19 +454,19 @@
 
 -(void)addFriend:(UIButton*)sender{
     //加好友
-//    if (sender.selected) {
-//        return;
-//       
-//    }else{
-//        sender.selected=YES;
-//        EMError *error = [[EMClient sharedClient].contactManager addContact:self.HeaderModel.username message:@"我想加您为好友"];
-//        if (!error) {
-//            MyLog(@"添加成功");
-//        }else{
-//            sender.selected=NO;
-//        }
-//        
-//    }
+    if (sender.selected) {
+        return;
+       
+    }else{
+        sender.selected=YES;
+        EMError *error = [[EMClient sharedClient].contactManager addContact:self.HeaderModel.username message:@"我想加您为好友"];
+        if (!error) {
+            MyLog(@"添加成功");
+        }else{
+            sender.selected=NO;
+        }
+        
+    }
     [JRToast showWithText:@"尽请期待"];
 
 }

@@ -31,12 +31,21 @@
 #import "ShopDetailViewController.h"//新店铺详情界面
 #import "YWload.h"
 //
+#import "YWMessageViewController.h"
+#import "VIPTabBarController.h"
+
 
 #define CELL0   @"HomeMenuCell"
-#define CELL1   @"ShoppingTableViewCell"
 #define CELL2   @"YWMainShoppingTableViewCell"
+#define CELL1   @"ShoppingTableViewCell"
+
+
+#import "YWMessageTableViewCell.h"
+
 
 @interface VIPHomePageViewController()<UITableViewDelegate,UITableViewDataSource,HomeMenuCellDelegate,SDCycleScrollViewDelegate>
+//@property (nonatomic, strong) NSMutableArray *dataArr;//消息模块有几条未读信息，时候用到
+
 @property(nonatomic,strong)UITableView*tableView;
 @property(nonatomic,strong)UIView*centerView;   //导航栏上的view
 @property(nonatomic,strong)UIBarButtonItem*leftItem;
@@ -72,25 +81,14 @@
     [self makeNaviBar];
     [self addTableVIew];
     [self setUpMJRefresh];
-
-//    Class cls = NSClassFromString(@"UMANUtil");
-//    SEL deviceIDSelector = @selector(openUDIDString);
-//    NSString *deviceID = nil;
-//    if(cls && [cls respondsToSelector:deviceIDSelector]){
-//        deviceID = [cls performSelector:deviceIDSelector];
-//    }
-//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:@{@"oid" : deviceID}
-//                                                       options:NSJSONWritingPrettyPrinted
-//                                                         error:nil];
-//    
-//    NSLog(@"!!!!!%@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
-//    NSArray *arr = @[@1];
-//    NSNumber * a = arr[3];
+    
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0 ]setAlpha:1];
 //    [self makeNoticeWithTime:0 withAlertBody:@"您已购买了xxxx"];
+    [self requestShopArrDataWithPages:1];
 }
 - (void)tagsAliasCallback:(int)iResCode  tags:(NSSet *)tags alias:(NSString *)alias {
     NSLog(@"起别名 :      rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
@@ -209,14 +207,15 @@
 -(void)setUpMJRefresh{
     self.pagen=10;
     self.pages=-1;
-
     self.tableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self getDatas];
+        [self requestShopArrDataWithPages:1];
     }];
     
     //上拉刷新
     self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self loadingMoreShowInfo];
+        [self requestShopArrDataWithPages:1];
     }];
     //立即刷新
     [self.tableView.mj_header beginRefreshing];
@@ -783,7 +782,49 @@
     }
     return _tableView;
 }
-
+#pragma mark --- 用来设置消息模块有几条信息是未读的
+- (void)requestShopArrDataWithPages:(NSInteger)page{
+    NSMutableArray * dataArr = [NSMutableArray array];
+    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+    NSArray* sorted = [conversations sortedArrayUsingComparator:^(EMConversation *obj1, EMConversation* obj2){
+        EMMessage *message1 = [obj1 latestMessage];
+        EMMessage *message2 = [obj2 latestMessage];
+        if(message1.timestamp > message2.timestamp) {
+            return(NSComparisonResult)NSOrderedAscending;
+        }else {
+            return(NSComparisonResult)NSOrderedDescending;
+        }
+    }];
+    __block NSInteger count = 0;
+    for (int i = 0; i<sorted.count; i++) {
+        EMConversation * converstion = sorted[i];
+        EaseConversationModel * model = [[EaseConversationModel alloc] initWithConversation:converstion];
+        if (model&&([YWMessageTableViewCell latestMessageTitleForConversationModel:model].length>0)){
+            [dataArr addObject:model];
+            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId)};
+            [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
+                MyLog(@"Regieter Code pragram is %@",pragram);
+                MyLog(@"Regieter Code is %@",responsObj);
+                YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
+                modelTemp.hxID = [model.title length] > 0?model.title:model.conversation.conversationId;
+                model.title = modelTemp.nikeName;
+                model.avatarURLPath = modelTemp.header_img;
+                model.jModel = modelTemp;
+                [dataArr replaceObjectAtIndex:i withObject:model];
+                count++;
+                int badgeValue = 0;
+                for (EaseConversationModel * model in dataArr) {
+                    badgeValue += model.conversation.unreadMessagesCount;
+                }
+                VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
+                item.badgeValue=[NSString stringWithFormat:@"%d",badgeValue];
+                //还原
+            } failur:^(id responsObj, NSError *error) {
+            }];
+        }
+    }
+}
 -(void)dealloc{
     [_mtModelArrBanner removeAllObjects];
     _mtModelArrBanner = nil;
@@ -839,4 +880,5 @@
     }
     return _geocoder;
 }
+
 @end

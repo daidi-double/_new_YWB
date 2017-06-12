@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -39,21 +39,14 @@
                         <action selector="noLoginBGBtnAvtion:" destination="-1" eventType="touchUpInside" id="vWd-Ix-EWZ"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="消息.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="y8i-L6-88f">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.96078431372549022" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="y8i-L6-88f" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="0GZ-KS-e4h"/>
                 <constraint firstItem="HNC-jo-nPZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1V5-Zh-xSw"/>
                 <constraint firstAttribute="bottom" secondItem="HNC-jo-nPZ" secondAttribute="bottom" constant="50" id="39Z-Eg-mIa"/>
-                <constraint firstAttribute="trailing" secondItem="y8i-L6-88f" secondAttribute="trailing" id="BgB-EU-epv"/>
                 <constraint firstAttribute="trailing" secondItem="T07-aF-Hsb" secondAttribute="trailing" id="CEd-ix-5fZ"/>
                 <constraint firstItem="T07-aF-Hsb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FK8-19-CYC"/>
-                <constraint firstAttribute="bottom" secondItem="y8i-L6-88f" secondAttribute="bottom" id="FrV-5n-Z0Y"/>
                 <constraint firstItem="HNC-jo-nPZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Hjr-nC-F06"/>
-                <constraint firstItem="y8i-L6-88f" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TRq-Uk-qFv"/>
                 <constraint firstItem="T07-aF-Hsb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Vvl-yc-JGY"/>
                 <constraint firstAttribute="trailing" secondItem="HNC-jo-nPZ" secondAttribute="trailing" id="cEv-dl-Pp4"/>
                 <constraint firstAttribute="bottom" secondItem="T07-aF-Hsb" secondAttribute="bottom" constant="49" id="e8H-rC-0Ug"/>
@@ -63,6 +56,5 @@
     </objects>
     <resources>
         <image name="YW_Message_shop_fan" width="50" height="50"/>
-        <image name="消息.jpg" width="750" height="1334"/>
     </resources>
 </document>
