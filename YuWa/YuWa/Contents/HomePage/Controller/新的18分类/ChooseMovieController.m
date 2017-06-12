@@ -110,8 +110,8 @@
 
     MovieCinemaViewController * MCinemaVC = [[MovieCinemaViewController alloc]init];
     CinemaModel * models = self.movieDataAry[indexPath.row];
-    MCinemaVC.cinema_code = self.cinemaModel.code;
-    MCinemaVC.film_code = self.model.code;
+    MCinemaVC.cinema_code = models.code;
+    MCinemaVC.film_code = self.model.code;//35050321
     MCinemaVC.cityCode = self.cityCode;
     MCinemaVC.filmName = self.filmName;
     if ([models.goodstype integerValue] !=1) {
@@ -174,7 +174,7 @@
         [bgView removeFromSuperview];
     }
     if (tag == 1112) {
-        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45*3 + 30) andTag:tag andTitle:title] ;
+        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45*3 + 30) andTag:tag andTitle:title andIndex:1 andFilmCode:self.filmCode andCityCode:self.cityCode] ;
     }else{
         CGFloat hight;
         if (44 * self.cityCodeAry.count <= kScreen_Height * 0.7f) {
@@ -182,10 +182,11 @@
         }else{
             hight = kScreen_Height * 0.7f;
         }
-        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, hight) andTag:tag andTitle:title];
+        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, hight) andTag:tag andTitle:title andIndex:1 andFilmCode:self.filmCode andCityCode:self.cityCode];
     }
-    tableViewBG.delegate = self;
+    tableViewBG.filmCode = self.filmCode;
     tableViewBG.cityCode = self.cityCode;
+    tableViewBG.delegate = self;
     tableViewBG.backgroundColor = [UIColor whiteColor];
     if (markBtn.tag != tag) {
         for (UIButton * touchBtn in _bgView.subviews) {

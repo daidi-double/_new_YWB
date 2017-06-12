@@ -79,7 +79,7 @@
 #define HTTP_MOVIE_JUDGECONTENTOTHERTICKET  @"/api.php/Movie/queryCommTickets/"//判断是否有通兑票
 #define HTTP_MOVIE_GETORDERID  @"/api.php/Movie/createMyCommOrder/"//获取通兑票订单
 #define HTTP_MOVIE_CITYCODE    @"/api.php/Movie/countyList/"//获取当前城市的县市编码
-
+#define HTTP_MOVIE_CITYCODENEW    @"/api.php/Movie/countyListNew/"//获取当前城市和影院所属的县市编码
 #define HTTP_MOVIE_HOME_CINEMALIST  @"/api.php/Movie/cinemaInfo/"//获取首页影院列表
 #define HTTP_MOVIE_PAY_CHECKCOUPON @"/api.php/Movie/checkCoupon/"//检测可使用的优惠券
 #define HTTP_MOVIE_PAY_GETMOVIEORDER  @"/api.php/Movie/lockSeats/"//生成订单id,锁定座位
@@ -94,7 +94,7 @@
 #define HTTP_MOVIE_ORDERLIST          @"/api.php/Movie/myOrder/"//电影订单列表
 #define HTTP_MOVIE_ORDERDETAIL         @"/api.php/Movie/orderDetail/"//订单详情
 #define HTTP_MOVIE_CINEMADETAIL     @"/api.php/Movie/cinemaDetail/"//影院详情
-
+#define HTTP_MOVIE_FILMDETAIL       @"/api.php/Movie/addLikes/"//影片详情赞和吐槽
 
 
 #pragma mark - discover

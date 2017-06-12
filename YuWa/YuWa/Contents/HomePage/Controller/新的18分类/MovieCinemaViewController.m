@@ -43,6 +43,7 @@
 @property (nonatomic,strong)CLGeocoder * geocoder;
 @property (nonatomic,assign) NSInteger index;//标记滚动部分是哪部电影
 @property (nonatomic,strong)NSMutableArray * otherTicketAry;//通兑票数组
+@property (nonatomic,assign)NSInteger Num;//记录当前选择的电影位于第几个
 @end
 
 @implementation MovieCinemaViewController
@@ -50,7 +51,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = self.filmName;
-    self.time = [JWTools currentTime2];
     self.index = 0;
     [self requestHeaderData];
     
@@ -74,6 +74,9 @@
     if (self.status == 1) {
         
         if (section == 0) {
+            if (self.filmListAry.count<=0) {
+                return kScreen_Height *342/1334.f;
+            }
             return kScreen_Height *850/1334.f;
             
         }else{
@@ -81,6 +84,10 @@
         }
     }else{
         if (section == 0) {
+            if (self.filmListAry.count<=0) {
+                return kScreen_Height *342/1334.f;
+            }
+
             return kScreen_Height *850/1334.f;
             
         }else{
@@ -97,39 +104,79 @@
 }
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        
-        CinemaHeaderView * headerBGview = [[CinemaHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.5f)andAry:self.filmListAry];
-        headerBGview.cinema_code = self.cinema_code;
-        headerBGview.model = self.headerModel;
-        headerBGview.movies = self.filmListAry;
-        headerBGview.delegate =self;
-        
-        return headerBGview;
-    }else{
-        FilmListModel * model;
-        if (self.filmListAry.count >0) {
+        if (self.headerModel != nil) {
             
-            model= self.filmListAry[_index];
+            CinemaHeaderView * headerBGview = [[CinemaHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height*0.5f)];
+            headerBGview.cinema_code = self.cinema_code;
+            headerBGview.movies = self.filmListAry;
+            headerBGview.num = self.Num;
+            headerBGview.model = self.headerModel;
+            headerBGview.delegate =self;
+            
+            return headerBGview;
+        }else{
+            return nil;
         }
-        NSArray * dateAry = [model.allDate componentsSeparatedByString:@","];
-        if (dateAry.count>0) {
-            
-            for (UIButton * dateBtn in self.btnTimeView.subviews) {
-                if (dateBtn.tag>=1) {
-
-                    if (dateBtn.tag<=dateAry.count) {
+    }else{
+        if (self.filmName != nil) {
+            //从热映电影点击进来的
+            for (FilmListModel * model in self.filmListAry) {
+                if ([self.film_code isEqualToString:model.code]) {
+                    NSArray * date = [model.allDate componentsSeparatedByString:@","];
+                    if (date.count>0) {
                         
-                        [dateBtn setTitle:dateAry[dateBtn.tag-1] forState:UIControlStateNormal];
-                        if ([dateBtn.titleLabel.text isEqualToString:@""]||dateBtn.titleLabel.text == nil) {
-                            [dateBtn setUserInteractionEnabled:NO];
-                        }else{
-                            [dateBtn setUserInteractionEnabled:YES];
+                        for (UIButton * dateBtn in self.btnTimeView.subviews) {
+                            if (dateBtn.tag>=1) {
+                              
+                                if (dateBtn.tag<=date.count) {
+                                    
+                                    [dateBtn setTitle:date[dateBtn.tag-1] forState:UIControlStateNormal];
+                                    if ([dateBtn.titleLabel.text isEqualToString:@""]||dateBtn.titleLabel.text == nil) {
+                                        [dateBtn setUserInteractionEnabled:NO];
+                                    }else{
+                                        [dateBtn setUserInteractionEnabled:YES];
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        
+                        self.time = @"";
+                    }
+                    
+                }
+            }
+        }else{
+            //            还未选择电影，即从影院数据进来的
+            FilmListModel * model;
+            if (self.filmListAry.count >0) {
+                
+                model= self.filmListAry[_index];
+            }
+            NSArray * dateAry = [model.allDate componentsSeparatedByString:@","];
+            if (dateAry.count>0) {
+                
+                for (UIButton * dateBtn in self.btnTimeView.subviews) {
+                    if (dateBtn.tag>=1) {
+                        
+                        if (dateBtn.tag<=dateAry.count) {
+                            [dateBtn setTitle:dateAry[dateBtn.tag-1] forState:UIControlStateNormal];
+                            if ([dateBtn.titleLabel.text isEqualToString:@""]||dateBtn.titleLabel.text == nil) {
+                                [dateBtn setUserInteractionEnabled:NO];
+                            }else{
+                                [dateBtn setUserInteractionEnabled:YES];
+                            }
                         }
                     }
                 }
             }
+            
+            
+            
         }
-        
+        if (self.filmListAry.count<=0) {
+            return nil;
+        }
         
         return self.btnTimeView;
     }
@@ -181,20 +228,17 @@
     return cell;
 }
 - (void)chooseDate:(UIButton*)sender{
-    
-    lineView.centerX = sender.centerX;
-    switch (sender.tag) {
-        case 1:
-            self.time = [JWTools currentTime2];
-            break;
-        case 2:
-            self.time = [JWTools tommorowTime];
-            break;
-            
-        default:
-            self.time = [JWTools getThreeDayTime];
-            break;
+    FilmListModel * filmModel;
+    if (self.filmName != nil) {
+        filmModel = self.filmListAry[self.Num];
+        
+    }else{
+        filmModel = self.filmListAry[self.index];
     }
+    NSArray * date = [filmModel.allDate componentsSeparatedByString:@","];
+    lineView.centerX = sender.centerX;
+    
+    self.time = date[sender.tag-1];
     [self requestFootData];
 }
 
@@ -262,6 +306,7 @@
         [dic setValue:@([UserSession instance].uid) forKey:@"user_id"];
         [dic setValue:[UserSession instance].token forKey:@"token"];
     }
+
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
         MyLog(@"影院头部%@",data);
@@ -277,9 +322,30 @@
                     
                     FilmListModel * filmModel = [FilmListModel yy_modelWithDictionary:ary[i]];
                     [self.filmListAry addObject:filmModel];
-                    if (i == 0) {
-                        
+                    
+                    if (self.film_code == nil) {
+                        if (i == 0) {
+                            self.film_code = filmModel.code;
+                            self.Num = 0;
+                            NSArray * date = [filmModel.allDate componentsSeparatedByString:@","];
+                            if (date.count>0) {
+                                
+                                self.time = date[0];
+                            }else{
+                                self.time = @"";
+                            }
+                            [self requestFootData];
+                        }
+                    }else if ([self.film_code isEqualToString:filmModel.code]) {
+                        self.Num = i;
                         self.film_code = filmModel.code;
+                        NSArray * date = [filmModel.allDate componentsSeparatedByString:@","];
+                        if (date.count>0) {
+                            
+                            self.time = date[0];
+                        }else{
+                            self.time = @"";
+                        }
                         [self requestFootData];
                     }
                 }
@@ -296,9 +362,7 @@
 
 - (void)requestFootData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAFOOT];
-    //
-    //    self.cinema_code = @"01010071";
-    //    self.film_code = @"";
+    
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"cinema_code":self.cinema_code,@"film_code":self.film_code,@"time":self.time};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
@@ -308,6 +372,7 @@
     }
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",dic);
         MyLog(@"电影场次%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             
@@ -328,9 +393,7 @@
     }];
     
 }
-- (void)ToVipDetaliPage{
-    
-}
+
 -(UIView*)btnTimeView{
     
     NSArray * arr = @[@"",@"",@""];
@@ -345,7 +408,7 @@
             blakView.backgroundColor = RGBCOLOR(234, 235, 236, 1);
             [_btnTimeView addSubview:blakView];
             
-            lineView = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height-56, kScreen_Width/3, 2)];
+            lineView = [[UIView alloc]initWithFrame:CGRectMake(5, _btnTimeView.height-56, kScreen_Width/3, 2)];
             lineView.backgroundColor = CNaviColor;
             [_btnTimeView addSubview:lineView];
             
@@ -408,7 +471,9 @@
             lineView = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height-2, kScreen_Width/3, 2)];
             lineView.backgroundColor = CNaviColor;
             [_btnTimeView addSubview:lineView];
-            
+            UIView * blakView = [[UIView alloc]initWithFrame:CGRectMake(0, -10, kScreen_Width, 10)];
+            blakView.backgroundColor = RGBCOLOR(234, 235, 236, 1);
+            [_btnTimeView addSubview:blakView];
             for (int j = 0; j<3; j++) {
                 UIButton * dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 dateBtn.frame = CGRectMake(10 + (kScreen_Width/3-3)*j, 1, kScreen_Width/3-3, _btnTimeView.height);

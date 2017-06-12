@@ -26,7 +26,8 @@
 @property (nonatomic,copy)NSString * showTypes;
 @property (nonatomic,copy)NSString * duration;//时长
 @property (nonatomic,copy)NSString * publish_date;//上映时间
-
+@property (nonatomic,copy)NSString * like_percent;//喜欢百分比
+@property (nonatomic,copy)NSString * ctype;//类型0：无 1：点赞 2：吐槽
 //影片详情的图片字段
 @property (nonatomic,copy)NSString * stills;
 

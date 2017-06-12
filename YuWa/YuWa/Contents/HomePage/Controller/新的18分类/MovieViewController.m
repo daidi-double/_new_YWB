@@ -497,7 +497,7 @@
         [bgView removeFromSuperview];
     }
     if (tag == 1112) {
-        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45*3 + 30) andTag:tag andTitle:title];
+        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45*3 + 30) andTag:tag andTitle:title andIndex:0 andFilmCode:nil andCityCode:self.cityCode];
     }else{
         CGFloat hight;
         if (44 * self.cityCodeAry.count <= kScreen_Height * 0.7f) {
@@ -505,7 +505,7 @@
         }else{
             hight = kScreen_Height * 0.7f+30;
         }
-        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, hight) andTag:tag andTitle:title] ;
+        tableViewBG = [[TableBGView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, hight) andTag:tag andTitle:title andIndex:0 andFilmCode:nil andCityCode:self.cityCode] ;
     }
     tableViewBG.delegate = self;
     tableViewBG.cityCode = self.cityCode;
