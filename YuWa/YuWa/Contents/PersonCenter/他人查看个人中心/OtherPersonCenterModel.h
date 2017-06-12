@@ -29,8 +29,8 @@
 @interface OtherPersonCenterModel : NSObject
 
 @property(nonatomic,strong)NSString*username;  //环信的用户名
-@property(nonatomic,strong)NSString*address;
-@property(nonatomic,strong)NSString*nickname;
+@property(nonatomic,strong)NSString*address; //地址
+@property(nonatomic,strong)NSString*nickname; //
 @property(nonatomic,strong)NSString*header_img;
 @property(nonatomic,strong)NSString*mark;        //个性签名
 
