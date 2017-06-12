@@ -311,12 +311,12 @@
     
     
    //创建两个按钮 关注和加好友
-    UIButton*PersonInfo=[showView viewWithTag:4];
+    UIButton*PersonInfo=[showView viewWithTag:4]; //个人资料
     PersonInfo.hidden=YES;
-    UIButton*follow=[showView viewWithTag:5];
+    UIButton*follow=[showView viewWithTag:5];//取消关注 
     follow.hidden=NO;
     self.followButton=follow;
-    UIButton*friend=[showView viewWithTag:6];
+    UIButton*friend=[showView viewWithTag:6]; //加好友
     friend.hidden=NO;
     self.FriendButton=friend;
 
@@ -327,6 +327,7 @@
     
 
     [follow addTarget:self action:@selector(addGuanzhu:) forControlEvents:UIControlEventTouchUpInside];
+    
     [friend addTarget:self action:@selector(addFriend:) forControlEvents:UIControlEventTouchUpInside];
     
     //一开始没有关注
@@ -431,32 +432,22 @@
         default:
             break;
     }
-    
-    
-    
-    
 }
-
 -(void)addGuanzhu:(UIButton*)sender{
     //加关注
   
     if (sender.selected) {
         //取消关注接口
         [self ButtonCancelAbount];
-        sender.selected=NO;
     }else{
         //加上关注接口
         [self ButtonAddAbount];
-        sender.selected=YES;
     }
-    
 }
-
 -(void)addFriend:(UIButton*)sender{
     //加好友
     if (sender.selected) {
         return;
-       
     }else{
         sender.selected=YES;
         EMError *error = [[EMClient sharedClient].contactManager addContact:self.HeaderModel.username message:@"我想加您为好友"];
@@ -465,22 +456,12 @@
         }else{
             sender.selected=NO;
         }
-        
     }
     [JRToast showWithText:@"尽请期待"];
-
 }
-
-
-
-
-
 //个人资料设置
 -(void)touchPersonInfo{
-    
-    
 }
-
 -(void)setUpMJRefresh{
     self.pagen=10;
     self.pages=0;
@@ -663,7 +644,7 @@
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
             [JRToast showWithText:data[@"msg"]];
-            
+            self.followButton.selected = NO;
             
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
@@ -693,7 +674,7 @@
         if ([errorCode isEqualToString:@"0"]) {
             
             [JRToast showWithText:data[@"msg"]];
-            
+              self.followButton.selected=YES;
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
              [self getDatas];
