@@ -348,30 +348,14 @@
                     NSString*errorCode=[NSString stringWithFormat:@"%@",number];
                     if ([errorCode isEqualToString:@"0"]) {
                         [UserSession instance].logo=dict[@"header_img"];
-                        
                     }else{
                         [JRToast showWithText:data[@"errorMessage"]];
                     }
-
-
-                    
                 }];
-
-                
-                
-                
             }else{
                 [JRToast showWithText:data[@"errorMessage"]];
             }
-
-            
-            
         }];
-        
-        
-        
-        
-        
         return;
     }
     
