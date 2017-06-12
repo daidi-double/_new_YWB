@@ -12,7 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    self.backgroundColor = RGBCOLOR(239, 239, 244, 1);
+    self.textFildBGView.layer.cornerRadius = 21;
+    self.textFildBGView.layer.masksToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

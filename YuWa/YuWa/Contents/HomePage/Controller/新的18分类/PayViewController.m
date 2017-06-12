@@ -115,15 +115,13 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return 3;
-    }else if (section == 1){
-        return 1;
     }else{
-        return 0;//根据小吃套餐修改
+        return 1;
     }
     
 }
@@ -170,12 +168,14 @@
             return totalCell;
         }
     }else if (indexPath.section == 1){
+        self.payInforTableView.separatorStyle = NO;
         MarkTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:MARKCELL00];
         cell.iphoneTextFild.textColor = [UIColor colorWithHexString:@"#333333"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         cell.iphoneTextFild.text = [NSString stringWithFormat:@"%@",[UserSession instance].account];
         self.iphone = cell.iphoneTextFild.text;
+        return cell;
     }
     return cell;
 }
@@ -196,7 +196,8 @@
         
     }else if (indexPath.section == 1&&indexPath.row == 0){
         NSIndexPath * path = [self.payInforTableView indexPathForSelectedRow];
-//        MarkTableViewCell * cell = [self.payInforTableView ]
+        MarkTableViewCell * cell = (MarkTableViewCell*)[self.payInforTableView cellForRowAtIndexPath:path];
+        [cell.iphoneTextFild becomeFirstResponder];
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -307,7 +308,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
 /*
