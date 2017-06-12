@@ -304,11 +304,9 @@
     // 地点
     UILabel*locateLabel=[showView viewWithTag:3];
     locateLabel.text=self.HeaderModel.address;
-
-    
-
-
-    
+    // 备注按钮
+    UIButton*markBtn=[showView viewWithTag:80];
+    [markBtn addTarget:self action:@selector(markBtn:) forControlEvents:UIControlEventTouchDown];
     
    //创建两个按钮 关注和加好友
     UIButton*PersonInfo=[showView viewWithTag:4]; //个人资料
@@ -376,7 +374,10 @@
     
 }
 
-
+//备注按钮触发
+-(void)markBtn:(UIButton * )btn{
+    
+}
 -(void)DelegateForAlbum:(NSInteger)number andMax:(NSInteger)maxNumber{
     MyAlbumViewController*vc=[[MyAlbumViewController alloc]init];
     vc.otherUserID = self.uid;

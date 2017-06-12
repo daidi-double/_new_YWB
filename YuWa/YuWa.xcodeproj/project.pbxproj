@@ -20,6 +20,8 @@
 		2535423A1EA4ABE3006F2C7A /* headerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253542391EA4ABE3006F2C7A /* headerView.xib */; };
 		2535423D1EA4ADF8006F2C7A /* headerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2535423C1EA4ADF8006F2C7A /* headerView.m */; };
 		255222581EB504FF00F22793 /* YWdetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 255222571EB504FF00F22793 /* YWdetailModel.m */; };
+		25A0C8181EEE495C000ED81D /* YWmarkNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A0C8171EEE495C000ED81D /* YWmarkNameViewController.m */; };
+		25A0C81A1EEE496E000ED81D /* YWmarkNameViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A0C8191EEE496E000ED81D /* YWmarkNameViewController.storyboard */; };
 		25B3C5A91ECD8E4000674F20 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5801ECD8E4000674F20 /* 1.png */; };
 		25B3C5AA1ECD8E4000674F20 /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5811ECD8E4000674F20 /* 10.png */; };
 		25B3C5AB1ECD8E4000674F20 /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B3C5821ECD8E4000674F20 /* 11.png */; };
@@ -1875,6 +1877,9 @@
 		2535423C1EA4ADF8006F2C7A /* headerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = headerView.m; sourceTree = "<group>"; };
 		255222561EB504FF00F22793 /* YWdetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWdetailModel.h; sourceTree = "<group>"; };
 		255222571EB504FF00F22793 /* YWdetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWdetailModel.m; sourceTree = "<group>"; };
+		25A0C8161EEE495C000ED81D /* YWmarkNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWmarkNameViewController.h; sourceTree = "<group>"; };
+		25A0C8171EEE495C000ED81D /* YWmarkNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWmarkNameViewController.m; sourceTree = "<group>"; };
+		25A0C8191EEE496E000ED81D /* YWmarkNameViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = YWmarkNameViewController.storyboard; sourceTree = "<group>"; };
 		25B3C5801ECD8E4000674F20 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		25B3C5811ECD8E4000674F20 /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
 		25B3C5821ECD8E4000674F20 /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
@@ -4613,6 +4618,15 @@
 				255222571EB504FF00F22793 /* YWdetailModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		25A0C8151EEE4928000ED81D /* 修改昵称 */ = {
+			isa = PBXGroup;
+			children = (
+				25A0C8161EEE495C000ED81D /* YWmarkNameViewController.h */,
+				25A0C8171EEE495C000ED81D /* YWmarkNameViewController.m */,
+			);
+			name = "修改昵称";
 			sourceTree = "<group>";
 		};
 		25B3C57F1ECD8E4000674F20 /* load1 */ = {
@@ -9998,6 +10012,8 @@
 		C1F7BDC31DB1C95400CCAF96 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				25A0C8191EEE496E000ED81D /* YWmarkNameViewController.storyboard */,
+				25A0C8151EEE4928000ED81D /* 修改昵称 */,
 				C1F7BDC41DB1C95400CCAF96 /* defineButton.h */,
 				C1F7BDC51DB1C95400CCAF96 /* defineButton.m */,
 				C1F7BDC61DB1C95400CCAF96 /* imageDefineButton.h */,
@@ -11478,6 +11494,7 @@
 				AA35441E1E9DF23800A2EC73 /* 2baobaoLVUP48@2x.jpg in Resources */,
 				AA3544C21E9DF23900A2EC73 /* 0baobaoBG33@2x.jpg in Resources */,
 				AA1FEB5A1E55DE9E00239FEC /* ChooseMovieController.xib in Resources */,
+				25A0C81A1EEE496E000ED81D /* YWmarkNameViewController.storyboard in Resources */,
 				AA3544D31E9DF23900A2EC73 /* 0baobaoBG49@2x.jpg in Resources */,
 				AA3544551E9DF23800A2EC73 /* 3baobaoLVUP43@2x.jpg in Resources */,
 				AAFA57AC1ED2E540006CF2D7 /* 旅游@3x.png in Resources */,
@@ -12005,6 +12022,7 @@
 				AA29C2771EAE27DB0092EF6F /* ShopCarDeViewController.m in Sources */,
 				C1E5B7611DE456B700EB1F85 /* scheduleTwoTableViewCell.m in Sources */,
 				B38B2DF81D8FACD8004D5256 /* AFSecurityPolicy.m in Sources */,
+				25A0C8181EEE495C000ED81D /* YWmarkNameViewController.m in Sources */,
 				AA6B5EC31EA9FCF900E6A83D /* ShopDetailGoodsModel.m in Sources */,
 				AAF30AE31E5EA74400793382 /* NSString+MJExtension.m in Sources */,
 				B38B2E351D8FACD8004D5256 /* UIImage+GIF.m in Sources */,
