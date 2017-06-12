@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MarkTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *changeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *retureLabel;
-@property (weak, nonatomic) IBOutlet UILabel *otherLabel;
+@property (weak, nonatomic) IBOutlet UITextField *iphoneTextFild;
+@property (weak, nonatomic) IBOutlet UIView *textFildBGView;
+
 
 @end
