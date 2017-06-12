@@ -11,12 +11,14 @@
 #import "PCPayViewController.h"
 #import "CouponModel.h"
 #import "UseCouponViewController.h"
+#import "MarkTableViewCell.h"
 
+#define MARKCELL  @"MarkTableViewCell"
 #define TICKETPAYCELL  @"OtherTicketPayTableViewCell"
 @interface OtherTicketPayViewController ()<UITableViewDelegate,UITableViewDataSource,OtherTicketPayTableViewCellDelegate,UseCouponViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *settmentMoneyLabel;
 @property (weak, nonatomic) IBOutlet UITableView *payTableView;
-@property (nonatomic,strong) UITextField * iPhoneNumberTF;
+//@property (nonatomic,strong) UITextField * iPhoneNumberTF;
 @property (nonatomic,assign) NSInteger ticketNumber;
 @property (nonatomic,assign) BOOL is_coupon;//是否使用优惠券
 @property (nonatomic,assign)CGFloat coupon_money;//优惠券金额
@@ -25,6 +27,10 @@
 @property (nonatomic,copy)NSString * pay_money;//返回的实际支付金额
 @property (nonatomic,copy)NSString * coupon_id;
 @property (nonatomic,assign)CGFloat shouldPay_money;//需要支付的金额
+@property (nonatomic,strong)UIView * footView;
+@property (nonatomic,strong)UIView * footViewTwo;
+@property (nonatomic,copy)NSString * iphone;
+
 @end
 
 @implementation OtherTicketPayViewController
@@ -33,60 +39,99 @@
     [super viewDidLoad];
     [self makeUI];
     self.title = @"通兑券确认";
-    self.ticketNumber = 0;
+    self.ticketNumber = 1;//默认张数为1张
     self.is_coupon = 0;
     self.coupon_money = 0;
-    self.settmentMoneyLabel.text = @"待结算￥0.00";
+    self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",[self.model.price floatValue]/100];
 }
 
 - (void)makeUI{
     [self.payTableView registerNib:[UINib nibWithNibName:TICKETPAYCELL bundle:nil] forCellReuseIdentifier:TICKETPAYCELL];
+    [self.payTableView registerNib:[UINib nibWithNibName:MARKCELL bundle:nil] forCellReuseIdentifier:MARKCELL];
     self.view.backgroundColor = RGBCOLOR(240, 240, 240, 1);
 
  }
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 230.f;
+    if (indexPath.section == 0) {
+        
+        return 195.f;
+    }else{
+        return 42.f;
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 135.f;
+    if (section == 0) {
+        
+        return 0.01f;
+    }else{
+        return 200.f;
+    }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    OtherTicketPayTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TICKETPAYCELL];
-    cell.selectionStyle = NO;
-    cell.delegate = self;
-    self.payTableView.separatorStyle = NO;
-    cell.model = self.model;
-    return cell;
+    if (indexPath.section == 0) {
+        OtherTicketPayTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TICKETPAYCELL];
+        cell.selectionStyle = NO;
+        cell.delegate = self;
+        self.payTableView.separatorStyle = NO;
+        cell.model = self.model;
+
+        return cell;
+        
+    }else{
+        MarkTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:MARKCELL];
+        cell.iphoneTextFild.textColor = [UIColor colorWithHexString:@"#333333"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.iphoneTextFild.text = [NSString stringWithFormat:@"%@",[UserSession instance].account];
+        self.iphone = cell.iphoneTextFild.text;
+
+        return cell;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        return 65.f;
+    }
     return 0.01f;
 }
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 120)];
-    UILabel * markLaber = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, kScreen_Width -50, 30)];
-    markLaber.centerX = kScreen_Width/2;
-    markLaber.textColor = RGBCOLOR(110, 112, 113, 1);
-    markLaber.font = [UIFont systemFontOfSize:13];
-    markLaber.text = @"取票码已发送至如下手机号，请注意查收";
-    [footView addSubview:markLaber];
-    self.iPhoneNumberTF = [[UITextField alloc]initWithFrame:CGRectMake(25, 60, kScreen_Width - 50, 45)];
-    _iPhoneNumberTF.text = [NSString stringWithFormat:@"    手机号:%@",[UserSession instance].account];
-    _iPhoneNumberTF.textColor = RGBCOLOR(124, 124, 125, 1);
-    _iPhoneNumberTF.enabled = NO;
-    _iPhoneNumberTF.font = [UIFont systemFontOfSize:15];
-    _iPhoneNumberTF.backgroundColor = [UIColor whiteColor];
-    _iPhoneNumberTF.layer.masksToBounds = YES;
-    _iPhoneNumberTF.layer.cornerRadius = 5;
-    [footView addSubview:_iPhoneNumberTF];
-
-    return footView;
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        
+        return self.footView;
+    }else{
+        return nil;
+    }
+}
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if (section == 1) {
+        return self.footViewTwo;
+    }
+    return nil;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (indexPath.section == 1) {
+        NSIndexPath * path = [self.payTableView indexPathForSelectedRow];
+        MarkTableViewCell * cell = (MarkTableViewCell*)[self.payTableView cellForRowAtIndexPath:path];
+        [cell.iphoneTextFild becomeFirstResponder];
+    }
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
 }
 //去结算
 - (IBAction)toPayAction:(UIButton *)sender {
     //先生成订单号
+    if (self.ticketNumber <= 0) {
+        [JRToast showWithText:@"请选择购买张数" duration:2];
+        return;
+    }
     [self getOrderID];
 }
 //使用优惠券
@@ -125,13 +170,13 @@
 }
 -(void)reduceOrAddTicket:(NSInteger)status{
 
-    [self.payTableView reloadData];
     switch (status) {
         case 1:
         {
             CGFloat settmentMoney = [[self.settmentMoneyLabel.text substringFromIndex:4] floatValue];
             self.settmentMoneyLabel.text = [NSString stringWithFormat:@"待结算￥%.2f",settmentMoney +[self.model.price floatValue]/100];
             self.shouldPay_money = settmentMoney +[self.model.price floatValue]/100;
+            
             self.ticketNumber = self.ticketNumber +1;
         }
             break;
@@ -156,7 +201,7 @@
    NSString * day = [JWTools dateTimeStrDate:[self.model.validDays integerValue]];
     
     
-    NSDictionary * pragrams = @{@"mobile":[UserSession instance].account,@"ticketNo":self.model.ticketNo,@"ticketName":self.model.ticketName,@"devicePos":self.model.devicePos,@"validateMemo":self.model.validateMemo,@"price":self.model.price,@"count":number,@"cinema_code":self.cinemaCode,@"is_coupon":isCoupon,@"coupon_money":coupon_moneyStr,@"show_type":self.model.showType,@"period_validity":day,@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"percentage":self.model.percentage,@"per_price":self.model.per_price};
+    NSDictionary * pragrams = @{@"mobile":self.iphone,@"ticketNo":self.model.ticketNo,@"ticketName":self.model.ticketName,@"devicePos":self.model.devicePos,@"validateMemo":self.model.validateMemo,@"price":self.model.price,@"count":number,@"cinema_code":self.cinemaCode,@"is_coupon":isCoupon,@"coupon_money":coupon_moneyStr,@"show_type":self.model.showType,@"period_validity":day,@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"percentage":self.model.percentage,@"per_price":self.model.per_price};
    
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if (self.is_coupon) {
@@ -181,6 +226,66 @@
         }
         
      }];
+}
+
+- (UIView *)footView{
+    if (!_footView) {
+        _footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 65)];
+        UILabel * markLaber = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, kScreen_Width, 28)];
+        markLaber.centerX = kScreen_Width/2;
+        markLaber.textColor = [UIColor colorWithHexString:@"#333333"];
+        markLaber.textAlignment = 1;
+        markLaber.font = [UIFont systemFontOfSize:13];
+        markLaber.text = @"取票码将发送至如下手机号，请注意查收";
+        [_footView addSubview:markLaber];
+
+
+    }
+    return _footView;
+}
+- (UIView*)footViewTwo{
+    if (!_footViewTwo) {
+        _footViewTwo = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 200)];
+        UILabel * markLaber = [[UILabel alloc]initWithFrame:CGRectMake(15, 20, kScreen_Width, 20)];
+        markLaber.textColor = [UIColor colorWithHexString:@"#333333"];
+        markLaber.textAlignment = 0;
+        markLaber.font = [UIFont systemFontOfSize:13];
+        markLaber.text = @"○注意事项";
+        [_footViewTwo addSubview:markLaber];
+        
+        UILabel*firstLabel = [[UILabel alloc]initWithFrame:CGRectMake(24, markLaber.bottom, kScreen_Width-48, 25)];
+        firstLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+        firstLabel.textAlignment = 0;
+        firstLabel.font = [UIFont systemFontOfSize:13];
+        firstLabel.numberOfLines = 0;
+        firstLabel.text = @"1、情人节、圣诞节、平安夜、VIP厅、明星见面会以及首映不可用";
+        CGRect height = [firstLabel.text boundingRectWithSize:CGSizeMake(kScreen_Width-48, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: firstLabel.font} context:nil];
+        firstLabel.frame= CGRectMake(24, markLaber.bottom+10, kScreen_Width-48 , height.size.height);
+        [_footViewTwo addSubview:firstLabel];
+        
+        UILabel*secondLabel = [[UILabel alloc]initWithFrame:CGRectMake(24, firstLabel.bottom, kScreen_Width-48, 25)];
+        secondLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+        secondLabel.textAlignment = 0;
+        secondLabel.numberOfLines = 0;
+        secondLabel.font = [UIFont systemFontOfSize:13];
+        secondLabel.text = @"2、支付成功，凭手机接收的验证码短信，在影院前台选座出票";
+        CGRect height2 = [secondLabel.text boundingRectWithSize:CGSizeMake(kScreen_Width-48, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: secondLabel.font} context:nil];
+        secondLabel.frame= CGRectMake(24, firstLabel.bottom+5, kScreen_Width-48 , height2.size.height);
+        [_footViewTwo addSubview:secondLabel];
+        
+        UILabel*thirdLabel = [[UILabel alloc]initWithFrame:CGRectMake(24, secondLabel.bottom, kScreen_Width-48, 25)];
+        thirdLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+        thirdLabel.textAlignment = 0;
+        thirdLabel.numberOfLines = 0;
+        thirdLabel.font = [UIFont systemFontOfSize:13];
+        thirdLabel.text = @"3、温馨提示:如遇特殊影片需补差价，具体金额按影城公告到前台补差，给您造成不便，敬请见谅";
+        CGRect height3 = [thirdLabel.text boundingRectWithSize:CGSizeMake(kScreen_Width-48, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: thirdLabel.font} context:nil];
+        thirdLabel.frame= CGRectMake(24, secondLabel.bottom+5, kScreen_Width-48 , height3.size.height);
+        [_footViewTwo addSubview:thirdLabel];
+        
+        
+    }
+    return _footViewTwo;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

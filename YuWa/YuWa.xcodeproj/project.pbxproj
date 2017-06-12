@@ -707,6 +707,7 @@
 		AA3545CE1E9DF23A00A2EC73 /* 4baobaoBG7@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3543B51E9DF23800A2EC73 /* 4baobaoBG7@2x.jpg */; };
 		AA3545CF1E9DF23A00A2EC73 /* 4baobaoBG8@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3543B61E9DF23800A2EC73 /* 4baobaoBG8@2x.jpg */; };
 		AA3545D01E9DF23A00A2EC73 /* 4baobaoBG9@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA3543B71E9DF23800A2EC73 /* 4baobaoBG9@2x.jpg */; };
+		AA3575B11EEE81340022C901 /* LookAllCinemaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3575B01EEE81340022C901 /* LookAllCinemaViewController.m */; };
 		AA377B701EC6A80700E81A88 /* CinemaAndBuyTicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA377B6F1EC6A80700E81A88 /* CinemaAndBuyTicketModel.m */; };
 		AA377B7B1EC6E0C000E81A88 /* MovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA377B791EC6E0C000E81A88 /* MovieDetailViewController.m */; };
 		AA377B7C1EC6E0C000E81A88 /* MovieDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA377B7A1EC6E0C000E81A88 /* MovieDetailViewController.xib */; };
@@ -2618,6 +2619,8 @@
 		AA3543B51E9DF23800A2EC73 /* 4baobaoBG7@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "4baobaoBG7@2x.jpg"; sourceTree = "<group>"; };
 		AA3543B61E9DF23800A2EC73 /* 4baobaoBG8@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "4baobaoBG8@2x.jpg"; sourceTree = "<group>"; };
 		AA3543B71E9DF23800A2EC73 /* 4baobaoBG9@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "4baobaoBG9@2x.jpg"; sourceTree = "<group>"; };
+		AA3575AF1EEE81340022C901 /* LookAllCinemaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookAllCinemaViewController.h; sourceTree = "<group>"; };
+		AA3575B01EEE81340022C901 /* LookAllCinemaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookAllCinemaViewController.m; sourceTree = "<group>"; };
 		AA377B6E1EC6A80700E81A88 /* CinemaAndBuyTicketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaAndBuyTicketModel.h; sourceTree = "<group>"; };
 		AA377B6F1EC6A80700E81A88 /* CinemaAndBuyTicketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaAndBuyTicketModel.m; sourceTree = "<group>"; };
 		AA377B781EC6E0C000E81A88 /* MovieDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetailViewController.h; sourceTree = "<group>"; };
@@ -4817,6 +4820,8 @@
 				AA3BDE791E63C6800019F02F /* SearchViewController.m */,
 				AA19CBEA1EE0412000B18990 /* MovieResultViewController.h */,
 				AA19CBEB1EE0412000B18990 /* MovieResultViewController.m */,
+				AA3575AF1EEE81340022C901 /* LookAllCinemaViewController.h */,
+				AA3575B01EEE81340022C901 /* LookAllCinemaViewController.m */,
 			);
 			name = "搜索";
 			sourceTree = "<group>";
@@ -12346,6 +12351,7 @@
 				AA1FEB551E55DA3000239FEC /* HotMovieCollectCell.m in Sources */,
 				C1E5B77C1DE549FC00EB1F85 /* MHSelectPickerView.m in Sources */,
 				B38B2E341D8FACD8004D5256 /* UIButton+WebCache.m in Sources */,
+				AA3575B11EEE81340022C901 /* LookAllCinemaViewController.m in Sources */,
 				B34B569B1DAFD46700040D25 /* RBPublishSession.m in Sources */,
 				C1F7BD941DB1C94500CCAF96 /* YWChooseOneView.m in Sources */,
 				AAD988CB1ECB41110055D044 /* OtherTicketViewController.m in Sources */,

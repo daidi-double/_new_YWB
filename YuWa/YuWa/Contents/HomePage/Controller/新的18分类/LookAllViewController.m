@@ -39,8 +39,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.status = 0;
-//    self.pagen = 10;
-//    self.pages = 0;
+
     [self initWithTableView];
     [self requesetAllMovieData];
     
@@ -109,11 +108,12 @@
         HotMovieModel * model = self.movieArr[indexPath.row];
         chooseMC.filmCode = model.code;
         chooseMC.filmName = model.name;
-        chooseMC.cityCode = self.cityCode;
+        chooseMC.cityCode = @"350500";//先固定为泉州地区，后续若要修改可以修改
         chooseMC.coordinatey = self.coordinatey;
         chooseMC.coordinatex = self.coordinatex;
         [self.navigationController pushViewController:chooseMC animated:YES];
     }else{
+        //预售
         
     }
 }
@@ -146,6 +146,7 @@
     HotMovieModel * model = self.movieArr[path.row];
     chooseMC.filmCode = model.code;
     chooseMC.filmName = model.name;
+    chooseMC.cityCode = @"350500";//先固定地区
     chooseMC.coordinatey = self.coordinatey;
     chooseMC.coordinatex = self.coordinatex;
     [self.navigationController pushViewController:chooseMC animated:YES];
@@ -154,8 +155,6 @@
 #pragma mark - http
 - (void)requesetAllMovieData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_ALLHOTMOVIE];
-//    NSDictionary * pragrams = @{@"pages":@(self.pages),@"pagen":@(self.pagen)}
-//    ;
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:nil compliation:^(id data, NSError *error) {
         MyLog(@"热映电影%@",data);

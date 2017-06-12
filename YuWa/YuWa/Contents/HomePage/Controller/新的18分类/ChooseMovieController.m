@@ -136,7 +136,7 @@
 }
 - (void)menuBtnAction:(UIButton*)btn{
     NSLog(@"%ld",btn.tag);
-    
+    self.cityCode = @"350500";
     btn.selected = YES;
     markBtn.selected = NO;
     markBtn = btn;
@@ -210,7 +210,7 @@
             weakSelf.cityType = @"1";
         }
         weakSelf.cityCode = cityCode;
-        
+        weakSelf.pages = 0;
         [weakSelf requestCinemaData];
     };
     tableViewBG.titleBlockT = ^(NSString * titleStr,NSString * listType){
@@ -219,7 +219,7 @@
         weakMenuBG.hidden = YES;
         weakBgView.hidden = YES;
         weakSelf.typeList = listType;
-        
+        weakSelf.pages = 0;
         [weakSelf requestCinemaData];
         
     };
