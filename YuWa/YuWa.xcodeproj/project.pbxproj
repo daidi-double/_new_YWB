@@ -4622,6 +4622,7 @@
 			children = (
 				25A0C8161EEE495C000ED81D /* YWmarkNameViewController.h */,
 				25A0C8171EEE495C000ED81D /* YWmarkNameViewController.m */,
+				25A0C8191EEE496E000ED81D /* YWmarkNameViewController.storyboard */,
 			);
 			name = "修改昵称";
 			sourceTree = "<group>";
@@ -10007,7 +10008,6 @@
 		C1F7BDC31DB1C95400CCAF96 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				25A0C8191EEE496E000ED81D /* YWmarkNameViewController.storyboard */,
 				25A0C8151EEE4928000ED81D /* 修改昵称 */,
 				C1F7BDC41DB1C95400CCAF96 /* defineButton.h */,
 				C1F7BDC51DB1C95400CCAF96 /* defineButton.m */,
