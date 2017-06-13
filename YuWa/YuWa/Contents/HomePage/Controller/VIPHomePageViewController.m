@@ -88,7 +88,10 @@
     [super viewWillAppear:animated];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0 ]setAlpha:1];
 //    [self makeNoticeWithTime:0 withAlertBody:@"您已购买了xxxx"];
-    [self requestShopArrDataWithPages:1];
+    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        MyLog(@"a");
+        [self requestShopArrDataWithPages:1];
+    }];
 }
 - (void)tagsAliasCallback:(int)iResCode  tags:(NSSet *)tags alias:(NSString *)alias {
     NSLog(@"起别名 :      rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
@@ -209,13 +212,11 @@
     self.pages=-1;
     self.tableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self getDatas];
-        [self requestShopArrDataWithPages:1];
     }];
     
     //上拉刷新
     self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self loadingMoreShowInfo];
-        [self requestShopArrDataWithPages:1];
     }];
     //立即刷新
     [self.tableView.mj_header beginRefreshing];
@@ -803,8 +804,6 @@
             [dataArr addObject:model];
             NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId)};
             [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
-                MyLog(@"Regieter Code pragram is %@",pragram);
-                MyLog(@"Regieter Code is %@",responsObj);
                 YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
                 modelTemp.hxID = [model.title length] > 0?model.title:model.conversation.conversationId;
                 model.title = modelTemp.nikeName;

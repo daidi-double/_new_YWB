@@ -11,6 +11,9 @@
 #import "JWTools.h"
 #import "HttpObject.h"
 
+@interface YWMessageAddressBookTableView ()
+@property (nonatomic,strong)NSMutableArray * dataArr;
+@end
 @implementation YWMessageAddressBookTableView
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style{
     self = [super initWithFrame:frame style:style];
@@ -23,7 +26,7 @@
 }
 
 - (void)dataSet{
-    self.dataArr = [NSMutableArray arrayWithCapacity:0];
+
     self.keyArr = [NSMutableArray arrayWithCapacity:0];
     [self registerNib:[UINib nibWithNibName:MESSAGEADDRESSCELL bundle:nil] forCellReuseIdentifier:MESSAGEADDRESSCELL];
     [self registerNib:[UINib nibWithNibName:MESSAGEADDRESSHEADER bundle:nil] forHeaderFooterViewReuseIdentifier:MESSAGEADDRESSHEADER];
@@ -52,13 +55,18 @@
     return indexPath.section == 0?UITableViewCellEditingStyleNone:UITableViewCellEditingStyleDelete;
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    MyLog(@"%d",indexPath.row);
     if (indexPath.section == 0)return;
     if (editingStyle ==UITableViewCellEditingStyleDelete){
         if (indexPath.row<[self.dataArr[indexPath.section - 1] count]) {
             UIAlertAction * OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSMutableArray * dataArr = self.dataArr[indexPath.section - 1];
+                NSArray * dataArr1 = self.dataArr[indexPath.section - 1];
+                NSMutableArray *dataArr = [NSMutableArray array];
+                for (YWMessageAddressBookModel *model in dataArr1) {
+                    [dataArr addObject:model];
+                }
                 YWMessageAddressBookModel * model = dataArr[indexPath.row];
-                [dataArr removeObjectAtIndex:indexPath.row];
+                [dataArr removeObject:model];
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                     EMError *error = [[EMClient sharedClient].contactManager deleteContact:model.hxID];
@@ -234,6 +242,11 @@
         }
     }];
 }
-
+-(NSMutableArray *)dataArr{
+    if (!_dataArr) {
+        _dataArr = [NSMutableArray array];
+    }
+    return _dataArr;
+}
 
 @end

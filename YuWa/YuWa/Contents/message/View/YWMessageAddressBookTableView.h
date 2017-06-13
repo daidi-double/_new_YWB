@@ -17,7 +17,7 @@
 @property (nonatomic,copy)void (^friendsAddBlock)();
 @property (nonatomic,copy)void (^friendsChatBlock)(YWMessageAddressBookModel *);
 
-@property (nonatomic,strong)NSMutableArray * dataArr;
+
 @property (nonatomic,strong)NSMutableArray * keyArr;
 @property (nonatomic,strong)NSArray * sortArr;
 @property (nonatomic,copy)NSString * pagens;

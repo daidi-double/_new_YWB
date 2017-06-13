@@ -23,7 +23,6 @@
  *  @return 刷新Header
  */
 + (MJRefreshGifHeader *)scrollRefreshGifHeaderWithImgName:(NSString *)imageName withImageCount:(NSInteger)imageCount withRefreshBlock:(MJRefreshComponentRefreshingBlock)refreshBlock{
-     [[[UIScrollView alloc]init]requestShopArrDataWithPages:1];
     MJRefreshGifHeader * gifHeader = [[MJRefreshGifHeader alloc]init];
     gifHeader.refreshingBlock = refreshBlock;
     gifHeader.lastUpdatedTimeLabel.hidden= YES;
@@ -55,7 +54,6 @@
  *  @return 刷新Header
  */
 + (MJRefreshAutoGifFooter *)scrollRefreshGifFooterWithImgName:(NSString *)imageName withImageCount:(NSInteger)imageCount withRefreshBlock:(MJRefreshComponentRefreshingBlock)refreshBlock{
-    [[[UIScrollView alloc]init]requestShopArrDataWithPages:1];
     MJRefreshAutoGifFooter * gifFooter = [[MJRefreshAutoGifFooter alloc]init];
     gifFooter.refreshingBlock = refreshBlock;
     gifFooter.stateLabel.hidden = YES;
@@ -78,52 +76,4 @@
     [gifFooter setImages:footerImagesRefreshing duration:(footerImagesRefreshing.count*0.05) forState:MJRefreshStateRefreshing];
     return gifFooter;
 }
-#pragma mark --- 用来设置消息模块有几条信息是未读的
-- (void)requestShopArrDataWithPages:(NSInteger)page{
-    NSMutableArray * dataArr = [NSMutableArray array];
-    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
-    NSArray* sorted = [conversations sortedArrayUsingComparator:^(EMConversation *obj1, EMConversation* obj2){
-        EMMessage *message1 = [obj1 latestMessage];
-        EMMessage *message2 = [obj2 latestMessage];
-        if(message1.timestamp > message2.timestamp) {
-            return(NSComparisonResult)NSOrderedAscending;
-        }else {
-            return(NSComparisonResult)NSOrderedDescending;
-        }
-    }];
-    __block NSInteger count = 0;
-    for (int i = 0; i<sorted.count; i++) {
-        EMConversation * converstion = sorted[i];
-        EaseConversationModel * model = [[EaseConversationModel alloc] initWithConversation:converstion];
-        if (model&&([YWMessageTableViewCell latestMessageTitleForConversationModel:model].length>0)){
-            [dataArr addObject:model];
-            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId)};
-            [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
-                MyLog(@"Regieter Code pragram is %@",pragram);
-                MyLog(@"Regieter Code is %@",responsObj);
-                YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
-                modelTemp.hxID = [model.title length] > 0?model.title:model.conversation.conversationId;
-                model.title = modelTemp.nikeName;
-                model.avatarURLPath = modelTemp.header_img;
-                model.jModel = modelTemp;
-                [dataArr replaceObjectAtIndex:i withObject:model];
-                count++;
-                int badgeValue = 0;
-                for (EaseConversationModel * model in dataArr) {
-                    badgeValue += model.conversation.unreadMessagesCount;
-                }
-                VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-                UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
-                item.badgeValue=[NSString stringWithFormat:@"%d",badgeValue];
-                if (badgeValue == 0) {
-                    item.badgeValue = nil;
-                }
-                //还原
-                
-            } failur:^(id responsObj, NSError *error) {
-            }];
-        }
-    }
-}
-
 @end

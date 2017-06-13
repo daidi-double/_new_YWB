@@ -8,7 +8,8 @@
 
 #import "YWmarkNameViewController.h"
 
-@interface YWmarkNameViewController ()
+@interface YWmarkNameViewController ()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *textfileName;
 
 @end
 
@@ -17,21 +18,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIButton * bnt = [[UIButton alloc]init];
+    UIBarButtonItem *barBtn = [[UIBarButtonItem alloc]initWithCustomView:bnt];
+    [bnt setTitle:@"完成" forState:UIControlStateNormal];
+    bnt.frame = CGRectMake(0, 0, 50, 30);
+    [bnt addTarget:self action:@selector(rightBarButton:) forControlEvents:UIControlEventTouchDown];
+    self.navigationItem.rightBarButtonItem = barBtn;
 }
-
+-(void)rightBarButton:(UIButton *)btn{
+    if (self.textfileName.text.length>0) {
+        if (self.nickName) {
+            self.nickName(self.textfileName.text);
+        }
+    }else{
+        //
+         [JRToast showWithText:@"请输备注名称"];
+        return;
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    return YES;
 }
-*/
-
 @end

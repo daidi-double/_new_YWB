@@ -25,6 +25,7 @@
 #import "MyAlbumViewController.h"
 #import "RBNodeShowViewController.h"
 #import "YWShoppingDetailViewController.h"
+#import "YWmarkNameViewController.h"//备注
 
 
 #define SECTION0CELL  @"cell"    //默认cell
@@ -48,6 +49,8 @@
 @property (nonatomic, strong) UIImageView *headerImageView;
 //背景图片的frame
 @property (nonatomic, assign) CGRect  headerImageFrame;
+//姓名
+@property (nonatomic, strong) UILabel * nameLabel;//个人用户名称
 @end
 
 @implementation YWOtherSeePersonCenterViewController
@@ -301,6 +304,7 @@
         NSString * name = [self.HeaderModel.nickname substringToIndex:7];
         nameLabel.text = [NSString stringWithFormat:@"%@****",name];
     }
+    self.nameLabel = nameLabel;
     // 地点
     UILabel*locateLabel=[showView viewWithTag:3];
     locateLabel.text=self.HeaderModel.address;
@@ -375,8 +379,15 @@
 }
 
 //备注按钮触发
+#pragma mark ---- 备注按钮触发
 -(void)markBtn:(UIButton * )btn{
-    
+    YWmarkNameViewController * vc = [[UIStoryboard storyboardWithName:@"YWmarkNameViewController" bundle:nil]instantiateInitialViewController] ;
+    [self.navigationController pushViewController: vc animated:YES];
+    //修改备注回调昵称
+    vc.nickName = ^(NSString * nickName ){
+        MyLog(@"设置成功");
+        self.nameLabel.text = nickName;
+    };
 }
 -(void)DelegateForAlbum:(NSInteger)number andMax:(NSInteger)maxNumber{
     MyAlbumViewController*vc=[[MyAlbumViewController alloc]init];
@@ -676,6 +687,8 @@
             
             [JRToast showWithText:data[@"msg"]];
               self.followButton.selected=YES;
+            //关注好友成功之后，自动添加对方好友
+            [self addFriend:self.FriendButton];
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
              [self getDatas];
