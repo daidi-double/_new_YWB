@@ -88,10 +88,10 @@
     [super viewWillAppear:animated];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0 ]setAlpha:1];
 //    [self makeNoticeWithTime:0 withAlertBody:@"您已购买了xxxx"];
-    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        MyLog(@"a");
-        [self requestShopArrDataWithPages:1];
-    }];
+//    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+//        MyLog(@"a");
+//        [self requestShopArrDataWithPages:1];
+//    }];
 }
 - (void)tagsAliasCallback:(int)iResCode  tags:(NSSet *)tags alias:(NSString *)alias {
     NSLog(@"起别名 :      rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);

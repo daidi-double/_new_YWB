@@ -51,17 +51,44 @@
             self.seatLabel.text = @"座";
             self.seatLabel.hidden = NO;
             self.otherTicketLabel.hidden = NO;
+            self.foodLabel.hidden = YES;
             break;
         case 1:
              self.seatLabel.text = @"座";
             self.seatLabel.hidden = NO;
             self.otherTicketLabel.hidden = YES;
+            self.foodLabel.hidden = YES;
             break;
-        
-        default:
+        case 2:
+            self.seatLabel.text = @"兑";
             self.seatLabel.hidden = YES;
             self.otherTicketLabel.hidden = NO;
-             self.otherTicketLabel.text = @"兑";
+            self.foodLabel.hidden = YES;
+            break;
+        case 3:
+//            self.seatLabel.text = @"座";
+            self.seatLabel.hidden = YES;
+            self.otherTicketLabel.hidden = YES;
+            self.foodLabel.hidden = YES;
+            break;
+        case 4:
+            self.seatLabel.text = @"座";
+            self.seatLabel.hidden = NO;
+            self.otherTicketLabel.hidden = YES;
+            self.foodLabel.hidden = YES;
+            break;
+        case 5:
+            self.seatLabel.text = @"兑";
+            self.seatLabel.hidden = YES;
+            self.otherTicketLabel.hidden = NO;
+            self.foodLabel.hidden = YES;
+            break;
+        default:
+            self.seatLabel.hidden = NO;
+            self.foodLabel.hidden = YES;
+            self.otherTicketLabel.hidden = NO;
+            self.otherTicketLabel.text = @"兑";
+            self.seatLabel.text = @"座";
             
             break;
     }

@@ -25,7 +25,7 @@
 @property (nonatomic,copy)NSString * stop_sell_time;
 @property (nonatomic,copy)NSString * city;//城市编码
 @property (nonatomic,copy)NSString * latutude;//维度
-@property (nonatomic,copy)NSString * goodstype;//0通兑票和选座票，1选座票，2通兑票
+@property (nonatomic,copy)NSString * goodstype;//0:选座票和通兑票 1:选座票 2:通兑票 3.卖品 4.选座票和卖品 5.通兑票和卖品 6.选座票和通兑票和卖品
 @property (nonatomic,copy)NSString * minprice;//起步价
 @property (nonatomic,copy)NSString * hall_name;
 @property (nonatomic,copy)NSString * id;

@@ -432,7 +432,10 @@
                 [self.theaterNameAry addObject:model];
             }
             [self.movieTableView reloadData];
-            [self.movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            if (self.pages > 1) {
+                
+                [self.movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            }
         }else{
             [JRToast showWithText:@"网络异常,请检查网络" duration:1];
         }

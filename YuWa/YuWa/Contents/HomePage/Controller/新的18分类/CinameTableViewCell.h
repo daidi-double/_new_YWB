@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *filmCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *foodLabel;
 @property (nonatomic,strong)CinemaModel * model;
 @end
