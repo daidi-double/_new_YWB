@@ -432,6 +432,7 @@
                 [self.theaterNameAry addObject:model];
             }
             [self.movieTableView reloadData];
+            [self.movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
         }else{
             [JRToast showWithText:@"网络异常,请检查网络" duration:1];
         }
@@ -466,7 +467,6 @@
 
 - (void)menuBtn:(UIButton*)btn{
     NSLog(@"%ld",btn.tag);
-    self.cityCode = @"350500";
     btn.selected = YES;
     markBtn.selected = NO;
     markBtn = btn;
@@ -588,8 +588,12 @@
         ChooseMovieController * vc = [[ChooseMovieController alloc]init];
         vc.filmCode = model.film_code;
         vc.filmName = model.film_name;
+        vc.cityCode = @"350500";
         vc.coordinatex = self.coordinatex;
         vc.coordinatey = self.coordinatey;
+        if (model.film_code == nil || model.film_name== nil ||self.coordinatex == nil || self.coordinatey == nil) {
+            return;
+        }
         if (self.otherTicketAry.count <= 0) {
             vc.isOtherTicket = 0;
         }else{

@@ -253,11 +253,10 @@
 //拨打电话
 -(void)iphoneNumer{
     MyLog(@"拨打电话");
-    NSString *allString;
-    if (self.model.tel != nil || ![self.model.tel isKindOfClass:[NSNull class]]) {
-        
-        allString = [NSString stringWithFormat:@"tel:%@",self.model.tel];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
+
+    if (self.model.tel != nil && ![self.model.tel isKindOfClass:[NSNull class]]) {
+        [self.delegate callIphone:self.model.tel];
+
     }else{
         [JRToast showWithText:@"暂无影院电话"];
     }

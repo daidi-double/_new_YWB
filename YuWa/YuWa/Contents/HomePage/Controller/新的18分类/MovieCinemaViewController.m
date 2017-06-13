@@ -278,6 +278,45 @@
     [self.navigationController pushViewController:locationVC animated:YES];
     
 }
+- (void)callIphone:(NSString *)iphoneStr{
+    NSArray * iphoneAry;
+    UIAlertAction * tel;
+    UIAlertController * alerVC = [UIAlertController alertControllerWithTitle:@"拨打影院电话" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    if ([iphoneStr containsString:@" "]) {
+        iphoneAry = [iphoneStr componentsSeparatedByString:@" "];
+        tel = [UIAlertAction actionWithTitle:iphoneAry[0] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            NSString * allString = [NSString stringWithFormat:@"tel:%@",iphoneAry[0]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
+            
+        }];
+        UIAlertAction* tel2 = [UIAlertAction actionWithTitle:iphoneAry[1] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            NSString * allString = [NSString stringWithFormat:@"tel:%@",iphoneAry[1]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
+            
+        }];
+        
+        [alerVC addAction:tel];
+        [alerVC addAction:tel2];
+        [alerVC addAction:cancel];
+
+    }else{
+        
+        tel = [UIAlertAction actionWithTitle:iphoneStr style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+             NSString * allString = [NSString stringWithFormat:@"tel:%@",iphoneStr];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
+            
+        }];
+        [alerVC addAction:tel];
+        [alerVC addAction:cancel];
+        
+    }
+    [self.navigationController presentViewController:alerVC animated:YES completion:nil];
+    
+}
 - (void)filmName:(NSString *)filmName andIndex:(NSInteger)index andfilmCode:(NSString *)filmCode{
     self.filmName = filmName;
     self.index = index;

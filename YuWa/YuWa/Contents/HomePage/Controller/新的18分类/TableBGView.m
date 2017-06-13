@@ -26,11 +26,12 @@
 - (instancetype)initWithFrame:(CGRect)frame andTag:(NSInteger)tag andTitle:(NSString *)title andIndex:(NSInteger)index andFilmCode:(NSString *)filmCode andCityCode:(NSString *)cityCode{
     self = [super initWithFrame:frame];
     if (self) {
+        self.cityCode = @"350500";
         _index = index;
         _staus = tag;
         markTitle = title;
         self.type = @"0";
-        self.cityCode = cityCode;
+//        self.cityCode = cityCode;
         self.filmCode = filmCode;
         [self setPlaceBtn];
         [self makeTableView];

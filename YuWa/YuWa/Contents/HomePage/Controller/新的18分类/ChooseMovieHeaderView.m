@@ -47,7 +47,11 @@
     }
     self.timeLabel.frame = CGRectMake(self.countryLabel.right +10, self.publishDateLabel.bottom+10, [self getLabelWidth:[NSString stringWithFormat:@"%@分钟",self.model.duration]], self.bounds.size.height*0.15);
     _timeLabel.text = [NSString stringWithFormat:@"%@分钟",self.model.duration];
-    self.publishDateLabel.text = [JWTools getTime:self.model.publish_date];
+    if (self.model.publish_date == nil) {
+         self.publishDateLabel.text = [JWTools getTime:self.model.publishDate];
+    }else{
+         self.publishDateLabel.text = [JWTools getTime:self.model.publish_date];
+    }
     self.scoreLabel.text = self.model.score;
     [self addSubview:self.gradeBtn];
     [self addSubview:self.rightImageView];

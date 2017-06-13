@@ -161,7 +161,7 @@
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmNo":self.filmCode,@"user_id":@([UserSession instance].uid),@"token":[UserSession instance].token};
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
-        MyLog(@"参数%@  /n  %@",pragrams,urlStr);
+        MyLog(@"参数%@~~~ %@",pragrams,urlStr);
         MyLog(@"影片详情%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             //头部影片数据
@@ -174,8 +174,7 @@
         }
         [self.detailTableView reloadData];
     }];
-//    [self.detailTableView.mj_header endRefreshing];
-//    [self.detailTableView.mj_footer endRefreshing];
+
 }
 //去吐槽（还没用）
 - (void)toComment{

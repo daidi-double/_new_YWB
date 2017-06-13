@@ -29,12 +29,31 @@
     self.title = @"全部影院";
     self.pagen = 10;
     self.pages = 0;
+    [self setRJRefresh];
     [self getHomePageCinemaList];
     UIBarButtonItem * searchBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_homepage_search"] style:UIBarButtonItemStylePlain target:self action:@selector(searchMovie)];
     self.navigationItem.rightBarButtonItem = searchBtn;
     [self.view addSubview:self.movieTableView];
     [self.movieTableView registerNib:[UINib nibWithNibName:CINEMACELL bundle:nil] forCellReuseIdentifier:CINEMACELL];
 }
+- (void)setRJRefresh {
+    
+    self.movieTableView.mj_header=[UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+        self.pages=0;
+        self.theaterNameAry=[NSMutableArray array];
+        [self getHomePageCinemaList];
+        
+    }];
+    
+    //上拉刷新
+    self.movieTableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
+       
+        [self getHomePageCinemaList];
+        
+    }];
+    
+}
+
 
 - (void)searchMovie{
     SearchViewController *vc=[[SearchViewController alloc]init];
@@ -97,12 +116,23 @@
         MyLog(@"参数%@",dic);
         MyLog(@"首页影院列表 %@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
-            [self.theaterNameAry removeAllObjects];
+            NSArray * dataAry = data[@"data"];
+            if (dataAry.count>0) {
+                [self.theaterNameAry removeAllObjects];
+                self.pages ++;
+                
+            }else{
+                if (self.pages == 0) {
+                    [self.theaterNameAry removeAllObjects];
+                }
+            }
             for (NSDictionary * dict in data[@"data"]) {
                 CinemaModel * model = [CinemaModel yy_modelWithDictionary:dict];
                 [self.theaterNameAry addObject:model];
             }
+            
             [self.movieTableView reloadData];
+            [self.movieTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
         }else{
             [JRToast showWithText:@"网络异常,请检查网络" duration:1];
         }

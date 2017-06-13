@@ -136,7 +136,6 @@
 }
 - (void)menuBtnAction:(UIButton*)btn{
     NSLog(@"%ld",btn.tag);
-    self.cityCode = @"350500";
     btn.selected = YES;
     markBtn.selected = NO;
     markBtn = btn;
@@ -342,6 +341,7 @@
     }
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:dic compliation:^(id data, NSError *error) {
+        MyLog(@"参数%@",dic);
         MyLog(@"电影影院和购票，影院数据下半部%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             if (self.pages == 0) {

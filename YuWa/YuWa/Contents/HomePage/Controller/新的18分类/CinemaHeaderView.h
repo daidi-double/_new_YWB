@@ -14,6 +14,8 @@
 
 - (void)ToCinemaDetaliPage;
 - (void)ToLocation;
+- (void)callIphone:(NSString *)iphoneStr;
+
 
 - (void)filmName:(NSString *)filmName andIndex:(NSInteger)index andfilmCode:(NSString *)filmCode;
 @end
