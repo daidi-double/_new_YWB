@@ -29,18 +29,7 @@
 }
 
 -(NSArray*)animationImages{
-//    NSFileManager*fileM=[NSFileManager defaultManager];
-//    NSString*path=[[NSBundle mainBundle]pathForResource:@"GifBundle" ofType:@"bundle"];
-//    NSArray*array=[fileM contentsOfDirectoryAtPath:path error:nil];
-//    
-//    NSMutableArray*imageArrays=[NSMutableArray array];
-//    
-//    for (NSString*imageStr in array) {
-//        UIImage*image=[UIImage imageNamed:[@"GifBundle.bundle" stringByAppendingPathComponent:imageStr]];
-//        [imageArrays addObject:image];
-//        
-//    }
-    
+
     NSMutableArray*imageArrays=[NSMutableArray array];
     for (int i=0; i<32; i++) {
         NSString * path = [[NSBundle mainBundle]pathForResource:[NSString stringWithFormat:@"sayaren00%d",i] ofType:@"jpg"];
