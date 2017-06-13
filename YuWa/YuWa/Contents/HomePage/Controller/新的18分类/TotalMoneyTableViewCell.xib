@@ -37,6 +37,13 @@
                         <color key="textColor" red="0.6705882353" green="0.6705882353" blue="0.6705882353" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ch7-HG-9UO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.94901960780000005" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="hl1-KC-ALJ"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="bAP-Yr-iKb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Ecg-Xx-z76"/>
@@ -45,6 +52,9 @@
                     <constraint firstItem="kD4-Oq-rV8" firstAttribute="top" secondItem="OID-nT-iJC" secondAttribute="bottom" constant="5" id="S8B-0o-Wdo"/>
                     <constraint firstItem="kD4-Oq-rV8" firstAttribute="trailing" secondItem="OID-nT-iJC" secondAttribute="trailing" id="ZjQ-bA-v0e"/>
                     <constraint firstItem="bAP-Yr-iKb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="c2b-Jp-Kuc"/>
+                    <constraint firstItem="Ch7-HG-9UO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dZl-Lj-abf"/>
+                    <constraint firstItem="Ch7-HG-9UO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="sCT-La-Pio"/>
+                    <constraint firstAttribute="trailing" secondItem="Ch7-HG-9UO" secondAttribute="trailing" id="w8d-up-3vD"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

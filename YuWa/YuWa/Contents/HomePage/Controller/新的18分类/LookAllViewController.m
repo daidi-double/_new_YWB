@@ -26,8 +26,7 @@
 @property (nonatomic,strong) NSMutableArray * movieArr;//电影数组
 @property (nonatomic,strong)NSMutableArray * recommendArr;//预告片推荐数组
 @property (nonatomic,strong)NSMutableArray * headerViewAry;//上映影院和购票数组
-//@property (nonatomic,assign)NSInteger pages;//页数
-//@property (nonatomic,assign)NSInteger pagen;//每页的条数默认10条；
+
 @end
 
 @implementation LookAllViewController
@@ -39,8 +38,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.status = 0;
-//    self.pagen = 10;
-//    self.pages = 0;
     [self initWithTableView];
     [self requesetAllMovieData];
     
@@ -68,13 +65,9 @@
     self.status = sender.selectedSegmentIndex;
    
     if (sender.selectedSegmentIndex == 0) {
-//        self.rightTableView.hidden = YES;
-//        self.leftTableView.hidden = NO;
         [self requesetAllMovieData];
     }else{
  
-//        self.leftTableView.hidden = YES;
-//        self.rightTableView.hidden = NO;
         [self requestWillPlayMovie];
     }
 }
@@ -109,12 +102,24 @@
         HotMovieModel * model = self.movieArr[indexPath.row];
         chooseMC.filmCode = model.code;
         chooseMC.filmName = model.name;
-        chooseMC.cityCode = self.cityCode;
+        chooseMC.cityCode = @"350500";//先固定为泉州地区，后续若要修改可以修改
         chooseMC.coordinatey = self.coordinatey;
         chooseMC.coordinatex = self.coordinatex;
         [self.navigationController pushViewController:chooseMC animated:YES];
     }else{
-        
+        //预售
+        HotMovieModel * model = self.movieArr[indexPath.row];
+        if ([model.isCF isEqualToString:@"1"]) {
+            
+            ChooseMovieController * chooseMC  = [[ChooseMovieController alloc]init];
+            chooseMC.markRow = indexPath.row;
+            chooseMC.filmCode = model.code;
+            chooseMC.filmName = model.name;
+            chooseMC.cityCode = @"350500";//先固定为泉州地区，后续若要修改可以修改
+            chooseMC.coordinatey = self.coordinatey;
+            chooseMC.coordinatex = self.coordinatex;
+            [self.navigationController pushViewController:chooseMC animated:YES];
+        }
     }
 }
 
@@ -146,6 +151,7 @@
     HotMovieModel * model = self.movieArr[path.row];
     chooseMC.filmCode = model.code;
     chooseMC.filmName = model.name;
+    chooseMC.cityCode = @"350500";//先固定地区
     chooseMC.coordinatey = self.coordinatey;
     chooseMC.coordinatex = self.coordinatex;
     [self.navigationController pushViewController:chooseMC animated:YES];
@@ -154,9 +160,11 @@
 #pragma mark - http
 - (void)requesetAllMovieData{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_ALLHOTMOVIE];
-//    NSDictionary * pragrams = @{@"pages":@(self.pages),@"pagen":@(self.pagen)}
-//    ;
     HttpManager * manager = [[HttpManager alloc]init];
+    
+    UIView*loadingView=[JWTools addLoadingViewWithframe:CGRectMake(0, 64, kScreen_Width, kScreen_Height-64)];
+    [self.view addSubview:loadingView];
+    
     [manager postDatasNoHudWithUrl:urlStr withParams:nil compliation:^(id data, NSError *error) {
         MyLog(@"热映电影%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
@@ -166,9 +174,18 @@
                 [self.movieArr addObject:model];
             }
             [self.leftTableView reloadData];
+            if (self.movieArr.count<1) {
+                [JRToast showWithText:@"没有更多正在热映影片了！" duration:3.5f];
+                
+            }
+
         }else{
             [JRToast showWithText:@"网络超时,请检查网络" duration:1];
         }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [loadingView removeFromSuperview];    //移除
+            
+        });
     }];
 }
 
@@ -211,6 +228,7 @@
     }
     return _headerViewAry;
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

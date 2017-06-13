@@ -24,6 +24,7 @@
     [super viewDidLoad];
     self.pagen = 10;
     self.pages = 0;
+    self.view.backgroundColor = [UIColor whiteColor];
     [self makeSearchBar];
 
 }
@@ -81,6 +82,10 @@
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+
+
 //点击搜索
 -(void)getDatasFromSearch:(NSString*)str{
     

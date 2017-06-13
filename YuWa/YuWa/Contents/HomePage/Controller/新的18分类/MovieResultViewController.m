@@ -48,7 +48,7 @@
     return 1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70.f;
+    return 100.f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 1;
@@ -68,7 +68,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CinemaModel * model = self.dataAry[indexPath.section];
     MovieCinemaViewController * vc = [[MovieCinemaViewController alloc]init];
-    vc.cinema_code = model.cinema_code;
+    vc.cinema_code = model.code;
     vc.film_code = model.film_code;
     vc.cityCode = model.city;
     if ([model.goodstype integerValue] != 1) {

@@ -25,7 +25,7 @@
 #import "BannerModel.h"//轮播图模型
 #import "MovieHeaderModel.h"
 
-
+#import "LookAllCinemaViewController.h"
 #import "HomeCinemaListModel.h"//影院模型
 
 #define newHotCell  @"NewHotMovieCollectCell"
@@ -73,9 +73,6 @@
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
-    
-//    UIBarButtonItem * searchBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_homepage_search"] style:UIBarButtonItemStylePlain target:self action:@selector(searchMovie)];
-//    self.navigationItem.rightBarButtonItem = searchBtn;
     self.type = @"0";
     self.typeList = @"0";
     [self.view addSubview:self.movieTableView];
@@ -111,7 +108,6 @@
     
     //上拉刷新
     self.movieTableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
-        self.pages++;
         [self getHomePageCinemaList];
         
     }];
@@ -301,7 +297,7 @@
     choseVC.filmCode = model.code;
     choseVC.filmName = model.name;
     choseVC.cityCodeAry = self.cityCodeAry;
-    choseVC.cityCode = self.cityCode;
+    choseVC.cityCode = @"350500";//重新赋值回泉州地区
     choseVC.coordinatex = self.coordinatex;
     choseVC.coordinatey = self.coordinatey;
     [self.navigationController pushViewController:choseVC animated:YES];
@@ -421,7 +417,16 @@
         MyLog(@"首页影院列表 %@",data);
         MyLog(@"参数%@",dic);
         if ([data[@"errorCode"] integerValue] == 0) {
-            [self.theaterNameAry removeAllObjects];
+            NSArray * dataAry = data[@"data"];
+            if (dataAry.count>0) {
+                [self.theaterNameAry removeAllObjects];
+                self.pages ++;
+                
+            }else{
+                if (self.pages == 0) {
+                    [self.theaterNameAry removeAllObjects];
+                }
+            }
             for (NSDictionary * dict in data[@"data"]) {
                 CinemaModel * model = [CinemaModel yy_modelWithDictionary:dict];
                 [self.theaterNameAry addObject:model];
@@ -442,7 +447,7 @@
     LookAllViewController * lookAllView = [[LookAllViewController alloc]init];
     lookAllView.coordinatex = self.coordinatex;
     lookAllView.coordinatey = self.coordinatey;
-    lookAllView.cityCode = self.cityCode;
+//    lookAllView.cityCode = self.cityCode;
     [self.navigationController pushViewController:lookAllView animated:YES];
 }
 //- (void)lookDetail:(UIButton*)sender{
@@ -450,18 +455,18 @@
 //    LookDetaliViewController * lookVC = [[LookDetaliViewController alloc]init];
 //    [self.navigationController pushViewController:lookVC animated:YES];
 //}
-////搜索
-//- (void)searchMovie{
-//    SearchViewController*vc=[[SearchViewController alloc]init];
-//    vc.coordinatey = self.coordinatey;
-//    vc.coordinatex = self.coordinatex;
-//    vc.cityCode = self.cityCode;
-//    [self.navigationController pushViewController:vc animated:YES];
-//}
+//搜索，查看全部影院
+- (void)searchMovie{
+    LookAllCinemaViewController *vc=[[LookAllCinemaViewController alloc]init];
+    vc.coordinatey = self.coordinatey;
+    vc.coordinatex = self.coordinatex;
+    vc.cityCode = @"350500";
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)menuBtn:(UIButton*)btn{
     NSLog(@"%ld",btn.tag);
-
+    self.cityCode = @"350500";
     btn.selected = YES;
     markBtn.selected = NO;
     markBtn = btn;
@@ -532,7 +537,7 @@
             weakSelf.type = @"1";
         }
         weakSelf.cityCode = cityCode;
-        
+        weakSelf.pages = 0;
         [weakSelf getHomePageCinemaList];
     };
     tableViewBG.titleBlockT = ^(NSString * titleStr,NSString * listType){
@@ -541,7 +546,7 @@
         weakMenuBG.hidden = YES;
         weakBgView12.hidden = YES;
         weakSelf.typeList = listType;
-        
+        weakSelf.pages = 0;
         [weakSelf getHomePageCinemaList];
 
     };
@@ -678,7 +683,7 @@
         allCinemaBtn.frame = CGRectMake(kScreen_Width - 13- 70, 0, 70, 35);
         [allCinemaBtn setTitle:@"全部 >" forState:UIControlStateNormal];
         [allCinemaBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
-        [allCinemaBtn addTarget:self action:@selector(lookAll:) forControlEvents:UIControlEventTouchUpInside];
+        [allCinemaBtn addTarget:self action:@selector(searchMovie) forControlEvents:UIControlEventTouchUpInside];
         allCinemaBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         [nameView addSubview:allCinemaBtn];
 
@@ -718,8 +723,8 @@
                 selectBtn.selected = NO;
             }
             [btnView12 addSubview:selectBtn];
-            UIView * line = [[UIView alloc]initWithFrame:CGRectMake(selectBtn.right+1, 10, 1, 10)];
-            line.centerY = _headerView.height/2;
+            UIView * line = [[UIView alloc]initWithFrame:CGRectMake(selectBtn.right+1, 0, 1, 10)];
+            line.centerY = selectBtn.centerY;
             line.backgroundColor = RGBCOLOR(234, 234, 234, 1);
             [btnView12 addSubview:line];
             if (i == 1) {
@@ -777,6 +782,16 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
+ area = 350521,
+	pages = 1,
+	device_id = 5954E10B-F1B3-4D48-998F-8CD5AD59336B,
+	typeList = 1,
+	pagen = 10,
+	coordinatey = 24.774296,
+	toke = 80d3751499f752d2d804a8dbdbc7bbf3,
+	type = 0,
+	coordinatex = 118.485703,
+	user_id = 134
 */
 
 @end

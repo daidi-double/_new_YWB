@@ -217,7 +217,7 @@
     }
     HttpManager * manage = [[HttpManager alloc]init];
     [manage postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
-        MyLog(@"参数 %@",pragrams);
+        MyLog(@"地区编码参数 %@",pragrams);
         MyLog(@"地区编码 %@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             [self.cityCodeAry removeAllObjects];
