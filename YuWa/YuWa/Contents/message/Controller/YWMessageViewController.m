@@ -184,7 +184,18 @@
 }
 - (void)chatWithUser:(YWMessageAddressBookModel *)model{
     YWMessageChatViewController *chatVC = [[YWMessageChatViewController alloc] initWithConversationChatter:model.hxID conversationType:EMConversationTypeChat];
-    chatVC.chatMessage = @"已不是好友,不能执行此操作";
+    BOOL isCun = NO;
+    for (NSString * name in self.nameArr) {
+        if ([model.nikeName  isEqualToString:name]) {
+            isCun = YES;
+        }
+    }
+    if (isCun != NO) {
+        //表示不是好友。则处理一下
+        chatVC.chatMessage = @"已不是好友,不能执行此操作";
+    }else{
+        chatVC.chatMessage = nil;
+    }
     chatVC.friendNikeName = model.nikeName;
     chatVC.friendID = model.user_id;
     chatVC.friendIcon = model.header_img;
@@ -218,16 +229,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //在进入聊天页面之前、先判断是否是好友，如果不是，则不能发送消息
     YWMessageTableViewCell * messageCell = [tableView cellForRowAtIndexPath:indexPath];
-    BOOL isCun = NO;
-    for (NSString * name in self.nameArr) {
-        if ([messageCell.model.jModel.nikeName  isEqualToString:name]) {
-            isCun = YES;
-        }
-    }
-    if (isCun != YES) {
-        //表示不是好友。则处理一下
-    }
-//    EaseConversationModel *model = self.dataArr[indexPath.row];
+    //    EaseConversationModel *model = self.dataArr[indexPath.row];
     [self chatWithUser:messageCell.model.jModel];
     
 //    [self chatWithUser:([model.title length] > 0?model.title:model.conversation.conversationId) withNikeName:messageCell.nameLabel.text];
