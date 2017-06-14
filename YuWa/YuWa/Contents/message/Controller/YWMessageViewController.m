@@ -38,6 +38,8 @@
 
 //为tabbar右上角提供红色数字提示用的
 @property (nonatomic, assign) int badgeValue;
+//用来记录好友的名称数组，如果有昵称，就用昵称，没有就用环信ID
+@property (nonatomic, strong) NSMutableArray *nameArr;
 @end
 
 @implementation YWMessageViewController
@@ -129,6 +131,14 @@
     self.addressBooktableView.friendsChatBlock = ^(YWMessageAddressBookModel * model){
         [weakSelf chatWithUser:model];
     };
+    self.addressBooktableView.friendsModel = ^(NSMutableArray  * dataArrM){
+        //已经排序号的数组，dataArrM[i]表示第几组。dataArrM[i][i]表示第几组第几个好友的model
+        for (NSArray * section in dataArrM) {
+            for (YWMessageAddressBookModel * model in section) {
+                [weakSelf.nameArr addObject:model.nikeName];
+            }
+        }
+    };
     [self.view addSubview:self.addressBooktableView];
 }
 
@@ -174,6 +184,7 @@
 }
 - (void)chatWithUser:(YWMessageAddressBookModel *)model{
     YWMessageChatViewController *chatVC = [[YWMessageChatViewController alloc] initWithConversationChatter:model.hxID conversationType:EMConversationTypeChat];
+    chatVC.chatMessage = @"已不是好友,不能执行此操作";
     chatVC.friendNikeName = model.nikeName;
     chatVC.friendID = model.user_id;
     chatVC.friendIcon = model.header_img;
@@ -205,9 +216,20 @@
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    //在进入聊天页面之前、先判断是否是好友，如果不是，则不能发送消息
     YWMessageTableViewCell * messageCell = [tableView cellForRowAtIndexPath:indexPath];
+    BOOL isCun = NO;
+    for (NSString * name in self.nameArr) {
+        if ([messageCell.model.jModel.nikeName  isEqualToString:name]) {
+            isCun = YES;
+        }
+    }
+    if (isCun != YES) {
+        //表示不是好友。则处理一下
+    }
 //    EaseConversationModel *model = self.dataArr[indexPath.row];
     [self chatWithUser:messageCell.model.jModel];
+    
 //    [self chatWithUser:([model.title length] > 0?model.title:model.conversation.conversationId) withNikeName:messageCell.nameLabel.text];
 }
 #pragma mark - UITableViewDataSource
@@ -314,5 +336,10 @@
     }
 }
 
-
+-(NSMutableArray *)nameArr{
+    if (!_nameArr) {
+        _nameArr = [NSMutableArray array];
+    }
+    return _nameArr;
+}
 @end

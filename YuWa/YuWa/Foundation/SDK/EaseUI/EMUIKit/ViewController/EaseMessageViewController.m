@@ -1193,6 +1193,10 @@
 
 - (void)didSendText:(NSString *)text
 {
+    if (self.chatMessage) {
+         [JRToast showWithText:self.chatMessage duration:2];
+        return;
+    }
     if (text && text.length > 0) {
         [self sendTextMessage:text];
         [self.atTargets removeAllObjects];

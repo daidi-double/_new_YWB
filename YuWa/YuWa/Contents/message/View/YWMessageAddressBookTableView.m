@@ -55,7 +55,6 @@
     return indexPath.section == 0?UITableViewCellEditingStyleNone:UITableViewCellEditingStyleDelete;
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    MyLog(@"%d",indexPath.row);
     if (indexPath.section == 0)return;
     if (editingStyle ==UITableViewCellEditingStyleDelete){
         if (indexPath.row<[self.dataArr[indexPath.section - 1] count]) {
@@ -186,7 +185,14 @@
                     [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
                     [self reloadData];
                 }else{
+                    //排序
                     [self sortedArry:sortArr];
+                    //排序号之后
+                    if (self.friendsModel) {
+                        if (self.dataArr.count>0) {
+                            self.friendsModel(self.dataArr);
+                        }
+                    }
                 }
             }
         } failur:^(id responsObj, NSError *error) {

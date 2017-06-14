@@ -6827,9 +6827,7 @@
 				C1DB58F41E51AC06004B386F /* applePaySDK */,
 				C1392DCA1DC0423C002418EF /* aliPay */,
 				C1392DBB1DBF505D002418EF /* weChatSDK */,
-				C13019631DB1FD2E00E24C88 /* ZBar */,
 				B3D218E41DB0985100D661F5 /* ShareSDK */,
-				B36C7F271D9D4BBB00B022E0 /* JPush */,
 				B33A255C1D9A68040092CB12 /* EaseUI */,
 				B33A1E1D1D9A4F7D0092CB12 /* HyphenateFullSDK */,
 			);
@@ -6902,6 +6900,7 @@
 			isa = PBXGroup;
 			children = (
 				B33A255D1D9A68040092CB12 /* EaseUI.h */,
+				C13019631DB1FD2E00E24C88 /* ZBar */,
 				B33A255E1D9A68040092CB12 /* EMUIKit */,
 				B33A26501D9A68040092CB12 /* resources */,
 			);
@@ -6924,6 +6923,7 @@
 		B33A255F1D9A68040092CB12 /* 3rdparty */ = {
 			isa = PBXGroup;
 			children = (
+				B36C7F271D9D4BBB00B022E0 /* JPush */,
 				B33A25601D9A68040092CB12 /* DeviceHelper */,
 				B33A25851D9A68040092CB12 /* MBProgressHUD */,
 				B33A25881D9A68040092CB12 /* MWPhotoBrowser */,
@@ -7493,7 +7493,8 @@
 				B36C7F281D9D4BBB00B022E0 /* jpush-ios-2.1.9.a */,
 				B36C7F291D9D4BBB00B022E0 /* JPUSHService.h */,
 			);
-			path = JPush;
+			name = JPush;
+			path = ../../../JPush;
 			sourceTree = "<group>";
 		};
 		B36C7F6A1D9E0DBD00B022E0 /* NotificationModel */ = {
@@ -9353,7 +9354,8 @@
 				C13019991DB1FD2E00E24C88 /* WLBarcodeViewController.h */,
 				C130199A1DB1FD2E00E24C88 /* WLBarcodeViewController.m */,
 			);
-			path = ZBar;
+			name = ZBar;
+			path = ../ZBar;
 			sourceTree = "<group>";
 		};
 		C13019651DB1FD2E00E24C88 /* QRImage */ = {
