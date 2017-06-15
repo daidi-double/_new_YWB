@@ -133,11 +133,22 @@
     };
     self.addressBooktableView.friendsModel = ^(NSMutableArray  * dataArrM){
         //已经排序号的数组，dataArrM[i]表示第几组。dataArrM[i][i]表示第几组第几个好友的model
+        [weakSelf.nameArr removeAllObjects];
+        if ([dataArrM[0]  isEqual: @1]) {
+             [weakSelf requestShopArrDataWithPages:0];
+//            说明没有好友
+            return ;
+        }
         for (NSArray * section in dataArrM) {
             for (YWMessageAddressBookModel * model in section) {
-                [weakSelf.nameArr addObject:model.nikeName];
+                if (![weakSelf.nameArr containsObject:model.nikeName]) {
+                    [weakSelf.nameArr addObject:model.nikeName];
+                }
             }
         }
+        //加载本页面数据
+        [weakSelf requestShopArrDataWithPages:0];
+        
     };
     [self.view addSubview:self.addressBooktableView];
 }
@@ -186,11 +197,12 @@
     YWMessageChatViewController *chatVC = [[YWMessageChatViewController alloc] initWithConversationChatter:model.hxID conversationType:EMConversationTypeChat];
     BOOL isCun = NO;
     for (NSString * name in self.nameArr) {
+        MyLog(@"%@",name);
         if ([model.nikeName  isEqualToString:name]) {
             isCun = YES;
         }
     }
-    if (isCun != NO) {
+    if (isCun !=YES ) {
         //表示不是好友。则处理一下
         chatVC.chatMessage = @"已不是好友,不能执行此操作";
     }else{
@@ -263,12 +275,15 @@
 }
 - (void)headerRereshing{
     self.pages = 0;
-    [self requestShopArrDataWithPages:0];
+         [self.addressBooktableView headerRereshing];
+//    self.addressBooktableView.friendsModel  中回调了下面这个方法刷新本页面
+//    [self requestShopArrDataWithPages:0];
 }
 - (void)cancelRefreshWithIsHeader:(BOOL)isHeader{
-    if (isHeader) {
+    if (self.tableView.mj_header.isRefreshing) {
         [self.tableView.mj_header endRefreshing];
-    }else{
+    }
+    if ( self.tableView.mj_footer.isRefreshing){
         [self.tableView.mj_footer endRefreshing];
     }
 }

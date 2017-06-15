@@ -54,7 +54,6 @@
             if ([requestDic[@"hxID"] isEqualToString:self.model.hxID]) {
                 [requestDic setObject:status forKey:@"status"];
                 [friendsRequest replaceObjectAtIndex:i withObject:requestDic];
-                break;
             }
         }
         [KUSERDEFAULT setObject:friendsRequest forKey:FRIENDSREQUEST];

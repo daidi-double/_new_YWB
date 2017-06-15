@@ -165,6 +165,9 @@
     userlist = [[EMClient sharedClient].contactManager getContactsFromServerWithError:&error];
     if (error)userlist = [[EMClient sharedClient].contactManager getContacts];
     if (!userlist||userlist.count<=0) {
+        if (self.friendsModel) {
+            self.friendsModel(@[@1]);
+        }
         [self reloadData];
         return;
     }
@@ -187,13 +190,17 @@
                 }else{
                     //排序
                     [self sortedArry:sortArr];
-                    //排序号之后
-                    if (self.friendsModel) {
-                        if (self.dataArr.count>0) {
-                            self.friendsModel(self.dataArr);
-                        }
-                    }
                 }
+            }
+            //排序号之后
+            if (i == userlist.count-1) {
+                //表示最后一个，时候执行
+                if (self.friendsModel) {
+                    if (self.dataArr.count>0) {
+                        self.friendsModel(self.dataArr);
+//                        [self.dataArr removeAllObjects];
+                    }
+            }
             }
         } failur:^(id responsObj, NSError *error) {
             MyLog(@"Regieter Code pragram is %@",pragram);
@@ -210,6 +217,7 @@
             }
         }];
     }
+
 }
 
 - (void)sortedArry:(NSMutableArray *)sortArr{//排序好的数组、按照首字母排
