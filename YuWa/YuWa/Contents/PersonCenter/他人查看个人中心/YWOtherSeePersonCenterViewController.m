@@ -385,10 +385,27 @@
     [self.navigationController pushViewController: vc animated:YES];
     //修改备注回调昵称
     vc.nickName = ^(NSString * nickName ){
-        MyLog(@"设置成功");
-        self.nameLabel.text = nickName;
+        [self chanegMarkName:nickName];
     };
 }
+-(void)chanegMarkName:(NSString *)name{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_SEEOTHERCENTER];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":self.uid,@"user_type":@(1),@"nickname":name};
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"！！！！%@",data);
+        NSNumber*number=data[@"errorCode"];
+        NSString*errorCode=[NSString stringWithFormat:@"%@",number];
+        if ([errorCode isEqualToString:@"0"]) {
+            NSDictionary*dict=data[@"data"];
+            self.nameLabel.text = dict[@"nickname"];
+            [JRToast showWithText:@"备注修改成功"];
+        }else{
+            [JRToast showWithText:data[@"errorMessage"]];
+        }
+    }];
+}
+
 -(void)DelegateForAlbum:(NSInteger)number andMax:(NSInteger)maxNumber{
     MyAlbumViewController*vc=[[MyAlbumViewController alloc]init];
     vc.otherUserID = self.uid;
