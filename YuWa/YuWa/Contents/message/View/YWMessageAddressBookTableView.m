@@ -45,7 +45,9 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0)return nil;
     YWMessageAddressBookHeader * headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:MESSAGEADDRESSHEADER];
-    headerView.nameLabel.text = self.keyArr[section - 1];
+    if (section<self.keyArr.count) {
+        headerView.nameLabel.text = self.keyArr[section - 1];
+    }
     return headerView;
 }
 - (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
