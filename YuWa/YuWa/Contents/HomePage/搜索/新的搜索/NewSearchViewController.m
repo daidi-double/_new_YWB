@@ -276,17 +276,7 @@
 }
 
 -(UICollectionReusableView*)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-//    if (self.historyArr.count>0&&indexPath.section==0) {
-//        if ([kind isEqual:UICollectionElementKindSectionFooter]) {
-//            UICollectionReusableView*footer=[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FOOTREUSEVIEW forIndexPath:indexPath];
-//            footer.backgroundColor=RGBCOLOR(229, 229, 229, 1);
-//            return footer;
-//
-//        }
-//        
-//        
-//    }
-    
+
     if (self.historyArr.count>0) {
         switch (indexPath.section) {
             case 0:{
@@ -344,14 +334,7 @@
         return header;
 
     }
-    
-    
-    
-        return nil;
-
-
-    
- 
+    return nil;
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
