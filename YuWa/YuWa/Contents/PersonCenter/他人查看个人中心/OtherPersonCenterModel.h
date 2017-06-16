@@ -44,4 +44,6 @@
 @property(nonatomic,strong)NSString*note_nums;  //多少条笔记
 @property(nonatomic,strong)NSString*album_nums;  //专辑的数量
 @property(nonatomic,strong)NSString*comment_nums; //评论数
+
+@property(nonatomic,strong)NSString*user_type;
 @end

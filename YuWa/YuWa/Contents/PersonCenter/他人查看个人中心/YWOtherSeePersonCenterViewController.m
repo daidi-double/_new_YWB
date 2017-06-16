@@ -469,7 +469,7 @@
             sender.selected=NO;
         }
     }
-    [JRToast showWithText:@"尽请期待"];
+    
 }
 //个人资料设置
 -(void)touchPersonInfo{
@@ -649,9 +649,10 @@
     
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_DELABOUT];
     
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":self.uid};
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":self.uid,@"user_type":@(1),@"auser_type":self.user_type};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"取消关注%@",data);
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
@@ -678,9 +679,11 @@
     
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_ADDABOUT];
     
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":self.uid,@"auser_type":@(1)};
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":self.uid,@"user_type":@(1),@"auser_type":self.user_type};
+
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"添加关注%@",data);
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         [JRToast showWithText:data[@"msg"]];

@@ -116,6 +116,7 @@
         vc.uid = model.user_id;
         vc.nickName = model.nickName;
         vc.otherIcon = model.header_img;
+        vc.user_type = model.user_type;
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
@@ -146,6 +147,7 @@
         vc.uid = model.user_id;
         vc.nickName = model.nickName;
         vc.otherIcon = model.header_img;
+        vc.user_type = model.user_type;
         [self.navigationController pushViewController:vc animated:YES];
         return YES;
     }
