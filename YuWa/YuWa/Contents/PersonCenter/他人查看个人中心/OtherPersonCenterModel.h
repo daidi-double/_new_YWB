@@ -34,7 +34,7 @@
 @property(nonatomic,strong)NSString*header_img;
 @property(nonatomic,strong)NSString*mark;        //个性签名
 
-@property(nonatomic,strong)NSString*is_fans;  //是粉丝
+@property(nonatomic,strong)NSString*is_fans;  //是粉丝，是否关注
 
 @property(nonatomic,strong)NSString*attentioncount;
 @property(nonatomic,strong)NSString*fans;

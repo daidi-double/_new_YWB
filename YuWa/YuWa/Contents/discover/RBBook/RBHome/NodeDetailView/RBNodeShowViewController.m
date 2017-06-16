@@ -64,7 +64,7 @@
     [self makeNavi];
     [self dataSet];
     [self makeUI];
-   
+    
     //获取通知中心单例对象
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
@@ -118,7 +118,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:DETAILCELL bundle:nil] forCellReuseIdentifier:DETAILCELL];
     [self.tableView registerNib:[UINib nibWithNibName:COMMENTCELL bundle:nil] forCellReuseIdentifier:COMMENTCELL];
     [self.tableView registerNib:[UINib nibWithNibName:RECOMMENDCELL bundle:nil] forCellReuseIdentifier:RECOMMENDCELL];
-
+    
     self.recommendCell = [self.tableView dequeueReusableCellWithIdentifier:RECOMMENDCELL];
     self.recommendCell.selectionStyle = UITableViewCellSelectionStyleNone;
     WEAKSELF;
@@ -134,7 +134,7 @@
     self.toolsBottomView = [[[NSBundle mainBundle]loadNibNamed:@"RBNodeDetailBottomView" owner:nil options:nil] firstObject];
     WEAKSELF;
     self.toolsBottomView.nodeID = self.model.homeID;
-
+    
     self.toolsBottomView.likeBlock = ^(BOOL isLike){
         if ([weakSelf isLogin]) {
             weakSelf.dataModel.inlikes = [NSString stringWithFormat:@"%zi",isLike];
@@ -217,21 +217,22 @@
         self.authorHeader.otherBlock = ^(){
             
             if ([weakSelf isLogin]) {
-            if ([weakSelf.dataModel.user.user_type isEqualToString:@"2"]) {
-                ShopDetailViewController * shopVC = [[ShopDetailViewController alloc]init];
-                shopVC.shop_id = weakSelf.dataModel.user.userid;
-                [weakSelf.navigationController pushViewController:shopVC animated:YES];
-                
-            }else if (!weakSelf.authorHeader.isUser) {
-                
+                if ([weakSelf.dataModel.user.user_type isEqualToString:@"2"]) {
+                    ShopDetailViewController * shopVC = [[ShopDetailViewController alloc]init];
+                    shopVC.shop_id = weakSelf.dataModel.user.userid;
+                    [weakSelf.navigationController pushViewController:shopVC animated:YES];
+                    
+                }else if (!weakSelf.authorHeader.isUser) {
+                    
                     YWOtherSeePersonCenterViewController * vc = [[YWOtherSeePersonCenterViewController alloc]init];
                     vc.uid = weakSelf.dataModel.user.userid;
                     vc.nickName = weakSelf.dataModel.user.nickname;
                     vc.otherIcon = weakSelf.dataModel.user.images;
+                    vc.user_type = weakSelf.dataModel.user.user_type;
                     [weakSelf.navigationController pushViewController:vc animated:YES];
-           
-            }
-           
+                    
+                }
+                
             }
         };
     }
@@ -295,17 +296,17 @@
         [self cancelComment];
         self.commentToolsView.hidden = YES;
     }
-     [UIView animateWithDuration:0.5 animations:^{
-         if (scrollView.contentOffset.y <= self.bottomToolsHeight ) {
-             //表示要隐藏
-             self.toolsBottomView.alpha = 1;
-         }else{
-             //表示要显示出来
-              self.toolsBottomView.alpha = 0;
-         }
-//             self.toolsBottomView.hidden = scrollView.contentOffset.y <= self.bottomToolsHeight ?NO:YES;
-     }];
-
+    [UIView animateWithDuration:0.5 animations:^{
+        if (scrollView.contentOffset.y <= self.bottomToolsHeight ) {
+            //表示要隐藏
+            self.toolsBottomView.alpha = 1;
+        }else{
+            //表示要显示出来
+            self.toolsBottomView.alpha = 0;
+        }
+        //             self.toolsBottomView.hidden = scrollView.contentOffset.y <= self.bottomToolsHeight ?NO:YES;
+    }];
+    
 }
 
 #pragma mark - Set ScrollImageView Height
@@ -416,11 +417,11 @@
 
 #pragma mark - UITableViewDataSource
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  
+    
     if (indexPath.section == 2) {//回复用户评论
         RBNodeShowCommentModel * model = self.dataModel.comments_list[indexPath.row];
         [self commentActionWithUserDic:@{@"nodeID":self.model.homeID,@"userID":model.user.userid,@"userName":model.user.nickname,@"rep_user_type":self.model.user.user_type}];
-
+        
         return;
     }
 }
@@ -462,7 +463,7 @@
 - (void)headerRefreshing{
     self.pages = 0;
     [self requestData];
-//    [self requestDataWithPages:self.pages];
+    //    [self requestDataWithPages:self.pages];
 }
 - (void)footerRereshing{
     self.pages++;
@@ -487,9 +488,9 @@
         MyLog(@"Regieter Code is 223%@",responsObj);
         NSMutableDictionary * dataDic = [RBNodeShowModel dataDicSetWithDic:responsObj[@"data"]];
         [dataDic setObject:self.note_id forKey:@"id"];
-
+        
         self.dataModel = [RBNodeShowModel yy_modelWithDictionary:dataDic];
-
+        
         self.scrollToolsHeight = 0.f;
         [self reSetBottomToolsView];
         [self requestDataWithPages:0];//瀑布流数据
@@ -499,8 +500,8 @@
             [self promptView];
             
         }
-//        MyLog(@"Regieter Code pragram is %@",pragram);
-//        MyLog(@"Regieter Code error is %@",responsObj);
+        //        MyLog(@"Regieter Code pragram is %@",pragram);
+        //        MyLog(@"Regieter Code error is %@",responsObj);
     }];
 }
 
@@ -509,18 +510,18 @@
         self.note_id = self.model.homeID;
         
     }
-//
+    //
     NSDictionary * pragram = @{@"note_id":self.note_id,@"pagen":self.pagens,@"pages":[NSString stringWithFormat:@"%zi",page],@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid)};
     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
-//    });
+    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
+    //    });
     if (page==0) {
         [self.tableView.mj_footer endRefreshing];
     }
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_RELATED withPragram:pragram success:^(id responsObj) {
-//        MyLog(@"Regieter Code pragram is %@",pragram);
-//        MyLog(@"Regieter Code is %@",responsObj);
+        //        MyLog(@"Regieter Code pragram is %@",pragram);
+        //        MyLog(@"Regieter Code is %@",responsObj);
         if (page == 0) {
             [self.dataArr removeAllObjects];
         }
@@ -548,7 +549,7 @@
     [self.tableView.mj_header endRefreshing];
 }
 - (void)requestAddToAldumWithIdx:(NSString *)aldumIdx{
-//    MyLog(@"添加到专辑%@",aldumIdx);
+    //    MyLog(@"添加到专辑%@",aldumIdx);
     if (self.addToAldumView.dataArr.count<=0) {
         YWNodeAddAldumViewController * vc = [[YWNodeAddAldumViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -562,8 +563,8 @@
     NSDictionary * pragram = @{@"note_id":self.model.homeID,@"album_id":album_id,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"auser_type":self.model.user.user_type};//album_id没有将创建默认
     
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_COLLECTION_TO_ALDUM withPragram:pragram success:^(id responsObj) {
-//        MyLog(@"Regieter Code pragram is %@",pragram);
-//        MyLog(@"Regieter Code is %@",responsObj);
+        //        MyLog(@"Regieter Code pragram is %@",pragram);
+        //        MyLog(@"Regieter Code is %@",responsObj);
         [self.addToAldumView setUserInteractionEnabled:YES];
         self.toolsBottomView.isCollection = !self.toolsBottomView.isCollection;
         self.dataModel.infavs = @"1";
@@ -572,8 +573,8 @@
         [self reSetBottomToolsView];
         [self.addToAldumView removeFromSuperview];
     } failur:^(id responsObj, NSError *error) {
-//        MyLog(@"Regieter Code pragram is %@",pragram);
-//        MyLog(@"Regieter Code error is %@",responsObj);
+        //        MyLog(@"Regieter Code pragram is %@",pragram);
+        //        MyLog(@"Regieter Code error is %@",responsObj);
         [self.addToAldumView setUserInteractionEnabled:YES];
         NSString * number = responsObj[@"errorCode"];
         if([number integerValue] == 9){
@@ -587,8 +588,8 @@
     NSDictionary * pragram = @{@"note_id":self.model.homeID,@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"auser_type":self.model.user.user_type};
     
     [[HttpObject manager]postNoHudWithType:YuWaType_RB_COLLECTION_CANCEL withPragram:pragram success:^(id responsObj) {
-//        MyLog(@"Regieter Code pragram is %@",pragram);
-//        MyLog(@"Regieter Code is %@",responsObj);
+        //        MyLog(@"Regieter Code pragram is %@",pragram);
+        //        MyLog(@"Regieter Code is %@",responsObj);
         self.dataModel.infavs = @"0";
         self.dataModel.fav_count = [NSString stringWithFormat:@"%zi",([self.dataModel.fav_count integerValue] - 1)];
         self.toolsBottomView.isCollection = !self.toolsBottomView.isCollection;
@@ -599,8 +600,8 @@
             [self promptView];
             
         }
-//        MyLog(@"Regieter Code pragram is %@",pragram);
-//        MyLog(@"Regieter Code error is %@",responsObj);
+        //        MyLog(@"Regieter Code pragram is %@",pragram);
+        //        MyLog(@"Regieter Code error is %@",responsObj);
     }];
 }
 

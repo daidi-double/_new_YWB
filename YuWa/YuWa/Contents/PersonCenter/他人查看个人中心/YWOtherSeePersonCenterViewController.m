@@ -51,6 +51,9 @@
 @property (nonatomic, assign) CGRect  headerImageFrame;
 //姓名
 @property (nonatomic, strong) UILabel * nameLabel;//个人用户名称
+
+//修改后的昵称
+@property (nonatomic,strong)NSString * nicknameStr;
 @end
 
 @implementation YWOtherSeePersonCenterViewController
@@ -349,7 +352,6 @@
     [fourArray addObject:@[@"被赞",self.HeaderModel.praised]];
     [fourArray addObject:@[@"被收藏",self.HeaderModel.collected]];
 
-    
     for (int i=0; i<4; i++) {
         defineButton*button=[showView viewWithTag:11+i];
         [button addTarget:self action:@selector(touchFourButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -384,8 +386,10 @@
     YWmarkNameViewController * vc = [[UIStoryboard storyboardWithName:@"YWmarkNameViewController" bundle:nil]instantiateInitialViewController] ;
     [self.navigationController pushViewController: vc animated:YES];
     //修改备注回调昵称
+    WEAKSELF;
     vc.nickName = ^(NSString * nickName ){
-        [self chanegMarkName:nickName];
+        [weakSelf chanegMarkName:nickName];
+        weakSelf.nicknameStr = nickName;
     };
 }
 -(void)chanegMarkName:(NSString *)name{
@@ -519,7 +523,7 @@
 
 -(void)getDatas{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_SEEOTHERCENTER];
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":self.uid,@"user_type":@(1)};
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":self.uid,@"user_type":@(1),@"auser_type":self.user_type};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"！！！！%@",data);
@@ -665,8 +669,9 @@
 
     
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_DELABOUT];
-    
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":self.uid,@"user_type":@(1),@"auser_type":self.user_type};
+
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":self.uid,@"user_type":@(1),@"auser_type":self.user_type};
+
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"取消关注%@",data);
