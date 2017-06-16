@@ -166,7 +166,9 @@
 
 #pragma mark - Http
 - (void)requestSearchFriend{
-    if ([self.searchTextField.text isEqualToString:[UserSession instance].account])return;
+    if ([self.searchTextField.text isEqualToString:[UserSession instance].account]){
+        [JRToast showWithText:@"不能添加自己为好友" duration:2];
+    }
     NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":self.searchTextField.text};
     [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);

@@ -300,10 +300,10 @@
     UILabel*nameLabel=[showView viewWithTag:2];
     nameLabel.text=self.HeaderModel.nickname;
     
-    if ([JWTools isNumberWithStr:self.HeaderModel.nickname]) {
-        NSString * name = [self.HeaderModel.nickname substringToIndex:7];
-        nameLabel.text = [NSString stringWithFormat:@"%@****",name];
-    }
+//    if ([JWTools isNumberWithStr:self.HeaderModel.nickname]) {
+//        NSString * name = [self.HeaderModel.nickname substringToIndex:7];
+//        nameLabel.text = [NSString stringWithFormat:@"%@****",name];
+//    }
     self.nameLabel = nameLabel;
     // 地点
     UILabel*locateLabel=[showView viewWithTag:3];
@@ -505,7 +505,7 @@
     NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":self.uid,@"user_type":@(1)};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
-        MyLog(@"%@",data);
+        MyLog(@"！！！！%@",data);
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
@@ -678,11 +678,12 @@
     
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_ADDABOUT];
     
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":self.uid};
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"attention_id":self.uid,@"auser_type":@(1)};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
+        [JRToast showWithText:data[@"msg"]];
         if ([errorCode isEqualToString:@"0"]) {
             
             [JRToast showWithText:data[@"msg"]];
