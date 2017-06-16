@@ -68,6 +68,10 @@
         }
         
         
+    }else{
+        
+        [self.buyBtn setTitle:@"购票" forState:UIControlStateNormal];
+        
     }
 }
 - (IBAction)toBuyTicketAction:(UIButton *)sender {

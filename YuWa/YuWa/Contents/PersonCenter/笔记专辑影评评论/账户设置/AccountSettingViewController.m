@@ -42,7 +42,8 @@
     if (!cell) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
-    
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
     if (indexPath.row==0) {
         cell.textLabel.text=@"清除缓存";
       NSArray*path=  NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
