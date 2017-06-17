@@ -14,5 +14,5 @@
 @property (nonatomic,copy)NSString * hxID;//环信账号（即为账号）
 @property (nonatomic,copy)NSString * nikeName;//昵称
 @property (nonatomic,copy)NSString * header_img;//头像
-
+@property (nonatomic,copy)NSString * user_type;
 @end

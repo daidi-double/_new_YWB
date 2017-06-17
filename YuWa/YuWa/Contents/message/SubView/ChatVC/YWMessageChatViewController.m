@@ -153,6 +153,7 @@
     vc.uid = self.friendID;
     vc.nickName = self.friendNikeName;
     vc.otherIcon = self.friendIcon;
+    vc.user_type = self.user_type;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

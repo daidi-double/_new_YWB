@@ -211,6 +211,8 @@
     chatVC.friendNikeName = model.nikeName;
     chatVC.friendID = model.user_id;
     chatVC.friendIcon = model.header_img;
+//    chatVC.user_type = model.user_type;
+    chatVC.user_type = @"1";//修改，暂时用1，因为目前只能搜索到用户，无法搜索到商家
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
@@ -228,11 +230,9 @@
             EaseConversationModel *model = self.dataArr[indexPath.row];
             [self.dataArr removeObjectAtIndex:indexPath.row];//移除数据源的数据
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-//                if ([model.title length] > 0) {
+
                 [[EMClient sharedClient].chatManager deleteConversation:model.conversation.conversationId isDeleteMessages:YES completion:nil];
-//                }else{
-//                    [[EMClient sharedClient].chatManager deleteConversation:model.title isDeleteMessages:YES completion:nil];
-//                }
+
             });
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         }
@@ -241,10 +241,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //在进入聊天页面之前、先判断是否是好友，如果不是，则不能发送消息
     YWMessageTableViewCell * messageCell = [tableView cellForRowAtIndexPath:indexPath];
-    //    EaseConversationModel *model = self.dataArr[indexPath.row];
+ 
     [self chatWithUser:messageCell.model.jModel];
-    
-//    [self chatWithUser:([model.title length] > 0?model.title:model.conversation.conversationId) withNikeName:messageCell.nameLabel.text];
+
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -318,8 +317,8 @@
             [self.dataArr addObject:model];
             NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId)};
             [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
-                MyLog(@"Regieter Code pragram is %@",pragram);
-                MyLog(@"Regieter Code is %@",responsObj);
+                MyLog(@"参数Regieter Code pragram is %@",pragram);
+                MyLog(@"好友信息Regieter Code is %@",responsObj);
                 YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
                 modelTemp.hxID = [model.title length] > 0?model.title:model.conversation.conversationId;
                 model.title = modelTemp.nikeName;

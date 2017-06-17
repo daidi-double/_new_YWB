@@ -207,6 +207,7 @@
             
             vc.uid=model.uid;
             vc.nickName = model.nickname;
+                vc.user_type = model.user_type;
             [self.navigationController pushViewController:vc animated:YES];
         }
         }
