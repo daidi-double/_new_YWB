@@ -78,17 +78,17 @@
 
 #pragma mark - Http
 - (void)requestFriendData{
-    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":self.model.hxID};
+    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":self.model.hxID,@"user_type":@(1)};
     [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
-        MyLog(@"Regieter Code is %@",responsObj);
+        MyLog(@"请求好友Regieter Code is %@",responsObj);
         YWMessageAddressBookModel * model = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
         model.hxID = self.model.hxID;//无昵称时设为环信ID
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.header_img] placeholderImage:[UIImage imageNamed:@"Head-portrait"] completed:nil];
         self.nameLabel.text = model.nikeName;
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
-        MyLog(@"Regieter Code error is %@",responsObj);
+        MyLog(@"请求好友Regieter Code error is %@",responsObj);
     }];
 }
 

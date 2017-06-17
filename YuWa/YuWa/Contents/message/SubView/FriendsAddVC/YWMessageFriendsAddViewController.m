@@ -179,7 +179,7 @@
     NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":self.searchTextField.text,@"user_type":@(1)};
     [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
-        MyLog(@"Regieter Code is %@",responsObj);
+        MyLog(@"添加好友Regieter Code is %@",responsObj);
         if (responsObj[@"data"][@"user_id"]) {
             [self.searchDataArr removeAllObjects];
             YWMessageSearchFriendAddModel * model = [YWMessageSearchFriendAddModel yy_modelWithDictionary:responsObj[@"data"]];
@@ -188,7 +188,7 @@
         }
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
-        MyLog(@"Regieter Code error is %@",responsObj);
+        MyLog(@"添加好友Regieter Code error is %@",responsObj);
         [JRToast showWithText:responsObj[@"errorMessage"] duration:2];
     }];
 }
