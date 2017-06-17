@@ -43,7 +43,7 @@
 
 - (UILabel*)filmNameLabel{
     if (!_filmNameLabel) {
-        _filmNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20 + self.height * 0.8f, self.shopNameLabel.bottom-20, kScreen_Width * 0.85, self.height * 0.3)];
+        _filmNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20 + self.height * 0.8f, self.shopNameLabel.bottom-20, kScreen_Width * 0.65, self.height * 0.3)];
         _filmNameLabel.textColor = RGBCOLOR(122, 124, 123, 1);
         _filmNameLabel.font = [UIFont systemFontOfSize:13];
         
