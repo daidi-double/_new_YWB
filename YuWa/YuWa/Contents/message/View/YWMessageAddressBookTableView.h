@@ -17,7 +17,7 @@
 @property (nonatomic,copy)void (^friendsAddBlock)();
 @property (nonatomic,copy)void (^friendsChatBlock)(YWMessageAddressBookModel *);
 //好友模型数组
-@property (nonatomic,copy)void (^friendsModel)(NSMutableArray *);
+@property (nonatomic,copy)void (^friendsModel)(NSArray *);
 
 
 @property (nonatomic,strong)NSMutableArray * keyArr;

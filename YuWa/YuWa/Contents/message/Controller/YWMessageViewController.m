@@ -131,7 +131,7 @@
     self.addressBooktableView.friendsChatBlock = ^(YWMessageAddressBookModel * model){
         [weakSelf chatWithUser:model];
     };
-    self.addressBooktableView.friendsModel = ^(NSMutableArray  * dataArrM){
+    self.addressBooktableView.friendsModel = ^(NSArray  * dataArrM){
         //已经排序号的数组，dataArrM[i]表示第几组。dataArrM[i][i]表示第几组第几个好友的model
         [weakSelf.nameArr removeAllObjects];
         if ([dataArrM[0]  isEqual: @1]) {
@@ -211,8 +211,8 @@
     chatVC.friendNikeName = model.nikeName;
     chatVC.friendID = model.user_id;
     chatVC.friendIcon = model.header_img;
-//    chatVC.user_type = model.user_type;
-    chatVC.user_type = @"1";//修改，暂时用1，因为目前只能搜索到用户，无法搜索到商家
+    chatVC.user_type = model.user_type;
+    
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
@@ -315,7 +315,8 @@
         
         if (model&&([YWMessageTableViewCell latestMessageTitleForConversationModel:model].length>0)){
             [self.dataArr addObject:model];
-            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId)};
+            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId),@"user_type":@(1)};
+            
             [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
                 MyLog(@"参数Regieter Code pragram is %@",pragram);
                 MyLog(@"好友信息Regieter Code is %@",responsObj);
@@ -342,8 +343,8 @@
                 }
                 self.badgeValue = 0;
             } failur:^(id responsObj, NSError *error) {
-                MyLog(@"Regieter Code pragram is %@",pragram);
-                MyLog(@"Regieter Code error is %@",responsObj);
+                MyLog(@"参数Regieter Code pragram is %@",pragram);
+                MyLog(@"错误信息Regieter Code error is %@",responsObj);
                 if (count>0) {
                     [self.tableView reloadData];
                 }
