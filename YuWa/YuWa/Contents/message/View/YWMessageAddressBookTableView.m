@@ -158,9 +158,9 @@
 - (void)requestShopArrData{
     [self.dataArr removeAllObjects];
     [self.keyArr removeAllObjects];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-         [self.mj_header endRefreshing];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//    });
     
     NSArray *userlist;
     EMError *error = nil;
@@ -171,6 +171,9 @@
             self.friendsModel(@[@1]);
         }
         [self reloadData];
+        if ([self.mj_header isRefreshing]) {
+            [self.mj_header endRefreshing];
+        }
         return;
     }
     
@@ -188,6 +191,7 @@
                 if (userlist.count == 1) {
                     [self.dataArr addObject:@[model]];
                     [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
+
                     [self reloadData];
                 }else{
                     //排序
@@ -204,6 +208,9 @@
                     }
             }
             }
+            if ([self.mj_header isRefreshing]) {
+                [self.mj_header endRefreshing];
+            }
         } failur:^(id responsObj, NSError *error) {
             MyLog(@"Regieter Code pragram is %@",pragram);
             MyLog(@"Regieter Code error is %@",responsObj);
@@ -213,9 +220,13 @@
                     [self.dataArr addObject:@[model]];
                     [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
                     [self reloadData];
+                    
                 }else{
                     [self sortedArry:sortArr];
                 }
+            }
+            if ([self.mj_header isRefreshing]) {
+                [self.mj_header endRefreshing];
             }
         }];
     }
