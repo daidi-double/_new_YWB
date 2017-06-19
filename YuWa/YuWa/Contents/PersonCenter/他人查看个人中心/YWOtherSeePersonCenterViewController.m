@@ -33,6 +33,7 @@
 #define HEADERVIEWHEIGHT   195     //头视图的高度
 
 @interface YWOtherSeePersonCenterViewController ()<PCBottomTableViewCellDelegate,UITableViewDelegate,UITableViewDataSource,YJSegmentedControlDelegate>
+@property (nonatomic, copy) NSString *path;
 @property(nonatomic,strong)UIView*belowImageViewView;   //图片下面的视图
 @property(nonatomic,strong)UIView*headerView;   //头视图
 @property(nonatomic,strong)UIButton*FriendButton;        //好友按钮
@@ -327,6 +328,12 @@
 
     [follow setTitle:@"关注" forState:UIControlStateNormal];
     [follow setTitle:@"取消关注" forState:UIControlStateSelected];
+    //获取plist 文件中的好友名称l
+    NSMutableArray * arr  =[[ NSMutableArray alloc]initWithContentsOfFile:self.path];
+//    判断是否是好友
+    if ([arr containsObject:self.HeaderModel.nickname]) {
+        friend.hidden = YES;
+    }
     [friend setTitle:@"加好友" forState:UIControlStateNormal];
     [friend setTitle:@"等待验证" forState:UIControlStateSelected];
     
@@ -744,6 +751,12 @@
     return _tableView;
     
 }
-
+-(NSString *)path{
+    if (!_path) {
+        _path  = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+        _path = [_path stringByAppendingPathComponent:@"isFriends.plist"];
+    }
+    return _path;
+}
 
 @end
