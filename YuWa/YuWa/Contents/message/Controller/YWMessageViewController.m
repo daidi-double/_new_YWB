@@ -40,6 +40,7 @@
 @property (nonatomic, assign) int badgeValue;
 //用来记录好友的名称数组，如果有昵称，就用昵称，没有就用环信ID
 @property (nonatomic, strong) NSMutableArray *nameArr;
+@property (nonatomic, copy) NSString * path;
 @end
 
 @implementation YWMessageViewController
@@ -135,8 +136,9 @@
         //已经排序号的数组，dataArrM[i]表示第几组。dataArrM[i][i]表示第几组第几个好友的model
         [weakSelf.nameArr removeAllObjects];
         if ([dataArrM[0]  isEqual: @1]) {
+            //            说明没有好友
              [weakSelf requestShopArrDataWithPages:0];
-//            说明没有好友
+            
             return ;
         }
         for (NSArray * section in dataArrM) {
@@ -146,6 +148,11 @@
                 }
             }
         }
+        //好友的名字数组得出之后 weakSelf.nameArr  对他进行数据持久化
+        [weakSelf.nameArr writeToFile:weakSelf.path atomically:YES];
+        //那怎么证明我的数据写入了呢？读出来看看
+        NSMutableArray *data1 = [[NSMutableArray alloc] initWithContentsOfFile:weakSelf.path];
+        NSLog(@"%@", data1);
         //加载本页面数据
         [weakSelf requestShopArrDataWithPages:0];
         
@@ -358,5 +365,12 @@
         _nameArr = [NSMutableArray array];
     }
     return _nameArr;
+}
+-(NSString *)path{
+    if (!_path) {
+        _path  = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+        _path = [_path stringByAppendingPathComponent:@"isFriends.plist"];
+    }
+    return _path;
 }
 @end

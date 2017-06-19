@@ -398,6 +398,9 @@
     
     //图片界面装在 上面
    PersonCenterHeadView*showView= [[NSBundle mainBundle]loadNibNamed:@"PersonCenterHeadView" owner:nil options:nil].firstObject;
+    //隐藏掉备注
+    UIButton * reMark = [showView viewWithTag:80];
+    reMark.hidden = YES;
     showView.frame=CGRectMake(0, 0, kScreen_Width, HEADERVIEWHEIGHT);
     showView.backgroundColor=[UIColor clearColor];
     [self.headerView addSubview:showView];
