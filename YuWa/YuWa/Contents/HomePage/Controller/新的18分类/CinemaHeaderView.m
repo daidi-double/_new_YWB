@@ -142,7 +142,7 @@
     }else{
         UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,self.address.bottom +16, kScreen_Width, kScreen_Height*114/1334)];
         textLabel.textColor = [UIColor colorWithHexString:@"#333333"];
-        textLabel.text = @"暂无电影排期";
+        textLabel.text = @"暂无影院选座排期哦~";
         textLabel.textAlignment = 1;
         [self addSubview:textLabel];
     }
@@ -152,9 +152,11 @@
     return self.movies.count;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    MyLog(@"偏移量%f",collectionView.mj_offsetX);
     collectionView.contentOffset = CGPointMake(115*indexPath.item, 0);
     FilmListModel * filmModel = self.movies[indexPath.item];
-    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
+    NSArray * playDate = [filmModel.allDate componentsSeparatedByString:@","];
+    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code andPlayDate:playDate[0]];
     self.movieTitle.text = filmModel.name;
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
     _movieTitle.frame = CGRectMake(12, _BGScrollView.height+10, movieTitleSize.width, _BGScrollView.height*0.15f);
@@ -186,14 +188,18 @@
 
 
     }
+    if (indexPath.item == self.num) {
+        
+        [_bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    }
     
-    [_bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     return cell;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offsetX;
+       MyLog(@"偏移量2%f",scrollView.mj_offsetX);
     for (int i = 0; i<self.movies.count; i++) {
         offsetX = 115*i;
         if (scrollView.mj_offsetX == offsetX) {
@@ -209,7 +215,9 @@
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     FilmListModel * filmModel = self.movies[_index];
-    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
+     MyLog(@"偏移量3%f",scrollView.mj_offsetX);
+    NSArray * playDate = [filmModel.allDate componentsSeparatedByString:@","];
+    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code andPlayDate:playDate[0]];
     self.movieTitle.text = filmModel.name;
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
     _movieTitle.frame = CGRectMake(12, _BGScrollView.height+10, movieTitleSize.width, _BGScrollView.height*0.15f);

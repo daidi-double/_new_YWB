@@ -129,13 +129,15 @@
                             if (dateBtn.tag>=1) {
                               
                                 if (dateBtn.tag<=date.count) {
-                                    
+                                     dateBtn.hidden = NO;
                                     [dateBtn setTitle:date[dateBtn.tag-1] forState:UIControlStateNormal];
                                     if ([dateBtn.titleLabel.text isEqualToString:@""]||dateBtn.titleLabel.text == nil) {
                                         [dateBtn setUserInteractionEnabled:NO];
                                     }else{
                                         [dateBtn setUserInteractionEnabled:YES];
                                     }
+                                }else{
+                                    dateBtn.hidden = YES;
                                 }
                             }
                         }
@@ -317,11 +319,13 @@
     [self.navigationController presentViewController:alerVC animated:YES completion:nil];
     
 }
-- (void)filmName:(NSString *)filmName andIndex:(NSInteger)index andfilmCode:(NSString *)filmCode{
+- (void)filmName:(NSString *)filmName andIndex:(NSInteger)index andfilmCode:(NSString *)filmCode andPlayDate:(NSString *)playDate{
     self.filmName = filmName;
     self.index = index;
+    self.Num = index;
     self.title = filmName;
     self.film_code = filmCode;
+    self.time= playDate;
     [self requestFootData];
 }
 
@@ -427,8 +431,9 @@
         }else{
             [JRToast showWithText:@"网络错误，请检查网络" duration:1];
         }
-        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
-        [self.movieTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+//        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
+//        [self.movieTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.movieTableView reloadData];
     }];
     
 }

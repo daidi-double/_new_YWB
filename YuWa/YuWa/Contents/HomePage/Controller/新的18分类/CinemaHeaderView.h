@@ -17,7 +17,7 @@
 - (void)callIphone:(NSString *)iphoneStr;
 
 
-- (void)filmName:(NSString *)filmName andIndex:(NSInteger)index andfilmCode:(NSString *)filmCode;
+- (void)filmName:(NSString *)filmName andIndex:(NSInteger)index andfilmCode:(NSString *)filmCode andPlayDate:(NSString *)playDate;
 @end
 
 @interface CinemaHeaderView : UIView
