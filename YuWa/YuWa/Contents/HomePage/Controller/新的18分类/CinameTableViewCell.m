@@ -78,7 +78,7 @@
             self.foodLabel.hidden = YES;
             break;
         case 5:
-            self.seatLabel.text = @"兑";
+            self.otherTicketLabel.text = @"兑";
             self.seatLabel.hidden = YES;
             self.otherTicketLabel.hidden = NO;
             self.foodLabel.hidden = YES;

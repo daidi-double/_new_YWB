@@ -114,11 +114,13 @@
     MCinemaVC.film_code = self.model.code;//35050321
     MCinemaVC.cityCode = self.cityCode;
     MCinemaVC.filmName = self.filmName;
-    if ([models.goodstype integerValue] !=1) {
+    if (([models.goodstype integerValue] == 1 ||[models.goodstype integerValue] == 4)&&[models.goodstype integerValue] !=3 ) {
         
-        MCinemaVC.status = 1;
-    }else{
         MCinemaVC.status = 0;
+    }else if ([models.goodstype integerValue] == 3){
+        return;
+    }else{
+        MCinemaVC.status = 1;
     }
     
     [self.navigationController pushViewController:MCinemaVC animated:YES];

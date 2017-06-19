@@ -32,6 +32,7 @@
 @interface MovieCinemaViewController ()<UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,CinemaHeaderViewDelegate>
 {
     UIView * lineView;
+    UIView * bgView;
 }
 
 @property (nonatomic,strong)UITableView * movieTableView;
@@ -67,16 +68,14 @@
     if (section == 0) {
         return 0;
     }
-    return self.filmShowAry.count;//修改
+    return self.filmShowAry.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (self.status == 1) {
         
         if (section == 0) {
-            if (self.filmListAry.count<=0) {
-                return kScreen_Height *342/1334.f;
-            }
+
             return kScreen_Height *850/1334.f;
             
         }else{
@@ -84,9 +83,6 @@
         }
     }else{
         if (section == 0) {
-            if (self.filmListAry.count<=0) {
-                return kScreen_Height *342/1334.f;
-            }
 
             return kScreen_Height *850/1334.f;
             
@@ -118,6 +114,7 @@
             return nil;
         }
     }else{
+
         if (self.filmName != nil) {
             //从热映电影点击进来的
             for (FilmListModel * model in self.filmListAry) {
@@ -176,10 +173,14 @@
             
             
         }
-        if (self.filmListAry.count<=0) {
-            return nil;
+
+        if (self.filmShowAry.count <=0) {
+            lineView.hidden = YES;
+
+        }else{
+            lineView.hidden = NO;
+
         }
-        
         return self.btnTimeView;
     }
     
@@ -238,8 +239,10 @@
         filmModel = self.filmListAry[self.index];
     }
     NSArray * date = [filmModel.allDate componentsSeparatedByString:@","];
+    if (date.count < sender.tag) {
+        return;
+    }
     lineView.centerX = sender.centerX;
-    
     self.time = date[sender.tag-1];
     [self requestFootData];
 }
@@ -428,12 +431,12 @@
             }
             
             
+            [self.movieTableView reloadData];
         }else{
             [JRToast showWithText:@"网络错误，请检查网络" duration:1];
         }
 //        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
 //        [self.movieTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.movieTableView reloadData];
     }];
     
 }
@@ -451,49 +454,37 @@
             UIView * blakView = [[UIView alloc]initWithFrame:CGRectMake(0, -10, kScreen_Width, 10)];
             blakView.backgroundColor = RGBCOLOR(234, 235, 236, 1);
             [_btnTimeView addSubview:blakView];
-            
-            lineView = [[UIView alloc]initWithFrame:CGRectMake(5, _btnTimeView.height-56, kScreen_Width/3, 2)];
-            lineView.backgroundColor = CNaviColor;
-            [_btnTimeView addSubview:lineView];
-            
             for (int j = 0; j<3; j++) {
                 UIButton * dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                dateBtn.frame = CGRectMake(10 + (kScreen_Width/3-3)*j, 1, kScreen_Width/3-3, _btnTimeView.height - 56);
+                dateBtn.frame = CGRectMake(10 + (kScreen_Width/3-3)*j, 56, kScreen_Width/3-3, _btnTimeView.height - 56);
                 dateBtn.tag = j +1;
                 [dateBtn addTarget:self action:@selector(chooseDate:) forControlEvents:UIControlEventTouchUpInside];
                 [_btnTimeView addSubview:dateBtn];
                 dateBtn.titleLabel.font = [UIFont systemFontOfSize:13];
                 [dateBtn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
                 [dateBtn setTitle:arr[j] forState:UIControlStateNormal];
-                
-                UIView * line3 = [[UIView alloc]initWithFrame:CGRectMake(dateBtn.right+1, _btnTimeView.height - 56, kScreen_Width, 0.5)];
-                line3.backgroundColor = RGBCOLOR(240, 240, 240, 1);
-                [_btnTimeView addSubview:line3];
-                
-                if (j == 2) {
-                    line3.hidden = YES;
-                }
+
                 
             }
-            UIView * line2 = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height - 56, kScreen_Width, 0.5)];
-            line2.backgroundColor = RGBCOLOR(240, 240, 240, 1);
-            [_btnTimeView addSubview:line2];
-            UIView * bgView = [[UIView alloc]initWithFrame:CGRectMake(0, _btnTimeView.height -55.5, kScreen_Width, 55.5)];
+            lineView = [[UIView alloc]initWithFrame:CGRectMake(5, _btnTimeView.height-1, kScreen_Width/3, 1)];
+            lineView.backgroundColor = CNaviColor;
+            [_btnTimeView addSubview:lineView];
+            bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 55.5)];
+
             [_btnTimeView addSubview:bgView];
-            
-            UIImageView * picImageView = [[UIImageView alloc]initWithFrame:CGRectMake(12, 10, 35.5, 35.5)];
+            UIImageView * picImageView = [[UIImageView alloc]initWithFrame:CGRectMake(12, 12, 35.5, 35.5)];
             picImageView.image = [UIImage imageNamed:@"otherticketpic"];
             [bgView addSubview:picImageView];
             
             UILabel * otherTicketLabel = [[UILabel alloc]initWithFrame:CGRectMake(picImageView.right + 20, 0, kScreen_Width * 0.7f, 30)];
             otherTicketLabel.textColor = [UIColor colorWithHexString:@"#333333"];
-            otherTicketLabel.centerY = bgView.height/2;
+            otherTicketLabel.centerY = picImageView.centerY;
             otherTicketLabel.font = [UIFont systemFontOfSize:13];
             otherTicketLabel.text = @"可观看2D,3D,免预约,可升级";
             [bgView addSubview:otherTicketLabel];
             
-            UIImageView * picImageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 30, 15, 8, 15)];
-            picImageView.centerY = bgView.height/2;
+            UIImageView * picImageView2 = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 30, 25, 8, 15)];
+            picImageView2.centerY = otherTicketLabel.centerY;
             picImageView2.image = [UIImage imageNamed:@"common_icon_arrow"];
             [bgView addSubview:picImageView2];
             UITapGestureRecognizer * otherTicketTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toOtherTicker)];
@@ -501,6 +492,9 @@
             otherTicketTap.numberOfTapsRequired = 1;
             otherTicketTap.numberOfTouchesRequired = 1;
             [bgView addGestureRecognizer:otherTicketTap];
+            UIView * line3 = [[UIView alloc]initWithFrame:CGRectMake(0, picImageView.bottom+10, kScreen_Width, 0.5)];
+            line3.backgroundColor = RGBCOLOR(240, 240, 240, 1);
+            [_btnTimeView addSubview:line3];
         }
         return _btnTimeView;
     }else{
@@ -527,15 +521,7 @@
                 dateBtn.titleLabel.font = [UIFont systemFontOfSize:14];
                 [dateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 [dateBtn setTitle:arr[j] forState:UIControlStateNormal];
-                
-                UIView * line3 = [[UIView alloc]initWithFrame:CGRectMake(dateBtn.right+1, _btnTimeView.height * 0.7f, kScreen_Width, 0.5)];
-                line3.backgroundColor = RGBCOLOR(240, 240, 240, 1);
-                [_btnTimeView addSubview:line3];
-                
-                if (j == 2) {
-                    line3.hidden = YES;
-                }
-                
+             
             }
         }
         return _btnTimeView;

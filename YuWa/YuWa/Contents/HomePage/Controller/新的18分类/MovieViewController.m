@@ -237,13 +237,13 @@
     MovieCinemaViewController * movieVC = [[MovieCinemaViewController alloc]init];
     movieVC.cinema_code = model.code;
     movieVC.cityCode = model.city;
-    if ([model.goodstype integerValue] != 1) {
-        movieVC.status = 1;
-        
-    }else{
+    if (([model.goodstype integerValue] == 1 ||[model.goodstype integerValue] == 4)&&[model.goodstype integerValue] !=3 ) {
         
         movieVC.status = 0;
-        
+    }else if ([model.goodstype integerValue] == 3){
+        return;
+    }else{
+        movieVC.status = 1;
     }
     [self.navigationController pushViewController:movieVC animated:YES];
 
