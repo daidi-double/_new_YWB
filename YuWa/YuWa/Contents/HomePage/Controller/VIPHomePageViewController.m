@@ -822,6 +822,7 @@
                 }
                 //还原
             } failur:^(id responsObj, NSError *error) {
+                MyLog(@"%@~~~~~%@",error,responsObj);
             }];
         }
     }
