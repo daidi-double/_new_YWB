@@ -52,7 +52,7 @@
     tapGes.delegate = self;
     [_touchView addGestureRecognizer:tapGes];
     [self addSubview:_cinemaName];
-
+    
     self.touchView = [[UIView alloc]initWithFrame:_cinemaName.frame];
     UIView * line1 = [[UIView alloc]initWithFrame:CGRectMake(12, _cinemaName.bottom, kScreen_Width-24, 0.5)];
     line1.backgroundColor = RGBCOLOR(234, 235, 236, 1);
@@ -63,7 +63,7 @@
     _address.numberOfLines = 0;
     _address.font = [UIFont systemFontOfSize:12];
     _address.text = self.model.address;
-
+    
     [self addSubview:_address];
     
     
@@ -98,63 +98,81 @@
     [self addSubview:rightImageView];
     
     
-
+    
     _BGScrollView = [[UIView alloc]initWithFrame:CGRectMake(0,self.address.bottom +16, kScreen_Width, kScreen_Height*452/1334)];
-
+    
     [self addSubview:_BGScrollView];
+    
     if (self.movies.count>0) {
-
-    ViscosityLayout * layout = [[ViscosityLayout alloc]init];
-    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    _movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,self.address.bottom +16, kScreen_Width, kScreen_Height*452/1334) collectionViewLayout:layout];
-    
-    [_movieCollectView registerClass:[MoviePicCollectionViewCell class] forCellWithReuseIdentifier:MOVIECELL1];
-    [_movieCollectView registerNib:[UINib nibWithNibName:MOVIECELL1 bundle:nil] forCellWithReuseIdentifier:MOVIECELL1];
-
-    _movieCollectView.contentOffset = CGPointMake(115*self.num, 0);
-    _movieCollectView.dataSource = self;
-    _movieCollectView.delegate = self;
-    _movieCollectView.backgroundColor = [UIColor clearColor];
-    
-    
-    _movieCollectView.showsVerticalScrollIndicator = NO;
-    _movieCollectView.showsHorizontalScrollIndicator = NO;
-    
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.address.bottom +16, kScreen_Width, _BGScrollView.height)];
-   
-    toolbar.barStyle = UIBarStyleBlackTranslucent;
-    toolbar.alpha = 0.8;
-    [self addSubview:toolbar];
-    [self addSubview:_movieCollectView];
-    FilmListModel * filmModel;
-    if (self.movies.count>0) {
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.address.bottom +16, kScreen_Width, _BGScrollView.height)];
         
-       filmModel = self.movies[self.num];
-    }
-    self.movieTitle.text = filmModel.name;
-    CGSize movieTitleSize = [self sizeWithSt:filmModel.name font:self.movieTitle.font];
-    _movieTitle.frame = CGRectMake(12, _BGScrollView.height+10, movieTitleSize.width, _BGScrollView.height*0.15f);
-    self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _movieTitle.top,40, _BGScrollView.height * 0.15f);
-    self.movieScore.text = [NSString stringWithFormat:@"%@分",filmModel.score];
-    self.durationLabel.frame = CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom,kScreen_Width/2, _BGScrollView.height * 0.15f);
-    self.durationLabel.text = [NSString stringWithFormat:@"时长:%@分钟",filmModel.duration];
+        toolbar.barStyle = UIBarStyleBlackTranslucent;
+        toolbar.alpha = 0.8;
+        [self addSubview:toolbar];
+        ViscosityLayout * layout = [[ViscosityLayout alloc]init];
+        [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+        _movieCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,self.address.bottom +16, kScreen_Width, kScreen_Height*452/1334) collectionViewLayout:layout];
         
+        [_movieCollectView registerClass:[MoviePicCollectionViewCell class] forCellWithReuseIdentifier:MOVIECELL1];
+        [_movieCollectView registerNib:[UINib nibWithNibName:MOVIECELL1 bundle:nil] forCellWithReuseIdentifier:MOVIECELL1];
+        
+        _movieCollectView.contentOffset = CGPointMake(115*self.num, 0);
+        _movieCollectView.dataSource = self;
+        _movieCollectView.delegate = self;
+        _movieCollectView.backgroundColor = [UIColor clearColor];
+        
+        
+        _movieCollectView.showsVerticalScrollIndicator = NO;
+        _movieCollectView.showsHorizontalScrollIndicator = NO;
+        [self addSubview:_movieCollectView];
+        
+        FilmListModel * filmModel;
+        if (self.movies.count>0) {
+            
+            filmModel = self.movies[self.num];
+        }
+        self.movieTitle.text = filmModel.name;
+        CGSize movieTitleSize = [self sizeWithSt:filmModel.name font:self.movieTitle.font];
+        _movieTitle.frame = CGRectMake(12, _BGScrollView.height+10, movieTitleSize.width, _BGScrollView.height*0.15f);
+        self.movieScore.frame = CGRectMake(_movieTitle.origin.x + _movieTitle.width+10, _movieTitle.top,40, _BGScrollView.height * 0.15f);
+        self.movieScore.text = [NSString stringWithFormat:@"%@分",filmModel.score];
+        self.durationLabel.frame = CGRectMake(_movieTitle.origin.x, self.movieTitle.bottom,kScreen_Width/2, _BGScrollView.height * 0.15f);
+        self.durationLabel.text = [NSString stringWithFormat:@"时长:%@分钟",filmModel.duration];
     }else{
-        UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,self.address.bottom +16, kScreen_Width, kScreen_Height*114/1334)];
-        textLabel.textColor = [UIColor colorWithHexString:@"#333333"];
-        textLabel.text = @"暂无电影排期";
+        UIView * bgColorView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 25)];
+        bgColorView.backgroundColor = RGBCOLOR(233, 234, 235, 1);
+        [_BGScrollView addSubview:bgColorView];
+        
+        UIImageView * wawaImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width/2, 50, kScreen_Width/3, kScreen_Width/3+20)];
+        wawaImageView.centerX = kScreen_Width/2;
+        wawaImageView.image = [UIImage imageNamed:@"娃娃"];
+        [_BGScrollView addSubview:wawaImageView];
+        
+        UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, wawaImageView.bottom, kScreen_Width, 40)];
+        textLabel.centerX = kScreen_Width/2;
         textLabel.textAlignment = 1;
-        [self addSubview:textLabel];
+        textLabel.font = [UIFont systemFontOfSize:14];
+        textLabel.textColor = RGBCOLOR(123, 124, 124, 1);
+        textLabel.text = @"暂无影院选座排期哦~";
+        [_BGScrollView addSubview:textLabel];
+        
+
     }
+    
+
+    
+    
 }
 #pragma mark - collectViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.movies.count;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    MyLog(@"偏移量%f",collectionView.mj_offsetX);
     collectionView.contentOffset = CGPointMake(115*indexPath.item, 0);
     FilmListModel * filmModel = self.movies[indexPath.item];
-    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
+    NSArray * playDate = [filmModel.allDate componentsSeparatedByString:@","];
+    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code andPlayDate:playDate[0]];
     self.movieTitle.text = filmModel.name;
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
     _movieTitle.frame = CGRectMake(12, _BGScrollView.height+10, movieTitleSize.width, _BGScrollView.height*0.15f);
@@ -168,10 +186,10 @@
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     MoviePicCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:MOVIECELL1 forIndexPath:indexPath];
-
-        FilmListModel * filmModel = self.movies[indexPath.item];
-        [cell.movieImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-
+    
+    FilmListModel * filmModel = self.movies[indexPath.item];
+    [cell.movieImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _BGScrollView.height)];
         
@@ -183,17 +201,21 @@
         _BGroundView.image = [UIImage imageNamed:@"横条.png"];
         [_bgImageView addSubview:_BGroundView];
         
-
-
+        
+        
+    }
+    if (indexPath.item == self.num) {
+        
+        [_bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
     
-    [_bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     return cell;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offsetX;
+    MyLog(@"偏移量2%f",scrollView.mj_offsetX);
     for (int i = 0; i<self.movies.count; i++) {
         offsetX = 115*i;
         if (scrollView.mj_offsetX == offsetX) {
@@ -205,11 +227,13 @@
         
         filmModel = self.movies[_index];
     }
- 
+    
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     FilmListModel * filmModel = self.movies[_index];
-    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code];
+    MyLog(@"偏移量3%f",scrollView.mj_offsetX);
+    NSArray * playDate = [filmModel.allDate componentsSeparatedByString:@","];
+    [self.delegate filmName:filmModel.name andIndex:_index andfilmCode:filmModel.code andPlayDate:playDate[0]];
     self.movieTitle.text = filmModel.name;
     CGSize movieTitleSize = [self sizeWithSt:_movieTitle.text font:_movieTitle.font];
     _movieTitle.frame = CGRectMake(12, _BGScrollView.height+10, movieTitleSize.width, _BGScrollView.height*0.15f);
@@ -229,15 +253,15 @@
         
         
     }
-
-        [_bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];;
-
-
+    
+    [_bgImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",filmModel.image]] placeholderImage:[UIImage imageNamed:@"placeholder"]];;
+    
+    
 }
 
 
 - (BOOL)judgeLogin{
-   
+    
     return [UserSession instance].isLogin;
 }
 - (CGSize)sizeWithSt:(NSString *)string font:(UIFont *)font
@@ -253,14 +277,14 @@
 //拨打电话
 -(void)iphoneNumer{
     MyLog(@"拨打电话");
-
+    
     if (self.model.tel != nil && ![self.model.tel isKindOfClass:[NSNull class]]) {
         [self.delegate callIphone:self.model.tel];
-
+        
     }else{
         [JRToast showWithText:@"暂无影院电话"];
     }
-
+    
 }
 
 - (void)ToCinemaDetail{
@@ -294,7 +318,7 @@
         _movieTitle.textColor = [UIColor colorWithHexString:@"#333333"];
         _movieTitle.font = [UIFont systemFontOfSize:13];
         [_BGScrollView addSubview:_movieTitle];
-
+        
     }
     return _movieTitle;
 }
@@ -318,11 +342,11 @@
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end

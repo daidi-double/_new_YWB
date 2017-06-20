@@ -52,7 +52,7 @@
         NSString * path = [[NSBundle mainBundle]pathForResource:@"37x-Checkmark" ofType:@"png"];
         hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
     }
-    hud.alpha = 0.4;
+    hud.alpha = 0.55;
     hud.mode = MBProgressHUDModeCustomView;
 //    hud.removeFromSuperViewOnHide = YES;
     [hud hide:YES afterDelay:100];
