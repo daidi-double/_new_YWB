@@ -81,7 +81,7 @@
     [self makeNaviBar];
     [self addTableVIew];
     [self setUpMJRefresh];
-        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(requestShopArrData) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(requestShopArrData) userInfo:nil repeats:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
