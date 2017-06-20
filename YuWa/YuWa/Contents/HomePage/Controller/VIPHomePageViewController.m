@@ -81,7 +81,7 @@
     [self makeNaviBar];
     [self addTableVIew];
     [self setUpMJRefresh];
-        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(requestShopArrData) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(requestShopArrData) userInfo:nil repeats:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -824,7 +824,7 @@
                 //还原
             } failur:^(id responsObj, NSError *error) {
 //                [JRToast showWithText:];
-                [self showHUDWithStr:responsObj[@"errorMessage"]withSuccess:YES];
+//                [self showHUDWithStr:responsObj[@"errorMessage"]withSuccess:YES];
                 MyLog(@"%@~~~~~%@",error,responsObj);
             }];
         }
