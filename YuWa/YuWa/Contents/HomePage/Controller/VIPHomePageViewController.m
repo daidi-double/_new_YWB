@@ -822,6 +822,7 @@
                 }
                 //还原
             } failur:^(id responsObj, NSError *error) {
+                [JRToast showWithText:responsObj[@"errorMessage"]];
                 MyLog(@"%@~~~~~%@",error,responsObj);
             }];
         }
