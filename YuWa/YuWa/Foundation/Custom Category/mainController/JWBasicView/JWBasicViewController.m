@@ -54,7 +54,7 @@
     }
     hud.alpha = 0.4;
     hud.mode = MBProgressHUDModeCustomView;
-    hud.removeFromSuperViewOnHide = YES;
+//    hud.removeFromSuperViewOnHide = YES;
     [hud hide:YES afterDelay:0.8];
 }
 
