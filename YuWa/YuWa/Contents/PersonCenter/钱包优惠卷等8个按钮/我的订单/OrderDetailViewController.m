@@ -285,7 +285,8 @@
                     
                     cell.detailTextLabel.text = @"实付款￥0.00";
                 }else{
-                    cell.detailTextLabel.attributedText = [NSString stringWithFirstStr:@"实付款" withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor blackColor] withSecondtStr:[NSString stringWithFormat:@"￥%.2f",[orderModel.pay_money floatValue]/100] withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor orangeColor]];
+//                    cell.detailTextLabel.attributedText = [NSString stringWithFirstStr:@"实付款" withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor blackColor] withSecondtStr:[NSString stringWithFormat:@"￥%.2f",[orderModel.pay_money floatValue]/100] withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor orangeColor]];
+                     cell.detailTextLabel.attributedText = [NSString stringWithFirstStr:@"实付款" withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor blackColor] withSecondtStr:[NSString stringWithFormat:@"￥%@",orderModel.pay_money] withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor orangeColor]];
                 }
                 cell.textLabel.font = [UIFont systemFontOfSize:13];
                 if (orderModel.is_coupon == 0) {
@@ -402,7 +403,7 @@
                     cell.textLabel.text = [NSString stringWithFormat:@"座位号:%@",orderModel.seat];
                 }
             }else{
-                cell.textLabel.text = [NSString stringWithFormat:@"下单时间:%@",[JWTools getTime:orderModel.create_time]];
+                cell.textLabel.text = [NSString stringWithFormat:@"下单时间:%@",[JWTools dateStr:orderModel.create_time]];
                 UIButton * questionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 
                 questionBtn.frame = CGRectMake(kScreen_Width * 0.65f, 5, kScreen_Width * 0.3f, 34);
