@@ -138,7 +138,9 @@
         if ([dataArrM[0]  isEqual: @1]) {
             //            说明没有好友
              [weakSelf requestShopArrDataWithPages:0];
+            //没好友。更新个空数组
             
+            [weakSelf.nameArr writeToFile:weakSelf.path atomically:YES];
             return ;
         }
         for (NSArray * section in dataArrM) {
@@ -362,7 +364,9 @@
             }];
         }
     }
-    
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+             [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
+        });
 }
 
 -(NSMutableArray *)nameArr{
