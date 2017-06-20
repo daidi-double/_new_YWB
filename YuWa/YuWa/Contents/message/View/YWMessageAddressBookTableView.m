@@ -214,6 +214,10 @@
         } failur:^(id responsObj, NSError *error) {
             MyLog(@"Regieter Code pragram is %@",pragram);
             MyLog(@"Regieter Code error is %@",responsObj);
+            //回调取消刷新
+            if (self.friendsModel) {
+                self.friendsModel(@[@1]);
+            }
             if (sortArr.count>0) {
                 if (sortArr.count == 1) {
                     YWMessageAddressBookModel * model = sortArr[0];
