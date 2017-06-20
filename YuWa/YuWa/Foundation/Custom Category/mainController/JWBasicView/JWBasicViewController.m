@@ -55,7 +55,7 @@
     hud.alpha = 0.55;
     hud.mode = MBProgressHUDModeCustomView;
 //    hud.removeFromSuperViewOnHide = YES;
-    [hud hide:YES afterDelay:100];
+    [hud hide:YES afterDelay:0.88];
 }
 
 - (void)backBarAction{
