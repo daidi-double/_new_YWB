@@ -292,6 +292,7 @@
     if ( self.tableView.mj_footer.isRefreshing){
         [self.tableView.mj_footer endRefreshing];
     }
+
 }
 #pragma mark - Http
 - (void)requestShopArrDataWithPages:(NSInteger)page{

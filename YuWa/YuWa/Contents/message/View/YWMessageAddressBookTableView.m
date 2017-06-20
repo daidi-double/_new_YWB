@@ -191,6 +191,7 @@
                 if (userlist.count == 1) {
                     [self.dataArr addObject:@[model]];
                     [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
+
                     [self reloadData];
                 }else{
                     //排序
@@ -219,6 +220,7 @@
                     [self.dataArr addObject:@[model]];
                     [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
                     [self reloadData];
+                    
                 }else{
                     [self sortedArry:sortArr];
                 }
