@@ -159,7 +159,7 @@
     [self.dataArr removeAllObjects];
     [self.keyArr removeAllObjects];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-         [self.mj_header endRefreshing];
+        
     });
     
     NSArray *userlist;
@@ -171,6 +171,9 @@
             self.friendsModel(@[@1]);
         }
         [self reloadData];
+        if ([self.mj_header isRefreshing]) {
+            [self.mj_header endRefreshing];
+        }
         return;
     }
     
@@ -204,6 +207,9 @@
                     }
             }
             }
+            if ([self.mj_header isRefreshing]) {
+                [self.mj_header endRefreshing];
+            }
         } failur:^(id responsObj, NSError *error) {
             MyLog(@"Regieter Code pragram is %@",pragram);
             MyLog(@"Regieter Code error is %@",responsObj);
@@ -216,6 +222,9 @@
                 }else{
                     [self sortedArry:sortArr];
                 }
+            }
+            if ([self.mj_header isRefreshing]) {
+                [self.mj_header endRefreshing];
             }
         }];
     }
