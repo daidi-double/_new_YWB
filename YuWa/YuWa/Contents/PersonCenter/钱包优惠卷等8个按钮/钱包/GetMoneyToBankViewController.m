@@ -95,45 +95,7 @@
         [JRToast showWithText:@"网络繁忙,请稍后再试" duration:1];
     }
 }
-//- (void)requestData{
-//    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MONEY_GETMONEY];
-//    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"user_type":@(2),@"token":[UserSession instance].token, @"user_card_id":self.user_card_id,@"money":self.money};
-//    HttpManager * manager = [[HttpManager alloc]init];
-//    [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
-//        
-//        NSInteger number = [data[@"errorCode"] integerValue];
-//        if (number == 0) {
-//            MyLog(@"data = %@",data);
-//            self.getMoneyStatus.text = data[@"msg"];
-//            
-//            
-//            [self.detailTablleView reloadData];
-//            
-//        }else{
-//            [JRToast showWithText:data[@"errorMessage"]duration:1];
-//        }
-//    }];
-//    
-//}
-//-(void)sureGetMoney{
-//    NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_SUREGETMYMONEY];
-//    NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"user_type":@(2),@"token":[UserSession instance].token,@"user_card_id":self.user_card_id,@"money":self.money};
-//    HttpManager * manager = [[HttpManager alloc]init];
-//    [manager postDatasNoHudWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
-//        MyLog(@"data = %@",data);
-//        NSInteger number = [data[@"errorCode"] integerValue];
-//        self.status = number;
-//        if (number == 0) {
-//            [JRToast showWithText:data[@"msg"] duration:1];
-//
-//
-//        }else{
-//            [JRToast showWithText:data[@"errorMessage"]duration:1];
-//
-//        }
-//    }];
-//
-//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
