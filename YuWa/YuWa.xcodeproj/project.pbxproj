@@ -5876,6 +5876,16 @@
 			name = model;
 			sourceTree = "<group>";
 		};
+		AA3A7A7A1EF8B4B900DFCDCF /* 通知 */ = {
+			isa = PBXGroup;
+			children = (
+				B3FEBA001D9B64C1003CDEF2 /* YWMessageNotificationViewController.h */,
+				B3FEBA011D9B64C1003CDEF2 /* YWMessageNotificationViewController.m */,
+				B3FEBA021D9B64C1003CDEF2 /* YWMessageNotificationViewController.xib */,
+			);
+			name = "通知";
+			sourceTree = "<group>";
+		};
 		AA3A86151EC1A566003966F1 /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -8943,12 +8953,10 @@
 		B3FEB9F41D9B63C6003CDEF2 /* SubView */ = {
 			isa = PBXGroup;
 			children = (
+				AA3A7A7A1EF8B4B900DFCDCF /* 通知 */,
 				B36C7EFA1D9CE14F00B022E0 /* FriendsAddVC */,
 				B3FEBA341D9C10B5003CDEF2 /* ChatVC */,
 				B3FEBA081D9B717C003CDEF2 /* PayNotificationTableView */,
-				B3FEBA001D9B64C1003CDEF2 /* YWMessageNotificationViewController.h */,
-				B3FEBA011D9B64C1003CDEF2 /* YWMessageNotificationViewController.m */,
-				B3FEBA021D9B64C1003CDEF2 /* YWMessageNotificationViewController.xib */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
