@@ -803,6 +803,7 @@
             [dataArr addObject:model];
             NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId)};
             [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
+                
                 YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
                 modelTemp.hxID = [model.title length] > 0?model.title:model.conversation.conversationId;
                 model.title = modelTemp.nikeName;
@@ -822,7 +823,8 @@
                 }
                 //还原
             } failur:^(id responsObj, NSError *error) {
-                [JRToast showWithText:responsObj[@"errorMessage"]];
+//                [JRToast showWithText:];
+                [self showHUDWithStr:responsObj[@"errorMessage"]withSuccess:YES];
                 MyLog(@"%@~~~~~%@",error,responsObj);
             }];
         }
