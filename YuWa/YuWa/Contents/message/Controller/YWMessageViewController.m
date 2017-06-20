@@ -296,10 +296,8 @@
 }
 #pragma mark - Http
 - (void)requestShopArrDataWithPages:(NSInteger)page{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
-    });
     if (page>0){
+        [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
         return;
     }else{
         [self.dataArr removeAllObjects];
@@ -326,6 +324,10 @@
             NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId),@"user_type":@(1)};
             
             [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
+                //循环到最后做一个的时候，执行取消刷新状态
+                if (sorted.count-1 == i) {
+                    [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
+                }
                 MyLog(@"参数Regieter Code pragram is %@",pragram);
                 MyLog(@"好友信息Regieter Code is %@",responsObj);
                 YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
@@ -356,9 +358,11 @@
                 if (count>0) {
                     [self.tableView reloadData];
                 }
+                [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
             }];
         }
     }
+    
 }
 
 -(NSMutableArray *)nameArr{

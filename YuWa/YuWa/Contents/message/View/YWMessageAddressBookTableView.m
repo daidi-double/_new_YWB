@@ -158,9 +158,9 @@
 - (void)requestShopArrData{
     [self.dataArr removeAllObjects];
     [self.keyArr removeAllObjects];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
-//    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+    });
     
     NSArray *userlist;
     EMError *error = nil;
