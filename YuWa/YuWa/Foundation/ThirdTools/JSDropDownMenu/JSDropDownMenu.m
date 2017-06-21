@@ -8,7 +8,8 @@
 
 #import "JSDropDownMenu.h"
 
-#define BackColor [UIColor colorWithRed:244.0f/255.0f green:244.0f/255.0f blue:244.0f/255.0f alpha:1.0]
+//#define BackColor [UIColor colorWithRed:244.0f/255.0f green:244.0f/255.0f blue:244.0f/255.0f alpha:1.0]
+#define BackColor [UIColor whiteColor]
 // 选中颜色加深
 #define SelectColor [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0]
 
@@ -287,13 +288,13 @@
         //tableView init
         _leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(origin.x, self.frame.origin.y + self.frame.size.height, 0, 0) style:UITableViewStyleGrouped];
         _leftTableView.rowHeight = 38;
-        _leftTableView.separatorColor = [UIColor colorWithRed:220.f/255.0f green:220.f/255.0f blue:220.f/255.0f alpha:1.0];
+        _leftTableView.separatorColor = [UIColor colorWithRed:240.f/255.0f green:240.f/255.0f blue:240.f/255.0f alpha:1.0];
         _leftTableView.dataSource = self;
         _leftTableView.delegate = self;
         
         _rightTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.frame.size.width, self.frame.origin.y + self.frame.size.height, 0, 0) style:UITableViewStyleGrouped];
         _rightTableView.rowHeight = 38;
-        _rightTableView.separatorColor = [UIColor colorWithRed:220.f/255.0f green:220.f/255.0f blue:220.f/255.0f alpha:1.0];
+        _rightTableView.separatorColor = [UIColor colorWithRed:240.f/255.0f green:240.f/255.0f blue:240.f/255.0f alpha:1.0];
         _rightTableView.dataSource = self;
         _rightTableView.delegate = self;
         
@@ -302,7 +303,7 @@
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(origin.x, self.frame.origin.y + self.frame.size.height, self.frame.size.width, 0) collectionViewLayout:flowLayout];
         
         [_collectionView registerClass:[JSCollectionViewCell class] forCellWithReuseIdentifier:@"CollectionCell"];
-        _collectionView.backgroundColor = [UIColor colorWithRed:220.f/255.0f green:220.f/255.0f blue:220.f/255.0f alpha:1.0];
+        _collectionView.backgroundColor = [UIColor colorWithRed:240.f/255.0f green:240.f/255.0f blue:240.f/255.0f alpha:1.0];;
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         
@@ -467,7 +468,7 @@
                     _show = YES;
                 }];
             }
-            [(CALayer *)self.bgLayers[tapIndex] setBackgroundColor:SelectColor.CGColor];
+            [(CALayer *)self.bgLayers[tapIndex] setBackgroundColor:BackColor.CGColor];
         }
         
     } else{
@@ -531,7 +532,9 @@
                     _show = YES;
                 }];
             }
-            [(CALayer *)self.bgLayers[tapIndex] setBackgroundColor:SelectColor.CGColor];
+            [(CALayer *)self.bgLayers[tapIndex] setBackgroundColor:BackColor.CGColor];
+             [(CALayer *)self.bgLayers[tapIndex] setBorderColor:BackColor.CGColor];
+            
         }
     }
 }
@@ -777,8 +780,7 @@
     titleLabel.font = [UIFont systemFontOfSize:14.0];
         
     [cell addSubview:titleLabel];
-    
-    
+
     NSInteger leftOrRight = 0;
     
     if (_rightTableView==tableView) {
@@ -800,10 +802,12 @@
         
     }
     
-    cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor =  [UIColor colorWithRed:244.0f/255.0f green:244.0f/255.0f blue:244.0f/255.0f alpha:1.0];
     cell.textLabel.font = [UIFont systemFontOfSize:14.0];
     cell.separatorInset = UIEdgeInsetsZero;
+    self.leftTableView.separatorColor = [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1];
     
+    self.rightTableView.separatorColor = [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1];
     
     if (leftOrRight == 1) {
         
@@ -814,14 +818,14 @@
         cell.backgroundColor = BackColor;
         
         if ([titleLabel.text isEqualToString:[(CATextLayer *)[_titles objectAtIndex:_currentSelectedMenudIndex] string]]) {
+
+            titleLabel.textColor = CNaviColor;
+//            UIImageView *accessoryImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico_make"]];
+//            accessoryImageView.frame = CGRectMake(titleLabel.frame.origin.x+titleLabel.frame.size.width+10, (self.frame.size.height-12)/2, 16, 12);
             
-            UIImageView *accessoryImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico_make"]];
-            
-            accessoryImageView.frame = CGRectMake(titleLabel.frame.origin.x+titleLabel.frame.size.width+10, (self.frame.size.height-12)/2, 16, 12);
-            
-            [cell addSubview:accessoryImageView];
+//            [cell addSubview:accessoryImageView];
         } else{
-            
+            titleLabel.textColor = self.textColor;
             
         }
     } else{
@@ -836,14 +840,15 @@
             cell.backgroundColor = BackColor;
             BOOL haveRightTableView = [_dataSource haveRightTableViewInColumn:_currentSelectedMenudIndex];
             if(!haveRightTableView){
-                UIImageView *accessoryImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico_make"]];
-                
-                accessoryImageView.frame = CGRectMake(titleLabel.frame.origin.x+titleLabel.frame.size.width+10, (self.frame.size.height-12)/2, 16, 12);
-                
-                [cell addSubview:accessoryImageView];
+//                UIImageView *accessoryImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico_make"]];
+//                
+//                accessoryImageView.frame = CGRectMake(titleLabel.frame.origin.x+titleLabel.frame.size.width+10, (self.frame.size.height-12)/2, 16, 12);
+//                
+//                [cell addSubview:accessoryImageView];
+                titleLabel.textColor = CNaviColor;
             }
         } else{
-            
+            titleLabel.textColor = self.textColor;
         }
     }
     
@@ -866,6 +871,7 @@
         
         if ((leftOrRight==0 && !haveRightTableView) || leftOrRight==1) {
             [self confiMenuWithSelectRow:indexPath.row leftOrRight:leftOrRight];
+            
         }
         
         [self.delegate menu:self didSelectRowAtIndexPath:[JSIndexPath indexPathWithCol:self.currentSelectedMenudIndex leftOrRight:leftOrRight leftRow:_leftSelectedRow row:indexPath.row]];
@@ -924,17 +930,25 @@
     
     if ([self.dataSource respondsToSelector:@selector(menu:titleForRowAtIndexPath:)]) {
         cell.textLabel.text = [self.dataSource menu:self titleForRowAtIndexPath:[JSIndexPath indexPathWithCol:self.currentSelectedMenudIndex leftOrRight:-1 leftRow:-1 row:indexPath.row]];
+
     } else {
         NSAssert(0 == 1, @"dataSource method needs to be implemented");
     }
     cell.backgroundColor = [UIColor whiteColor];
-    cell.selectedBackgroundView.backgroundColor = BackColor;
+    cell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
+
     cell.textLabel.font = [UIFont systemFontOfSize:14.0];
     cell.textLabel.textColor = self.textColor;
-    
+    if (cell.selected) {
+        cell.textLabel.textColor = CNaviColor;
+    }else{
+        cell.textLabel.textColor = self.textColor;
+    }
     if ([cell.textLabel.text isEqualToString:[(CATextLayer *)[_titles objectAtIndex:_currentSelectedMenudIndex] string]]) {
-        cell.backgroundColor = BackColor;
+        cell.backgroundColor = [UIColor whiteColor];
         cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico_make"]];
+        cell.textLabel.textColor = CNaviColor;
+        
     } else{
         
         [cell removeAccessoryView];

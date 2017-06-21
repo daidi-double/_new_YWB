@@ -13,6 +13,8 @@
 #import "ChooseMovieController.h"
 #import "NewAllMovieTableViewCell.h"//所有电影
 #import "HotMovieModel.h"
+#import "MovieDetailViewController.h"
+
 
 #define ALLMOVIECELL  @"NewAllMovieTableViewCell"
 @interface LookAllViewController ()<UITableViewDelegate,UITableViewDataSource,NewAllMovieTableViewCellDeletage>
@@ -119,6 +121,12 @@
             chooseMC.coordinatey = self.coordinatey;
             chooseMC.coordinatex = self.coordinatex;
             [self.navigationController pushViewController:chooseMC animated:YES];
+        }else{
+            //没有预售的跳到影片详情
+            MovieDetailViewController * cinemaVC = [[MovieDetailViewController alloc]init];
+            cinemaVC.filmCode = model.code;
+            
+            [self.navigationController pushViewController:cinemaVC animated:YES];
         }
     }
 }

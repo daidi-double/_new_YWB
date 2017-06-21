@@ -28,8 +28,7 @@
     NSMutableArray *_data1;
     NSMutableArray *_data2;
     NSMutableArray *_data3;
- 
-    UIImageView * annimationImage;
+
     
     NSInteger _currentData1Index;
     NSInteger _currentData2Index;
@@ -50,8 +49,6 @@
 @property(nonatomic,assign)int pages;
 @property (nonatomic, strong) NSMutableArray *tableViewDatasModel;
 
-@property (nonatomic,strong)NSMutableArray * annimationAry;//动画组数组
-
 @end
 
 @implementation NewMainCategoryViewController
@@ -67,28 +64,25 @@
     [self setUpTableView];
     
     [self setUpMJRefresh];
-   
-    [self makeAnimation];
+
 
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [annimationImage stopAnimating];
-    [annimationImage removeFromSuperview];
-    _annimationAry = nil;
+
     [_data1 removeAllObjects];
     [_data2 removeAllObjects];
     [_data3 removeAllObjects];
     _data1 = nil;
     _data2= nil;
     _data3 = nil;
-    [_annimationAry removeAllObjects];
+
     [_maCityModel removeAllObjects];
     [_maCategoryModel removeAllObjects];
     [_maCityModel removeAllObjects];
     [_maCityModel removeAllObjects];
     [_maSortModel removeAllObjects];
-    _annimationAry = nil;
+   
     _maCityModel= nil;
     _maCategoryModel = nil;
     _maCityModel = nil;
@@ -106,8 +100,7 @@
     [self setUpTableView];
     
     [self setUpMJRefresh];
-    
-    [self makeAnimation];
+
 }
 #pragma mark --  UI
 -(void)initDropMenu{
@@ -126,7 +119,9 @@
     
      menu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(0, 64) andHeight:40];
     menu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
-    menu.separatorColor = [UIColor colorWithRed:210.0f/255.0f green:210.0f/255.0f blue:210.0f/255.0f alpha:1.0];
+ 
+
+    menu.separatorColor = [UIColor colorWithRed:245.0f/255.0f green:245.0f/255.0f blue:245.0f/255.0f alpha:1.0];
     menu.textColor = [UIColor colorWithRed:83.f/255.0f green:83.f/255.0f blue:83.f/255.0f alpha:1.0f];
     menu.dataSource = self;
     menu.delegate = self;
@@ -135,39 +130,7 @@
  
     
 }
-- (void)setAnnimationImage{
 
-    if (self.categoryTouch == 3 || self.categoryTouch == 7) {
-
-        annimationImage.center = CGPointMake(kScreen_Width/2, kScreen_Height/2);
-
-    }else if (self.categoryTouch == 6){
-
-        annimationImage.center = CGPointMake(kScreen_Width/2, kScreen_Height*0.75);
-
-    }
-    else if (self.categoryTouch == 12 || self.categoryTouch == 15 || self.categoryTouch == 19){
-        annimationImage.center = CGPointMake(kScreen_Width/2, kScreen_Height/2+50);
-    }else{
-        annimationImage.center = CGPointMake(kScreen_Width/2, kScreen_Height*2/3);
-    }
-    
-    
-    annimationImage.animationImages = self.annimationAry;
-    annimationImage.animationDuration = 0.1;
-    annimationImage.animationRepeatCount = 0;
-    [annimationImage startAnimating];
-   
-
-}
-
-- (void)makeAnimation{
-
-    annimationImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,kScreen_Width * 0.9 , kScreen_Height*0.5)];
-    
-    [self.view addSubview:annimationImage];
-    
-   }
 -(void)setUpTableView{
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:CELL0 bundle:nil] forCellReuseIdentifier:CELL0];
@@ -542,6 +505,7 @@
 //            leftOrRight
             if (indexPath.leftOrRight==0) {
                  _currentData1Index=indexPath.leftRow;
+                
             }else{
                 _currentData1SelectedIndex=indexPath.row;
                 //吊用接口
@@ -693,17 +657,7 @@
                 HPRecommendShopModel*model=[HPRecommendShopModel yy_modelWithDictionary:dict];
                 [self.tableViewDatasModel addObject:model];
             }
-            if (self.tableViewDatasModel.count <=1) {
-                
-                [self setAnnimationImage];
-
-            }else{
-                if (annimationImage.animating) {
-                    [annimationImage stopAnimating];
-                    [annimationImage removeFromSuperview];
-                    _annimationAry = nil;
-                }
-            }
+         
             [self.tableView reloadData];
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
@@ -747,20 +701,7 @@
     return _tableView;
 }
 
-- (NSMutableArray *)annimationAry{
-    
-    if (!_annimationAry) {
 
-        _annimationAry = [[NSMutableArray alloc]initWithCapacity:0];
-        for (int i = 0; i<2; i++) {
-            NSString * path = [[NSBundle mainBundle  ]pathForResource:[NSString stringWithFormat:@"gogogo%d",i+1] ofType:@"png"];
-            UIImage * image = [UIImage imageWithContentsOfFile:path];
-            [_annimationAry addObject:image];
-
-        }
-    }
-    return _annimationAry;
-}
 -(void)dealloc{
 
     
