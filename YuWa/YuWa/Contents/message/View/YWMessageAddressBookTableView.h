@@ -27,5 +27,6 @@
 
 - (void)dataSet;
 - (void)headerRereshing;
+-(void)setupRefresh;
 
 @end

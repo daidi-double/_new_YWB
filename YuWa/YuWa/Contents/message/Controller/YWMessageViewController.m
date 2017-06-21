@@ -32,6 +32,7 @@
 @property (nonatomic,assign)NSInteger pages;
 
 @property (nonatomic,assign)NSInteger status;
+@property (nonatomic,assign)NSInteger status1;//状态用来刷新当前页面是消息页面还是通讯录页面
 @property (nonatomic,strong)UISegmentedControl * segmentedControl;
 @property (nonatomic,strong)YWMessageAddressBookTableView * addressBooktableView;
 @property (nonatomic,strong)UIBarButtonItem * rightBarBtn;
@@ -55,6 +56,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self setupRefresh];
     [self.navigationController.navigationBar setUserInteractionEnabled:YES];
     self.noLoginBGBtnView.hidden = YES;
     self.noChatBGBtnView.hidden = YES;
@@ -68,10 +70,13 @@
     if (![UserSession instance].isLogin){
         [self withOutLogion];
         return;
-    }else if(self.status == 0){
+    }else if(self.status == 0||self.status1){
         [self headerRereshing];
     }else if (self.status == 1&&self.addressBooktableView) {
         [self.addressBooktableView headerRereshing];
+    }
+    if (self.status1) {
+        [self.addressBooktableView setupRefresh];
     }
 }
 
@@ -194,9 +199,10 @@
     
     if (sender.selectedSegmentIndex == 0) {
         [self.tableView.mj_header beginRefreshing];
-        
+        self.status1 = 0;
     }else{
         [self.addressBooktableView.mj_header beginRefreshing];
+         self.status1 = 1;
     }
 }
 
@@ -274,13 +280,7 @@
 - (void)setupRefresh{
     self.tableView.mj_header = [UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self headerRereshing];
-        if (!self.tableView.mj_header.isRefreshing) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self cancelRefreshWithIsHeader:YES];
-            });
-        }
-
-
+        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(cancelRefreshWithIsHeader:) userInfo:nil repeats:NO ];
     }];
     self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self footerRereshing];

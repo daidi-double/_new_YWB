@@ -72,6 +72,7 @@
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                     EMError *error = [[EMClient sharedClient].contactManager deleteContact:model.hxID];
                     if (!error)MyLog(@"删除%@成功",model.hxID);
+                         [self requestShopArrData];
                 });
                 
                 if (dataArr.count > 0) {
