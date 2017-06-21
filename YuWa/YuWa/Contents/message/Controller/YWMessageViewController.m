@@ -51,7 +51,7 @@
     [self makeUI];
     [self dataSet];
     [self setupRefresh];
-    [[EMClient sharedClient].chatManager removeDelegate:self];
+   [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
