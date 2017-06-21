@@ -300,6 +300,7 @@
 - (void)requestShopArrDataWithPages:(NSInteger)page{
     if (page>0){
         [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
+        [self cancelRefreshWithIsHeader:YES];
         return;
     }else{
         [self.dataArr removeAllObjects];
@@ -329,6 +330,7 @@
                 //循环到最后做一个的时候，执行取消刷新状态
                 if (sorted.count-1 == i) {
                     [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
+                    [self cancelRefreshWithIsHeader:YES];
                 }
                 MyLog(@"参数Regieter Code pragram is %@",pragram);
                 MyLog(@"好友信息Regieter Code is %@",responsObj);
@@ -361,11 +363,13 @@
                     [self.tableView reloadData];
                 }
                 [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
+                [self cancelRefreshWithIsHeader:YES];
             }];
         }
     }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
              [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
+            [self cancelRefreshWithIsHeader:YES];
         });
 }
 
