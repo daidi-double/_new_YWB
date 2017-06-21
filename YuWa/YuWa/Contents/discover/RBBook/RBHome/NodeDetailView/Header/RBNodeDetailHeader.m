@@ -43,14 +43,7 @@
         UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"温馨提醒" message:@"您确定要删除此笔记吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alertView show];
         
-        //                UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"您确定要删除此笔记吗？" preferredStyle:UIAlertControllerStyleActionSheet];
-        //                UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        //                UIAlertAction * sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //
-        //                }];
-        //                [alertVC addAction:cancel];
-        //                [alertVC addAction:sure];
-        //                [self presentViewController:alertVC animated:YES completion:nil];
+ 
         
     }else{
         
@@ -70,7 +63,6 @@
 - (void)requesetDelNode{
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_RB_DELNODE];
     NSDictionary * pragrams = @{@"user_id":@([UserSession instance].uid),@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_type":@(1),@"note_id":self.node_id};
-    MyLog(@"node_id = %@",self.node_id);
     
     HttpManager * manager = [[HttpManager alloc]init];
     [manager postDatasWithUrl:urlStr withParams:pragrams compliation:^(id data, NSError *error) {
@@ -126,7 +118,7 @@
 - (void)dataSet{
     self.nameLabel.text = self.model.nickname;
     //判断是否为手机号码，是就隐藏一部分
-    if (self.model.nickname.length == 11 && [JWTools isNumberWithStr:self.model.nickname]) {
+    if ([JWTools isNumberWithStr:self.model.nickname]) {
         NSString * number = [self.model.nickname substringToIndex:7];
         self.nameLabel.text = [NSString stringWithFormat:@"%@****",number];
     }
