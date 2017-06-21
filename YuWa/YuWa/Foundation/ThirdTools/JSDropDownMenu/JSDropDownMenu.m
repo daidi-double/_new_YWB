@@ -449,6 +449,7 @@
             }];
             
             [(CALayer *)self.bgLayers[tapIndex] setBackgroundColor:BackColor.CGColor];
+             [(CALayer *)self.bgLayers[tapIndex] setBorderColor:BackColor.CGColor];
         } else {
             
             _currentSelectedMenudIndex = tapIndex;
@@ -469,6 +470,7 @@
                 }];
             }
             [(CALayer *)self.bgLayers[tapIndex] setBackgroundColor:BackColor.CGColor];
+             [(CALayer *)self.bgLayers[tapIndex] setBorderColor:BackColor.CGColor];
         }
         
     } else{
@@ -491,6 +493,7 @@
             }];
             
             [(CALayer *)self.bgLayers[tapIndex] setBackgroundColor:BackColor.CGColor];
+             [(CALayer *)self.bgLayers[tapIndex] setBorderColor:BackColor.CGColor];
         } else {
             
             _hadSelected = NO;
