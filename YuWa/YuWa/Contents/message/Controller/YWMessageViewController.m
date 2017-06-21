@@ -194,6 +194,7 @@
     
     if (sender.selectedSegmentIndex == 0) {
         [self.tableView.mj_header beginRefreshing];
+        
     }else{
         [self.addressBooktableView.mj_header beginRefreshing];
     }
@@ -273,9 +274,22 @@
 - (void)setupRefresh{
     self.tableView.mj_header = [UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self headerRereshing];
+        if (!self.tableView.mj_header.isRefreshing) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self cancelRefreshWithIsHeader:YES];
+            });
+        }
+
+
     }];
     self.tableView.mj_footer = [UIScrollView scrollRefreshGifFooterWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self footerRereshing];
+        if ( !self.tableView.mj_footer.isRefreshing){
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self cancelRefreshWithIsHeader:YES];
+            });
+        }
+
     }];
 }
 - (void)footerRereshing{
@@ -363,15 +377,9 @@
                 if (count>0) {
                     [self.tableView reloadData];
                 }
-                [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
-                [self cancelRefreshWithIsHeader:YES];
             }];
         }
     }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-             [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
-            [self cancelRefreshWithIsHeader:YES];
-        });
 }
 -(void)messagesDidReceive:(NSArray *)aMessages{
     BOOL  isReceive = NO;
