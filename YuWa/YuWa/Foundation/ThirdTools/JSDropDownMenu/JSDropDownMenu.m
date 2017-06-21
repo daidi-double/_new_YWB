@@ -819,7 +819,7 @@
         titleLabel.frame = CGRectMake(marginX, 0, textSize.width, cell.frame.size.height);
         //右边tableview
         cell.backgroundColor = BackColor;
-        
+       
         if ([titleLabel.text isEqualToString:[(CATextLayer *)[_titles objectAtIndex:_currentSelectedMenudIndex] string]]) {
 
             titleLabel.textColor = CNaviColor;
@@ -838,21 +838,21 @@
         CGFloat marginX = (self.frame.size.width*ratio-textSize.width)/2;
         
         titleLabel.frame = CGRectMake(marginX, 0, textSize.width, cell.frame.size.height);
+       
+        titleLabel.textColor = CNaviColor;
         
         if (!_hadSelected && _leftSelectedRow == indexPath.row) {
             cell.backgroundColor = BackColor;
             BOOL haveRightTableView = [_dataSource haveRightTableViewInColumn:_currentSelectedMenudIndex];
             if(!haveRightTableView){
-//                UIImageView *accessoryImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico_make"]];
-//                
-//                accessoryImageView.frame = CGRectMake(titleLabel.frame.origin.x+titleLabel.frame.size.width+10, (self.frame.size.height-12)/2, 16, 12);
-//                
-//                [cell addSubview:accessoryImageView];
+
                 titleLabel.textColor = CNaviColor;
             }
         } else{
             titleLabel.textColor = self.textColor;
+            
         }
+
     }
     
     return cell;
@@ -882,6 +882,7 @@
         if (leftOrRight==0 && haveRightTableView) {
             if (!_hadSelected) {
                 _hadSelected = YES;
+                
                 [_leftTableView reloadData];
                 NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:_leftSelectedRow inSection:0];
                 
@@ -941,6 +942,7 @@
     cell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
 
     cell.textLabel.font = [UIFont systemFontOfSize:14.0];
+
     cell.textLabel.textColor = self.textColor;
     if (cell.selected) {
         cell.textLabel.textColor = CNaviColor;
