@@ -20,7 +20,7 @@
 
 
 #define MESSAGECELL @"YWMessageTableViewCell"
-@interface YWMessageViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface YWMessageViewController ()<UITableViewDelegate,UITableViewDataSource,EMChatManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *noLoginBGBtnView;
@@ -51,6 +51,7 @@
     [self makeUI];
     [self dataSet];
     [self setupRefresh];
+    [[EMClient sharedClient].chatManager removeDelegate:self];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -372,7 +373,25 @@
             [self cancelRefreshWithIsHeader:YES];
         });
 }
-
+-(void)messagesDidReceive:(NSArray *)aMessages{
+    BOOL  isReceive = NO;
+    for (EMMessage *message in aMessages) {
+        if (message.body.type == EMMessageBodyTypeText) {
+            MyLog(@"接收到文字消息");
+            
+            WEAKSELF;
+            if (!isReceive) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf requestShopArrDataWithPages:0];
+                    
+                });
+            }
+            isReceive = YES;
+        }
+        
+    }
+    
+}
 -(NSMutableArray *)nameArr{
     if (!_nameArr) {
         _nameArr = [NSMutableArray array];
