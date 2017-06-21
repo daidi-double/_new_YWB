@@ -43,7 +43,7 @@
 #import "YWMessageTableViewCell.h"
 
 
-@interface VIPHomePageViewController()<UITableViewDelegate,UITableViewDataSource,HomeMenuCellDelegate,SDCycleScrollViewDelegate>
+@interface VIPHomePageViewController()<UITableViewDelegate,UITableViewDataSource,HomeMenuCellDelegate,SDCycleScrollViewDelegate,EMChatManagerDelegate>
 //@property (nonatomic, strong) NSMutableArray *dataArr;//消息模块有几条未读信息，时候用到
 
 @property(nonatomic,strong)UITableView*tableView;
@@ -81,7 +81,8 @@
     [self makeNaviBar];
     [self addTableVIew];
     [self setUpMJRefresh];
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(requestShopArrData) userInfo:nil repeats:YES];
+    //注册消息回调
+    [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -830,7 +831,28 @@
         }
     }
 }
+
+-(void)messagesDidReceive:(NSArray *)aMessages{
+    BOOL  isReceive = NO;
+    for (EMMessage *message in aMessages) {
+        if (message.body.type == EMMessageBodyTypeText) {
+            MyLog(@"接收到文字消息");
+            
+            WEAKSELF;
+            if (!isReceive) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf requestShopArrData];
+                    
+                });
+            }
+            isReceive = YES;
+        }
+        
+    }
+    
+}
 -(void)dealloc{
+    [[EMClient sharedClient].chatManager removeDelegate:self];
     [_mtModelArrBanner removeAllObjects];
     _mtModelArrBanner = nil;
     
