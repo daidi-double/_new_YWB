@@ -72,6 +72,7 @@
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                     EMError *error = [[EMClient sharedClient].contactManager deleteContact:model.hxID];
                     if (!error)MyLog(@"删除%@成功",model.hxID);
+                         [self requestShopArrData];
                 });
                 
                 if (dataArr.count > 0) {
@@ -147,6 +148,11 @@
 - (void)setupRefresh{
     self.mj_header = [UIScrollView scrollRefreshGifHeaderWithImgName:@"newheader" withImageCount:60 withRefreshBlock:^{
         [self headerRereshing];
+        if (!self.mj_header.isRefreshing) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.mj_header endRefreshing];
+            });
+        }
     }];
 }
 - (void)headerRereshing{
