@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *shopBtn;
 //消费者
 @property (weak, nonatomic) IBOutlet UIButton *searchCustom;
-@property (weak, nonatomic) IBOutlet UIImageView *arrowImage;
+//@property (weak, nonatomic) IBOutlet UIImageView *arrowImage;
 
 //选择商家消费者按钮
 @property (weak, nonatomic) IBOutlet UIView *btnView;
@@ -88,29 +88,41 @@
     self.searchCustom.layer.cornerRadius = 4;
     self.shopBtn.clipsToBounds = YES;
     self.shopBtn.layer.cornerRadius = 4;
-    //是箭头旋转一百八十度
-        self.arrowImage.transform = CGAffineTransformRotate(self.arrowImage.transform,M_PI);
+    [self.customBtn setImage:[UIImage imageNamed:@"down_nol"] forState:UIControlStateNormal];
+     [self.customBtn setImage:[UIImage imageNamed:@"down_sel"] forState:UIControlStateSelected];
+    [self.customBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 50, 0, -50)];
+    [self.customBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
+    
+//    //是箭头旋转一百八十度
+//        self.arrowImage.transform = CGAffineTransformRotate(self.arrowImage.transform,M_PI);
 }
 //选择按钮
-- (IBAction)searchBtn:(id)sender {
+- (IBAction)searchBtn:(UIButton*)sender {
     self.btnView.hidden = self.btnView.hidden?NO:YES;
-    [UIView animateWithDuration:0.5 animations:^{
-       self.arrowImage.transform = CGAffineTransformRotate(self.arrowImage.transform,M_PI);
-    }];
+    sender.selected = !sender.selected;
+
 }
 //消费者按钮
 - (IBAction)searchCustom:(id)sender {
-    [self.customBtn setTitle:@"搜消费者" forState:UIControlStateNormal];
+    [self.customBtn setTitle:@"搜用户" forState:UIControlStateNormal];
     self.customBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     self.btnView.hidden = YES;
+     self.customBtn.selected = NO;
     self.UserType = @1;
+    if (![self.searchTextField.text isEqualToString:@""]) {
+        [self requestSearchFriendWithUserType:self.UserType];
+    }
 }
 //商家按钮
 - (IBAction)searchShoper:(id)sender {
     [self.customBtn setTitle:@"搜商家" forState:UIControlStateNormal];
     self.customBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     self.btnView.hidden = YES;
+    self.customBtn.selected = NO;
     self.UserType = @2;
+    if (![self.searchTextField.text isEqualToString:@""]) {
+        [self requestSearchFriendWithUserType:self.UserType];
+    }
 }
 
 - (BOOL)isSearch{
