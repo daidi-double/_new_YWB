@@ -98,14 +98,14 @@
 }
 //选择按钮
 - (IBAction)searchBtn:(UIButton*)sender {
-    self.btnView.hidden = self.btnView.hidden?NO:YES;
     sender.selected = !sender.selected;
+    self.btnView.hidden = self.btnView.hidden?NO:YES;
 
 }
 //消费者按钮
 - (IBAction)searchCustom:(id)sender {
     [self.customBtn setTitle:@"搜用户" forState:UIControlStateNormal];
-    self.customBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    self.customBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     self.btnView.hidden = YES;
      self.customBtn.selected = NO;
     self.UserType = @1;
@@ -116,7 +116,7 @@
 //商家按钮
 - (IBAction)searchShoper:(id)sender {
     [self.customBtn setTitle:@"搜商家" forState:UIControlStateNormal];
-    self.customBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+//    self.customBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     self.btnView.hidden = YES;
     self.customBtn.selected = NO;
     self.UserType = @2;
