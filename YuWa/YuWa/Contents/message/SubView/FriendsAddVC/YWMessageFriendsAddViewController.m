@@ -192,6 +192,8 @@
     if ([self isSearch]) {
         YWMessageSearchFriendAddCell * searchCell = [tableView dequeueReusableCellWithIdentifier:MESSAGEADDFRIENDSEARCHCELL];
         searchCell.model = self.searchDataArr[indexPath.row];
+        //提供环信账号，添加好友，需要用到，目前是，环信账号，是用户搜索好友的时候账号前面加2
+        searchCell.HXName = [NSString stringWithFormat:@"2%@",self.searchTextField.text];
         return searchCell;
     }
     

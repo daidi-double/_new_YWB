@@ -184,19 +184,23 @@
     }
     NSString * other_username;
     NSMutableArray * sortArr = [NSMutableArray arrayWithCapacity:0];
+
     for (int i = 0; i < userlist.count; i++) {
+        //判断是商家类型2，还是消费者类型1
+        NSNumber * type = @1;
         other_username = userlist[i];
-        
+        MyLog(@"账号%@",other_username);
         //用于判断是否是商家的账号，商家的环信账号为2+手机号，为12位
         NSString * userAccount = userlist[i];
         if (userAccount.length == 12) {
             NSString * phoneAccount = [userAccount substringFromIndex:1];//得到手机号
             if ([JWTools isPhoneIDWithStr:phoneAccount]) {//判断是否为手机号
                 other_username = phoneAccount;
+                type = @2;
             }
             
         }
-        NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":other_username,@"user_type":@(1)};
+        NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":other_username,@"user_type":@(1),@"type":type};
         [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
             MyLog(@"Regieter Code pragram is %@",pragram);
             MyLog(@"Regieter Code is %@",responsObj);
@@ -230,6 +234,7 @@
         } failur:^(id responsObj, NSError *error) {
             MyLog(@"Regieter Code pragram is %@",pragram);
             MyLog(@"Regieter Code error is %@",responsObj);
+            [JRToast showWithText:responsObj[@"errorMessage"] duration:2];
             //回调取消刷新
             if (self.friendsModel) {
                 self.friendsModel(@[@1]);

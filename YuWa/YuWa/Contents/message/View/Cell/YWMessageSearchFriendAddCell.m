@@ -35,8 +35,14 @@
     self.nameLabel.text = self.model.nickName;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:self.model.header_img] placeholderImage:[UIImage imageNamed:@"Head-portrait"] completed:nil];
 }
-- (IBAction)addFriends:(id)sender {
-
+- (IBAction)addFriends:(UIButton *)sender {
+    EMError *error = [[EMClient sharedClient].contactManager addContact:self.HXName message:@"我想加您为好友"];
+    if (!error) {
+        MyLog(@"添加成功");
+        [JRToast showWithText:@"等待回复" duration:2];
+        [sender setTitle:@"等待回复" forState:0];
+        
+    }
 }
 
 @end

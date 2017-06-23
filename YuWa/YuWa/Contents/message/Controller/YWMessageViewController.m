@@ -339,7 +339,7 @@
         
         if (model&&([YWMessageTableViewCell latestMessageTitleForConversationModel:model].length>0)){
             [self.dataArr addObject:model];
-            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId),@"user_type":@(1)};
+            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId),@"user_type":@(1),@"type":@2};
             
             [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
                 //循环到最后做一个的时候，执行取消刷新状态

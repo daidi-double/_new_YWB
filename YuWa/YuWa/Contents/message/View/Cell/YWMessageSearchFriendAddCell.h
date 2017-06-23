@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addFriends;
-
+//环信账号
+@property (nonatomic, copy) NSString * HXName;
 @end
