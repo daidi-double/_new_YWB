@@ -39,11 +39,26 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbk-HV-UXp">
+                        <rect key="frame" x="243" y="10" width="67" height="30"/>
+                        <color key="backgroundColor" red="0.29019607843137252" green="0.62352941176470589" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="4GK-ZG-g09"/>
+                            <constraint firstAttribute="width" constant="67" id="Drn-jD-LiR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="加为好友"/>
+                        <connections>
+                            <action selector="addFriends:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="h5v-Oc-HSU"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="8Lp-gh-FgS" secondAttribute="bottom" constant="-8" id="0LP-MI-eVT"/>
                     <constraint firstItem="DOP-uI-hYk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="OQY-O8-eHw"/>
                     <constraint firstAttribute="trailingMargin" secondItem="AxM-7P-FaH" secondAttribute="trailing" constant="2" id="W7C-sg-UHx"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Xbk-HV-UXp" secondAttribute="trailing" constant="2" id="WrG-fe-XbL"/>
+                    <constraint firstItem="Xbk-HV-UXp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bKa-di-Uwq"/>
                     <constraint firstAttribute="bottomMargin" secondItem="AxM-7P-FaH" secondAttribute="bottom" constant="-8" id="dQx-GP-h2f"/>
                     <constraint firstItem="DOP-uI-hYk" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eY3-ON-ssa"/>
                     <constraint firstItem="8Lp-gh-FgS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="g1k-lC-PCT"/>
@@ -52,6 +67,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="addFriends" destination="Xbk-HV-UXp" id="M5t-Dx-lOS"/>
                 <outlet property="iconImageView" destination="DOP-uI-hYk" id="Z4c-he-bEc"/>
                 <outlet property="nameLabel" destination="8Lp-gh-FgS" id="1Va-nS-sH1"/>
             </connections>

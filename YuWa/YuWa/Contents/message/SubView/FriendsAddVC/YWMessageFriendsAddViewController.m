@@ -167,6 +167,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.UserType isEqual:@2]) {
+        //表示搜索商家店铺，不必要跳转到详情界面
+        return;
+    }
     if ([self isSearch]) {
         YWOtherSeePersonCenterViewController * vc = [[YWOtherSeePersonCenterViewController alloc]init];
         YWMessageSearchFriendAddModel * model = self.searchDataArr[indexPath.row];

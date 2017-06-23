@@ -14,5 +14,6 @@
 @property (nonatomic,strong)YWMessageSearchFriendAddModel * model;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addFriends;
 
 @end

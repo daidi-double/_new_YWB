@@ -8,6 +8,7 @@
 
 #import "YWMessageSearchFriendAddCell.h"
 
+
 @implementation YWMessageSearchFriendAddCell
 
 - (void)awakeFromNib {
@@ -15,7 +16,8 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.iconImageView.layer.cornerRadius = 17.f;
-    self.iconImageView.layer.masksToBounds = YES;
+    self.iconImageView.layer.masksToBounds = 4;
+    self.addFriends.layer.cornerRadius =4;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -32,6 +34,9 @@
 - (void)dataSet{
     self.nameLabel.text = self.model.nickName;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:self.model.header_img] placeholderImage:[UIImage imageNamed:@"Head-portrait"] completed:nil];
+}
+- (IBAction)addFriends:(id)sender {
+
 }
 
 @end
