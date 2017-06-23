@@ -20,7 +20,19 @@
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (weak, nonatomic) IBOutlet UIView *searchBGView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+//选择按钮
+@property (weak, nonatomic) IBOutlet UIButton *customBtn;
+//搜索商家
+@property (weak, nonatomic) IBOutlet UIButton *shopBtn;
+//消费者
+@property (weak, nonatomic) IBOutlet UIButton *searchCustom;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowImage;
 
+//选择商家消费者按钮
+@property (weak, nonatomic) IBOutlet UIView *btnView;
+
+//搜索商家或者消费者类型   1  消费者，2 商家
+@property (nonatomic, strong) NSNumber *UserType;
 @end
 
 @implementation YWMessageFriendsAddViewController
@@ -30,6 +42,7 @@
     self.title = @"好友申请";
     [self dataSet];
     [self makeUI];
+    self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -66,6 +79,38 @@
 - (void)makeUI{
     self.searchBGView.layer.cornerRadius = 5.f;
     self.searchBGView.layer.masksToBounds = YES;
+    //默认搜索是消费者
+    self.UserType  = @1;
+    self.btnView.hidden = YES;
+    self.customBtn.clipsToBounds = YES;
+    self.customBtn.layer.cornerRadius = 4;
+    self.searchCustom.clipsToBounds = YES;
+    self.searchCustom.layer.cornerRadius = 4;
+    self.shopBtn.clipsToBounds = YES;
+    self.shopBtn.layer.cornerRadius = 4;
+    //是箭头旋转一百八十度
+        self.arrowImage.transform = CGAffineTransformRotate(self.arrowImage.transform,M_PI);
+}
+//选择按钮
+- (IBAction)searchBtn:(id)sender {
+    self.btnView.hidden = self.btnView.hidden?NO:YES;
+    [UIView animateWithDuration:0.5 animations:^{
+       self.arrowImage.transform = CGAffineTransformRotate(self.arrowImage.transform,M_PI);
+    }];
+}
+//消费者按钮
+- (IBAction)searchCustom:(id)sender {
+    [self.customBtn setTitle:@"搜消费者" forState:UIControlStateNormal];
+    self.customBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    self.btnView.hidden = YES;
+    self.UserType = @1;
+}
+//商家按钮
+- (IBAction)searchShoper:(id)sender {
+    [self.customBtn setTitle:@"搜商家" forState:UIControlStateNormal];
+    self.customBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    self.btnView.hidden = YES;
+    self.UserType = @2;
 }
 
 - (BOOL)isSearch{
@@ -162,7 +207,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (textField.text.length>10) {
             [self.tableView scrollsToTop];
-            [self requestSearchFriend];
+            [self requestSearchFriendWithUserType:self.UserType];
         }else if (self.searchDataArr.count > 0){
             [self.searchDataArr removeAllObjects];
         }
@@ -170,13 +215,13 @@
     return YES;
 }
 
-#pragma mark - Http
-- (void)requestSearchFriend{
+#pragma mark - Http   UserType    1表示消费者   2表示商家搜索
+- (void)requestSearchFriendWithUserType:(NSNumber *)UserType{
     if ([self.searchTextField.text isEqualToString:[UserSession instance].account]){
         [JRToast showWithText:@"不能添加自己为好友" duration:2];
         return;
     }
-    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":self.searchTextField.text,@"user_type":@(1)};
+    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":self.searchTextField.text,@"type":self.UserType,@"user_type":@1};
     [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"添加好友Regieter Code is %@",responsObj);
