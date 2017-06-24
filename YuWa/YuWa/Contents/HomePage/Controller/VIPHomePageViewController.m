@@ -52,7 +52,7 @@
 @property(nonatomic,strong)UIBarButtonItem*rightItem;
 @property(nonatomic,strong)UIBarButtonItem*rightItem2;
 @property(nonatomic,strong)NSString *saveQRCode;   //保存二维码
-
+@property(nonatomic,strong)NSString * type;//1消费者，2商家
 @property(nonatomic,strong)NSMutableArray * zheAry;
 
 @property(nonatomic,strong)NSMutableArray*meunArrays;   //20个类
@@ -800,9 +800,20 @@
     for (int i = 0; i<sorted.count; i++) {
         EMConversation * converstion = sorted[i];
         EaseConversationModel * model = [[EaseConversationModel alloc] initWithConversation:converstion];
+        NSString * username;
+        NSString * firstNum = [[model.title length] > 0?model.title:model.conversation.conversationId substringToIndex:1];
         if (model&&([YWMessageTableViewCell latestMessageTitleForConversationModel:model].length>0)){
             [dataArr addObject:model];
-            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId),@"user_type":@(1)};
+            
+            username = [model.title length] > 0?model.title:model.conversation.conversationId;
+            if ([firstNum isEqualToString:@"2"]){
+                username = [[model.title length] > 0?model.title:model.conversation.conversationId substringFromIndex:1];
+                self.type = @"2";
+            }else{
+                self.type = @"1";
+            }
+            
+            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":username,@"user_type":@(1),@"type":self.type};
             [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
                 
                 YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];

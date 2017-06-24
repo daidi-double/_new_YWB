@@ -214,7 +214,10 @@
         return YES;
     }
     if ([self.searchTextField.text isEqualToString:[UserSession instance].account]){
-        [JRToast showWithText:@"不能添加自己为好友" duration:2];
+        if ([self.UserType isEqual:@1]) {
+            
+            [JRToast showWithText:@"不能添加自己为好友" duration:2];
+        }
     }else{
         [self showHUDWithStr:@"不存在该用户" withSuccess:NO];
     }
@@ -236,8 +239,11 @@
 #pragma mark - Http   UserType    1表示消费者   2表示商家搜索
 - (void)requestSearchFriendWithUserType:(NSNumber *)UserType{
     if ([self.searchTextField.text isEqualToString:[UserSession instance].account]){
-        [JRToast showWithText:@"不能添加自己为好友" duration:2];
-        return;
+        if ([UserType isEqual: @1]) {
+            
+            [JRToast showWithText:@"不能添加自己为好友" duration:2];
+            return;
+        }
     }
     NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":self.searchTextField.text,@"type":self.UserType,@"user_type":@1};
     [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
@@ -247,8 +253,8 @@
             [self.searchDataArr removeAllObjects];
             YWMessageSearchFriendAddModel * model = [YWMessageSearchFriendAddModel yy_modelWithDictionary:responsObj[@"data"]];
             [self.searchDataArr addObject:model];
-            [self.tableView reloadData];
         }
+        [self.tableView reloadData];
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"添加好友Regieter Code error is %@",responsObj);

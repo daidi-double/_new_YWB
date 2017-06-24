@@ -78,7 +78,19 @@
 
 #pragma mark - Http
 - (void)requestFriendData{
-    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":self.model.hxID,@"user_type":@(1)};
+    NSInteger type = 1;
+    NSString * accounts = self.model.hxID;
+    NSString * firstNum = [self.model.hxID substringToIndex:1];//第一个数字
+    if ([firstNum isEqualToString:@"2"]){
+       
+            type = 2;
+            accounts = [accounts substringFromIndex:1];
+    }else{
+        type = 1;
+
+    }
+
+    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":accounts,@"user_type":@(1),@"type":@(type)};
     [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"请求好友Regieter Code is %@",responsObj);
