@@ -116,7 +116,6 @@
 //商家按钮
 - (IBAction)searchShoper:(id)sender {
     [self.customBtn setTitle:@"搜商家" forState:UIControlStateNormal];
-//    self.customBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     self.btnView.hidden = YES;
     self.customBtn.selected = NO;
     self.UserType = @2;
@@ -222,6 +221,7 @@
     return NO;
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    [self.tableView reloadData];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (textField.text.length>10) {
             [self.tableView scrollsToTop];

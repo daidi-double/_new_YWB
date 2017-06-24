@@ -314,7 +314,6 @@
 #pragma mark - Http
 - (void)requestShopArrDataWithPages:(NSInteger)page{
     if (page>0){
-        [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
         [self cancelRefreshWithIsHeader:YES];
         return;
     }else{
@@ -334,32 +333,33 @@
     
     __block NSInteger count = 0;
     for (int i = 0; i<sorted.count; i++) {
-        EMConversation * converstion = sorted[i];
-        EaseConversationModel * model = [[EaseConversationModel alloc] initWithConversation:converstion];
-        
-        if (model&&([YWMessageTableViewCell latestMessageTitleForConversationModel:model].length>0)){
-            [self.dataArr addObject:model];
-            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId),@"user_type":@(1),@"type":@2};
+        dispatch_sync(dispatch_queue_create("friendsList", DISPATCH_QUEUE_SERIAL), ^{
+            EMConversation * converstion = sorted[i];
+            EaseConversationModel * model = [[EaseConversationModel alloc] initWithConversation:converstion];
             
-            [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
-                //循环到最后做一个的时候，执行取消刷新状态
-                if (sorted.count-1 == i) {
-                    [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
-                    [self cancelRefreshWithIsHeader:YES];
-                }
-                MyLog(@"参数Regieter Code pragram is %@",pragram);
-                MyLog(@"好友信息Regieter Code is %@",responsObj);
-                YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
-                modelTemp.hxID = [model.title length] > 0?model.title:model.conversation.conversationId;
-                model.title = modelTemp.nikeName;
-                model.avatarURLPath = modelTemp.header_img;
-                model.jModel = modelTemp;
-                [self.dataArr replaceObjectAtIndex:i withObject:model];
-                count++;
-                if (count >= sorted.count) {
-                    [self.tableView reloadData];
-                }
-                //给tabbar 增加一个红色提示数字
+            if (model&&([YWMessageTableViewCell latestMessageTitleForConversationModel:model].length>0)){
+                [self.dataArr addObject:model];
+                NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId),@"user_type":@(1),@"type":@2};
+                
+                [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
+                    //循环到最后做一个的时候，执行取消刷新状态
+                    if (sorted.count-1 == i) {
+                        [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
+                        [self cancelRefreshWithIsHeader:YES];
+                    }
+                    MyLog(@"参数Regieter Code pragram is %@",pragram);
+                    MyLog(@"好友信息Regieter Code is %@",responsObj);
+                    YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
+                    modelTemp.hxID = [model.title length] > 0?model.title:model.conversation.conversationId;
+                    model.title = modelTemp.nikeName;
+                    model.avatarURLPath = modelTemp.header_img;
+                    model.jModel = modelTemp;
+                    [self.dataArr replaceObjectAtIndex:i withObject:model];
+                    count++;
+                    if (count >= sorted.count) {
+                        [self.tableView reloadData];
+                    }
+                    //给tabbar 增加一个红色提示数字
                     for (EaseConversationModel * model in self.dataArr) {
                         self.badgeValue += model.conversation.unreadMessagesCount;
                         MyLog(@"%d",model.conversation.unreadMessagesCount);
@@ -367,18 +367,19 @@
                     VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
                     UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
                     item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
-                if (self.badgeValue == 0) {
-                    item.badgeValue = nil;
-                }
-                self.badgeValue = 0;
-            } failur:^(id responsObj, NSError *error) {
-                MyLog(@"参数Regieter Code pragram is %@",pragram);
-                MyLog(@"错误信息Regieter Code error is %@",responsObj);
-                if (count>0) {
-                    [self.tableView reloadData];
-                }
-            }];
-        }
+                    if (self.badgeValue == 0) {
+                        item.badgeValue = nil;
+                    }
+                    self.badgeValue = 0;
+                } failur:^(id responsObj, NSError *error) {
+                    MyLog(@"参数Regieter Code pragram is %@",pragram);
+                    MyLog(@"错误信息Regieter Code error is %@",responsObj);
+                    if (count>0) {
+                        [self.tableView reloadData];
+                    }
+                }];
+            }
+        });
     }
 }
 -(void)messagesDidReceive:(NSArray *)aMessages{

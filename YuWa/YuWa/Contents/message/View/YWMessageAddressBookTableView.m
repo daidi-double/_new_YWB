@@ -50,9 +50,51 @@
     }
     return headerView;
 }
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewRowAction *deleteRoWAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@" 删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {//title可自已定义
+        if (indexPath.row<[self.dataArr[indexPath.section - 1] count]) {
+            UIAlertAction * OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSArray * dataArr1 = self.dataArr[indexPath.section - 1];
+                NSMutableArray *dataArr = [NSMutableArray array];
+                for (YWMessageAddressBookModel *model in dataArr1) {
+                    [dataArr addObject:model];
+                }
+                YWMessageAddressBookModel * model = dataArr[indexPath.row];
+                [dataArr removeObject:model];
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                    EMError *error = [[EMClient sharedClient].contactManager deleteContact:model.hxID];
+                    if (!error)MyLog(@"删除%@成功",model.hxID);
+                    [self requestShopArrData];
+                });
+                
+                if (dataArr.count > 0) {
+                    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                }else{
+                    [self.keyArr removeObjectAtIndex:(indexPath.section - 1)];
+                    [self.dataArr removeObjectAtIndex:(indexPath.section - 1)];
+                    [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationLeft];
+                }
+            }];
+            UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+            UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认删除好友?" preferredStyle:UIAlertControllerStyleAlert];
+            [alertVC addAction:cancelAction];
+            [alertVC addAction:OKAction];
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+        }
+    }];
+    //deleteRoWAction.backgroundColor = [UIColor blueColor]; 定义button的颜色，默认是红色的
+    
+    UITableViewRowAction *test = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@" 编辑" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {//title可自已定义
+        NSLog(@"点击了test");
+    }];
+    test.backgroundColor = [UIColor colorWithHexString:@"3CBCED"];
+    return @[deleteRoWAction,test];//最后返回这俩个RowAction 的数组
+}
 - (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
     return @"删除";
 }
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     return indexPath.section == 0?UITableViewCellEditingStyleNone:UITableViewCellEditingStyleDelete;
 }
@@ -162,8 +204,7 @@
 
 #pragma mark - Http
 - (void)requestShopArrData{
-    [self.dataArr removeAllObjects];
-    [self.keyArr removeAllObjects];
+
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //
 //    });
@@ -182,78 +223,83 @@
         }
         return;
     }
-    NSString * other_username;
-    NSMutableArray * sortArr = [NSMutableArray arrayWithCapacity:0];
+        NSMutableArray * sortArr = [NSMutableArray arrayWithCapacity:0];
 
     for (int i = 0; i < userlist.count; i++) {
-        //判断是商家类型2，还是消费者类型1
-        NSNumber * type = @1;
-        other_username = userlist[i];
-        MyLog(@"账号%@",other_username);
-        //用于判断是否是商家的账号，商家的环信账号为2+手机号，为12位
-        NSString * userAccount = userlist[i];
-        if (userAccount.length == 12) {
-            NSString * phoneAccount = [userAccount substringFromIndex:1];//得到手机号
-            if ([JWTools isPhoneIDWithStr:phoneAccount]) {//判断是否为手机号
-                other_username = phoneAccount;
-                type = @2;
-            }
-            
-        }
-        NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":other_username,@"user_type":@(1),@"type":type};
-        [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
-            MyLog(@"Regieter Code pragram is %@",pragram);
-            MyLog(@"Regieter Code is %@",responsObj);
-            YWMessageAddressBookModel * model = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
-            model.hxID = userlist[i];//无昵称时设为环信ID
-            [sortArr addObject:model];
-            if (sortArr.count >= userlist.count) {
-                if (userlist.count == 1) {
-                    [self.dataArr addObject:@[model]];
-                    [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
-
-                    [self reloadData];
-                }else{
-                    //排序
-                    [self sortedArry:sortArr];
+        dispatch_sync(dispatch_queue_create("friendsList", DISPATCH_QUEUE_SERIAL), ^{
+            NSString * other_username;
+            //判断是商家类型2，还是消费者类型1
+            NSNumber * type = @1;
+            other_username = userlist[i];
+            MyLog(@"账号%@",other_username);
+            //用于判断是否是商家的账号，商家的环信账号为2+手机号，为12位
+            NSString * userAccount = userlist[i];
+            if (userAccount.length == 12) {
+                NSString * phoneAccount = [userAccount substringFromIndex:1];//得到手机号
+                if ([JWTools isPhoneIDWithStr:phoneAccount]) {//判断是否为手机号
+                    other_username = phoneAccount;
+                    type = @2;
                 }
+                
             }
-            //排序号之后
-            if (i == userlist.count-1) {
-                //表示最后一个，时候执行
-                if (self.friendsModel) {
-                    if (self.dataArr.count>0) {
-                        self.friendsModel(self.dataArr);
-//                        [self.dataArr removeAllObjects];
+            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":other_username,@"user_type":@(1),@"type":type};
+            [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
+                
+                [self.dataArr removeAllObjects];
+                [self.keyArr removeAllObjects];
+                MyLog(@"Regieter Code pragram is %@",pragram);
+                MyLog(@"Regieter Code is %@",responsObj);
+                YWMessageAddressBookModel * model = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
+                model.hxID = userlist[i];//无昵称时设为环信ID
+                [sortArr addObject:model];
+                if (sortArr.count >= userlist.count) {
+                    if (userlist.count == 1) {
+                        [self.dataArr addObject:@[model]];
+                        [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
+                        
+                        [self reloadData];
+                    }else{
+                        //排序
+                        [self sortedArry:sortArr];
                     }
-            }
-            }
-            if ([self.mj_header isRefreshing]) {
-                [self.mj_header endRefreshing];
-            }
-        } failur:^(id responsObj, NSError *error) {
-            MyLog(@"Regieter Code pragram is %@",pragram);
-            MyLog(@"Regieter Code error is %@",responsObj);
-            [JRToast showWithText:responsObj[@"errorMessage"] duration:2];
-            //回调取消刷新
-            if (self.friendsModel) {
-                self.friendsModel(@[@1]);
-            }
-            if (sortArr.count>0) {
-                if (sortArr.count == 1) {
-                    YWMessageAddressBookModel * model = sortArr[0];
-                    [self.dataArr addObject:@[model]];
-                    [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
-                    [self reloadData];
-                    
-                }else{
-                    [self sortedArry:sortArr];
                 }
-            }
-            if ([self.mj_header isRefreshing]) {
-                [self.mj_header endRefreshing];
-            }
-        }];
+                //排序号之后
+                if (i == userlist.count-1) {
+                    //表示最后一个，时候执行
+                    if (self.friendsModel) {
+                        if (self.dataArr.count>0) {
+                            self.friendsModel(self.dataArr);
+                            //                        [self.dataArr removeAllObjects];
+                        }
+                    }
+                }
+                if ([self.mj_header isRefreshing]) {
+                    [self.mj_header endRefreshing];
+                }
+            } failur:^(id responsObj, NSError *error) {
+                MyLog(@"Regieter Code pragram is %@",pragram);
+                MyLog(@"Regieter Code error is %@",responsObj);
+                [JRToast showWithText:responsObj[@"errorMessage"] duration:2];
+                //回调取消刷新
+                if (self.friendsModel) {
+                    self.friendsModel(@[@1]);
+                }
+                if (sortArr.count>0) {
+                    if (sortArr.count == 1) {
+                        YWMessageAddressBookModel * model = sortArr[0];
+                        [self.dataArr addObject:@[model]];
+                        [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
+                        [self reloadData];
+                        
+                    }else{
+                        [self sortedArry:sortArr];
+                    }
+                }
+                if ([self.mj_header isRefreshing]) {
+                    [self.mj_header endRefreshing];
+                }
+            }];
+        });
     }
 
 }
