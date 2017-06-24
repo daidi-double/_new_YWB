@@ -20,7 +20,7 @@
 
 
 #define MESSAGECELL @"YWMessageTableViewCell"
-@interface YWMessageViewController ()<UITableViewDelegate,UITableViewDataSource,EMChatManagerDelegate>
+@interface YWMessageViewController ()<UITableViewDelegate,UITableViewDataSource,EMChatManagerDelegate,EMContactManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *noLoginBGBtnView;
@@ -42,6 +42,7 @@
 //用来记录好友的名称数组，如果有昵称，就用昵称，没有就用环信ID
 @property (nonatomic, strong) NSMutableArray *nameArr;
 @property (nonatomic, copy) NSString * path;
+@property (nonatomic,copy)NSString * type;//1消费者，2商家
 @end
 
 @implementation YWMessageViewController
@@ -52,7 +53,16 @@
     [self makeUI];
     [self dataSet];
     [self setupRefresh];
-   [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+    //移除消息回调
+    [[EMClient sharedClient].chatManager removeDelegate:self];
+    
+    //注册消息回调
+    [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+    
+    //移除好友回调
+    [[EMClient sharedClient].contactManager removeDelegate:self];
+    //注册好友回调
+    [[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -80,6 +90,22 @@
     }
 }
 
+/*!
+ *  用户A发送加用户B为好友的申请，用户B会收到这个回调
+ *
+ *  @param aUsername   用户名
+ *  @param aMessage    附属信息
+ */
+- (void)friendRequestDidReceiveFromUser:(NSString *)aUsername
+                                message:(NSString *)aMessage{
+    [JRToast showWithText:[NSString stringWithFormat:@"收到%@的好友请求",aUsername] duration:1];
+    WEAKSELF;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf requestShopArrDataWithPages:0];
+        
+    });
+}
+
 - (void)dataSet{
     self.dataArr = [NSMutableArray arrayWithCapacity:0];
     
@@ -102,7 +128,7 @@
     [self.view addSubview:self.noChatlabel];
     
     [self addressBookMake];
-
+    
 }
 - (void)makeNavi{
     self.segmentedControl = [self makeSegmentedControl];
@@ -143,7 +169,7 @@
         [weakSelf.nameArr removeAllObjects];
         if ([dataArrM[0]  isEqual: @1]) {
             //            说明没有好友
-             [weakSelf requestShopArrDataWithPages:0];
+            [weakSelf requestShopArrDataWithPages:0];
             //没好友。更新个空数组
             
             [weakSelf.nameArr writeToFile:weakSelf.path atomically:YES];
@@ -202,7 +228,7 @@
         self.status1 = 0;
     }else{
         [self.addressBooktableView.mj_header beginRefreshing];
-         self.status1 = 1;
+        self.status1 = 1;
     }
 }
 
@@ -247,9 +273,9 @@
             EaseConversationModel *model = self.dataArr[indexPath.row];
             [self.dataArr removeObjectAtIndex:indexPath.row];//移除数据源的数据
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-
+                
                 [[EMClient sharedClient].chatManager deleteConversation:model.conversation.conversationId isDeleteMessages:YES completion:nil];
-
+                
             });
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         }
@@ -258,9 +284,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //在进入聊天页面之前、先判断是否是好友，如果不是，则不能发送消息
     YWMessageTableViewCell * messageCell = [tableView cellForRowAtIndexPath:indexPath];
- 
+    
     [self chatWithUser:messageCell.model.jModel];
-
+    
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -289,7 +315,7 @@
                 [self cancelRefreshWithIsHeader:YES];
             });
         }
-
+        
     }];
 }
 - (void)footerRereshing{
@@ -298,9 +324,9 @@
 }
 - (void)headerRereshing{
     self.pages = 0;
-         [self.addressBooktableView headerRereshing];
-//    self.addressBooktableView.friendsModel  中回调了下面这个方法刷新本页面
-//    [self requestShopArrDataWithPages:0];
+    [self.addressBooktableView headerRereshing];
+    //    self.addressBooktableView.friendsModel  中回调了下面这个方法刷新本页面
+        [self requestShopArrDataWithPages:0];
 }
 - (void)cancelRefreshWithIsHeader:(BOOL)isHeader{
     if (self.tableView.mj_header.isRefreshing) {
@@ -309,7 +335,7 @@
     if ( self.tableView.mj_footer.isRefreshing){
         [self.tableView.mj_footer endRefreshing];
     }
-
+    
 }
 #pragma mark - Http
 - (void)requestShopArrDataWithPages:(NSInteger)page{
@@ -319,7 +345,7 @@
     }else{
         [self.dataArr removeAllObjects];
     }
-    
+    //获取回话列表
     NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
     NSArray* sorted = [conversations sortedArrayUsingComparator:^(EMConversation *obj1, EMConversation* obj2){
         EMMessage *message1 = [obj1 latestMessage];
@@ -333,61 +359,66 @@
     
     __block NSInteger count = 0;
     for (int i = 0; i<sorted.count; i++) {
-        dispatch_sync(dispatch_queue_create("friendsList", DISPATCH_QUEUE_SERIAL), ^{
-            EMConversation * converstion = sorted[i];
-            EaseConversationModel * model = [[EaseConversationModel alloc] initWithConversation:converstion];
-            
-            if (model&&([YWMessageTableViewCell latestMessageTitleForConversationModel:model].length>0)){
-                [self.dataArr addObject:model];
-                NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId),@"user_type":@(1),@"type":@2};
-                
-                [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
-                    //循环到最后做一个的时候，执行取消刷新状态
-                    if (sorted.count-1 == i) {
-                        [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
-                        [self cancelRefreshWithIsHeader:YES];
-                    }
-                    MyLog(@"参数Regieter Code pragram is %@",pragram);
-                    MyLog(@"好友信息Regieter Code is %@",responsObj);
-                    YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
-                    modelTemp.hxID = [model.title length] > 0?model.title:model.conversation.conversationId;
-                    model.title = modelTemp.nikeName;
-                    model.avatarURLPath = modelTemp.header_img;
-                    model.jModel = modelTemp;
-                    [self.dataArr replaceObjectAtIndex:i withObject:model];
-                    count++;
-                    if (count >= sorted.count) {
-                        [self.tableView reloadData];
-                    }
-                    //给tabbar 增加一个红色提示数字
-                    for (EaseConversationModel * model in self.dataArr) {
-                        self.badgeValue += model.conversation.unreadMessagesCount;
-                        MyLog(@"%d",model.conversation.unreadMessagesCount);
-                    }
-                    VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-                    UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
-                    item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
-                    if (self.badgeValue == 0) {
-                        item.badgeValue = nil;
-                    }
-                    self.badgeValue = 0;
-                } failur:^(id responsObj, NSError *error) {
-                    MyLog(@"参数Regieter Code pragram is %@",pragram);
-                    MyLog(@"错误信息Regieter Code error is %@",responsObj);
-                    if (count>0) {
-                        [self.tableView reloadData];
-                    }
-                }];
+        EMConversation * converstion = sorted[i];
+        EaseConversationModel * model = [[EaseConversationModel alloc] initWithConversation:converstion];
+        NSString * username;
+        NSString * firstNum = [[model.title length] > 0?model.title:model.conversation.conversationId substringToIndex:1];
+        if (model&&([YWMessageTableViewCell latestMessageTitleForConversationModel:model].length>0)){
+            [self.dataArr addObject:model];
+            username = [model.title length] > 0?model.title:model.conversation.conversationId;
+            if ([firstNum isEqualToString:@"2"]){
+                username = [[model.title length] > 0?model.title:model.conversation.conversationId substringFromIndex:1];
+                self.type = @"2";
+            }else{
+                self.type = @"1";
             }
-        });
+            
+            
+            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":([model.title length] > 0?model.title:model.conversation.conversationId),@"user_type":@(1),@"type":self.type};
+            
+            [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
+                //循环到最后做一个的时候，执行取消刷新状态
+                if (sorted.count-1 == i) {
+                    [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
+                    [self cancelRefreshWithIsHeader:YES];
+                }
+                MyLog(@"参数Regieter Code pragram is %@",pragram);
+                MyLog(@"好友信息Regieter Code is %@",responsObj);
+                YWMessageAddressBookModel * modelTemp = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
+                modelTemp.hxID = [model.title length] > 0?model.title:model.conversation.conversationId;
+                model.title = modelTemp.nikeName;
+                model.avatarURLPath = modelTemp.header_img;
+                model.jModel = modelTemp;
+                [self.dataArr replaceObjectAtIndex:i withObject:model];
+                count++;
+                if (count >= sorted.count) {
+                    [self.tableView reloadData];
+                }
+                //给tabbar 增加一个红色提示数字
+                for (EaseConversationModel * model in self.dataArr) {
+                    self.badgeValue += model.conversation.unreadMessagesCount;
+                    MyLog(@"%d",model.conversation.unreadMessagesCount);
+                }
+                VIPTabBarController * rootTabBarVC = (VIPTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                UITabBarItem * item=[rootTabBarVC.tabBar.items objectAtIndex:3];
+                item.badgeValue=[NSString stringWithFormat:@"%d",self.badgeValue];
+                if (self.badgeValue == 0) {
+                    item.badgeValue = nil;
+                }
+                self.badgeValue = 0;
+            } failur:^(id responsObj, NSError *error) {
+                MyLog(@"参数Regieter Code pragram is %@",pragram);
+                MyLog(@"错误信息Regieter Code error is %@",responsObj);
+                if (count>0) {
+                    [self.tableView reloadData];
+                }
+            }];
+        }
+        
     }
 }
 -(void)messagesDidReceive:(NSArray *)aMessages{
     BOOL  isReceive = NO;
-    for (EMMessage *message in aMessages) {
-        if (message.body.type == EMMessageBodyTypeText) {
-            MyLog(@"接收到文字消息");
-            
             WEAKSELF;
             if (!isReceive) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -396,9 +427,6 @@
                 });
             }
             isReceive = YES;
-        }
-        
-    }
     
 }
 -(NSMutableArray *)nameArr{

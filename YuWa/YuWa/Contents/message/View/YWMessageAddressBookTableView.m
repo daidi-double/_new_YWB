@@ -206,10 +206,7 @@
 - (void)requestShopArrData{
     [self.dataArr removeAllObjects];
     [self.keyArr removeAllObjects];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
-//    });
-    
+
     NSArray *userlist;
     EMError *error = nil;
     userlist = [[EMClient sharedClient].contactManager getContactsFromServerWithError:&error];
@@ -227,26 +224,25 @@
         NSMutableArray * sortArr = [NSMutableArray arrayWithCapacity:0];
 
     for (int i = 0; i < userlist.count; i++) {
-        dispatch_sync(dispatch_queue_create("friendsList", DISPATCH_QUEUE_SERIAL), ^{
+
             NSString * other_username;
             //判断是商家类型2，还是消费者类型1
             NSNumber * type = @1;
             other_username = userlist[i];
-            MyLog(@"账号%@",other_username);
-            //用于判断是否是商家的账号，商家的环信账号为2+手机号，为12位
+            //用于判断是否是商家的账号，商家的环信账号为2+手机号，为12位,
             NSString * userAccount = userlist[i];
-            if (userAccount.length == 12) {
-                NSString * phoneAccount = [userAccount substringFromIndex:1];//得到手机号
-                if ([JWTools isPhoneIDWithStr:phoneAccount]) {//判断是否为手机号
-                    other_username = phoneAccount;
-                    type = @2;
+
+            NSString * phoneAccount = [userAccount substringFromIndex:1];//得到手机号，用于请求数据
+        NSString * firstNum = [userAccount substringToIndex:1];
+                if ([firstNum isEqualToString:@"2"]) {//判断首位是不是2
+                        other_username = phoneAccount;
+                        type = @2;
+                    
                 }
                 
-            }
+        
             NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":other_username,@"user_type":@(1),@"type":type};
             [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
-                
-         
                 MyLog(@"Regieter Code pragram is %@",pragram);
                 MyLog(@"Regieter Code is %@",responsObj);
                 YWMessageAddressBookModel * model = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
@@ -299,7 +295,7 @@
                     [self.mj_header endRefreshing];
                 }
             }];
-        });
+        
     }
 
 }

@@ -106,4 +106,5 @@
 //得到后天的时间
 +(NSString*)getThreeDayTime;
 
++(int)checkIsHaveNumAndLetter:(NSString*)other_username;
 @end
