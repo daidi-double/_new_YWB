@@ -204,7 +204,8 @@
 
 #pragma mark - Http
 - (void)requestShopArrData{
-
+    [self.dataArr removeAllObjects];
+    [self.keyArr removeAllObjects];
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //
 //    });
@@ -245,8 +246,7 @@
             NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":other_username,@"user_type":@(1),@"type":type};
             [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
                 
-                [self.dataArr removeAllObjects];
-                [self.keyArr removeAllObjects];
+         
                 MyLog(@"Regieter Code pragram is %@",pragram);
                 MyLog(@"Regieter Code is %@",responsObj);
                 YWMessageAddressBookModel * model = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
