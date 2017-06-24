@@ -10,6 +10,7 @@
 #import "UIScrollView+JWGifRefresh.h"
 #import "JWTools.h"
 #import "HttpObject.h"
+#import "YWmarkNameViewController.h"
 
 @interface YWMessageAddressBookTableView ()
 @property (nonatomic,strong)NSMutableArray * dataArr;
@@ -86,8 +87,10 @@
     //deleteRoWAction.backgroundColor = [UIColor blueColor]; 定义button的颜色，默认是红色的
     
     UITableViewRowAction *test = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@" 编辑" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {//title可自已定义
-        NSLog(@"点击了test");
-    }];
+        if (self.changeMarkName) {
+            self.changeMarkName(self.dataArr[indexPath.section - 1][indexPath.row]);
+        }
+        }];
     test.backgroundColor = [UIColor colorWithHexString:@"3CBCED"];
     return @[deleteRoWAction,test];//最后返回这俩个RowAction 的数组
 }
@@ -107,23 +110,6 @@
     YWMessageAddressBookModel * model = self.dataArr[indexPath.section - 1][indexPath.row];
     self.friendsChatBlock(model);
 }
-//-(void)chanegMarkName:(NSString *)name WithModel:(YWMessageAddressBookModel *)model{
-//    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_SEEOTHERCENTER];
-//    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":self.uid,@"user_type":@(1),@"nickname":name};
-//    HttpManager*manager=[[HttpManager alloc]init];
-//    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
-//        MyLog(@"！！！！%@",data);
-//        NSNumber*number=data[@"errorCode"];
-//        NSString*errorCode=[NSString stringWithFormat:@"%@",number];
-//        if ([errorCode isEqualToString:@"0"]) {
-//            NSDictionary*dict=data[@"data"];
-//            self.nameLabel.text = dict[@"nickname"];
-//            [JRToast showWithText:@"备注修改成功"];
-//        }else{
-//            [JRToast showWithText:data[@"errorMessage"]];
-//        }
-//    }];
-//}
 
 #pragma mark - UITableViewDataSource
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {

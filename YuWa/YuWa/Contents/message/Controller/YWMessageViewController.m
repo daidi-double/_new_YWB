@@ -5,7 +5,7 @@
 //  Created by Tian Wei You on 16/9/27.
 //  Copyright © 2016年 Shanghai DuRui Information Technology Company. All rights reserved.
 //
-
+#import "YWmarkNameViewController.h"
 #import "YWMessageViewController.h"
 #import "YWLoginViewController.h"
 #import "YWMessageNotificationViewController.h"
@@ -148,6 +148,7 @@
     self.addressBooktableView = [[YWMessageAddressBookTableView alloc]initWithFrame:CGRectMake(0.f, 64.f, kScreen_Width, kScreen_Height - 64.f - 49.f) style:UITableViewStylePlain];
     [self.addressBooktableView dataSet];
     WEAKSELF;
+    //添加好友
     self.addressBooktableView.friendsAddBlock = ^(){
         YWMessageFriendsAddViewController * vc = [[YWMessageFriendsAddViewController alloc]init];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -156,10 +157,40 @@
         });
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
+    //跳转到聊天界面
     self.addressBooktableView.friendsChatBlock = ^(YWMessageAddressBookModel * model){
         [weakSelf chatWithUser:model];
     };
+    //点击了cell右滑编辑按钮的回调函数
+    self.addressBooktableView.changeMarkName = ^(YWMessageAddressBookModel * model){
+        YWmarkNameViewController * vc = [[UIStoryboard storyboardWithName:@"YWmarkNameViewController" bundle:nil]instantiateInitialViewController] ;
+        [weakSelf.navigationController pushViewController: vc animated:YES];
+        //修改备注回调昵称
+        
+        vc.nickName = ^(NSString * nickName ){
+            
+            [weakSelf chanegMarkName:nickName WithModel:model];
+        };
+
+    };
     [self.view addSubview:self.addressBooktableView];
+}
+-(void)chanegMarkName:(NSString *)name WithModel:(YWMessageAddressBookModel *)model{
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_SEEOTHERCENTER];
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":model.user_id,@"user_type":@(1),@"nickname":name};
+    HttpManager*manager=[[HttpManager alloc]init];
+    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+        MyLog(@"！！！！%@",data);
+        NSNumber*number=data[@"errorCode"];
+        NSString*errorCode=[NSString stringWithFormat:@"%@",number];
+        if ([errorCode isEqualToString:@"0"]) {
+            NSDictionary*dict=data[@"data"];
+            //            self.nameLabel.text = dict[@"nickname"];
+            [JRToast showWithText:@"备注修改成功"];
+        }else{
+            [JRToast showWithText:data[@"errorMessage"]];
+        }
+    }];
 }
 
 #pragma mark - Control Action
