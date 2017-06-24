@@ -213,7 +213,7 @@
     chatVC.friendNikeName = model.nikeName;
     chatVC.friendID = model.user_id;
     chatVC.friendIcon = model.header_img;
-    
+    chatVC.user_type = model.user_type;
     
     //    从服务器获取所有的好友
     NSArray *userlist;

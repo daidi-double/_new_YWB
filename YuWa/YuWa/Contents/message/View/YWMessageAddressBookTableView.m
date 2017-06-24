@@ -98,42 +98,6 @@
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     return indexPath.section == 0?UITableViewCellEditingStyleNone:UITableViewCellEditingStyleDelete;
 }
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0)return;
-    if (editingStyle ==UITableViewCellEditingStyleDelete){
-        if (indexPath.row<[self.dataArr[indexPath.section - 1] count]) {
-            UIAlertAction * OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSArray * dataArr1 = self.dataArr[indexPath.section - 1];
-                NSMutableArray *dataArr = [NSMutableArray array];
-                for (YWMessageAddressBookModel *model in dataArr1) {
-                    [dataArr addObject:model];
-                }
-                YWMessageAddressBookModel * model = dataArr[indexPath.row];
-                [dataArr removeObject:model];
-                
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                    EMError *error = [[EMClient sharedClient].contactManager deleteContact:model.hxID];
-                    if (!error)MyLog(@"删除%@成功",model.hxID);
-                    [self requestShopArrData];
-                });
-                
-                if (dataArr.count > 0) {
-                    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                }else{
-                    [self.keyArr removeObjectAtIndex:(indexPath.section - 1)];
-                    [self.dataArr removeObjectAtIndex:(indexPath.section - 1)];
-                    [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationLeft];
-                }
-            }];
-            UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
-            UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认删除好友?" preferredStyle:UIAlertControllerStyleAlert];
-            [alertVC addAction:cancelAction];
-            [alertVC addAction:OKAction];
-            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
-        }
-    }
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
         self.friendsAddBlock();
@@ -143,6 +107,23 @@
     YWMessageAddressBookModel * model = self.dataArr[indexPath.section - 1][indexPath.row];
     self.friendsChatBlock(model);
 }
+//-(void)chanegMarkName:(NSString *)name WithModel:(YWMessageAddressBookModel *)model{
+//    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_SEEOTHERCENTER];
+//    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":self.uid,@"user_type":@(1),@"nickname":name};
+//    HttpManager*manager=[[HttpManager alloc]init];
+//    [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
+//        MyLog(@"！！！！%@",data);
+//        NSNumber*number=data[@"errorCode"];
+//        NSString*errorCode=[NSString stringWithFormat:@"%@",number];
+//        if ([errorCode isEqualToString:@"0"]) {
+//            NSDictionary*dict=data[@"data"];
+//            self.nameLabel.text = dict[@"nickname"];
+//            [JRToast showWithText:@"备注修改成功"];
+//        }else{
+//            [JRToast showWithText:data[@"errorMessage"]];
+//        }
+//    }];
+//}
 
 #pragma mark - UITableViewDataSource
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
