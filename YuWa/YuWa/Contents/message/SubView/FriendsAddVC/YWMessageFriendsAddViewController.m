@@ -14,7 +14,7 @@
 
 #define MESSAGEADDFRIENDSEARCHCELL @"YWMessageSearchFriendAddCell"
 #define MESSAGEADDFRIENDCELL @"YWMessageFriendAddCell"
-@interface YWMessageFriendsAddViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface YWMessageFriendsAddViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,YWMessageFriendAddCellDelegate,YWMessageSearchFriendAddCellDelegate>
 @property (nonatomic,strong)NSMutableArray * dataArr;
 @property (nonatomic,strong)NSMutableArray * searchDataArr;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
@@ -48,6 +48,18 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
+}
+//代理，若是已经是好友了，则在再次同意或者拒绝时删除该请求
+-(void)delFriendRequset:(UIButton *)sender{
+    YWMessageFriendAddCell* cell = (YWMessageFriendAddCell *)[[sender superview] superview];
+    NSIndexPath * path = [self.tableView indexPathForCell:cell];
+    
+    NSMutableArray * friendsRequest = [NSMutableArray arrayWithArray:[KUSERDEFAULT valueForKey:FRIENDSREQUEST]];
+    [friendsRequest removeObjectAtIndex:path.row];
+    [KUSERDEFAULT setObject:friendsRequest forKey:FRIENDSREQUEST];
+    
+    [self.dataArr removeObjectAtIndex:path.row];
+    [self.tableView reloadData];
 }
 
 - (void)dataSet{
@@ -193,12 +205,83 @@
         searchCell.model = self.searchDataArr[indexPath.row];
         //提供环信账号，添加好友，需要用到，目前是，环信账号，是用户搜索好友的时候账号前面加2
         searchCell.HXName = [NSString stringWithFormat:@"2%@",self.searchTextField.text];
+        searchCell.delegate = self;
         return searchCell;
     }
     
     YWMessageFriendAddCell * friendCell = [tableView dequeueReusableCellWithIdentifier:MESSAGEADDFRIENDCELL];
     friendCell.model = self.dataArr[indexPath.row];
+    
+    friendCell.delegate = self;
+
     return friendCell;
+}
+
+- (void)addFriendAction{
+    YWMessageSearchFriendAddModel * model = self.searchDataArr[0];
+    if (model.hxID == nil) {
+        if ([self.UserType isEqual:@2]) {
+            model.hxID = [NSString stringWithFormat:@"2%@",self.searchTextField.text];
+        }else{
+            
+            model.hxID = self.searchTextField.text;
+        }
+    }
+    if (![self judgeSendRequest]) {
+        return;
+    }
+    EMError *error = [[EMClient sharedClient].contactManager addContact:model.hxID message:@"我想加您为好友"];
+    if (!error) {
+        MyLog(@"添加成功");
+        [JRToast showWithText:@"好友请求发送成功" duration:1.5];
+    }else{
+        [JRToast showWithText:@"好友请求发送失败,请稍后再试" duration:1.5];
+    }
+    
+    
+    
+}
+- (BOOL)judgeSendRequest{
+    if ([self.searchTextField.text isEqualToString:[UserSession instance].account]){
+        if ([self.UserType isEqual:@1]) {
+            
+            [JRToast showWithText:@"不能添加自己为好友" duration:2];
+            return NO;
+        }
+        
+    }else if (self.searchDataArr.count <=0){
+        [self showHUDWithStr:@"不存在该用户" withSuccess:NO];
+        return NO;
+    }else if (![self getFriendsList:self.searchTextField.text]){
+        [self showHUDWithStr:@"你们已经是好友了" withSuccess:NO];
+        return NO;
+    }
+    return YES;
+}
+- (BOOL )getFriendsList:(NSString *)username{
+    //    从服务器获取所有的好友
+    NSArray *userlist;
+    EMError *error = nil;
+    userlist = [[EMClient sharedClient].contactManager getContactsFromServerWithError:&error];
+    
+    if (error){
+        //        从数据库获取所有的好友
+        userlist = [[EMClient sharedClient].contactManager getContacts];
+    }
+    if (!userlist||userlist.count<=0) {
+        
+        return YES;
+    }
+    for (NSString * userName in userlist) {
+        if ([self.UserType isEqual:@2]) {
+            if ([[NSString stringWithFormat:@"2%@",username] isEqualToString:userName]) {
+                return NO;
+            }
+        }else if ([userName isEqualToString:username]) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 #pragma mark- UITextFieldDelegate

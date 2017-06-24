@@ -26,7 +26,7 @@
 }
 
 - (void)dataSet{
-
+    
     self.keyArr = [NSMutableArray arrayWithCapacity:0];
     [self registerNib:[UINib nibWithNibName:MESSAGEADDRESSCELL bundle:nil] forCellReuseIdentifier:MESSAGEADDRESSCELL];
     [self registerNib:[UINib nibWithNibName:MESSAGEADDRESSHEADER bundle:nil] forHeaderFooterViewReuseIdentifier:MESSAGEADDRESSHEADER];
@@ -114,7 +114,7 @@
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                     EMError *error = [[EMClient sharedClient].contactManager deleteContact:model.hxID];
                     if (!error)MyLog(@"删除%@成功",model.hxID);
-                         [self requestShopArrData];
+                    [self requestShopArrData];
                 });
                 
                 if (dataArr.count > 0) {
@@ -204,9 +204,9 @@
 
 #pragma mark - Http
 - (void)requestShopArrData{
-    [self.dataArr removeAllObjects];
-    [self.keyArr removeAllObjects];
-
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.mj_header endRefreshing];
+    });
     NSArray *userlist;
     EMError *error = nil;
     userlist = [[EMClient sharedClient].contactManager getContactsFromServerWithError:&error];
@@ -221,83 +221,86 @@
         }
         return;
     }
-        NSMutableArray * sortArr = [NSMutableArray arrayWithCapacity:0];
-
+    NSMutableArray * sortArr = [NSMutableArray arrayWithCapacity:0];
+    
     for (int i = 0; i < userlist.count; i++) {
-
-            NSString * other_username;
-            //判断是商家类型2，还是消费者类型1
-            NSNumber * type = @1;
-            other_username = userlist[i];
-            //用于判断是否是商家的账号，商家的环信账号为2+手机号，为12位,
-            NSString * userAccount = userlist[i];
-
-            NSString * phoneAccount = [userAccount substringFromIndex:1];//得到手机号，用于请求数据
-        NSString * firstNum = [userAccount substringToIndex:1];
-                if ([firstNum isEqualToString:@"2"]) {//判断首位是不是2
-                        other_username = phoneAccount;
-                        type = @2;
-                    
-                }
-                
         
-            NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":other_username,@"user_type":@(1),@"type":type};
-            [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
-                MyLog(@"Regieter Code pragram is %@",pragram);
-                MyLog(@"Regieter Code is %@",responsObj);
-                YWMessageAddressBookModel * model = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
-                model.hxID = userlist[i];//无昵称时设为环信ID
-                [sortArr addObject:model];
-                if (sortArr.count >= userlist.count) {
-                    if (userlist.count == 1) {
-                        [self.dataArr addObject:@[model]];
-                        [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
-                        
-                        [self reloadData];
-                    }else{
-                        //排序
-                        [self sortedArry:sortArr];
-                    }
+        NSString * other_username;
+        //判断是商家类型2，还是消费者类型1
+        NSNumber * type = @1;
+        other_username = userlist[i];
+        //用于判断是否是商家的账号，商家的环信账号为2+手机号，为12位,
+        NSString * userAccount = userlist[i];
+        
+        NSString * phoneAccount = [userAccount substringFromIndex:1];//得到手机号，用于请求数据
+        NSString * firstNum = [userAccount substringToIndex:1];
+        if ([firstNum isEqualToString:@"2"]) {//判断首位是不是2
+            other_username = phoneAccount;
+            type = @2;
+            
+        }
+        
+        
+        NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_username":other_username,@"user_type":@(1),@"type":type};
+        [[HttpObject manager]postNoHudWithType:YuWaType_FRIENDS_INFO withPragram:pragram success:^(id responsObj) {
+            MyLog(@"Regieter Code pragram is %@",pragram);
+            MyLog(@"Regieter Code is %@",responsObj);
+            [self.dataArr removeAllObjects];
+            [self.keyArr removeAllObjects];
+            
+            YWMessageAddressBookModel * model = [YWMessageAddressBookModel yy_modelWithDictionary:responsObj[@"data"]];
+            model.hxID = userlist[i];//无昵称时设为环信ID
+            [sortArr addObject:model];
+            if (sortArr.count >= userlist.count) {
+                if (userlist.count == 1) {
+                    [self.dataArr addObject:@[model]];
+                    [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
+                    
+                    [self reloadData];
+                }else{
+                    //排序
+                    [self sortedArry:sortArr];
                 }
-                //排序号之后
-                if (i == userlist.count-1) {
-                    //表示最后一个，时候执行
-                    if (self.friendsModel) {
-                        if (self.dataArr.count>0) {
-                            self.friendsModel(self.dataArr);
-                            //                        [self.dataArr removeAllObjects];
-                        }
-                    }
-                }
-                if ([self.mj_header isRefreshing]) {
-                    [self.mj_header endRefreshing];
-                }
-            } failur:^(id responsObj, NSError *error) {
-                MyLog(@"Regieter Code pragram is %@",pragram);
-                MyLog(@"Regieter Code error is %@",responsObj);
-                [JRToast showWithText:responsObj[@"errorMessage"] duration:2];
-                //回调取消刷新
+            }
+            //排序号之后
+            if (i == userlist.count-1) {
+                //表示最后一个，时候执行
                 if (self.friendsModel) {
-                    self.friendsModel(@[@1]);
-                }
-                if (sortArr.count>0) {
-                    if (sortArr.count == 1) {
-                        YWMessageAddressBookModel * model = sortArr[0];
-                        [self.dataArr addObject:@[model]];
-                        [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
-                        [self reloadData];
-                        
-                    }else{
-                        [self sortedArry:sortArr];
+                    if (self.dataArr.count>0) {
+                        self.friendsModel(self.dataArr);
+                        //                        [self.dataArr removeAllObjects];
                     }
                 }
-                if ([self.mj_header isRefreshing]) {
-                    [self.mj_header endRefreshing];
+            }
+            if ([self.mj_header isRefreshing]) {
+                [self.mj_header endRefreshing];
+            }
+        } failur:^(id responsObj, NSError *error) {
+            MyLog(@"Regieter Code pragram is %@",pragram);
+            MyLog(@"Regieter Code error is %@",responsObj);
+            [JRToast showWithText:responsObj[@"errorMessage"] duration:2];
+            //回调取消刷新
+            if (self.friendsModel) {
+                self.friendsModel(@[@1]);
+            }
+            if (sortArr.count>0) {
+                if (sortArr.count == 1) {
+                    YWMessageAddressBookModel * model = sortArr[0];
+                    [self.dataArr addObject:@[model]];
+                    [self.keyArr addObject:[JWTools stringWithFirstCharactor:[model.nikeName substringToIndex:1]]];
+                    [self reloadData];
+                    
+                }else{
+                    [self sortedArry:sortArr];
                 }
-            }];
+            }
+            if ([self.mj_header isRefreshing]) {
+                [self.mj_header endRefreshing];
+            }
+        }];
         
     }
-
+    
 }
 
 - (void)sortedArry:(NSMutableArray *)sortArr{//排序好的数组、按照首字母排

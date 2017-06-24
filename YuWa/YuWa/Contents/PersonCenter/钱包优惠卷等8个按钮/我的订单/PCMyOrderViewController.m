@@ -197,7 +197,7 @@
 
     moneyLabel.text=[NSString stringWithFormat:@"总价：%@",model.pay_money];
     if (self.status == 1) {
-        moneyLabel.text = [NSString stringWithFormat:@"总价：%.2f",[model.pay_money floatValue]/100];
+        moneyLabel.text = [NSString stringWithFormat:@"总价：%.2f",[model.pay_money floatValue]];
     }
     assessLabel.text=model.status;
     

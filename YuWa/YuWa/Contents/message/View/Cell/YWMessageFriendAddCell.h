@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "YWMessageFriendAddModel.h"
+@protocol YWMessageFriendAddCellDelegate <NSObject>
 
+-(void)delFriendRequset:(UIButton *)sender;
+
+@end
 @interface YWMessageFriendAddCell : UITableViewCell
 
 @property (nonatomic,strong)YWMessageFriendAddModel * model;
-
+@property (nonatomic,assign)id<YWMessageFriendAddCellDelegate>delegate;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *conLabel;

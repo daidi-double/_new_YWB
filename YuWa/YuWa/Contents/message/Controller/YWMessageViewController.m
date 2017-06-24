@@ -73,7 +73,7 @@
     [JRToast showWithText:[NSString stringWithFormat:@"收到%@的好友请求",aUsername] duration:1];
     WEAKSELF;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf requestShopArrDataWithPages:0];
+        [weakSelf.tableView reloadData];
         
     });
 }
@@ -402,7 +402,7 @@
                 }
             }];
         }
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
     }
 }
 

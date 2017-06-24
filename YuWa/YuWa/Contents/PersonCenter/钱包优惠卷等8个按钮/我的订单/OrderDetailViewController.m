@@ -81,7 +81,7 @@
     if (self.status==1) {
         if (![self.orModel.hall_name containsString:@"通兑票"]){
             if ([self.orModel.status integerValue] == 3 ||[self.orModel.status integerValue] ==4||[self.orModel.status integerValue] ==5) {
-                return 11;
+                return 10;
             }else{
                 return 9;
             }
@@ -285,7 +285,7 @@
                     
                     cell.detailTextLabel.text = @"实付款￥0.00";
                 }else{
-//                    cell.detailTextLabel.attributedText = [NSString stringWithFirstStr:@"实付款" withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor blackColor] withSecondtStr:[NSString stringWithFormat:@"￥%.2f",[orderModel.pay_money floatValue]/100] withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor orangeColor]];
+
                      cell.detailTextLabel.attributedText = [NSString stringWithFirstStr:@"实付款" withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor blackColor] withSecondtStr:[NSString stringWithFormat:@"￥%@",orderModel.pay_money] withFont:[UIFont systemFontOfSize:13.f] withColor:[UIColor orangeColor]];
                 }
                 cell.textLabel.font = [UIFont systemFontOfSize:13];
@@ -350,8 +350,12 @@
                 cell.textLabel.text = [NSString stringWithFormat:@"订单状态:%@",orderStatus];
                 
             }else if (indexPath.row == 6){
+               
                 if ([orderModel.status integerValue] == 3 ||[orderModel.status integerValue] ==4||[orderModel.status integerValue] ==5) {
-                    cell.textLabel.text = [NSString stringWithFormat:@"凭证号:%@",orderModel.voucher_code];
+                        cell.textLabel.text = [NSString stringWithFormat:@"取票号:%@",orderModel.print_code];
+                        if (orderModel.print_code == nil ||[orderModel.print_code isEqualToString:@""]) {
+                            cell.textLabel.text = @"取票号:";
+                        }
                 }else if (![orderModel.hall_name containsString:@"通兑票"]) {
                     cell.textLabel.text = [NSString stringWithFormat:@"座位号:%@",orderModel.seat];
                 }else{
@@ -379,8 +383,12 @@
                         [cell.contentView addSubview:questionBtn];
                     }
                 }else{
-                    if ([orderModel.status integerValue] == 3 ||[orderModel.status integerValue] ==4||[orderModel.status integerValue] ==5) {
-                        cell.textLabel.text = [NSString stringWithFormat:@"取票号:%@",orderModel.print_code];
+                    if (([orderModel.status integerValue] == 3 ||[orderModel.status integerValue] ==4||[orderModel.status integerValue] ==5) && ![orderModel.hall_name containsString:@"通兑票"]) {
+                        cell.textLabel.text = [NSString stringWithFormat:@"取票验证码:%@",orderModel.verify_code];
+                        if (orderModel.verify_code == nil || [orderModel.verify_code isEqualToString:@""]) {
+                            cell.textLabel.text = @"取票验证码:本影院不需要取票验证码";
+                        }
+                        
                     }else{
                         cell.textLabel.text = [NSString stringWithFormat:@"下单时间:%@",[JWTools getTime:orderModel.create_time]];
                         UIButton * questionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -395,10 +403,6 @@
                     }
                 }
             }else if (indexPath.row == 8){
-                  if (([orderModel.status integerValue] == 3 ||[orderModel.status integerValue] ==4||[orderModel.status integerValue] ==5) && ![orderModel.hall_name containsString:@"通兑票"]) {
-                    cell.textLabel.text = [NSString stringWithFormat:@"取票验证码:%@",orderModel.verify_code];
-                }
-            }else if (indexPath.row == 9){
                 if (![orderModel.hall_name containsString:@"通兑票"]) {
                     cell.textLabel.text = [NSString stringWithFormat:@"座位号:%@",orderModel.seat];
                 }
@@ -412,6 +416,7 @@
                 [questionBtn setTitleColor:CNaviColor forState:UIControlStateNormal];
                 [questionBtn addTarget:self action:@selector(callKeFu) forControlEvents:UIControlEventTouchDown];
                 [cell.contentView addSubview:questionBtn];
+                
 
             }
         }
