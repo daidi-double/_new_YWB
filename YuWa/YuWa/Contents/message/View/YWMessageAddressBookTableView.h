@@ -18,7 +18,8 @@
 @property (nonatomic,copy)void (^friendsChatBlock)(YWMessageAddressBookModel *);
 //好友模型数组
 @property (nonatomic,copy)void (^friendsModel)(NSArray *);
-
+//修改昵称
+@property (nonatomic,copy)void (^changeMarkName)(YWMessageAddressBookModel *);
 
 @property (nonatomic,strong)NSMutableArray * keyArr;
 @property (nonatomic,strong)NSArray * sortArr;
@@ -28,5 +29,6 @@
 - (void)dataSet;
 - (void)headerRereshing;
 -(void)setupRefresh;
-
+//刷新页面数据
+-(void)requestShopArrData;
 @end
