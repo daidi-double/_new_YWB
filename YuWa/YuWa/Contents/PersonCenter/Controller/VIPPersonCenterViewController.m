@@ -412,7 +412,7 @@
     
     
     showView.touchImageBlock=^{
-        MyLog(@"点击图片放大");
+//        MyLog(@"点击图片放大");
         [self touchPersonInfo];
         
         
@@ -619,7 +619,7 @@
 #pragma mark  --delegate
 //第几个选项卡
 -(void)segumentSelectionChange:(NSInteger)selection{
-    MyLog(@"%ld",(long)selection);
+//    MyLog(@"%ld",(long)selection);
     self.whichShow=selection;
     
        self.showWhichView=selection;
@@ -659,12 +659,12 @@
 -(void)DelegateForAlbum:(NSInteger)number andMax:(NSInteger)maxNumber{
     if (number==maxNumber) {
         //专辑
-        MyLog(@"创建专辑");
+//        MyLog(@"创建专辑");
         YWNodeAddAldumViewController*vc=[[YWNodeAddAldumViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
-        MyLog(@"点击某个专辑%lu",(long)number);
+//        MyLog(@"点击某个专辑%lu",(long)number);
         MyAlbumViewController*vc=[[MyAlbumViewController alloc]init];
         RBCenterAlbumModel * model = self.maMallDatas[number];
         vc.albumDetail = model.aldumID;

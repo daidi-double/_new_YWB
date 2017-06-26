@@ -31,7 +31,7 @@
 
 
 +(CGFloat)CalculateCellHeight:(NSString *)str{
-    NSLog(@"%@",str);
+//    NSLog(@"%@",str);
     CGFloat cellHeight=[str boundingRectWithSize:CGSizeMake(kScreen_Width-30, 999) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size.height;
     
     return 22+cellHeight;
