@@ -202,6 +202,7 @@
         cell.selectionStyle=NO;
         
         NSString*str=[UserSession instance].personality;
+        
         cell.titleString=str;
         
         return cell;

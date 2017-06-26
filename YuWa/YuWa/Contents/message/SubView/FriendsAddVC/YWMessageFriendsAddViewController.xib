@@ -16,7 +16,6 @@
                 <outlet property="searchBGView" destination="9Ei-L0-4so" id="N0j-xe-4JL"/>
                 <outlet property="searchCustom" destination="liK-Ib-fdN" id="SMs-UG-axJ"/>
                 <outlet property="searchTextField" destination="dWi-6L-Xre" id="gMY-3n-SPY"/>
-                <outlet property="shopBtn" destination="0kf-Ei-zTU" id="fxs-Ts-Xal"/>
                 <outlet property="tableView" destination="NOw-5G-66y" id="u0S-Vm-rWd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -98,7 +97,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YBo-Ps-npL">
-                    <rect key="frame" x="275" y="109" width="90" height="90"/>
+                    <rect key="frame" x="275" y="109" width="90" height="45"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liK-Ib-fdN">
                             <rect key="frame" x="5" y="0.0" width="80" height="35"/>
@@ -108,35 +107,18 @@
                                 <constraint firstAttribute="width" constant="80" id="i4E-CV-pCC"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="搜用户">
+                            <state key="normal" title="搜商家">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="searchCustom:" destination="-1" eventType="touchUpInside" id="sa6-xp-naU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kf-Ei-zTU">
-                            <rect key="frame" x="5" y="45" width="80" height="35"/>
-                            <color key="backgroundColor" red="0.23529411759999999" green="0.54901960780000003" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="35" id="KdM-w4-yJv"/>
-                                <constraint firstAttribute="width" constant="80" id="t97-uy-QrF"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                            <state key="normal" title="搜商家">
-                                <color key="titleColor" red="0.91372549020000005" green="0.93333333330000001" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="searchShoper:" destination="-1" eventType="touchUpInside" id="5hK-Vo-nad"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="liK-Ib-fdN" secondAttribute="trailing" constant="5" id="9yO-pP-M43"/>
-                        <constraint firstItem="0kf-Ei-zTU" firstAttribute="top" secondItem="liK-Ib-fdN" secondAttribute="bottom" constant="10" id="Kn5-Xc-4mi"/>
-                        <constraint firstAttribute="height" constant="90" id="TqY-QZ-o5V"/>
-                        <constraint firstAttribute="trailing" secondItem="0kf-Ei-zTU" secondAttribute="trailing" constant="5" id="XSo-x8-F18"/>
+                        <constraint firstAttribute="height" constant="45" id="TqY-QZ-o5V"/>
                         <constraint firstItem="liK-Ib-fdN" firstAttribute="top" secondItem="YBo-Ps-npL" secondAttribute="top" id="hmN-7H-P7V"/>
                         <constraint firstAttribute="width" constant="90" id="zO4-dq-gdM"/>
                     </constraints>

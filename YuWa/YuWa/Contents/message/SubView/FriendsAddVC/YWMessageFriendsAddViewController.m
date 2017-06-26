@@ -22,9 +22,9 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 //选择按钮
 @property (weak, nonatomic) IBOutlet UIButton *customBtn;
-//搜索商家
-@property (weak, nonatomic) IBOutlet UIButton *shopBtn;
-//消费者
+//搜索商家/用户
+//@property (weak, nonatomic) IBOutlet UIButton *shopBtn;
+////消费者
 @property (weak, nonatomic) IBOutlet UIButton *searchCustom;
 //@property (weak, nonatomic) IBOutlet UIImageView *arrowImage;
 
@@ -98,13 +98,12 @@
     self.customBtn.layer.cornerRadius = 4;
     self.searchCustom.clipsToBounds = YES;
     self.searchCustom.layer.cornerRadius = 4;
-    self.shopBtn.clipsToBounds = YES;
-    self.shopBtn.layer.cornerRadius = 4;
     [self.customBtn setImage:[UIImage imageNamed:@"down_nol"] forState:UIControlStateNormal];
      [self.customBtn setImage:[UIImage imageNamed:@"down_sel"] forState:UIControlStateSelected];
     [self.customBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 50, 0, -50)];
     [self.customBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
-    
+    self.btnView.layer.cornerRadius = 5;
+    self.btnView.layer.masksToBounds = YES;
 //    //是箭头旋转一百八十度
 //        self.arrowImage.transform = CGAffineTransformRotate(self.arrowImage.transform,M_PI);
 }
@@ -115,25 +114,33 @@
 
 }
 //消费者按钮
-- (IBAction)searchCustom:(id)sender {
-    [self.customBtn setTitle:@"搜用户" forState:UIControlStateNormal];
-//    self.customBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    self.btnView.hidden = YES;
-     self.customBtn.selected = NO;
-    self.UserType = @1;
-    if (![self.searchTextField.text isEqualToString:@""]) {
-        [self requestSearchFriendWithUserType:self.UserType];
+- (IBAction)searchCustom:(UIButton*)sender {
+    sender.selected = !sender.selected;
+    if (!sender.selected) {
+        
+        [self.customBtn setTitle:@"搜用户" forState:UIControlStateNormal];
+        self.btnView.hidden = YES;
+        self.customBtn.selected = NO;
+        self.UserType = @1;
+        if (![self.searchTextField.text isEqualToString:@""]) {
+            [self requestSearchFriendWithUserType:self.UserType];
+        }
+        [sender setTitle:@"搜商家" forState:UIControlStateNormal];
+    }else{
+        
+        [self.customBtn setTitle:@"搜商家" forState:UIControlStateNormal];
+        self.btnView.hidden = YES;
+        self.customBtn.selected = NO;
+        self.UserType = @2;
+        if (![self.searchTextField.text isEqualToString:@""]) {
+            [self requestSearchFriendWithUserType:self.UserType];
+        }
+         [sender setTitle:@"搜用户" forState:UIControlStateNormal];
     }
 }
-//商家按钮
-- (IBAction)searchShoper:(id)sender {
-    [self.customBtn setTitle:@"搜商家" forState:UIControlStateNormal];
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     self.btnView.hidden = YES;
     self.customBtn.selected = NO;
-    self.UserType = @2;
-    if (![self.searchTextField.text isEqualToString:@""]) {
-        [self requestSearchFriendWithUserType:self.UserType];
-    }
 }
 
 - (BOOL)isSearch{
