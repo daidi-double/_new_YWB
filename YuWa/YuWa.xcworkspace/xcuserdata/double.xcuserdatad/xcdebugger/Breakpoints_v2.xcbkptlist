@@ -25,7 +25,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "221"
             endingLineNumber = "221"
-            landmarkName = "-chatWithUser:"
+            landmarkName = "-segmentControlAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

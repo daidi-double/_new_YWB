@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIView *toShopTouchView;
 
 @property (weak, nonatomic) IBOutlet UILabel *suggestions;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *titleImageView;
+@property (weak, nonatomic) IBOutlet UILabel *seller_messageLabel;
 
 @end
 
@@ -31,7 +34,7 @@
     self.title = @"订单详情";
     self.shopName1.text = self.model.shop_name;
     self.time.text = [JWTools dateWithOutYearStr:self.model.ctime];;
-    self.message.text = self.model.seller_message;
+    self.message.text = self.model.customer_message;
     if ([self.model.customer_sex isEqualToString:@"1"]) {
         //表明是男士
         self.Name.text = [NSString stringWithFormat:@"%@先生",self.model.customer_name];
@@ -40,8 +43,19 @@
     }
     self.customer_phone.text =  self.model.customer_phone;
     self.num.text = [NSString stringWithFormat:@"%@人",self.model.customer_num];
-    self.message.text = self.model.seller_message;
     [self.suggestions setUserInteractionEnabled:YES];
+    if (self.status == 1) {
+        self.titleLabel.text = @"等待处理中";
+        self.titleImageView.image = [UIImage imageNamed:@"jujue"];
+    }else if (self.status == 2){
+        self.titleLabel.text = @"预定成功";
+        self.titleImageView.image = [UIImage imageNamed:@"jieshou"];
+    }else{
+        self.titleLabel.text = @"预定失败";
+        self.titleImageView.image = [UIImage imageNamed:@"jujue"];
+
+    }
+    self.seller_messageLabel.text = [NSString stringWithFormat:@"商家回复:%@",self.model.seller_message];
     UITapGestureRecognizer * touchTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(callIphone)];
     touchTap.delegate = self;
     touchTap.numberOfTapsRequired = 1;

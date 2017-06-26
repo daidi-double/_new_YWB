@@ -137,6 +137,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIStoryboard * SB = [UIStoryboard storyboardWithName:@"detail" bundle:nil];
     YWdetailViewController * vc = [SB instantiateInitialViewController];
+    YWMessageNotificationModel * model = self.dataArr[indexPath.row];
+    vc.status = [model.status integerValue];
     vc.model = self.detailArray[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }

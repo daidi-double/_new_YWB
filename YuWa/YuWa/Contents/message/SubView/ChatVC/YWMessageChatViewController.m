@@ -8,6 +8,7 @@
 
 #import "YWMessageChatViewController.h"
 #import "YWOtherSeePersonCenterViewController.h"
+#import "ShopDetailViewController.h"
 
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
@@ -149,16 +150,18 @@
 - (void)avatarViewSelcted:(id<IMessageModel>)model{
     if ([model.nickname isEqualToString:[UserSession instance].account])return;
     MyLog(@"用户点击头像");
-    YWOtherSeePersonCenterViewController * vc = [[YWOtherSeePersonCenterViewController alloc]init];
-    vc.uid = self.friendID;
-    vc.nickName = self.friendNikeName;
-    vc.otherIcon = self.friendIcon;
     if ([self.user_type isEqualToString:@"1"]) {
-        //如果是1，表示是用户账号。就跳转，如果不是，就停止跳转操作
+        //如果是1，表示是用户账号。就跳转，如果是商家则跳转到店铺
+        YWOtherSeePersonCenterViewController * vc = [[YWOtherSeePersonCenterViewController alloc]init];
+        vc.uid = self.friendID;
+        vc.nickName = self.friendNikeName;
+        vc.otherIcon = self.friendIcon;
         vc.user_type = self.user_type;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-        return;
+        ShopDetailViewController * detailVC = [[ShopDetailViewController alloc]init];
+        detailVC.shop_id = self.friendID;
+        [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
 

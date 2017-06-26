@@ -10,4 +10,5 @@
 #import "YWdetailModel.h"
 @interface YWdetailViewController : UIViewController
 @property (nonatomic, strong) YWdetailModel *model;
+@property (nonatomic,assign)NSInteger  status;//1,待处理，2接受，3拒绝
 @end
