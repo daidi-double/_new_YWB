@@ -59,11 +59,15 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [UIView animateWithDuration:0.3 animations:^{
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+    }];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[[self.navigationController.navigationBar subviews]objectAtIndex:0] setAlpha:1];
+    [UIView animateWithDuration:0.3 animations:^{
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+    }];
     
     
 }
