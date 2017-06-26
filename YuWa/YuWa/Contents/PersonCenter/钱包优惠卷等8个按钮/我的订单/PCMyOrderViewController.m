@@ -232,7 +232,7 @@
     if (self.status ==1) {
         return 135;
     }
-    return 120;
+    return 130;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

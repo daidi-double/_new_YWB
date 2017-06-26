@@ -893,6 +893,8 @@
 		AAF1280E1E8B918D00121621 /* CheckPhoneCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF1280C1E8B918D00121621 /* CheckPhoneCodeViewController.xib */; };
 		AAF128121E8B9D5500121621 /* SetPayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF128101E8B9D5500121621 /* SetPayPasswordViewController.m */; };
 		AAF128131E8B9D5500121621 /* SetPayPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF128111E8B9D5500121621 /* SetPayPasswordViewController.xib */; };
+		AAF235BE1F010E8100D1E67C /* YWSalesroomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF235BC1F010E8100D1E67C /* YWSalesroomViewController.m */; };
+		AAF235BF1F010E8100D1E67C /* YWSalesroomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF235BD1F010E8100D1E67C /* YWSalesroomViewController.xib */; };
 		AAF237261E5BE96A002D58B4 /* PlayTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF237251E5BE96A002D58B4 /* PlayTimeCell.m */; };
 		AAF237291E5C0A3B002D58B4 /* CinemaHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF237281E5C0A3B002D58B4 /* CinemaHeaderView.m */; };
 		AAF30A831E5E73F900793382 /* XZSeatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF30A821E5E73F900793382 /* XZSeatModel.m */; };
@@ -2904,6 +2906,9 @@
 		AAF1280F1E8B9D5500121621 /* SetPayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPayPasswordViewController.h; sourceTree = "<group>"; };
 		AAF128101E8B9D5500121621 /* SetPayPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPayPasswordViewController.m; sourceTree = "<group>"; };
 		AAF128111E8B9D5500121621 /* SetPayPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetPayPasswordViewController.xib; sourceTree = "<group>"; };
+		AAF235BB1F010E8100D1E67C /* YWSalesroomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWSalesroomViewController.h; sourceTree = "<group>"; };
+		AAF235BC1F010E8100D1E67C /* YWSalesroomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWSalesroomViewController.m; sourceTree = "<group>"; };
+		AAF235BD1F010E8100D1E67C /* YWSalesroomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWSalesroomViewController.xib; sourceTree = "<group>"; };
 		AAF237241E5BE96A002D58B4 /* PlayTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayTimeCell.h; sourceTree = "<group>"; };
 		AAF237251E5BE96A002D58B4 /* PlayTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayTimeCell.m; sourceTree = "<group>"; };
 		AAF237271E5C0A3B002D58B4 /* CinemaHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaHeaderView.h; sourceTree = "<group>"; };
@@ -6525,6 +6530,16 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
+		AAF235BA1F010E4C00D1E67C /* 拍卖场 */ = {
+			isa = PBXGroup;
+			children = (
+				AAF235BB1F010E8100D1E67C /* YWSalesroomViewController.h */,
+				AAF235BC1F010E8100D1E67C /* YWSalesroomViewController.m */,
+				AAF235BD1F010E8100D1E67C /* YWSalesroomViewController.xib */,
+			);
+			name = "拍卖场";
+			sourceTree = "<group>";
+		};
 		AAF30A801E5E73A200793382 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -7629,6 +7644,7 @@
 		B38B2CC01D8FACD8004D5256 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AAF235BA1F010E4C00D1E67C /* 拍卖场 */,
 				B35778A51D99229D0058A998 /* YWStormViewController.h */,
 				B35778A61D99229D0058A998 /* YWStormViewController.m */,
 				B35778A71D99229D0058A998 /* YWStormViewController.xib */,
@@ -10625,6 +10641,7 @@
 				AA35455D1E9DF23A00A2EC73 /* 3baobaoBG13@2x.jpg in Resources */,
 				C13019E01DB20B2400E24C88 /* 汽车服务.png in Resources */,
 				AA35458A1E9DF23A00A2EC73 /* 3baobaoBG54@2x.jpg in Resources */,
+				AAF235BF1F010E8100D1E67C /* YWSalesroomViewController.xib in Resources */,
 				25FE75601EA9EA76003EA989 /* jujue.png in Resources */,
 				AA35450A1E9DF23900A2EC73 /* 1baobaoBG47@2x.jpg in Resources */,
 				AA3A1E631E8F7AE500C12497 /* AMap.bundle in Resources */,
@@ -12040,6 +12057,7 @@
 				AA6B5EC31EA9FCF900E6A83D /* ShopDetailGoodsModel.m in Sources */,
 				AAF30AE31E5EA74400793382 /* NSString+MJExtension.m in Sources */,
 				B38B2E351D8FACD8004D5256 /* UIImage+GIF.m in Sources */,
+				AAF235BE1F010E8100D1E67C /* YWSalesroomViewController.m in Sources */,
 				C1F7BDAE1DB1C94500CCAF96 /* SeeMoreShoppingViewController.m in Sources */,
 				B38B2F0F1D8FC82F004D5256 /* RBNodeShowCommentModel.m in Sources */,
 				B38B2F1A1D8FC82F004D5256 /* RBNodeDetailBottomView.m in Sources */,

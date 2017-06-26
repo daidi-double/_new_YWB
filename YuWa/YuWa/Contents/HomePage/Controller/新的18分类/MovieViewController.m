@@ -75,6 +75,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.type = @"0";
     self.typeList = @"0";
+    if (self.coordinatex== nil||self.coordinatey == nil) {
+        self.coordinatex = @"118:37";
+        self.coordinatey = @"24:54";
+    }
     [self.view addSubview:self.movieTableView];
     [self.movieTableView registerNib:[UINib nibWithNibName:CINEMASHOWCELL bundle:nil] forCellReuseIdentifier:CINEMASHOWCELL];
     [self setRJRefresh];
