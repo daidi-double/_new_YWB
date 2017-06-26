@@ -153,7 +153,12 @@
     vc.uid = self.friendID;
     vc.nickName = self.friendNikeName;
     vc.otherIcon = self.friendIcon;
-    vc.user_type = self.user_type;
+    if ([vc.user_type isEqualToString:@"1"]) {
+        //如果是1，表示是用户账号。就跳转，如果不是，就停止跳转操作
+        vc.user_type = self.user_type;
+    }else{
+        return;
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 

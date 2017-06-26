@@ -186,6 +186,7 @@
         if ([errorCode isEqualToString:@"0"]) {
             NSDictionary*dict=data[@"data"];
             //            self.nameLabel.text = dict[@"nickname"];
+            [self.addressBooktableView requestShopArrData];
             [JRToast showWithText:@"备注修改成功"];
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
@@ -239,6 +240,8 @@
     redLabel.hidden = !isNew;
 }
 - (void)chatWithUser:(YWMessageAddressBookModel *)model{
+    
+    //先判断是否是商家
     YWMessageChatViewController *chatVC = [[YWMessageChatViewController alloc] initWithConversationChatter:model.hxID conversationType:EMConversationTypeChat];
     
     chatVC.friendNikeName = model.nikeName;
@@ -270,6 +273,7 @@
             }
         }];
     }
+    
     [self.navigationController pushViewController:chatVC animated:YES];
     
 }

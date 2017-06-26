@@ -29,5 +29,6 @@
 - (void)dataSet;
 - (void)headerRereshing;
 -(void)setupRefresh;
-
+//刷新页面数据
+-(void)requestShopArrData;
 @end
