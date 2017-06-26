@@ -215,6 +215,9 @@
         [selectedButton setTitle:@"评价" forState:UIControlStateNormal];
         [selectedButton removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
         [selectedButton addTarget:self action:@selector(touchCommit:) forControlEvents:UIControlEventTouchUpInside];
+        if (model.film_code == nil) {
+            selectedButton.hidden = YES;
+        }
     }else if ([model.status isEqualToString:@"已完成"]){
         selectedButton.hidden=YES;
     }
@@ -297,7 +300,11 @@
         CommendViewController * vc = [[CommendViewController alloc]init];
         vc.status = 1;
         vc.film_code = model.film_code;
-        [self.navigationController pushViewController:vc animated:YES];
+        vc.order_id = model.order_id;
+        if (model.film_code != nil) {
+            
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     
     

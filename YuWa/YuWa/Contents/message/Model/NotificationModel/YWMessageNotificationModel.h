@@ -17,5 +17,5 @@
 @property (nonatomic,strong)NSArray * details;
 @property (nonatomic,strong)NSString * pay_money;
 @property (nonatomic,strong)NSString * order_id;
-
+@property (nonatomic,strong)NSString * title;
 @end

@@ -40,6 +40,11 @@
 //兑换全部
 - (IBAction)exchangeAllGrade:(UIButton *)sender {
     self.exchangeGradeTextField.text = self.canUseGrade;
+    NSArray * scoreAry = [self.pay_scale componentsSeparatedByString:@":"];
+    CGFloat scoreNum = [scoreAry[1] floatValue];
+    NSString * money = [NSString stringWithFormat:@"%f",[_canUseGrade floatValue] * scoreNum];
+    
+    self.scoreLabel.text = [NSString stringWithFormat:@"当前兑换比例为%@,可兑换为人民币金额为:%@元",self.pay_scale,money];
 }
 //确认兑换
 - (IBAction)suerExchangeBtnAction:(UIButton *)sender {

@@ -140,7 +140,7 @@
         frame.size.height = -yoffset+self.headerViewFrame.size.height;
         frame.size.width = self.headerViewFrame.size.width/self.headerViewFrame.size.height*frame.size.height;
         //改变头部视图的fram
-        MyLog(@"~~~~~~!!!!!!!%@",NSStringFromCGRect(frame));
+//        MyLog(@"~~~~~~!!!!!!!%@",NSStringFromCGRect(frame));
         self.headerImageView.frame= frame;
     }
     

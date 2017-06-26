@@ -40,7 +40,7 @@
     }
     self.customer_phone.text =  self.model.customer_phone;
     self.num.text = [NSString stringWithFormat:@"%@人",self.model.customer_num];
-    
+    self.message.text = self.model.seller_message;
     [self.suggestions setUserInteractionEnabled:YES];
     UITapGestureRecognizer * touchTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(callIphone)];
     touchTap.delegate = self;

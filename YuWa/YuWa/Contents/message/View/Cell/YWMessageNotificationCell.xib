@@ -26,36 +26,49 @@
                             <constraint firstAttribute="height" constant="1" id="gO7-FQ-eFA"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="悠悠" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iz1-2L-VRf">
-                        <rect key="frame" x="52" y="28" width="31" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="悠悠" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iz1-2L-VRf">
+                        <rect key="frame" x="44" y="29" width="29" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jieshou.png" translatesAutoresizingMaskIntoConstraints="NO" id="MkN-kh-G8C">
-                        <rect key="frame" x="14" y="25" width="25" height="25"/>
+                        <rect key="frame" x="14" y="27.5" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="6kI-uq-dGr"/>
-                            <constraint firstAttribute="width" constant="25" id="yvI-11-Wo2"/>
+                            <constraint firstAttribute="height" constant="20" id="6kI-uq-dGr"/>
+                            <constraint firstAttribute="width" constant="20" id="yvI-11-Wo2"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9z-EJ-QID">
-                        <rect key="frame" x="283" y="30" width="27" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019-12-12 12:00:23" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9z-EJ-QID">
+                        <rect key="frame" x="185.5" y="30" width="118.5" height="14.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="118.5" id="Nmu-xA-lyS"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.28235294119999998" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right" translatesAutoresizingMaskIntoConstraints="NO" id="mCT-hh-ghh">
+                        <rect key="frame" x="309" y="30" width="6" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="6" id="R3J-fG-9h4"/>
+                            <constraint firstAttribute="height" constant="13" id="qPl-uU-t3K"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="n9z-EJ-QID" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4ja-Dy-mpl"/>
                     <constraint firstAttribute="bottomMargin" secondItem="oBy-s9-bld" secondAttribute="bottom" constant="-8" id="EfS-XB-Xo5"/>
                     <constraint firstItem="Iz1-2L-VRf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IdP-xq-fSd"/>
+                    <constraint firstItem="mCT-hh-ghh" firstAttribute="leading" secondItem="n9z-EJ-QID" secondAttribute="trailing" constant="5" id="ODA-yC-3t1"/>
                     <constraint firstItem="MkN-kh-G8C" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="RqI-oL-qvU"/>
+                    <constraint firstItem="mCT-hh-ghh" firstAttribute="centerY" secondItem="n9z-EJ-QID" secondAttribute="centerY" id="Swd-9U-NrC"/>
                     <constraint firstItem="MkN-kh-G8C" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WXx-XY-Q4S"/>
+                    <constraint firstItem="n9z-EJ-QID" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Iz1-2L-VRf" secondAttribute="trailing" constant="10" id="Zrt-Sn-sVb"/>
                     <constraint firstItem="oBy-s9-bld" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="hE8-KY-SBR"/>
                     <constraint firstAttribute="trailingMargin" secondItem="oBy-s9-bld" secondAttribute="trailing" constant="2" id="iRC-s3-zX0"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="n9z-EJ-QID" secondAttribute="trailing" constant="2" id="wXU-K5-ADp"/>
-                    <constraint firstItem="Iz1-2L-VRf" firstAttribute="leading" secondItem="MkN-kh-G8C" secondAttribute="trailing" constant="13" id="yBJ-WX-WZ9"/>
+                    <constraint firstAttribute="trailing" secondItem="mCT-hh-ghh" secondAttribute="trailing" constant="5" id="rz0-BM-lAl"/>
+                    <constraint firstItem="Iz1-2L-VRf" firstAttribute="leading" secondItem="MkN-kh-G8C" secondAttribute="trailing" constant="10" id="yBJ-WX-WZ9"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -68,5 +81,6 @@
     </objects>
     <resources>
         <image name="jieshou.png" width="37" height="37"/>
+        <image name="right" width="7" height="12"/>
     </resources>
 </document>

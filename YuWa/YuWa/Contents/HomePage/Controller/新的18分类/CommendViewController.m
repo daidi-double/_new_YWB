@@ -10,7 +10,7 @@
 #import "ChooseMovieHeaderView.h"
 #import "MovieAddComment.h"//评分
 #import "CinemaAndBuyTicketModel.h"
-
+#import "MovieDetailViewController.h"
 @interface CommendViewController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UIGestureRecognizerDelegate,MovieAddCommentDelegate>
 {
     UITextView * textCommendView;
@@ -95,6 +95,7 @@
         [movieView.PrivateLetterTap removeTarget:self action:@selector(tapAvatarView)];
         [movieView.wantSeeBtn removeFromSuperview];
         [movieView.gradeBtn removeFromSuperview];
+        [movieView addGestureRecognizer:tapTouch];
         return movieView;
     }else{
         return nil;
@@ -154,7 +155,11 @@
 }
 //进入电影详情
 -(void)movieDetailAction{
-    MyLog(@"电影详情");
+    MovieDetailViewController * vc = [[MovieDetailViewController alloc]init];
+    vc.filmCode = self.film_code;
+
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 //代理
 -(void)movieAddCommentAndScore:(NSInteger)score{
@@ -201,7 +206,6 @@
 - (void)requestMovieData{
     
     NSString * urlStr = [NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_MOVIE_CINEMAANDBUYTICKET];
-    self.film_code = @"001103332016";
     NSDictionary * pragrams = @{@"device_id":[JWTools getUUID],@"filmCode":self.film_code};
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:pragrams];
     if ([self judgeLogin]) {
