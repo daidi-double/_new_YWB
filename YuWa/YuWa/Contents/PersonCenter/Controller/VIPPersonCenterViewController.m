@@ -85,16 +85,16 @@
 @implementation VIPPersonCenterViewController
 
 -(void)viewDidLoad{
-
+    
     //
     self.showWhichView=showViewCategoryNotes;
     
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.view.backgroundColor=[UIColor whiteColor];
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
-          self.automaticallyAdjustsScrollViewInsets=NO;
+        self.automaticallyAdjustsScrollViewInsets=NO;
     }
-  
+    
     self.heighCell = [[[NSBundle mainBundle]loadNibNamed:@"RBHomeCollectionViewCell" owner:nil options:nil]firstObject];
     
     [self.view addSubview:self.tableView];
@@ -102,18 +102,18 @@
     [self.tableView registerNib:[UINib nibWithNibName:CELL0 bundle:nil] forCellReuseIdentifier:CELL0];
     
     [self.tableView registerClass:[PersonCenterOneCell class] forCellReuseIdentifier:CELL1];
-
-   
     
-
+    
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationItem.title=@"";
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-//    [self.navigationController setNavigationBarHidden:YES animated:YES]
-
+    //    [self.navigationController setNavigationBarHidden:YES animated:YES]
+    
     
     UIBarButtonItem*rightIte=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"center_set"] style:UIBarButtonItemStylePlain target:self action:@selector(touchRightItem)];
     self.navigationItem.rightBarButtonItem=rightIte;
@@ -121,11 +121,11 @@
     [self addHeaderView];
     [self setUpMJRefresh];
     [self getNewBaseInfo];
-//    [self.tableView.mj_header beginRefreshing];
+    //    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-      [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     
 }
 
@@ -140,11 +140,11 @@
         frame.size.height = -yoffset+self.headerViewFrame.size.height;
         frame.size.width = self.headerViewFrame.size.width/self.headerViewFrame.size.height*frame.size.height;
         //改变头部视图的fram
-//        MyLog(@"~~~~~~!!!!!!!%@",NSStringFromCGRect(frame));
+        //        MyLog(@"~~~~~~!!!!!!!%@",NSStringFromCGRect(frame));
         self.headerImageView.frame= frame;
     }
     
-//    MyLog(@"%@~~~~~~~~~~",NSStringFromCGPoint(scrollView.contentOffset));
+    //    MyLog(@"%@~~~~~~~~~~",NSStringFromCGPoint(scrollView.contentOffset));
     if (yoffset>=HEADERVIEWHEIGHT-64&&yoffset<=HEADERVIEWHEIGHT) {
         
         CGFloat alpha=(yoffset-(HEADERVIEWHEIGHT-64))/64;
@@ -153,14 +153,14 @@
         
         
     }else if (yoffset<HEADERVIEWHEIGHT-64){
-      
+        
         self.navigationItem.title=@"";
-//        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
-
+        //        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+        
     }else{
         self.navigationItem.title=[UserSession instance].nickName;
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
-
+        
     }
     
 }
@@ -198,12 +198,11 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:SECTION0CELL];
     if (indexPath.section==0&&indexPath.row==0) {
-      PersonCenterZeroCell*  cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
+        PersonCenterZeroCell*  cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
         cell.selectionStyle=NO;
-
+        
         NSString*str=[UserSession instance].personality;
         cell.titleString=str;
-      
         
         return cell;
     }else if (indexPath.section==1&&indexPath.row==0){
@@ -229,7 +228,7 @@
     }else if (indexPath.section==2&&indexPath.row==0){
         //笔记的内容
         NSMutableArray*array=self.maMallDatas;
-      
+        
         
         PCBottomTableViewCell*cell=[[PCBottomTableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil andDatas:array andWhichCategory:self.showWhichView];
         cell.delegate=self;
@@ -255,12 +254,12 @@
         NSString*cc=[NSString stringWithFormat:@"评论*%@",[UserSession instance].comment_nums];
         
         NSArray*titleArray=@[aa,bb,cc];
-     
+        
         if (!self.segmentedControl) {
-    
+            
             self.segmentedControl=[YJSegmentedControl segmentedControlFrame:CGRectMake(0, 0, kScreen_Width, 44) titleDataSource:titleArray backgroundColor:[UIColor whiteColor] titleColor:CsubtitleColor titleFont:[UIFont systemFontOfSize:14] selectColor:CNaviColor buttonDownColor:CNaviColor Delegate:self];
-
-           
+            
+            
         }
         
         [self.segmentedControl changeButtonName:titleArray];
@@ -270,23 +269,23 @@
         
     }
     return nil;
-
+    
     
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0&&indexPath.row==0) {
         NSString*str=[UserSession instance].personality;
-
+        
         return [PersonCenterZeroCell CalculateCellHeight:str];
         
     }else if (indexPath.section==1&&indexPath.row==0){
         return 157;
     }else if (indexPath.section==2&&indexPath.row==0){
         //分所选的区域的
-//        return 1000;
+        //        return 1000;
         if (self.showWhichView==showViewCategoryNotes) {
-//            NSMutableArray*alldatas=[self getBottomDatas];
+            //            NSMutableArray*alldatas=[self getBottomDatas];
             NSMutableArray*alldatas=self.maMallDatas;
             __block CGFloat rightRowHeight = 0.f;
             __block CGFloat leftRowHeight = ACTUAL_HEIGHT(170);
@@ -304,34 +303,34 @@
             
             return rightRowHeight>leftRowHeight?rightRowHeight:leftRowHeight;
             
-//            return 1000;
+            //            return 1000;
             
         }else if (self.showWhichView==showViewCategoryAlbum){
-//            NSMutableArray*alldatas=[self getBottomDatas];
+            //            NSMutableArray*alldatas=[self getBottomDatas];
             NSMutableArray*alldatas=self.maMallDatas;
-             CGFloat height = 180.f - 55.25f + (kScreen_Width - 20.f - 75.f)/4;
+            CGFloat height = 180.f - 55.25f + (kScreen_Width - 20.f - 75.f)/4;
             return (height+10)*(alldatas.count+1);
             
             
         }else if (self.showWhichView==showViewCategoryCommit){
             //评论
             CGFloat cellHeight=0.f;
-//            NSMutableArray*alldatas=[self getBottomDatas];
+            //            NSMutableArray*alldatas=[self getBottomDatas];
             NSMutableArray*alldatas=self.maMallDatas;
-
+            
             for (int i=0; i<alldatas.count; i++) {
                 CommentModel*model=alldatas[i];
                 
-               cellHeight=cellHeight+10+60+ [CommentTableViewCell getCellHeight:model];
+                cellHeight=cellHeight+10+60+ [CommentTableViewCell getCellHeight:model];
             }
             
             return cellHeight;
-          
-//            return 2000;
+            
+            //            return 2000;
             
         }
         
-      
+        
         
     }
     return 44;
@@ -342,14 +341,14 @@
         return 44;
     }
     return 0.01;
-
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 10;
 }
 
 -(NSArray*)animationImages{
-
+    
     NSMutableArray*imageArrays=[NSMutableArray array];
     for (int i=0; i<60; i++) {
         NSString*imageName=[NSString stringWithFormat:@"波浪个人_000%d",i];
@@ -365,29 +364,29 @@
 -(void)addHeaderView{
     
     UIImageView*imageView=[[UIImageView alloc]init];
-//    imageView.image=[UIImage imageNamed:@"backImage"];
+    //    imageView.image=[UIImage imageNamed:@"backImage"];
     imageView.contentMode=UIViewContentModeScaleAspectFill;
     imageView.animationImages=[self animationImages];
     imageView.animationDuration=3;
     imageView.animationRepeatCount=0;
     [imageView startAnimating];
     self.headerImageView = imageView;
-
+    
     //超出的图片的高度
-//    CGFloat OTHERHEADER = ((kScreen_Width * imageView.image.size.height / imageView.image.size.width)-195);
+    //    CGFloat OTHERHEADER = ((kScreen_Width * imageView.image.size.height / imageView.image.size.width)-195);
     //HEADERVIEWHEIGHT+OTHERHEADER
     imageView.frame=CGRectMake(0, 0, kScreen_Width, ACTUAL_HEIGHT(300));
     self.headerViewFrame = self.headerImageView.frame;
-
     
     
-//    self.belowImageViewView=[[UIView alloc]initWithFrame:CGRectMake(0, -OTHERHEADER, kScreen_Width, HEADERVIEWHEIGHT+OTHERHEADER)];
-        self.belowImageViewView=[[UIView alloc]initWithFrame:CGRectMake(0, HEADERVIEWHEIGHT-ACTUAL_HEIGHT(300), kScreen_Width, ACTUAL_HEIGHT(300))];
     
-   
+    //    self.belowImageViewView=[[UIView alloc]initWithFrame:CGRectMake(0, -OTHERHEADER, kScreen_Width, HEADERVIEWHEIGHT+OTHERHEADER)];
+    self.belowImageViewView=[[UIView alloc]initWithFrame:CGRectMake(0, HEADERVIEWHEIGHT-ACTUAL_HEIGHT(300), kScreen_Width, ACTUAL_HEIGHT(300))];
+    
+    
     [self.belowImageViewView addSubview:imageView];
     
-  
+    
     self.headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, HEADERVIEWHEIGHT)];
     self.headerView.backgroundColor=[UIColor blackColor];
     
@@ -397,7 +396,7 @@
     
     
     //图片界面装在 上面
-   PersonCenterHeadView*showView= [[NSBundle mainBundle]loadNibNamed:@"PersonCenterHeadView" owner:nil options:nil].firstObject;
+    PersonCenterHeadView*showView= [[NSBundle mainBundle]loadNibNamed:@"PersonCenterHeadView" owner:nil options:nil].firstObject;
     //隐藏掉备注
     UIButton * reMark = [showView viewWithTag:80];
     reMark.hidden = YES;
@@ -412,7 +411,7 @@
     
     
     showView.touchImageBlock=^{
-//        MyLog(@"点击图片放大");
+        //        MyLog(@"点击图片放大");
         [self touchPersonInfo];
         
         
@@ -424,7 +423,7 @@
     if (self.newsToday_money == nil) {
         str = @"今日收益:￥0.00";
     }
-
+    
     [PersonInfo setTitle:str forState:UIControlStateNormal];
     
     UIButton*follow=[showView viewWithTag:5];
@@ -432,7 +431,7 @@
     UIButton*friend=[showView viewWithTag:6];
     friend.hidden=YES;
     
-
+    
     NSMutableArray*fourArray=[NSMutableArray array];
     if ([UserSession instance].attentionCount == nil) {
         [UserSession instance].attentionCount = @"0";
@@ -451,7 +450,7 @@
     [fourArray addObject:@[@"粉丝",[UserSession instance].fans]];
     [fourArray addObject:@[@"被赞",[UserSession instance].praised]];
     [fourArray addObject:@[@"被收藏",[UserSession instance].collected]];
-
+    
     
     for (int i=0; i<4; i++) {
         defineButton*button=[showView viewWithTag:11+i];
@@ -478,7 +477,7 @@
     UILabel*locateLabel=[showView viewWithTag:3];
     locateLabel.text=[UserSession instance].local;
     
-  
+    
 }
 
 
@@ -487,9 +486,9 @@
 
 -(void)touchFourButton:(UIButton*)sender{
     NSInteger number =sender.tag-11;
-//    MyLog(@"%lu",number);
+    //    MyLog(@"%lu",number);
     if (number==0) {
-
+        
         // 关注
         YWFansViewController*vc=[[YWFansViewController alloc]init];
         vc.whichFriend=TheFirendsAbount;
@@ -502,7 +501,7 @@
         YWFansViewController*vc=[[YWFansViewController alloc]init];
         vc.whichFriend=TheFirendsFans;
         [self.navigationController pushViewController:vc animated:YES];
-
+        
         
     }else if (number==2){
         
@@ -522,8 +521,8 @@
 
 
 -(void)touchRightItem{
-   AccountSettingViewController*vc=[[AccountSettingViewController
-                                     alloc]init];
+    AccountSettingViewController*vc=[[AccountSettingViewController
+                                      alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
     
     
@@ -531,7 +530,7 @@
 
 //点击个人信息
 -(void)touchPersonInfo{
-     self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBarHidden = NO;
     YWPersonInfoViewController*vc=[[YWPersonInfoViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -540,8 +539,8 @@
 //八个按钮
 -(void)touchEightButton:(imageDefineButton*)sender{
     NSInteger number=sender.tag-200;
-     self.navigationController.navigationBarHidden = NO;
-//    MyLog(@"%lu",number);
+    self.navigationController.navigationBarHidden = NO;
+    //    MyLog(@"%lu",number);
     switch (number) {
         case 0:{
             //钱包
@@ -554,9 +553,9 @@
             //优惠券
             CouponViewController*vc=[[CouponViewController alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
-
+            
             break;}
-
+            
         case 2:{
             //雨娃宝宝
             YWBaoBaoViewController * vc = [[YWBaoBaoViewController alloc]init];
@@ -566,48 +565,48 @@
             //商务会员
             if ([[UserSession instance].isVIP isEqualToNumber:@(2)]) {
                 //商务会员
-                 YWBusinessMemberViewController*vc=[[YWBusinessMemberViewController alloc]init];
-                  [self.navigationController pushViewController:vc animated:YES];
+                YWBusinessMemberViewController*vc=[[YWBusinessMemberViewController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];
             }else if ([[UserSession instance].isVIP isEqualToNumber:@(1)]){
                 CommonUserViewController*vc=[[CommonUserViewController alloc]init];
-                  [self.navigationController pushViewController:vc animated:YES];
+                [self.navigationController pushViewController:vc animated:YES];
             }else {
                 //商务会员   3的情况也弄商务会员吧
                 YWBusinessMemberViewController*vc=[[YWBusinessMemberViewController alloc]init];
                 [self.navigationController pushViewController:vc animated:YES];
-
+                
             }
             
             break;}
-
+            
         case 4:{
             //我的订单
             PCMyOrderViewController*vc=[[PCMyOrderViewController alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
             
             break;}
-
+            
         case 5:{
             //收藏
             MyFavouriteViewController*vc=[[MyFavouriteViewController alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
             
             break;}
-
+            
         case 6:{
             //消费记录
             PCDetailMoneyViewController*vc=[[PCDetailMoneyViewController alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
             
             break;}
-
+            
         case 7:{
             //通知
-           YWMessageNotificationViewController *vc=[[YWMessageNotificationViewController alloc]init];
+            YWMessageNotificationViewController *vc=[[YWMessageNotificationViewController alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
             
             break;}
-
+            
             
         default:
             break;
@@ -619,13 +618,13 @@
 #pragma mark  --delegate
 //第几个选项卡
 -(void)segumentSelectionChange:(NSInteger)selection{
-//    MyLog(@"%ld",(long)selection);
+    //    MyLog(@"%ld",(long)selection);
     self.whichShow=selection;
     
-       self.showWhichView=selection;
+    self.showWhichView=selection;
     [self.tableView.mj_header beginRefreshing];
     
-//    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
+    //    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
     
 }
 
@@ -640,14 +639,14 @@
         }];
         
         [self presentViewController:imagePickerVC animated:YES completion:nil];
-
+        
         
     }else{
         
         RBNodeShowViewController * vc = [[RBNodeShowViewController alloc]init];
         vc.model = self.maMallDatas[number];
         [self.navigationController pushViewController:vc animated:NO];
-
+        
         
         
         
@@ -659,12 +658,12 @@
 -(void)DelegateForAlbum:(NSInteger)number andMax:(NSInteger)maxNumber{
     if (number==maxNumber) {
         //专辑
-//        MyLog(@"创建专辑");
+        //        MyLog(@"创建专辑");
         YWNodeAddAldumViewController*vc=[[YWNodeAddAldumViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
-//        MyLog(@"点击某个专辑%lu",(long)number);
+        //        MyLog(@"点击某个专辑%lu",(long)number);
         MyAlbumViewController*vc=[[MyAlbumViewController alloc]init];
         RBCenterAlbumModel * model = self.maMallDatas[number];
         vc.albumDetail = model.aldumID;
@@ -688,7 +687,7 @@
 #pragma mark  --  getDatas
 //得到底部的数据
 - (NSMutableArray*)getBottomDatas{
-
+    
     //
     switch (self.whichShow) {
         case 0:{
@@ -707,7 +706,7 @@
         default:
             break;
     }
-
+    
     
     
     
@@ -728,10 +727,10 @@
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
             for (NSDictionary*dict in data[@"data"]) {
-
+                
                 NSMutableDictionary * dataDic = [RBHomeModel dataDicSetWithDic:dict];
                 [self.maMallDatas addObject:[RBHomeModel yy_modelWithDictionary:dataDic]];
-
+                
                 [UserSession instance].note_nums =data[@"total_nums"];
             }
             
@@ -780,9 +779,9 @@
                 //有多少内容
                 [UserSession instance].album_nums=data[@"total_nums"];
             }
-//            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
+            //            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView reloadData];
-
+            
         }else if([errorCode isEqualToString:@"9"]){
             [JRToast showWithText:@"您的身份已过期，请重新登入" duration:2];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -800,7 +799,7 @@
         
     }];
     
-
+    
     
     
 }
@@ -821,18 +820,18 @@
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
             for (NSDictionary*dict in data[@"data"]) {
-
+                
                 
                 CommentModel*model=[CommentModel yy_modelWithDictionary:dict];
                 [self.maMallDatas addObject:model];
                 
-             
+                
             }
             
-               [UserSession instance].comment_nums=data[@"total_nums"];
-//            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
+            [UserSession instance].comment_nums=data[@"total_nums"];
+            //            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView reloadData];
-
+            
             
         }else if([errorCode isEqualToString:@"9"]){
             [JRToast showWithText:@"您的身份已过期，请重新登入" duration:2];
@@ -851,7 +850,7 @@
         
     }];
     
-
+    
     
 }
 //获取今日收益数据
