@@ -137,6 +137,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIStoryboard * SB = [UIStoryboard storyboardWithName:@"detail" bundle:nil];
     YWdetailViewController * vc = [SB instantiateInitialViewController];
+    YWMessageNotificationModel * model = self.dataArr[indexPath.row];
+    vc.status = [model.status integerValue];
     vc.model = self.detailArray[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -215,14 +217,6 @@
         if (dataArr.count>0) {
             for (int i = 0; i<dataArr.count; i++) {
                 YWMessageNotificationModel * model = [YWMessageNotificationModel yy_modelWithDictionary:dataArr[i]];
-                NSDictionary * dic = dataArr[i];
-                if ([dic[@"title"]isEqualToString:@"您的预约被拒绝"]) {
-                    //表示预约拒绝
-                    model.status = @"3";
-                }else{
-                    //表示接受
-                    model.status = @"2";
-                }
 
                 [self.dataArr addObject:model];
             }

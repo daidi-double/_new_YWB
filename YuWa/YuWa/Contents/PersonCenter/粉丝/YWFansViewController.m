@@ -125,7 +125,7 @@
         //名字
         UILabel*nameLabel=[cell viewWithTag:2];
         nameLabel.text=model.nickname;
-        if ([JWTools isNumberWithStr:model.nickname]) {
+        if ([JWTools isPhoneIDWithStr:model.nickname]) {
             NSString * name = [model.nickname substringToIndex:7];
             nameLabel.text = [NSString stringWithFormat:@"%@****",name];
         }

@@ -73,7 +73,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     YWpayNotificationCell   * messageCell = [tableView dequeueReusableCellWithIdentifier:payNotificationCell];
     messageCell.model = self.dataArr[indexPath.row];
-    
+   
     return messageCell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

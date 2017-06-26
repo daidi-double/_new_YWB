@@ -28,9 +28,15 @@
 }
 
 - (void)dataSet{
-    self.timeLbael.text = [JWTools dateWithOutYearStr:self.model.ctime];
-    self.nameLabel.text = self.model.shop_name;
-    self.iconImageView.image = [UIImage imageNamed:[self.model.status isEqualToString:@"0"]?@"jujue":@"jieshou"];
+    self.timeLbael.text = [JWTools dateWithStr:self.model.ctime];
+    if ([self.model.status isEqualToString:@"3"]) {
+        self.nameLabel.text = [NSString stringWithFormat:@"%@已拒绝您的预定",self.model.shop_name];
+ 
+    }else{
+        
+        self.nameLabel.text = [NSString stringWithFormat:@"%@已接受您的预定",self.model.shop_name];
+    }
+    self.iconImageView.image = [UIImage imageNamed:[self.model.status isEqualToString:@"3"]?@"jujue":@"jieshou"];
 }
 
 @end

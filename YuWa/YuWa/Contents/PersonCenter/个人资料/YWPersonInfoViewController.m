@@ -432,7 +432,7 @@
 
 //修改昵称
 -(void)DelegateToChangeNibName:(NSString*)name andTouchType:(TouchType)type{
-    MyLog(@"%@",name);
+//    MyLog(@"%@",name);
     if (type==TouchTypeNickName) {
         //接口
         NSDictionary*dict=@{@"nickname":name};
@@ -465,7 +465,7 @@
 
 //修改signature
 -(void)DelegateForGetSignature:(NSString *)string{
-    MyLog(@"%@",string);
+//    MyLog(@"%@",string);
     //接口
     NSDictionary*dict=@{@"mark":string};
     [self changePersonInfoWithDic:dict];
@@ -495,7 +495,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY-MM-dd"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
-    NSLog(@"dateString:%@",dateString);
+//    NSLog(@"dateString:%@",dateString);
     
     return dateString;
 }
