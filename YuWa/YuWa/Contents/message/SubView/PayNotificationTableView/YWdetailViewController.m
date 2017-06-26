@@ -55,7 +55,7 @@
         self.titleImageView.image = [UIImage imageNamed:@"jujue"];
 
     }
-    self.seller_messageLabel.text = [NSString stringWithFormat:@"商家回复:%@",self.model.seller_message];
+    self.seller_messageLabel.text = [NSString stringWithFormat:@"%@",self.model.seller_message];
     UITapGestureRecognizer * touchTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(callIphone)];
     touchTap.delegate = self;
     touchTap.numberOfTapsRequired = 1;
