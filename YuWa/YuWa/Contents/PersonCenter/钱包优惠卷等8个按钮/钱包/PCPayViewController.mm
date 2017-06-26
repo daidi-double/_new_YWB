@@ -899,7 +899,7 @@
         switch (resopnse.errCode) {
             case WXSuccess:
             {
-//                [self.navigationController popViewControllerAnimated:YES];
+//                EMError *error = [[EMClient sharedClient].contactManager addContact:model.hxID message:@"我想加您为好友"];
                 strMsg = @"支付结果：成功！";
                 if (self.status == 1) {
                     [self judgeMoviePaySuccessOrNot];

@@ -23,13 +23,13 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cN-MF-La4" customClass="defineButton">
-                    <rect key="frame" x="300" y="80" width="72" height="34"/>
+                    <rect key="frame" x="299.5" y="80" width="72.5" height="34"/>
                 </button>
                 <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pU-Uu-cP6" customClass="defineButton">
-                    <rect key="frame" x="227" y="80" width="73" height="34"/>
+                    <rect key="frame" x="227" y="80" width="72.5" height="34"/>
                 </button>
                 <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hY1-qV-DmV" customClass="defineButton">
-                    <rect key="frame" x="155" y="80" width="72" height="34"/>
+                    <rect key="frame" x="154.5" y="80" width="72.5" height="34"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="yellowbee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWp-Y2-7N6">
                     <rect key="frame" x="15" y="130" width="69" height="18"/>
@@ -51,7 +51,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twS-zz-Ely" customClass="defineButton">
-                    <rect key="frame" x="82" y="80" width="73" height="34"/>
+                    <rect key="frame" x="82" y="80" width="72.5" height="34"/>
                 </button>
                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBd-XM-eJy">
                     <rect key="frame" x="275" y="153" width="80" height="30"/>
@@ -79,14 +79,13 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" tag="80" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGW-78-Ab5">
-                    <rect key="frame" x="89" y="130" width="46" height="18"/>
+                <button opaque="NO" tag="80" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGW-78-Ab5">
+                    <rect key="frame" x="89" y="130" width="18" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="46" id="ct4-sU-E2U"/>
-                        <constraint firstAttribute="height" constant="18" id="zhv-L7-MVW"/>
+                        <constraint firstAttribute="height" constant="18" id="4AR-Cg-1QP"/>
+                        <constraint firstAttribute="width" constant="18" id="fLA-9w-gj5"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <state key="normal" title="备注"/>
+                    <state key="normal" image="markName"/>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -131,5 +130,6 @@
     </objects>
     <resources>
         <image name="center_whiteLocate.png" width="32" height="32"/>
+        <image name="markName" width="40" height="40"/>
     </resources>
 </document>
