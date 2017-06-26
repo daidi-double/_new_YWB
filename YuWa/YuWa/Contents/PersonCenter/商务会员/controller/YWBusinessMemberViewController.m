@@ -57,13 +57,10 @@
     [self setUpMJRefresh];
     
 }
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
-
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[[self.navigationController.navigationBar subviews]objectAtIndex:0] setAlpha:1];
