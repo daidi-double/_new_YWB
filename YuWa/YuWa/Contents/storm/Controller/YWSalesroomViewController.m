@@ -18,8 +18,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"拍卖场";
-
+    UIButton * btn = [[UIButton alloc]initWithFrame:CGRectMake(50, 50, 100, 40)];
+    [self.view addSubview:btn];
+    [btn setTitle:@"美食" forState:0];
+    [btn addTarget:self action:@selector(BFood:) forControlEvents:UIControlEventTouchDown];
 }
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"selectedIndex" object:nil];
+}
+//美食按钮
+- (IBAction)BFood:(id)sender {
+    YWSalesroomViewController*vc=[[YWSalesroomViewController alloc]init];
+    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
