@@ -93,8 +93,8 @@
     RBHomeViewController*vcDiscover=[[RBHomeViewController alloc]init];
     [self addChildVC:vcDiscover withTitle:@"发现" withImage:@"home_1_nomal" withSelectedImage:@"home_1_selected"];
     
-//    YWSalesroomViewController*vcStorm=[[YWSalesroomViewController alloc]init];
-//    [self addChildVC:vcStorm withTitle:@"拍卖场" withImage:@"tabBar_publos_salesroom" withSelectedImage:@"tabBar_publos_salesroom"];
+    YWSalesroomViewController*vcStorm=[[YWSalesroomViewController alloc]init];
+    [self addChildVC:vcStorm withTitle:@"拍卖场" withImage:@"tabBar_publos_salesroom" withSelectedImage:@"tabBar_publos_salesroom"];
     
     YWMessageViewController*vcMessage=[[YWMessageViewController alloc]init];
     [self addChildVC:vcMessage withTitle:@"消息" withImage:@"home_3_nomal" withSelectedImage:@"home_3_selected"];
@@ -102,11 +102,11 @@
     VIPPersonCenterViewController*vcPerson=[[VIPPersonCenterViewController alloc]init];
     [self addChildVC:vcPerson withTitle:@"个人中心" withImage:@"home_4_nomal" withSelectedImage:@"home_4_selected"];
     tabBar = [[VIPTabBar alloc] init];
-    [tabBar.button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [tabBar.button addTarget:self action:@selector(auction:) forControlEvents:UIControlEventTouchUpInside];
     //kvc  :通过key的形式来访问成员变量
     [self setValue:tabBar forKey:@"tabBar"];
 }
-- (void)buttonAction:(YWCustomButton *)sender{
+- (void)auction:(YWCustomButton *)sender{
     MyLog(@"拍卖场");
     sender.selected = !sender.selected;
     if (sender.selected) {
