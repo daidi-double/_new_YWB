@@ -57,19 +57,17 @@
     [self setUpMJRefresh];
     
 }
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [UIView animateWithDuration:0.3 animations:^{
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIView animateWithDuration:0.4 animations:^{
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
     }];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.4 animations:^{
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     }];
-    
-    
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{

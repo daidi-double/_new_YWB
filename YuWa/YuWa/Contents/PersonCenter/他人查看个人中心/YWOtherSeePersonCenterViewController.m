@@ -331,6 +331,7 @@
     //获取plist 文件中的好友名称l
     NSMutableArray * arr  =[[ NSMutableArray alloc]initWithContentsOfFile:self.path];
 //    判断是否是好友
+    
     if ([arr containsObject:self.HeaderModel.nickname]) {
         friend.hidden = YES;
     }
@@ -717,7 +718,7 @@
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         [JRToast showWithText:data[@"msg"]];
         if ([errorCode isEqualToString:@"0"]) {
-            
+         
             [JRToast showWithText:data[@"msg"]];
               self.followButton.selected=YES;
             //关注好友成功之后，自动添加对方好友

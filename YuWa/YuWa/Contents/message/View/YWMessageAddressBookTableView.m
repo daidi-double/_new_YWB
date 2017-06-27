@@ -180,6 +180,7 @@
     if (error)userlist = [[EMClient sharedClient].contactManager getContacts];
     if (!userlist||userlist.count<=0) {
         if (self.friendsModel) {
+            //数组==1 时候表示没有好友，就不存
             self.friendsModel(@[@1]);
         }
         [self reloadData];
