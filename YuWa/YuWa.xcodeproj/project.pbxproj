@@ -68,7 +68,6 @@
 		25EA9E611ECD42D2001CF604 /* YWload.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EA9E601ECD42D2001CF604 /* YWload.m */; };
 		25F9B1FB1EDFA9AE00C6A6C6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 25F9B1FA1EDFA9AD00C6A6C6 /* libsqlite3.0.tbd */; };
 		25F9B1FD1EDFAD5B00C6A6C6 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25F9B1FC1EDFAD5B00C6A6C6 /* UMMobClick.framework */; };
-		25FE755E1EA9EA70003EA989 /* jieshou.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FE755D1EA9EA70003EA989 /* jieshou.png */; };
 		25FE75601EA9EA76003EA989 /* jujue.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FE755F1EA9EA76003EA989 /* jujue.png */; };
 		AA0131021EC2E86200A99BD1 /* MovieShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0131001EC2E86200A99BD1 /* MovieShopTableViewCell.m */; };
 		AA0131031EC2E86200A99BD1 /* MovieShopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA0131011EC2E86200A99BD1 /* MovieShopTableViewCell.xib */; };
@@ -130,6 +129,8 @@
 		AA19CC2B1EE059FC00B18990 /* sayaren009.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC0B1EE059FC00B18990 /* sayaren009.jpg */; };
 		AA19CC2C1EE059FC00B18990 /* sayaren0011.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC0C1EE059FC00B18990 /* sayaren0011.jpg */; };
 		AA19CC2D1EE059FC00B18990 /* sayaren0031.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC0D1EE059FC00B18990 /* sayaren0031.jpg */; };
+		AA1CF6B91F01E8C400806E9F /* jieshou.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1CF6B81F01E8C400806E9F /* jieshou.png */; };
+		AA1CF6BC1F01EEE200806E9F /* YWCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CF6BB1F01EEE200806E9F /* YWCustomButton.m */; };
 		AA1FEB551E55DA3000239FEC /* HotMovieCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1FEB541E55DA3000239FEC /* HotMovieCollectCell.m */; };
 		AA1FEB591E55DE9E00239FEC /* ChooseMovieController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1FEB571E55DE9E00239FEC /* ChooseMovieController.m */; };
 		AA1FEB5A1E55DE9E00239FEC /* ChooseMovieController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA1FEB581E55DE9E00239FEC /* ChooseMovieController.xib */; };
@@ -1933,7 +1934,6 @@
 		25EA9E601ECD42D2001CF604 /* YWload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWload.m; sourceTree = "<group>"; };
 		25F9B1FA1EDFA9AD00C6A6C6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		25F9B1FC1EDFAD5B00C6A6C6 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
-		25FE755D1EA9EA70003EA989 /* jieshou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jieshou.png; sourceTree = "<group>"; };
 		25FE755F1EA9EA76003EA989 /* jujue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jujue.png; sourceTree = "<group>"; };
 		6D91CFB893AA70B1C9A0D506 /* Pods-YuWa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YuWa.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YuWa/Pods-YuWa.debug.xcconfig"; sourceTree = "<group>"; };
 		AA0130FF1EC2E86200A99BD1 /* MovieShopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieShopTableViewCell.h; sourceTree = "<group>"; };
@@ -2017,6 +2017,9 @@
 		AA19CC0B1EE059FC00B18990 /* sayaren009.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren009.jpg; sourceTree = "<group>"; };
 		AA19CC0C1EE059FC00B18990 /* sayaren0011.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0011.jpg; sourceTree = "<group>"; };
 		AA19CC0D1EE059FC00B18990 /* sayaren0031.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sayaren0031.jpg; sourceTree = "<group>"; };
+		AA1CF6B81F01E8C400806E9F /* jieshou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jieshou.png; sourceTree = "<group>"; };
+		AA1CF6BA1F01EEE200806E9F /* YWCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWCustomButton.h; sourceTree = "<group>"; };
+		AA1CF6BB1F01EEE200806E9F /* YWCustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWCustomButton.m; sourceTree = "<group>"; };
 		AA1FEB531E55DA3000239FEC /* HotMovieCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotMovieCollectCell.h; sourceTree = "<group>"; };
 		AA1FEB541E55DA3000239FEC /* HotMovieCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotMovieCollectCell.m; sourceTree = "<group>"; };
 		AA1FEB561E55DE9E00239FEC /* ChooseMovieController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseMovieController.h; sourceTree = "<group>"; };
@@ -4705,7 +4708,7 @@
 		25FE755C1EA9EA65003EA989 /* 通知 */ = {
 			isa = PBXGroup;
 			children = (
-				25FE755D1EA9EA70003EA989 /* jieshou.png */,
+				AA1CF6B81F01E8C400806E9F /* jieshou.png */,
 				25FE755F1EA9EA76003EA989 /* jujue.png */,
 			);
 			name = "通知";
@@ -7759,6 +7762,8 @@
 				B38B2CE31D8FACD8004D5256 /* VIPTabBar.m */,
 				B38B2CE41D8FACD8004D5256 /* VIPTabBarController.h */,
 				B38B2CE51D8FACD8004D5256 /* VIPTabBarController.m */,
+				AA1CF6BA1F01EEE200806E9F /* YWCustomButton.h */,
+				AA1CF6BB1F01EEE200806E9F /* YWCustomButton.m */,
 			);
 			path = mainController;
 			sourceTree = "<group>";
@@ -11271,6 +11276,7 @@
 				B34BCE031DAA2439001AB98D /* RBNodeAddToAldumTableViewCell.xib in Resources */,
 				AA3543DE1E9DF23800A2EC73 /* 1baobaoLVUP44@2x.jpg in Resources */,
 				B38B2F251D8FC82F004D5256 /* RBAlbumCollectionViewCell.xib in Resources */,
+				AA1CF6B91F01E8C400806E9F /* jieshou.png in Resources */,
 				B38B2F1F1D8FC82F004D5256 /* RBHomeSearchViewController.xib in Resources */,
 				B351E84F1DDEA72B00A15954 /* YWPersonCenterDelView.xib in Resources */,
 				C1F7BF5D1DB1CA0700CCAF96 /* blueChoose.jpg in Resources */,
@@ -11599,7 +11605,6 @@
 				AA3544431E9DF23800A2EC73 /* 3baobaoLVUP27@2x.jpg in Resources */,
 				B38B2F0A1D8FC82F004D5256 /* RBNodeDetailHeader.xib in Resources */,
 				AA3544471E9DF23800A2EC73 /* 3baobaoLVUP30@2x.jpg in Resources */,
-				25FE755E1EA9EA70003EA989 /* jieshou.png in Resources */,
 				AA35448C1E9DF23900A2EC73 /* 4baobaoLVUP39@2x.jpg in Resources */,
 				AA3838BE1E82194500A1B5C9 /* ExchangeViewController.xib in Resources */,
 				AA73F29C1ECEC4FA0002B548 /* yuwa@2x.png in Resources */,
@@ -11854,6 +11859,7 @@
 				B38B2DEA1D8FACD8004D5256 /* HUDLoadingShowView.m in Sources */,
 				B33A26961D9A68040092CB12 /* FixFopen.c in Sources */,
 				AAD988D11ECB43400055D044 /* OtherTicketTableViewCell.m in Sources */,
+				AA1CF6BC1F01EEE200806E9F /* YWCustomButton.m in Sources */,
 				AAF508851EAF25A10007BC78 /* YWOtherPayMoneyTableViewCell.m in Sources */,
 				B38B2E1A1D8FACD8004D5256 /* MJRefreshBackNormalFooter.m in Sources */,
 				B36C7F6D1D9E0DF100B022E0 /* YWMessageNotificationModel.m in Sources */,

@@ -10,8 +10,8 @@
  *  设置个数。
  */
 #import <UIKit/UIKit.h>
-
+#import "YWCustomButton.h"
 @interface VIPTabBar : UITabBar
 @property(nonatomic,assign)NSInteger numberCount;
-
+@property (nonatomic,strong)YWCustomButton * button;
 @end
