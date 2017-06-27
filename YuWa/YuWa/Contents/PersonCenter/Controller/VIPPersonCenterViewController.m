@@ -102,16 +102,16 @@
     [self.tableView registerNib:[UINib nibWithNibName:CELL0 bundle:nil] forCellReuseIdentifier:CELL0];
     
     [self.tableView registerClass:[PersonCenterOneCell class] forCellReuseIdentifier:CELL1];
-    
-    
-    
-    
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [UIView animateWithDuration:0.3 animations:^{
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+    }];
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationItem.title=@"";
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
     //    [self.navigationController setNavigationBarHidden:YES animated:YES]
     
     
