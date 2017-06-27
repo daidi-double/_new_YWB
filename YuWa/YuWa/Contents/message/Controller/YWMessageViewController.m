@@ -161,6 +161,12 @@
     self.addressBooktableView.friendsChatBlock = ^(YWMessageAddressBookModel * model){
         [weakSelf chatWithUser:model];
     };
+    self.addressBooktableView.friendsModel = ^(NSArray * models){
+        if ([models.lastObject isEqual: @1]) {
+            return ;
+        }
+        
+    };
     //点击了cell右滑编辑按钮的回调函数
     self.addressBooktableView.changeMarkName = ^(YWMessageAddressBookModel * model){
         YWmarkNameViewController * vc = [[UIStoryboard storyboardWithName:@"YWmarkNameViewController" bundle:nil]instantiateInitialViewController] ;

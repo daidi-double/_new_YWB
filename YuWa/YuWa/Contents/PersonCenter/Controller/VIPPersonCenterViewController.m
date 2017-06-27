@@ -105,15 +105,16 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [UIView animateWithDuration:0.3 animations:^{
-        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    }];
+
+
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationItem.title=@"";
     //    [self.navigationController setNavigationBarHidden:YES animated:YES]
-    
+    [UIView animateWithDuration:0.3 animations:^{
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+    }];
     
     UIBarButtonItem*rightIte=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"center_set"] style:UIBarButtonItemStylePlain target:self action:@selector(touchRightItem)];
     self.navigationItem.rightBarButtonItem=rightIte;

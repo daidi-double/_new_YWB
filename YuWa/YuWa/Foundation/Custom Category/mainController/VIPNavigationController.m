@@ -19,6 +19,7 @@
         self.interactivePopGestureRecognizer.enabled = YES;      // 手势有效设置为YES  无效为NO
         self.interactivePopGestureRecognizer.delegate = self;    // 手势的代理设置为self
     }
+    
 
 }
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
