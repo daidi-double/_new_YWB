@@ -19,7 +19,14 @@
 
 
 #import "YWLoginViewController.h"
-
+@interface VIPTabBarController()
+{
+    VIPTabBar * tabBar;
+}
+@property (nonatomic,strong)UIButton * cancelBtn;
+@property (nonatomic,strong)UIButton * foodBtn;//美食按钮
+@property (nonatomic,strong)UIButton * entertainmentBtn;//娱乐按钮
+@end
 @implementation VIPTabBarController
 //-(void)viewDidLoad{
 //    [super viewDidLoad];
@@ -58,6 +65,7 @@
     [UITabBar appearance].tintColor=CNaviColor;
     [self addChildViewControllers];
     [self delTopLine];
+    [self.view addSubview:self.BGView];
     self.delegate=self;
 //    self .selectedIndex =3;
 //    self .selectedIndex =0;
@@ -93,13 +101,21 @@
     
     VIPPersonCenterViewController*vcPerson=[[VIPPersonCenterViewController alloc]init];
     [self addChildVC:vcPerson withTitle:@"个人中心" withImage:@"home_4_nomal" withSelectedImage:@"home_4_selected"];
-    VIPTabBar * tabBar = [[VIPTabBar alloc] init];
-    [tabBar.button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
+    tabBar = [[VIPTabBar alloc] init];
+    [tabBar.button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     //kvc  :通过key的形式来访问成员变量
     [self setValue:tabBar forKey:@"tabBar"];
 }
-- (void)buttonAction{
+- (void)buttonAction:(YWCustomButton *)sender{
     MyLog(@"拍卖场");
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        self.BGView.hidden = NO;
+ 
+    }else{
+        self.BGView.hidden = YES;
+    }
+   
 }
 
 -(void)addChildVC:(UIViewController*)vc withTitle:(NSString*)title withImage:(NSString*)imageName withSelectedImage:(NSString*)selectedImageName{
@@ -136,7 +152,49 @@
     return YES;
 }
 
-
-
-
+- (UIView*)BGView{
+    if (!_BGView) {
+        _BGView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, self.BGView.height)];
+        toolbar.barStyle = UIBarStyleBlackTranslucent;
+        toolbar.alpha = 0.8;
+        _BGView.hidden = YES;
+        [_BGView addSubview:toolbar];
+        
+        UITapGestureRecognizer * cancelTouch = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelBGView)];
+        cancelTouch.numberOfTapsRequired = 1;
+        cancelTouch.numberOfTouchesRequired = 1;
+        cancelTouch.delegate = self;
+        [_BGView addGestureRecognizer:cancelTouch];
+        
+        _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _cancelBtn.frame = CGRectMake(0, kScreen_Height-55, 35, 35);
+        _cancelBtn.centerX = kScreen_Width/2;
+        
+        [_cancelBtn setBackgroundImage:[UIImage imageNamed:@"quxiao"] forState:UIControlStateNormal];
+        [_cancelBtn addTarget:self action:@selector(cancelBGView) forControlEvents:UIControlEventTouchUpInside];
+        [_BGView addSubview:_cancelBtn];
+        
+        _foodBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _foodBtn.frame = CGRectMake(_cancelBtn.left - 45, _cancelBtn.top - 65, 80, 45);
+        [_foodBtn setTitle:@"美食" forState:UIControlStateNormal];
+        [_foodBtn setImage:[UIImage imageNamed:@"food"] forState:UIControlStateNormal];
+        _foodBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+        [_foodBtn setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
+        [_foodBtn setTitleEdgeInsets:UIEdgeInsetsMake(30, -25, -30, 25)];
+        
+//        [_foodBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
+        [_foodBtn addTarget:self action:@selector(toFoodPage) forControlEvents:UIControlEventTouchUpInside];
+        [_BGView addSubview:_foodBtn];
+        
+    }
+    return _BGView;
+}
+- (void)cancelBGView{
+    self.BGView.hidden = YES;
+    tabBar.button.selected = NO;
+}
+- (void)toFoodPage{
+    
+}
 @end

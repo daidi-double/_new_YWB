@@ -14,4 +14,5 @@
 @interface VIPTabBar : UITabBar
 @property(nonatomic,assign)NSInteger numberCount;
 @property (nonatomic,strong)YWCustomButton * button;
+//@property (nonatomic,strong)UIButton * button;
 @end

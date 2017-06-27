@@ -11,23 +11,37 @@
 @implementation VIPTabBar
 -(YWCustomButton *)button{
     if (!_button) {
-        _button = [[YWCustomButton alloc]initWithFrame:CGRectMake(0, 0, 36, 72) andTitle:@"拍卖场"];
+        _button = [[YWCustomButton alloc]initWithFrame:CGRectMake(0, 0, 36, 80) andTitle:@"拍卖场"];
         
         [_button setImage:[UIImage imageNamed:@"tabBar_publos_salesroom"] forState:UIControlStateNormal];
         [_button setImage:[UIImage imageNamed:@"tabBar_publos_salesroom"] forState:UIControlStateHighlighted];
-        [_button setTitle:@"拍卖场" forState:UIControlStateNormal];
-        [_button setTitle:@"拍卖场" forState:UIControlStateSelected];
-        [_button setTitleColor:CNaviColor forState:UIControlStateSelected];
-        [_button setTitleColor:[UIColor colorWithHexString:@"#9f9f9f"] forState:UIControlStateNormal];
-        _button.backgroundColor = [UIColor redColor];
+
     }
     return _button;
 }
+//-(UIButton *)button{
+//    if (!_button) {
+//        _button = [UIButton buttonWithType:UIButtonTypeCustom];
+//
+//        [_button setImage:[UIImage imageNamed:@"tabBar_publos_salesroom"] forState:UIControlStateNormal];
+//        [_button setImage:[UIImage imageNamed:@"tabBar_publos_salesroom"] forState:UIControlStateHighlighted];
+//        [_button setTitle:@"拍卖场" forState:UIControlStateNormal];
+//        [_button setTitle:@"拍卖场" forState:UIControlStateHighlighted];
+//        [_button setTitleColor:[UIColor colorWithHexString:@"9f9f9f"] forState:UIControlStateNormal];
+//        [_button setTitleColor:CNaviColor forState:UIControlStateHighlighted];
+//        [_button setTitleEdgeInsets:UIEdgeInsetsMake(30, -15, -30, 15)];
+//        [_button setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
+//        _button.size = CGSizeMake(45, 80);
+//        
+//    }
+//    return _button;
+//}
 //初始化方法中添加一个按钮---拍卖场
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+
         [self addSubview:self.button];
 
     }

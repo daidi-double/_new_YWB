@@ -13,15 +13,15 @@
 - (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title{
     self = [super initWithFrame:frame];
     if (self) {
-        self.btnImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.width*0.8f, self.width*0.8f)];
-        self.btnImageView.center = self.center;
-        self.btnImageView.centerY = self.centerY -10;
-        
-        [self addSubview:self.btnImageView];
-        
-        self.title = [[UILabel alloc]initWithFrame:CGRectMake(0, _btnImageView.bottom, self.width, 20)];
+//        self.btnImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.width*0.8f, self.width*0.8f)];
+//        self.btnImageView.center = self.center;
+//        self.btnImageView.centerY = self.centerY -10;
+//        
+//        [self addSubview:self.btnImageView];
+//        
+        self.title = [[UILabel alloc]initWithFrame:CGRectMake(0, self.height -15, self.width, 15)];
         self.title.textAlignment = 1;
-        self.title.centerX = self.centerX;
+        self.title.centerX = 28;
         self.title.text = title;
         self.title.font = [UIFont systemFontOfSize:10];
         self.title.textColor = [UIColor colorWithHexString:@"#9f9f9f"];

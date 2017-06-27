@@ -13,4 +13,5 @@
 @property (nonatomic,strong)UIImageView *btnImageView;
 
 - (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title;
+
 @end

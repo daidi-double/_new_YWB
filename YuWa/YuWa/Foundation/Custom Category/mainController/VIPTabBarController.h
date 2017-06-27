@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VIPTabBarController : UITabBarController<UITabBarControllerDelegate>
+@interface VIPTabBarController : UITabBarController<UITabBarControllerDelegate,UIGestureRecognizerDelegate>
 
+@property (nonatomic,strong)UIView * BGView;
 @end
