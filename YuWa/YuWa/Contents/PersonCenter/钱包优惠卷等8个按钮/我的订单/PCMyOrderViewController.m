@@ -215,9 +215,13 @@
         [selectedButton setTitle:@"评价" forState:UIControlStateNormal];
         [selectedButton removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
         [selectedButton addTarget:self action:@selector(touchCommit:) forControlEvents:UIControlEventTouchUpInside];
-        if (model.film_code == nil) {
-            selectedButton.hidden = YES;
+        if (self.status == 1) {
+            
+            if (model.film_code == nil) {
+                selectedButton.hidden = YES;
+            }
         }
+        
     }else if ([model.status isEqualToString:@"已完成"]){
         selectedButton.hidden=YES;
     }

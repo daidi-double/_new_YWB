@@ -179,7 +179,7 @@
         _foodBtn.frame = CGRectMake(_cancelBtn.left - 45, _cancelBtn.top - 65, 80, 45);
         [_foodBtn setTitle:@"美食" forState:UIControlStateNormal];
         [_foodBtn setImage:[UIImage imageNamed:@"food"] forState:UIControlStateNormal];
-        _foodBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+        _foodBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [_foodBtn setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
         [_foodBtn setTitleEdgeInsets:UIEdgeInsetsMake(30, -25, -30, 25)];
         
