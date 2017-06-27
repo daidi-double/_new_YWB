@@ -11,7 +11,7 @@
 @implementation VIPTabBar
 -(YWCustomButton *)button{
     if (!_button) {
-        _button = [[YWCustomButton alloc]initWithFrame:CGRectMake(0, 0, 36, 80) andTitle:@"拍卖场"];
+        _button = [[YWCustomButton alloc]initWithFrame:CGRectMake(0, 0, 46, 80) andTitle:@"拍卖场"];
         
         [_button setImage:[UIImage imageNamed:@"tabBar_publos_salesroom"] forState:UIControlStateNormal];
         [_button setImage:[UIImage imageNamed:@"tabBar_publos_salesroom"] forState:UIControlStateHighlighted];
