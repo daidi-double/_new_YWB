@@ -65,9 +65,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [UIView animateWithDuration:0.4 animations:^{
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
-    }];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
