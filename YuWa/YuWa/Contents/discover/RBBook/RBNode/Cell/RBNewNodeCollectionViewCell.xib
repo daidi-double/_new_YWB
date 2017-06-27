@@ -18,13 +18,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="234" height="257"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="node" translatesAutoresizingMaskIntoConstraints="NO" id="nva-6Y-02N">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="node" translatesAutoresizingMaskIntoConstraints="NO" id="nva-6Y-02N">
+                        <rect key="frame" x="86" y="30" width="62" height="62"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="62" id="7zR-pS-wPx"/>
                             <constraint firstAttribute="height" constant="62" id="Szb-LR-7XA"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="发布笔记" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJd-Nb-9mI">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布笔记" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJd-Nb-9mI">
+                        <rect key="frame" x="0.0" y="92" width="234" height="38"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="38" id="hev-aJ-CxN"/>
                         </constraints>

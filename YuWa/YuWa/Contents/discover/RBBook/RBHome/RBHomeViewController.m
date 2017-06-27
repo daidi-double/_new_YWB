@@ -176,6 +176,7 @@
             for (int i = 0; i < dataArr.count; i++) {
                 NSDictionary * dic = dataArr[i];
                 NSMutableDictionary * dataDic = [RBHomeModel dataDicSetWithDic:dic];
+                
                 [self.dataArr addObject:[RBHomeModel yy_modelWithDictionary:dataDic]];
                 
             }

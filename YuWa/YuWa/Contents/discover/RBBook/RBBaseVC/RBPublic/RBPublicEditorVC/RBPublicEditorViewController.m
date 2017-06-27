@@ -12,7 +12,7 @@
 #import "RBPublicEditorScrollView.h"
 #import "RBPublicLocationViewController.h"
 #import "RBPublicLocationEditorViewController.h"
-
+#import "YWload.h"
 @interface RBPublicEditorViewController ()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextViewDelegate>
 
 @property (nonatomic,strong)RBPublicEditorScrollView * scrollView;
@@ -20,7 +20,7 @@
 @property (nonatomic,strong)NSMutableArray * picUrlArr;
 @property (nonatomic,assign)NSInteger picUpCount;
 @property (nonatomic,strong)UIButton * publishBtn;
-
+@property (nonatomic,strong)YWload * HUD;//等待标识符
 @end
 
 @implementation RBPublicEditorViewController
@@ -103,7 +103,7 @@
     [self.publishBtn addTarget:self action:@selector(publishBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.publishBtn];
     
-    self.commentToolsView.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
+    self.commentToolsView.backgroundColor = CNaviColor;
     [self.commentToolsView removeFromSuperview];
     [self.view addSubview:self.commentToolsView];
     self.commentToolsView.sendTextField.hidden = YES;
@@ -173,6 +173,7 @@
 - (void)publishBtnAction{//数据发布
     [self.publishBtn setUserInteractionEnabled:NO];
     [self requestPublishNodeWithPhoto];
+   
 }
 
 - (void)backAction{
@@ -311,10 +312,11 @@
     NSString * tagStr = [self tagArrJsonCreate];
 //    MyLog(@"%@",tagStr);
     NSInteger annotionCount = [RBPublishSession sharePublishSession].status;
-    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"cid":@(annotionCount),@"title":self.scrollView.nameTextField.text,@"location":[self.scrollView.locationnameLabel.text isEqualToString:@"添加地点"]?@"":self.scrollView.locationnameLabel.text,@"content":[JWTools UTF8WithStringJW:self.scrollView.conTextView.text],@"img_list":[JWTools jsonStrWithArr:self.picUrlArr],@"tag":tagStr,@"user_type":@"1"};
+    NSDictionary * pragram = @{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"cid":@(annotionCount),@"title":[JWTools UTF8WithStringJW:self.scrollView.nameTextField.text],@"location":[self.scrollView.locationnameLabel.text isEqualToString:@"添加地点"]?@"":self.scrollView.locationnameLabel.text,@"content":[JWTools UTF8WithStringJW:self.scrollView.conTextView.text],@"img_list":[JWTools jsonStrWithArr:self.picUrlArr],@"tag":tagStr,@"user_type":@"1"};
     [[HttpObject manager]postDataWithType:YuWaType_RB_NODE_PUBLISH withPragram:pragram success:^(id responsObj) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code is %@",responsObj);
+        self.HUD.hidden = YES;
         [self showHUDWithStr:responsObj[@"msg"] withSuccess:YES];
         [self.publishBtn setUserInteractionEnabled:YES];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -325,6 +327,7 @@
     } failur:^(id responsObj, NSError *error) {
         MyLog(@"Regieter Code pragram is %@",pragram);
         MyLog(@"Regieter Code error is %@",responsObj);
+        self.HUD.hidden = YES;
         [self.publishBtn setUserInteractionEnabled:YES];
     }];
 }
@@ -342,6 +345,7 @@
     
     self.picUpCount = 0;
     self.picUrlArr = [NSMutableArray arrayWithCapacity:0];
+     self.HUD.hidden = NO;
     for (int i = 0; i < self.imageChangeSaveArr.count; i++) {
         [self.picUrlArr addObject:@""];
         [self requestPublishNodePhotoWithIdx:i];
@@ -382,5 +386,10 @@
     
     return str;
 }
-
+-(YWload *)HUD{
+    if (!_HUD) {
+        _HUD=[YWload showOnView:[UIApplication sharedApplication].delegate.window];
+    }
+    return _HUD;
+}
 @end
