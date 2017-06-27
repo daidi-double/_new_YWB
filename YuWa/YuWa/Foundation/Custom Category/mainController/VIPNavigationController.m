@@ -33,6 +33,7 @@
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
 
     if (self.viewControllers.count>0) {
+    
         viewController.hidesBottomBarWhenPushed=YES;
         
         UIButton*button=[[UIButton alloc]init];
@@ -43,12 +44,9 @@
         [button addTarget:self action:@selector(buttonBack) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem*leftItem=[[UIBarButtonItem alloc]initWithCustomView:button];
         viewController.navigationItem.leftBarButtonItem=leftItem;
-//        viewController.navigationItem.backBarButtonItem=leftItem;
-        
+   
 }
         [super pushViewController:viewController animated:animated];
-    
-
 }
 
 -(void)buttonBack{

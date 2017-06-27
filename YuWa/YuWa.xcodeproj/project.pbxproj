@@ -7599,7 +7599,7 @@
 				B38B2E651D8FC160004D5256 /* Login */,
 				B38B2CA31D8FACD8004D5256 /* discover */,
 				B38B2CB31D8FACD8004D5256 /* message */,
-				B38B2CBF1D8FACD8004D5256 /* storm */,
+				B38B2CBF1D8FACD8004D5256 /* seales */,
 			);
 			path = Contents;
 			sourceTree = "<group>";
@@ -7634,13 +7634,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		B38B2CBF1D8FACD8004D5256 /* storm */ = {
+		B38B2CBF1D8FACD8004D5256 /* seales */ = {
 			isa = PBXGroup;
 			children = (
 				B35778B31D996AB80058A998 /* SubView */,
 				B38B2CC01D8FACD8004D5256 /* Controller */,
 				B38B2CC41D8FACD8004D5256 /* View */,
 			);
+			name = seales;
 			path = storm;
 			sourceTree = "<group>";
 		};
