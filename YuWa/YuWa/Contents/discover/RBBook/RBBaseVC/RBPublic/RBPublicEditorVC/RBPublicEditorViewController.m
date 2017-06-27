@@ -99,7 +99,7 @@
     
     self.publishBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.f, kScreen_Height - 44.f, kScreen_Width, 44.f)];
     [self.publishBtn setTitle:@"发布 ➔" forState:UIControlStateNormal];
-    self.publishBtn.backgroundColor = CNaviColor;
+    self.publishBtn.backgroundColor = RGBCOLOR(78, 154, 225, 1);
     [self.publishBtn addTarget:self action:@selector(publishBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.publishBtn];
     

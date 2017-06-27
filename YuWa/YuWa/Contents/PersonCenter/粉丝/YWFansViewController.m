@@ -109,6 +109,7 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     if (self.whichFriend != TheFriendsBePraise && self.whichFriend != TheFriendsBeCollected) {
         
         YWFansTableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:CELL0];
