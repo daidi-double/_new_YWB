@@ -131,6 +131,9 @@
 		AA19CC2D1EE059FC00B18990 /* sayaren0031.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA19CC0D1EE059FC00B18990 /* sayaren0031.jpg */; };
 		AA1CF6B91F01E8C400806E9F /* jieshou.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1CF6B81F01E8C400806E9F /* jieshou.png */; };
 		AA1CF6BC1F01EEE200806E9F /* YWCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CF6BB1F01EEE200806E9F /* YWCustomButton.m */; };
+		AA1CF6C01F028EF000806E9F /* YWBarnerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CF6BF1F028EF000806E9F /* YWBarnerTableViewCell.m */; };
+		AA1CF6C41F0290D900806E9F /* YWHotProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CF6C21F0290D900806E9F /* YWHotProjectTableViewCell.m */; };
+		AA1CF6C51F0290D900806E9F /* YWHotProjectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA1CF6C31F0290D900806E9F /* YWHotProjectTableViewCell.xib */; };
 		AA1FEB551E55DA3000239FEC /* HotMovieCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1FEB541E55DA3000239FEC /* HotMovieCollectCell.m */; };
 		AA1FEB591E55DE9E00239FEC /* ChooseMovieController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1FEB571E55DE9E00239FEC /* ChooseMovieController.m */; };
 		AA1FEB5A1E55DE9E00239FEC /* ChooseMovieController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA1FEB581E55DE9E00239FEC /* ChooseMovieController.xib */; };
@@ -2020,6 +2023,11 @@
 		AA1CF6B81F01E8C400806E9F /* jieshou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jieshou.png; sourceTree = "<group>"; };
 		AA1CF6BA1F01EEE200806E9F /* YWCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWCustomButton.h; sourceTree = "<group>"; };
 		AA1CF6BB1F01EEE200806E9F /* YWCustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWCustomButton.m; sourceTree = "<group>"; };
+		AA1CF6BE1F028EF000806E9F /* YWBarnerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWBarnerTableViewCell.h; sourceTree = "<group>"; };
+		AA1CF6BF1F028EF000806E9F /* YWBarnerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWBarnerTableViewCell.m; sourceTree = "<group>"; };
+		AA1CF6C11F0290D900806E9F /* YWHotProjectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWHotProjectTableViewCell.h; sourceTree = "<group>"; };
+		AA1CF6C21F0290D900806E9F /* YWHotProjectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWHotProjectTableViewCell.m; sourceTree = "<group>"; };
+		AA1CF6C31F0290D900806E9F /* YWHotProjectTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWHotProjectTableViewCell.xib; sourceTree = "<group>"; };
 		AA1FEB531E55DA3000239FEC /* HotMovieCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotMovieCollectCell.h; sourceTree = "<group>"; };
 		AA1FEB541E55DA3000239FEC /* HotMovieCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotMovieCollectCell.m; sourceTree = "<group>"; };
 		AA1FEB561E55DE9E00239FEC /* ChooseMovieController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseMovieController.h; sourceTree = "<group>"; };
@@ -4890,6 +4898,18 @@
 			path = "赛亚人";
 			sourceTree = "<group>";
 		};
+		AA1CF6BD1F028E9400806E9F /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CF6BE1F028EF000806E9F /* YWBarnerTableViewCell.h */,
+				AA1CF6BF1F028EF000806E9F /* YWBarnerTableViewCell.m */,
+				AA1CF6C11F0290D900806E9F /* YWHotProjectTableViewCell.h */,
+				AA1CF6C21F0290D900806E9F /* YWHotProjectTableViewCell.m */,
+				AA1CF6C31F0290D900806E9F /* YWHotProjectTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		AA1FEB371E55CFC700239FEC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -6536,6 +6556,7 @@
 		AAF235BA1F010E4C00D1E67C /* 拍卖场 */ = {
 			isa = PBXGroup;
 			children = (
+				AA1CF6BD1F028E9400806E9F /* cell */,
 				AAF235BB1F010E8100D1E67C /* YWSalesroomViewController.h */,
 				AAF235BC1F010E8100D1E67C /* YWSalesroomViewController.m */,
 				AAF235BD1F010E8100D1E67C /* YWSalesroomViewController.xib */,
@@ -10621,6 +10642,7 @@
 				AA3FFF6D1ECC1854004E77EB /* OtherTicketPayViewController.xib in Resources */,
 				C1F7BF581DB1CA0700CCAF96 /* page_downArr.png in Resources */,
 				AA3545941E9DF23A00A2EC73 /* 3baobaoBG9@2x.jpg in Resources */,
+				AA1CF6C51F0290D900806E9F /* YWHotProjectTableViewCell.xib in Resources */,
 				AA3544DD1E9DF23900A2EC73 /* 0baobaoBG6@2x.jpg in Resources */,
 				C135A1571DDE020F002B78A5 /* 波浪个人_00040.png in Resources */,
 				B38B2F561D8FC83A004D5256 /* 总的笔记个人.json in Resources */,
@@ -11824,6 +11846,7 @@
 				AAF127F21E8B58CF00121621 /* PayManageViewController.m in Sources */,
 				B3AE4D711D91302B000A389F /* TZAssetModel.m in Sources */,
 				AA048FD81E89142900AF5423 /* WillAccountIncomeTableViewCell.m in Sources */,
+				AA1CF6C01F028EF000806E9F /* YWBarnerTableViewCell.m in Sources */,
 				25D587CB1EAA627300C0178C /* YWpayNotificationCell.m in Sources */,
 				255222581EB504FF00F22793 /* YWdetailModel.m in Sources */,
 				AA3CA5671E606F0B000D05FA /* MapAnnotation.m in Sources */,
@@ -12318,6 +12341,7 @@
 				AA2B2BF51E8CB46D008CB3C6 /* AwardViewController.m in Sources */,
 				B33A268F1D9A68040092CB12 /* EaseChineseToPinyin.m in Sources */,
 				B34B56921DAFCBB000040D25 /* JWEmojisKeyBoards.m in Sources */,
+				AA1CF6C41F0290D900806E9F /* YWHotProjectTableViewCell.m in Sources */,
 				B38B2E261D8FACD8004D5256 /* MJRefreshConst.m in Sources */,
 				B301E7CA1DAC86BD0001336E /* YWMessageSearchFriendAddCell.m in Sources */,
 				B38B2F091D8FC82F004D5256 /* RBNodeDetailHeader.m in Sources */,

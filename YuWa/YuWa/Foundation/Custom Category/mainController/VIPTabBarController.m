@@ -37,15 +37,15 @@
     [self delTopLine];
     [self.view addSubview:self.BGView];
     self.delegate=self;
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedIndex1) name:@"selectedIndex" object:nil];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedIndex1) name:@"selectedIndex" object:nil];
 //    self .selectedIndex =3;
 //    self .selectedIndex =0;
 }
 //点击空白处，让tabbar selectedIndex  上一个控制器
--(void)selectedIndex1{
-//    暂时固定在1上
-     self .selectedIndex =1;
-}
+//-(void)selectedIndex1{
+////    暂时固定在1上
+//     self .selectedIndex =1;
+//}
 - (void)delTopLine{
     CGRect rect = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width);
     UIGraphicsBeginImageContext(rect.size);
@@ -68,7 +68,7 @@
     RBHomeViewController*vcDiscover=[[RBHomeViewController alloc]init];
     [self addChildVC:vcDiscover withTitle:@"发现" withImage:@"home_1_nomal" withSelectedImage:@"home_1_selected"];
     
-        YWSalesroomViewController*vcStorm=[[YWSalesroomViewController alloc]init];
+    YWSalesroomViewController*vcStorm=[[YWSalesroomViewController alloc]init];
         [self addChildVC:vcStorm withTitle:@"拍卖场" withImage:@"tabBar_publos_salesroom" withSelectedImage:@"tabBar_publos_salesroom"];
     
     YWMessageViewController*vcMessage=[[YWMessageViewController alloc]init];
@@ -79,7 +79,7 @@
     
 //    tabBar = [[VIPTabBar alloc] init];
 //    [tabBar.button addTarget:self action:@selector(auction:) forControlEvents:UIControlEventTouchUpInside];
-//    //kvc  :通过key的形式来访问成员变量
+    //kvc  :通过key的形式来访问成员变量
 //    [self setValue:tabBar forKey:@"tabBar"];
     
 }
@@ -96,7 +96,10 @@
 }
 
 -(void)addChildVC:(UIViewController*)vc withTitle:(NSString*)title withImage:(NSString*)imageName withSelectedImage:(NSString*)selectedImageName{
-    vc.tabBarItem.title=title;
+    if (![vc isKindOfClass:[YWSalesroomViewController class]]) {
+        
+        vc.tabBarItem.title=title;
+    }
     vc.title=title;
     vc.tabBarItem.image=[UIImage imageNamed:imageName];
     vc.tabBarItem.selectedImage=[UIImage imageNamed:selectedImageName];
@@ -106,7 +109,7 @@
         vc.tabBarItem.selectedImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         [vc.tabBarItem setImageInsets:UIEdgeInsetsMake(-8, 0, 8, 0)];//top = - bottom
     }
-            VIPNavigationController*navi=[[VIPNavigationController alloc]initWithRootViewController:vc];
+    VIPNavigationController*navi=[[VIPNavigationController alloc]initWithRootViewController:vc];
 
     [self addChildViewController:navi];
     
@@ -124,6 +127,9 @@
             return YES;
         }
         
+    }else  if ([viewController.tabBarItem.title isEqualToString:@"拍卖场"]){
+        self.BGView.hidden= NO;
+        return NO;
     }
     
     return YES;
@@ -186,10 +192,12 @@
 }
 //美食
 - (void)toFoodPage{
-    YWSalesroomViewController*vc=[[YWSalesroomViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-    VIPNavigationController*navi=[[VIPNavigationController alloc]initWithRootViewController:vc];
-    [self presentViewController:navi animated:YES completion:nil];
+     self .selectedIndex =2;
+    [self cancelBGView];
+//    YWSalesroomViewController*vc=[[YWSalesroomViewController alloc]init];
+//    [self.navigationController pushViewController:vc animated:YES];
+//    VIPNavigationController*navi=[[VIPNavigationController alloc]initWithRootViewController:vc];
+//    [self presentViewController:navi animated:YES completion:nil];
 //    [self setHidesBottomBarWhenPushed:NO];
 }
 //娱乐

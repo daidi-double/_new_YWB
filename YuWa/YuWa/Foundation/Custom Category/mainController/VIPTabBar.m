@@ -50,12 +50,13 @@
         if ([subView isKindOfClass:NSClassFromString(@"UITabBarButton")]) {
             //这个 宽要先设置。  不然先设置了中心点 再改宽度  会出bug
             [subView setWidth:tabBarWidth];
-            if (index<2) {
-                
-                subView.center = CGPointMake(endgeWidth + tabBarWidth/2 + index * tabBarWidth, tabBarY);
-            }else{
-               subView.center = CGPointMake(endgeWidth + tabBarWidth/2 + (index+1) * tabBarWidth, tabBarY);
-            }
+//            if (index<2) {
+//                
+//                subView.center = CGPointMake(endgeWidth + tabBarWidth/2 + index * tabBarWidth, tabBarY);
+//            }else{
+//               subView.center = CGPointMake(endgeWidth + tabBarWidth/2 + (index+1) * tabBarWidth, tabBarY);
+//            }
+            subView.center = CGPointMake(endgeWidth + tabBarWidth/2 + index * tabBarWidth, tabBarY);
             index++;
 
         }
