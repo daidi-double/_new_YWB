@@ -855,6 +855,8 @@
 		AAC9BB7A1ED7D94100893D3B /* 33.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC9BB771ED7D94100893D3B /* 33.png */; };
 		AACC80BF1E901E070023CA6D /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AACC80BD1E901E070023CA6D /* CustomTableViewCell.m */; };
 		AACC80C01E901E070023CA6D /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AACC80BE1E901E070023CA6D /* CustomTableViewCell.xib */; };
+		AACF6BCE1F0341CE0072478A /* YWStarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AACF6BCC1F0341CE0072478A /* YWStarCollectionViewCell.m */; };
+		AACF6BCF1F0341CE0072478A /* YWStarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AACF6BCD1F0341CE0072478A /* YWStarCollectionViewCell.xib */; };
 		AAD81F341EC46A6800799957 /* home_grayStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F311EC46A6800799957 /* home_grayStar@2x.png */; };
 		AAD81F351EC46A6800799957 /* home_halfStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F321EC46A6800799957 /* home_halfStar@2x.png */; };
 		AAD81F361EC46A6800799957 /* home_lightStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F331EC46A6800799957 /* home_lightStar@2x.png */; };
@@ -2858,6 +2860,9 @@
 		AACC80BC1E901E070023CA6D /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		AACC80BD1E901E070023CA6D /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		AACC80BE1E901E070023CA6D /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		AACF6BCB1F0341CE0072478A /* YWStarCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWStarCollectionViewCell.h; sourceTree = "<group>"; };
+		AACF6BCC1F0341CE0072478A /* YWStarCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWStarCollectionViewCell.m; sourceTree = "<group>"; };
+		AACF6BCD1F0341CE0072478A /* YWStarCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWStarCollectionViewCell.xib; sourceTree = "<group>"; };
 		AAD81F311EC46A6800799957 /* home_grayStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_grayStar@2x.png"; sourceTree = "<group>"; };
 		AAD81F321EC46A6800799957 /* home_halfStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_halfStar@2x.png"; sourceTree = "<group>"; };
 		AAD81F331EC46A6800799957 /* home_lightStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_lightStar@2x.png"; sourceTree = "<group>"; };
@@ -4906,6 +4911,9 @@
 				AA1CF6C11F0290D900806E9F /* YWHotProjectTableViewCell.h */,
 				AA1CF6C21F0290D900806E9F /* YWHotProjectTableViewCell.m */,
 				AA1CF6C31F0290D900806E9F /* YWHotProjectTableViewCell.xib */,
+				AACF6BCB1F0341CE0072478A /* YWStarCollectionViewCell.h */,
+				AACF6BCC1F0341CE0072478A /* YWStarCollectionViewCell.m */,
+				AACF6BCD1F0341CE0072478A /* YWStarCollectionViewCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -11653,6 +11661,7 @@
 				AA3544151E9DF23800A2EC73 /* 2baobaoLVUP3@2x.jpg in Resources */,
 				AA35450B1E9DF23900A2EC73 /* 1baobaoBG48@2x.jpg in Resources */,
 				AA35452C1E9DF23900A2EC73 /* 2baobaoBG23@2x.jpg in Resources */,
+				AACF6BCF1F0341CE0072478A /* YWStarCollectionViewCell.xib in Resources */,
 				AA3544031E9DF23800A2EC73 /* 2baobaoLVUP23@2x.jpg in Resources */,
 				AA3544721E9DF23800A2EC73 /* 4baobaoLVUP15@2x.jpg in Resources */,
 				AA3544FA1E9DF23900A2EC73 /* 1baobaoBG32@2x.jpg in Resources */,
@@ -12145,6 +12154,7 @@
 				AA3BFE351E8559B500D669C2 /* AddBankSuccessViewController.m in Sources */,
 				C10E94BF1DD36DC600728B3D /* YWPayMoneyViewController.m in Sources */,
 				C1B5E1311DCACFA8003769EF /* ShopdetailModel.m in Sources */,
+				AACF6BCE1F0341CE0072478A /* YWStarCollectionViewCell.m in Sources */,
 				AA3A30571EB02BB600E2FCD7 /* YWNoShopTableViewCell.m in Sources */,
 				B38B2E321D8FACD8004D5256 /* SDWebImageManager.m in Sources */,
 				B38B2F7B1D8FC8CD004D5256 /* JWCollectionViewFlowLayout.m in Sources */,

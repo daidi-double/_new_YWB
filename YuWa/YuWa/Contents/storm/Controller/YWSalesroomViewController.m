@@ -9,13 +9,14 @@
 #import "YWSalesroomViewController.h"
 #import "YWBarnerTableViewCell.h"
 #import "YWHotProjectTableViewCell.h"
+#import "YWStarCollectionViewCell.h"
 
-
-
+#define STARCOLLECTVIEWCELL @"YWStarCollectionViewCell"
 #define HOTPROJECTCELL @"YWHotProjectTableViewCell"
 #define BARNERCELL  @"YWBarnerTableViewCell"
-@interface YWSalesroomViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface YWSalesroomViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UITableView *tabbleViews;
+@property (nonatomic,strong)UICollectionView * starCollectView;
 @property (nonatomic,strong)UIView * footView;
 @end
 
@@ -24,10 +25,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"美食项目专场";
+    
     [self makeUI];
 }
 - (void)makeUI{
+    
+    [self.navigationItem setTitle:@"美食项目专场"];
     [self.tabbleViews registerNib:[UINib nibWithNibName:HOTPROJECTCELL bundle:nil] forCellReuseIdentifier:HOTPROJECTCELL];
     
 }
@@ -88,9 +91,30 @@
 - (void)toLookAll{
     MyLog(@"查看全部");
 }
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 3;
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    YWStarCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:STARCOLLECTVIEWCELL forIndexPath:indexPath];
+    cell.nameLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    cell.starIconImageView.layer.cornerRadius = cell.starIconImageView.height/2;
+    
+    return cell;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake(kScreen_Width/4, kScreen_Height * 220/1334);
+}
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(20, 16, 20, 16);
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    
 }
 - (UIView*)footView{
     if (!_footView) {
@@ -119,6 +143,19 @@
         line.backgroundColor = RGBCOLOR(240, 241, 242, 1);
         [_footView addSubview:line];
         
+        //明星
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
+        
+        _starCollectView = [[UICollectionView  alloc]initWithFrame:CGRectMake(0, line.bottom+10, kScreen_Width, _footView.height - allBtn.height - line.height-10) collectionViewLayout:layout];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        _starCollectView.delegate = self;
+        _starCollectView.dataSource = self;
+        _starCollectView.showsHorizontalScrollIndicator = NO;
+        _starCollectView.contentSize = CGSizeMake(kScreen_Width*1.5, _footView.height - allBtn.height - line.height-10);
+        _starCollectView.backgroundColor = [UIColor whiteColor];
+        [_footView addSubview:_starCollectView];
+        
+        [_starCollectView registerNib:[UINib nibWithNibName:STARCOLLECTVIEWCELL bundle:nil] forCellWithReuseIdentifier:STARCOLLECTVIEWCELL];
         
     }
     return _footView;
@@ -130,13 +167,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -37,15 +37,11 @@
     [self delTopLine];
     [self.view addSubview:self.BGView];
     self.delegate=self;
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedIndex1) name:@"selectedIndex" object:nil];
+
 //    self .selectedIndex =3;
 //    self .selectedIndex =0;
 }
-//点击空白处，让tabbar selectedIndex  上一个控制器
-//-(void)selectedIndex1{
-////    暂时固定在1上
-//     self .selectedIndex =1;
-//}
+
 - (void)delTopLine{
     CGRect rect = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width);
     UIGraphicsBeginImageContext(rect.size);
