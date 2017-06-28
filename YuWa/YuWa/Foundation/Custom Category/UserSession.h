@@ -56,7 +56,8 @@
 @property (nonatomic,assign)NSInteger baobaoLV;    //雨娃宝宝等级
 @property (nonatomic,assign)NSInteger baobaoEXP;    //宝宝的经验
 @property (nonatomic,assign)NSInteger baobaoNeedEXP;   //宝宝升级需要的经验
-
+//记录环信是否登录成功，成功是 yes  失败是NO；
+@property (nonatomic, assign)  BOOL isLoginHX;
 +(UserSession*)instance;  //创建单例
 +(void)clearUser;   //退出登录 删除数据
 

@@ -40,7 +40,10 @@ static UserSession * user=nil;
         [[EMClient sharedClient].options setIsAutoLogin:NO];
         
         EMError *error = [[EMClient sharedClient] logout:YES];
-        if (!error)MyLog(@"环信退出成功");
+        if (!error){
+            MyLog(@"环信退出成功");
+            [UserSession instance].isLoginHX = NO;
+        }
         [UserSession getDataFromUserDefault];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -85,6 +88,19 @@ static UserSession * user=nil;
                 [[EMClient sharedClient].options setIsAutoLogin:NO];
                 [[EMClient sharedClient].chatManager getAllConversations];
                 MyLog(@"环信登录成功");
+                [UserSession instance].isLoginHX = YES;
+            }else{
+                [UserSession instance].isLoginHX = NO;
+                //登录失败，就重新登录一次；
+                EMError *errorLog = [[EMClient sharedClient] loginWithUsername:user.account password:user.hxPassword];
+                if (!errorLog){
+                    [[EMClient sharedClient].options setIsAutoLogin:NO];
+                    [[EMClient sharedClient].chatManager getAllConversations];
+                    MyLog(@"环信登录成功");
+                    [UserSession instance].isLoginHX = YES;
+                }else{
+                    [UserSession instance].isLoginHX = NO;
+                }
             }
             
             [JPUSHService setAlias:user.account callbackSelector:nil object:nil];

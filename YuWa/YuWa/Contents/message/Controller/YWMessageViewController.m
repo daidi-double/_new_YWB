@@ -340,7 +340,12 @@
 }
 - (void)headerRereshing{
     self.pages = 0;
-    [self requestShopArrDataWithPages:0];
+    if ([UserSession instance].isLoginHX) {
+//        如果登录环信成功，就加载好友数据
+        [self requestShopArrDataWithPages:0];
+    }else{
+        [self cancelRefreshWithIsHeader:YES];
+    }
 }
 - (void)cancelRefreshWithIsHeader:(BOOL)isHeader{
     if (isHeader) {

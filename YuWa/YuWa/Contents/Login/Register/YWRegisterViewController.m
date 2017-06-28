@@ -161,11 +161,23 @@
         if (error==nil) {
             MyLog(@"环信注册成功");
             BOOL isAutoLogin = [EMClient sharedClient].options.isAutoLogin;
-            if (!isAutoLogin) {
+            if (isAutoLogin) {
                 EMError *errorLog = [[EMClient sharedClient] loginWithUsername:account password:password];
                 if (errorLog==nil){
                     [[EMClient sharedClient].options setIsAutoLogin:YES];
                 MyLog(@"环信登录成功");
+                    [UserSession instance].isLoginHX = YES;
+                }else{
+                    [UserSession instance].isLoginHX = NO;
+                    //登录失败，就在重新登录一次
+                    EMError *errorLog = [[EMClient sharedClient] loginWithUsername:account password:password];
+                    if (errorLog==nil){
+                        [[EMClient sharedClient].options setIsAutoLogin:YES];
+                        MyLog(@"环信登录成功");
+                        [UserSession instance].isLoginHX = YES;
+                    }else{
+                        [UserSession instance].isLoginHX = NO;
+                    }
                 }
             }
         }
