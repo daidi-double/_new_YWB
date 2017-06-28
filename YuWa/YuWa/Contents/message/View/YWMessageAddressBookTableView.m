@@ -165,7 +165,12 @@
     }];
 }
 - (void)headerRereshing{
-    [self requestShopArrData];
+    if ([UserSession instance].isLoginHX) {
+        //如果登录成功就加载好友数据；
+        [self requestShopArrData];
+    }else{
+        [self.mj_header endRefreshing];
+    }
 }
 
 

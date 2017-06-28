@@ -232,6 +232,18 @@
         if (!errorLog){
             [[EMClient sharedClient].options setIsAutoLogin:NO];
             MyLog(@"环信登录成功");
+            [UserSession instance].isLoginHX = YES;
+        }else{
+            [UserSession instance].isLoginHX = NO;
+            //如果登录失败，重新登录一次
+            EMError *errorLog = [[EMClient sharedClient] loginWithUsername:account password:[UserSession instance].hxPassword];
+            if (!errorLog){
+                [[EMClient sharedClient].options setIsAutoLogin:NO];
+                MyLog(@"环信登录成功");
+                [UserSession instance].isLoginHX = YES;
+            }else{
+                [UserSession instance].isLoginHX = NO;
+            }
         }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -276,6 +288,18 @@
         if (!errorLog){
             [[EMClient sharedClient].options setIsAutoLogin:NO];
             MyLog(@"环信登录成功");
+            [UserSession instance].isLoginHX = YES;
+        }else{
+            [UserSession instance].isLoginHX = NO;
+            //登录失败，就重新在登录一次
+            EMError *errorLog = [[EMClient sharedClient] loginWithUsername:account password:[UserSession instance].hxPassword];
+            if (!errorLog){
+                [[EMClient sharedClient].options setIsAutoLogin:NO];
+                MyLog(@"环信登录成功");
+                [UserSession instance].isLoginHX = YES;
+            }else{
+                [UserSession instance].isLoginHX = NO;
+            }
         }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
