@@ -10,7 +10,7 @@
 #import "YWBarnerTableViewCell.h"
 #import "YWHotProjectTableViewCell.h"
 #import "YWStarCollectionViewCell.h"
-
+#import "YWShopPlanViewController.h"//商业计划书
 #import "YWAllProjectViewController.h"//全部项目
 
 
@@ -138,7 +138,8 @@
     NSIndexPath * indexPath = [self.tabbleViews indexPathForCell:cell];
     MyLog(@"%ld~~%ld",indexPath.section,indexPath.row);
     //添加数据
-    
+    YWShopPlanViewController * planVC = [[YWShopPlanViewController alloc]init];
+    [self.navigationController pushViewController:planVC animated:YES];
     
 }
 - (void)viewWillAppear:(BOOL)animated{

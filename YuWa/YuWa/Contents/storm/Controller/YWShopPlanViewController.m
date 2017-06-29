@@ -8,7 +8,14 @@
 
 #import "YWShopPlanViewController.h"
 
-@interface YWShopPlanViewController ()
+@interface YWShopPlanViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *shopTableView;
+@property (weak, nonatomic) IBOutlet UIButton *autionBtn;//竞拍按钮
+@property (weak, nonatomic) IBOutlet UIButton *moreBtn;
+//更多按钮
+@property (weak, nonatomic) IBOutlet UILabel *cautionMoneyLabel;//保证金
+@property (weak, nonatomic) IBOutlet UIButton *payBtn;//缴纳
+
 
 @end
 
@@ -17,6 +24,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self makeUI];
+}
+
+- (void)makeUI{
+    self.title = @"商业计划书";
+    self.cautionMoneyLabel.layer.borderColor = CNaviColor.CGColor;
+    self.cautionMoneyLabel.layer.borderWidth = 0.3;
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 5;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 3;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"shopPlanCell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"shopPlanCell"];
+    }
+    return cell;
+}
+//缴纳
+- (IBAction)toPayMoneyAction:(UIButton *)sender {
+}
+//更多
+- (IBAction)moreAction:(UIButton *)sender {
+}
+//竞拍
+- (IBAction)autionAction:(UIButton *)sender {
 }
 
 - (void)didReceiveMemoryWarning {

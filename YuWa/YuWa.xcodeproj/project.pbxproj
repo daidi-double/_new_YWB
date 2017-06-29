@@ -818,6 +818,8 @@
 		AA98458C1E58428D00A3A9F9 /* WillPlayMovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA98458B1E58428D00A3A9F9 /* WillPlayMovieCell.m */; };
 		AA9F4E411F04D0BF001AFA02 /* YWShopPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9F4E3F1F04D0BF001AFA02 /* YWShopPlanViewController.m */; };
 		AA9F4E421F04D0BF001AFA02 /* YWShopPlanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA9F4E401F04D0BF001AFA02 /* YWShopPlanViewController.xib */; };
+		AA9F4E4C1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9F4E4A1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.m */; };
+		AA9F4E4D1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA9F4E4B1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.xib */; };
 		AAA459521E79173400396AE5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA459511E79173400396AE5 /* OpenGLES.framework */; };
 		AAA459541E79177400396AE5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA459531E79177400396AE5 /* CoreLocation.framework */; };
 		AAA459561E79179800396AE5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA459551E79179800396AE5 /* AdSupport.framework */; };
@@ -2808,6 +2810,9 @@
 		AA9F4E3E1F04D0BF001AFA02 /* YWShopPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopPlanViewController.h; sourceTree = "<group>"; };
 		AA9F4E3F1F04D0BF001AFA02 /* YWShopPlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopPlanViewController.m; sourceTree = "<group>"; };
 		AA9F4E401F04D0BF001AFA02 /* YWShopPlanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopPlanViewController.xib; sourceTree = "<group>"; };
+		AA9F4E491F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopPlanFirstTableViewCell.h; sourceTree = "<group>"; };
+		AA9F4E4A1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopPlanFirstTableViewCell.m; sourceTree = "<group>"; };
+		AA9F4E4B1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopPlanFirstTableViewCell.xib; sourceTree = "<group>"; };
 		AAA459511E79173400396AE5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AAA459531E79177400396AE5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AAA459551E79179800396AE5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -6260,11 +6265,22 @@
 		AA9F4E3D1F04D09D001AFA02 /* 计划书 */ = {
 			isa = PBXGroup;
 			children = (
+				AA9F4E431F04EA06001AFA02 /* cell */,
 				AA9F4E3E1F04D0BF001AFA02 /* YWShopPlanViewController.h */,
 				AA9F4E3F1F04D0BF001AFA02 /* YWShopPlanViewController.m */,
 				AA9F4E401F04D0BF001AFA02 /* YWShopPlanViewController.xib */,
 			);
 			name = "计划书";
+			sourceTree = "<group>";
+		};
+		AA9F4E431F04EA06001AFA02 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA9F4E491F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.h */,
+				AA9F4E4A1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.m */,
+				AA9F4E4B1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.xib */,
+			);
+			name = cell;
 			sourceTree = "<group>";
 		};
 		AAA4595C1E7941F300396AE5 /* 地图 */ = {
@@ -10599,7 +10615,7 @@
 					B38B2C6B1D8FAC5A004D5256 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = JQ283T24DV;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 0;
@@ -10762,6 +10778,7 @@
 				AAF80CEC1E67AD5B0000C4BC /* home_03.png in Resources */,
 				AA3544301E9DF23800A2EC73 /* 3baobaoLVUP0@2x.jpg in Resources */,
 				B3D219281DB1241800D661F5 /* YWSharedEditorViewController.xib in Resources */,
+				AA9F4E4D1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.xib in Resources */,
 				AA3545641E9DF23A00A2EC73 /* 3baobaoBG1@2x.jpg in Resources */,
 				AA3544BC1E9DF23900A2EC73 /* 0baobaoBG28@2x.jpg in Resources */,
 				AAFA57A71ED2E540006CF2D7 /* 酒店.png in Resources */,
@@ -11957,6 +11974,7 @@
 				AACF6BD91F0376B00072478A /* YWSiftCollectionViewCell.m in Sources */,
 				AA3AB5341E5D1F92009BD8D9 /* PlayViewController.m in Sources */,
 				C10E93A41DD1815300728B3D /* PHCategoryModel.m in Sources */,
+				AA9F4E4C1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.m in Sources */,
 				AA6208121E8E8CCB0001960C /* YWScanViewController.m in Sources */,
 				B33A269D1D9A68040092CB12 /* EaseUserCell.m in Sources */,
 				AAD988C01ECAE9110055D044 /* FilmShowTimeModel.m in Sources */,
@@ -12675,7 +12693,7 @@
 				CODE_SIGN_ENTITLEMENTS = YuWa/YuWa.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mingbang Network Technology Co., Ltd. (JQ283T24DV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JQ283T24DV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12713,8 +12731,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.duruikeji.YuWa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9b9f5f2-2c2c-44e0-87ad-366c261519cb";
-				PROVISIONING_PROFILE_SPECIFIER = luoyun;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -12728,7 +12746,7 @@
 				CODE_SIGN_ENTITLEMENTS = YuWa/YuWa.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mingbang Network Technology Co., Ltd. (JQ283T24DV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JQ283T24DV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12766,8 +12784,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.duruikeji.YuWa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a9b9f5f2-2c2c-44e0-87ad-366c261519cb";
-				PROVISIONING_PROFILE_SPECIFIER = luoyun;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

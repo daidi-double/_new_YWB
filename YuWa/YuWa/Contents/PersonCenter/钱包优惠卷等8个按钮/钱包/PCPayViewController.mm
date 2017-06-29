@@ -44,7 +44,7 @@
 @property (nonatomic,assign)NSInteger minute;
 @property (nonatomic,strong)UILabel * timerLabel;
 
-
+@property (nonatomic,assign)BOOL isPaySuccess;//判断是否支付成功
 @property(nonatomic,assign)CGFloat accountMoney;  //账户余额   这个吊接口
 @property(nonatomic,assign)BOOL isSelectedOn;  //选择了是否使用余额
 @property(nonatomic,assign)CGFloat needPayMoney;  //需要付的钱
@@ -62,7 +62,7 @@
     
     if (self.status == 1) {
         [self.navigationItem setHidesBackButton:YES];
-
+        self.isPaySuccess = NO;
     self.timerLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 100, kScreen_Width/2, 100)];
     
     self.timerLabel.textAlignment = NSTextAlignmentCenter;
@@ -79,6 +79,9 @@
 }
 //返回，释放座位
 - (void)backAction{
+    if (self.isPaySuccess) {
+        [self.navigationController popToViewController:[self.navigationController.childViewControllers objectAtIndex:2] animated:YES];
+    }else{
         UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"返回将取消您的订单,是否继续" preferredStyle:UIAlertControllerStyleAlert];
         
         [controller addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -87,7 +90,7 @@
         }]];
         [controller addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:controller animated:YES completion:nil];
-        
+    }
 
 }
 
@@ -683,7 +686,8 @@
         MyLog(@"参数%@",params);
         MyLog(@"订单状态%@",data);
         if ([data[@"errorCode"] integerValue ] == 0) {
-            [JRToast showWithText:@"购买成功" duration:2];
+            [JRToast showWithText:data[@"data"] duration:2];
+            self.isPaySuccess = YES;
             if (self.timer) {
                 
                 [self.timer invalidate];
@@ -693,7 +697,8 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:1] animated:YES];
             });
-        }else if([data[@"data"] integerValue ] == 1){
+        }else if([data[@"errorCode"] integerValue ] == 1){
+            self.isPaySuccess = NO;
             [JRToast showWithText:@"购买失败" duration:2];
             if (self.timer) {
                 
@@ -704,6 +709,9 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:1] animated:YES];
                   });
+        }else if([data[@"errorCode"] integerValue ] == 3){
+            [JRToast showWithText:data[@"errorMessage"]];
+            
         }else{
             static int a = 0;
             if (a>15) {
@@ -759,7 +767,7 @@
         MyLog(@"判断支付结果%@",data);
         if ([data[@"errorCode"] integerValue] == 0) {
             if ([data[@"data"][@"is_paid"] integerValue] == 1) {
-                
+                self.isPaySuccess = YES;
 //                [JRToast showWithText:@"支付成功" duration:1];
                 [self getAccountMoney];
                 if (self.status == 1) {
@@ -770,6 +778,7 @@
                     [self sureOrder];
             }
             }else{
+                self.isPaySuccess = NO;
                 [JRToast showWithText:@"支付失败" duration:1];
             }
         }
