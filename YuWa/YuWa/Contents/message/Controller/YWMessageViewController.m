@@ -463,6 +463,7 @@
         }
 //        [self.tableView reloadData];
     }
+    [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
 }
 -(NSString *)path{
     if (!_path) {
