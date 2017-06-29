@@ -239,6 +239,9 @@
     
     if (sender.selectedSegmentIndex == 0) {
         [self.tableView.mj_header beginRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RefreshTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self cancelRefreshWithIsHeader:YES];
+        });
     }else{
         [self.addressBooktableView.mj_header beginRefreshing];
     }
@@ -360,9 +363,10 @@
     }
 }
 - (void)cancelRefreshWithIsHeader:(BOOL)isHeader{
-    if (isHeader) {
+    if ([self.tableView.mj_header isRefreshing]) {
         [self.tableView.mj_header endRefreshing];
-    }else{
+    }
+    if ([self.tableView.mj_footer isRefreshing]) {
         [self.tableView.mj_footer endRefreshing];
     }
 }
