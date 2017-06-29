@@ -55,6 +55,7 @@
     
     NSArray * btnAry = @[chooseBtnItem,searchBtnItem];
     self.navigationItem.rightBarButtonItems = btnAry;
+    
     [self.tableViews registerNib:[UINib nibWithNibName:PROJECTCELL bundle:nil] forCellReuseIdentifier:PROJECTCELL];
     
 }
@@ -215,7 +216,6 @@
         labelOne.textColor = [UIColor colorWithHexString:@"#ffffff"];
         [header addSubview:labelOne];
     }else{
-        
         UIView * whiteView = [[UIView alloc]initWithFrame:CGRectMake(12, 27, 8, 23)];
         whiteView.backgroundColor = [UIColor whiteColor];
         [header addSubview:whiteView];
@@ -249,7 +249,7 @@
 //    _chooseView.hidden = YES;
 //    markBarBtn.selected = !markBarBtn.selected;
 }
-- (UIView *)chooseView1{
+- (UIView *)chooseView{
     if (!_chooseView) {
         _chooseView = [[UIView alloc]initWithFrame:CGRectMake(0, NavigationHeight, kScreen_Width, kScreen_Height)];
         UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, _chooseView.height)];
