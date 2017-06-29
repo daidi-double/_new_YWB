@@ -34,6 +34,8 @@
 @property (nonatomic,strong)YWMessageAddressBookTableView * addressBooktableView;
 @property (nonatomic,strong)UIBarButtonItem * rightBarBtn;
 @property (nonatomic,copy)NSString * type;
+//存好友的数组路径
+@property (nonatomic, copy) NSString *path;
 @end
 
 @implementation YWMessageViewController
@@ -161,11 +163,17 @@
     self.addressBooktableView.friendsChatBlock = ^(YWMessageAddressBookModel * model){
         [weakSelf chatWithUser:model];
     };
+    //models 的成员数组是  @[YWMessageAddressBookModel}
     self.addressBooktableView.friendsModel = ^(NSArray * models){
         if ([models.lastObject isEqual: @1]) {
             return ;
         }
-        
+        NSMutableArray *friendsModels = [NSMutableArray arrayWithCapacity:models.count];
+        for (NSArray * model in models) {
+            YWMessageAddressBookModel * AddressBookModel = model.lastObject;
+            [friendsModels  addObject:AddressBookModel.nikeName];
+        }
+        [friendsModels writeToFile:weakSelf.path atomically:YES];
     };
     //点击了cell右滑编辑按钮的回调函数
     self.addressBooktableView.changeMarkName = ^(YWMessageAddressBookModel * model){
@@ -451,6 +459,12 @@
 //        [self.tableView reloadData];
     }
 }
-
+-(NSString *)path{
+    if (!_path) {
+        _path  = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+        _path = [_path stringByAppendingPathComponent:@"isFriends.plist"];
+    }
+    return _path;
+}
 
 @end
