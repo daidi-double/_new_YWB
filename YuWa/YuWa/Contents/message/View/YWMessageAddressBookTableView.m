@@ -188,6 +188,8 @@
             //数组==1 时候表示没有好友，就不存
             self.friendsModel(@[@1]);
         }
+        [self.dataArr removeAllObjects];
+        [self.keyArr removeAllObjects];
         [self reloadData];
         if ([self.mj_header isRefreshing]) {
             [self.mj_header endRefreshing];
