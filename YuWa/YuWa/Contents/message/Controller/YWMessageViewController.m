@@ -460,12 +460,11 @@
                 if (count>0) {
                     [self.tableView reloadData];
                 }
-                [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
             }];
         }
 //        [self.tableView reloadData];
     }
-      [self.tableView reloadData];
+    [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
 }
 -(NSString *)path{
     if (!_path) {
