@@ -174,6 +174,7 @@
             [friendsModels  addObject:AddressBookModel.nikeName];
         }
         [friendsModels writeToFile:weakSelf.path atomically:YES];
+        [weakSelf requestShopArrDataWithPages:0];
     };
     //点击了cell右滑编辑按钮的回调函数
     self.addressBooktableView.changeMarkName = ^(YWMessageAddressBookModel * model){
@@ -191,7 +192,7 @@
 }
 -(void)chanegMarkName:(NSString *)name WithModel:(YWMessageAddressBookModel *)model{
     NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_SEEOTHERCENTER];
-    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"other_uid":model.user_id,@"user_type":@(1),@"nickname":name};
+    NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"remark_id":@([model.user_id integerValue]),@"user_type":@(1),@"remark":name,@"ruser_type":@([model.user_type integerValue])};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
         MyLog(@"！！！！%@",data);
@@ -350,7 +351,7 @@
     self.pages = 0;
     if ([UserSession instance].isLoginHX) {
 //        如果登录环信成功，就加载好友数据
-        [self requestShopArrDataWithPages:0];
+        [self.addressBooktableView requestShopArrData];
     }else{
         [self cancelRefreshWithIsHeader:YES];
     }
