@@ -15,4 +15,5 @@
 @property (nonatomic,copy)NSString * nikeName;//昵称
 @property (nonatomic,copy)NSString * header_img;//头像
 @property (nonatomic,copy)NSString * user_type;
+@property (nonatomic,copy)NSString * friend_remark;//修改后的好友昵称
 @end

@@ -191,7 +191,7 @@
     [self.view addSubview:self.addressBooktableView];
 }
 -(void)chanegMarkName:(NSString *)name WithModel:(YWMessageAddressBookModel *)model{
-    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_SEEOTHERCENTER];
+    NSString*urlStr=[NSString stringWithFormat:@"%@%@",HTTP_ADDRESS,HTTP_SEEOTHEREMARKNAME];
     NSDictionary*params=@{@"device_id":[JWTools getUUID],@"token":[UserSession instance].token,@"user_id":@([UserSession instance].uid),@"remark_id":@([model.user_id integerValue]),@"user_type":@(1),@"remark":name,@"ruser_type":@([model.user_type integerValue])};
     HttpManager*manager=[[HttpManager alloc]init];
     [manager postDatasNoHudWithUrl:urlStr withParams:params compliation:^(id data, NSError *error) {
@@ -199,10 +199,9 @@
         NSNumber*number=data[@"errorCode"];
         NSString*errorCode=[NSString stringWithFormat:@"%@",number];
         if ([errorCode isEqualToString:@"0"]) {
-            NSDictionary*dict=data[@"data"];
-            //            self.nameLabel.text = dict[@"nickname"];
+
             [self.addressBooktableView requestShopArrData];
-            [JRToast showWithText:@"备注修改成功"];
+            [JRToast showWithText:data[@"msg"]];
         }else{
             [JRToast showWithText:data[@"errorMessage"]];
         }
@@ -258,8 +257,12 @@
     
     //先判断是否是商家
     YWMessageChatViewController *chatVC = [[YWMessageChatViewController alloc] initWithConversationChatter:model.hxID conversationType:EMConversationTypeChat];
-    
-    chatVC.friendNikeName = model.nikeName;
+    if ([model.friend_remark isEqualToString:@""]) {
+        
+        chatVC.friendNikeName = model.nikeName;
+    }else{
+        chatVC.friendNikeName = model.friend_remark;
+    }
     chatVC.friendID = model.user_id;
     chatVC.friendIcon = model.header_img;
     chatVC.user_type = model.user_type;
@@ -435,10 +438,8 @@
                 if (badgeValue == 0) {
                     item.badgeValue = nil;
                 }
-//                
-//                if (count >= sorted.count) {
-//                    [self.tableView reloadData];
-//                }
+
+                [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
                 [self.tableView reloadData];
             } failur:^(id responsObj, NSError *error) {
                 MyLog(@"Regieter Code pragram is %@",pragram);
@@ -455,10 +456,12 @@
                 if (count>0) {
                     [self.tableView reloadData];
                 }
+                [self cancelRefreshWithIsHeader:(page==0?YES:NO)];
             }];
         }
 //        [self.tableView reloadData];
     }
+      [self.tableView reloadData];
 }
 -(NSString *)path{
     if (!_path) {

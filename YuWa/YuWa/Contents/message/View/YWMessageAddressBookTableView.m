@@ -91,7 +91,7 @@
             self.changeMarkName(self.dataArr[indexPath.section - 1][indexPath.row]);
         }
         }];
-    test.backgroundColor = [UIColor colorWithHexString:@"3CBCED"];
+    test.backgroundColor = CNaviColor;
     return @[deleteRoWAction,test];//最后返回这俩个RowAction 的数组
 }
 - (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
