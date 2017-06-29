@@ -206,6 +206,7 @@
 #define HTTP_MYNOTEBEPRAISE        @"/api.php/User/myPraised/"      //被赞
 #define HTTP_MYNOTEBECOLLECT       @"/api.php/User/myCollected/"   //被收藏
 #define HTTP_SEEOTHERCENTER       @"/api.php/User/getUserInfo/"  //1查看他人个人中心
+#define HTTP_SEEOTHEREMARKNAME      @"/api.php/User/editFriend/"  //1查看他人个人中心
 #define HTTP_TAABOUNT              @"/api.php/User/otherAttention/"  //1他人的关注
 #define HTTP_TAFANS                @"/api.php/User/otherFans/"       //1他人的粉丝
 #define HTTP_Other_Node @"/api.php/Note/getOtherNewNote/"        //1别人的笔记
