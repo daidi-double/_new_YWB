@@ -21,6 +21,12 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableViews;
 @property (nonatomic,strong)UIView * chooseView;//筛选view
 @property (nonatomic,strong)UICollectionView * itemCollectView;
+//状态cell
+@property (nonatomic, strong) YWSiftCollectionViewCell *stausCell;
+//阶段cell
+@property (nonatomic, strong) YWSiftCollectionViewCell *stageClee;
+//类别cell
+@property (nonatomic, strong) YWSiftCollectionViewCell *typeCell;
 @end
 
 @implementation YWAllProjectViewController
@@ -100,12 +106,20 @@
     YWSiftCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SIFTCELL forIndexPath:indexPath];
     cell.backgroundColor = [UIColor clearColor];
     cell.nameLabel.text = @"全部";
-    if (indexPath.item == 0) {
-        cell.selected = YES;
-        cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
-        cell.nameLabel.textColor = RGBCOLOR(123, 124, 125, 1);
-    
-    }
+        if (indexPath.item == 0) {
+            cell.selected = YES;
+            cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
+            cell.nameLabel.textColor = RGBCOLOR(123, 124, 125, 1);
+            if (indexPath.section == 0) {
+                self.stausCell = cell;
+            }
+            if (indexPath.section == 1) {
+                self.stageClee = cell;
+            }
+            if (indexPath.section == 2) {
+                self.typeCell = cell;
+            }
+        }
     [_itemCollectView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:2] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     return cell;
 }
@@ -119,9 +133,21 @@
 //选中时的操作
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-
     YWSiftCollectionViewCell *cell = (YWSiftCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if (indexPath.section== 0) {
+    [self updateCellStatus:self.stausCell selected:NO itemAtIndexPath:indexPath];
+        self.stausCell = cell;
+    }
+    if (indexPath.section== 1) {
+        [self updateCellStatus:self.stageClee selected:NO itemAtIndexPath:indexPath];
+        self.stageClee = cell;
+    }
+    if (indexPath.section== 2) {
+        [self updateCellStatus:self.typeCell selected:NO itemAtIndexPath:indexPath];
+        self.typeCell = cell;
+    }
+
+
 //    cell.backgroundColor = [UIColor whiteColor];
     
     //选中之后的cell变颜色
@@ -129,14 +155,14 @@
 }
 
 //取消选中操作
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    YWSiftCollectionViewCell *cell = (YWSiftCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-
-
-
-    [self updateCellStatus:cell selected:NO itemAtIndexPath:indexPath];
-}
+//- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    YWSiftCollectionViewCell *cell = (YWSiftCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//
+//
+//
+//    [self updateCellStatus:cell selected:NO itemAtIndexPath:indexPath];
+//}
 // 改变cell的背景颜色
 -(void)updateCellStatus:(YWSiftCollectionViewCell *)cell selected:(BOOL)selected itemAtIndexPath:(NSIndexPath *)indexPath
 {
