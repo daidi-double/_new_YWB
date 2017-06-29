@@ -17,7 +17,7 @@
 #define STARCOLLECTVIEWCELL @"YWStarCollectionViewCell"
 #define HOTPROJECTCELL @"YWHotProjectTableViewCell"
 #define BARNERCELL  @"YWBarnerTableViewCell"
-@interface YWSalesroomViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface YWSalesroomViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,YWHotProjectTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tabbleViews;
 @property (nonatomic,strong)UICollectionView * starCollectView;
 @property (nonatomic,strong)UIView * footView;
@@ -64,7 +64,8 @@
         return cell;
     }else {
         YWHotProjectTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:HOTPROJECTCELL];
-        
+        cell.selectionStyle = NO;
+        cell.delegate = self;
         return cell;
     }
 }
@@ -130,6 +131,15 @@
     MyLog(@"全部项目");
     YWAllProjectViewController * allVC = [[YWAllProjectViewController alloc]init];
     [self.navigationController pushViewController:allVC animated:YES];
+}
+//商业计划书
+- (void)toShopPlanPage:(UIButton *)sender{
+    YWHotProjectTableViewCell * cell = (YWHotProjectTableViewCell*)[[sender superview] superview];
+    NSIndexPath * indexPath = [self.tabbleViews indexPathForCell:cell];
+    MyLog(@"%ld~~%ld",indexPath.section,indexPath.row);
+    //添加数据
+    
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

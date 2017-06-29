@@ -816,6 +816,8 @@
 		AA8846361E667755005F657D /* SweepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA8846341E667755005F657D /* SweepViewController.xib */; };
 		AA9845891E5834B600A3A9F9 /* RecommendScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9845881E5834B600A3A9F9 /* RecommendScrollView.m */; };
 		AA98458C1E58428D00A3A9F9 /* WillPlayMovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA98458B1E58428D00A3A9F9 /* WillPlayMovieCell.m */; };
+		AA9F4E411F04D0BF001AFA02 /* YWShopPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9F4E3F1F04D0BF001AFA02 /* YWShopPlanViewController.m */; };
+		AA9F4E421F04D0BF001AFA02 /* YWShopPlanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA9F4E401F04D0BF001AFA02 /* YWShopPlanViewController.xib */; };
 		AAA459521E79173400396AE5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA459511E79173400396AE5 /* OpenGLES.framework */; };
 		AAA459541E79177400396AE5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA459531E79177400396AE5 /* CoreLocation.framework */; };
 		AAA459561E79179800396AE5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA459551E79179800396AE5 /* AdSupport.framework */; };
@@ -2803,6 +2805,9 @@
 		AA9845881E5834B600A3A9F9 /* RecommendScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendScrollView.m; sourceTree = "<group>"; };
 		AA98458A1E58428D00A3A9F9 /* WillPlayMovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WillPlayMovieCell.h; sourceTree = "<group>"; };
 		AA98458B1E58428D00A3A9F9 /* WillPlayMovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WillPlayMovieCell.m; sourceTree = "<group>"; };
+		AA9F4E3E1F04D0BF001AFA02 /* YWShopPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopPlanViewController.h; sourceTree = "<group>"; };
+		AA9F4E3F1F04D0BF001AFA02 /* YWShopPlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopPlanViewController.m; sourceTree = "<group>"; };
+		AA9F4E401F04D0BF001AFA02 /* YWShopPlanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YWShopPlanViewController.xib; sourceTree = "<group>"; };
 		AAA459511E79173400396AE5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AAA459531E79177400396AE5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AAA459551E79179800396AE5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -6252,6 +6257,16 @@
 			name = "抓娃娃";
 			sourceTree = "<group>";
 		};
+		AA9F4E3D1F04D09D001AFA02 /* 计划书 */ = {
+			isa = PBXGroup;
+			children = (
+				AA9F4E3E1F04D0BF001AFA02 /* YWShopPlanViewController.h */,
+				AA9F4E3F1F04D0BF001AFA02 /* YWShopPlanViewController.m */,
+				AA9F4E401F04D0BF001AFA02 /* YWShopPlanViewController.xib */,
+			);
+			name = "计划书";
+			sourceTree = "<group>";
+		};
 		AAA4595C1E7941F300396AE5 /* 地图 */ = {
 			isa = PBXGroup;
 			children = (
@@ -6584,6 +6599,7 @@
 		AAF235BA1F010E4C00D1E67C /* 拍卖场 */ = {
 			isa = PBXGroup;
 			children = (
+				AA9F4E3D1F04D09D001AFA02 /* 计划书 */,
 				AACF6BD01F035A9E0072478A /* 全部项目 */,
 				AA1CF6BD1F028E9400806E9F /* cell */,
 				AAF235BB1F010E8100D1E67C /* YWSalesroomViewController.h */,
@@ -10861,6 +10877,7 @@
 				25B3C5B01ECD8E4000674F20 /* 16.png in Resources */,
 				AAFAE3D91EE63E8500D24DCF /* freecatch@2x.png in Resources */,
 				AA3544491E9DF23800A2EC73 /* 3baobaoLVUP32@2x.jpg in Resources */,
+				AA9F4E421F04D0BF001AFA02 /* YWShopPlanViewController.xib in Resources */,
 				C13019A61DB1FD2F00E24C88 /* qr_vc_left@2x.png in Resources */,
 				B38B2F2E1D8FC82F004D5256 /* RBNodeBGView.xib in Resources */,
 				C1F7BE3C1DB1C95400CCAF96 /* InfoPhotoTableViewCell.xib in Resources */,
@@ -11971,6 +11988,7 @@
 				B38B2E381D8FACD8004D5256 /* UIImageView+HighlightedWebCache.m in Sources */,
 				B33A26561D9A68040092CB12 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				B3FEBA031D9B64C1003CDEF2 /* YWMessageNotificationViewController.m in Sources */,
+				AA9F4E411F04D0BF001AFA02 /* YWShopPlanViewController.m in Sources */,
 				B38B2F331D8FC82F004D5256 /* UIBarButtonItem+SettingCustom.m in Sources */,
 				C1C1481E1DE83B44001FCBC3 /* pointMoneyHeaderView.m in Sources */,
 				AA29C2421EAD8EB60092EF6F /* YWShopDetailViewController.m in Sources */,

@@ -196,7 +196,7 @@
     
         header.backgroundColor = [UIColor clearColor];
     if (indexPath.section == 0) {
-        UIView * whiteView = [[UIView alloc]initWithFrame:CGRectMake(12, 27, 8, 23)];
+        UIView * whiteView = [[UIView alloc]initWithFrame:CGRectMake(12, 10, 8, 23)];
         whiteView.backgroundColor = [UIColor whiteColor];
         [header addSubview:whiteView];
         UILabel * labelOne = [[UILabel alloc]initWithFrame:CGRectMake(whiteView.right+10, 0, 55, 30)];
@@ -206,7 +206,7 @@
         labelOne.textColor = [UIColor colorWithHexString:@"#ffffff"];
         [header addSubview:labelOne];
     }else if (indexPath.section == 1){
-        UIView * whiteView = [[UIView alloc]initWithFrame:CGRectMake(12, 27, 8, 23)];
+        UIView * whiteView = [[UIView alloc]initWithFrame:CGRectMake(12, 10, 8, 23)];
         whiteView.backgroundColor = [UIColor whiteColor];
         [header addSubview:whiteView];
         UILabel * labelOne = [[UILabel alloc]initWithFrame:CGRectMake(whiteView.right+10, 0, 55, 30)];
@@ -216,7 +216,7 @@
         labelOne.textColor = [UIColor colorWithHexString:@"#ffffff"];
         [header addSubview:labelOne];
     }else{
-        UIView * whiteView = [[UIView alloc]initWithFrame:CGRectMake(12, 27, 8, 23)];
+        UIView * whiteView = [[UIView alloc]initWithFrame:CGRectMake(12, 5, 8, 23)];
         whiteView.backgroundColor = [UIColor whiteColor];
         [header addSubview:whiteView];
         UILabel * labelOne = [[UILabel alloc]initWithFrame:CGRectMake(whiteView.right+10, 0, 55, 30)];
@@ -265,7 +265,7 @@
 //        [_chooseView addGestureRecognizer:cancelTouch];
         
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
-        layout.headerReferenceSize =CGSizeMake(kScreen_Width,40);//头视图大小
+        layout.headerReferenceSize =CGSizeMake(kScreen_Width,30);//头视图大小
         _itemCollectView = [[UICollectionView  alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _chooseView.height) collectionViewLayout:layout];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _itemCollectView.delegate = self;

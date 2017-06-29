@@ -76,6 +76,9 @@
                         <state key="normal" title="立即抢拍">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="auctionAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kre-Ti-Ja3"/>
+                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-banner" translatesAutoresizingMaskIntoConstraints="NO" id="NBR-VL-n0g">
                         <rect key="frame" x="16" y="198" width="45" height="45"/>

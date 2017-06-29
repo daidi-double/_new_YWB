@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol YWHotProjectTableViewCellDelegate <NSObject>
 
-@interface YWHotProjectTableViewCell : UITableViewCell
+- (void)toShopPlanPage:(UIButton*)sender;
+//- (void)toShopPlanPages:(UIImageView*)imageView;
+
+@end
+@interface YWHotProjectTableViewCell : UITableViewCell<UIGestureRecognizerDelegate>
+
+@property (nonatomic,assign)id<YWHotProjectTableViewCellDelegate>delegate;
 @property (weak, nonatomic) IBOutlet UIImageView *bigImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *shopIconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
@@ -21,3 +28,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *auctionBtn;//竞拍按钮
 
 @end
+
+
+
