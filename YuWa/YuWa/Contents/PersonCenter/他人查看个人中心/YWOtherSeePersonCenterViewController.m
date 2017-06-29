@@ -312,9 +312,10 @@
     // 地点
     UILabel*locateLabel=[showView viewWithTag:3];
     locateLabel.text=self.HeaderModel.address;
-    // 备注按钮
+    // 备注按钮 默认是隐藏的
     UIButton*markBtn=[showView viewWithTag:80];
     [markBtn addTarget:self action:@selector(markBtn:) forControlEvents:UIControlEventTouchDown];
+    markBtn.hidden = YES;
     
    //创建两个按钮 关注和加好友
     UIButton*PersonInfo=[showView viewWithTag:4]; //个人资料
@@ -333,7 +334,10 @@
 //    判断是否是好友
     
     if ([arr containsObject:self.HeaderModel.nickname]) {
+        //表示是好友，所以添加好友按钮要隐藏掉
         friend.hidden = YES;
+        //是好友，就显示可备注好友的按钮
+        markBtn.hidden = NO;
     }
     [friend setTitle:@"加好友" forState:UIControlStateNormal];
     [friend setTitle:@"等待验证" forState:UIControlStateSelected];
