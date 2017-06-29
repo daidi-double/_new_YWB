@@ -120,7 +120,7 @@
                 self.typeCell = cell;
             }
         }
-    [_itemCollectView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:2] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+//    [_itemCollectView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:2] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     return cell;
 }
 /**************修改选中cell的背景颜色*******************/
