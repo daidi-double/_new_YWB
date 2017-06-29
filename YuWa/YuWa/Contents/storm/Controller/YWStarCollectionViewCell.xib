@@ -20,13 +20,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baobaoBG3" translatesAutoresizingMaskIntoConstraints="NO" id="upl-LW-tMT">
-                        <rect key="frame" x="0.0" y="0.0" width="133" height="133"/>
+                        <rect key="frame" x="8" y="8" width="117" height="117"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="upl-LW-tMT" secondAttribute="height" multiplier="1:1" id="tY9-7j-UCu"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="double" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GZ-hy-vVI">
-                        <rect key="frame" x="0.0" y="133" width="133" height="40"/>
+                        <rect key="frame" x="0.0" y="125" width="133" height="43"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -34,13 +34,13 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="3GZ-hy-vVI" secondAttribute="bottom" id="793-iK-7Ri"/>
-                <constraint firstAttribute="trailing" secondItem="upl-LW-tMT" secondAttribute="trailing" id="C0y-aL-HvZ"/>
-                <constraint firstItem="upl-LW-tMT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="EDC-z4-vA4"/>
+                <constraint firstAttribute="bottom" secondItem="3GZ-hy-vVI" secondAttribute="bottom" constant="5" id="793-iK-7Ri"/>
+                <constraint firstAttribute="trailing" secondItem="upl-LW-tMT" secondAttribute="trailing" constant="8" id="Nh2-k2-T1P"/>
                 <constraint firstItem="3GZ-hy-vVI" firstAttribute="top" secondItem="upl-LW-tMT" secondAttribute="bottom" id="TjU-fk-A9U"/>
                 <constraint firstAttribute="trailing" secondItem="3GZ-hy-vVI" secondAttribute="trailing" id="cT3-A4-Itw"/>
+                <constraint firstItem="upl-LW-tMT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="jdn-6e-JlJ"/>
                 <constraint firstItem="3GZ-hy-vVI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="tdA-7B-lMw"/>
-                <constraint firstItem="upl-LW-tMT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vdf-56-0hC"/>
+                <constraint firstItem="upl-LW-tMT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="wgj-wf-iFW"/>
             </constraints>
             <size key="customSize" width="133" height="173"/>
             <connections>

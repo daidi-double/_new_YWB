@@ -11,6 +11,9 @@
 #import "YWHotProjectTableViewCell.h"
 #import "YWStarCollectionViewCell.h"
 
+#import "YWAllProjectViewController.h"//全部项目
+
+
 #define STARCOLLECTVIEWCELL @"YWStarCollectionViewCell"
 #define HOTPROJECTCELL @"YWHotProjectTableViewCell"
 #define BARNERCELL  @"YWBarnerTableViewCell"
@@ -18,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tabbleViews;
 @property (nonatomic,strong)UICollectionView * starCollectView;
 @property (nonatomic,strong)UIView * footView;
+@property (nonatomic,strong)UIView * headerView;
 @end
 
 @implementation YWSalesroomViewController
@@ -32,7 +36,12 @@
     
     [self.navigationItem setTitle:@"美食项目专场"];
     [self.tabbleViews registerNib:[UINib nibWithNibName:HOTPROJECTCELL bundle:nil] forCellReuseIdentifier:HOTPROJECTCELL];
+    UIBarButtonItem * searchBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_homepage_search"] style:UIBarButtonItemStylePlain target:self action:@selector(searchProject)];
+    self.navigationItem.rightBarButtonItem = searchBtn;
     
+}
+- (void)searchProject{
+    MyLog(@"搜索项目");
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -72,7 +81,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 1) {
-        return 10;
+        return 50;
     }
     return 0.01f;
 }
@@ -88,6 +97,12 @@
     }
     return nil;
 }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        return self.headerView;
+    }
+    return nil;
+}
 - (void)toLookAll{
     MyLog(@"查看全部");
 }
@@ -97,20 +112,24 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 3;
+    return 6;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     YWStarCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:STARCOLLECTVIEWCELL forIndexPath:indexPath];
-    cell.nameLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    cell.starIconImageView.layer.cornerRadius = cell.starIconImageView.height/2;
-    
+  
     return cell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(kScreen_Width/4, kScreen_Height * 220/1334);
+    return CGSizeMake((kScreen_Width-32)/4, kScreen_Height * 220/1334);
 }
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(20, 16, 20, 16);
+    return UIEdgeInsetsMake(0, 8, 0, 8);
+}
+
+- (void)toAllProject{
+    MyLog(@"全部项目");
+    YWAllProjectViewController * allVC = [[YWAllProjectViewController alloc]init];
+    [self.navigationController pushViewController:allVC animated:YES];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -146,7 +165,7 @@
         //明星
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
         
-        _starCollectView = [[UICollectionView  alloc]initWithFrame:CGRectMake(0, line.bottom+10, kScreen_Width, _footView.height - allBtn.height - line.height-10) collectionViewLayout:layout];
+        _starCollectView = [[UICollectionView  alloc]initWithFrame:CGRectMake(0, line.bottom+5, kScreen_Width, _footView.height - allBtn.height - line.height-5) collectionViewLayout:layout];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _starCollectView.delegate = self;
         _starCollectView.dataSource = self;
@@ -160,7 +179,38 @@
     }
     return _footView;
 }
+- (UIView*)headerView{
+    if (!_headerView) {
+        _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 50)];
+        _headerView.backgroundColor = [UIColor clearColor];
+        
+        UIView * bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 10, kScreen_Width, 40)];
+        bgView.backgroundColor = [UIColor whiteColor];
+        
+        [_headerView addSubview:bgView];
+        UILabel * sectionNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, kScreen_Width/4, 25)];
+        sectionNameLabel.centerY = 20;
+        sectionNameLabel.textColor = [UIColor colorWithHexString:@"#333333"];
+        sectionNameLabel.font = [UIFont systemFontOfSize:15];
+        sectionNameLabel.text = @"热门项目";
+        [bgView addSubview:sectionNameLabel];
+        
+        UIButton * allBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        allBtn.frame = CGRectMake(kScreen_Width*0.7f, 0, kScreen_Width*0.25f, 40);
+        [allBtn setTitle:@"全部项目" forState:UIControlStateNormal];
+        [allBtn setImage:[UIImage imageNamed:@"right"] forState:UIControlStateNormal];
+        [allBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 65, 0, -65)];
+        [allBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
+        [allBtn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+        allBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [allBtn addTarget:self action:@selector(toAllProject) forControlEvents:UIControlEventTouchUpInside];
+        [bgView addSubview:allBtn];
+        
 
+        
+    }
+   return _headerView;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

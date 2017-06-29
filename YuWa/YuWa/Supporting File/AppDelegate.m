@@ -153,7 +153,7 @@
     apnsCertName = @"YvWaNotificationProducation";
 #endif
     NSString * appkey= @"ceoshanghaidurui#duruikejiyuwa";
-//    NSString * appkey = @"1105170616115279#yuwashop";
+
     
     EMOptions *options = [EMOptions optionsWithAppkey:appkey];
     options.apnsCertName = apnsCertName;

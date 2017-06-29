@@ -13,8 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.nameLabel.textColor = [UIColor colorWithHexString:@"333333"];
-    self.starIconImageView.layer.cornerRadius = self.starIconImageView.height/2;
-    
+    self.starIconImageView.layer.masksToBounds = YES;
+    self.starIconImageView.layer.cornerRadius = self.starIconImageView.width/4;
 }
 
 @end

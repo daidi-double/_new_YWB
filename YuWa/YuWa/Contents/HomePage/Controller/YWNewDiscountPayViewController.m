@@ -450,7 +450,7 @@
     [self calshouldPayMoney];
     if (([self.otherTotalMoney floatValue] - [self.noDiscountMoney floatValue])*[self.shopDiscount floatValue]- _CouponMoney != 0.00 ) {
         self.goPay.userInteractionEnabled = YES;
-        [self.goPay setBackgroundColor:RGBCOLOR(60, 194, 237, 1)];
+        [self.goPay setBackgroundColor:CNaviColor];
         
     }else{
         if (self.whichPay != PayCategoryQRCodePayMethod) {
