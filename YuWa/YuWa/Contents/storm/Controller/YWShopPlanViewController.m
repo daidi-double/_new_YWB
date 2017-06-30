@@ -14,7 +14,12 @@
 #import "ShopmodelTableViewCell.h"
 #import "ShopPlanFourTableViewCell.h"
 #import "FourTwoTableViewCell.h"
+#import "MarketResearchTableViewCell.h"
+#import "ProjectTableViewCell.h"
 
+
+#define PROJECTCELL @"ProjectTableViewCell"
+#define RESEARCHCELL @"MarketResearchTableViewCell"
 #define FOURTWOCELL @"FourTwoTableViewCell"
 #define FOURCELL @"ShopPlanFourTableViewCell"
 #define SHOPMODELCELL @"ShopmodelTableViewCell"
@@ -45,17 +50,19 @@
 
 - (void)makeUI{
     self.title = @"商业计划书";
-    self.headerNameAry = @[@"",@"产品快照",@"卖家介绍",@"商业模式",@"",@"市场调研",@""];
-    self.headerImageViewAry = @[@"",@"xiangji",@"seller",@"shopmodel",@"",@"market",@""];
+    self.headerNameAry = @[@"",@"产品快照",@"卖家介绍",@"商业模式",@"",@"",@"市场调研",@""];
+    self.headerImageViewAry = @[@"",@"xiangji",@"seller",@"shopmodel",@"",@"",@"market",@""];
     self.cautionMoneyLabel.layer.borderColor = CNaviColor.CGColor;
     self.cautionMoneyLabel.layer.borderWidth = 0.3;
     [self.shopTableView registerNib:[UINib nibWithNibName:PLANCELL bundle:nil] forCellReuseIdentifier:PLANCELL];
     [self.shopTableView registerNib:[UINib nibWithNibName:SELLERCELL bundle:nil] forCellReuseIdentifier:SELLERCELL];
     [self.shopTableView registerNib:[UINib nibWithNibName:FOURCELL bundle:nil] forCellReuseIdentifier:FOURCELL];
     [self.shopTableView registerNib:[UINib nibWithNibName:FOURTWOCELL bundle:nil] forCellReuseIdentifier:FOURTWOCELL];
+    [self.shopTableView registerNib:[UINib nibWithNibName:RESEARCHCELL bundle:nil] forCellReuseIdentifier:RESEARCHCELL];
+    [self.shopTableView registerNib:[UINib nibWithNibName:PROJECTCELL bundle:nil] forCellReuseIdentifier:PROJECTCELL];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 7;
+    return 8;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -65,6 +72,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"shopPlanCell"];
     }
+    self.shopTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (indexPath.section == 0) {
         ShopPlanFirstTableViewCell * planCell = [tableView dequeueReusableCellWithIdentifier:PLANCELL];
         return planCell;
@@ -93,27 +101,38 @@
         FourTwoTableViewCell * fourTCell = [tableView dequeueReusableCellWithIdentifier:FOURTWOCELL];
         
         return fourTCell;
+    }else if (indexPath.section ==6){
+        MarketResearchTableViewCell * researchTCell = [tableView dequeueReusableCellWithIdentifier:RESEARCHCELL];
+        
+        return researchTCell;
+    }else if (indexPath.section ==7){
+        ProjectTableViewCell * projectCell = [tableView dequeueReusableCellWithIdentifier:PROJECTCELL];
+        
+        return projectCell;
     }
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0 ||section == 4 ||section == 5) {
-        return 0.01f;
+        return 0.001f;
     }
     return 45.f;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section != 0 ||section != 4 ||section !=5) {
-        _headerView =[[ShopPlanHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45)];
-        _headerView.backgroundColor = [UIColor whiteColor];
-        
-        _headerView.headerNameLabel.text = self.headerNameAry[section];
-        _headerView.headerImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.headerImageViewAry[section]]];
-        
-    
-        return _headerView;
+    if (section == 0 ||section == 4 ||section ==5) {
+            return nil;
     }
-    return nil;
+    _headerView =[[ShopPlanHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45)];
+    _headerView.backgroundColor = [UIColor whiteColor];
+    
+    _headerView.headerNameLabel.text = self.headerNameAry[section];
+    _headerView.headerImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.headerImageViewAry[section]]];
+    if (section == 6) {
+        _headerView.lightView.backgroundColor = [UIColor clearColor];
+    }
+    
+    return _headerView;
+
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -136,15 +155,19 @@
     }else if (indexPath.section == 4){
         if (IS_IPHONE5) {
             
-            return 1076.f;
+            return 475.f;
         }
         return kScreen_Height *1076/1334;
-    }else if (indexPath.section == 3){
+    }else if (indexPath.section == 5){
         if (IS_IPHONE5) {
             
             return 480.f;
         }
-        return kScreen_Height *480/1334;
+        return kScreen_Height *938/1334;
+    }else if (indexPath.section == 6){
+        return 400.f;//修改为动态高度
+    }else if (indexPath.section == 7){
+        return 360.f;//修改为动态高度
     }
     
     return 50.f;

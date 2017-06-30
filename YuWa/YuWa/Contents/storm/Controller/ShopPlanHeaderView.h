@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ShopPlanHeaderView : UIView
+@property (nonatomic,strong)UIView * lightView;
 @property (nonatomic,strong)UILabel * headerNameLabel;
 @property (nonatomic,strong)UIImageView * headerImageView;
 @end
