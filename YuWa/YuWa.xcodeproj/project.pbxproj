@@ -808,6 +808,14 @@
 		AA73F2991ECEC4D50002B548 /* toyou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA73F2971ECEC4D50002B548 /* toyou@2x.png */; };
 		AA73F29C1ECEC4FA0002B548 /* yuwa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA73F29B1ECEC4FA0002B548 /* yuwa@2x.png */; };
 		AA7B64731E797ED400406CB8 /* MapNavNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7B64711E797ED400406CB8 /* MapNavNewViewController.m */; };
+		AA7F62721F09D73900BD93EE /* SalesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7F62701F09D73900BD93EE /* SalesDetailViewController.m */; };
+		AA7F62731F09D73900BD93EE /* SalesDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA7F62711F09D73900BD93EE /* SalesDetailViewController.xib */; };
+		AA7F62781F09EC5E00BD93EE /* SalesDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7F62761F09EC5E00BD93EE /* SalesDetailTableViewCell.m */; };
+		AA7F62791F09EC5E00BD93EE /* SalesDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA7F62771F09EC5E00BD93EE /* SalesDetailTableViewCell.xib */; };
+		AA7F627D1F09F4DF00BD93EE /* SalesShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7F627B1F09F4DF00BD93EE /* SalesShopTableViewCell.m */; };
+		AA7F627E1F09F4DF00BD93EE /* SalesShopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA7F627C1F09F4DF00BD93EE /* SalesShopTableViewCell.xib */; };
+		AA7F62831F0A807B00BD93EE /* SalesPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7F62811F0A807B00BD93EE /* SalesPriceViewController.m */; };
+		AA7F62841F0A807B00BD93EE /* SalesPriceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA7F62821F0A807B00BD93EE /* SalesPriceViewController.xib */; };
 		AA88462B1E666FD7005F657D /* CatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8846291E666FD7005F657D /* CatchViewController.m */; };
 		AA88462C1E666FD7005F657D /* CatchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA88462A1E666FD7005F657D /* CatchViewController.xib */; };
 		AA8846301E667742005F657D /* AdressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA88462E1E667742005F657D /* AdressViewController.m */; };
@@ -2809,6 +2817,18 @@
 		AA73F29B1ECEC4FA0002B548 /* yuwa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuwa@2x.png"; sourceTree = "<group>"; };
 		AA7B64701E797ED400406CB8 /* MapNavNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNavNewViewController.h; sourceTree = "<group>"; };
 		AA7B64711E797ED400406CB8 /* MapNavNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNavNewViewController.m; sourceTree = "<group>"; };
+		AA7F626F1F09D73900BD93EE /* SalesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesDetailViewController.h; sourceTree = "<group>"; };
+		AA7F62701F09D73900BD93EE /* SalesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesDetailViewController.m; sourceTree = "<group>"; };
+		AA7F62711F09D73900BD93EE /* SalesDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SalesDetailViewController.xib; sourceTree = "<group>"; };
+		AA7F62751F09EC5E00BD93EE /* SalesDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesDetailTableViewCell.h; sourceTree = "<group>"; };
+		AA7F62761F09EC5E00BD93EE /* SalesDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesDetailTableViewCell.m; sourceTree = "<group>"; };
+		AA7F62771F09EC5E00BD93EE /* SalesDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SalesDetailTableViewCell.xib; sourceTree = "<group>"; };
+		AA7F627A1F09F4DF00BD93EE /* SalesShopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesShopTableViewCell.h; sourceTree = "<group>"; };
+		AA7F627B1F09F4DF00BD93EE /* SalesShopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesShopTableViewCell.m; sourceTree = "<group>"; };
+		AA7F627C1F09F4DF00BD93EE /* SalesShopTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SalesShopTableViewCell.xib; sourceTree = "<group>"; };
+		AA7F62801F0A807B00BD93EE /* SalesPriceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesPriceViewController.h; sourceTree = "<group>"; };
+		AA7F62811F0A807B00BD93EE /* SalesPriceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesPriceViewController.m; sourceTree = "<group>"; };
+		AA7F62821F0A807B00BD93EE /* SalesPriceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SalesPriceViewController.xib; sourceTree = "<group>"; };
 		AA8846281E666FD7005F657D /* CatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchViewController.h; sourceTree = "<group>"; };
 		AA8846291E666FD7005F657D /* CatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatchViewController.m; sourceTree = "<group>"; };
 		AA88462A1E666FD7005F657D /* CatchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatchViewController.xib; sourceTree = "<group>"; };
@@ -6284,6 +6304,47 @@
 			name = "启动页";
 			sourceTree = "<group>";
 		};
+		AA7F626E1F09D70200BD93EE /* 竞拍明细 */ = {
+			isa = PBXGroup;
+			children = (
+				AA7F62741F09EC3700BD93EE /* cell */,
+				AA7F626F1F09D73900BD93EE /* SalesDetailViewController.h */,
+				AA7F62701F09D73900BD93EE /* SalesDetailViewController.m */,
+				AA7F62711F09D73900BD93EE /* SalesDetailViewController.xib */,
+			);
+			name = "竞拍明细";
+			sourceTree = "<group>";
+		};
+		AA7F62741F09EC3700BD93EE /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA7F62751F09EC5E00BD93EE /* SalesDetailTableViewCell.h */,
+				AA7F62761F09EC5E00BD93EE /* SalesDetailTableViewCell.m */,
+				AA7F62771F09EC5E00BD93EE /* SalesDetailTableViewCell.xib */,
+				AA7F627A1F09F4DF00BD93EE /* SalesShopTableViewCell.h */,
+				AA7F627B1F09F4DF00BD93EE /* SalesShopTableViewCell.m */,
+				AA7F627C1F09F4DF00BD93EE /* SalesShopTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		AA7F627F1F0A803A00BD93EE /* 开始竞拍 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "开始竞拍";
+			sourceTree = "<group>";
+		};
+		AA7F62851F0A810A00BD93EE /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AA7F62801F0A807B00BD93EE /* SalesPriceViewController.h */,
+				AA7F62811F0A807B00BD93EE /* SalesPriceViewController.m */,
+				AA7F62821F0A807B00BD93EE /* SalesPriceViewController.xib */,
+			);
+			name = BaseViewController;
+			sourceTree = "<group>";
+		};
 		AA8846271E666F30005F657D /* 抓娃娃 */ = {
 			isa = PBXGroup;
 			children = (
@@ -6686,6 +6747,9 @@
 		AAF235BA1F010E4C00D1E67C /* 拍卖场 */ = {
 			isa = PBXGroup;
 			children = (
+				AA7F62851F0A810A00BD93EE /* BaseViewController */,
+				AA7F627F1F0A803A00BD93EE /* 开始竞拍 */,
+				AA7F626E1F09D70200BD93EE /* 竞拍明细 */,
 				AA9F4E3D1F04D09D001AFA02 /* 计划书 */,
 				AACF6BD01F035A9E0072478A /* 全部项目 */,
 				AA1CF6BD1F028E9400806E9F /* cell */,
@@ -11337,6 +11401,7 @@
 				AA3545021E9DF23900A2EC73 /* 1baobaoBG3@2x.jpg in Resources */,
 				AAC86F711E76E93300F94C84 /* app_logo@2x.png in Resources */,
 				AA3544FB1E9DF23900A2EC73 /* 1baobaoBG33@2x.jpg in Resources */,
+				AA7F62791F09EC5E00BD93EE /* SalesDetailTableViewCell.xib in Resources */,
 				C1F7BD931DB1C94500CCAF96 /* YWChooseOneTableViewCell.xib in Resources */,
 				25B3C5C61ECD8E4000674F20 /* 36.png in Resources */,
 				AA3545241E9DF23900A2EC73 /* 2baobaoBG16@2x.jpg in Resources */,
@@ -11461,6 +11526,7 @@
 				AA3544B31E9DF23900A2EC73 /* 0baobaoBG1@2x.jpg in Resources */,
 				AA91FB311F065615004EC41B /* ProjectTableViewCell.xib in Resources */,
 				AA35452E1E9DF23900A2EC73 /* 2baobaoBG25@2x.jpg in Resources */,
+				AA7F62841F0A807B00BD93EE /* SalesPriceViewController.xib in Resources */,
 				AA3544CE1E9DF23900A2EC73 /* 0baobaoBG44@2x.jpg in Resources */,
 				AA35453B1E9DF23900A2EC73 /* 2baobaoBG37@2x.jpg in Resources */,
 				AA3545AF1E9DF23A00A2EC73 /* 4baobaoBG33@2x.jpg in Resources */,
@@ -11530,6 +11596,7 @@
 				B38B2F1B1D8FC82F004D5256 /* RBNodeDetailBottomView.xib in Resources */,
 				C1E5B7621DE456B700EB1F85 /* scheduleTwoTableViewCell.xib in Resources */,
 				C1F7BF4B1DB1CA0700CCAF96 /* home_leftArr@2x.png in Resources */,
+				AA7F627E1F09F4DF00BD93EE /* SalesShopTableViewCell.xib in Resources */,
 				B34BCE181DAA8165001AB98D /* YWNodeAddAldumShowTableViewCell.xib in Resources */,
 				AA3544321E9DF23800A2EC73 /* 3baobaoLVUP11@2x.jpg in Resources */,
 				AA19CC121EE059FC00B18990 /* sayaren0013.jpg in Resources */,
@@ -11621,6 +11688,7 @@
 				C1214C1C1DED468500FFC63C /* rightToTo.png in Resources */,
 				B3192AD41D9257AA00FD6578 /* RBIMGToolsCollectionViewCell.xib in Resources */,
 				C135A16A1DDE020F002B78A5 /* 波浪个人_00058.png in Resources */,
+				AA7F62731F09D73900BD93EE /* SalesDetailViewController.xib in Resources */,
 				C135A17D1DDEF3BC002B78A5 /* addImage.png in Resources */,
 				AA2B2C131E8D010A008CB3C6 /* YWWinnersCollectionViewCell.xib in Resources */,
 				AA2B2BFB1E8CB57B008CB3C6 /* BaobaoSkillViewController.xib in Resources */,
@@ -11926,6 +11994,7 @@
 				AA048FDD1E8918D100AF5423 /* AccountIncomeModel.m in Sources */,
 				AAF30ADB1E5EA74300793382 /* MJFoundation.m in Sources */,
 				B315823C1D9105A80096C194 /* RBHomeSearchDetailViewController.m in Sources */,
+				AA7F62721F09D73900BD93EE /* SalesDetailViewController.m in Sources */,
 				B33A266D1D9A68040092CB12 /* EMSDWebImageManager.m in Sources */,
 				B3CD68A01D94C96300C26B1C /* JWTextView.m in Sources */,
 				AAC86F631E76E40300F94C84 /* YWRegisterViewController.m in Sources */,
@@ -11954,6 +12023,7 @@
 				B3FEBA201D9BA069003CDEF2 /* YWMessageAddressBookModel.m in Sources */,
 				B33A26711D9A68040092CB12 /* UIButton+EMWebCache.m in Sources */,
 				C1A7D5041DC773D0004F3518 /* HPRecommendShopModel.m in Sources */,
+				AA7F62831F0A807B00BD93EE /* SalesPriceViewController.m in Sources */,
 				B33A267A1D9A68040092CB12 /* PSTCollectionViewCell.m in Sources */,
 				B33A266E1D9A68040092CB12 /* EMSDWebImagePrefetcher.m in Sources */,
 				C1F7BD921DB1C94500CCAF96 /* YWChooseOneTableViewCell.m in Sources */,
@@ -12499,9 +12569,11 @@
 				B33A267F1D9A68040092CB12 /* PSTCollectionViewLayout.m in Sources */,
 				C1F7BE311DB1C95400CCAF96 /* VIPPersonCenterViewController.m in Sources */,
 				AA1FEB591E55DE9E00239FEC /* ChooseMovieController.m in Sources */,
+				AA7F62781F09EC5E00BD93EE /* SalesDetailTableViewCell.m in Sources */,
 				C1214C101DEC40B400FFC63C /* SignUserTableViewCell.m in Sources */,
 				B38B2DF11D8FACD8004D5256 /* VIPTabBar.m in Sources */,
 				AADC4DF71F05FD34001D9FC2 /* ShopmodelTableViewCell.m in Sources */,
+				AA7F627D1F09F4DF00BD93EE /* SalesShopTableViewCell.m in Sources */,
 				B33A266F1D9A68040092CB12 /* MKAnnotationView+EMWebCache.m in Sources */,
 				AAF127F71E8B5C2A00121621 /* AgainSetPayPasswordViewController.m in Sources */,
 				C1F7BD9A1DB1C94500CCAF96 /* ChooseOneModel.m in Sources */,

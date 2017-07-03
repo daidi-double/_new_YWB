@@ -140,7 +140,7 @@
 #define CNaviColor  [UIColor colorWithHexString:@"#3c8cd9"]
 #define CpriceColor [UIColor colorWithRed:250/255.0 green:179/255.0 blue:67/255.0 alpha:1.0]   //价格的颜色            闪电黄
 #define LightColor  [UIColor colorWithHexString:@"#333333"]//淡灰色
-
+#define MoneyColor  [UIColor colorWithHexString:@"#ffb155"]//金额颜色
 #define CtitleColor [UIColor blackColor]   //大的标题 的颜色
 #define CsubtitleColor [UIColor colorWithRed:158/255.0 green:158/255.0 blue:158/255.0 alpha:1.0]   //子标题颜色  灰色
 

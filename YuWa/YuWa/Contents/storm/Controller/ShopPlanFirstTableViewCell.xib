@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="351" height="513"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="351" height="513"/>
+                <rect key="frame" x="0.0" y="0.0" width="351" height="512"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJd-Is-fwd">
@@ -35,12 +35,6 @@
                                     <constraint firstAttribute="height" constant="20" id="8SG-Wa-Ptv"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quanzhou" translatesAutoresizingMaskIntoConstraints="NO" id="nBl-Q8-cGl">
-                                <rect key="frame" x="205.5" y="205" width="48" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="rFe-U6-qR2"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Agh-UF-bqQ">
                                 <rect key="frame" x="115.5" y="103" width="120.5" height="21"/>
                                 <attributedString key="attributedText">
@@ -53,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="甜点饮品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMR-oC-bc1">
-                                <rect key="frame" x="149" y="171" width="53.5" height="16"/>
+                                <rect key="frame" x="175.5" y="171" width="0.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -76,6 +70,12 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quanzhou" translatesAutoresizingMaskIntoConstraints="NO" id="nBl-Q8-cGl">
+                                <rect key="frame" x="179" y="205" width="48" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="rFe-U6-qR2"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -92,6 +92,7 @@
                             <constraint firstItem="nBl-Q8-cGl" firstAttribute="leading" secondItem="EMR-oC-bc1" secondAttribute="trailing" constant="3" id="kRE-oN-fG2"/>
                             <constraint firstItem="JPS-lh-afH" firstAttribute="top" secondItem="PAc-Qf-0ER" secondAttribute="bottom" id="lnx-7X-EBw"/>
                             <constraint firstItem="PAc-Qf-0ER" firstAttribute="top" secondItem="Agh-UF-bqQ" secondAttribute="bottom" constant="13" id="p0Y-jk-Usu"/>
+                            <constraint firstItem="nBl-Q8-cGl" firstAttribute="leading" secondItem="JPS-lh-afH" secondAttribute="trailing" constant="3" id="pJa-0Y-NCJ"/>
                             <constraint firstItem="PAc-Qf-0ER" firstAttribute="centerX" secondItem="XJd-Is-fwd" secondAttribute="centerX" id="pwx-wR-Tgh"/>
                             <constraint firstItem="JuP-eW-YfC" firstAttribute="top" secondItem="XJd-Is-fwd" secondAttribute="top" constant="30" id="zdF-jt-XoZ"/>
                         </constraints>
@@ -239,11 +240,13 @@
                 <outlet property="characteristicLabel" destination="PAc-Qf-0ER" id="6LP-Oz-vcm"/>
                 <outlet property="currentPriceLabel" destination="eKQ-bW-2xm" id="uZK-gh-tp0"/>
                 <outlet property="geiPriceNumberLabel" destination="VVZ-3w-zCl" id="1q0-Jc-X9m"/>
+                <outlet property="infoBGView" destination="LnV-yu-JXj" id="SeL-gj-hON"/>
                 <outlet property="introLabel" destination="hNm-dN-NZd" id="Pau-vy-74c"/>
                 <outlet property="isHaveUserImageView" destination="nS9-ab-Q2u" id="f9j-4e-kyl"/>
                 <outlet property="lookPeopleNumberLabel" destination="91D-He-Zgd" id="D4m-oB-Qeh"/>
                 <outlet property="minPriceLabel" destination="IqQ-9w-u2e" id="AbG-bg-96a"/>
                 <outlet property="priceLabel" destination="GHZ-Zp-e09" id="9NH-Wu-I1J"/>
+                <outlet property="sellerIntroBGView" destination="Uxr-Le-bAi" id="xgc-12-quz"/>
                 <outlet property="shopIconImageView" destination="JuP-eW-YfC" id="Mtx-71-YOm"/>
                 <outlet property="shopIntroduceLabel" destination="1ob-7Q-acX" id="7qE-Tm-XYq"/>
                 <outlet property="shopNameBGView" destination="XJd-Is-fwd" id="e1U-TL-D3t"/>

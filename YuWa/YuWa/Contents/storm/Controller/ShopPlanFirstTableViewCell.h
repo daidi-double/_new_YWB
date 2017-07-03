@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *minPriceLabel;//起拍价
 @property (weak, nonatomic) IBOutlet UILabel *cautionMoneyLabel;//保证金
 @property (weak, nonatomic) IBOutlet UILabel *geiPriceNumberLabel;//出价次数
+@property (weak, nonatomic) IBOutlet UIView *sellerIntroBGView;
+@property (weak, nonatomic) IBOutlet UIView *infoBGView;
 
 
 

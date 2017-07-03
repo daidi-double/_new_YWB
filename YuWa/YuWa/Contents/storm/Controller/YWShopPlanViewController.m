@@ -16,7 +16,7 @@
 #import "FourTwoTableViewCell.h"
 #import "MarketResearchTableViewCell.h"
 #import "ProjectTableViewCell.h"
-
+#import "SalesDetailViewController.h"//竞拍详情
 
 #define PROJECTCELL @"ProjectTableViewCell"
 #define RESEARCHCELL @"MarketResearchTableViewCell"
@@ -26,7 +26,7 @@
 #define SELLERCELL  @"SellerIntroductTableViewCell"
 #define PRODUCETABLEVIEWCELL @"ProducePhotoTableViewCell"
 #define PLANCELL @"ShopPlanFirstTableViewCell"
-# define IS_IPHONE5  ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )//判断是否为苹果5s
+#define IS_IPHONE5  ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )//判断是否为苹果5s
 @interface YWShopPlanViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *shopTableView;
 @property (weak, nonatomic) IBOutlet UIButton *autionBtn;//竞拍按钮
@@ -68,13 +68,12 @@
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"shopPlanCell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"shopPlanCell"];
-    }
     self.shopTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     if (indexPath.section == 0) {
         ShopPlanFirstTableViewCell * planCell = [tableView dequeueReusableCellWithIdentifier:PLANCELL];
+
+        planCell.selectionStyle = NO;
         return planCell;
         
     }else if (indexPath.section ==1){
@@ -82,49 +81,57 @@
         if (!photoCell) {
             photoCell = [[ProducePhotoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PRODUCETABLEVIEWCELL];
         }
+        photoCell.selectionStyle = NO;
         return photoCell;
     }else if (indexPath.section ==2){
         SellerIntroductTableViewCell * sellerCell = [tableView dequeueReusableCellWithIdentifier:SELLERCELL];
-        
+
+        sellerCell.selectionStyle = NO;
         return sellerCell;
     }else if (indexPath.section ==3){
         ShopmodelTableViewCell * modelCell = [tableView dequeueReusableCellWithIdentifier:SHOPMODELCELL];
         if (!modelCell) {
             modelCell = [[ShopmodelTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SHOPMODELCELL];
         }
+        modelCell.selectionStyle = NO;
         return modelCell;
     }else if (indexPath.section ==4){
         ShopPlanFourTableViewCell * fourCell = [tableView dequeueReusableCellWithIdentifier:FOURCELL];
-        
+
+        fourCell.layer.shouldRasterize = YES;
+        fourCell.selectionStyle = NO;
         return fourCell;
     }else if (indexPath.section ==5){
         FourTwoTableViewCell * fourTCell = [tableView dequeueReusableCellWithIdentifier:FOURTWOCELL];
-        
+
+        fourTCell.layer.shouldRasterize = YES;
+        fourTCell.selectionStyle = NO;
         return fourTCell;
     }else if (indexPath.section ==6){
         MarketResearchTableViewCell * researchTCell = [tableView dequeueReusableCellWithIdentifier:RESEARCHCELL];
-        
+
+        researchTCell.selectionStyle = NO;
         return researchTCell;
-    }else if (indexPath.section ==7){
+    }else{
         ProjectTableViewCell * projectCell = [tableView dequeueReusableCellWithIdentifier:PROJECTCELL];
-        
+
+        projectCell.selectionStyle = NO;
         return projectCell;
     }
-    return cell;
+
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 0 ||section == 4 ||section == 5) {
+    if (section == 0 ||section == 4 ||section == 5||section == 7) {
         return 0.001f;
     }
     return 45.f;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 0 ||section == 4 ||section ==5) {
+    if (section == 0 ||section == 4 ||section ==5||section == 7) {
             return nil;
     }
-    _headerView =[[ShopPlanHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 45)];
+    _headerView =[[ShopPlanHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
     _headerView.backgroundColor = [UIColor whiteColor];
-    
     _headerView.headerNameLabel.text = self.headerNameAry[section];
     _headerView.headerImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",self.headerImageViewAry[section]]];
     if (section == 6) {
@@ -172,9 +179,45 @@
     
     return 50.f;
 }
+//预估高度
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        if (IS_IPHONE5) {
+            
+            return 489.f;
+        }
+        return kScreen_Height*990/1334;
+    }else if (indexPath.section == 1){
+        return kScreen_Height *272/1334;
+    }else if (indexPath.section == 2){
+        return kScreen_Height *412/1334;
+    }else if (indexPath.section == 3){
+        return kScreen_Height *714/1334;
+    }else if (indexPath.section == 4){
+        if (IS_IPHONE5) {
+            
+            return 475.f;
+        }
+        return kScreen_Height *1076/1334;
+    }else if (indexPath.section == 5){
+        if (IS_IPHONE5) {
+            
+            return 480.f;
+        }
+        return kScreen_Height *938/1334;
+    }else if (indexPath.section == 6){
+        return 400.f;//修改为动态高度
+    }else if (indexPath.section == 7){
+        return 360.f;//修改为动态高度
+    }
+    
+    return 50.f;
 
+}
 //缴纳
 - (IBAction)toPayMoneyAction:(UIButton *)sender {
+    SalesDetailViewController * salesVC = [[SalesDetailViewController alloc]init];
+    [self.navigationController pushViewController:salesVC animated:YES];
 }
 //更多
 - (IBAction)moreAction:(UIButton *)sender {
