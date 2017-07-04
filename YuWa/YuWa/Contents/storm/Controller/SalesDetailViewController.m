@@ -127,6 +127,7 @@
 
 - (void)cancelWindows{
     self.windowView.hidden = YES;
+    
 }
 - (void)agreementAction:(UIButton *)sender{
     sender.selected = !sender.selected;
