@@ -815,7 +815,6 @@
 		AA7F627D1F09F4DF00BD93EE /* SalesShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7F627B1F09F4DF00BD93EE /* SalesShopTableViewCell.m */; };
 		AA7F627E1F09F4DF00BD93EE /* SalesShopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA7F627C1F09F4DF00BD93EE /* SalesShopTableViewCell.xib */; };
 		AA7F62831F0A807B00BD93EE /* SalesPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7F62811F0A807B00BD93EE /* SalesPriceViewController.m */; };
-		AA7F62841F0A807B00BD93EE /* SalesPriceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA7F62821F0A807B00BD93EE /* SalesPriceViewController.xib */; };
 		AA88462B1E666FD7005F657D /* CatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8846291E666FD7005F657D /* CatchViewController.m */; };
 		AA88462C1E666FD7005F657D /* CatchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA88462A1E666FD7005F657D /* CatchViewController.xib */; };
 		AA8846301E667742005F657D /* AdressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA88462E1E667742005F657D /* AdressViewController.m */; };
@@ -897,6 +896,10 @@
 		AADC4DF71F05FD34001D9FC2 /* ShopmodelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AADC4DF61F05FD34001D9FC2 /* ShopmodelTableViewCell.m */; };
 		AADC4DFB1F0616D1001D9FC2 /* ShopPlanFourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AADC4DF91F0616D1001D9FC2 /* ShopPlanFourTableViewCell.m */; };
 		AADC4DFC1F0616D1001D9FC2 /* ShopPlanFourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AADC4DFA1F0616D1001D9FC2 /* ShopPlanFourTableViewCell.xib */; };
+		AAF00E2F1F0B2315008B22E2 /* BeginSalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF00E2D1F0B2315008B22E2 /* BeginSalesViewController.m */; };
+		AAF00E301F0B2315008B22E2 /* BeginSalesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF00E2E1F0B2315008B22E2 /* BeginSalesViewController.xib */; };
+		AAF00E351F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF00E331F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.m */; };
+		AAF00E361F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF00E341F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.xib */; };
 		AAF0EB3A1EAC58EB0003A930 /* YWShopCommitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB391EAC58EB0003A930 /* YWShopCommitView.m */; };
 		AAF0EB431EAC5C940003A930 /* YWShopScoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0EB411EAC5C940003A930 /* YWShopScoreTableViewCell.m */; };
 		AAF0EB441EAC5C940003A930 /* YWShopScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF0EB421EAC5C940003A930 /* YWShopScoreTableViewCell.xib */; };
@@ -2828,7 +2831,6 @@
 		AA7F627C1F09F4DF00BD93EE /* SalesShopTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SalesShopTableViewCell.xib; sourceTree = "<group>"; };
 		AA7F62801F0A807B00BD93EE /* SalesPriceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesPriceViewController.h; sourceTree = "<group>"; };
 		AA7F62811F0A807B00BD93EE /* SalesPriceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesPriceViewController.m; sourceTree = "<group>"; };
-		AA7F62821F0A807B00BD93EE /* SalesPriceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SalesPriceViewController.xib; sourceTree = "<group>"; };
 		AA8846281E666FD7005F657D /* CatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchViewController.h; sourceTree = "<group>"; };
 		AA8846291E666FD7005F657D /* CatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatchViewController.m; sourceTree = "<group>"; };
 		AA88462A1E666FD7005F657D /* CatchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatchViewController.xib; sourceTree = "<group>"; };
@@ -2952,6 +2954,12 @@
 		AADC4DF81F0616D1001D9FC2 /* ShopPlanFourTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopPlanFourTableViewCell.h; sourceTree = "<group>"; };
 		AADC4DF91F0616D1001D9FC2 /* ShopPlanFourTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopPlanFourTableViewCell.m; sourceTree = "<group>"; };
 		AADC4DFA1F0616D1001D9FC2 /* ShopPlanFourTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopPlanFourTableViewCell.xib; sourceTree = "<group>"; };
+		AAF00E2C1F0B2315008B22E2 /* BeginSalesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeginSalesViewController.h; sourceTree = "<group>"; };
+		AAF00E2D1F0B2315008B22E2 /* BeginSalesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeginSalesViewController.m; sourceTree = "<group>"; };
+		AAF00E2E1F0B2315008B22E2 /* BeginSalesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BeginSalesViewController.xib; sourceTree = "<group>"; };
+		AAF00E321F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesPriceCollectionViewCell.h; sourceTree = "<group>"; };
+		AAF00E331F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesPriceCollectionViewCell.m; sourceTree = "<group>"; };
+		AAF00E341F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SalesPriceCollectionViewCell.xib; sourceTree = "<group>"; };
 		AAF0EB381EAC58EB0003A930 /* YWShopCommitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopCommitView.h; sourceTree = "<group>"; };
 		AAF0EB391EAC58EB0003A930 /* YWShopCommitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWShopCommitView.m; sourceTree = "<group>"; };
 		AAF0EB401EAC5C940003A930 /* YWShopScoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWShopScoreTableViewCell.h; sourceTree = "<group>"; };
@@ -6331,6 +6339,10 @@
 		AA7F627F1F0A803A00BD93EE /* 开始竞拍 */ = {
 			isa = PBXGroup;
 			children = (
+				AAF00E311F0B7A19008B22E2 /* cell */,
+				AAF00E2C1F0B2315008B22E2 /* BeginSalesViewController.h */,
+				AAF00E2D1F0B2315008B22E2 /* BeginSalesViewController.m */,
+				AAF00E2E1F0B2315008B22E2 /* BeginSalesViewController.xib */,
 			);
 			name = "开始竞拍";
 			sourceTree = "<group>";
@@ -6340,7 +6352,6 @@
 			children = (
 				AA7F62801F0A807B00BD93EE /* SalesPriceViewController.h */,
 				AA7F62811F0A807B00BD93EE /* SalesPriceViewController.m */,
-				AA7F62821F0A807B00BD93EE /* SalesPriceViewController.xib */,
 			);
 			name = BaseViewController;
 			sourceTree = "<group>";
@@ -6653,6 +6664,16 @@
 				AA3FFF671ECBF287004E77EB /* OtherTicketModel.m */,
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		AAF00E311F0B7A19008B22E2 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AAF00E321F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.h */,
+				AAF00E331F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.m */,
+				AAF00E341F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.xib */,
+			);
+			name = cell;
 			sourceTree = "<group>";
 		};
 		AAF0EB4A1EAC72000003A930 /* mdel */ = {
@@ -11386,6 +11407,7 @@
 				B33A26851D9A68040092CB12 /* MWPhotoBrowser.bundle in Resources */,
 				AA3545751E9DF23A00A2EC73 /* 3baobaoBG35@2x.jpg in Resources */,
 				AA3544211E9DF23800A2EC73 /* 2baobaoLVUP50@2x.jpg in Resources */,
+				AAF00E301F0B2315008B22E2 /* BeginSalesViewController.xib in Resources */,
 				AA377B7C1EC6E0C000E81A88 /* MovieDetailViewController.xib in Resources */,
 				AA35454B1E9DF23A00A2EC73 /* 2baobaoBG51@2x.jpg in Resources */,
 				AA3543F51E9DF23800A2EC73 /* 2baobaoLVUP10@2x.jpg in Resources */,
@@ -11504,6 +11526,7 @@
 				AA3BFE3D1E8559B500D669C2 /* CheckUpBankInfomationViewController.xib in Resources */,
 				AA19CC1E1EE059FC00B18990 /* sayaren0024.jpg in Resources */,
 				AA3545C21E9DF23A00A2EC73 /* 4baobaoBG50@2x.jpg in Resources */,
+				AAF00E361F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.xib in Resources */,
 				AAC9BB7A1ED7D94100893D3B /* 33.png in Resources */,
 				25B3C5BA1ECD8E4000674F20 /* 25.png in Resources */,
 				AA3543BF1E9DF23800A2EC73 /* 1baobaoLVUP16@2x.jpg in Resources */,
@@ -11526,7 +11549,6 @@
 				AA3544B31E9DF23900A2EC73 /* 0baobaoBG1@2x.jpg in Resources */,
 				AA91FB311F065615004EC41B /* ProjectTableViewCell.xib in Resources */,
 				AA35452E1E9DF23900A2EC73 /* 2baobaoBG25@2x.jpg in Resources */,
-				AA7F62841F0A807B00BD93EE /* SalesPriceViewController.xib in Resources */,
 				AA3544CE1E9DF23900A2EC73 /* 0baobaoBG44@2x.jpg in Resources */,
 				AA35453B1E9DF23900A2EC73 /* 2baobaoBG37@2x.jpg in Resources */,
 				AA3545AF1E9DF23A00A2EC73 /* 4baobaoBG33@2x.jpg in Resources */,
@@ -12048,6 +12070,7 @@
 				B33A26521D9A68040092CB12 /* EMAudioPlayerUtil.m in Sources */,
 				B3B8510A1DD9879A00E171C8 /* JHPieChart.m in Sources */,
 				B33A26AE1D9A68040092CB12 /* EaseFaceView.m in Sources */,
+				AAF00E351F0B7A3F008B22E2 /* SalesPriceCollectionViewCell.m in Sources */,
 				C1F7BDAF1DB1C94500CCAF96 /* StorePhotoViewController.m in Sources */,
 				B3B8510E1DD9879A00E171C8 /* JHRingChart.m in Sources */,
 				B38B2E291D8FACD8004D5256 /* UIScrollView+MJRefresh.m in Sources */,
@@ -12591,6 +12614,7 @@
 				B38B2E4B1D8FACD8004D5256 /* SDCycleScrollView.m in Sources */,
 				B33A26631D9A68040092CB12 /* MWPhotoBrowser.m in Sources */,
 				B32E4AE41DB5B3BA00358076 /* YWStormSubSortCollectionViewCell.m in Sources */,
+				AAF00E2F1F0B2315008B22E2 /* BeginSalesViewController.m in Sources */,
 				C1F7BD981DB1C94500CCAF96 /* VIPHomePageViewController.m in Sources */,
 				C1F7BE601DB1C95400CCAF96 /* PCPayViewController.mm in Sources */,
 				C12315621DE708B000B9D0FE /* ShowGetMoneyTableViewCell.m in Sources */,

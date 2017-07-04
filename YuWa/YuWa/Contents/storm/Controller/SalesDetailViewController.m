@@ -12,6 +12,11 @@
 #import "NSString+JWAppendOtherStr.h"
 #import "PCPayViewController.h"
 
+
+#import "BeginSalesViewController.h"
+
+
+
 #define DETAILCELL @"SalesDetailTableViewCell"
 #define SALESSHOPCELL  @"SalesShopTableViewCell"
 #define IS_IPHONE5  ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )//判断是否为苹果5s
@@ -108,8 +113,13 @@
 
 //竞拍
 - (IBAction)toSalesAction:(UIButton *)sender {
+    BeginSalesViewController * beginVC = [[BeginSalesViewController alloc]init];
+    
+    [self.navigationController pushViewController:beginVC animated:YES];
+    
 }
 - (IBAction)moreAction:(UIButton *)sender {
+
 }
 - (IBAction)toPayAction:(UIButton *)sender {
     self.windowView.hidden = NO;

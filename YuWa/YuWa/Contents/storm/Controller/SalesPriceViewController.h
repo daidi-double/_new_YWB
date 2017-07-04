@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface SalesPriceViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIButton *increaseBtn;//加价按钮
-@property (weak, nonatomic) IBOutlet UILabel *myPriceLabel;//我的价格
-@property (weak, nonatomic) IBOutlet UILabel *directnessLabel;//直接出价
-
+@property (strong,nonatomic) UIView * BgView;//选择价格的背景view，底部的视图
+@property (strong, nonatomic) UIButton *increaseBtn;//加价按钮
+@property (strong, nonatomic) UILabel *myPriceLabel;//我的价格
+@property (strong, nonatomic) UILabel *directnessLabel;//直接出价
+@property (strong,nonatomic) UILabel * cautionTitleLabel;//当前价
+@property (strong,nonatomic) UILabel * priceLabel;//下次出价
+@property (strong,nonatomic) UIView * line;
+@property (strong,nonatomic) UIView * delegateBGView;//弹窗背景视图
+@property (nonatomic,strong) UIView * delegatePriceBGView;//弹窗的透明背景层
+-(CGFloat)getCellHeightStr:(NSString*)content contentOfFont:(NSInteger)font;
+- (void)creatPayView;
 @end

@@ -51,7 +51,7 @@
         _threeLabel.textColor = LightColor;
         _threeLabel.font = [UIFont systemFontOfSize:13];
         _threeLabel.numberOfLines = 0;
-        _threeLabel.text = @"地方垃圾发了发了疯马恶犯佛；aijefaklnva.v啊；发哦发妈妈女啊阿佛案件麻烦漫卷；fiaj'ak/vavaofja阿妈率哦啊的v发大奖哦费劲啊啊快女阿卡局我AV的那可就阿尔法而非卡";
+        _threeLabel.text = @"3、通过大规模培训输出菜场肉铺，通过大规模培训输出菜场肉铺，通过大规模培训输出菜场肉铺,通过大规模培训输出菜场肉铺，通过大规模培训输出菜场肉铺。";
     }
     return _threeLabel;
 }
@@ -61,7 +61,7 @@
         _fourLabel.textColor = LightColor;
         _fourLabel.font = [UIFont systemFontOfSize:13];
         _fourLabel.numberOfLines = 0;
-        _fourLabel.text = @"地方垃圾发了发了疯马恶犯佛；aijefaklnva.v啊；发哦发妈妈女啊阿佛案件麻烦漫卷；fiaj'ak/vavaofja阿妈率哦啊的v发大奖哦费劲啊啊快女阿卡局我AV的那可就阿尔法而非卡";
+        _fourLabel.text = @"4、通过大规模培训输出菜场肉铺，通过大规模培训输出菜场肉铺，通过大规模培训输出菜场肉铺,通过大规模培训输出菜场肉铺，通过大规模培训输出菜场肉铺。";
     }
     return _fourLabel;
 }
