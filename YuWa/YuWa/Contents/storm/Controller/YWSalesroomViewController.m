@@ -14,6 +14,10 @@
 #import "YWAllProjectViewController.h"//全部项目
 
 
+#import "IssuanceViewController.h"//发布项目
+
+
+
 #define STARCOLLECTVIEWCELL @"YWStarCollectionViewCell"
 #define HOTPROJECTCELL @"YWHotProjectTableViewCell"
 #define BARNERCELL  @"YWBarnerTableViewCell"
@@ -106,6 +110,13 @@
 }
 - (void)toLookAll{
     MyLog(@"查看全部");
+    
+    /*
+     暂时
+     */
+    IssuanceViewController * vc = [[IssuanceViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{

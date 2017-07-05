@@ -138,6 +138,14 @@
 		AA1FEB591E55DE9E00239FEC /* ChooseMovieController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1FEB571E55DE9E00239FEC /* ChooseMovieController.m */; };
 		AA1FEB5A1E55DE9E00239FEC /* ChooseMovieController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA1FEB581E55DE9E00239FEC /* ChooseMovieController.xib */; };
 		AA225B781E63F69E00F4D74F /* TableBGView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA225B771E63F69E00F4D74F /* TableBGView.m */; };
+		AA2388231F0C815B0053C8F9 /* IssuanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2388211F0C815B0053C8F9 /* IssuanceViewController.m */; };
+		AA2388241F0C815B0053C8F9 /* IssuanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2388221F0C815B0053C8F9 /* IssuanceViewController.xib */; };
+		AA2388291F0C857B0053C8F9 /* IssuanceProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2388271F0C857B0053C8F9 /* IssuanceProjectTableViewCell.m */; };
+		AA23882A1F0C857B0053C8F9 /* IssuanceProjectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2388281F0C857B0053C8F9 /* IssuanceProjectTableViewCell.xib */; };
+		AA23882E1F0C95C00053C8F9 /* IntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA23882C1F0C95C00053C8F9 /* IntroduceTableViewCell.m */; };
+		AA23882F1F0C95C00053C8F9 /* IntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA23882D1F0C95C00053C8F9 /* IntroduceTableViewCell.xib */; };
+		AA2388331F0C99B80053C8F9 /* ProjectPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2388311F0C99B80053C8F9 /* ProjectPhotoTableViewCell.m */; };
+		AA2388341F0C99B80053C8F9 /* ProjectPhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2388321F0C99B80053C8F9 /* ProjectPhotoTableViewCell.xib */; };
 		AA2724071EC40CF300F80DB7 /* adress.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2724061EC40CF300F80DB7 /* adress.png */; };
 		AA27F5411E86778B00B29B17 /* ShopNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27F5401E86778B00B29B17 /* ShopNameView.m */; };
 		AA28F1561EE7DA3C00BA8438 /* AllPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA28F1541EE7DA3C00BA8438 /* AllPhotoViewController.m */; };
@@ -2067,6 +2075,18 @@
 		AA1FEB581E55DE9E00239FEC /* ChooseMovieController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseMovieController.xib; sourceTree = "<group>"; };
 		AA225B761E63F69E00F4D74F /* TableBGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableBGView.h; sourceTree = "<group>"; };
 		AA225B771E63F69E00F4D74F /* TableBGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableBGView.m; sourceTree = "<group>"; };
+		AA2388201F0C815B0053C8F9 /* IssuanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssuanceViewController.h; sourceTree = "<group>"; };
+		AA2388211F0C815B0053C8F9 /* IssuanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssuanceViewController.m; sourceTree = "<group>"; };
+		AA2388221F0C815B0053C8F9 /* IssuanceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuanceViewController.xib; sourceTree = "<group>"; };
+		AA2388261F0C857B0053C8F9 /* IssuanceProjectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssuanceProjectTableViewCell.h; sourceTree = "<group>"; };
+		AA2388271F0C857B0053C8F9 /* IssuanceProjectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssuanceProjectTableViewCell.m; sourceTree = "<group>"; };
+		AA2388281F0C857B0053C8F9 /* IssuanceProjectTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuanceProjectTableViewCell.xib; sourceTree = "<group>"; };
+		AA23882B1F0C95C00053C8F9 /* IntroduceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroduceTableViewCell.h; sourceTree = "<group>"; };
+		AA23882C1F0C95C00053C8F9 /* IntroduceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroduceTableViewCell.m; sourceTree = "<group>"; };
+		AA23882D1F0C95C00053C8F9 /* IntroduceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceTableViewCell.xib; sourceTree = "<group>"; };
+		AA2388301F0C99B80053C8F9 /* ProjectPhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectPhotoTableViewCell.h; sourceTree = "<group>"; };
+		AA2388311F0C99B80053C8F9 /* ProjectPhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectPhotoTableViewCell.m; sourceTree = "<group>"; };
+		AA2388321F0C99B80053C8F9 /* ProjectPhotoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectPhotoTableViewCell.xib; sourceTree = "<group>"; };
 		AA2724061EC40CF300F80DB7 /* adress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = adress.png; sourceTree = "<group>"; };
 		AA27F53F1E86778B00B29B17 /* ShopNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopNameView.h; sourceTree = "<group>"; };
 		AA27F5401E86778B00B29B17 /* ShopNameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopNameView.m; sourceTree = "<group>"; };
@@ -5024,6 +5044,33 @@
 			name = menuView;
 			sourceTree = "<group>";
 		};
+		AA23881F1F0C80B00053C8F9 /* 发布项目 */ = {
+			isa = PBXGroup;
+			children = (
+				AA2388251F0C84BA0053C8F9 /* cell */,
+				AA2388201F0C815B0053C8F9 /* IssuanceViewController.h */,
+				AA2388211F0C815B0053C8F9 /* IssuanceViewController.m */,
+				AA2388221F0C815B0053C8F9 /* IssuanceViewController.xib */,
+			);
+			name = "发布项目";
+			sourceTree = "<group>";
+		};
+		AA2388251F0C84BA0053C8F9 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA2388261F0C857B0053C8F9 /* IssuanceProjectTableViewCell.h */,
+				AA2388271F0C857B0053C8F9 /* IssuanceProjectTableViewCell.m */,
+				AA2388281F0C857B0053C8F9 /* IssuanceProjectTableViewCell.xib */,
+				AA23882B1F0C95C00053C8F9 /* IntroduceTableViewCell.h */,
+				AA23882C1F0C95C00053C8F9 /* IntroduceTableViewCell.m */,
+				AA23882D1F0C95C00053C8F9 /* IntroduceTableViewCell.xib */,
+				AA2388301F0C99B80053C8F9 /* ProjectPhotoTableViewCell.h */,
+				AA2388311F0C99B80053C8F9 /* ProjectPhotoTableViewCell.m */,
+				AA2388321F0C99B80053C8F9 /* ProjectPhotoTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		AA28F1521EE7DA0D00BA8438 /* 剧照 */ = {
 			isa = PBXGroup;
 			children = (
@@ -6768,6 +6815,7 @@
 		AAF235BA1F010E4C00D1E67C /* 拍卖场 */ = {
 			isa = PBXGroup;
 			children = (
+				AA23881F1F0C80B00053C8F9 /* 发布项目 */,
 				AA7F62851F0A810A00BD93EE /* BaseViewController */,
 				AA7F627F1F0A803A00BD93EE /* 开始竞拍 */,
 				AA7F626E1F09D70200BD93EE /* 竞拍明细 */,
@@ -10936,6 +10984,7 @@
 				AA3544301E9DF23800A2EC73 /* 3baobaoLVUP0@2x.jpg in Resources */,
 				B3D219281DB1241800D661F5 /* YWSharedEditorViewController.xib in Resources */,
 				AA9F4E4D1F04EAB3001AFA02 /* ShopPlanFirstTableViewCell.xib in Resources */,
+				AA23882A1F0C857B0053C8F9 /* IssuanceProjectTableViewCell.xib in Resources */,
 				AA3545641E9DF23A00A2EC73 /* 3baobaoBG1@2x.jpg in Resources */,
 				AA3544BC1E9DF23900A2EC73 /* 0baobaoBG28@2x.jpg in Resources */,
 				AAFA57A71ED2E540006CF2D7 /* 酒店.png in Resources */,
@@ -11340,6 +11389,7 @@
 				C1F7BE381DB1C95400CCAF96 /* PersonCenterZeroCell.xib in Resources */,
 				AA35444B1E9DF23800A2EC73 /* 3baobaoLVUP34@2x.jpg in Resources */,
 				AAF128131E8B9D5500121621 /* SetPayPasswordViewController.xib in Resources */,
+				AA2388241F0C815B0053C8F9 /* IssuanceViewController.xib in Resources */,
 				AABFC4FB1E88E5E0002B5140 /* MyIncomeViewController.xib in Resources */,
 				AA35441B1E9DF23800A2EC73 /* 2baobaoLVUP45@2x.jpg in Resources */,
 				B3AE4DBE1D915C2C000A389F /* RBPublicNodeViewController.xib in Resources */,
@@ -11646,6 +11696,7 @@
 				B3D219141DB0985100D661F5 /* ShareSDK.bundle in Resources */,
 				C13019E61DB20B2400E24C88 /* 运动健身.png in Resources */,
 				AAD988D21ECB43400055D044 /* OtherTicketTableViewCell.xib in Resources */,
+				AA23882F1F0C95C00053C8F9 /* IntroduceTableViewCell.xib in Resources */,
 				AA3545BF1E9DF23A00A2EC73 /* 4baobaoBG48@2x.jpg in Resources */,
 				B3FEB9FF1D9B6465003CDEF2 /* YWMessageTableViewCell.xib in Resources */,
 				B3D2190D1DB0985100D661F5 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -11865,6 +11916,7 @@
 				AA3544FA1E9DF23900A2EC73 /* 1baobaoBG32@2x.jpg in Resources */,
 				B38B2F0E1D8FC82F004D5256 /* RBNodeDetailRecommendHeader.xib in Resources */,
 				C135A15C1DDE020F002B78A5 /* 波浪个人_00045.png in Resources */,
+				AA2388341F0C99B80053C8F9 /* ProjectPhotoTableViewCell.xib in Resources */,
 				B38B2DEB1D8FACD8004D5256 /* HUDLoadingShowView.xib in Resources */,
 				C135A1781DDEC49B002B78A5 /* PostCommitTextTableViewCell.xib in Resources */,
 				AA35446F1E9DF23800A2EC73 /* 4baobaoLVUP12@2x.jpg in Resources */,
@@ -12047,6 +12099,7 @@
 				C1A7D5041DC773D0004F3518 /* HPRecommendShopModel.m in Sources */,
 				AA7F62831F0A807B00BD93EE /* SalesPriceViewController.m in Sources */,
 				B33A267A1D9A68040092CB12 /* PSTCollectionViewCell.m in Sources */,
+				AA2388331F0C99B80053C8F9 /* ProjectPhotoTableViewCell.m in Sources */,
 				B33A266E1D9A68040092CB12 /* EMSDWebImagePrefetcher.m in Sources */,
 				C1F7BD921DB1C94500CCAF96 /* YWChooseOneTableViewCell.m in Sources */,
 				B38B2E701D8FC3F3004D5256 /* YWLoginViewController.m in Sources */,
@@ -12245,6 +12298,7 @@
 				B38B2F111D8FC82F004D5256 /* RBNodeShowModel.m in Sources */,
 				B33A267B1D9A68040092CB12 /* PSTCollectionViewController.m in Sources */,
 				AAC86F531E76DA4400F94C84 /* OpenBusinessViewController.m in Sources */,
+				AA23882E1F0C95C00053C8F9 /* IntroduceTableViewCell.m in Sources */,
 				AAF30AAE1E5E887700793382 /* XZRowIndexView.m in Sources */,
 				B315823A1D90F86B0096C194 /* YWForgetPassWordViewController.m in Sources */,
 				B3B851171DD987F900E171C8 /* YWPayAnalysisViewController.m in Sources */,
@@ -12535,6 +12589,7 @@
 				B38B2F151D8FC82F004D5256 /* RBNodeUserModel.m in Sources */,
 				B38B2E2B1D8FACD8004D5256 /* MKAnnotationView+WebCache.m in Sources */,
 				AA3FFF681ECBF287004E77EB /* OtherTicketModel.m in Sources */,
+				AA2388231F0C815B0053C8F9 /* IssuanceViewController.m in Sources */,
 				AA3A86191EC1A59F003966F1 /* MoviePayTableViewCell.m in Sources */,
 				B38B2E571D8FACD8004D5256 /* VPImageCropperViewController.m in Sources */,
 				B38B2E201D8FACD8004D5256 /* MJChiBaoZiFooter2.m in Sources */,
@@ -12710,6 +12765,7 @@
 				B33A265E1D9A68040092CB12 /* MBProgressHUD+Add.m in Sources */,
 				B3FEBA321D9BE4EE003CDEF2 /* YWMessageNotificationCell.m in Sources */,
 				AA29FFFC1E78EFC100113FFF /* NSObject+MapService.m in Sources */,
+				AA2388291F0C857B0053C8F9 /* IssuanceProjectTableViewCell.m in Sources */,
 				B3B8510F1DD9879A00E171C8 /* JHShowInfoView.m in Sources */,
 				B33A265B1D9A68040092CB12 /* EMVoiceConverter.mm in Sources */,
 				C1214BF91DEBE9AF00FFC63C /* BusinessMoneyModel.m in Sources */,
