@@ -12,7 +12,7 @@
 #import "HPRecommendShopModel.h"
 #import "JWTools.h"
 
-#import "YWShoppingDetailViewController.h"
+#import "ShopDetailViewController.h"
 #define CELL0  @"YWMainShoppingTableViewCell"
 
 @interface MyFavouriteViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -202,7 +202,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
      HPRecommendShopModel*model=self.maMallDatas[indexPath.row];
-    YWShoppingDetailViewController*vc=[[YWShoppingDetailViewController alloc]init];
+    ShopDetailViewController*vc=[[ShopDetailViewController alloc]init];
     vc.shop_id=model.id;
     [self.navigationController pushViewController:vc animated:YES];
 

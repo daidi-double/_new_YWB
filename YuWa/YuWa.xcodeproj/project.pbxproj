@@ -12942,6 +12942,7 @@
 					"$(PROJECT_DIR)/YuWa/Foundation/SDK/aliPay",
 					"$(PROJECT_DIR)/YuWa/Foundation/SDK",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/YuWa/Foundation/SDK/HyphenateFullSDK",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YuWa/Foundation/Custom Category/VipxoxPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -12995,6 +12996,7 @@
 					"$(PROJECT_DIR)/YuWa/Foundation/SDK/aliPay",
 					"$(PROJECT_DIR)/YuWa/Foundation/SDK",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/YuWa/Foundation/SDK/HyphenateFullSDK",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YuWa/Foundation/Custom Category/VipxoxPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (

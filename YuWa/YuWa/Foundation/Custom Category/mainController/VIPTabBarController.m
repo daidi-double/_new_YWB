@@ -149,7 +149,7 @@
         
         //关闭
         _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _cancelBtn.frame = CGRectMake(0, kScreen_Height-55, 35, 35);
+        _cancelBtn.frame = CGRectMake(0, kScreen_Height-55, 45, 45);
         _cancelBtn.centerX = kScreen_Width/2;
         
         [_cancelBtn setBackgroundImage:[UIImage imageNamed:@"quxiao"] forState:UIControlStateNormal];
@@ -158,7 +158,7 @@
         
         
         //美食
-        _foodBtn = [[YWCustomButton alloc]initWithFrame:CGRectMake(_cancelBtn.left - 55, _cancelBtn.top - 75, 55, 55) andTitle:@"美食"];
+        _foodBtn = [[YWCustomButton alloc]initWithFrame:CGRectMake(_cancelBtn.left - 70, _cancelBtn.top - 90, 70, 70) andTitle:@"美食"];
 
         [_foodBtn setImage:[UIImage imageNamed:@"food"] forState:UIControlStateNormal];
         _foodBtn.title.centerY = _foodBtn.height+7;
@@ -170,7 +170,7 @@
         [_BGView addSubview:_foodBtn];
         
         //娱乐
-        _entertainmentBtn = [[YWCustomButton alloc]initWithFrame:CGRectMake(_cancelBtn.right + 10, _cancelBtn.top - 75, 55, 55) andTitle:@"娱乐"];
+        _entertainmentBtn = [[YWCustomButton alloc]initWithFrame:CGRectMake(_cancelBtn.right + 10, _cancelBtn.top - 90, 70, 70) andTitle:@"娱乐"];
         
         [_entertainmentBtn setImage:[UIImage imageNamed:@"yule"] forState:UIControlStateNormal];
         _entertainmentBtn.title.centerY = _foodBtn.height+7;
