@@ -25,12 +25,14 @@
 #import "EaseLocalDefine.h"
 #import "EaseSDKHelper.h"
 
+#import "VoiceChatViewController.h"
+
 #define KHintAdjustY    50
 
 #define IOS_VERSION [[UIDevice currentDevice] systemVersion]>=9.0
 
-@interface YWMessageChatViewController ()
-
+@interface YWMessageChatViewController ()<EMCallManagerDelegate>
+@property (nonatomic,strong)VoiceChatViewController * voiceViewController;
 
 @end
 
@@ -39,6 +41,53 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = self.friendNikeName?self.friendNikeName:@"聊天";
+    //移除实时通话回调
+    [[EMClient sharedClient].callManager removeDelegate:self];
+    //注册实时通话回调
+    [[EMClient sharedClient].callManager addDelegate:self delegateQueue:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makeCall:) name:KNOTIFICATION_CALL object:nil];
+
+}
+
+- (void)makeCall:(NSNotification*)notification{
+    
+    
+    NSString * type = [notification object][@"type"];
+    VoiceChatViewController * chatVC = [[VoiceChatViewController alloc]init];
+    chatVC.friendsName = [notification object][@"chatter"];
+    chatVC.type = [type integerValue];
+    chatVC.isSender = YES;
+    chatVC.friendsIcon = self.friendIcon;
+    chatVC.friendsNiceName = self.friendNikeName;
+    [self presentViewController:chatVC animated:YES completion:nil];
+    
+}
+
+/*!
+ *  \~chinese
+ *  用户A拨打用户B，用户B会收到这个回调
+ *
+ *  @param aSession  会话实例
+ *
+ */
+
+- (void)callDidReceive:(EMCallSession *)aSession{
+    NSLog(@"callDidReceive 用户A拨打用户B，用户B会收到这个回调");
+    
+    self.voiceViewController.callSession = aSession;
+    self.voiceViewController.statusLabel.hidden = YES;
+    if (!aSession.type) {
+        self.voiceViewController.isSender = NO;
+        
+        [self presentViewController:self.voiceViewController animated:YES completion:nil];
+        
+    }else{//视频
+        self.voiceViewController.type = 1;
+        self.voiceViewController.isSender = NO;
+        [self presentViewController:self.voiceViewController animated:YES completion:nil];
+        
+    }
     
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -164,5 +213,10 @@
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
-
+- (VoiceChatViewController*)voiceViewController{
+    if (!_voiceViewController) {
+        _voiceViewController = [[VoiceChatViewController alloc]init];
+    }
+    return _voiceViewController;
+}
 @end

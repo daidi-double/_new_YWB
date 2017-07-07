@@ -232,6 +232,8 @@
         if (!errorLog){
             [[EMClient sharedClient].options setIsAutoLogin:NO];
             MyLog(@"环信登录成功");
+            MyLog(@"%@",[EMClient sharedClient].version);
+
             [UserSession instance].isLoginHX = YES;
         }else{
             [UserSession instance].isLoginHX = NO;

@@ -17,8 +17,10 @@
 #import "VIPTabBarController.h"
 #import "YWMessageTableViewCell.h"
 
+
+
 #define MESSAGECELL @"YWMessageTableViewCell"
-@interface YWMessageViewController ()<UITableViewDelegate,UITableViewDataSource,EMContactManagerDelegate>
+@interface YWMessageViewController ()<UITableViewDelegate,UITableViewDataSource,EMContactManagerDelegate,EMCallManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *noLoginBGBtnView;
@@ -36,6 +38,8 @@
 @property (nonatomic,copy)NSString * type;
 //存好友的数组路径
 @property (nonatomic, copy) NSString *path;
+
+
 @end
 
 @implementation YWMessageViewController
@@ -58,8 +62,8 @@
     [[EMClient sharedClient].contactManager removeDelegate:self];
     //注册好友回调
     [[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
+    
 }
-
 - (void)messagesDidReceive:(NSArray *)aMessages{
     [self.tableView reloadData];
 }

@@ -943,6 +943,8 @@
 		AAF235BF1F010E8100D1E67C /* YWSalesroomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF235BD1F010E8100D1E67C /* YWSalesroomViewController.xib */; };
 		AAF237261E5BE96A002D58B4 /* PlayTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF237251E5BE96A002D58B4 /* PlayTimeCell.m */; };
 		AAF237291E5C0A3B002D58B4 /* CinemaHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF237281E5C0A3B002D58B4 /* CinemaHeaderView.m */; };
+		AAF3084C1F0E136A00278983 /* VoiceChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3084A1F0E136A00278983 /* VoiceChatViewController.m */; };
+		AAF3084D1F0E136A00278983 /* VoiceChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAF3084B1F0E136A00278983 /* VoiceChatViewController.xib */; };
 		AAF30A831E5E73F900793382 /* XZSeatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF30A821E5E73F900793382 /* XZSeatModel.m */; };
 		AAF30A861E5E748E00793382 /* XZSeatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF30A851E5E748E00793382 /* XZSeatsModel.m */; };
 		AAF30A901E5E7A8C00793382 /* XZSeatSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF30A8F1E5E7A8C00793382 /* XZSeatSelectionView.m */; };
@@ -3030,6 +3032,9 @@
 		AAF237251E5BE96A002D58B4 /* PlayTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayTimeCell.m; sourceTree = "<group>"; };
 		AAF237271E5C0A3B002D58B4 /* CinemaHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaHeaderView.h; sourceTree = "<group>"; };
 		AAF237281E5C0A3B002D58B4 /* CinemaHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaHeaderView.m; sourceTree = "<group>"; };
+		AAF308491F0E136A00278983 /* VoiceChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceChatViewController.h; sourceTree = "<group>"; };
+		AAF3084A1F0E136A00278983 /* VoiceChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceChatViewController.m; sourceTree = "<group>"; };
+		AAF3084B1F0E136A00278983 /* VoiceChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoiceChatViewController.xib; sourceTree = "<group>"; };
 		AAF30A811E5E73F900793382 /* XZSeatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XZSeatModel.h; sourceTree = "<group>"; };
 		AAF30A821E5E73F900793382 /* XZSeatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZSeatModel.m; sourceTree = "<group>"; };
 		AAF30A841E5E748E00793382 /* XZSeatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XZSeatsModel.h; sourceTree = "<group>"; };
@@ -6830,6 +6835,16 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		AAF308481F0E134E00278983 /* 语音视频聊天 */ = {
+			isa = PBXGroup;
+			children = (
+				AAF308491F0E136A00278983 /* VoiceChatViewController.h */,
+				AAF3084A1F0E136A00278983 /* VoiceChatViewController.m */,
+				AAF3084B1F0E136A00278983 /* VoiceChatViewController.xib */,
+			);
+			name = "语音视频聊天";
+			sourceTree = "<group>";
+		};
 		AAF30A801E5E73A200793382 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -9337,6 +9352,7 @@
 		B3FEBA341D9C10B5003CDEF2 /* ChatVC */ = {
 			isa = PBXGroup;
 			children = (
+				AAF308481F0E134E00278983 /* 语音视频聊天 */,
 				B3FEBA351D9C10DE003CDEF2 /* YWMessageChatViewController.h */,
 				B3FEBA361D9C10DE003CDEF2 /* YWMessageChatViewController.m */,
 				B3FEBA371D9C10DE003CDEF2 /* YWMessageChatViewController.xib */,
@@ -11933,6 +11949,7 @@
 				AA35458F1E9DF23A00A2EC73 /* 3baobaoBG59@2x.jpg in Resources */,
 				AA3545931E9DF23A00A2EC73 /* 3baobaoBG8@2x.jpg in Resources */,
 				AA19CC221EE059FC00B18990 /* sayaren0028.jpg in Resources */,
+				AAF3084D1F0E136A00278983 /* VoiceChatViewController.xib in Resources */,
 				AA3543D91E9DF23800A2EC73 /* 1baobaoLVUP3@2x.jpg in Resources */,
 				B38B2F5E1D8FC83A004D5256 /* xhsemoji.plist in Resources */,
 				AA3BFE411E8559B500D669C2 /* YWBankViewController.xib in Resources */,
@@ -12703,6 +12720,7 @@
 				C1F7BE5E1DB1C95400CCAF96 /* PCPacketViewController.m in Sources */,
 				AA377B7B1EC6E0C000E81A88 /* MovieDetailViewController.m in Sources */,
 				B33A26A71D9A68040092CB12 /* EaseBubbleView+Video.m in Sources */,
+				AAF3084C1F0E136A00278983 /* VoiceChatViewController.m in Sources */,
 				B3FFF4851D93B45500EDD2AB /* RBPublicTagEditorViewController.m in Sources */,
 				B38B2EF71D8FC82F004D5256 /* RBHomeCollectionViewCell.m in Sources */,
 				AABFC4F41E88BF5C002B5140 /* GetMyMoneyViewController.m in Sources */,

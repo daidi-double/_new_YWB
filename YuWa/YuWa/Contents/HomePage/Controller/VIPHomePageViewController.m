@@ -41,9 +41,9 @@
 
 
 #import "YWMessageTableViewCell.h"
+#import "VoiceChatViewController.h"
 
-
-@interface VIPHomePageViewController()<UITableViewDelegate,UITableViewDataSource,HomeMenuCellDelegate,SDCycleScrollViewDelegate,EMChatManagerDelegate>
+@interface VIPHomePageViewController()<UITableViewDelegate,UITableViewDataSource,HomeMenuCellDelegate,SDCycleScrollViewDelegate,EMChatManagerDelegate,EMCallManagerDelegate>
 //@property (nonatomic, strong) NSMutableArray *dataArr;//消息模块有几条未读信息，时候用到
 
 @property(nonatomic,strong)UITableView*tableView;
@@ -69,7 +69,7 @@
 @property(nonatomic,strong)NSMutableArray*mtModelArrRecommend;
 @property (nonatomic, strong) YWload *HUD;
 @property (nonatomic, strong) NewMainCategoryViewController *NewMainCategoryViewController;
-
+@property (nonatomic,strong)VoiceChatViewController * voiceViewController;
 @end
 
 @implementation VIPHomePageViewController
@@ -83,6 +83,9 @@
     [self setUpMJRefresh];
     //注册消息回调
     [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+    //注册实时通话回调
+    [[EMClient sharedClient].callManager addDelegate:self delegateQueue:nil];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -845,9 +848,9 @@
 
 -(void)messagesDidReceive:(NSArray *)aMessages{
     BOOL  isReceive = NO;
+    MyLog(@"接收到文字消息");
     for (EMMessage *message in aMessages) {
         if (message.body.type == EMMessageBodyTypeText) {
-            MyLog(@"接收到文字消息");
             
             WEAKSELF;
             if (!isReceive) {
@@ -862,8 +865,54 @@
     }
     
 }
+
+/*!
+ *  \~chinese
+ *  用户A拨打用户B，用户B会收到这个回调
+ *
+ *  @param aSession  会话实例
+ *
+ */
+
+- (void)callDidReceive:(EMCallSession *)aSession{
+    NSLog(@"callDidReceive 用户A拨打用户B，用户B会收到这个回调");
+    
+    self.voiceViewController.callSession = aSession;
+    
+    if (!aSession.type) {
+        self.voiceViewController.isSender = NO;
+        [self presentViewController:self.voiceViewController animated:YES completion:nil];
+        
+    }else{//视频
+        self.voiceViewController.type = 1;
+        self.voiceViewController.isSender = NO;
+        
+        [self presentViewController:self.voiceViewController animated:YES completion:nil];
+        
+    }
+    
+}
+/*!
+ *  \~chinese
+ *  1. 用户A或用户B结束通话后，对方会收到该回调
+ *  2. 通话出现错误，双方都会收到该回调
+ *
+ *  @param aSession  会话实例
+ *  @param aReason   结束原因
+ *  @param aError    错误
+ */
+- (void)callDidEnd:(EMCallSession *)aSession
+            reason:(EMCallEndReason)aReason
+             error:(EMError *)aError{
+    if (self.voiceViewController) {
+        
+        self.voiceViewController = nil;
+    }
+    
+}
 -(void)dealloc{
     [[EMClient sharedClient].chatManager removeDelegate:self];
+//    [[EMClient sharedClient].callManager removeDelegate:self];
     [_mtModelArrBanner removeAllObjects];
     _mtModelArrBanner = nil;
     
@@ -918,5 +967,10 @@
     }
     return _geocoder;
 }
-
+- (VoiceChatViewController*)voiceViewController{
+    if (!_voiceViewController) {
+        _voiceViewController = [[VoiceChatViewController alloc]init];
+    }
+    return _voiceViewController;
+}
 @end
